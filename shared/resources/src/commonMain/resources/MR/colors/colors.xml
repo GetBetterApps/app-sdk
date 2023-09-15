@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- format: #RRGGBB[AA] or 0xRRGGBB[AA] or RRGGBB[AA] where [AA] - optional -->
+
+    <color name="button_gradient_start">
+        <light>#7872c0</light>
+        <dark>#7872c0</dark>
+    </color>
+
+    <color name="button_gradient_end">
+        <light>#8489e2</light>
+        <dark>#8489e2</dark>
+    </color>
+
+    <color name="button_disabled_color">
+        <light>#7270bb</light>
+        <dark>#7270bb</dark>
+    </color>
+
+    <color name="main_background">
+        <light>#f3f7fb</light>
+        <dark>#253252</dark>
+    </color>
+
+    <color name="text_field_background">
+        <light>#ebeff3</light>
+        <dark>#1f2d4c</dark>
+    </color>
+
+    <color name="onboarding_background_gradient_start">
+        <light>#8286de</light>
+        <dark>#8286de</dark>
+    </color>
+
+    <color name="onboarding_background_gradient_end">
+        <light>#7a74c2</light>
+        <dark>#7a74c2</dark>
+    </color>
+
+    <color name="onboarding_hint_color">
+        <light>#cfcfeb</light>
+        <dark>#cfcfeb</dark>
+    </color>
+
+    <color name="onboarding_text_field">
+        <light>#7b7bcc</light>
+        <dark>#7b7bcc</dark>
+    </color>
+
+    <color name="background_item">
+        <light>#ffffff</light>
+        <dark>#2f415f</dark>
+    </color>
+
+    <color name="background_icon">
+        <light>#f6f7f8</light>
+        <dark>#2a3b59</dark>
+    </color>
+
+    <color name="hint_color">
+        <light>#adb4c0</light>
+        <dark>#6b748a</dark>
+    </color>
+
+    <color name="text_light">
+        <light>#d3d6dc</light>
+        <dark>#d3d6dc</dark>
+    </color>
+
+    <color name="text_title">
+        <light>#1b2745</light>
+        <dark>#d3d6dc</dark>
+    </color>
+
+    <color name="text_regular_title">
+        <light>#48536b</light>
+        <dark>#d5d9df</dark>
+    </color>
+
+    <color name="text_secondary">
+        <light>#697287</light>
+        <dark>#b0b5c1</dark>
+    </color>
+
+    <color name="text_primary">
+        <light>#a4a9b5</light>
+        <dark>#828d9f</dark>
+    </color>
+
+    <color name="text_button_disabled">
+        <light>#5d5e9e</light>
+        <dark>#5d5e9e</dark>
+    </color>
+
+    <color name="text_button_enabled">
+        <light>#776fbb</light>
+        <dark>#776fbb</dark>
+    </color>
+
+
+    <color name="text_unimportant_color">
+        <light>#e2e7ec</light>
+        <dark>#1f2b4a</dark>
+    </color>
+
+    <color name="icon_active">
+        <light>#5c657b</light>
+        <dark>#d5d9df</dark>
+    </color>
+
+    <color name="icon_inactive">
+        <light>#b6bac3</light>
+        <dark>#717e92</dark>
+    </color>
+</resources>

@@ -1,0 +1,6 @@
+framework module UIPilot {
+  umbrella header "UIPilot-umbrella.h"
+
+  export *
+  module * { export * }
+}
