@@ -10,7 +10,7 @@ class DebugLog: Logger {
 
 
 public class UIPilot<T: Equatable>: ObservableObject {
-
+    
     private let logger: Logger
         
     private var _routes: [T] = []
@@ -20,6 +20,7 @@ public class UIPilot<T: Equatable>: ObservableObject {
     }
     
     var onPush: ((T) -> Void)?
+    var onSetRoot: ((T) -> Void)?
     var onPopLast: ((Int, Bool) -> Void)?
 
     public init(initial: T? = nil, debug: Bool = false) {
@@ -37,6 +38,13 @@ public class UIPilot<T: Equatable>: ObservableObject {
         self._routes.append(route)
         self.onPush?(route)
     }
+    
+    public func setRoot(_ route: T) {
+        logger.log("UIPilot - Set root \(route) route.")
+//        self._routes.removeAll()
+        self._routes.append(route)
+        self.onSetRoot?(route)
+    }
 
     public func pop(animated: Bool = true) {
         if !self._routes.isEmpty {
@@ -46,17 +54,17 @@ public class UIPilot<T: Equatable>: ObservableObject {
         }
     }
 
-    public func popTo(_ route: T, inclusive: Bool = false, animated: Bool = true) {
+    public func popTo(_ route: T, inclusive: Bool = false, animated: Bool = true) -> Bool {
         logger.log("UIPilot: Popping route \(route).")
 
         if _routes.isEmpty {
             logger.log("UIPilot - Path is empty.")
-            return
+            return false
         }
 
         guard var found = _routes.lastIndex(where: { $0 == route }) else {
             logger.log("UIPilot - Route not found.")
-            return
+            return false
         }
 
         if !inclusive {
@@ -67,6 +75,12 @@ public class UIPilot<T: Equatable>: ObservableObject {
         logger.log("UIPilot - Popping \(numToPop) routes")
         _routes.removeLast(numToPop)
         onPopLast?(numToPop, animated)
+        
+        if numToPop == 0 {
+            return false
+        }
+        
+        return true
     }
     
     public func onSystemPop() {
@@ -123,7 +137,8 @@ struct NavigationControllerHost<T: Equatable, Screen: View>: UIViewControllerRep
         }
 
     func makeUIViewController(context: Context) -> UINavigationController {
-        let navigation = PopAwareUINavigationController()
+        let navigation = PopAwareUINavigationController<T>()
+        navigation.uipilot = uipilot
         
         navigation.popHandler = {
             uipilot.onSystemPop()
@@ -138,6 +153,15 @@ struct NavigationControllerHost<T: Equatable, Screen: View>: UIViewControllerRep
             )
         }
         
+        uipilot.onSetRoot = { route in
+            addTransition(nav: navigation)
+            
+//            navigation.viewControllers = []
+            navigation.pushViewController(
+                UIHostingController(rootView: routeMap(route)), animated: false
+            )
+        }
+        
         uipilot.onPush = { route in
             addTransition(nav: navigation)
             
@@ -147,6 +171,8 @@ struct NavigationControllerHost<T: Equatable, Screen: View>: UIViewControllerRep
         }
         
         uipilot.onPopLast = { numToPop, animated in
+            addTransition(nav: navigation)
+            
             if numToPop == navigation.viewControllers.count {
                 navigation.viewControllers = []
             } else {
@@ -165,14 +191,17 @@ struct NavigationControllerHost<T: Equatable, Screen: View>: UIViewControllerRep
     
     static func dismantleUIViewController(_ navigation: UINavigationController, coordinator: ()) {
         navigation.viewControllers = []
-        (navigation as! PopAwareUINavigationController).popHandler = nil
+        (navigation as! PopAwareUINavigationController<T>).popHandler = nil
     }
         
     typealias UIViewControllerType = UINavigationController
 }
 
-class PopAwareUINavigationController: UINavigationController, UINavigationControllerDelegate
+class PopAwareUINavigationController<E: Equatable>: UINavigationController, UINavigationControllerDelegate, UIGestureRecognizerDelegate
 {
+    
+    var uipilot: UIPilot<E>?
+    
     var popHandler: (() -> Void)?
     var stackSizeProvider: (() -> Int)?
     
@@ -181,6 +210,16 @@ class PopAwareUINavigationController: UINavigationController, UINavigationContro
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
+        interactivePopGestureRecognizer?.delegate = self
+    }
+    
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if uipilot?.routes.last as? String == DetailRoute().route {
+            return true
+        }
+        return false
+        
+        
     }
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {

@@ -1,6 +1,5 @@
 package com.velkonost.getbetter.shared.features.auth.presentation
 
-import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onFailure
 import com.velkonost.getbetter.shared.core.util.onSuccess
@@ -11,12 +10,16 @@ import com.velkonost.getbetter.shared.features.auth.api.AuthRepository
 import com.velkonost.getbetter.shared.features.auth.presentation.models.AuthAction
 import com.velkonost.getbetter.shared.features.auth.presentation.models.AuthNavigation
 import com.velkonost.getbetter.shared.features.auth.presentation.models.AuthViewState
-import dev.gitlive.firebase.auth.FirebaseAuth
+import com.velkonost.getbetter.shared.resources.SharedR
+import dev.gitlive.firebase.FirebaseException
+import dev.gitlive.firebase.auth.FirebaseUser
+import dev.icerock.moko.resources.desc.Resource
+import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.coroutines.flow.collect
 
 class AuthViewModel
 internal constructor(
-    private val authRepository: AuthRepository<FirebaseAuth>
+    private val authRepository: AuthRepository<FirebaseUser>
 ) : BaseViewModel<AuthViewState, AuthAction, AuthNavigation, Nothing>(
     initialState = AuthViewState()
 ) {
@@ -28,6 +31,7 @@ internal constructor(
             if (viewState.value.isRegistering) registerEmail()
             else loginEmail()
         }
+
         is AuthAction.AnonymousLoginClick -> loginAnonymous()
         is AuthAction.SwitchAuthClick -> switchAuth()
         is AuthAction.NavigateToMainFlow -> Unit
@@ -41,39 +45,79 @@ internal constructor(
     private fun loginAnonymous() {
         launchJob {
             authRepository.registerAnonymously().collect { result ->
-                when(result) {
-                    is ResultState.Success -> {
-                        emit(viewState.value.copy(isLoading = false))
+                with(result) {
+                    isLoading {
+                        emit(viewState.value.copy(isLoading = it))
+                    }
+                    onSuccess {
                         emit(AuthAction.NavigateToMainFlow)
-//                        val message = Message.Builder()
-//                            .id("1")
-//                            .text("123")
-//                            .messageType(MessageType.SnackBar.Builder().build())
-//                            .build()
-//                        emit(message)
                     }
-                    is ResultState.Failure -> {
+                    onFailure {
                         emit(viewState.value.copy(isLoading = false))
-                    }
-                    is ResultState.Loading -> {
-                        emit(viewState.value.copy(isLoading = true))
-                    }
 
+                        val message = Message.Builder()
+                            .id("login_anonymous_failure")
+                            .text(StringDesc.Resource(SharedR.strings.auth_login_anonymous_failure))
+                            .messageType(MessageType.SnackBar.Builder().build())
+                            .build()
+                        emit(message)
+                    }
                 }
             }
         }
     }
 
     private fun loginEmail() {
-        emit(viewState.value.copy(isLoading = true))
+        launchJob {
+            authRepository.loginEmail(
+                email = viewState.value.email,
+                password = viewState.value.password
+            ).collect { result ->
+                with(result) {
+                    isLoading {
+                        emit(viewState.value.copy(isLoading = it))
+                    }
+                    onSuccess {
+                        emit(AuthAction.NavigateToMainFlow)
+                    }
+                    onFailure {
+                        val message = Message.Builder()
+                            .id("login_email_failure")
+                            .text(StringDesc.Resource(it.getEmailLoginError()))
+                            .messageType(MessageType.SnackBar.Builder().build())
+                            .build()
+                        emit(message)
+                    }
+                }
+            }
+        }
     }
 
     private fun registerEmail() {
-        emit(viewState.value.copy(isLoading = true))
-
-
+        launchJob {
+            authRepository.registerEmail(
+                email = viewState.value.email,
+                password = viewState.value.password
+            ).collect { result ->
+                with(result) {
+                    isLoading {
+                        emit(viewState.value.copy(isLoading = it))
+                    }
+                    onSuccess {
+                        emit(AuthAction.NavigateToMainFlow)
+                    }
+                    onFailure {
+                        val message = Message.Builder()
+                            .id("register_email_failure")
+                            .text(StringDesc.Resource(it.getEmailRegisterError()))
+                            .messageType(MessageType.SnackBar.Builder().build())
+                            .build()
+                        emit(message)
+                    }
+                }
+            }
+        }
     }
-
 
     private fun obtainEmailChanged(value: String) {
         emit(viewState.value.copy(email = value))

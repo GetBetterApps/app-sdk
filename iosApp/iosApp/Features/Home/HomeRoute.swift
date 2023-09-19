@@ -18,6 +18,10 @@ struct HomeRoute: NavRoute {
         return NavigationScreen.HomeNavScreen.shared.route
     }
     
+    var menuIcon: UIImage? {
+        return SharedR.images.shared.ic_menu_profile.toUIImage()
+    }
+    
     var content: some View {
         return HomeScreen(viewModel: viewModel)
     }

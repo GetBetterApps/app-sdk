@@ -1,7 +1,7 @@
 package com.velkonost.getbetter.shared.core.util
 
 sealed class ResultState<out T> {
-    data class Success<out T : Any?>(val data: T?) : ResultState<T>()
+    data class Success<out T: Any?>(val data: T) : ResultState<T>()
     data class Failure(val throwable: Throwable? = null) : ResultState<Nothing>()
     data object Loading : ResultState<Nothing>()
 }
@@ -24,11 +24,11 @@ inline fun <T : Any?> ResultState<T>.onFailure(crossinline action: (throwable: T
 /**
  * Generic Mapper for providing any class as a Resource
  */
-@Suppress("UNCHECKED_CAST")
-inline fun <reified T, S> T.asResult(mapper: T.() -> S? = { this as? S }): ResultState<S> {
-    return when {
-        this == Unit -> ResultState.Success(null)
-        this !is Throwable -> ResultState.Success(mapper.invoke(this))
-        else -> ResultState.Failure(Throwable((this as? Throwable)?.message ?: "Error"))
-    }
-}
+//@Suppress("UNCHECKED_CAST")
+//inline fun <reified T, S> T.asResult(mapper: T.() -> S? = { this as? S }): ResultState<S> {
+//    return when {
+//        this == Unit -> ResultState.Success(null)
+//        this !is Throwable -> ResultState.Success(mapper.invoke(this))
+//        else -> ResultState.Failure(Throwable((this as? Throwable)?.message ?: "Error"))
+//    }
+//}

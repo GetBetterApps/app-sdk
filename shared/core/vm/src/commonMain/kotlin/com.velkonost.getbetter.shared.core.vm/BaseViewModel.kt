@@ -41,13 +41,13 @@ constructor(
     val viewState
         get() = _viewState.asStateFlow()
 
-    @NativeCoroutinesIgnore
+//    @NativeCoroutinesIgnore
     private val _events by lazy { MutableSharedFlow<E>() }
 
     @NativeCoroutines
     val events by lazy { _events.asSharedFlow() }
 
-    @NativeCoroutinesIgnore
+//    @NativeCoroutinesIgnore
     private val _navigationEvent = MutableSharedFlow<NavigationEvent>()
 
     @NativeCoroutines

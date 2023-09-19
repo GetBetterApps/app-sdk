@@ -18,6 +18,8 @@ struct AuthRoute: NavRoute {
         return NavigationScreen.AuthNavScreen.shared.route
     }
     
+    var menuIcon: UIImage? = nil
+    
     var content: some View {
         return AuthScreen(viewModel: viewModel)
     }

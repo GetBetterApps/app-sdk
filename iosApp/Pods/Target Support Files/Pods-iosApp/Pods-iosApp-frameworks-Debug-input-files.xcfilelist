@@ -13,5 +13,4 @@ ${BUILT_PRODUCTS_DIR}/KMPNativeCoroutinesAsync/KMPNativeCoroutinesAsync.framewor
 ${BUILT_PRODUCTS_DIR}/KMPNativeCoroutinesCore/KMPNativeCoroutinesCore.framework
 ${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework
 ${BUILT_PRODUCTS_DIR}/RecaptchaInterop/RecaptchaInterop.framework
-${BUILT_PRODUCTS_DIR}/UIPilot/UIPilot.framework
 ${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework

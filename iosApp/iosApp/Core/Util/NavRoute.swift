@@ -10,13 +10,14 @@ import Foundation
 import KMPNativeCoroutinesAsync
 import SharedSDK
 import SwiftUI
-import UIPilot
 
 protocol NavRoute {
     associatedtype T: RouteNavigator
     associatedtype V: View
     
     var route: String { get }
+    
+    var menuIcon: UIImage? { get }
     
     var content: V { get }
     

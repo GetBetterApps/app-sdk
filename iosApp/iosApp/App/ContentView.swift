@@ -4,8 +4,10 @@ import KMPNativeCoroutinesAsync
 
 struct ContentView: View {
     
-    let navigationTransition = AnyTransition.opacity.animation(.easeOut(duration: 2))
-
+    let navigationScreens: [String] = [
+        HomeRoute().route,
+        DetailRoute().route
+    ]
     
     @StateObject var pilot = UIPilot(initial: NavigationScreenKt.AUTH_DESTINATION)
     
@@ -15,8 +17,16 @@ struct ContentView: View {
     @State private var showToast: Bool = false
     @State private var messageDequeObserver: Task<(), Error>? = nil
     
+    
     var body: some View {
-            UIPilotHost(pilot) { route in
+        
+        UIPilotHost(pilot) { route in
+            var isBottomBarVisible = navigationScreens.contains(route)
+            
+            ZStack {
+                
+                Color.mainBackground.edgesIgnoringSafeArea(.all)
+                
                 switch route {
                 case _ where route.starts(with: NavigationScreenKt.HOME_DESTINATION) :
                     HomeRoute().view(pilot: pilot, route: route)
@@ -29,68 +39,72 @@ struct ContentView: View {
                     
                 default : EmptyView()
                 }
+                
+                if (isBottomBarVisible == true) {
+                    VStack {
+                        Spacer()
+                        BottomBar(pilot: pilot, currentRoute: route)
+                            .padding(.bottom, -5)
+                    }
+                    .edgesIgnoringSafeArea(.bottom)
+                }
             }
-            .edgesIgnoringSafeArea(.all)
-            //        .toast(
-            //            isPresenting: $showToast,
-            //            message: String(resourceMessageText?.prefix(120) ?? ""),
-            //            icon: nil,
-            //            backgroundColor: Color.onSurface.opacity(0.9),
-            //            textColor: Color.blue,
-            //            autoDismiss: .after(5),
-            //            onDisappear: { resourceMessageText = nil }
-            //        )
-            .snackBar(
-                isShowing: $showSnackBar,
-                text: resourceMessageText ?? "",
-                snackBar: snackBar
-            )
-            .onAppear {
-                if messageDequeObserver == nil {
-                    messageDequeObserver = Task {
-                        for try await message in asyncSequence(for: MessageDeque.shared.invoke()) {
-                            handle(resource: message)
-                        }
+        }
+        .edgesIgnoringSafeArea(.all)
+        //        .toast(
+        //            isPresenting: $showToast,
+        //            message: String(resourceMessageText?.prefix(120) ?? ""),
+        //            icon: nil,
+        //            backgroundColor: Color.onSurface.opacity(0.9),
+        //            textColor: Color.blue,
+        //            autoDismiss: .after(5),
+        //            onDisappear: { resourceMessageText = nil }
+        //        )
+        .snackBar(
+            isShowing: $showSnackBar,
+            text: resourceMessageText ?? "",
+            snackBar: snackBar
+        )
+        .onAppear {
+            if messageDequeObserver == nil {
+                messageDequeObserver = Task {
+                    for try await message in asyncSequence(for: MessageDeque.shared.invoke()) {
+                        handle(resource: message)
                     }
                 }
             }
-            .onDisappear {
-                messageDequeObserver?.cancel()
-                messageDequeObserver = nil
-            }
+        }
+        .onDisappear {
+            messageDequeObserver?.cancel()
+            messageDequeObserver = nil
+        }
     }
     
     private func handle(resource message: Message) {
         switch message.messageType {
             
-            case let snackBar as MessageType.SnackBar : do {
-                if showSnackBar == false {
-                    resourceMessageText = message.text
-                    self.snackBar = snackBar
-                    withAnimation {
-                        showSnackBar.toggle()
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                        Task { try await MessageDeque.shared.dequeue() }
-                    }
+        case let snackBar as MessageType.SnackBar : do {
+            if showSnackBar == false {
+                resourceMessageText = message.text != nil ? message.text : message.textResource?.localized()
+                self.snackBar = snackBar
+                withAnimation {
+                    showSnackBar.toggle()
                 }
-            }
-                
-            case _ as MessageType.Toast : do {
-                resourceMessageText = message.text
-                showToast = true
-                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                     Task { try await MessageDeque.shared.dequeue() }
                 }
             }
-                
-            default: break
+        }
+            
+        case _ as MessageType.Toast : do {
+            resourceMessageText = message.text
+            showToast = true
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                Task { try await MessageDeque.shared.dequeue() }
+            }
+        }
+            
+        default: break
         }
     }
-}
-
-struct ContentView_Previews: PreviewProvider {
-	static var previews: some View {
-		ContentView()
-	}
 }

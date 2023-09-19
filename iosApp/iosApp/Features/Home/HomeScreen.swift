@@ -13,12 +13,15 @@ import KMMViewModelSwiftUI
 
 struct HomeScreen: View {
     
-    @StateViewModel var viewModel: HomeViewModel
+    @ObservedViewModel var viewModel: HomeViewModel
     
     private let safeAreaInsetTop = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0
     
     var body: some View {
         ZStack(alignment: .topLeading) {
+            
+            Color.red
+            
             VStack {
                 Text("123")
                     .foregroundColor(Color.red)
@@ -38,7 +41,7 @@ struct HomeScreen: View {
                 
 //                Image("\(SharedR.shared.image.ic_test)")
                 
-                Image(uiImage: SharedR.images().bg_paw_print_loaded.toUIImage()!)
+//                Image(uiImage: SharedR.images().bg_paw_print_loaded.toUIImage()!)
 //                Image(name: SharedR.shared.image.ic_test)
             }
             

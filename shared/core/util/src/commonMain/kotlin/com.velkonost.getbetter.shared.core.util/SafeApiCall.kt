@@ -14,7 +14,7 @@ inline fun <reified R : Any> flowRequest(noinline request: suspend () -> R): Flo
         }.onFailure {
             emit(ResultState.Failure(it as Exception))
         }.onSuccess { result ->
-            emit(ResultState.Success(result))
+            emit(ResultState.Success(data = result))
         }
 
     }

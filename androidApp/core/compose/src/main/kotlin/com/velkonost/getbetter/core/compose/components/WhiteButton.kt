@@ -20,6 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedback
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -30,6 +32,7 @@ fun ColumnScope.WhiteButton(
     modifier: Modifier,
     labelText: String,
     isLoading: Boolean,
+    haptic: HapticFeedback,
     onClick: () -> Unit
 ) {
     Button(
@@ -47,7 +50,10 @@ fun ColumnScope.WhiteButton(
             .height(64.dp),
         enabled = !isLoading,
         colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-        onClick = { onClick.invoke() }
+        onClick = {
+            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+            onClick.invoke()
+        }
     ) {
 
         if (isLoading) {

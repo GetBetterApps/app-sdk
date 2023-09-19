@@ -18,11 +18,16 @@ struct DetailRoute: NavRoute {
         return NavigationScreen.DetailNavScreen.shared.route
     }
     
+    var menuIcon: UIImage? {
+        return SharedR.images.shared.ic_menu_profile.toUIImage()
+    }
+    
     var content: some View {
         return DetailScreen(viewModel: viewModel)
     }
     
     var viewModel: DetailViewModel {
+        
         @LazyKoin var delegate: DetailViewModel
         return delegate
     }

@@ -29,6 +29,8 @@ struct SwitchRegisteringText: View {
                 .frame(alignment: .trailing)
                 .padding(.init(top: 12, leading: .zero, bottom: .zero, trailing: .zero))
                 .onTapGesture {
+                    let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                    impactMed.impactOccurred()
                     onClick()
                 }
         }.animation(.easeInOut, value: switchRegisteringText)

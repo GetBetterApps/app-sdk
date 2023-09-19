@@ -9,4 +9,11 @@
     <string name="auth_footer_text">By signing in, you are agreeing to our Terms of Service and Privacy Policy</string>
     <string name="auth_dont_have_account">I don\'t have an account</string>
     <string name="auth_have_account">I already have an account</string>
+
+    <string name="auth_login_anonymous_failure">Something went wrong. Try again</string>
+
+    <string name="auth_error_incorrect_email">Incorrect email. Try different</string>
+    <string name="auth_error_incorrect_credentials">Incorrect email or password</string>
+    <string name="auth_error_weak_password">Weak password</string>
+    <string name="auth_error_email_exist">This email already exist</string>
 </resources>

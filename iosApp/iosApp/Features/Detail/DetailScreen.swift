@@ -49,6 +49,7 @@ struct DetailScreen: View {
                 }
                 .background(Color.red)
                 
+                            
             }
         }
     }

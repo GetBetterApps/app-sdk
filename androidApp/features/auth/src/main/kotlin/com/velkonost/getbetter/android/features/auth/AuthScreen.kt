@@ -26,8 +26,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -53,7 +55,9 @@ fun AuthScreen(
 
     val state by viewModel.viewState.collectAsStateWithLifecycle()
     val localFocusManager = LocalFocusManager.current
-    val interactionSource = remember { MutableInteractionSource() }
+
+    val haptic = LocalHapticFeedback.current
+
 
     Box(
         modifier = modifier
@@ -78,7 +82,7 @@ fun AuthScreen(
             modifier = modifier.padding(top = 50.dp)
         ) {
 
-            AuthAnonymousButton(modifier = modifier, isEnabled = !state.isLoading) {
+            AuthAnonymousButton(modifier = modifier, isEnabled = !state.isLoading, haptic) {
                 viewModel.dispatch(AuthAction.AnonymousLoginClick)
             }
 
@@ -94,7 +98,7 @@ fun AuthScreen(
                 viewModel.dispatch(AuthAction.PasswordChanged(it))
             }
 
-            SwitchRegisteringText(modifier = modifier, targetState = state.isRegistering) {
+            SwitchRegisteringText(modifier = modifier, targetState = state.isRegistering, haptic) {
                 viewModel.dispatch(AuthAction.SwitchAuthClick)
             }
 
@@ -107,7 +111,7 @@ fun AuthScreen(
                     if (state.isRegistering) SharedR.strings.auth_signup_button
                     else SharedR.strings.auth_login_button
                 ),
-                isLoading = state.isLoading
+                isLoading = state.isLoading, haptic
             ) {
                 viewModel.dispatch(AuthAction.LoginClick)
             }

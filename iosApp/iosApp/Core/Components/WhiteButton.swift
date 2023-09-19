@@ -24,6 +24,8 @@ struct WhiteButton: View {
     
     var body: some View {
         Button {
+            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+            impactMed.impactOccurred()
             onClick()
         } label: {
             

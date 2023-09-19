@@ -14,9 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.velkonost.getbetter.android.activity.components.BottomBar
 import com.velkonost.getbetter.android.activity.components.MainSnackBarHost
 import com.velkonost.getbetter.android.activity.components.rememberSnackBarHostState
 import com.velkonost.getbetter.android.activity.di.AppScreens
@@ -41,7 +41,10 @@ internal fun MainContent() {
             snackbarHost = { MainSnackBarHost(snackbarHostState) },
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
+                .background(MaterialTheme.colorScheme.background),
+            bottomBar = {
+                BottomBar(navController)
+            }
         ) {
             AnimatedNavHost(
                 navController = navController,
@@ -66,25 +69,26 @@ private suspend fun onMessageReceived(
 ) {
     when (val component = message.messageType) {
         is MessageType.SnackBar -> {
-            message.text?.let {
-                val result = snackbarHostState.showSnackbar(
-                    message = it,
-                    actionLabel = component.actionLabel,
-                    withDismissAction = true,
-                    duration = SnackbarDuration.Short
-                )
+            val text = message.text ?: message.textResource?.toString(context = context) ?: ""
+            val result = snackbarHostState.showSnackbar(
+                message = text,
+                actionLabel = component.actionLabel,
+                withDismissAction = true,
+                duration = SnackbarDuration.Short
+            )
 
-                when (result) {
-                    SnackbarResult.Dismissed -> {
-                        component.onDismiss.invoke()
-                        MessageDeque.dequeue()
-                    }
-                    SnackbarResult.ActionPerformed -> {
-                        component.onAction.invoke()
-                        MessageDeque.dequeue()
-                    }
+            when (result) {
+                SnackbarResult.Dismissed -> {
+                    component.onDismiss.invoke()
+                    MessageDeque.dequeue()
+                }
+
+                SnackbarResult.ActionPerformed -> {
+                    component.onAction.invoke()
+                    MessageDeque.dequeue()
                 }
             }
+
         }
 
         is MessageType.Toast -> {

@@ -9,3 +9,8 @@ val AppScreens = setOf(
     HomeNavRoute,
     DetailNavRoute
 )
+
+val NavigationScreens = setOf(
+    HomeNavRoute,
+    DetailNavRoute
+)

@@ -16,6 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedback
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -26,6 +28,7 @@ import dev.icerock.moko.resources.compose.stringResource
 fun ColumnScope.SwitchRegisteringText(
     modifier: Modifier,
     targetState: Boolean,
+    haptic: HapticFeedback,
     onClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -47,6 +50,7 @@ fun ColumnScope.SwitchRegisteringText(
                     interactionSource = interactionSource,
                     indication = null
                 ) {
+                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                     onClick.invoke()
                 },
             text = stringResource(

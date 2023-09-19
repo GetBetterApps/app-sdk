@@ -73,7 +73,8 @@ struct Snackbar: View {
 //                        .shadow(radius: 8)
 //                        .background(Color.buttonGradientStart)
 //                        .cornerRadius(12)
-                        .padding(16)
+                        
+                        .padding(.init(top: 16, leading: 16, bottom: 70, trailing: 16))
                         .transition(.move(edge: .bottom).combined(with: .opacity))
                         .animation(.default)
                         .onAppear {

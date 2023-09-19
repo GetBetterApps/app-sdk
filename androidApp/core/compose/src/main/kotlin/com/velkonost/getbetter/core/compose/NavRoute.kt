@@ -14,12 +14,15 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.composable
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationEvent
 import com.velkonost.getbetter.shared.core.vm.navigation.RouteNavigator
+import dev.icerock.moko.resources.ImageResource
 
 typealias AnimatedBackStack = AnimatedContentTransitionScope<NavBackStackEntry>
 
 interface NavRoute<T : RouteNavigator> {
 
     val route: String
+
+    fun menuIcon(): ImageResource? = null
 
     @Composable
     fun Content(viewModel: T)

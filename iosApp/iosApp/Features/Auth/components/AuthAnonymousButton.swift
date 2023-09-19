@@ -38,8 +38,11 @@ struct AuthAnonymousButton: View {
                         .shadow(radius: 8)
                 )
                 .onTapGesture {
+                    let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                    impactMed.impactOccurred()
                     onClick()
-                }.disabled(!enabled)
+                }
+                .disabled(!enabled)
         }
     }
 }

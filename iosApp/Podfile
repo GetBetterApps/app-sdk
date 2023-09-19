@@ -2,7 +2,6 @@ target 'iosApp' do
   use_frameworks!
   platform :ios, '15.0'
   pod 'umbrella', :path => '../shared/umbrella'
-  pod 'UIPilot', '~> 2.0.2'
   pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-18'
   pod 'KMMViewModelSwiftUI', '1.0.0-ALPHA-14'
   pod 'Firebase/Core'

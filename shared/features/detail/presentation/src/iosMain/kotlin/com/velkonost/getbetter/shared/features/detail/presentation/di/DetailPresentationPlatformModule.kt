@@ -7,7 +7,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 internal actual val DetailPresentationPlatformModule = module {
-    factoryOf(::DetailViewModel)
+    singleOf(::DetailViewModel)
 }
 
 @Suppress("unused")

@@ -23,6 +23,7 @@ kotlin {
             dependencies {
                 api(projects.shared.core.vm)
                 api(projects.shared.core.util)
+                implementation(projects.shared.resources)
                 implementation(projects.shared.features.auth.api)
 
                 implementation(libs.kotlinx.coroutines.core)

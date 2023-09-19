@@ -2,7 +2,6 @@
 
 import com.velkonost.getbetter.SHARED_PACKAGE
 import com.velkonost.getbetter.join
-import com.velkonost.getbetter.util.libs
 
 plugins {
     `kmm-shared-module-plugin`
@@ -12,8 +11,9 @@ plugins {
 
 android {
     namespace = SHARED_PACKAGE.join(
-        projects.shared.core,
-        projects.shared.core.vm
+        projects.shared.features,
+        projects.shared.features.profile,
+        projects.shared.features.profile.presentation
     )
 }
 
@@ -21,17 +21,16 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                api(projects.shared.core.vm)
+
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
-
-                api(libs.moko.resources)
-                api(libs.rickclephas.kmm.viewmodel)
             }
         }
 
         androidMain {
             dependencies {
-                implementation(libs.androidx.lifecycle.viewmodel.compose)
+                implementation(libs.koin.androidx.compose)
             }
         }
     }

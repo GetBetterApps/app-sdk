@@ -26,6 +26,10 @@ include(
     ":shared:features:auth:data",
     ":shared:features:auth:presentation",
 
+    ":shared:features:profile:api",
+    ":shared:features:profile:data",
+    ":shared:features:profile:presentation",
+
     ":shared:features:home:presentation",
 
     ":shared:features:detail:presentation",

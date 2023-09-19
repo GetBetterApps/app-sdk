@@ -12,6 +12,8 @@ import com.velkonost.getbetter.core.compose.AnimatedBackStack
 import com.velkonost.getbetter.core.compose.NavRoute
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationScreen
 import com.velkonost.getbetter.shared.features.auth.presentation.AuthViewModel
+import com.velkonost.getbetter.shared.resources.SharedR
+import dev.icerock.moko.resources.ImageResource
 import org.koin.androidx.compose.koinViewModel
 
 object AuthNavRoute : NavRoute<AuthViewModel> {
