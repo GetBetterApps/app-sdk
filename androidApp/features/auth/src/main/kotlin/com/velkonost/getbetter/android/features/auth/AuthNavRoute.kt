@@ -1,9 +1,7 @@
 package com.velkonost.getbetter.android.features.auth
 
-import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -12,8 +10,6 @@ import com.velkonost.getbetter.core.compose.AnimatedBackStack
 import com.velkonost.getbetter.core.compose.NavRoute
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationScreen
 import com.velkonost.getbetter.shared.features.auth.presentation.AuthViewModel
-import com.velkonost.getbetter.shared.resources.SharedR
-import dev.icerock.moko.resources.ImageResource
 import org.koin.androidx.compose.koinViewModel
 
 object AuthNavRoute : NavRoute<AuthViewModel> {
@@ -41,7 +37,7 @@ private val AuthEnterTransition: AnimatedBackStack.() -> EnterTransition? = {
             delayMillis = 10,
             easing = androidx.compose.animation.core.FastOutSlowInEasing
         ),
-        initialOffset = { it / 4 }
+        initialOffset = @Suppress("MagicNumber") { it / 4 }
     ).plus(
         fadeIn(
             animationSpec = tween(
@@ -61,7 +57,7 @@ private val AuthExitTransition: AnimatedBackStack.() -> ExitTransition? = {
             delayMillis = 20,
             easing = androidx.compose.animation.core.FastOutSlowInEasing
         ),
-        targetOffset = { it / 4 }
+        targetOffset = @Suppress("MagicNumber") { it / 4 }
     ).plus(
         fadeOut(
             animationSpec = tween(
