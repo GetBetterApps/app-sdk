@@ -16,6 +16,7 @@ dependencies {
     implementation(projects.androidApp.features.home)
     implementation(projects.androidApp.features.detail)
     implementation(projects.androidApp.features.profile)
+    implementation(projects.androidApp.features.wisdom)
 
     implementation(projects.shared.core.util)
     implementation(projects.shared.core.vm)

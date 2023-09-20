@@ -28,7 +28,6 @@ fun ProfileScreen(
             .padding(16.dp)
             .verticalScroll(scrollState)
             .padding(bottom = 140.dp)
-
     ) {
 
         ProfileHeader(

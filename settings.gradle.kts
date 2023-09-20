@@ -34,6 +34,8 @@ include(
 
     ":shared:features:detail:presentation",
 
+    ":shared:features:wisdom:presentation",
+
     ":androidApp:app",
     ":androidApp:activity",
     ":androidApp:core:compose",
@@ -41,6 +43,7 @@ include(
     ":androidApp:features:home",
     ":androidApp:features:detail",
     ":androidApp:features:profile",
+    ":androidApp:features:wisdom",
 
     ":shared:resources",
     ":shared:umbrella"

@@ -5,6 +5,8 @@ sealed class NavigationScreen(val route: String) {
 
     data object AuthNavScreen : NavigationScreen(AUTH_DESTINATION)
 
+    data object WisdomNavScreen: NavigationScreen(WISDOM_DESTINATION)
+
     data object ProfileNavScreen: NavigationScreen(PROFILE_DESTINATION)
 
     data object HomeNavScreen : NavigationScreen(HOME_DESTINATION)
@@ -17,5 +19,6 @@ const val NAV_PREFIX: String = "com.velkonost.getbetter"
 const val SPLASH_DESTINATION: String = "$NAV_PREFIX.splash/SplashScreen"
 const val AUTH_DESTINATION: String = "$NAV_PREFIX.auth/AuthScreen"
 const val PROFILE_DESTINATION: String = "$NAV_PREFIX.profile/ProfileScreen"
+const val WISDOM_DESTINATION: String = "$NAV_PREFIX.wisdom/WisdomScreen"
 const val HOME_DESTINATION: String = "$NAV_PREFIX.home/HomeScreen"
 const val DETAIL_DESTINATION: String = "$NAV_PREFIX.detail/DetailScreen"
