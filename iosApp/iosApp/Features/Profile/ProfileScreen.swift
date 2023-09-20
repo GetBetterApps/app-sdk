@@ -28,10 +28,8 @@ struct ProfileScreen: View {
                 AppSettings()
                 HelpAndSupport()
             }
-            .padding(.init(top: 16, leading: 16, bottom: 200, trailing: 16))
-            
+            .padding(.init(top: 16, leading: 16, bottom: 200, trailing: 16))   
         }
-        
     }
     
 }

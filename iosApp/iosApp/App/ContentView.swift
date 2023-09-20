@@ -7,7 +7,8 @@ struct ContentView: View {
     let navigationScreens: [any NavRoute] = [
         HomeRoute(),
         DetailRoute(),
-        ProfileRoute()
+        ProfileRoute(),
+        WisdomRoute()
     ]
     
     
@@ -23,7 +24,7 @@ struct ContentView: View {
     var body: some View {
         
         UIPilotHost(pilot) { route in
-            var isBottomBarVisible = navigationScreens.map({ screen in
+            let isBottomBarVisible = navigationScreens.map({ screen in
                 screen.route
             }).contains(route)
             
@@ -43,6 +44,9 @@ struct ContentView: View {
                     
                 case _ where route.starts(with: NavigationScreenKt.PROFILE_DESTINATION) :
                     ProfileRoute().view(pilot: pilot, route: route)
+                    
+                case _ where route.starts(with: NavigationScreenKt.WISDOM_DESTINATION) :
+                    WisdomRoute().view(pilot: pilot, route: route)
                     
                 default : EmptyView()
                 }

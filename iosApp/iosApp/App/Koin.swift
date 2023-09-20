@@ -21,7 +21,8 @@ extension KoinApplication {
         \.DetailViewModel,
         \.HomeViewModel,
         \.AuthViewModel,
-        \.ProfileViewModel
+        \.ProfileViewModel,
+        \.WisdomViewModel
     ]
     
     static func inject<T>() -> T { shared.inject() }

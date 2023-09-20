@@ -17,6 +17,9 @@
 		460054A92ABB18A800586767 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460054A82ABB18A800586767 /* AppSettings.swift */; };
 		460054AB2ABB18FC00586767 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460054AA2ABB18FC00586767 /* MenuItem.swift */; };
 		460054AD2ABB1B5E00586767 /* HelpAndSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460054AC2ABB1B5E00586767 /* HelpAndSupport.swift */; };
+		460054B22ABB56F900586767 /* WisdomScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460054B12ABB56F900586767 /* WisdomScreen.swift */; };
+		460054B42ABB56FF00586767 /* WisdomRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460054B32ABB56FF00586767 /* WisdomRoute.swift */; };
+		460054B72ABB576B00586767 /* WisdomItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460054B62ABB576B00586767 /* WisdomItem.swift */; };
 		461D21EC2AA8EC71007E84CE /* DetailRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21EB2AA8EC71007E84CE /* DetailRoute.swift */; };
 		461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */; };
 		461F7C612AA878EB003791CF /* Koin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C602AA878EB003791CF /* Koin.swift */; };
@@ -64,6 +67,9 @@
 		460054A82ABB18A800586767 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		460054AA2ABB18FC00586767 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		460054AC2ABB1B5E00586767 /* HelpAndSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpAndSupport.swift; sourceTree = "<group>"; };
+		460054B12ABB56F900586767 /* WisdomScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomScreen.swift; sourceTree = "<group>"; };
+		460054B32ABB56FF00586767 /* WisdomRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomRoute.swift; sourceTree = "<group>"; };
+		460054B62ABB576B00586767 /* WisdomItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomItem.swift; sourceTree = "<group>"; };
 		461D21EB2AA8EC71007E84CE /* DetailRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRoute.swift; sourceTree = "<group>"; };
 		461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifecycleAwareObservableObject.swift; sourceTree = "<group>"; };
 		461F7C602AA878EB003791CF /* Koin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Koin.swift; sourceTree = "<group>"; };
@@ -133,6 +139,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		460054B02ABB56EC00586767 /* Wisdom */ = {
+			isa = PBXGroup;
+			children = (
+				460054B52ABB576500586767 /* components */,
+				460054B12ABB56F900586767 /* WisdomScreen.swift */,
+				460054B32ABB56FF00586767 /* WisdomRoute.swift */,
+			);
+			path = Wisdom;
+			sourceTree = "<group>";
+		};
+		460054B52ABB576500586767 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				460054B62ABB576B00586767 /* WisdomItem.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
 		461F7C5F2AA878D0003791CF /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +205,7 @@
 		461F7C6D2AA8D7DE003791CF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				460054B02ABB56EC00586767 /* Wisdom */,
 				46D9381A2ABAECA90096A221 /* Profile */,
 				46CDB56A2AADB45200800096 /* Auth */,
 				461F7C6E2AA8D7FC003791CF /* Home */,
@@ -456,6 +481,7 @@
 				461F7C612AA878EB003791CF /* Koin.swift in Sources */,
 				460054A72ABB17FF00586767 /* PrimaryBox.swift in Sources */,
 				46B17E142AADE482008C2BC4 /* AuthTextField.swift in Sources */,
+				460054B72ABB576B00586767 /* WisdomItem.swift in Sources */,
 				461F7C652AA88A39003791CF /* NavRoute.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				460054AB2ABB18FC00586767 /* MenuItem.swift in Sources */,
@@ -482,6 +508,8 @@
 				461F7C732AA8DC2B003791CF /* HomeRoute.swift in Sources */,
 				46D9381C2ABAECB70096A221 /* ProfileRoute.swift in Sources */,
 				46B17E112AADE0DD008C2BC4 /* Color.swift in Sources */,
+				460054B42ABB56FF00586767 /* WisdomRoute.swift in Sources */,
+				460054B22ABB56F900586767 /* WisdomScreen.swift in Sources */,
 				46CDB56E2AADB46400800096 /* AuthRoute.swift in Sources */,
 				46B17E0C2AADE081008C2BC4 /* TextExt.swift in Sources */,
 				461F7C772AA8E371003791CF /* DetailScreen.swift in Sources */,

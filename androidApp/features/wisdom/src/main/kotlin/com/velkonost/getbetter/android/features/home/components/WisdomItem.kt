@@ -16,7 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -32,6 +34,8 @@ fun WisdomItem(
     backgroundImage: Painter,
     onClick: () -> Unit
 ) {
+    val haptic = LocalHapticFeedback.current
+
     Box(
         modifier = modifier
             .padding(top = 16.dp)
@@ -46,6 +50,7 @@ fun WisdomItem(
                 shape = MaterialTheme.shapes.medium
             )
             .clickable {
+                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                 onClick.invoke()
             }
 
@@ -59,7 +64,12 @@ fun WisdomItem(
 
         Column(
             modifier = modifier
-                .align(Alignment.BottomStart)
+                .align(Alignment.Center)
+                .padding(16.dp)
+                .background(
+                    color = colorResource(resource = SharedR.colors.background_item).copy(alpha = 0.4f),
+                    shape = MaterialTheme.shapes.medium
+                )
                 .padding(16.dp)
         ) {
             Text(

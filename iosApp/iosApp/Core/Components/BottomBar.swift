@@ -22,6 +22,7 @@ struct BottomBar: View {
         HStack(alignment: .top, spacing: 0) {
             BottomBarItem(pilot: pilot, screen: HomeRoute(), currentRoute: currentRoute)
             BottomBarItem(pilot: pilot, screen: DetailRoute(), currentRoute: currentRoute)
+            BottomBarItem(pilot: pilot, screen: WisdomRoute(), currentRoute: currentRoute)
             BottomBarItem(pilot: pilot, screen: ProfileRoute(), currentRoute: currentRoute)
         }
         .frame(maxWidth: .infinity)
