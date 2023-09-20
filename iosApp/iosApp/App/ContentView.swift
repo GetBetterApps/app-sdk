@@ -4,10 +4,12 @@ import KMPNativeCoroutinesAsync
 
 struct ContentView: View {
     
-    let navigationScreens: [String] = [
-        HomeRoute().route,
-        DetailRoute().route
+    let navigationScreens: [any NavRoute] = [
+        HomeRoute(),
+        DetailRoute(),
+        ProfileRoute()
     ]
+    
     
     @StateObject var pilot = UIPilot(initial: NavigationScreenKt.AUTH_DESTINATION)
     
@@ -21,7 +23,9 @@ struct ContentView: View {
     var body: some View {
         
         UIPilotHost(pilot) { route in
-            var isBottomBarVisible = navigationScreens.contains(route)
+            var isBottomBarVisible = navigationScreens.map({ screen in
+                screen.route
+            }).contains(route)
             
             ZStack {
                 
@@ -37,13 +41,16 @@ struct ContentView: View {
                 case _ where route.starts(with: NavigationScreenKt.AUTH_DESTINATION) :
                     AuthRoute().view(pilot: pilot, route: route)
                     
+                case _ where route.starts(with: NavigationScreenKt.PROFILE_DESTINATION) :
+                    ProfileRoute().view(pilot: pilot, route: route)
+                    
                 default : EmptyView()
                 }
                 
                 if (isBottomBarVisible == true) {
                     VStack {
                         Spacer()
-                        BottomBar(pilot: pilot, currentRoute: route)
+                        BottomBar(screens: navigationScreens, pilot: pilot, currentRoute: route)
                             .padding(.bottom, -5)
                     }
                     .edgesIgnoringSafeArea(.bottom)

@@ -32,9 +32,7 @@ fun ProfileHeader(
         }
 
         Column {
-            Row(
-                modifier = modifier
-            ) {
+            Row {
                 Spacer(modifier = modifier.weight(1f))
 
                 SettingsButton(modifier = modifier) {

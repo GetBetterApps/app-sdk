@@ -23,8 +23,6 @@ configure<SpotlessExtension> {
             )
         )
         trimTrailingWhitespace()
-        indentWithSpaces()
-        endWithNewline()
     }
 
     format("xml") {
@@ -45,8 +43,6 @@ configure<SpotlessExtension> {
             )
         )
         trimTrailingWhitespace()
-        indentWithSpaces()
-        endWithNewline()
     }
 
     kotlinGradle {
@@ -61,7 +57,5 @@ configure<SpotlessExtension> {
         )
 
         trimTrailingWhitespace()
-        indentWithSpaces()
-        endWithNewline()
     }
 }

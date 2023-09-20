@@ -1,8 +1,6 @@
 package com.velkonost.getbetter.android.features.profile
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -24,40 +22,35 @@ fun ProfileScreen(
 ) {
     val scrollState = rememberScrollState()
 
-    Box(
+    Column(
         modifier = modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .padding(16.dp)
+            .verticalScroll(scrollState)
+            .padding(bottom = 140.dp)
+
     ) {
 
-        Column(
-            modifier = modifier
-                .fillMaxWidth()
-                .verticalScroll(scrollState)
-                .padding(bottom = 140.dp)
+        ProfileHeader(
+            userName = "velkonost",
+            onAvatarClick = {
 
-        ) {
-
-            ProfileHeader(
-                userName = "velkonost",
-                onAvatarClick = {
-
-                },
-                onSettingsClick = {
-
-                }
-            )
-
-            SubscriptionBox(
-                subscriptionPlan = stringResource(resource = SharedR.strings.profile_sub_basic)
-            ) {
+            },
+            onSettingsClick = {
 
             }
+        )
 
-            AppSettings()
-            HelpAndSupport()
+        SubscriptionBox(
+            subscriptionPlan = stringResource(resource = SharedR.strings.profile_sub_basic)
+        ) {
+
         }
+
+        AppSettings()
+        HelpAndSupport()
     }
+
 }
 
 @Preview(

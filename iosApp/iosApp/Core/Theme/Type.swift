@@ -50,7 +50,7 @@ public struct TextStyle {
 
 public extension TextStyle {
     
-    static let displayLarge = TextStyle(SharedR.fontsSfpro.shared.rounded_regular, -2.5, 0, 57)
+    static let displayLarge = TextStyle(SharedR.fontsSfpro.shared.rounded_bold, -2.5, 0, 57)
     static let displayMedium = TextStyle(SharedR.fontsSfpro.shared.rounded_regular, -2, 0, 45)
     static let displaySmall = TextStyle(SharedR.fontsSfpro.shared.rounded_regular, -1.5, 0, 36)
     

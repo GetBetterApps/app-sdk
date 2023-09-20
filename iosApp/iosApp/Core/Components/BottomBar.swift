@@ -13,6 +13,7 @@ import SwiftUI
 
 struct BottomBar: View {
 
+    let screens: [any NavRoute]
     let pilot: UIPilot<String>
     let currentRoute: String
     
@@ -21,10 +22,7 @@ struct BottomBar: View {
         HStack(alignment: .top, spacing: 0) {
             BottomBarItem(pilot: pilot, screen: HomeRoute(), currentRoute: currentRoute)
             BottomBarItem(pilot: pilot, screen: DetailRoute(), currentRoute: currentRoute)
-            BottomBarItem(pilot: pilot, screen: HomeRoute(), currentRoute: currentRoute)
-            BottomBarItem(pilot: pilot, screen: HomeRoute(), currentRoute: currentRoute)
-            BottomBarItem(pilot: pilot, screen: HomeRoute(), currentRoute: currentRoute)
-            
+            BottomBarItem(pilot: pilot, screen: ProfileRoute(), currentRoute: currentRoute)
         }
         .frame(maxWidth: .infinity)
         .frame(height: 95, alignment: .top)

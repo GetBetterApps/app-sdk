@@ -47,7 +47,7 @@ fun SettingsButton(
                 .align(Alignment.Center),
             painter = painterResource(imageResource = SharedR.images.ic_settings),
             colorFilter = ColorFilter.tint(
-                color = colorResource(resource = SharedR.colors.text_light).copy(alpha = 0.5f)
+                color = colorResource(resource = SharedR.colors.icon_active).copy(alpha = 0.5f)
             ),
             contentDescription = null
         )

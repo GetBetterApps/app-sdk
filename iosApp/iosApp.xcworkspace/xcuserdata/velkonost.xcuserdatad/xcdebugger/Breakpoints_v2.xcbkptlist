@@ -152,7 +152,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "0843D8ED-229D-44C7-B9A8-215D85F0AA10"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iosApp/Core/Util/NavRoute.swift"
@@ -237,8 +237,8 @@
             filePath = "iosApp/Core/Components/BottomBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -269,8 +269,8 @@
             filePath = "iosApp/Core/Components/BottomBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -349,8 +349,8 @@
             filePath = "iosApp/Core/Components/BottomBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -365,8 +365,8 @@
             filePath = "iosApp/Core/Components/BottomBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -381,8 +381,8 @@
             filePath = "iosApp/Core/Components/BottomBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -401,13 +401,45 @@
             endingLineNumber = "89"
             landmarkName = "onNavEvent(pilot:event:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9E9869F0-BC6C-4C7E-95FD-B8F4A96F9F30 - de217a9657d1852b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iosApp.NavRoute.onNavEvent(pilot: iosApp.UIPilot&lt;Swift.String&gt;, event: __C.SSDKNavigationEvent) -&gt; ()"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/velkonost/AndroidStudioProjects/GetBetter/iosApp/iosApp/Core/Util/NavRoute.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "1008">
+               </Location>
+               <Location
+                  uuid = "9E9869F0-BC6C-4C7E-95FD-B8F4A96F9F30 - de217a9657d1852b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iosApp.NavRoute.onNavEvent(pilot: iosApp.UIPilot&lt;Swift.String&gt;, event: __C.SSDKNavigationEvent) -&gt; ()"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/velkonost/AndroidStudioProjects/GetBetter/iosApp/iosApp/Core/Util/NavRoute.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "968">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "9626D868-0ECB-4BC0-8C5D-D64A5FE68347"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iosApp/Core/Util/NavRoute.swift"
@@ -439,7 +471,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "F8420CF2-E193-455E-8E97-3B24AC4842EB"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iosApp/Core/Util/NavRoute.swift"
@@ -449,6 +481,54 @@
             endingLineNumber = "53"
             landmarkName = "view(pilot:route:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FF56FD27-0F8C-4578-9392-F510FA41EBE9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/Features/Profile/ProfileScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "835A749A-A421-49E7-A35C-73B3DB575D7A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/Core/Util/NavRoute.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "onNavEvent(pilot:event:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EECD3265-DA6F-4D03-A261-EE9EC65FC0CE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/Features/Profile/ProfileScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
