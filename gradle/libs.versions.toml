@@ -24,6 +24,7 @@ moko-resources = "0.23.0"
 google-services = "4.3.15"
 
 accompanist = "0.31.2-alpha"
+android-constraintlayout-compose = "1.0.1"
 android-material = "1.9.0"
 androidx-activity = "1.7.2"
 androidx-compose = "1.6.0-alpha04"
@@ -87,6 +88,7 @@ accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pa
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 
 android-material = { module = "com.google.android.material:material", version.ref = "android-material" }
+android-constraintlayout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "android-constraintlayout-compose" }
 androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-compose-animation = { module = "androidx.compose.animation:animation", version.ref = "androidx-compose" }
 androidx-compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "androidx-compose-compiler" }
@@ -189,6 +191,7 @@ app-ui = [
     "accompanist-navigation-animation",
     "accompanist-navigation-material",
     "accompanist-systemuicontroller",
+    "android-constraintlayout",
     "androidx-compose-activity",
     "androidx-compose-animation",
     "androidx-compose-compiler",

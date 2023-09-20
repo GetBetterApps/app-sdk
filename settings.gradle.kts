@@ -40,6 +40,7 @@ include(
     ":androidApp:features:auth",
     ":androidApp:features:home",
     ":androidApp:features:detail",
+    ":androidApp:features:profile",
 
     ":shared:resources",
     ":shared:umbrella"

@@ -3,9 +3,12 @@ package com.velkonost.getbetter.android.activity
 import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Toast
-import androidx.compose.foundation.background
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
@@ -26,6 +29,8 @@ import com.velkonost.getbetter.shared.core.vm.navigation.NavigationScreen
 import com.velkonost.getbetter.shared.core.vm.resource.Message
 import com.velkonost.getbetter.shared.core.vm.resource.MessageDeque
 import com.velkonost.getbetter.shared.core.vm.resource.MessageType
+import com.velkonost.getbetter.shared.resources.SharedR
+import dev.icerock.moko.resources.compose.colorResource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 
@@ -40,15 +45,54 @@ internal fun MainContent() {
         Scaffold(
             snackbarHost = { MainSnackBarHost(snackbarHostState) },
             modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background),
+                .fillMaxSize(),
+//                .background(MaterialTheme.colorScheme.background),
             bottomBar = {
                 BottomBar(navController)
-            }
+            },
+            containerColor = colorResource(resource = SharedR.colors.main_background)
         ) {
             AnimatedNavHost(
                 navController = navController,
-                startDestination = NavigationScreen.AuthNavScreen.route
+                startDestination = NavigationScreen.AuthNavScreen.route,
+                enterTransition = {
+                    slideIntoContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Up,
+                        animationSpec = tween(
+                            durationMillis = 290,
+                            delayMillis = 10,
+                            easing = FastOutSlowInEasing
+                        ),
+                        initialOffset = { it / 4 }
+                    ).plus(
+                        fadeIn(
+                            animationSpec = tween(
+                                durationMillis = 150,
+                                delayMillis = 10,
+                                easing = FastOutSlowInEasing
+                            )
+                        )
+                    )
+                },
+                exitTransition = {
+                    slideOutOfContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Down,
+                        animationSpec = tween(
+                            durationMillis = 280,
+                            delayMillis = 20,
+                            easing = FastOutSlowInEasing
+                        ),
+                        targetOffset = { it / 4 }
+                    ).plus(
+                        fadeOut(
+                            animationSpec = tween(
+                                durationMillis = 280,
+                                delayMillis = 20,
+                                easing = FastOutSlowInEasing
+                            )
+                        )
+                    )
+                }
             ) {
                 AppScreens.provide(this@AnimatedNavHost, navController)
             }

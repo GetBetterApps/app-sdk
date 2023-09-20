@@ -11,9 +11,11 @@ android {
 
 dependencies {
     implementation(projects.androidApp.core.compose)
+
     implementation(projects.androidApp.features.auth)
     implementation(projects.androidApp.features.home)
     implementation(projects.androidApp.features.detail)
+    implementation(projects.androidApp.features.profile)
 
     implementation(projects.shared.core.util)
     implementation(projects.shared.core.vm)

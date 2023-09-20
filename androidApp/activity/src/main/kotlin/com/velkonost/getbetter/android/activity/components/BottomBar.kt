@@ -75,17 +75,16 @@ fun BottomBar(
             Row(
                 modifier = Modifier
                     .advancedShadow(
-                        cornersRadius = 48.dp,
+                        cornersRadius = 32.dp,
                         shadowBlurRadius = 8.dp
                     )
                     .fillMaxWidth()
                     .height(110.dp)
-
                     .background(
                         color = colorResource(resource = SharedR.colors.background_item),
                         shape = RoundedCornerShape(
-                            topStart = 48.dp,
-                            topEnd = 48.dp
+                            topStart = 32.dp,
+                            topEnd = 32.dp
                         )
                     ),
 
@@ -97,18 +96,6 @@ fun BottomBar(
                         screen, currentDestination, navController, haptic
                     )
                 }
-
-
-//            repeat(5) {
-//                BottomBarItem(
-//                    screen = NavigationScreens.first(),
-//                    currentDestination = currentDestination,
-//                    navController = navController,
-//                    haptic = haptic
-//                )
-//            }
-
-
         }
     }
 
@@ -132,23 +119,11 @@ fun BottomBarItem(
             .clickable {
                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
 
-//                if (!navController.popBackStack(screen.route, true, true)) {
-//                    navController.navigate(screen.route) {
-////                        popUpTo(navController.graph.findStartDestination().id)
-//                        launchSingleTop = true
-//                    }
-//                }
                 navController.navigate(screen.route) {
-                    // Pop up to the start destination of the graph to
-                    // avoid building up a large stack of destinations
-                    // on the back stack as users select items
                     popUpTo(navController.graph.findStartDestination().id) {
                         saveState = true
                     }
-                    // Avoid multiple copies of the same destination when
-                    // reselecting the same item
                     launchSingleTop = true
-                    // Restore state when reselecting a previously selected item
                     restoreState = true
                 }
 

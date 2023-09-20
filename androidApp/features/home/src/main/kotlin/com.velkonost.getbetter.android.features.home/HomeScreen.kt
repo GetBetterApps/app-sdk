@@ -24,7 +24,7 @@ internal fun HomeScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(color = Color.Black)
+            .background(color = Color.Transparent)
     ) {
         Column {
 
@@ -35,12 +35,6 @@ internal fun HomeScreen(
             }) {
                 Text(text = "Click me mthfcr", color = Color.Green, fontSize = 20.sp)
             }
-//            Image(
-//                painter = painterResource(id = SharedR.images.bg_paw_print_loaded.drawableResId),
-//                contentDescription = null
-//            )
-
-
         }
 
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
+    <!--  AUTH  -->
     <string name="auth_email_label">Email</string>
     <string name="auth_password_label">Password</string>
     <string name="auth_login_button">Sign in</string>
@@ -16,4 +17,19 @@
     <string name="auth_error_incorrect_credentials">Incorrect email or password</string>
     <string name="auth_error_weak_password">Weak password</string>
     <string name="auth_error_email_exist">This email already exist</string>
+
+    <!--  PROFILE  -->
+    <string name="profile_title">Profile</string>
+
+    <string name="profile_sub_upgrade">Upgrade</string>
+    <string name="profile_sub_active_plan">Active Plan</string>
+    <string name="profile_sub_basic">GetBetter Basic</string>
+
+    <string name="profile_app_settings_title">App Settings</string>
+    <string name="profile_app_settings_theming">Theming</string>
+    <string name="profile_app_settings_notifications">Notifications</string>
+
+    <string name="profile_help_title">Help &amp; Support</string>
+    <string name="profile_help_rate">Rate GetBetter</string>
+    <string name="profile_help_contact_support">Contact Support</string>
 </resources>

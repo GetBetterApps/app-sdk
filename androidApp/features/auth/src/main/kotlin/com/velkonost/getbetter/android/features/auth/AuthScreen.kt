@@ -55,9 +55,7 @@ fun AuthScreen(
 
     val state by viewModel.viewState.collectAsStateWithLifecycle()
     val localFocusManager = LocalFocusManager.current
-
     val haptic = LocalHapticFeedback.current
-
 
     Box(
         modifier = modifier

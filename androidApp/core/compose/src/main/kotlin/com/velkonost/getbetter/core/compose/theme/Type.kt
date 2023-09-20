@@ -28,7 +28,7 @@ internal val AppTypography = Typography(
     // DISPLAY .....................................................................................
     displayLarge = TextStyle(
         fontFamily = SFFontFamily,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Bold,
         fontSize = 57.sp,
         lineHeight = TextUnit(1.12F, TextUnitType.Em)
     ),

@@ -1,7 +1,9 @@
 package com.velkonost.getbetter.android.features.home
 
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -27,18 +29,51 @@ object HomeNavRoute : NavRoute<HomeViewModel> {
     override val viewModel: HomeViewModel
         @Composable get() = koinViewModel()
 
+    override fun getEnterTransition(): (AnimatedBackStack.() -> EnterTransition?) = HomePopEnterTransition
+
+    override fun getExitTransition(): (AnimatedBackStack.() -> ExitTransition?) = HomePopExitTransition
+
     override fun getPopEnterTransition() = HomePopEnterTransition
 
     override fun getPopExitTransition() = HomePopExitTransition
 }
 
 private val HomePopEnterTransition: AnimatedBackStack.() -> EnterTransition? = {
-    fadeIn(animationSpec = tween(durationMillis = 300))
+    slideIntoContainer(
+        towards = AnimatedContentTransitionScope.SlideDirection.Up,
+        animationSpec = tween(
+            durationMillis = 290,
+            delayMillis = 10,
+            easing = FastOutSlowInEasing
+        ),
+        initialOffset = { it / 4 }
+    ).plus(
+        fadeIn(
+            animationSpec = tween(
+                durationMillis = 150,
+                delayMillis = 10,
+                easing = FastOutSlowInEasing
+            )
+        )
+    )
 }
 
 private val HomePopExitTransition: AnimatedBackStack.() -> ExitTransition? = {
-    fadeOut(
-        animationSpec = tween(durationMillis = 300),
-        targetAlpha = 1f
+    slideOutOfContainer(
+        towards = AnimatedContentTransitionScope.SlideDirection.Down,
+        animationSpec = tween(
+            durationMillis = 280,
+            delayMillis = 20,
+            easing = FastOutSlowInEasing
+        ),
+        targetOffset = { it / 4 }
+    ).plus(
+        fadeOut(
+            animationSpec = tween(
+                durationMillis = 280,
+                delayMillis = 20,
+                easing = FastOutSlowInEasing
+            )
+        )
     )
 }
