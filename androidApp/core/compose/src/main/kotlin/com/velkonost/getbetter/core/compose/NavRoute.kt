@@ -12,6 +12,8 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.composable
+import com.velkonost.getbetter.core.compose.composable.GeneralEnterTransition
+import com.velkonost.getbetter.core.compose.composable.GeneralExitTransition
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationEvent
 import com.velkonost.getbetter.shared.core.vm.navigation.RouteNavigator
 import dev.icerock.moko.resources.ImageResource
@@ -34,9 +36,9 @@ interface NavRoute<T : RouteNavigator> {
 
     fun getDeepLinks(): List<NavDeepLink> = emptyList()
 
-    fun getEnterTransition(): (AnimatedBackStack.() -> EnterTransition?)? = null
+    fun getEnterTransition(): (AnimatedBackStack.() -> EnterTransition?)? = GeneralEnterTransition
 
-    fun getExitTransition(): (AnimatedBackStack.() -> ExitTransition?)? = null
+    fun getExitTransition(): (AnimatedBackStack.() -> ExitTransition?)? = GeneralExitTransition
 
     fun getPopEnterTransition(): (AnimatedBackStack.() -> EnterTransition?)? = getEnterTransition()
 

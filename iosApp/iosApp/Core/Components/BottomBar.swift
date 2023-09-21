@@ -20,8 +20,9 @@ struct BottomBar: View {
     var body: some View {
         
         HStack(alignment: .top, spacing: 0) {
-            BottomBarItem(pilot: pilot, screen: HomeRoute(), currentRoute: currentRoute)
-            BottomBarItem(pilot: pilot, screen: DetailRoute(), currentRoute: currentRoute)
+            BottomBarItem(pilot: pilot, screen: SocialRoute(), currentRoute: currentRoute)
+            BottomBarItem(pilot: pilot, screen: DiaryRoute(), currentRoute: currentRoute)
+            BottomBarItem(pilot: pilot, screen: CalendarsRoute(), currentRoute: currentRoute)
             BottomBarItem(pilot: pilot, screen: WisdomRoute(), currentRoute: currentRoute)
             BottomBarItem(pilot: pilot, screen: ProfileRoute(), currentRoute: currentRoute)
         }

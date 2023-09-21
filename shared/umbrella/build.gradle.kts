@@ -33,10 +33,15 @@ kotlin {
 
             export(projects.shared.features.auth.api)
             export(projects.shared.features.auth.presentation)
+
             export(projects.shared.features.home.presentation)
             export(projects.shared.features.detail.presentation)
-            export(projects.shared.features.profile.presentation)
+
+            export(projects.shared.features.social.presentation)
+            export(projects.shared.features.diary.presentation)
+            export(projects.shared.features.calendars.presentation)
             export(projects.shared.features.wisdom.presentation)
+            export(projects.shared.features.profile.presentation)
 
             export(libs.kermit.log)
             export(libs.moko.resources)
@@ -56,10 +61,15 @@ kotlin {
 
                 implementation(projects.shared.features.auth.data)
                 implementation(projects.shared.features.auth.presentation)
+
                 implementation(projects.shared.features.home.presentation)
                 implementation(projects.shared.features.detail.presentation)
-                implementation(projects.shared.features.profile.presentation)
+
+                implementation(projects.shared.features.social.presentation)
+                implementation(projects.shared.features.diary.presentation)
+                implementation(projects.shared.features.calendars.presentation)
                 implementation(projects.shared.features.wisdom.presentation)
+                implementation(projects.shared.features.profile.presentation)
 
                 implementation(libs.koin.core)
                 implementation(libs.moko.resources)
@@ -80,10 +90,15 @@ kotlin {
 
                 api(projects.shared.features.auth.api)
                 api(projects.shared.features.auth.presentation)
+
                 api(projects.shared.features.home.presentation)
                 api(projects.shared.features.detail.presentation)
-                api(projects.shared.features.profile.presentation)
+
+                api(projects.shared.features.social.presentation)
+                api(projects.shared.features.diary.presentation)
+                api(projects.shared.features.calendars.presentation)
                 api(projects.shared.features.wisdom.presentation)
+                api(projects.shared.features.profile.presentation)
 
                 api(libs.kermit.log)
                 api(libs.moko.resources)

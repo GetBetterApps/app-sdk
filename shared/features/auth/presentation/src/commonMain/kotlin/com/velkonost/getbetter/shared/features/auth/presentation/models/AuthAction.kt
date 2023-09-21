@@ -18,7 +18,7 @@ sealed interface AuthAction : UIContract.Action {
 
     data object NavigateToMainFlow : AuthAction, AuthNavigation {
         override val event: NavigationEvent = NavigationEvent.NavigateAndPopUpToRoute(
-            route = NavigationScreen.HomeNavScreen.route,
+            route = NavigationScreen.SocialNavScreen.route,
             popUpTo = NavigationScreen.AuthNavScreen.route,
         )
     }

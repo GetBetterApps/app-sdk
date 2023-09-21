@@ -67,7 +67,9 @@ fun WisdomItem(
                 .align(Alignment.Center)
                 .padding(16.dp)
                 .background(
-                    color = colorResource(resource = SharedR.colors.background_item).copy(alpha = 0.4f),
+                    color = colorResource(
+                        resource = SharedR.colors.background_item
+                    ).copy(alpha = 0.4f),
                     shape = MaterialTheme.shapes.medium
                 )
                 .padding(16.dp)

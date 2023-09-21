@@ -5,8 +5,9 @@ import KMPNativeCoroutinesAsync
 struct ContentView: View {
     
     let navigationScreens: [any NavRoute] = [
-        HomeRoute(),
-        DetailRoute(),
+        SocialRoute(),
+        DiaryRoute(),
+        CalendarsRoute(),
         ProfileRoute(),
         WisdomRoute()
     ]
@@ -42,11 +43,22 @@ struct ContentView: View {
                 case _ where route.starts(with: NavigationScreenKt.AUTH_DESTINATION) :
                     AuthRoute().view(pilot: pilot, route: route)
                     
-                case _ where route.starts(with: NavigationScreenKt.PROFILE_DESTINATION) :
-                    ProfileRoute().view(pilot: pilot, route: route)
+                case _ where route.starts(with: NavigationScreenKt.SOCIAL_DESTINATION) :
+                    SocialRoute().view(pilot: pilot, route: route)
+                    
+                case _ where route.starts(with: NavigationScreenKt.DIARY_DESTINATION) :
+                    DiaryRoute().view(pilot: pilot, route: route)
+                    
+                case _ where route.starts(with: NavigationScreenKt.CALENDARS_DESTINATION) :
+                    CalendarsRoute().view(pilot: pilot, route: route)
                     
                 case _ where route.starts(with: NavigationScreenKt.WISDOM_DESTINATION) :
                     WisdomRoute().view(pilot: pilot, route: route)
+                    
+                case _ where route.starts(with: NavigationScreenKt.PROFILE_DESTINATION) :
+                    ProfileRoute().view(pilot: pilot, route: route)
+                    
+                
                     
                 default : EmptyView()
                 }

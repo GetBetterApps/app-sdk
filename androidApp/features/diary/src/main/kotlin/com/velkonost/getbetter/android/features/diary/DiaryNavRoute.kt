@@ -1,0 +1,24 @@
+package com.velkonost.getbetter.android.features.diary
+
+import androidx.compose.runtime.Composable
+import com.velkonost.getbetter.core.compose.NavRoute
+import com.velkonost.getbetter.shared.core.vm.navigation.NavigationScreen
+import com.velkonost.getbetter.shared.features.diary.DiaryViewModel
+import com.velkonost.getbetter.shared.resources.SharedR
+import dev.icerock.moko.resources.ImageResource
+import org.koin.androidx.compose.koinViewModel
+
+object DiaryNavRoute : NavRoute<DiaryViewModel> {
+
+    override val route: String
+        get() = NavigationScreen.DiaryNavScreen.route
+
+    override fun menuIcon(): ImageResource = SharedR.images.ic_menu_profile
+
+    @Composable
+    override fun Content(viewModel: DiaryViewModel) = DiaryScreen()
+
+    override val viewModel: DiaryViewModel
+        @Composable get() = koinViewModel()
+
+}

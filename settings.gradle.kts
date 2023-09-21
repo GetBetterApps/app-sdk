@@ -36,14 +36,31 @@ include(
 
     ":shared:features:wisdom:presentation",
 
+    ":shared:features:social:api",
+    ":shared:features:social:data",
+    ":shared:features:social:presentation",
+
+    ":shared:features:calendars:api",
+    ":shared:features:calendars:data",
+    ":shared:features:calendars:presentation",
+
+    ":shared:features:diary:api",
+    ":shared:features:diary:data",
+    ":shared:features:diary:presentation",
+
     ":androidApp:app",
     ":androidApp:activity",
     ":androidApp:core:compose",
     ":androidApp:features:auth",
+
     ":androidApp:features:home",
     ":androidApp:features:detail",
-    ":androidApp:features:profile",
+
+    ":androidApp:features:social",
+    ":androidApp:features:diary",
+    ":androidApp:features:calendars",
     ":androidApp:features:wisdom",
+    ":androidApp:features:profile",
 
     ":shared:resources",
     ":shared:umbrella"

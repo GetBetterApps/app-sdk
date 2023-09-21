@@ -13,10 +13,15 @@ dependencies {
     implementation(projects.androidApp.core.compose)
 
     implementation(projects.androidApp.features.auth)
+
     implementation(projects.androidApp.features.home)
     implementation(projects.androidApp.features.detail)
-    implementation(projects.androidApp.features.profile)
+
+    implementation(projects.androidApp.features.social)
+    implementation(projects.androidApp.features.diary)
+    implementation(projects.androidApp.features.calendars)
     implementation(projects.androidApp.features.wisdom)
+    implementation(projects.androidApp.features.profile)
 
     implementation(projects.shared.core.util)
     implementation(projects.shared.core.vm)

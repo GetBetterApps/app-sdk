@@ -25,12 +25,4 @@ object AuthNavRoute : NavRoute<AuthViewModel> {
     override val viewModel: AuthViewModel
         @Composable get() = koinViewModel()
 
-    override fun getEnterTransition(): (AnimatedBackStack.() -> EnterTransition?) = GeneralEnterTransition
-
-    override fun getExitTransition(): (AnimatedBackStack.() -> ExitTransition?) = GeneralExitTransition
-
-    override fun getPopEnterTransition() = GeneralEnterTransition
-
-    override fun getPopExitTransition() = GeneralExitTransition
-
 }

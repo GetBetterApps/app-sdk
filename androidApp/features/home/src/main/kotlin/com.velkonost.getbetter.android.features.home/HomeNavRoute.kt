@@ -31,11 +31,4 @@ object HomeNavRoute : NavRoute<HomeViewModel> {
     override val viewModel: HomeViewModel
         @Composable get() = koinViewModel()
 
-    override fun getEnterTransition(): (AnimatedBackStack.() -> EnterTransition?) = GeneralEnterTransition
-
-    override fun getExitTransition(): (AnimatedBackStack.() -> ExitTransition?) = GeneralExitTransition
-
-    override fun getPopEnterTransition() = GeneralEnterTransition
-
-    override fun getPopExitTransition() = GeneralExitTransition
 }
