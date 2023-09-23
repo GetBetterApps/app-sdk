@@ -15,8 +15,9 @@ versionCode = "1"
 versionName = "0.1"
 
 # Dependencies
+firebase-android-bom = "32.3.1"
+firebase-android-crashlytics = "2.9.9"
 firebase-kmm = "1.10.0"
-firebase-bom = "32.2.3"
 
 libres = "1.2.0-beta01"
 moko-resources = "0.23.0"
@@ -79,6 +80,7 @@ realm-kotlin = { id = "io.realm.kotlin", version.ref = "realm" }
 libres = { id = "io.github.skeptick.libres", version.ref = "libres" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 moko-resources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko-resources" }
+android-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-android-crashlytics" }
 
 
 [libraries]
@@ -168,7 +170,8 @@ libres-compose = { module = "io.github.skeptick.libres:libres-compose", version.
 
 rickclephas-kmm-viewmodel = { module = "com.rickclephas.kmm:kmm-viewmodel-core", version.ref = "rickclephas-kmm-viewmodel" }
 
-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-android-core = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-android-bom" }
+firebase-android-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebase-kmm" }
 firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = "firebase-kmm" }
 firebase-crashlytics = { module = "dev.gitlive:firebase-crashlytics", version.ref = "firebase-kmm" }

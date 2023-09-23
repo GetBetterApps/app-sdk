@@ -80,7 +80,9 @@ kotlin {
         }
 
         androidMain {
+            dependencies {
 
+            }
         }
 
         iosMain {

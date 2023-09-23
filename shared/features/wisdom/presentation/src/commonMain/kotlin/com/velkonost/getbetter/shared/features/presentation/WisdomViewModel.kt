@@ -12,6 +12,7 @@ internal constructor(
 ) : BaseViewModel<WisdomViewState, WisdomAction, WisdomNavigation, Nothing>(
     initialState = WisdomViewState()
 ) {
+
     override fun dispatch(action: WisdomAction) = when(action) {
         is WisdomItemClick -> obtainWisdomItemClick(action.item)
         else -> {}

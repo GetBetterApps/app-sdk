@@ -6,6 +6,8 @@ target 'iosApp' do
   pod 'KMMViewModelSwiftUI', '1.0.0-ALPHA-14'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'Firebase/Crashlytics'
+
   
 end
 

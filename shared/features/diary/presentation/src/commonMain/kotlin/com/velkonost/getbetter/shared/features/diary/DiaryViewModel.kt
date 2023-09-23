@@ -11,6 +11,7 @@ internal constructor(
 ) : BaseViewModel<DiaryViewState, DiaryAction, DiaryNavigation, Nothing>(
     initialState = DiaryViewState()
 ) {
+
     override fun dispatch(action: DiaryAction) = when(action) {
 
         else -> {}

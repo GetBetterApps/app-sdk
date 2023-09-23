@@ -96,7 +96,8 @@ android {
         implementation(libs.koin.core)
         implementation(libs.koin.androidx.compose)
 
-        implementation(platform(libs.firebase.bom))
+        implementation(platform(libs.firebase.android.core))
+        implementation(libs.firebase.android.crashlytics)
     }
 }
 
