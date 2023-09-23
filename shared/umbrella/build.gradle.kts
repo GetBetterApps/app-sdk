@@ -26,6 +26,7 @@ kotlin {
             isStatic = true
             baseName = "SharedSDK"
 
+            export(projects.shared.core.datastore)
             export(projects.shared.core.network)
             export(projects.shared.core.util)
             export(projects.shared.core.vm)
@@ -56,6 +57,7 @@ kotlin {
 
         commonMain {
             dependencies {
+                implementation(projects.shared.core.datastore)
                 implementation(projects.shared.core.network)
                 implementation(projects.shared.core.util)
 
@@ -83,6 +85,7 @@ kotlin {
 
         iosMain {
             dependencies {
+                api(projects.shared.core.datastore)
                 api(projects.shared.core.network)
                 api(projects.shared.core.util)
                 api(projects.shared.core.vm)

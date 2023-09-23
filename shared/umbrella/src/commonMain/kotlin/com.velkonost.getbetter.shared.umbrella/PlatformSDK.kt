@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.umbrella
 
+import com.velkonost.getbetter.shared.core.datastore.di.CoreDataStoreModule
 import com.velkonost.getbetter.shared.core.network.di.CoreNetworkModule
 import com.velkonost.getbetter.shared.core.util.di.CoreUtilModule
 import com.velkonost.getbetter.shared.features.auth.data.di.AuthDataModule
@@ -18,6 +19,7 @@ object PlatformSDK {
 
     fun init(modules: List<Module>? = null) = startKoin {
         modules(
+            CoreDataStoreModule,
             CoreNetworkModule,
             CoreUtilModule,
 

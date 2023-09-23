@@ -21,6 +21,7 @@ include(
     ":shared:core:vm",
     ":shared:core:util",
     ":shared:core:network",
+    ":shared:core:datastore",
 
     ":shared:features:auth:api",
     ":shared:features:auth:data",

@@ -52,6 +52,7 @@ koin-core = "3.4.3"
 koin-test = "3.4.3"
 
 kotlin = "1.9.10"
+datastore = "1.1.0-dev01"
 kotlinx-coroutines = "1.7.3"
 kotlinx-serialization = "1.5.1"
 ksp = "1.9.10-1.0.13"
@@ -134,6 +135,8 @@ moko-resources-test = { module = "dev.icerock.moko:resources-test", version.ref 
 
 kermit-crashlytics = { module = "co.touchlab:kermit-crashlytics", version.ref = "kermit" }
 kermit-log = { module = "co.touchlab:kermit", version.ref = "kermit" }
+
+datastore = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastore" }
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-android" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin-androidx-compose" }
