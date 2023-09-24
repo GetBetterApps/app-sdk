@@ -8,32 +8,31 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
 
-class RegisterEmailUseCase constructor(
+class LoginEmailUseCase constructor(
     private val authRepository: AuthRepository<FirebaseUser>,
     private val userInfoRepository: UserInfoRepository
 ) {
+
     suspend operator fun invoke(
         email: String,
         password: String
     ): Flow<ResultState<Unit>> =
-        authRepository.registerEmail(
+        authRepository.loginEmail(
             email = email,
             password = password
-        ).flatMapMerge { registerResult ->
-            when (registerResult) {
+        ).flatMapMerge { loginResult ->
+            when (loginResult) {
                 is ResultState.Loading -> {
-                    flow { emit(registerResult) }
+                    flow { emit(loginResult) }
                 }
 
                 is ResultState.Success -> {
-                    userInfoRepository.initSettings(email)
+                    userInfoRepository.updateLastLogin()
                 }
 
                 is ResultState.Failure -> {
-                    flow { emit(registerResult) }
+                    flow { emit(loginResult) }
                 }
             }
         }
-
-
 }

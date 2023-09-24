@@ -6,20 +6,21 @@ import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.resource.Message
 import com.velkonost.getbetter.shared.core.vm.resource.MessageType
-import com.velkonost.getbetter.shared.features.auth.api.AuthRepository
+import com.velkonost.getbetter.shared.features.auth.domain.LoginAnonymousUseCase
+import com.velkonost.getbetter.shared.features.auth.domain.LoginEmailUseCase
 import com.velkonost.getbetter.shared.features.auth.domain.RegisterEmailUseCase
 import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthAction
 import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthNavigation
 import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthViewState
 import com.velkonost.getbetter.shared.resources.SharedR
-import dev.gitlive.firebase.auth.FirebaseUser
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
 
 class AuthViewModel
 internal constructor(
-    private val authRepository: AuthRepository<FirebaseUser>,
-    private val registerEmailUseCase: RegisterEmailUseCase
+    private val registerEmailUseCase: RegisterEmailUseCase,
+    private val loginEmailUseCase: LoginEmailUseCase,
+    private val loginAnonymousUseCase: LoginAnonymousUseCase
 ) : BaseViewModel<AuthViewState, AuthAction, AuthNavigation, Nothing>(
     initialState = AuthViewState()
 ) {
@@ -44,32 +45,33 @@ internal constructor(
 
     private fun loginAnonymous() {
         launchJob {
-            authRepository.registerAnonymously().collect { result ->
-                with(result) {
-                    isLoading {
-                        emit(viewState.value.copy(isLoading = it))
-                    }
-                    onSuccess {
-                        emit(AuthAction.NavigateToMainFlow)
-                    }
-                    onFailure {
-                        emit(viewState.value.copy(isLoading = false))
+            loginAnonymousUseCase()
+                .collect { result ->
+                    with(result) {
+                        isLoading {
+                            emit(viewState.value.copy(isLoading = it))
+                        }
+                        onSuccess {
+                            emit(AuthAction.NavigateToMainFlow)
+                        }
+                        onFailure {
+                            emit(viewState.value.copy(isLoading = false))
 
-                        val message = Message.Builder()
-                            .id("login_anonymous_failure")
-                            .text(StringDesc.Resource(SharedR.strings.auth_login_anonymous_failure))
-                            .messageType(MessageType.SnackBar.Builder().build())
-                            .build()
-                        emit(message)
+                            val message = Message.Builder()
+                                .id("login_anonymous_failure")
+                                .text(StringDesc.Resource(SharedR.strings.auth_login_anonymous_failure))
+                                .messageType(MessageType.SnackBar.Builder().build())
+                                .build()
+                            emit(message)
+                        }
                     }
                 }
-            }
         }
     }
 
     private fun loginEmail() {
         launchJob {
-            authRepository.loginEmail(
+            loginEmailUseCase(
                 email = viewState.value.email,
                 password = viewState.value.password
             ).collect { result ->
@@ -117,30 +119,6 @@ internal constructor(
                 }
             }
         }
-
-//        launchJob {
-//            authRepository.registerEmail(
-//                email = viewState.value.email,
-//                password = viewState.value.password
-//            ).collect { result ->
-//                with(result) {
-//                    isLoading {
-//                        emit(viewState.value.copy(isLoading = it))
-//                    }
-//                    onSuccess {
-//                        emit(AuthAction.NavigateToMainFlow)
-//                    }
-//                    onFailure {
-//                        val message = Message.Builder()
-//                            .id("register_email_failure")
-//                            .text(StringDesc.Resource(it.getEmailRegisterError()))
-//                            .messageType(MessageType.SnackBar.Builder().build())
-//                            .build()
-//                        emit(message)
-//                    }
-//                }
-//            }
-//        }
     }
 
     private fun obtainEmailChanged(value: String) {
