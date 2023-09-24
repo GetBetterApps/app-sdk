@@ -23,8 +23,12 @@ kotlin {
             dependencies {
                 api(projects.shared.core.vm)
 
+                implementation(projects.shared.core.util)
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.firebase.auth)
+
+                implementation(projects.shared.features.auth.api)
             }
         }
 

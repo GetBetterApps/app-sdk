@@ -13,43 +13,65 @@ import SharedSDK
 struct AppButton: View {
     
     private let labelText: String
+    private let isLoading: Bool
     private let onClick: () -> Void
     
-    init(labelText: String, onClick: @escaping () -> Void) {
+    init(labelText: String, isLoading: Bool, onClick: @escaping () -> Void) {
         self.labelText = labelText
+        self.isLoading = isLoading
         self.onClick = onClick
     }
     
     var body: some View {
         Button {
-            //onclick
+            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+            impactMed.impactOccurred()
+            onClick()
         } label: {
-            Text(labelText)
-//                .foregroundColor(
-//                    SwiftUI.Color(SharedR.colors.shared.button_text_color.getUIColor())
-//                )
-                .style(.titleMedium)
-                .frame(
-                    maxWidth: .infinity,
-                    minHeight: 64,
-                    maxHeight: 64
-                )
+            if (isLoading) {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: Color.textButtonEnabled))
+                    .frame(
+                        width: UIScreen.screenWidth * 0.8,
+                        height: 42,
+                        alignment: .center
+                    )
+                    .background(
+                        RoundedRectangle(cornerRadius: 48)
+                            .fill(
+                                LinearGradient(
+                                    colors: [.onboardingBackgroundGradientStart, .onboardingBackgroundGradientEnd],
+                                    startPoint: .trailing, endPoint: .leading
+                                )
+                            )
+                            .shadow(radius: 8)
+                    )
+            } else {
+                Text(labelText.uppercased())
+                    .foregroundColor(.textLight)
+                    .style(.titleMedium)
+                    .frame(
+                        width: UIScreen.screenWidth * 0.8,
+                        height: 42,
+                        alignment: .center
+                    )
+                    .background(
+                        RoundedRectangle(cornerRadius: 48)
+                            .fill(
+                                LinearGradient(
+                                    colors: [.onboardingBackgroundGradientStart, .onboardingBackgroundGradientEnd],
+                                    startPoint: .trailing, endPoint: .leading
+                                )
+                            )
+                            .shadow(radius: 8)
+                    )
+                    .transition(.opacity)
+                    .id("appButton")
+            }
                 
         }
+        .disabled(isLoading)
         
-        .foregroundColor(.white)
-    
-        .background(
-            LinearGradient(
-                gradient: .init(colors: [
-                    SwiftUI.Color(SharedR.colors.shared.button_gradient_start.getUIColor()),
-                    SwiftUI.Color(SharedR.colors.shared.button_gradient_end.getUIColor())
-                ]),
-                startPoint: .leading,
-                endPoint: .trailing
-            )
-        )
-        .clipShape(RoundedRectangle(cornerRadius: 24))
     }
 }
 

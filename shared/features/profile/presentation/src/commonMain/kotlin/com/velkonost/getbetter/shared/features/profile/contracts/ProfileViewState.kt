@@ -4,4 +4,5 @@ import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 
 data class ProfileViewState(
     val isLoading: Boolean = false,
+    val isLogoutLoading: Boolean = false
 ) : UIContract.State

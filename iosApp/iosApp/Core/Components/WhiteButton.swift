@@ -59,7 +59,7 @@ struct WhiteButton: View {
                         
                     )
                     .transition(.opacity)
-                    .id("authButton")
+                    .id("whiteButton")
             }
         }
         .disabled(isLoading)

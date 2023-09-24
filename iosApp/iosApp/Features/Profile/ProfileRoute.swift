@@ -23,7 +23,7 @@ struct ProfileRoute: NavRoute {
     }
     
     var content: some View {
-        return ProfileScreen() //viewModel: viewModel
+        return ProfileScreen(viewModel: viewModel)
     }
     
     var viewModel: ProfileViewModel {

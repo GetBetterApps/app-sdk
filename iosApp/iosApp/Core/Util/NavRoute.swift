@@ -107,8 +107,10 @@ extension NavRoute {
                     }
                 }
                 
-                pilot.popTo(navEvent.popUpTo, inclusive: true)
-                pilot.push(currentRoute)
+                pilot.setRoot(currentRoute)
+                
+//                pilot.popTo(navEvent.popUpTo, inclusive: true)
+//                pilot.push(currentRoute)
             }
             
             case let navEvent as NavigationEvent.PopToRoute : do {

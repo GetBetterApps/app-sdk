@@ -32,6 +32,7 @@
     <string name="profile_help_title">Help &amp; Support</string>
     <string name="profile_help_rate">Rate GetBetter</string>
     <string name="profile_help_contact_support">Contact Support</string>
+    <string name="profile_logout">Logout</string>
 
     <!--  WISDOM  -->
     <string name="wisdom_affirmations_title">Аффирмации и позитивное мышление</string>

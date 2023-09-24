@@ -18,6 +18,4 @@ data object NavigateToMainFlow : SplashNavigation() {
         route = NavigationScreen.SocialNavScreen.route,
         popUpTo = NavigationScreen.SplashNavScreen.route,
     )
-    override val delay: Long
-        get() = 500
 }

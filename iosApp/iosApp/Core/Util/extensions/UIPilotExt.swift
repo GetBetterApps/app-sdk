@@ -165,7 +165,7 @@ struct NavigationControllerHost<T: Equatable, Screen: View>: UIViewControllerRep
             if lastIndex != nil {
                 // используется для экранов меню, сохранение состояния
                 var vc = navigation.viewControllers
-                var prevC = vc[lastIndex!]
+                let prevC = vc[lastIndex!]
                 vc.remove(at: lastIndex!)
                 vc.append(prevC )
                 navigation.setViewControllers(vc, animated: false)
@@ -200,7 +200,7 @@ struct NavigationControllerHost<T: Equatable, Screen: View>: UIViewControllerRep
     
     func updateUIViewController(_ navigation: UINavigationController, context: Context) {
         navigation.topViewController?.navigationItem.title = navTitle
-        navigation.navigationBar.isHidden = navHidden
+        navigation.navigationBar.isHidden = true//navHidden
     }
     
     static func dismantleUIViewController(_ navigation: UINavigationController, coordinator: ()) {
