@@ -9,7 +9,8 @@ struct ContentView: View {
         DiaryRoute(),
         CalendarsRoute(),
         ProfileRoute(),
-        WisdomRoute()
+        WisdomRoute(),
+        DetailRoute()
     ]
     
     

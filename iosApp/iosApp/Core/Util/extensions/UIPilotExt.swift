@@ -20,7 +20,7 @@ public class UIPilot<T: Equatable>: ObservableObject {
     }
     
     var onPush: ((T) -> Void)?
-    var onSetRoot: ((T) -> Void)?
+    var onSetRoot: ((T, Int?) -> Void)?
     var onPopLast: ((Int, Bool) -> Void)?
 
     public init(initial: T? = nil, debug: Bool = false) {
@@ -42,8 +42,14 @@ public class UIPilot<T: Equatable>: ObservableObject {
     public func setRoot(_ route: T) {
         logger.log("UIPilot - Set root \(route) route.")
 //        self._routes.removeAll()
+        
+        let lastIndex = self._routes.firstIndex(of: route)
+        if lastIndex != nil {
+            self._routes.remove(at: lastIndex!)
+        }
+        
         self._routes.append(route)
-        self.onSetRoot?(route)
+        self.onSetRoot?(route, lastIndex)
     }
 
     public func pop(animated: Bool = true) {
@@ -85,8 +91,8 @@ public class UIPilot<T: Equatable>: ObservableObject {
     
     public func onSystemPop() {
         if !self._routes.isEmpty {
-            let popped = self._routes.removeLast()
-            logger.log("UIPilot - \(popped) route popped by system")
+//            let popped = self._routes.removeLast()
+//            logger.log("UIPilot - \(popped) route popped by system")
         }
     }
 }
@@ -153,13 +159,21 @@ struct NavigationControllerHost<T: Equatable, Screen: View>: UIViewControllerRep
             )
         }
         
-        uipilot.onSetRoot = { route in
+        uipilot.onSetRoot = { route, lastIndex in
             addTransition(nav: navigation)
             
-//            navigation.viewControllers = []
-            navigation.pushViewController(
-                UIHostingController(rootView: routeMap(route)), animated: false
-            )
+            if lastIndex != nil {
+                // используется для экранов меню, сохранение состояния
+                var vc = navigation.viewControllers
+                var prevC = vc[lastIndex!]
+                vc.remove(at: lastIndex!)
+                vc.append(prevC )
+                navigation.setViewControllers(vc, animated: false)
+            } else {
+                navigation.pushViewController(
+                    UIHostingController(rootView: routeMap(route)), animated: false
+                )
+            }
         }
         
         uipilot.onPush = { route in

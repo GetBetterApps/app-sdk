@@ -11,6 +11,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #3 in NavigationControllerHost.makeUIViewController(context:):UIPilotExt.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "vc[lastIndex!].copy()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in BottomBarItem.body.getter:BottomBar.swift">
          <PersistentStrings>
             <PersistentString

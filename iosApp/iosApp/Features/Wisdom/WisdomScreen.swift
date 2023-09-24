@@ -13,10 +13,10 @@ import KMMViewModelSwiftUI
 
 struct WisdomScreen: View {
     
-    @StateViewModel var viewModel: WisdomViewModel
+    @StateObject var viewModel = WisdomViewModelDelegate()
     
     var body: some View {
-        @State var state = viewModel.viewStateValue as! WisdomViewState
+        @State var state = viewModel.state
         
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 0) {
@@ -32,6 +32,9 @@ struct WisdomScreen: View {
             }
             .padding(16)
             .padding(.bottom, 100)
+            
         }
+        .onAppear(perform: viewModel.onAppear)
+        .onDisappear(perform: viewModel.onDisappear)
     }
 }

@@ -5,6 +5,7 @@ import com.velkonost.getbetter.shared.features.presentation.contracts.WisdomActi
 import com.velkonost.getbetter.shared.features.presentation.contracts.WisdomItemClick
 import com.velkonost.getbetter.shared.features.presentation.contracts.WisdomNavigation
 import com.velkonost.getbetter.shared.features.presentation.contracts.WisdomViewState
+import com.velkonost.getbetter.shared.features.presentation.model.WisdomType
 
 class WisdomViewModel
 internal constructor(
@@ -13,12 +14,16 @@ internal constructor(
     initialState = WisdomViewState()
 ) {
 
-    override fun dispatch(action: WisdomAction) = when(action) {
+    init {
+        emit(viewState.value)
+    }
+
+    override fun dispatch(action: WisdomAction) = when (action) {
         is WisdomItemClick -> obtainWisdomItemClick(action.item)
         else -> {}
     }
 
-    private fun obtainWisdomItemClick(item: WisdomItem) {
+    private fun obtainWisdomItemClick(item: WisdomType) {
 
     }
 

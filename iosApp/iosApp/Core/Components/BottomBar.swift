@@ -22,7 +22,7 @@ struct BottomBar: View {
         HStack(alignment: .top, spacing: 0) {
             BottomBarItem(pilot: pilot, screen: SocialRoute(), currentRoute: currentRoute)
             BottomBarItem(pilot: pilot, screen: DiaryRoute(), currentRoute: currentRoute)
-            BottomBarItem(pilot: pilot, screen: CalendarsRoute(), currentRoute: currentRoute)
+            BottomBarItem(pilot: pilot, screen: DetailRoute(), currentRoute: currentRoute)
             BottomBarItem(pilot: pilot, screen: WisdomRoute(), currentRoute: currentRoute)
             BottomBarItem(pilot: pilot, screen: ProfileRoute(), currentRoute: currentRoute)
         }
@@ -54,11 +54,13 @@ struct BottomBarItem: View {
             .foregroundColor(isSelected ? .iconActive : .iconInactive)
             .padding()
             .onTapGesture {
-                let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                impactMed.impactOccurred()
-                
-                if !pilot.popTo(screen.route, inclusive: false, animated: false) {
-                    pilot.setRoot(screen.route)
+                if screen.route != currentRoute {
+                    let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                    impactMed.impactOccurred()
+                    
+//                    if !pilot.popTo(screen.route, inclusive: false, animated: false) {
+                        pilot.setRoot(screen.route)
+//                    }
                 }
 //                pilot.push(currentRoute)
                 

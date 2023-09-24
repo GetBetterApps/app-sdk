@@ -23,7 +23,7 @@ struct WisdomRoute: NavRoute {
     }
     
     var content: some View {
-        return WisdomScreen(viewModel: viewModel) 
+        return WisdomScreen() 
     }
     
     var viewModel: WisdomViewModel {

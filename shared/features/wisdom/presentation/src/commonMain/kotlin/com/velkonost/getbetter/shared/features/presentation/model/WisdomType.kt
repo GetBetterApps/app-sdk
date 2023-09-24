@@ -1,11 +1,11 @@
-package com.velkonost.getbetter.shared.features.presentation
+package com.velkonost.getbetter.shared.features.presentation.model
 
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
 
-enum class WisdomItem(
+enum class WisdomType(
     val title: StringDesc,
     val description: StringDesc,
     val backgroundImage: ImageResource
