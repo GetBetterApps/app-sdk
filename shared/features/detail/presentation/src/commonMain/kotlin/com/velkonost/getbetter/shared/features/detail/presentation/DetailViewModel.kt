@@ -1,11 +1,11 @@
 package com.velkonost.getbetter.shared.features.detail.presentation
 
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
-import com.velkonost.getbetter.shared.features.detail.presentation.models.Decrement
-import com.velkonost.getbetter.shared.features.detail.presentation.models.DetailAction
-import com.velkonost.getbetter.shared.features.detail.presentation.models.DetailNavigation
-import com.velkonost.getbetter.shared.features.detail.presentation.models.DetailViewState
-import com.velkonost.getbetter.shared.features.detail.presentation.models.Increment
+import com.velkonost.getbetter.shared.features.detail.presentation.contracts.Decrement
+import com.velkonost.getbetter.shared.features.detail.presentation.contracts.DetailAction
+import com.velkonost.getbetter.shared.features.detail.presentation.contracts.DetailNavigation
+import com.velkonost.getbetter.shared.features.detail.presentation.contracts.DetailViewState
+import com.velkonost.getbetter.shared.features.detail.presentation.contracts.Increment
 
 class DetailViewModel
 internal constructor() :

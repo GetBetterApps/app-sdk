@@ -1,9 +1,9 @@
 package com.velkonost.getbetter.shared.features.diary
 
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
-import com.velkonost.getbetter.shared.features.diary.models.DiaryAction
-import com.velkonost.getbetter.shared.features.diary.models.DiaryNavigation
-import com.velkonost.getbetter.shared.features.diary.models.DiaryViewState
+import com.velkonost.getbetter.shared.features.diary.contracts.DiaryAction
+import com.velkonost.getbetter.shared.features.diary.contracts.DiaryNavigation
+import com.velkonost.getbetter.shared.features.diary.contracts.DiaryViewState
 
 class DiaryViewModel
 internal constructor(

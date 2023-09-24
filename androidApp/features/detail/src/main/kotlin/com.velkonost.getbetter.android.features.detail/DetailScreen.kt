@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.shared.features.detail.presentation.DetailViewModel
-import com.velkonost.getbetter.shared.features.detail.presentation.models.Decrement
-import com.velkonost.getbetter.shared.features.detail.presentation.models.Increment
+import com.velkonost.getbetter.shared.features.detail.presentation.contracts.Decrement
+import com.velkonost.getbetter.shared.features.detail.presentation.contracts.Increment
 
 @Composable
 internal fun DetailScreen(

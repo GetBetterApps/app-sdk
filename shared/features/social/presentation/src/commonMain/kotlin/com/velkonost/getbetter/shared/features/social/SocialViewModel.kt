@@ -1,9 +1,9 @@
 package com.velkonost.getbetter.shared.features.social
 
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
-import com.velkonost.getbetter.shared.features.social.models.SocialAction
-import com.velkonost.getbetter.shared.features.social.models.SocialNavigation
-import com.velkonost.getbetter.shared.features.social.models.SocialViewState
+import com.velkonost.getbetter.shared.features.social.contracts.SocialAction
+import com.velkonost.getbetter.shared.features.social.contracts.SocialNavigation
+import com.velkonost.getbetter.shared.features.social.contracts.SocialViewState
 
 class SocialViewModel
 internal constructor(

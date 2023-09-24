@@ -1,10 +1,10 @@
 package com.velkonost.getbetter.shared.features.presentation
 
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
-import com.velkonost.getbetter.shared.features.presentation.models.WisdomAction
-import com.velkonost.getbetter.shared.features.presentation.models.WisdomItemClick
-import com.velkonost.getbetter.shared.features.presentation.models.WisdomNavigation
-import com.velkonost.getbetter.shared.features.presentation.models.WisdomViewState
+import com.velkonost.getbetter.shared.features.presentation.contracts.WisdomAction
+import com.velkonost.getbetter.shared.features.presentation.contracts.WisdomItemClick
+import com.velkonost.getbetter.shared.features.presentation.contracts.WisdomNavigation
+import com.velkonost.getbetter.shared.features.presentation.contracts.WisdomViewState
 
 class WisdomViewModel
 internal constructor(

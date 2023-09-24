@@ -7,15 +7,13 @@ import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.resource.Message
 import com.velkonost.getbetter.shared.core.vm.resource.MessageType
 import com.velkonost.getbetter.shared.features.auth.api.AuthRepository
-import com.velkonost.getbetter.shared.features.auth.presentation.models.AuthAction
-import com.velkonost.getbetter.shared.features.auth.presentation.models.AuthNavigation
-import com.velkonost.getbetter.shared.features.auth.presentation.models.AuthViewState
+import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthAction
+import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthNavigation
+import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthViewState
 import com.velkonost.getbetter.shared.resources.SharedR
-import dev.gitlive.firebase.FirebaseException
 import dev.gitlive.firebase.auth.FirebaseUser
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
-import kotlinx.coroutines.flow.collect
 
 class AuthViewModel
 internal constructor(
