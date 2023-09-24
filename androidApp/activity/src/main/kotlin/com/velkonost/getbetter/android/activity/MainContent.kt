@@ -46,7 +46,6 @@ internal fun MainContent() {
             snackbarHost = { MainSnackBarHost(snackbarHostState) },
             modifier = Modifier
                 .fillMaxSize(),
-//                .background(MaterialTheme.colorScheme.background),
             bottomBar = {
                 BottomBar(navController)
             },
@@ -54,7 +53,7 @@ internal fun MainContent() {
         ) {
             AnimatedNavHost(
                 navController = navController,
-                startDestination = NavigationScreen.AuthNavScreen.route,
+                startDestination = NavigationScreen.SplashNavScreen.route,
                 enterTransition = {
                     slideIntoContainer(
                         towards = AnimatedContentTransitionScope.SlideDirection.Up,

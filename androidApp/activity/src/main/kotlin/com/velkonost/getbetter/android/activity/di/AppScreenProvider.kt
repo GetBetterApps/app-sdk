@@ -8,8 +8,10 @@ import com.velkonost.getbetter.android.features.home.HomeNavRoute
 import com.velkonost.getbetter.android.features.home.WisdomNavRoute
 import com.velkonost.getbetter.android.features.profile.ProfileNavRoute
 import com.velkonost.getbetter.android.features.social.SocialNavRoute
+import com.velkonost.getbetter.android.features.splash.SplashNavRoute
 
 val AppScreens = setOf(
+    SplashNavRoute,
     AuthNavRoute,
 
     SocialNavRoute,

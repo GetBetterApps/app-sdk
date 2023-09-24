@@ -23,6 +23,8 @@ include(
     ":shared:core:network",
     ":shared:core:datastore",
 
+    ":shared:features:splash:presentation",
+
     ":shared:features:userinfo:api",
     ":shared:features:userinfo:data",
 
@@ -61,6 +63,7 @@ include(
     ":androidApp:features:home",
     ":androidApp:features:detail",
 
+    ":androidApp:features:splash",
     ":androidApp:features:social",
     ":androidApp:features:diary",
     ":androidApp:features:calendars",

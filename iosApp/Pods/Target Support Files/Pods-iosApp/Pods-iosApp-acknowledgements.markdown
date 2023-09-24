@@ -1,5 +1,4 @@
 # Acknowledgements
-
 This application makes use of the following third party libraries:
 
 ## BoringSSL-GRPC
@@ -158,6 +157,7 @@ Original SSLeay License
 * [including the GNU Public Licence.]
   */
 
+
 ISC license used for completely new code in BoringSSL:
 
 /* Copyright (c) 2015, Google Inc.
@@ -174,6 +174,7 @@ ISC license used for completely new code in BoringSSL:
 * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION
 * OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
 * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE. */
+
 
 The code in third_party/fiat carries the MIT license:
 
@@ -234,6 +235,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+
 BoringSSL uses the Chromium test infrastructure to run a continuous build,
 trybots etc. The scripts which manage this, and the script for generating build
 metadata, are under the Chromium license. Distributing code linked against
@@ -267,7 +269,9 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+
 ## Firebase
+
 
                                  Apache License
                            Version 2.0, January 2004
@@ -277,26 +281,26 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
 1. Definitions.
 
-      "License" shall mean the terms and conditions for use, reproduction,
-      and distribution as defined by Sections 1 through 9 of this document.
+   "License" shall mean the terms and conditions for use, reproduction,
+   and distribution as defined by Sections 1 through 9 of this document.
 
-      "Licensor" shall mean the copyright owner or entity authorized by
-      the copyright owner that is granting the License.
+   "Licensor" shall mean the copyright owner or entity authorized by
+   the copyright owner that is granting the License.
 
-      "Legal Entity" shall mean the union of the acting entity and all
-      other entities that control, are controlled by, or are under common
-      control with that entity. For the purposes of this definition,
+   "Legal Entity" shall mean the union of the acting entity and all
+   other entities that control, are controlled by, or are under common
+   control with that entity. For the purposes of this definition,
       "control" means (i) the power, direct or indirect, to cause the
-      direction or management of such entity, whether by contract or
-      otherwise, or (ii) ownership of fifty percent (50%) or more of the
-      outstanding shares, or (iii) beneficial ownership of such entity.
+   direction or management of such entity, whether by contract or
+   otherwise, or (ii) ownership of fifty percent (50%) or more of the
+   outstanding shares, or (iii) beneficial ownership of such entity.
 
       "You" (or "Your") shall mean an individual or Legal Entity
-      exercising permissions granted by this License.
+   exercising permissions granted by this License.
 
       "Source" form shall mean the preferred form for making modifications,
-      including but not limited to software source code, documentation
-      source, and configuration files.
+   including but not limited to software source code, documentation
+   source, and configuration files.
 
       "Object" form shall mean any form resulting from mechanical
       transformation or translation of a Source form, including but
@@ -1739,7 +1743,9 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 ## FirebaseFirestore
+
 
                                  Apache License
                            Version 2.0, January 2004
@@ -1973,7 +1979,6 @@ SOFTWARE.
 --------------------------
 FirestoreEncoder
 --------------------------
-
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -2176,14 +2181,20 @@ FirestoreEncoder
     See the License for the specific language governing permissions and
     limitations under the License.
 
+
+
 ## Runtime Library Exception to the Apache 2.0 License: ##
+
 
     As an exception, if you use this Software to compile your source code and
     portions of this Software are embedded into the binary product as a result,
     you may redistribute such product without providing attribution as would
     otherwise be required by Sections 4(a), 4(b) and 4(d) of the License.
 
+
+
 ## FirebaseInstallations
+
 
                                  Apache License
                            Version 2.0, January 2004
@@ -2193,26 +2204,26 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
 1. Definitions.
 
-      "License" shall mean the terms and conditions for use, reproduction,
-      and distribution as defined by Sections 1 through 9 of this document.
+   "License" shall mean the terms and conditions for use, reproduction,
+   and distribution as defined by Sections 1 through 9 of this document.
 
-      "Licensor" shall mean the copyright owner or entity authorized by
-      the copyright owner that is granting the License.
+   "Licensor" shall mean the copyright owner or entity authorized by
+   the copyright owner that is granting the License.
 
-      "Legal Entity" shall mean the union of the acting entity and all
-      other entities that control, are controlled by, or are under common
-      control with that entity. For the purposes of this definition,
+   "Legal Entity" shall mean the union of the acting entity and all
+   other entities that control, are controlled by, or are under common
+   control with that entity. For the purposes of this definition,
       "control" means (i) the power, direct or indirect, to cause the
-      direction or management of such entity, whether by contract or
-      otherwise, or (ii) ownership of fifty percent (50%) or more of the
-      outstanding shares, or (iii) beneficial ownership of such entity.
+   direction or management of such entity, whether by contract or
+   otherwise, or (ii) ownership of fifty percent (50%) or more of the
+   outstanding shares, or (iii) beneficial ownership of such entity.
 
       "You" (or "Your") shall mean an individual or Legal Entity
-      exercising permissions granted by this License.
+   exercising permissions granted by this License.
 
       "Source" form shall mean the preferred form for making modifications,
-      including but not limited to software source code, documentation
-      source, and configuration files.
+   including but not limited to software source code, documentation
+   source, and configuration files.
 
       "Object" form shall mean any form resulting from mechanical
       transformation or translation of a Source form, including but
@@ -4003,7 +4014,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
+
 ## abseil
+
 
                                  Apache License
                            Version 2.0, January 2004
@@ -4207,7 +4220,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
+
+
 ## gRPC-C++
+
 
                                  Apache License
                            Version 2.0, January 2004
@@ -4449,7 +4465,6 @@ Mozilla Public License Version 2.0
 ==================================
 
 1. Definitions
-
 --------------
 
 1.1. "Contributor"
@@ -4532,7 +4547,6 @@ fifty percent (50%) of the outstanding shares or beneficial
 ownership of such entity.
 
 2. License Grants and Conditions
-
 --------------------------------
 
 2.1. Grants
@@ -4604,7 +4618,6 @@ Sections 3.1, 3.2, 3.3, and 3.4 are conditions of the licenses granted
 in Section 2.1.
 
 3. Responsibilities
-
 -------------------
 
 3.1. Distribution of Source Form
@@ -4667,7 +4680,6 @@ disclaimers of warranty and limitations of liability specific to any
 jurisdiction.
 
 4. Inability to Comply Due to Statute or Regulation
-
 ---------------------------------------------------
 
 If it is impossible for You to comply with any of the terms of this
@@ -4681,7 +4693,6 @@ or regulation, such description must be sufficiently detailed for a
 recipient of ordinary skill to be able to understand it.
 
 5. Termination
-
 --------------
 
 5.1. The rights granted under this License will terminate automatically
@@ -4729,7 +4740,6 @@ prior to termination shall survive termination.
 * essential part of this License. No use of any Covered Software is   *
 * authorized under this License except under this disclaimer.         *
 *                                                                      *
-
 ************************************************************************
 
 ************************************************************************
@@ -4755,11 +4765,9 @@ prior to termination shall survive termination.
 * incidental or consequential damages, so this exclusion and          *
 * limitation may not apply to You.                                    *
 *                                                                      *
-
 ************************************************************************
 
 8. Litigation
-
 -------------
 
 Any litigation relating to this License may be brought only in the
@@ -4770,7 +4778,6 @@ Nothing in this Section shall prevent a party's ability to bring
 cross-claims or counter-claims.
 
 9. Miscellaneous
-
 ----------------
 
 This License represents the complete agreement concerning the subject
@@ -4781,7 +4788,6 @@ that the language of a contract shall be construed against the drafter
 shall not be used to construe this License against a Contributor.
 
 10. Versions of the License
-
 ---------------------------
 
 10.1. New Versions
@@ -4833,7 +4839,9 @@ Exhibit B - "Incompatible With Secondary Licenses" Notice
 This Source Code Form is "Incompatible With Secondary Licenses", as
 defined by the Mozilla Public License, v. 2.0.
 
+
 ## gRPC-Core
+
 
                                  Apache License
                            Version 2.0, January 2004
@@ -5075,7 +5083,6 @@ Mozilla Public License Version 2.0
 ==================================
 
 1. Definitions
-
 --------------
 
 1.1. "Contributor"
@@ -5158,7 +5165,6 @@ fifty percent (50%) of the outstanding shares or beneficial
 ownership of such entity.
 
 2. License Grants and Conditions
-
 --------------------------------
 
 2.1. Grants
@@ -5230,7 +5236,6 @@ Sections 3.1, 3.2, 3.3, and 3.4 are conditions of the licenses granted
 in Section 2.1.
 
 3. Responsibilities
-
 -------------------
 
 3.1. Distribution of Source Form
@@ -5293,7 +5298,6 @@ disclaimers of warranty and limitations of liability specific to any
 jurisdiction.
 
 4. Inability to Comply Due to Statute or Regulation
-
 ---------------------------------------------------
 
 If it is impossible for You to comply with any of the terms of this
@@ -5307,7 +5311,6 @@ or regulation, such description must be sufficiently detailed for a
 recipient of ordinary skill to be able to understand it.
 
 5. Termination
-
 --------------
 
 5.1. The rights granted under this License will terminate automatically
@@ -5355,7 +5358,6 @@ prior to termination shall survive termination.
 * essential part of this License. No use of any Covered Software is   *
 * authorized under this License except under this disclaimer.         *
 *                                                                      *
-
 ************************************************************************
 
 ************************************************************************
@@ -5381,11 +5383,9 @@ prior to termination shall survive termination.
 * incidental or consequential damages, so this exclusion and          *
 * limitation may not apply to You.                                    *
 *                                                                      *
-
 ************************************************************************
 
 8. Litigation
-
 -------------
 
 Any litigation relating to this License may be brought only in the
@@ -5396,7 +5396,6 @@ Nothing in this Section shall prevent a party's ability to bring
 cross-claims or counter-claims.
 
 9. Miscellaneous
-
 ----------------
 
 This License represents the complete agreement concerning the subject
@@ -5407,7 +5406,6 @@ that the language of a contract shall be construed against the drafter
 shall not be used to construe this License against a Contributor.
 
 10. Versions of the License
-
 ---------------------------
 
 10.1. New Versions
@@ -5497,8 +5495,8 @@ This software is provided 'as-is', without any express or
 implied warranty. In no event will the authors be held liable
 for any damages arising from the use of this software.
 
-Permission is granted to anyone to use this software for any 
-purpose, including commercial applications, and to alter it and 
+Permission is granted to anyone to use this software for any
+purpose, including commercial applications, and to alter it and
 redistribute it freely, subject to the following restrictions:
 
 1. The origin of this software must not be misrepresented; you 

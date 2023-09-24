@@ -17,6 +17,7 @@ dependencies {
     implementation(projects.androidApp.features.home)
     implementation(projects.androidApp.features.detail)
 
+    implementation(projects.androidApp.features.splash)
     implementation(projects.androidApp.features.social)
     implementation(projects.androidApp.features.diary)
     implementation(projects.androidApp.features.calendars)

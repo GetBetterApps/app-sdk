@@ -12,6 +12,7 @@ import com.velkonost.getbetter.shared.features.auth.domain.RegisterEmailUseCase
 import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthAction
 import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthNavigation
 import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthViewState
+import com.velkonost.getbetter.shared.features.auth.presentation.contracts.NavigateToMainFlow
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
@@ -35,7 +36,6 @@ internal constructor(
 
         is AuthAction.AnonymousLoginClick -> loginAnonymous()
         is AuthAction.SwitchAuthClick -> switchAuth()
-        is AuthAction.NavigateToMainFlow -> Unit
     }
 
     private fun switchAuth() {
@@ -52,7 +52,7 @@ internal constructor(
                             emit(viewState.value.copy(isLoading = it))
                         }
                         onSuccess {
-                            emit(AuthAction.NavigateToMainFlow)
+                            emit(NavigateToMainFlow)
                         }
                         onFailure {
                             emit(viewState.value.copy(isLoading = false))
@@ -80,7 +80,7 @@ internal constructor(
                         emit(viewState.value.copy(isLoading = it))
                     }
                     onSuccess {
-                        emit(AuthAction.NavigateToMainFlow)
+                        emit(NavigateToMainFlow)
                     }
                     onFailure {
                         val message = Message.Builder()
@@ -106,7 +106,7 @@ internal constructor(
                         emit(viewState.value.copy(isLoading = it))
                     }
                     onSuccess {
-                        emit(AuthAction.NavigateToMainFlow)
+                        emit(NavigateToMainFlow)
                     }
                     onFailure {
                         val message = Message.Builder()

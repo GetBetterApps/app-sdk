@@ -14,7 +14,7 @@ struct ContentView: View {
     ]
     
     
-    @StateObject var pilot = UIPilot(initial: NavigationScreenKt.AUTH_DESTINATION)
+    @StateObject var pilot = UIPilot(initial: NavigationScreenKt.SPLASH_DESTINATION)
     
     @State private var resourceMessageText: String?
     @State private var snackBar: MessageType.SnackBar?
@@ -35,6 +35,9 @@ struct ContentView: View {
                 Color.mainBackground.edgesIgnoringSafeArea(.all)
                 
                 switch route {
+                case _ where route.starts(with: NavigationScreenKt.SPLASH_DESTINATION) :
+                    SplashRoute().view(pilot: pilot, route: route)
+                    
                 case _ where route.starts(with: NavigationScreenKt.HOME_DESTINATION) :
                     HomeRoute().view(pilot: pilot, route: route)
                     

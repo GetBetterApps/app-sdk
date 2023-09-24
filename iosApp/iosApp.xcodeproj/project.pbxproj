@@ -38,6 +38,8 @@
 		4678E44C2AAC6CF8000B88E8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4678E44B2AAC6CF8000B88E8 /* GoogleService-Info.plist */; };
 		467BECCF2AC017CF00F74482 /* PrimaryTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467BECCE2AC017CF00F74482 /* PrimaryTabs.swift */; };
 		467BECD12AC0350400F74482 /* WisdomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467BECD02AC0350400F74482 /* WisdomViewModel.swift */; };
+		46870C2E2AC092D300BCBDB1 /* SplashRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46870C2D2AC092D300BCBDB1 /* SplashRoute.swift */; };
+		46870C302AC092DA00BCBDB1 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46870C2F2AC092DA00BCBDB1 /* SplashScreen.swift */; };
 		468B87682ABC45BF001BBEB1 /* DiaryRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B87672ABC45BF001BBEB1 /* DiaryRoute.swift */; };
 		468B876A2ABC45C6001BBEB1 /* DiaryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B87692ABC45C6001BBEB1 /* DiaryScreen.swift */; };
 		468B876C2ABC45CC001BBEB1 /* CalendarsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B876B2ABC45CC001BBEB1 /* CalendarsRoute.swift */; };
@@ -96,6 +98,8 @@
 		4678E44B2AAC6CF8000B88E8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		467BECCE2AC017CF00F74482 /* PrimaryTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTabs.swift; sourceTree = "<group>"; };
 		467BECD02AC0350400F74482 /* WisdomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomViewModel.swift; sourceTree = "<group>"; };
+		46870C2D2AC092D300BCBDB1 /* SplashRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SplashRoute.swift; path = iosApp/Features/Wisdom/SplashRoute.swift; sourceTree = SOURCE_ROOT; };
+		46870C2F2AC092DA00BCBDB1 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		468B87672ABC45BF001BBEB1 /* DiaryRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryRoute.swift; sourceTree = "<group>"; };
 		468B87692ABC45C6001BBEB1 /* DiaryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryScreen.swift; sourceTree = "<group>"; };
 		468B876B2ABC45CC001BBEB1 /* CalendarsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarsRoute.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 		461F7C6D2AA8D7DE003791CF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				46870C2C2AC092CB00BCBDB1 /* Splash */,
 				468B87662ABC4445001BBEB1 /* Diary */,
 				468B87652ABC443E001BBEB1 /* Calendars */,
 				468B87642ABC4439001BBEB1 /* Social */,
@@ -266,6 +271,15 @@
 				460054AC2ABB1B5E00586767 /* HelpAndSupport.swift */,
 			);
 			path = components;
+			sourceTree = "<group>";
+		};
+		46870C2C2AC092CB00BCBDB1 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				46870C2D2AC092D300BCBDB1 /* SplashRoute.swift */,
+				46870C2F2AC092DA00BCBDB1 /* SplashScreen.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 		468B87642ABC4439001BBEB1 /* Social */ = {
@@ -560,6 +574,7 @@
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				460054AB2ABB18FC00586767 /* MenuItem.swift in Sources */,
 				468B87722ABC45E1001BBEB1 /* SocialScreen.swift in Sources */,
+				46870C2E2AC092D300BCBDB1 /* SplashRoute.swift in Sources */,
 				46D9381E2ABAECBE0096A221 /* ProfileScreen.swift in Sources */,
 				460054AD2ABB1B5E00586767 /* HelpAndSupport.swift in Sources */,
 				46C10D212AB46BF400E62846 /* UIPilotExt.swift in Sources */,
@@ -588,6 +603,7 @@
 				46D9381C2ABAECB70096A221 /* ProfileRoute.swift in Sources */,
 				46B17E112AADE0DD008C2BC4 /* Color.swift in Sources */,
 				460054B42ABB56FF00586767 /* WisdomRoute.swift in Sources */,
+				46870C302AC092DA00BCBDB1 /* SplashScreen.swift in Sources */,
 				460054B22ABB56F900586767 /* WisdomScreen.swift in Sources */,
 				46CDB56E2AADB46400800096 /* AuthRoute.swift in Sources */,
 				46B17E0C2AADE081008C2BC4 /* TextExt.swift in Sources */,

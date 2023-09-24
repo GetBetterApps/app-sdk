@@ -13,6 +13,7 @@ import com.velkonost.getbetter.shared.features.home.presentation.di.HomePresenta
 import com.velkonost.getbetter.shared.features.presentation.di.WisdomPresentationModule
 import com.velkonost.getbetter.shared.features.profile.di.ProfilePresentationModule
 import com.velkonost.getbetter.shared.features.social.di.SocialPresentationModule
+import com.velkonost.getbetter.shared.features.splash.presentation.di.SplashPresentationModule
 import com.velkonost.getbetter.shared.features.userinfo.data.di.UserInfoDataModule
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -34,6 +35,7 @@ object PlatformSDK {
             HomePresentationModule,
             DetailPresentationModule,
 
+            SplashPresentationModule,
             SocialPresentationModule,
             DiaryPresentationModule,
             CalendarsPresentationModule,
