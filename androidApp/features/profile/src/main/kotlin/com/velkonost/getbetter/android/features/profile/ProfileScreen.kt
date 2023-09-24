@@ -13,8 +13,10 @@ import com.velkonost.getbetter.android.features.profile.components.AppSettings
 import com.velkonost.getbetter.android.features.profile.components.HelpAndSupport
 import com.velkonost.getbetter.android.features.profile.components.ProfileHeader
 import com.velkonost.getbetter.android.features.profile.components.SubscriptionBox
+import com.velkonost.getbetter.core.compose.components.VersionName
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.stringResource
+
 
 @Composable
 fun ProfileScreen(
@@ -48,6 +50,7 @@ fun ProfileScreen(
 
         AppSettings()
         HelpAndSupport()
+        VersionName()
     }
 
 }

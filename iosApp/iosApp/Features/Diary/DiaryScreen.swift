@@ -12,7 +12,6 @@ import SharedSDK
 
 struct DiaryScreen: View {
     
-    
     @State private var selectedPage: Int = 0
     
     var body: some View {

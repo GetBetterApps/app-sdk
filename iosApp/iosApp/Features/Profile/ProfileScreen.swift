@@ -12,6 +12,9 @@ import SwiftUI
 
 struct ProfileScreen: View {
     
+    let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+
+    
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
@@ -27,6 +30,15 @@ struct ProfileScreen: View {
 
                 AppSettings()
                 HelpAndSupport()
+                
+                HStack {
+                    Spacer()
+                    Text(appVersion?.uppercased() ?? "")
+                        .style(.labelMedium)
+                        .foregroundColor(.textUnimportantColor)
+                    Spacer()
+                }.padding(.top, 40)
+                
             }
             .padding(.init(top: 16, leading: 16, bottom: 200, trailing: 16))   
         }

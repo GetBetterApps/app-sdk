@@ -12,7 +12,7 @@ minSdk = "21"
 targetSdk = "34"
 compileSdk = "34"
 versionCode = "1"
-versionName = "0.1"
+versionName = "0.2"
 
 # Dependencies
 firebase-android-bom = "32.3.1"
