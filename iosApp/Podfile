@@ -7,6 +7,7 @@ target 'iosApp' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Crashlytics'
+  pod 'Firebase/Firestore'
 
   
 end

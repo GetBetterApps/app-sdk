@@ -4,6 +4,7 @@ import com.velkonost.getbetter.shared.core.datastore.di.CoreDataStoreModule
 import com.velkonost.getbetter.shared.core.network.di.CoreNetworkModule
 import com.velkonost.getbetter.shared.core.util.di.CoreUtilModule
 import com.velkonost.getbetter.shared.features.auth.data.di.AuthDataModule
+import com.velkonost.getbetter.shared.features.auth.domain.di.AuthDomainModule
 import com.velkonost.getbetter.shared.features.auth.presentation.di.AuthPresentationModule
 import com.velkonost.getbetter.shared.features.detail.presentation.di.DetailPresentationModule
 import com.velkonost.getbetter.shared.features.diary.di.CalendarsPresentationModule
@@ -12,6 +13,7 @@ import com.velkonost.getbetter.shared.features.home.presentation.di.HomePresenta
 import com.velkonost.getbetter.shared.features.presentation.di.WisdomPresentationModule
 import com.velkonost.getbetter.shared.features.profile.di.ProfilePresentationModule
 import com.velkonost.getbetter.shared.features.social.di.SocialPresentationModule
+import com.velkonost.getbetter.shared.features.userinfo.data.di.UserInfoDataModule
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 
@@ -23,7 +25,10 @@ object PlatformSDK {
             CoreNetworkModule,
             CoreUtilModule,
 
+            UserInfoDataModule,
+
             AuthDataModule,
+            AuthDomainModule,
             AuthPresentationModule,
 
             HomePresentationModule,

@@ -23,8 +23,12 @@ include(
     ":shared:core:network",
     ":shared:core:datastore",
 
+    ":shared:features:userinfo:api",
+    ":shared:features:userinfo:data",
+
     ":shared:features:auth:api",
     ":shared:features:auth:data",
+    ":shared:features:auth:domain",
     ":shared:features:auth:presentation",
 
     ":shared:features:profile:api",

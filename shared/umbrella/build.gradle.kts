@@ -32,7 +32,10 @@ kotlin {
             export(projects.shared.core.vm)
             export(projects.shared.resources)
 
+            export(projects.shared.features.userinfo.api)
+
             export(projects.shared.features.auth.api)
+            export(projects.shared.features.auth.domain)
             export(projects.shared.features.auth.presentation)
 
             export(projects.shared.features.home.presentation)
@@ -47,6 +50,7 @@ kotlin {
             export(libs.kermit.log)
             export(libs.moko.resources)
             export(libs.firebase.auth)
+            export(libs.firebase.firestore)
 
             transitiveExport = true
             embedBitcode(BitcodeEmbeddingMode.BITCODE)
@@ -61,7 +65,10 @@ kotlin {
                 implementation(projects.shared.core.network)
                 implementation(projects.shared.core.util)
 
+                implementation(projects.shared.features.userinfo.data)
+
                 implementation(projects.shared.features.auth.data)
+                implementation(projects.shared.features.auth.domain)
                 implementation(projects.shared.features.auth.presentation)
 
                 implementation(projects.shared.features.home.presentation)
@@ -76,6 +83,7 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.moko.resources)
                 implementation(libs.firebase.auth)
+                implementation(libs.firebase.firestore)
             }
         }
 
@@ -93,7 +101,10 @@ kotlin {
                 api(projects.shared.core.vm)
                 api(projects.shared.resources)
 
+                api(projects.shared.features.userinfo.api)
+
                 api(projects.shared.features.auth.api)
+                api(projects.shared.features.auth.domain)
                 api(projects.shared.features.auth.presentation)
 
                 api(projects.shared.features.home.presentation)
@@ -108,6 +119,7 @@ kotlin {
                 api(libs.kermit.log)
                 api(libs.moko.resources)
                 api(libs.firebase.auth)
+                api(libs.firebase.firestore)
             }
         }
 
