@@ -25,7 +25,6 @@ kotlin {
 
                 implementation(projects.shared.core.util)
                 implementation(projects.shared.features.profile.api)
-
             }
         }
     }

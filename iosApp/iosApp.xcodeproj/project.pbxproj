@@ -32,7 +32,9 @@
 		461F7C752AA8DCD0003791CF /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C742AA8DCD0003791CF /* HomeScreen.swift */; };
 		461F7C772AA8E371003791CF /* DetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C762AA8E371003791CF /* DetailScreen.swift */; };
 		464B60B42ABAF7C300369EC3 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B60B32ABAF7C300369EC3 /* ProfileHeader.swift */; };
-		464B60B62ABAF81B00369EC3 /* AvatarPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B60B52ABAF81B00369EC3 /* AvatarPlaceholder.swift */; };
+		464B60B62ABAF81B00369EC3 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B60B52ABAF81B00369EC3 /* Avatar.swift */; };
+		465C1FCA2AC157C300B7AE18 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465C1FC92AC157C300B7AE18 /* ImagePicker.swift */; };
+		465C1FCC2AC1775200B7AE18 /* StorageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465C1FCB2AC1775200B7AE18 /* StorageDelegate.swift */; };
 		466C5CCB2AB73240002C089C /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C5CCA2AB73240002C089C /* BottomBar.swift */; };
 		4678E4482AAC6A67000B88E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4678E4472AAC6A67000B88E8 /* AppDelegate.swift */; };
 		4678E44C2AAC6CF8000B88E8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4678E44B2AAC6CF8000B88E8 /* GoogleService-Info.plist */; };
@@ -92,7 +94,9 @@
 		461F7C742AA8DCD0003791CF /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		461F7C762AA8E371003791CF /* DetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreen.swift; sourceTree = "<group>"; };
 		464B60B32ABAF7C300369EC3 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
-		464B60B52ABAF81B00369EC3 /* AvatarPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPlaceholder.swift; sourceTree = "<group>"; };
+		464B60B52ABAF81B00369EC3 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
+		465C1FC92AC157C300B7AE18 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		465C1FCB2AC1775200B7AE18 /* StorageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageDelegate.swift; sourceTree = "<group>"; };
 		466C5CCA2AB73240002C089C /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		4678E4472AAC6A67000B88E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4678E44B2AAC6CF8000B88E8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 				461F7C662AA88B75003791CF /* extensions */,
 				461F7C642AA88A39003791CF /* NavRoute.swift */,
 				461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */,
+				465C1FCB2AC1775200B7AE18 /* StorageDelegate.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -262,7 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				464B60B32ABAF7C300369EC3 /* ProfileHeader.swift */,
-				464B60B52ABAF81B00369EC3 /* AvatarPlaceholder.swift */,
+				464B60B52ABAF81B00369EC3 /* Avatar.swift */,
 				460054A02ABB0D0100586767 /* SettingsButton.swift */,
 				460054A22ABB101600586767 /* SubscriptionBox.swift */,
 				460054A42ABB17BD00586767 /* SectionTitle.swift */,
@@ -337,6 +342,7 @@
 				466C5CCA2AB73240002C089C /* BottomBar.swift */,
 				460054A62ABB17FF00586767 /* PrimaryBox.swift */,
 				467BECCE2AC017CF00F74482 /* PrimaryTabs.swift */,
+				465C1FC92AC157C300B7AE18 /* ImagePicker.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -565,8 +571,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				46C10D252AB4741100E62846 /* SwitchRegisteringText.swift in Sources */,
+				465C1FCC2AC1775200B7AE18 /* StorageDelegate.swift in Sources */,
 				461F7C612AA878EB003791CF /* Koin.swift in Sources */,
 				460054A72ABB17FF00586767 /* PrimaryBox.swift in Sources */,
+				465C1FCA2AC157C300B7AE18 /* ImagePicker.swift in Sources */,
 				46B17E142AADE482008C2BC4 /* AuthTextField.swift in Sources */,
 				460054B72ABB576B00586767 /* WisdomItem.swift in Sources */,
 				461F7C652AA88A39003791CF /* NavRoute.swift in Sources */,
@@ -584,7 +592,7 @@
 				460054A12ABB0D0100586767 /* SettingsButton.swift in Sources */,
 				464B60B42ABAF7C300369EC3 /* ProfileHeader.swift in Sources */,
 				468B87682ABC45BF001BBEB1 /* DiaryRoute.swift in Sources */,
-				464B60B62ABAF81B00369EC3 /* AvatarPlaceholder.swift in Sources */,
+				464B60B62ABAF81B00369EC3 /* Avatar.swift in Sources */,
 				468B876C2ABC45CC001BBEB1 /* CalendarsRoute.swift in Sources */,
 				46C10D232AB4734200E62846 /* AuthAnonymousButton.swift in Sources */,
 				467BECD12AC0350400F74482 /* WisdomViewModel.swift in Sources */,

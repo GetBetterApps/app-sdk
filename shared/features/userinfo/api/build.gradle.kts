@@ -6,6 +6,7 @@ import com.velkonost.getbetter.join
 plugins {
     `kmm-shared-module-plugin`
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.nativecoroutines)
 }
 
@@ -23,6 +24,7 @@ kotlin {
             dependencies {
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlinx.serialization)
 
                 implementation(projects.shared.core.util)
             }

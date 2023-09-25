@@ -58,6 +58,7 @@ include(
     ":androidApp:app",
     ":androidApp:activity",
     ":androidApp:core:compose",
+    ":androidApp:core:utils",
     ":androidApp:features:auth",
 
     ":androidApp:features:home",

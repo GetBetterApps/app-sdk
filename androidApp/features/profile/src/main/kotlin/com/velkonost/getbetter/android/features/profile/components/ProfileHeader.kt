@@ -17,7 +17,9 @@ import dev.icerock.moko.resources.compose.colorResource
 @Composable
 fun ProfileHeader(
     modifier: Modifier = Modifier,
+    isLoading: Boolean = true,
     userName: String,
+    avatarUrl: String?,
     onAvatarClick: () -> Unit,
     onSettingsClick: () -> Unit
 ) {
@@ -27,7 +29,11 @@ fun ProfileHeader(
             .padding(top = 32.dp)
             .height(128.dp)
     ) {
-        AvatarPlaceholder(modifier = modifier) {
+        Avatar(
+            modifier = modifier,
+            isLoading = isLoading,
+            avatarUrl = avatarUrl
+        ) {
             onAvatarClick.invoke()
         }
 

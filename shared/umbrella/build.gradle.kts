@@ -80,6 +80,8 @@ kotlin {
                 implementation(projects.shared.features.diary.presentation)
                 implementation(projects.shared.features.calendars.presentation)
                 implementation(projects.shared.features.wisdom.presentation)
+
+                implementation(projects.shared.features.profile.data)
                 implementation(projects.shared.features.profile.presentation)
 
                 implementation(libs.koin.core)

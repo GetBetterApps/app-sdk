@@ -17,5 +17,7 @@ dependencies {
     implementation(projects.shared.resources)
     implementation(projects.shared.features.profile.presentation)
 
+    implementation(projects.androidApp.core.utils)
     implementation(projects.androidApp.core.compose)
+
 }

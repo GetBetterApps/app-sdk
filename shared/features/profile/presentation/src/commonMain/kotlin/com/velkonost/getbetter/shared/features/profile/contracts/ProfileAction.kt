@@ -5,3 +5,5 @@ import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 sealed interface ProfileAction : UIContract.Action
 
 data object LogoutClick : ProfileAction
+
+data class AvatarUploaded(val fileUrl: String) : ProfileAction

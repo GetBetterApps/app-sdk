@@ -17,6 +17,7 @@ versionName = "0.2"
 # Dependencies
 firebase-android-bom = "32.3.1"
 firebase-android-crashlytics = "2.9.9"
+firebase-android-storage = "20.2.1"
 firebase-kmm = "1.10.0"
 
 libres = "1.2.0-beta01"
@@ -172,9 +173,11 @@ rickclephas-kmm-viewmodel = { module = "com.rickclephas.kmm:kmm-viewmodel-core",
 
 firebase-android-core = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-android-bom" }
 firebase-android-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
+firebase-android-storage = { module = "com.google.firebase:firebase-storage-ktx", version.ref = "firebase-android-storage" }
 firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebase-kmm" }
 firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = "firebase-kmm" }
 firebase-crashlytics = { module = "dev.gitlive:firebase-crashlytics", version.ref = "firebase-kmm" }
+firebase-storage = { module = "dev.gitlive:firebase-storage", version.ref = "firebase-kmm" }
 
 testing-androidx-core = { module = "androidx.arch.core:core-testing", version.ref = "testing-arch-core" }
 testing-androidx-junit = { module = "androidx.test.ext:junit", version.ref = "testing-junitext" }

@@ -1,5 +1,9 @@
 package com.velkonost.getbetter.android.features.profile
 
+import android.annotation.SuppressLint
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -7,6 +11,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -17,12 +24,17 @@ import com.velkonost.getbetter.android.features.profile.components.ProfileHeader
 import com.velkonost.getbetter.android.features.profile.components.SubscriptionBox
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.VersionName
+import com.velkonost.getbetter.core.utils.storage.StorageDelegate
 import com.velkonost.getbetter.shared.features.profile.ProfileViewModel
+import com.velkonost.getbetter.shared.features.profile.contracts.AvatarUploaded
 import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.stringResource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
+@SuppressLint("Recycle")
 @Composable
 fun ProfileScreen(
     modifier: Modifier = Modifier,
@@ -30,6 +42,26 @@ fun ProfileScreen(
 ) {
     val scrollState = rememberScrollState()
     val state by viewModel.viewState.collectAsStateWithLifecycle()
+    val scope = rememberCoroutineScope()
+
+    val uploadAvatarState = remember { mutableStateOf<StorageDelegate.UploadState?>(null) }
+
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        uri?.let {
+            scope.launch(Dispatchers.IO) {
+                StorageDelegate().uploadAvatar(it)
+                    .collect { result ->
+                        uploadAvatarState.value = result
+
+                        if (result is StorageDelegate.UploadState.Success) {
+                            viewModel.dispatch(AvatarUploaded(result.fileUrl))
+                        }
+                    }
+            }
+        }
+    }
 
     Column(
         modifier = modifier
@@ -40,9 +72,11 @@ fun ProfileScreen(
     ) {
 
         ProfileHeader(
-            userName = "velkonost",
+            userName = state.userName,
+            isLoading = uploadAvatarState.value is StorageDelegate.UploadState.Loading,
+            avatarUrl = state.avatarUrl,
             onAvatarClick = {
-
+                launcher.launch("image/*")
             },
             onSettingsClick = {
 
