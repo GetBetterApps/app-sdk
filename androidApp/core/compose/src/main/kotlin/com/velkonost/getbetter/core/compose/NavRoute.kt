@@ -5,6 +5,7 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDeepLink
@@ -27,6 +28,10 @@ interface NavRoute<T : RouteNavigator> {
     fun menuIcon(): ImageResource? = null
 
     @Composable
+    fun Content(viewModel: T, forceHideBottomBar: MutableState<Boolean>) =
+        Content(viewModel = viewModel)
+
+    @Composable
     fun Content(viewModel: T)
 
     val viewModel: T
@@ -44,7 +49,11 @@ interface NavRoute<T : RouteNavigator> {
 
     fun getPopExitTransition(): (AnimatedBackStack.() -> ExitTransition?)? = getExitTransition()
 
-    fun asComposable(builder: NavGraphBuilder, navController: NavHostController) =
+    fun asComposable(
+        builder: NavGraphBuilder,
+        navController: NavHostController,
+        forceHideBottomBar: MutableState<Boolean>
+    ) =
         builder.composable(
             route = route,
             arguments = getArguments(),
@@ -55,7 +64,7 @@ interface NavRoute<T : RouteNavigator> {
             popExitTransition = getPopExitTransition()
         ) {
             with(viewModel) {
-                Content(this)
+                Content(this, forceHideBottomBar)
 
                 LaunchedEffect(Unit) {
                     navigationEvent.collect { event ->
@@ -74,8 +83,12 @@ interface NavRoute<T : RouteNavigator> {
         }
 }
 
-fun Iterable<NavRoute<*>>.provide(builder: NavGraphBuilder, navController: NavHostController) =
-    forEach { it.asComposable(builder, navController) }
+fun Iterable<NavRoute<*>>.provide(
+    builder: NavGraphBuilder,
+    navController: NavHostController,
+    forceHideBottomBar: MutableState<Boolean>
+) =
+    forEach { it.asComposable(builder, navController, forceHideBottomBar) }
 
 private fun handleNavToRoute(controller: NavHostController, event: NavigationEvent.NavigateToRoute) {
     if (controller.currentDestination?.route == event.route) {

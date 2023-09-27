@@ -62,6 +62,8 @@ include(
     ":androidApp:activity",
     ":androidApp:core:compose",
     ":androidApp:core:utils",
+    ":androidApp:core:emojipicker",
+
     ":androidApp:features:auth",
 
     ":androidApp:features:home",

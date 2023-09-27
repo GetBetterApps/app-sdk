@@ -37,9 +37,9 @@ import dev.icerock.moko.resources.compose.colorResource
 data class ExpandableButtonItem(
     val title: String,
     val icon: Painter,
+    val iconExpanded: Painter? = null,
     val onClick: (() -> Unit)? = null
 )
-
 
 @Composable
 fun BoxScope.ExpandableButtonPanel(
@@ -107,7 +107,7 @@ fun BoxScope.ExpandableButtonPanel(
                             Image(
                                 modifier = Modifier
                                     .size(64.dp)
-                                    .padding(8.dp),
+                                    .padding(16.dp),
                                 painter = item.icon,
                                 contentDescription = null,
                                 colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_inactive))
@@ -127,11 +127,13 @@ fun BoxScope.ExpandableButtonPanel(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = primaryItem.icon,
+                    painter =
+                    if (isExpanded && primaryItem.iconExpanded != null) primaryItem.iconExpanded
+                    else primaryItem.icon,
                     contentDescription = null,
                     modifier = Modifier
                         .size(64.dp)
-                        .padding(8.dp),
+                        .padding(16.dp),
                     colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_inactive))
                 )
 

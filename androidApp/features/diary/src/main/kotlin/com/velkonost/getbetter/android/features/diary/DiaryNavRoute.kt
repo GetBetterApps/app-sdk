@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.android.features.diary
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import com.velkonost.getbetter.core.compose.NavRoute
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationScreen
 import com.velkonost.getbetter.shared.features.diary.DiaryViewModel
@@ -17,6 +18,12 @@ object DiaryNavRoute : NavRoute<DiaryViewModel> {
 
     @Composable
     override fun Content(viewModel: DiaryViewModel) = DiaryScreen()
+
+    @Composable
+    override fun Content(
+        viewModel: DiaryViewModel,
+        forceHideBottomBar: MutableState<Boolean>
+    ) = DiaryScreen(forceHideBottomBar = forceHideBottomBar)
 
     override val viewModel: DiaryViewModel
         @Composable get() = koinViewModel()

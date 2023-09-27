@@ -1,12 +1,11 @@
 package com.velkonost.getbetter.android.activity.components
 
-import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,6 +19,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,7 +43,8 @@ import dev.icerock.moko.resources.compose.painterResource
 
 @Composable
 fun BottomBar(
-    navController: NavHostController
+    navController: NavHostController,
+    forceHideBottomBar: MutableState<Boolean>
 ) {
     val navStackBackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navStackBackEntry?.destination
@@ -51,14 +52,14 @@ fun BottomBar(
 
     val isVisible = currentDestination?.route in NavigationScreens.map { it.route }
     AnimatedVisibility(
-        visible = isVisible,
+        visible = isVisible && !forceHideBottomBar.value,
         enter = slideInVertically(
             animationSpec = tween(
                 durationMillis = 500,
                 delayMillis = 10,
                 easing = FastOutSlowInEasing
             ),
-            initialOffsetY = { it / 4 }
+            initialOffsetY = { it }
         ).plus(
             fadeIn(
                 animationSpec = tween(
@@ -68,8 +69,13 @@ fun BottomBar(
                 )
             )
         ),
-        exit = fadeOut(
-            animationSpec = tween(durationMillis = 500)
+        exit = slideOutVertically(
+            animationSpec = tween(
+                durationMillis = 500,
+                delayMillis = 10,
+                easing = FastOutSlowInEasing
+            ),
+            targetOffsetY = { it }
         )
     ) {
             Row(

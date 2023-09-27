@@ -44,7 +44,7 @@ struct ExpandableButtonPanel: View {
                             .resizable()
                             .renderingMode(.template)
                             .scaledToFill()
-                            .padding(8)
+                            .padding(16)
                             .frame(width: 64, height: 64)
                             .foregroundColor(.iconInactive)
                         Text(item.label)
@@ -67,7 +67,7 @@ struct ExpandableButtonPanel: View {
                 .resizable()
                 .renderingMode(.template)
                 .scaledToFill()
-                .padding(8)
+                .padding(16)
                 .frame(width: 64, height: 64)
                 .foregroundColor(.iconInactive)
                 

@@ -60,7 +60,7 @@ internal val AppTypography = Typography(
     ),
     headlineSmall = TextStyle(
         fontFamily = SFFontFamily,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 24.sp,
         lineHeight = TextUnit(1.33F, TextUnitType.Em)
     ),

@@ -12,26 +12,26 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun BoxScope.AddAreaItem(
     modifier: Modifier = Modifier,
+    addExistingClick: () -> Unit,
+    createNewClick: () -> Unit
 ) {
     ExpandableButtonPanel(
         modifier = modifier,
         primaryItem = ExpandableButtonItem(
-            title = stringResource(resource = SharedR.strings.profile_logout),
-            icon = painterResource(imageResource = SharedR.images.ic_menu_profile),
+            title = stringResource(resource = SharedR.strings.cancel),
+            icon = painterResource(imageResource = SharedR.images.ic_plus),
+            iconExpanded = painterResource(imageResource = SharedR.images.ic_arrow_back)
         ),
         items = listOf(
             ExpandableButtonItem(
-                title = stringResource(resource = SharedR.strings.profile_title),
-                icon = painterResource(imageResource = SharedR.images.ic_chat_cloud)
-            ) {
+                title = stringResource(resource = SharedR.strings.diary_areas_add_existing_title),
+                icon = painterResource(imageResource = SharedR.images.ic_grid)
+            ) { addExistingClick.invoke() },
 
-            },
             ExpandableButtonItem(
-                title = stringResource(resource = SharedR.strings.profile_title),
-                icon = painterResource(imageResource = SharedR.images.ic_chat_cloud)
-            ) {
-
-            }
+                title = stringResource(resource = SharedR.strings.diary_areas_create_new_title),
+                icon = painterResource(imageResource = SharedR.images.ic_edit)
+            ) { createNewClick.invoke() }
         ),
     )
 }

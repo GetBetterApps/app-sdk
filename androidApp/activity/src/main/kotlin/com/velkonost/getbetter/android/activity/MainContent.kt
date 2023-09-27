@@ -15,6 +15,8 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -41,13 +43,15 @@ internal fun MainContent() {
     val navController = rememberAnimatedNavController()
     val snackbarHostState = rememberSnackBarHostState()
 
+    val forceHideBottomBar = remember { mutableStateOf(false) }
+
     ApplicationTheme {
         Scaffold(
             snackbarHost = { MainSnackBarHost(snackbarHostState) },
             modifier = Modifier
                 .fillMaxSize(),
             bottomBar = {
-                BottomBar(navController)
+                BottomBar(navController, forceHideBottomBar)
             },
             containerColor = colorResource(resource = SharedR.colors.main_background)
         ) {
@@ -93,7 +97,7 @@ internal fun MainContent() {
                     )
                 }
             ) {
-                AppScreens.provide(this@AnimatedNavHost, navController)
+                AppScreens.provide(this@AnimatedNavHost, navController, forceHideBottomBar)
             }
         }
     }

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
+    <!--  GENERAL  -->
+    <string name="cancel">Cancel</string>
+
     <!--  AUTH  -->
     <string name="auth_email_label">Email</string>
     <string name="auth_password_label">Password</string>
@@ -7,7 +10,9 @@
     <string name="auth_signup_button">Sign up</string>
     <string name="auth_forgot_password">Forgot?</string>
     <string name="auth_later">Later</string>
-    <string name="auth_footer_text">By signing in, you are agreeing to our Terms of Service and Privacy Policy</string>
+    <string name="auth_footer_text">By signing in, you are agreeing to our Terms of Service and
+        Privacy Policy
+    </string>
     <string name="auth_dont_have_account">I don\'t have an account</string>
     <string name="auth_have_account">I already have an account</string>
 
@@ -17,6 +22,14 @@
     <string name="auth_error_incorrect_credentials">Incorrect email or password</string>
     <string name="auth_error_weak_password">Weak password</string>
     <string name="auth_error_email_exist">This email already exist</string>
+
+    <!--  DIARY  -->
+    <string name="diary_areas_title">Areas</string>
+    <string name="diary_notes_title">Notes</string>
+    <string name="diary_tasks_title">Tasks</string>
+
+    <string name="diary_areas_add_existing_title">Add existing</string>
+    <string name="diary_areas_create_new_title">Create new</string>
 
     <!--  PROFILE  -->
     <string name="profile_title">Profile</string>

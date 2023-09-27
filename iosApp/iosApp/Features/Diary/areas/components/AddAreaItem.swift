@@ -19,21 +19,21 @@ struct AddAreaItem: View {
                 Spacer()
                 ExpandableButtonPanel(
                     primaryItem: ExpandableButtonItem(
-                        icon: SharedR.images().ic_menu_profile.toUIImage()!,
-                        iconExpanded: SharedR.images().ic_settings.toUIImage()!,
-                        label: "Cancel"
+                        icon: SharedR.images().ic_plus.toUIImage()!,
+                        iconExpanded: SharedR.images().ic_arrow_back.toUIImage()!,
+                        label: SharedR.strings().cancel.desc().localized()
                     ),
                     secondaryItems: [
                         ExpandableButtonItem(
-                            icon: SharedR.images().ic_menu_profile.toUIImage()!,
+                            icon: SharedR.images().ic_grid.toUIImage()!,
                             iconExpanded: nil,
-                            label: "Add existing"
+                            label: SharedR.strings().diary_areas_add_existing_title.desc().localized()
                         ) {
                         },
                         ExpandableButtonItem(
-                            icon: SharedR.images().ic_menu_profile.toUIImage()!,
+                            icon: SharedR.images().ic_edit.toUIImage()!,
                             iconExpanded: nil,
-                            label: "Create new"
+                            label: SharedR.strings().diary_areas_create_new_title.desc().localized()
                         ) {
                             
                         }
