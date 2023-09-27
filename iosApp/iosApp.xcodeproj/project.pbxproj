@@ -20,6 +20,12 @@
 		460054B22ABB56F900586767 /* WisdomScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460054B12ABB56F900586767 /* WisdomScreen.swift */; };
 		460054B42ABB56FF00586767 /* WisdomRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460054B32ABB56FF00586767 /* WisdomRoute.swift */; };
 		460054B72ABB576B00586767 /* WisdomItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460054B62ABB576B00586767 /* WisdomItem.swift */; };
+		46059D222AC4037000DC5015 /* AreasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D212AC4037000DC5015 /* AreasView.swift */; };
+		46059D242AC4037500DC5015 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D232AC4037500DC5015 /* NotesView.swift */; };
+		46059D262AC4037E00DC5015 /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D252AC4037E00DC5015 /* TasksView.swift */; };
+		46059D292AC405BA00DC5015 /* AreaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D282AC405BA00DC5015 /* AreaItem.swift */; };
+		46059D2B2AC409A900DC5015 /* AddAreaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D2A2AC409A900DC5015 /* AddAreaItem.swift */; };
+		46059D2D2AC41DB500DC5015 /* ExpandableButtonPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D2C2AC41DB500DC5015 /* ExpandableButtonPanel.swift */; };
 		461D21EC2AA8EC71007E84CE /* DetailRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21EB2AA8EC71007E84CE /* DetailRoute.swift */; };
 		461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */; };
 		461F7C612AA878EB003791CF /* Koin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C602AA878EB003791CF /* Koin.swift */; };
@@ -82,6 +88,12 @@
 		460054B12ABB56F900586767 /* WisdomScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomScreen.swift; sourceTree = "<group>"; };
 		460054B32ABB56FF00586767 /* WisdomRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomRoute.swift; sourceTree = "<group>"; };
 		460054B62ABB576B00586767 /* WisdomItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomItem.swift; sourceTree = "<group>"; };
+		46059D212AC4037000DC5015 /* AreasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasView.swift; sourceTree = "<group>"; };
+		46059D232AC4037500DC5015 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
+		46059D252AC4037E00DC5015 /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
+		46059D282AC405BA00DC5015 /* AreaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaItem.swift; sourceTree = "<group>"; };
+		46059D2A2AC409A900DC5015 /* AddAreaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaItem.swift; sourceTree = "<group>"; };
+		46059D2C2AC41DB500DC5015 /* ExpandableButtonPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableButtonPanel.swift; sourceTree = "<group>"; };
 		461D21EB2AA8EC71007E84CE /* DetailRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRoute.swift; sourceTree = "<group>"; };
 		461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifecycleAwareObservableObject.swift; sourceTree = "<group>"; };
 		461F7C602AA878EB003791CF /* Koin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Koin.swift; sourceTree = "<group>"; };
@@ -178,6 +190,40 @@
 			isa = PBXGroup;
 			children = (
 				460054B62ABB576B00586767 /* WisdomItem.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		46059D1E2AC4035800DC5015 /* areas */ = {
+			isa = PBXGroup;
+			children = (
+				46059D272AC4059700DC5015 /* components */,
+				46059D212AC4037000DC5015 /* AreasView.swift */,
+			);
+			path = areas;
+			sourceTree = "<group>";
+		};
+		46059D1F2AC4035F00DC5015 /* notes */ = {
+			isa = PBXGroup;
+			children = (
+				46059D232AC4037500DC5015 /* NotesView.swift */,
+			);
+			path = notes;
+			sourceTree = "<group>";
+		};
+		46059D202AC4036500DC5015 /* tasks */ = {
+			isa = PBXGroup;
+			children = (
+				46059D252AC4037E00DC5015 /* TasksView.swift */,
+			);
+			path = tasks;
+			sourceTree = "<group>";
+		};
+		46059D272AC4059700DC5015 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				46059D282AC405BA00DC5015 /* AreaItem.swift */,
+				46059D2A2AC409A900DC5015 /* AddAreaItem.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -308,6 +354,9 @@
 		468B87662ABC4445001BBEB1 /* Diary */ = {
 			isa = PBXGroup;
 			children = (
+				46059D202AC4036500DC5015 /* tasks */,
+				46059D1F2AC4035F00DC5015 /* notes */,
+				46059D1E2AC4035800DC5015 /* areas */,
 				468B87672ABC45BF001BBEB1 /* DiaryRoute.swift */,
 				468B87692ABC45C6001BBEB1 /* DiaryScreen.swift */,
 			);
@@ -343,6 +392,7 @@
 				460054A62ABB17FF00586767 /* PrimaryBox.swift */,
 				467BECCE2AC017CF00F74482 /* PrimaryTabs.swift */,
 				465C1FC92AC157C300B7AE18 /* ImagePicker.swift */,
+				46059D2C2AC41DB500DC5015 /* ExpandableButtonPanel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -584,13 +634,16 @@
 				468B87722ABC45E1001BBEB1 /* SocialScreen.swift in Sources */,
 				46870C2E2AC092D300BCBDB1 /* SplashRoute.swift in Sources */,
 				46D9381E2ABAECBE0096A221 /* ProfileScreen.swift in Sources */,
+				46059D292AC405BA00DC5015 /* AreaItem.swift in Sources */,
 				460054AD2ABB1B5E00586767 /* HelpAndSupport.swift in Sources */,
 				46C10D212AB46BF400E62846 /* UIPilotExt.swift in Sources */,
 				468B876E2ABC45D2001BBEB1 /* CalendarsScreen.swift in Sources */,
+				46059D222AC4037000DC5015 /* AreasView.swift in Sources */,
 				460054A32ABB101600586767 /* SubscriptionBox.swift in Sources */,
 				46B17E162AADF05D008C2BC4 /* ViewExt.swift in Sources */,
 				460054A12ABB0D0100586767 /* SettingsButton.swift in Sources */,
 				464B60B42ABAF7C300369EC3 /* ProfileHeader.swift in Sources */,
+				46059D2D2AC41DB500DC5015 /* ExpandableButtonPanel.swift in Sources */,
 				468B87682ABC45BF001BBEB1 /* DiaryRoute.swift in Sources */,
 				464B60B62ABAF81B00369EC3 /* Avatar.swift in Sources */,
 				468B876C2ABC45CC001BBEB1 /* CalendarsRoute.swift in Sources */,
@@ -601,6 +654,7 @@
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				466C5CCB2AB73240002C089C /* BottomBar.swift in Sources */,
 				461F7C6C2AA8D71F003791CF /* BaseViewModelExt.swift in Sources */,
+				46059D242AC4037500DC5015 /* NotesView.swift in Sources */,
 				461D21EC2AA8EC71007E84CE /* DetailRoute.swift in Sources */,
 				460054A92ABB18A800586767 /* AppSettings.swift in Sources */,
 				461F7C752AA8DCD0003791CF /* HomeScreen.swift in Sources */,
@@ -612,6 +666,7 @@
 				46B17E112AADE0DD008C2BC4 /* Color.swift in Sources */,
 				460054B42ABB56FF00586767 /* WisdomRoute.swift in Sources */,
 				46870C302AC092DA00BCBDB1 /* SplashScreen.swift in Sources */,
+				46059D2B2AC409A900DC5015 /* AddAreaItem.swift in Sources */,
 				460054B22ABB56F900586767 /* WisdomScreen.swift in Sources */,
 				46CDB56E2AADB46400800096 /* AuthRoute.swift in Sources */,
 				46B17E0C2AADE081008C2BC4 /* TextExt.swift in Sources */,
@@ -619,6 +674,7 @@
 				461F7C772AA8E371003791CF /* DetailScreen.swift in Sources */,
 				468B876A2ABC45C6001BBEB1 /* DiaryScreen.swift in Sources */,
 				469D0FBE2AB1DE330060CE95 /* WhiteButton.swift in Sources */,
+				46059D262AC4037E00DC5015 /* TasksView.swift in Sources */,
 				461F7C682AA88B80003791CF /* StringExt.swift in Sources */,
 				461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */,
 				460054A52ABB17BD00586767 /* SectionTitle.swift in Sources */,

@@ -16,10 +16,15 @@ struct DiaryScreen: View {
     
     var body: some View {
         VStack {
-           PrimaryTabs(selectedPage: $selectedPage, tabs: ["diary", "oblasti", "tasks"])
+            PrimaryTabs(selectedPage: $selectedPage, tabs: ["diary", "oblasti", "tasks"])
             
-            Text("\(selectedPage)")
-            Spacer()   
+            switch(selectedPage) {
+            case 0: NotesView()
+            case 1: AreasView()
+            default: TasksView()
+            }
+            Spacer()
+            
         }
     }
 }

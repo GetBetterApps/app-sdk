@@ -12,8 +12,8 @@ plugins {
 android {
     namespace = SHARED_PACKAGE.join(
         projects.shared.features,
-        projects.shared.features.diary,
-        projects.shared.features.diary.presentation
+        projects.shared.features.areas,
+        projects.shared.features.areas.data
     )
 }
 
@@ -21,18 +21,12 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                api(projects.shared.core.vm)
-
                 implementation(libs.koin.core)
-                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.firebase.auth)
+                implementation(libs.firebase.firestore)
 
+                implementation(projects.shared.core.util)
                 implementation(projects.shared.features.areas.api)
-            }
-        }
-
-        androidMain {
-            dependencies {
-                implementation(libs.koin.androidx.compose)
             }
         }
     }

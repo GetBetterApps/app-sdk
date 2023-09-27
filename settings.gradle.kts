@@ -28,6 +28,9 @@ include(
     ":shared:features:userinfo:api",
     ":shared:features:userinfo:data",
 
+    ":shared:features:areas:api",
+    ":shared:features:areas:data",
+
     ":shared:features:auth:api",
     ":shared:features:auth:data",
     ":shared:features:auth:domain",

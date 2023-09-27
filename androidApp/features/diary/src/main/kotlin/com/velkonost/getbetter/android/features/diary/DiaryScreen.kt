@@ -5,9 +5,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.velkonost.getbetter.android.features.diary.areas.AreasView
+import com.velkonost.getbetter.android.features.diary.notes.NotesView
+import com.velkonost.getbetter.android.features.diary.tasks.TasksView
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -34,6 +36,10 @@ fun DiaryScreenContent(
         userScrollEnabled = false,
         beyondBoundsPageCount = 2
     ) { index ->
-        Text(text = "$index")
+        when (index) {
+            0 -> NotesView()
+            1 -> AreasView()
+            else -> TasksView()
+        }
     }
 }
