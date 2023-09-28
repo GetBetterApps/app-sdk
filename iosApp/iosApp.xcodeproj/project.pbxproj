@@ -41,6 +41,12 @@
 		464B60B62ABAF81B00369EC3 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B60B52ABAF81B00369EC3 /* Avatar.swift */; };
 		465C1FCA2AC157C300B7AE18 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465C1FC92AC157C300B7AE18 /* ImagePicker.swift */; };
 		465C1FCC2AC1775200B7AE18 /* StorageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465C1FCB2AC1775200B7AE18 /* StorageDelegate.swift */; };
+		4667C9022AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C9012AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift */; };
+		4667C9042AC589EC00BAA9DD /* SingleLineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C9032AC589EC00BAA9DD /* SingleLineTextField.swift */; };
+		4667C9062AC58B0700BAA9DD /* SelectedEmojiImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C9052AC58B0700BAA9DD /* SelectedEmojiImage.swift */; };
+		4667C9082AC58DC800BAA9DD /* EmojiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C9072AC58DC800BAA9DD /* EmojiPicker.swift */; };
+		4667C90A2AC59A9B00BAA9DD /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C9092AC59A9B00BAA9DD /* MultilineTextField.swift */; };
+		4667C90C2AC5A89000BAA9DD /* RequiredLevelRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C90B2AC5A89000BAA9DD /* RequiredLevelRow.swift */; };
 		466C5CCB2AB73240002C089C /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C5CCA2AB73240002C089C /* BottomBar.swift */; };
 		4678E4482AAC6A67000B88E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4678E4472AAC6A67000B88E8 /* AppDelegate.swift */; };
 		4678E44C2AAC6CF8000B88E8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4678E44B2AAC6CF8000B88E8 /* GoogleService-Info.plist */; };
@@ -109,6 +115,12 @@
 		464B60B52ABAF81B00369EC3 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		465C1FC92AC157C300B7AE18 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		465C1FCB2AC1775200B7AE18 /* StorageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageDelegate.swift; sourceTree = "<group>"; };
+		4667C9012AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewAreaBottomSheet.swift; sourceTree = "<group>"; };
+		4667C9032AC589EC00BAA9DD /* SingleLineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLineTextField.swift; sourceTree = "<group>"; };
+		4667C9052AC58B0700BAA9DD /* SelectedEmojiImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedEmojiImage.swift; sourceTree = "<group>"; };
+		4667C9072AC58DC800BAA9DD /* EmojiPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPicker.swift; sourceTree = "<group>"; };
+		4667C9092AC59A9B00BAA9DD /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
+		4667C90B2AC5A89000BAA9DD /* RequiredLevelRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequiredLevelRow.swift; sourceTree = "<group>"; };
 		466C5CCA2AB73240002C089C /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		4678E4472AAC6A67000B88E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4678E44B2AAC6CF8000B88E8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -222,6 +234,7 @@
 		46059D272AC4059700DC5015 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				4667C9002AC585A300BAA9DD /* createnewarea */,
 				46059D282AC405BA00DC5015 /* AreaItem.swift */,
 				46059D2A2AC409A900DC5015 /* AddAreaItem.swift */,
 			);
@@ -324,6 +337,17 @@
 			path = components;
 			sourceTree = "<group>";
 		};
+		4667C9002AC585A300BAA9DD /* createnewarea */ = {
+			isa = PBXGroup;
+			children = (
+				4667C9012AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift */,
+				4667C9052AC58B0700BAA9DD /* SelectedEmojiImage.swift */,
+				4667C9072AC58DC800BAA9DD /* EmojiPicker.swift */,
+				4667C90B2AC5A89000BAA9DD /* RequiredLevelRow.swift */,
+			);
+			path = createnewarea;
+			sourceTree = "<group>";
+		};
 		46870C2C2AC092CB00BCBDB1 /* Splash */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,6 +417,8 @@
 				467BECCE2AC017CF00F74482 /* PrimaryTabs.swift */,
 				465C1FC92AC157C300B7AE18 /* ImagePicker.swift */,
 				46059D2C2AC41DB500DC5015 /* ExpandableButtonPanel.swift */,
+				4667C9032AC589EC00BAA9DD /* SingleLineTextField.swift */,
+				4667C9092AC59A9B00BAA9DD /* MultilineTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -627,6 +653,7 @@
 				465C1FCA2AC157C300B7AE18 /* ImagePicker.swift in Sources */,
 				46B17E142AADE482008C2BC4 /* AuthTextField.swift in Sources */,
 				460054B72ABB576B00586767 /* WisdomItem.swift in Sources */,
+				4667C9022AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift in Sources */,
 				461F7C652AA88A39003791CF /* NavRoute.swift in Sources */,
 				468B87702ABC45DB001BBEB1 /* SocialRoute.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
@@ -640,6 +667,7 @@
 				468B876E2ABC45D2001BBEB1 /* CalendarsScreen.swift in Sources */,
 				46059D222AC4037000DC5015 /* AreasView.swift in Sources */,
 				460054A32ABB101600586767 /* SubscriptionBox.swift in Sources */,
+				4667C90A2AC59A9B00BAA9DD /* MultilineTextField.swift in Sources */,
 				46B17E162AADF05D008C2BC4 /* ViewExt.swift in Sources */,
 				460054A12ABB0D0100586767 /* SettingsButton.swift in Sources */,
 				464B60B42ABAF7C300369EC3 /* ProfileHeader.swift in Sources */,
@@ -657,6 +685,8 @@
 				46059D242AC4037500DC5015 /* NotesView.swift in Sources */,
 				461D21EC2AA8EC71007E84CE /* DetailRoute.swift in Sources */,
 				460054A92ABB18A800586767 /* AppSettings.swift in Sources */,
+				4667C9042AC589EC00BAA9DD /* SingleLineTextField.swift in Sources */,
+				4667C9062AC58B0700BAA9DD /* SelectedEmojiImage.swift in Sources */,
 				461F7C752AA8DCD0003791CF /* HomeScreen.swift in Sources */,
 				469D0FC02AB20D5C0060CE95 /* UIScreenExt.swift in Sources */,
 				46B17E1A2AADF523008C2BC4 /* AppButton.swift in Sources */,
@@ -668,6 +698,7 @@
 				46870C302AC092DA00BCBDB1 /* SplashScreen.swift in Sources */,
 				46059D2B2AC409A900DC5015 /* AddAreaItem.swift in Sources */,
 				460054B22ABB56F900586767 /* WisdomScreen.swift in Sources */,
+				4667C9082AC58DC800BAA9DD /* EmojiPicker.swift in Sources */,
 				46CDB56E2AADB46400800096 /* AuthRoute.swift in Sources */,
 				46B17E0C2AADE081008C2BC4 /* TextExt.swift in Sources */,
 				467BECCF2AC017CF00F74482 /* PrimaryTabs.swift in Sources */,
@@ -679,6 +710,7 @@
 				461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */,
 				460054A52ABB17BD00586767 /* SectionTitle.swift in Sources */,
 				46C10D1F2AB43FA300E62846 /* SnackBar.swift in Sources */,
+				4667C90C2AC5A89000BAA9DD /* RequiredLevelRow.swift in Sources */,
 				46CDB56C2AADB45E00800096 /* AuthScreen.swift in Sources */,
 				46B17E0F2AADE0B3008C2BC4 /* Type.swift in Sources */,
 			);
@@ -739,7 +771,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -795,7 +827,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

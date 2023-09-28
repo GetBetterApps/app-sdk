@@ -23,7 +23,7 @@ struct DiaryRoute: NavRoute {
     }
     
     var content: some View {
-        return DiaryScreen() //viewModel: viewModel
+        return DiaryScreen(viewModel: viewModel) 
     }
     
     var viewModel: DiaryViewModel {

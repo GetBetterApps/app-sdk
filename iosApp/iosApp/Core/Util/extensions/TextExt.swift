@@ -28,6 +28,16 @@ public extension TextField {
     }
 }
 
+public extension TextEditor {
+    func style(_ style: TextStyle, withSize size: CGFloat = CGFloat.nan) -> some View {
+        return self
+            .font(Font(style.font.uiFont(withSize: !size.isNaN ? size : style.size)))
+//            .tracking(style.tracking)
+//            .lineSpacing(style.lineSpacing)
+    }
+}
+
+
 public extension SecureField {
     func style(_ style: TextStyle, withSize size: CGFloat = CGFloat.nan) -> some View {
         return self

@@ -20,6 +20,7 @@ rootProject.name = "GetBetter"
 include(
     ":shared:core:vm",
     ":shared:core:util",
+    ":shared:core:model",
     ":shared:core:network",
     ":shared:core:datastore",
 
@@ -62,7 +63,6 @@ include(
     ":androidApp:activity",
     ":androidApp:core:compose",
     ":androidApp:core:utils",
-    ":androidApp:core:emojipicker",
 
     ":androidApp:features:auth",
 

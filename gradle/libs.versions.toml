@@ -33,7 +33,6 @@ androidx-compose = "1.6.0-alpha04"
 androidx-compose-compiler = "1.5.3"
 androidx-compose-material3 = "1.1.1"
 androidx-compose-paging = "3.2.0"
-androidx-compose-emoji = "1.4.0"
 
 androidx-core-ktx = "1.10.1"
 androidx-lifecycle = "2.6.1"
@@ -106,7 +105,6 @@ androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", versio
 androidx-compose-ui-runtime = { module = "androidx.compose.ui:ui", version.ref = "androidx-compose" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "androidx-compose" }
 androidx-compose-ui-util = { module = "androidx.compose.ui:ui-util", version.ref = "androidx-compose" }
-androidx-compose-emoji = { module = "androidx.emoji2:emoji2", version.ref = "androidx-compose-emoji" }
 
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core-ktx" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }

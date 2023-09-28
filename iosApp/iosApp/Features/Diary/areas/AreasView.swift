@@ -11,6 +11,14 @@ import SwiftUI
 import SharedSDK
 
 struct AreasView: View {
+    
+    let createNewAreaClick: () -> Void
+    
+    init(createNewAreaClick: @escaping () -> Void) {
+        self.createNewAreaClick = createNewAreaClick
+    }
+    
+    
     var body: some View {
         
         ZStack {
@@ -35,7 +43,12 @@ struct AreasView: View {
             
             VStack(alignment: .trailing) {
                 Spacer()
-                AddAreaItem()
+                AddAreaItem {
+                    
+                } createNewClick: {
+                    createNewAreaClick()
+                }
+
             }
         }
     }

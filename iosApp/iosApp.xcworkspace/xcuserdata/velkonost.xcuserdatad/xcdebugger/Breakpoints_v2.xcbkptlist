@@ -432,6 +432,21 @@
                   endingLineNumber = "89"
                   offsetFromSymbolStart = "968">
                </Location>
+               <Location
+                  uuid = "9E9869F0-BC6C-4C7E-95FD-B8F4A96F9F30 - de217a9657d1852b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iosApp.NavRoute.onNavEvent(pilot: iosApp.UIPilot&lt;Swift.String&gt;, event: __C.SSDKNavigationEvent) -&gt; ()"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/velkonost/AndroidStudioProjects/GetBetter/iosApp/iosApp/Core/Util/NavRoute.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "1276">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -624,6 +639,21 @@
                   endingLineNumber = "169"
                   offsetFromSymbolStart = "852">
                </Location>
+               <Location
+                  uuid = "AE3096A3-EE0B-4E64-BB83-7657959B3132 - adef81b09c114e38"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (&#x3c4;_0_0, Swift.Optional&lt;Swift.Int&gt;) -&gt; () in iosApp.NavigationControllerHost.makeUIViewController(context: SwiftUI.UIViewControllerRepresentableContext&lt;iosApp.NavigationControllerHost&lt;&#x3c4;_0_0, &#x3c4;_0_1&gt;&gt;) -&gt; __C.UINavigationController"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/velkonost/AndroidStudioProjects/GetBetter/iosApp/iosApp/Core/Util/extensions/UIPilotExt.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "168"
+                  endingLineNumber = "168"
+                  offsetFromSymbolStart = "580">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -671,6 +701,21 @@
                   startingLineNumber = "170"
                   endingLineNumber = "170"
                   offsetFromSymbolStart = "1008">
+               </Location>
+               <Location
+                  uuid = "6C6F330E-8F62-410D-BD1D-4C1643922DE2 - adef81b09c114e19"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (&#x3c4;_0_0, Swift.Optional&lt;Swift.Int&gt;) -&gt; () in iosApp.NavigationControllerHost.makeUIViewController(context: SwiftUI.UIViewControllerRepresentableContext&lt;iosApp.NavigationControllerHost&lt;&#x3c4;_0_0, &#x3c4;_0_1&gt;&gt;) -&gt; __C.UINavigationController"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/velkonost/AndroidStudioProjects/GetBetter/iosApp/iosApp/Core/Util/extensions/UIPilotExt.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "169"
+                  endingLineNumber = "169"
+                  offsetFromSymbolStart = "780">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -720,7 +765,38 @@
                   endingLineNumber = "171"
                   offsetFromSymbolStart = "1248">
                </Location>
+               <Location
+                  uuid = "D021FA74-EE97-4101-8D8A-42A6B9B19C94 - adef81b09c114e76"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (&#x3c4;_0_0, Swift.Optional&lt;Swift.Int&gt;) -&gt; () in iosApp.NavigationControllerHost.makeUIViewController(context: SwiftUI.UIViewControllerRepresentableContext&lt;iosApp.NavigationControllerHost&lt;&#x3c4;_0_0, &#x3c4;_0_1&gt;&gt;) -&gt; __C.UINavigationController"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/velkonost/AndroidStudioProjects/GetBetter/iosApp/iosApp/Core/Util/extensions/UIPilotExt.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "170"
+                  endingLineNumber = "170"
+                  offsetFromSymbolStart = "988">
+               </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "19DB6C3C-8646-4DB1-BB9F-E111365C8F89"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/Features/Auth/components/AuthTextField.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "init(placeholderText:inputType:onValueChanged:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

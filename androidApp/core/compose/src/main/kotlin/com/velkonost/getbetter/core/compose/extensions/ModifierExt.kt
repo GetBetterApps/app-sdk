@@ -69,3 +69,18 @@ fun Modifier.fadingEdge() = this
             blendMode = BlendMode.DstIn
         )
     }
+
+fun Modifier.horizontalFadingEdge() = this
+    .graphicsLayer(compositingStrategy = CompositingStrategy.Offscreen)
+    .drawWithContent {
+        drawContent()
+        drawRect(
+            brush = Brush.horizontalGradient(
+                0f to Color.Transparent,
+                0.3f to Color.Red,
+                0.7f to Color.Red,
+                1f to Color.Transparent
+            ),
+            blendMode = BlendMode.DstIn
+        )
+    }
