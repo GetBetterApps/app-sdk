@@ -840,6 +840,7 @@ PODS:
     - KMPNativeCoroutinesCore (= 1.0.0-ALPHA-18)
   - KMPNativeCoroutinesCore (1.0.0-ALPHA-18)
   - leveldb-library (1.22.2)
+  - lottie-ios (4.3.2)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -859,6 +860,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - KMMViewModelSwiftUI (= 1.0.0-ALPHA-14)
   - KMPNativeCoroutinesAsync (= 1.0.0-ALPHA-18)
+  - lottie-ios
   - umbrella (from `../shared/umbrella`)
 
 SPEC REPOS:
@@ -890,6 +892,7 @@ SPEC REPOS:
     - KMPNativeCoroutinesAsync
     - KMPNativeCoroutinesCore
     - leveldb-library
+    - lottie-ios
     - nanopb
     - PromisesObjC
     - PromisesSwift
@@ -927,12 +930,13 @@ SPEC CHECKSUMS:
   KMPNativeCoroutinesAsync: 91d86216afbd78a569c2e6d01c1edf914d344812
   KMPNativeCoroutinesCore: fa73bbfb4f56ef9ff45666646374c43d717110f3
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
+  lottie-ios: 48af491639ba6e8bb7cfaf7649b8a339487da935
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   PromisesSwift: 28dca69a9c40779916ac2d6985a0192a5cb4a265
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
-  umbrella: 723c103363e6f97c9454d96cce637fff95088121
+  umbrella: e75f2a7eabf35a2fbad73ae6869d1803e4be4d41
 
-PODFILE CHECKSUM: b52785cffdeceb73004d5c244830e8394e3e9c6e
+PODFILE CHECKSUM: 27350a05a18a6ae611874df0b83072265a912aff
 
 COCOAPODS: 1.12.1

@@ -17,6 +17,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.android.compose.lootie)
+
     implementation(projects.shared.core.vm)
     implementation(projects.shared.resources)
 }

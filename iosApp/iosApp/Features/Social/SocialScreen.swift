@@ -13,7 +13,7 @@ import SharedSDK
 struct SocialScreen: View {
     var body: some View {
         ZStack {
-            
+            Loader()
         }
     }
 }

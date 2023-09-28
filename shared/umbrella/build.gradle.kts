@@ -18,7 +18,7 @@ kotlin {
     cocoapods {
         summary = "GetBetter iOS SDK"
         homepage = "https://google.com"
-        ios.deploymentTarget = "15.0"
+        ios.deploymentTarget = "16.0"
 
         podfile = project.file("${project.rootDir}/iosApp/Podfile")
 

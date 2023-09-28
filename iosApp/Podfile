@@ -9,6 +9,7 @@ target 'iosApp' do
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+  pod 'lottie-ios'
   
 end
 
