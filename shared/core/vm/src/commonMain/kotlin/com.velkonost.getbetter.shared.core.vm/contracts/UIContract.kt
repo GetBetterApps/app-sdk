@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.core.vm.contracts
 
+import com.velkonost.getbetter.shared.core.util.randomUUID
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationEvent
 
 sealed interface UIContract {
@@ -7,6 +8,7 @@ sealed interface UIContract {
 
     interface Event : UIContract {
         val id: String
+            get() = randomUUID()
     }
 
     interface Navigation : UIContract {

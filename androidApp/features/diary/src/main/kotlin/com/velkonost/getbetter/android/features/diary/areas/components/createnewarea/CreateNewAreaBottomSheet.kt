@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.android.features.diary.areas.components.createnewarea
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -18,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.AppButton
+import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
 import com.velkonost.getbetter.core.compose.components.SingleLineTextField
 import com.velkonost.getbetter.shared.core.model.Emoji
@@ -30,6 +32,7 @@ import dev.icerock.moko.resources.compose.colorResource
 @Composable
 fun CreateNewAreaBottomSheet(
     modifier: Modifier = Modifier,
+    isLoading: Boolean,
     modalSheetState: ModalBottomSheetState,
     state: CreateNewAreaViewState,
     emojiItems: List<Emoji>,
@@ -46,57 +49,68 @@ fun CreateNewAreaBottomSheet(
         sheetShape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
         sheetBackgroundColor = colorResource(resource = SharedR.colors.main_background),
         sheetContent = {
-            Column(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.8f)
-                    .padding(20.dp)
-            ) {
+            if (isLoading) {
+                Box(
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.8f)
+                        .padding(20.dp)
+                ) {
+                    Loader(modifier = modifier.align(Alignment.Center))
+                }
+            } else {
+                Column(
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.8f)
+                        .padding(20.dp)
+                ) {
 
-                Text(
-                    modifier = modifier.align(Alignment.CenterHorizontally),
-                    text = "Create new area",
-                    color = colorResource(resource = SharedR.colors.text_title),
-                    style = MaterialTheme.typography.headlineSmall
-                )
+                    Text(
+                        modifier = modifier.align(Alignment.CenterHorizontally),
+                        text = "Create new area",
+                        color = colorResource(resource = SharedR.colors.text_title),
+                        style = MaterialTheme.typography.headlineSmall
+                    )
 
-                Row(modifier = modifier.padding(top = 24.dp)) {
-                    SelectedEmojiImage(selectedEmoji = state.selectedEmoji) {
-                        isEmojiPickerVisible.value = !isEmojiPickerVisible.value
+                    Row(modifier = modifier.padding(top = 24.dp)) {
+                        SelectedEmojiImage(selectedEmoji = state.selectedEmoji) {
+                            isEmojiPickerVisible.value = !isEmojiPickerVisible.value
+                        }
+
+                        SingleLineTextField(
+                            value = state.name,
+                            placeholderText = "placeholder",
+                            onValueChanged = { onNameChanged.invoke(it) }
+                        )
                     }
 
-                    SingleLineTextField(
-                        value = state.name,
-                        placeholderText = "placeholder",
-                        onValueChanged = { onNameChanged.invoke(it) }
+                    EmojiPicker(
+                        isVisible = isEmojiPickerVisible.value,
+                        items = emojiItems,
+                        onEmojiClick = { onEmojiClick.invoke(it) }
                     )
+
+                    MultilineTextField(
+                        value = state.description,
+                        placeholderText = "placeholder",
+                        onValueChanged = { onDescriptionChanged.invoke(it) }
+                    )
+
+                    RequiredLevelRow(
+                        title = "required level",
+                        level = state.requiredLevel,
+                        onRequiredLevelChanged = { onRequiredLevelChanged.invoke(it) }
+                    )
+
+                    AppButton(
+                        modifier = modifier
+                            .align(Alignment.CenterHorizontally)
+                            .padding(bottom = 70.dp),
+                        labelText = "Create",
+                        isLoading = false
+                    ) { onCreateClick.invoke() }
                 }
-
-                EmojiPicker(
-                    isVisible = isEmojiPickerVisible.value,
-                    items = emojiItems,
-                    onEmojiClick = { onEmojiClick.invoke(it) }
-                )
-
-                MultilineTextField(
-                    value = state.description,
-                    placeholderText = "placeholder",
-                    onValueChanged = { onDescriptionChanged.invoke(it) }
-                )
-
-                RequiredLevelRow(
-                    title = "required level",
-                    level = state.requiredLevel,
-                    onRequiredLevelChanged = { onRequiredLevelChanged.invoke(it) }
-                )
-
-                AppButton(
-                    modifier = modifier
-                        .align(Alignment.CenterHorizontally)
-                        .padding(bottom = 70.dp),
-                    labelText = "Create",
-                    isLoading = false
-                ) { onCreateClick.invoke() }
             }
         }
     ) {

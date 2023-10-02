@@ -17,16 +17,21 @@ object DiaryNavRoute : NavRoute<DiaryViewModel> {
     override fun menuIcon(): ImageResource = SharedR.images.ic_menu_profile
 
     @Composable
-    override fun Content(viewModel: DiaryViewModel) = DiaryScreen(viewModel = viewModel)
+    override fun Content(viewModel: DiaryViewModel) {
+        DiaryScreen(viewModel = viewModel)
+    }
 
     @Composable
     override fun Content(
         viewModel: DiaryViewModel,
         forceHideBottomBar: MutableState<Boolean>
-    ) = DiaryScreen(
-        viewModel = viewModel,
-        forceHideBottomBar = forceHideBottomBar
-    )
+    ) {
+        viewModel.init()
+        DiaryScreen(
+            viewModel = viewModel,
+            forceHideBottomBar = forceHideBottomBar
+        )
+    }
 
     override val viewModel: DiaryViewModel
         @Composable get() = koinViewModel()

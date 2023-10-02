@@ -1,6 +1,8 @@
 package model
 
 import dev.gitlive.firebase.firestore.DocumentReference
+import dev.gitlive.firebase.firestore.DocumentSnapshot
+import dev.gitlive.firebase.firestore.Timestamp
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -19,20 +21,23 @@ data class Area(
     @SerialName(createdDatePropertyName)
     val createdDate: Long,
 
-    @SerialName(authorIdPropertyName)
-    val authorId: String,
+    @SerialName(authorPropertyName)
+    val author: AreaMember,
 
     @SerialName(imageUrlPropertyName)
     val imageUrl: String? = null,
 
     @SerialName(emojiIdPropertyName)
-    val emojiId: String? = null,
+    val emojiId: Int? = null,
 
     @SerialName(requiredLevelPropertyName)
     val requiredLevel: Int,
 
     @SerialName(usersDataPropertyName)
-    val usersData: Map<DocumentReference, Float>,
+    val usersData: Map<String, Float>,
+
+    @SerialName(membersListPropertyName)
+    val membersList: List<AreaMember>,
 
     @SerialName(isActivePropertyName)
     val isActive: Boolean
@@ -43,11 +48,29 @@ data class Area(
         const val namePropertyName = "name"
         const val descriptionPropertyName = "description"
         const val createdDatePropertyName = "createdDate"
-        const val authorIdPropertyName = "authorId"
+        const val authorPropertyName = "author"
         const val imageUrlPropertyName = "imageUrl"
         const val emojiIdPropertyName = "emojiId"
         const val requiredLevelPropertyName = "requiredLevel"
         const val usersDataPropertyName = "usersData"
         const val isActivePropertyName = "isActive"
+        const val membersListPropertyName = "membersList"
     }
 }
+
+suspend fun DocumentSnapshot.toAreaModel() =
+    Area(
+        id = get(Area.idPropertyName),
+        name = get(Area.namePropertyName),
+        description = get(Area.descriptionPropertyName),
+        isActive = get(Area.isActivePropertyName),
+        createdDate = get<Timestamp>(Area.createdDatePropertyName).seconds,
+        imageUrl = get(Area.imageUrlPropertyName),
+        emojiId = get(Area.emojiIdPropertyName),
+        requiredLevel = get(Area.requiredLevelPropertyName),
+        usersData = get(Area.usersDataPropertyName),
+        membersList = get<List<DocumentReference>>(Area.membersListPropertyName).map {
+            it.get().toAreaMember()
+        },
+        author = get<DocumentReference>(Area.authorPropertyName).get().toAreaMember()
+    )

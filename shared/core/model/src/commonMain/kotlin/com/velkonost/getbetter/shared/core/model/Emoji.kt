@@ -7,6 +7,7 @@ enum class Emoji(
     val id: Int,
     val icon: ImageResource
 ) {
+
     _1(
         id = 1,
         icon = SharedR.images.emoji_1
@@ -345,5 +346,13 @@ enum class Emoji(
     _68(
         id = 68,
         icon = SharedR.images.emoji_68
-    ),
+    );
+
+    companion object {
+        fun getIconById(id: Int): ImageResource {
+            return Emoji.values().first {
+                it.id == id
+            }.icon
+        }
+    }
 }

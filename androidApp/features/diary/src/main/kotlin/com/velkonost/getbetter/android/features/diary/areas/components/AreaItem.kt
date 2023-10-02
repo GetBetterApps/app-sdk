@@ -19,12 +19,15 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
+import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
+import model.Area
 
 @Composable
 fun AreaItem(
+    item: Area,
     modifier: Modifier = Modifier,
     onClick: (String) -> Unit
 ) {
@@ -42,12 +45,16 @@ fun AreaItem(
             }
     ) {
         Row {
-            Image(
-                modifier = modifier.size(64.dp),
-                painter = painterResource(imageResource = SharedR.images.ic_menu_profile),
-                contentDescription = null,
-                contentScale = ContentScale.Crop
-            )
+            if (item.emojiId != null) {
+                Image(
+                    modifier = modifier
+                        .size(64.dp)
+                        .padding(8.dp),
+                    painter = painterResource(imageResource = Emoji.getIconById(item.emojiId!!)),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop
+                )
+            }
 
             Column(
                 modifier = modifier
@@ -55,14 +62,14 @@ fun AreaItem(
                     .align(Alignment.CenterVertically)
             ) {
                 Text(
-                    text = "Healthy health",
+                    text = item.name,
                     color = colorResource(resource = SharedR.colors.text_title),
                     style = MaterialTheme.typography.labelLarge
                 )
 
                 Text(
                     modifier = modifier.padding(top = 4.dp),
-                    text = "также у пользователя в области должны быть кастомные поля, его прогресс: добавлена ли эта область (поле users = map(userRef to exp) в области?)",
+                    text = item.description,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     color = colorResource(resource = SharedR.colors.text_secondary),

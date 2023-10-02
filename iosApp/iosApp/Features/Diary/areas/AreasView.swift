@@ -12,9 +12,11 @@ import SharedSDK
 
 struct AreasView: View {
     
+    let items: [Area]
     let createNewAreaClick: () -> Void
     
-    init(createNewAreaClick: @escaping () -> Void) {
+    init(items: [Area], createNewAreaClick: @escaping () -> Void) {
+        self.items = items
         self.createNewAreaClick = createNewAreaClick
     }
     
@@ -24,8 +26,9 @@ struct AreasView: View {
         ZStack {
             ScrollView(showsIndicators: false) {
                 LazyVStack(spacing: 0) {
-                    ForEach(0...20, id: \.self) { index in
-                        AreaItem {
+                    
+                    ForEach(items, id: \.self) { item in
+                        AreaItem(item: item) {
                             
                         }
                     }

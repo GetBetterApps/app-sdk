@@ -47,58 +47,63 @@ struct CreateNewAreaBottomSheet: View {
             Color.mainBackground
             
             VStack {
-                Text("Create new area")
-                    .style(.headlineSmall)
-                    .foregroundColor(.textTitle)
-                    .frame(alignment: .center)
-                
-                HStack {
-                    SelectedEmojiImage(selectedEmoji: state.selectedEmoji.icon.toUIImage()!) {
-                        withAnimation {
-                            isEmojiPickerVisible.toggle()
+                if state.isLoading {
+                    Loader()
+                } else {
+                    Text("Create new area")
+                        .style(.headlineSmall)
+                        .foregroundColor(.textTitle)
+                        .frame(alignment: .center)
+                    
+                    HStack {
+                        SelectedEmojiImage(selectedEmoji: state.selectedEmoji.icon.toUIImage()!) {
+                            withAnimation {
+                                isEmojiPickerVisible.toggle()
+                            }
                         }
+                        
+                        SingleLineTextField(
+                            value: state.name,
+                            placeholderText: "placeholder"
+                        ) { value in
+                            onNameChanged(value)
+                        }
+                    }.padding(.top, 24)
+                    
+                    EmojiPicker(
+                        isVisible: $isEmojiPickerVisible,
+                        items: emojiItems
+                    ) { value in
+                        onEmojiClick(value)
                     }
                     
-                    SingleLineTextField(
-                        value: state.name,
+                    MultilineTextField(
+                        value: state.description_,
                         placeholderText: "placeholder"
                     ) { value in
-                        onNameChanged(value)
+                        onDescriptionChanged(value)
                     }
-                }.padding(.top, 24)
-                
-                EmojiPicker(
-                    isVisible: $isEmojiPickerVisible,
-                    items: emojiItems
-                ) { value in
-                    onEmojiClick(value)
+                    
+                    RequiredLevelRow(
+                        title: "required level",
+                        level: Int(state.requiredLevel)
+                    ) { value in
+                        onRequiredLevelChanged(value)
+                    }
+                    
+                    Spacer()
+                    
+                    AppButton(
+                        labelText: "Create",
+                        isLoading: false
+                    ) {
+                        onCreateClick()
+                    }
+                    .padding(.bottom, 70)
+                    
                 }
-                
-                MultilineTextField(
-                    value: state.description_,
-                    placeholderText: "placeholder"
-                ) { value in
-                    onDescriptionChanged(value)
-                }
-                
-                RequiredLevelRow(
-                    title: "required level",
-                    level: Int(state.requiredLevel)
-                ) { value in
-                    onRequiredLevelChanged(value)
-                }
-                
-                Spacer()
-                
-                AppButton(
-                    labelText: "Create",
-                    isLoading: false
-                ) {
-                    onCreateClick()
-                }
-                .padding(.bottom, 70)
-                
             }.padding(20)
+            
             
         }.edgesIgnoringSafeArea(.all)
             .onTapGesture {

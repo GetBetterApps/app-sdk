@@ -5,7 +5,6 @@ import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import com.rickclephas.kmm.viewmodel.coroutineScope
 import com.rickclephas.kmm.viewmodel.stateIn
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesIgnore
 import com.velkonost.getbetter.shared.core.vm.contracts.ActionDispatcher
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationEvent
@@ -47,12 +46,16 @@ constructor(
     @NativeCoroutines
     val events by lazy { _events.asSharedFlow() }
 
-//    @NativeCoroutinesIgnore
+    //    @NativeCoroutinesIgnore
     private val _navigationEvent = MutableSharedFlow<NavigationEvent>()
 
     @NativeCoroutines
     override val navigationEvent: SharedFlow<NavigationEvent>
         get() = _navigationEvent.asSharedFlow()
+
+    open fun init() {
+
+    }
 
     protected fun <T : N> emit(navigation: T) {
         vmScope.launch {

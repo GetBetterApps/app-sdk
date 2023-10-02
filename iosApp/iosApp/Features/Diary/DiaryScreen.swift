@@ -10,14 +10,19 @@ import Foundation
 import SwiftUI
 import SharedSDK
 import KMMViewModelSwiftUI
+import KMPNativeCoroutinesAsync
 
 struct DiaryScreen: View {
     
     
     @StateViewModel var viewModel: DiaryViewModel
+    @State private var eventsObserver: Task<(), Error>? = nil
+    
     @State private var showingCreateNewAreaSheet = false
     
     @State private var selectedPage: Int = 0
+    
+    
     
     var body: some View {
         @State var state = viewModel.viewStateValue as! DiaryViewState
@@ -31,7 +36,7 @@ struct DiaryScreen: View {
             
             switch(selectedPage) {
             case 0: NotesView()
-            case 1: AreasView() {
+            case 1: AreasView(items: state.areasItems) {
                 viewModel.dispatch(action: CreateNewAreaActionOpen())
                 showingCreateNewAreaSheet = true
             }
@@ -53,9 +58,25 @@ struct DiaryScreen: View {
             } onCreateClick: {
                 viewModel.dispatch(action: CreateNewAreaActionCreateClick())
             }
-
-            
-                           
+        }
+        .onAppear {
+            if eventsObserver == nil {
+                eventsObserver = Task {
+                    for try await event in asyncSequence(for: viewModel.events) {
+                        switch(event) {
+                        case _ as CreateNewAreaEventCreatedSuccess: do {
+                            showingCreateNewAreaSheet = false
+                        }
+                        default:
+                            break
+                        }
+                    }
+                }
+            }
+        }
+        .onDisappear {
+            eventsObserver?.cancel()
+            eventsObserver = nil
         }
     }
 }

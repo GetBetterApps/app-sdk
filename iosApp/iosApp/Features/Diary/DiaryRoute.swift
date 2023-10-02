@@ -28,6 +28,7 @@ struct DiaryRoute: NavRoute {
     
     var viewModel: DiaryViewModel {
         @LazyKoin var delegate: DiaryViewModel
+        delegate.doInit()
         return delegate
     }
     

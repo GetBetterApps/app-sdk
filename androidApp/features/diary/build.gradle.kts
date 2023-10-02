@@ -15,6 +15,8 @@ android {
 dependencies {
     implementation(projects.shared.core.util)
     implementation(projects.shared.resources)
+
+    implementation(projects.shared.features.areas.api)
     implementation(projects.shared.features.diary.presentation)
 
     implementation(projects.androidApp.core.compose)

@@ -12,28 +12,32 @@ import SharedSDK
 
 struct AreaItem: View {
     
+    let item: Area
     let onClick: () -> Void
     
-    init(onClick: @escaping () -> Void) {
+    init(item: Area, onClick: @escaping () -> Void) {
+        self.item = item
         self.onClick = onClick
     }
     
     var body: some View {
         PrimaryBox {
             HStack {
-                Image(uiImage: SharedR.images().ic_menu_profile.toUIImage()!)
+                Image(uiImage: Emoji.companion.getIconById(id: item.emojiId as! Int32).toUIImage()!)
                     .resizable()
+                    .padding(8)
                     .frame(width: 64, height: 64)
                     .scaledToFill()
+                    
                 
                 VStack(alignment: .leading) {
                     Spacer()
-                    Text("Healthy health")
+                    Text(item.name)
                         .style(.labelLarge)
                         .foregroundColor(.textTitle)
                         .multilineTextAlignment(.leading)
                     
-                    Text("также у пользователя в области должны быть кастомные поля, его прогресс: добавлена ли эта область (поле users = map(userRef to exp) в области?)")
+                    Text(item.description_)
                         .style(.bodySmall)
                         .foregroundColor(.textSecondaryTitle)
                         .lineLimit(2)
@@ -44,8 +48,10 @@ struct AreaItem: View {
                     Spacer()
                 }
                 .padding(.leading, 12)
-            }
+                Spacer()
+            }.frame(minWidth: 0, maxWidth: .infinity)
         }
+        .frame(minWidth: 0, maxWidth: .infinity)
         .onTapGesture {
             let impactMed = UIImpactFeedbackGenerator(style: .medium)
             impactMed.impactOccurred()

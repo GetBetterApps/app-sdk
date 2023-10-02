@@ -22,9 +22,11 @@ kotlin {
         commonMain {
             dependencies {
                 api(projects.shared.core.vm)
+                api(projects.shared.core.util)
 
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.multiplatform.paging)
 
                 api(projects.shared.core.model)
                 implementation(projects.shared.resources)
