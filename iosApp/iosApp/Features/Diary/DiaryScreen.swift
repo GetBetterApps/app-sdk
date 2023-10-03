@@ -36,7 +36,10 @@ struct DiaryScreen: View {
             
             switch(selectedPage) {
             case 0: NotesView()
-            case 1: AreasView(items: state.areasItems) {
+            case 1: AreasView(
+                items: state.areasViewState.items,
+                isLoading: state.areasViewState.isLoading
+            ) {
                 viewModel.dispatch(action: CreateNewAreaActionOpen())
                 showingCreateNewAreaSheet = true
             }

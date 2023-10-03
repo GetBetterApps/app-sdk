@@ -56,6 +56,7 @@ struct ExpandableButtonPanel: View {
                         let impactMed = UIImpactFeedbackGenerator(style: .medium)
                         impactMed.impactOccurred()
                         (item.action ?? noop)()
+                        self.isExpanded.toggle()
                     }
                 }
             }

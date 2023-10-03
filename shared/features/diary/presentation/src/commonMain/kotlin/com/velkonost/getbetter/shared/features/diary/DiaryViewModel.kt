@@ -59,16 +59,21 @@ internal constructor(
                 .collectLatest { result ->
                     with(result) {
                         isLoading {
-
+                            val areasViewState = viewState.value.areasViewState.copy(
+                                isLoading = it
+                            )
+                            emit(viewState.value.copy(areasViewState = areasViewState))
                         }
                         onSuccess { list ->
                             list?.let {
-                                emit(viewState.value.copy(areasItems = it))
+                                val areasViewState = viewState.value.areasViewState.copy(
+                                    items = it
+                                )
+                                emit(viewState.value.copy(areasViewState = areasViewState))
                             }
 
                         }
                         onFailure {
-                            println()
                         }
                     }
                 }

@@ -7,10 +7,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.android.features.diary.areas.components.AddAreaItem
 import com.velkonost.getbetter.android.features.diary.areas.components.AreaItem
+import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.extensions.fadingEdge
 import model.Area
 
@@ -18,36 +20,37 @@ import model.Area
 @Composable
 fun AreasView(
     modifier: Modifier = Modifier,
+    isLoading: Boolean,
     items: List<Area>,
     createNewAreaClick: () -> Unit
 ) {
 
-    Box {
-        LazyColumn(
-            modifier = modifier
-                .fillMaxSize()
-                .fadingEdge(),
-            contentPadding = PaddingValues(bottom = 140.dp)
-        ) {
-            items(items) { item ->
-                AreaItem(item) {
+    Box(modifier = modifier.fillMaxSize()) {
+        if (isLoading) {
+            Loader(modifier = Modifier.align(Alignment.Center))
+        } else {
+            LazyColumn(
+                modifier = modifier
+                    .fillMaxSize()
+                    .fadingEdge(),
+                contentPadding = PaddingValues(bottom = 140.dp)
+            ) {
+                items(items) { item ->
+                    AreaItem(item) {
 
+                    }
                 }
             }
-//            items(20) {
-//
-//            }
 
+            AddAreaItem(
+                addExistingClick = {
+
+                },
+                createNewClick = {
+                    createNewAreaClick.invoke()
+                }
+            )
         }
-
-        AddAreaItem(
-            addExistingClick = {
-
-            },
-            createNewClick = {
-                createNewAreaClick.invoke()
-            }
-        )
 
     }
 }

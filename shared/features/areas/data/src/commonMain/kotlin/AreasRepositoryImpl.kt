@@ -78,23 +78,30 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
     }
 
     override fun fetchUserAreas(): Flow<ResultState<List<Area>>> = flow {
-        val userId = Firebase.auth.currentUser?.uid
-        val userRef = db.collection("users").document(userId!!)
+        emit(ResultState.Loading)
 
-        while (true) {
-            val data = db.collection("areas")
-                .where(Area.isActivePropertyName, true)
-                .where(Area.membersListPropertyName, arrayContains = userRef)
-                .orderBy(Area.createdDatePropertyName, direction = Direction.DESCENDING)
-                .get()
+        kotlin.runCatching {
+            val userId = Firebase.auth.currentUser?.uid
+            val userRef = db.collection("users").document(userId!!)
 
-            val areas = data.documents.map { areaDocument ->
-                areaDocument.toAreaModel()
+            while (true) {
+                val data = db.collection("areas")
+                    .where(Area.isActivePropertyName, true)
+                    .where(Area.membersListPropertyName, arrayContains = userRef)
+                    .orderBy(Area.createdDatePropertyName, direction = Direction.DESCENDING)
+                    .get()
+
+                val areas = data.documents.map { areaDocument ->
+                    areaDocument.toAreaModel()
+                }
+
+                emit(ResultState.Success(areas))
+                delay(5.seconds)
             }
-
-            emit(ResultState.Success(areas))
-            delay(5.seconds)
+        }.onFailure {
+            emit(ResultState.Failure(it))
         }
+
     }
 
 

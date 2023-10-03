@@ -9,10 +9,15 @@ data class DiaryViewState(
     val isLoading: Boolean = false,
     val tabs: List<DiaryTab> = DiaryTab.values().toList(),
     val emojiList: List<Emoji> = Emoji.values().toList(),
-    val areasItems: List<Area> = emptyList(),
+    val areasViewState: AreasViewState = AreasViewState(),
     val createNewAreaViewState: CreateNewAreaViewState = CreateNewAreaViewState(
         selectedEmoji = emojiList.first()
     )
+) : UIContract.State
+
+data class AreasViewState(
+    val isLoading: Boolean = false,
+    val items: List<Area> = emptyList()
 ) : UIContract.State
 
 data class CreateNewAreaViewState(

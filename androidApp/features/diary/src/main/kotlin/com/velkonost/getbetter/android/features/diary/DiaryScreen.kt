@@ -25,11 +25,11 @@ import com.velkonost.getbetter.android.features.diary.notes.NotesView
 import com.velkonost.getbetter.android.features.diary.tasks.TasksView
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
 import com.velkonost.getbetter.shared.features.diary.DiaryViewModel
+import com.velkonost.getbetter.shared.features.diary.contracts.AreasViewState
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaEvent
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import model.Area
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
 @Composable
@@ -56,7 +56,7 @@ fun DiaryScreen(
             )
             DiaryScreenContent(
                 pagerState = pagerState,
-                areas = state.areasItems,
+                areasState = state.areasViewState,
                 createNewAreaClick = {
                     scope.launch {
                         viewModel.dispatch(CreateNewAreaAction.Open)
@@ -113,7 +113,7 @@ fun DiaryScreen(
 fun DiaryScreenContent(
     modifier: Modifier = Modifier,
     pagerState: PagerState,
-    areas: List<Area>,
+    areasState: AreasViewState,
     createNewAreaClick: () -> Unit
 ) {
     HorizontalPager(
@@ -124,10 +124,10 @@ fun DiaryScreenContent(
         when (index) {
             0 -> NotesView()
             1 -> AreasView(
-                items = areas,
+                items = areasState.items,
+                isLoading = areasState.isLoading,
                 createNewAreaClick = createNewAreaClick
             )
-
             else -> TasksView()
         }
     }

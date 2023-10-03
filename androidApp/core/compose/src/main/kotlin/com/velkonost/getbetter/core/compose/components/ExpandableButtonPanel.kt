@@ -102,6 +102,9 @@ fun BoxScope.ExpandableButtonPanel(
                             ) {
                                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                 item.onClick?.invoke()
+                                if (expandable) {
+                                    isExpanded = !isExpanded
+                                }
                             }
                         ) {
                             Image(
