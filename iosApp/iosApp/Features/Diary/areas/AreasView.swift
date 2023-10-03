@@ -15,11 +15,17 @@ struct AreasView: View {
     let items: [Area]
     let isLoading: Bool
     let createNewAreaClick: () -> Void
+    let addExistingAreaClick: () -> Void
     
-    init(items: [Area], isLoading: Bool, createNewAreaClick: @escaping () -> Void) {
+    init(
+        items: [Area], isLoading: Bool,
+        createNewAreaClick: @escaping () -> Void,
+        addExistingAreaClick: @escaping () -> Void
+    ) {
         self.items = items
         self.isLoading = isLoading
         self.createNewAreaClick = createNewAreaClick
+        self.addExistingAreaClick = addExistingAreaClick
     }
     
     
@@ -52,7 +58,7 @@ struct AreasView: View {
                 VStack(alignment: .trailing) {
                     Spacer()
                     AddAreaItem {
-                        
+                        addExistingAreaClick()
                     } createNewClick: {
                         createNewAreaClick()
                     }

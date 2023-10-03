@@ -35,15 +35,27 @@ struct DiaryScreen: View {
             )
             
             switch(selectedPage) {
-            case 0: NotesView()
+            case 0: NotesView(
+                isLoading: state.notesViewState.isLoading,
+                createGoalClick: {
+                    
+                },
+                createNoteClick: {
+                    
+                }
+            )
             case 1: AreasView(
                 items: state.areasViewState.items,
                 isLoading: state.areasViewState.isLoading
             ) {
                 viewModel.dispatch(action: CreateNewAreaActionOpen())
                 showingCreateNewAreaSheet = true
+            } addExistingAreaClick: {
             }
-            default: TasksView()
+                
+            default: TasksView(
+                isLoading: state.tasksViewState.isLoading
+            )
             }
             Spacer()
             

@@ -22,7 +22,8 @@ fun AreasView(
     modifier: Modifier = Modifier,
     isLoading: Boolean,
     items: List<Area>,
-    createNewAreaClick: () -> Unit
+    createNewAreaClick: () -> Unit,
+    addExistingAreaClick: () -> Unit
 ) {
 
     Box(modifier = modifier.fillMaxSize()) {
@@ -44,7 +45,7 @@ fun AreasView(
 
             AddAreaItem(
                 addExistingClick = {
-
+                    addExistingAreaClick.invoke()
                 },
                 createNewClick = {
                     createNewAreaClick.invoke()

@@ -55,6 +55,7 @@
 		467BECD12AC0350400F74482 /* WisdomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467BECD02AC0350400F74482 /* WisdomViewModel.swift */; };
 		46870C2E2AC092D300BCBDB1 /* SplashRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46870C2D2AC092D300BCBDB1 /* SplashRoute.swift */; };
 		46870C302AC092DA00BCBDB1 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46870C2F2AC092DA00BCBDB1 /* SplashScreen.swift */; };
+		468B794F2ACC57F000A8886C /* AddNoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B794E2ACC57F000A8886C /* AddNoteItem.swift */; };
 		468B87682ABC45BF001BBEB1 /* DiaryRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B87672ABC45BF001BBEB1 /* DiaryRoute.swift */; };
 		468B876A2ABC45C6001BBEB1 /* DiaryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B87692ABC45C6001BBEB1 /* DiaryScreen.swift */; };
 		468B876C2ABC45CC001BBEB1 /* CalendarsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B876B2ABC45CC001BBEB1 /* CalendarsRoute.swift */; };
@@ -130,6 +131,7 @@
 		467BECD02AC0350400F74482 /* WisdomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomViewModel.swift; sourceTree = "<group>"; };
 		46870C2D2AC092D300BCBDB1 /* SplashRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SplashRoute.swift; path = iosApp/Features/Wisdom/SplashRoute.swift; sourceTree = SOURCE_ROOT; };
 		46870C2F2AC092DA00BCBDB1 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		468B794E2ACC57F000A8886C /* AddNoteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteItem.swift; sourceTree = "<group>"; };
 		468B87672ABC45BF001BBEB1 /* DiaryRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryRoute.swift; sourceTree = "<group>"; };
 		468B87692ABC45C6001BBEB1 /* DiaryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryScreen.swift; sourceTree = "<group>"; };
 		468B876B2ABC45CC001BBEB1 /* CalendarsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarsRoute.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 		46059D1F2AC4035F00DC5015 /* notes */ = {
 			isa = PBXGroup;
 			children = (
+				468B794D2ACC577800A8886C /* components */,
 				46059D232AC4037500DC5015 /* NotesView.swift */,
 			);
 			path = notes;
@@ -228,6 +231,7 @@
 		46059D202AC4036500DC5015 /* tasks */ = {
 			isa = PBXGroup;
 			children = (
+				468B794C2ACC577000A8886C /* components */,
 				46059D252AC4037E00DC5015 /* TasksView.swift */,
 			);
 			path = tasks;
@@ -357,6 +361,21 @@
 				46870C2F2AC092DA00BCBDB1 /* SplashScreen.swift */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		468B794C2ACC577000A8886C /* components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		468B794D2ACC577800A8886C /* components */ = {
+			isa = PBXGroup;
+			children = (
+				468B794E2ACC57F000A8886C /* AddNoteItem.swift */,
+			);
+			path = components;
 			sourceTree = "<group>";
 		};
 		468B87642ABC4439001BBEB1 /* Social */ = {
@@ -677,6 +696,7 @@
 				46059D2D2AC41DB500DC5015 /* ExpandableButtonPanel.swift in Sources */,
 				468B87682ABC45BF001BBEB1 /* DiaryRoute.swift in Sources */,
 				464B60B62ABAF81B00369EC3 /* Avatar.swift in Sources */,
+				468B794F2ACC57F000A8886C /* AddNoteItem.swift in Sources */,
 				468B876C2ABC45CC001BBEB1 /* CalendarsRoute.swift in Sources */,
 				46C10D232AB4734200E62846 /* AuthAnonymousButton.swift in Sources */,
 				467BECD12AC0350400F74482 /* WisdomViewModel.swift in Sources */,

@@ -28,6 +28,8 @@ import com.velkonost.getbetter.shared.features.diary.DiaryViewModel
 import com.velkonost.getbetter.shared.features.diary.contracts.AreasViewState
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaEvent
+import com.velkonost.getbetter.shared.features.diary.contracts.NotesViewState
+import com.velkonost.getbetter.shared.features.diary.contracts.TasksViewState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -56,12 +58,23 @@ fun DiaryScreen(
             )
             DiaryScreenContent(
                 pagerState = pagerState,
+                notesState = state.notesViewState,
                 areasState = state.areasViewState,
+                tasksState = state.tasksViewState,
                 createNewAreaClick = {
                     scope.launch {
                         viewModel.dispatch(CreateNewAreaAction.Open)
                         createNewAreaSheetState.show()
                     }
+                },
+                addExistingAreaClick = {
+
+                },
+                createGoalClick = {
+
+                },
+                createNoteClick = {
+
                 }
             )
         }
@@ -113,8 +126,13 @@ fun DiaryScreen(
 fun DiaryScreenContent(
     modifier: Modifier = Modifier,
     pagerState: PagerState,
+    notesState: NotesViewState,
     areasState: AreasViewState,
-    createNewAreaClick: () -> Unit
+    tasksState: TasksViewState,
+    createNewAreaClick: () -> Unit,
+    addExistingAreaClick: () -> Unit,
+    createGoalClick: () -> Unit,
+    createNoteClick: () -> Unit
 ) {
     HorizontalPager(
         state = pagerState,
@@ -122,13 +140,22 @@ fun DiaryScreenContent(
         beyondBoundsPageCount = 2
     ) { index ->
         when (index) {
-            0 -> NotesView()
+            0 -> NotesView(
+                isLoading = notesState.isLoading,
+                createGoalClick = createGoalClick,
+                createNoteClick = createNoteClick
+            )
+
             1 -> AreasView(
                 items = areasState.items,
                 isLoading = areasState.isLoading,
-                createNewAreaClick = createNewAreaClick
+                createNewAreaClick = createNewAreaClick,
+                addExistingAreaClick = addExistingAreaClick
             )
-            else -> TasksView()
+
+            else -> TasksView(
+                isLoading = tasksState.isLoading
+            )
         }
     }
 }
