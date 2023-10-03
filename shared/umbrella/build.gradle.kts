@@ -33,6 +33,8 @@ kotlin {
             export(projects.shared.resources)
 
             export(projects.shared.features.areas.api)
+            export(projects.shared.features.notes.api)
+            export(projects.shared.features.tasks.api)
             export(projects.shared.features.userinfo.api)
 
             export(projects.shared.features.auth.api)
@@ -68,6 +70,8 @@ kotlin {
                 implementation(projects.shared.core.util)
 
                 implementation(projects.shared.features.areas.data)
+                implementation(projects.shared.features.notes.data)
+                implementation(projects.shared.features.tasks.data)
                 implementation(projects.shared.features.userinfo.data)
 
                 implementation(projects.shared.features.auth.data)
@@ -108,6 +112,8 @@ kotlin {
                 api(projects.shared.resources)
 
                 api(projects.shared.features.areas.api)
+                api(projects.shared.features.notes.api)
+                api(projects.shared.features.tasks.api)
                 api(projects.shared.features.userinfo.api)
 
                 api(projects.shared.features.auth.api)

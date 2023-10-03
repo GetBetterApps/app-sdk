@@ -17,6 +17,8 @@ import com.velkonost.getbetter.shared.features.social.di.SocialPresentationModul
 import com.velkonost.getbetter.shared.features.splash.presentation.di.SplashPresentationModule
 import com.velkonost.getbetter.shared.features.userinfo.data.di.UserInfoDataModule
 import di.AreasDataModule
+import di.NotesDataModule
+import di.TasksDataModule
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 
@@ -29,6 +31,8 @@ object PlatformSDK {
             CoreUtilModule,
 
             AreasDataModule,
+            NotesDataModule,
+            TasksDataModule,
             UserInfoDataModule,
 
             AuthDataModule,
