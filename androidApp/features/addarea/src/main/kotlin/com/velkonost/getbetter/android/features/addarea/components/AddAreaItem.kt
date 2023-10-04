@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.diary.areas.components
+package com.velkonost.getbetter.android.features.addarea.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -26,11 +26,11 @@ import dev.icerock.moko.resources.compose.painterResource
 import model.Area
 
 @Composable
-fun AreaItem(
-    item: Area,
+fun AddAreaItem(
     modifier: Modifier = Modifier,
-    onClick: (String) -> Unit
+    item: Area
 ) {
+
     val haptic = LocalHapticFeedback.current
 
     PrimaryBox(
@@ -41,7 +41,7 @@ fun AreaItem(
                 indication = null
             ) {
                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                onClick.invoke(item.id)
+//                onClick.invoke("")
             }
     ) {
         Row {
@@ -78,4 +78,5 @@ fun AreaItem(
             }
         }
     }
+
 }

@@ -20,6 +20,7 @@ dependencies {
     implementation(projects.androidApp.features.splash)
     implementation(projects.androidApp.features.social)
     implementation(projects.androidApp.features.diary)
+    implementation(projects.androidApp.features.addarea)
     implementation(projects.androidApp.features.calendars)
     implementation(projects.androidApp.features.wisdom)
     implementation(projects.androidApp.features.profile)

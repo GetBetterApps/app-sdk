@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.velkonost.getbetter.android.features.diary.areas.components.AddAreaItem
+import com.velkonost.getbetter.android.features.diary.areas.components.AddAreaButton
 import com.velkonost.getbetter.android.features.diary.areas.components.AreaItem
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.extensions.fadingEdge
@@ -43,7 +43,7 @@ fun AreasView(
                 }
             }
 
-            AddAreaItem(
+            AddAreaButton(
                 addExistingClick = {
                     addExistingAreaClick.invoke()
                 },

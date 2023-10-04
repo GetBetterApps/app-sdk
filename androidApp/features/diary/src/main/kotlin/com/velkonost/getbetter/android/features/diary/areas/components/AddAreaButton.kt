@@ -10,7 +10,7 @@ import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
-fun BoxScope.AddAreaItem(
+fun BoxScope.AddAreaButton(
     modifier: Modifier = Modifier,
     addExistingClick: () -> Unit,
     createNewClick: () -> Unit

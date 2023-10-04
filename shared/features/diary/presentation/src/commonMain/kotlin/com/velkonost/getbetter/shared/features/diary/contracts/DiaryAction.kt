@@ -5,6 +5,8 @@ import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 
 sealed interface DiaryAction : UIContract.Action
 
+data object AddAreaClick : DiaryAction
+
 sealed interface CreateNewAreaAction : DiaryAction {
     data object Open : CreateNewAreaAction
     data class EmojiSelect(val value: Emoji) : CreateNewAreaAction

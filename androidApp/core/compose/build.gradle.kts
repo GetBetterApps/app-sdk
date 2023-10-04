@@ -6,7 +6,6 @@ import com.velkonost.getbetter.util.libs
 
 plugins {
     `android-ui-plugin`
-    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -18,6 +17,7 @@ android {
 
 dependencies {
     implementation(libs.android.compose.lootie)
+    implementation(libs.androidx.compose.paging)
 
     implementation(projects.shared.core.vm)
     implementation(projects.shared.resources)

@@ -20,6 +20,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.koin.core)
+                implementation(libs.firebase.firestore)
 
                 implementation(projects.shared.resources)
             }

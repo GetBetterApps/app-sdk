@@ -12,11 +12,10 @@ import SharedSDK
 
 struct PrivateSwitch: View {
     
-    @State private var isPrivate: Bool
-    let onCheckedChange: (Bool) -> Void
+    @State private var isPrivate: Bool = true
+    let onCheckedChange: () -> Void
     
-    init(isPrivate: Bool, onCheckedChange: @escaping (Bool) -> Void) {
-        self.isPrivate = isPrivate
+    init(onCheckedChange: @escaping () -> Void) {
         self.onCheckedChange = onCheckedChange
     }
     
@@ -28,5 +27,8 @@ struct PrivateSwitch: View {
         }
         .tint(.iconActive)
         .padding(.top, 12)
+        .onChange(of: isPrivate) { newValue in
+            onCheckedChange()
+        }
     }
 }

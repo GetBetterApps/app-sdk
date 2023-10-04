@@ -19,7 +19,7 @@ struct CreateNewAreaBottomSheet: View {
     let onNameChanged: (String) -> Void
     let onDescriptionChanged: (String) -> Void
     let onRequiredLevelChanged: (Int) -> Void
-    let onPrivateChanged: (Bool) -> Void
+    let onPrivateChanged: () -> Void
     let onCreateClick: () -> Void
     
     @State private var isEmojiPickerVisible = false
@@ -30,7 +30,7 @@ struct CreateNewAreaBottomSheet: View {
          onNameChanged: @escaping (String) -> Void,
          onDescriptionChanged: @escaping (String) -> Void,
          onRequiredLevelChanged: @escaping (Int) -> Void,
-         onPrivateChanged: @escaping (Bool) -> Void,
+         onPrivateChanged: @escaping () -> Void,
          onCreateClick: @escaping () -> Void) {
         self._state = state
         self.emojiItems = emojiItems
@@ -93,7 +93,6 @@ struct CreateNewAreaBottomSheet: View {
                     }
                     
                     PrivateSwitch(
-                        isPrivate: state.isPrivate,
                         onCheckedChange: onPrivateChanged
                     )
                     

@@ -1,3 +1,4 @@
+import com.velkonost.getbetter.shared.core.model.response.FirestorePaginationInfo
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.flowRequest
 import com.velkonost.getbetter.shared.core.util.randomUUID
@@ -7,11 +8,13 @@ import dev.gitlive.firebase.firestore.Direction
 import dev.gitlive.firebase.firestore.FirebaseFirestore
 import dev.gitlive.firebase.firestore.Timestamp
 import dev.gitlive.firebase.firestore.orderBy
+import dev.gitlive.firebase.firestore.startAfter
 import dev.gitlive.firebase.firestore.where
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import model.Area
+import model.pagination.AreasPage
 import model.toAreaModel
 import kotlin.time.Duration.Companion.seconds
 
@@ -110,4 +113,34 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
     override fun addUserArea(area: Area): Flow<ResultState<Unit>> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun fetchPublicAreasToAdd(
+        perPage: Int, pagination: FirestorePaginationInfo
+    ): ResultState<AreasPage> =
+        kotlin.runCatching {
+            var dataRequest = db.collection("areas")
+                .where(Area.isActivePropertyName, true)
+                .where(Area.isPrivatePropertyName, false)
+//            .where(Area.membersListPropertyName, arrayContains = userRef)
+                .orderBy(Area.createdDatePropertyName, direction = Direction.DESCENDING)
+                .limit(perPage)
+
+            pagination.lastVisible?.let {
+                dataRequest = dataRequest.startAfter(pagination.lastVisible!!)
+            }
+
+            val data = dataRequest.get()
+
+            val lastVisible = data.documents.last()
+
+            val areas = data.documents.map { areaDocument ->
+                areaDocument.toAreaModel()
+            }
+
+            ResultState.Success(AreasPage(areas, FirestorePaginationInfo(lastVisible)))
+        }.onFailure {
+            ResultState.Failure(it)
+        }.getOrElse {
+            ResultState.Failure(it)
+        }
 }

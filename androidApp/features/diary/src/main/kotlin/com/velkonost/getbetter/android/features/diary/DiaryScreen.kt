@@ -25,6 +25,7 @@ import com.velkonost.getbetter.android.features.diary.notes.NotesView
 import com.velkonost.getbetter.android.features.diary.tasks.TasksView
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
 import com.velkonost.getbetter.shared.features.diary.DiaryViewModel
+import com.velkonost.getbetter.shared.features.diary.contracts.AddAreaClick
 import com.velkonost.getbetter.shared.features.diary.contracts.AreasViewState
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaEvent
@@ -68,7 +69,7 @@ fun DiaryScreen(
                     }
                 },
                 addExistingAreaClick = {
-
+                    viewModel.dispatch(AddAreaClick)
                 },
                 createGoalClick = {
 

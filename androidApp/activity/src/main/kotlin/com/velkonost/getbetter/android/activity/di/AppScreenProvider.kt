@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.android.activity.di
 
+import com.velkonost.getbetter.android.features.addarea.AddAreaNavRoute
 import com.velkonost.getbetter.android.features.auth.AuthNavRoute
 import com.velkonost.getbetter.android.features.calendars.CalendarsNavRoute
 import com.velkonost.getbetter.android.features.detail.DetailNavRoute
@@ -16,6 +17,7 @@ val AppScreens = setOf(
 
     SocialNavRoute,
     DiaryNavRoute,
+    AddAreaNavRoute,
     CalendarsNavRoute,
     ProfileNavRoute,
     WisdomNavRoute,

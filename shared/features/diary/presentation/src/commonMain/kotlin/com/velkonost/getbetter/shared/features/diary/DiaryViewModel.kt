@@ -6,11 +6,13 @@ import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onFailure
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.features.diary.contracts.AddAreaClick
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaAction
 import com.velkonost.getbetter.shared.features.diary.contracts.DiaryAction
 import com.velkonost.getbetter.shared.features.diary.contracts.DiaryEvent
 import com.velkonost.getbetter.shared.features.diary.contracts.DiaryNavigation
 import com.velkonost.getbetter.shared.features.diary.contracts.DiaryViewState
+import com.velkonost.getbetter.shared.features.diary.contracts.NavigateToAddArea
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -46,6 +48,7 @@ internal constructor(
 
     override fun dispatch(action: DiaryAction) = when (action) {
         is CreateNewAreaAction -> dispatchCreateNewAreaAction(action)
+        is AddAreaClick -> emit(NavigateToAddArea)
         else -> {}
     }
 
