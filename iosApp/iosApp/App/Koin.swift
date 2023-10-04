@@ -25,6 +25,7 @@ extension KoinApplication {
          \.SplashViewModel,
          \.SocialViewModel,
          \.DiaryViewModel,
+         \.AddAreaViewModel,
          \.CalendarsViewModel,
          \.WisdomViewModel,
          \.ProfileViewModel,

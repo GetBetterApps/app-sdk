@@ -62,6 +62,7 @@ include(
     ":shared:features:diary:api",
     ":shared:features:diary:data",
     ":shared:features:diary:presentation",
+    ":shared:features:addarea:presentation",
 
     ":androidApp:app",
     ":androidApp:activity",
@@ -76,6 +77,7 @@ include(
     ":androidApp:features:splash",
     ":androidApp:features:social",
     ":androidApp:features:diary",
+    ":androidApp:features:addarea",
     ":androidApp:features:calendars",
     ":androidApp:features:wisdom",
     ":androidApp:features:profile",
