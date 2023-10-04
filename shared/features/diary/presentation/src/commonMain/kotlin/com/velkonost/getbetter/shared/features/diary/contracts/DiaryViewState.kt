@@ -34,5 +34,6 @@ data class CreateNewAreaViewState(
     val selectedEmoji: Emoji,
     val name: String = "",
     val description: String = "",
-    val requiredLevel: Int = 1
+    val requiredLevel: Int = 1,
+    val isPrivate: Boolean = true
 ) : UIContract.State

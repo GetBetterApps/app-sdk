@@ -11,6 +11,7 @@ interface AreasRepository {
     fun createNewArea(
         name: String,
         description: String,
+        isPrivate: Boolean,
         requiredLevel: Int,
         emojiId: Int? = null,
         imageUrl: String? = null

@@ -3,6 +3,7 @@ package com.velkonost.getbetter.android.features.diary.areas.components.createne
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -26,6 +27,7 @@ import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaViewState
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
+import dev.icerock.moko.resources.compose.stringResource
 
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -40,6 +42,7 @@ fun CreateNewAreaBottomSheet(
     onNameChanged: (String) -> Unit,
     onDescriptionChanged: (String) -> Unit,
     onRequiredLevelChanged: (Int) -> Unit,
+    onPrivateChanged: (Boolean) -> Unit,
     onCreateClick: () -> Unit
 ) {
     val isEmojiPickerVisible = remember { mutableStateOf(false) }
@@ -53,7 +56,7 @@ fun CreateNewAreaBottomSheet(
                 Box(
                     modifier = modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(0.8f)
+                        .fillMaxHeight(0.9f)
                         .padding(20.dp)
                 ) {
                     Loader(modifier = modifier.align(Alignment.Center))
@@ -62,13 +65,13 @@ fun CreateNewAreaBottomSheet(
                 Column(
                     modifier = modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(0.8f)
+                        .fillMaxHeight(0.9f)
                         .padding(20.dp)
                 ) {
 
                     Text(
                         modifier = modifier.align(Alignment.CenterHorizontally),
-                        text = "Create new area",
+                        text = stringResource(resource = SharedR.strings.diary_areas_create_new_area_title),
                         color = colorResource(resource = SharedR.colors.text_title),
                         style = MaterialTheme.typography.headlineSmall
                     )
@@ -80,7 +83,7 @@ fun CreateNewAreaBottomSheet(
 
                         SingleLineTextField(
                             value = state.name,
-                            placeholderText = "placeholder",
+                            placeholderText = stringResource(resource = SharedR.strings.diary_areas_create_new_name_hint),
                             onValueChanged = { onNameChanged.invoke(it) }
                         )
                     }
@@ -93,21 +96,27 @@ fun CreateNewAreaBottomSheet(
 
                     MultilineTextField(
                         value = state.description,
-                        placeholderText = "placeholder",
+                        placeholderText = stringResource(resource = SharedR.strings.diary_areas_create_new_description_hint),
                         onValueChanged = { onDescriptionChanged.invoke(it) }
                     )
 
                     RequiredLevelRow(
-                        title = "required level",
+                        title = stringResource(resource = SharedR.strings.diary_areas_create_new_required_level),
                         level = state.requiredLevel,
                         onRequiredLevelChanged = { onRequiredLevelChanged.invoke(it) }
                     )
 
+                    PrivateSwitch(
+                        isPrivate = state.isPrivate,
+                        onCheckedChange = onPrivateChanged
+                    )
+
+                    Spacer(modifier = modifier.weight(1f))
                     AppButton(
                         modifier = modifier
                             .align(Alignment.CenterHorizontally)
                             .padding(bottom = 70.dp),
-                        labelText = "Create",
+                        labelText = stringResource(resource = SharedR.strings.diary_areas_create_button),
                         isLoading = false
                     ) { onCreateClick.invoke() }
                 }

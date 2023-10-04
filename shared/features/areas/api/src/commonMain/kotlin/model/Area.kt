@@ -40,7 +40,10 @@ data class Area(
     val membersList: List<AreaMember>,
 
     @SerialName(isActivePropertyName)
-    val isActive: Boolean
+    val isActive: Boolean,
+
+    @SerialName(isPrivatePropertyName)
+    val isPrivate: Boolean
 
 ) {
     companion object {
@@ -55,6 +58,7 @@ data class Area(
         const val usersDataPropertyName = "usersData"
         const val isActivePropertyName = "isActive"
         const val membersListPropertyName = "membersList"
+        const val isPrivatePropertyName = "isPrivate"
     }
 }
 
@@ -72,5 +76,6 @@ suspend fun DocumentSnapshot.toAreaModel() =
         membersList = get<List<DocumentReference>>(Area.membersListPropertyName).map {
             it.get().toAreaMember()
         },
-        author = get<DocumentReference>(Area.authorPropertyName).get().toAreaMember()
+        author = get<DocumentReference>(Area.authorPropertyName).get().toAreaMember(),
+        isPrivate = get(Area.isPrivatePropertyName)
     )

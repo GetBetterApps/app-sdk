@@ -22,11 +22,17 @@ internal constructor(
         is CreateNewAreaAction.NameChanged -> obtainNameChanged(action.value)
         is CreateNewAreaAction.DescriptionChanged -> obtainDescriptionChanged(action.value)
         is CreateNewAreaAction.RequiredLevelChanged -> obtainRequiredLevelChanged(action.value)
+        is CreateNewAreaAction.PrivateChanged -> obtainPrivateChanged()
         is CreateNewAreaAction.CreateClick -> obtainCreateClick()
     }
 
     private fun obtainOpen() {
         emit(initialState)
+    }
+
+    private fun obtainPrivateChanged() {
+        val prevValue = viewState.value.isPrivate
+        emit(viewState.value.copy(isPrivate = !prevValue))
     }
 
     private fun obtainEmojiSelect(value: Emoji) {
@@ -56,6 +62,7 @@ internal constructor(
                     description = areaData.description,
                     requiredLevel = areaData.requiredLevel,
                     emojiId = areaData.selectedEmoji.id,
+                    isPrivate = areaData.isPrivate,
                     imageUrl = null
                 ).collect { result ->
                     with(result) {

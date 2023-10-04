@@ -88,5 +88,5 @@ fun ColumnScope.RequiredLevelRow(
             colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_inactive))
         )
     }
-    Spacer(modifier = modifier.weight(1f))
+
 }

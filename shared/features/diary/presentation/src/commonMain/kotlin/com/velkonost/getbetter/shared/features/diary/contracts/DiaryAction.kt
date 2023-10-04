@@ -11,7 +11,7 @@ sealed interface CreateNewAreaAction : DiaryAction {
     data class NameChanged(val value: String) : CreateNewAreaAction
     data class DescriptionChanged(val value: String) : CreateNewAreaAction
     data class RequiredLevelChanged(val value: Int) : CreateNewAreaAction
-
+    data object PrivateChanged : CreateNewAreaAction
     data object CreateClick : CreateNewAreaAction
 }
 

@@ -19,6 +19,7 @@ struct CreateNewAreaBottomSheet: View {
     let onNameChanged: (String) -> Void
     let onDescriptionChanged: (String) -> Void
     let onRequiredLevelChanged: (Int) -> Void
+    let onPrivateChanged: (Bool) -> Void
     let onCreateClick: () -> Void
     
     @State private var isEmojiPickerVisible = false
@@ -29,6 +30,7 @@ struct CreateNewAreaBottomSheet: View {
          onNameChanged: @escaping (String) -> Void,
          onDescriptionChanged: @escaping (String) -> Void,
          onRequiredLevelChanged: @escaping (Int) -> Void,
+         onPrivateChanged: @escaping (Bool) -> Void,
          onCreateClick: @escaping () -> Void) {
         self._state = state
         self.emojiItems = emojiItems
@@ -36,9 +38,8 @@ struct CreateNewAreaBottomSheet: View {
         self.onNameChanged = onNameChanged
         self.onDescriptionChanged = onDescriptionChanged
         self.onRequiredLevelChanged = onRequiredLevelChanged
+        self.onPrivateChanged = onPrivateChanged
         self.onCreateClick = onCreateClick
-        
-        //        self.selectedImage = self.state.selectedEmoji.icon.toUIImage()!
     }
     
     
@@ -50,7 +51,7 @@ struct CreateNewAreaBottomSheet: View {
                 if state.isLoading {
                     Loader()
                 } else {
-                    Text("Create new area")
+                    Text(SharedR.strings().diary_areas_create_new_area_title.desc().localized())
                         .style(.headlineSmall)
                         .foregroundColor(.textTitle)
                         .frame(alignment: .center)
@@ -64,7 +65,7 @@ struct CreateNewAreaBottomSheet: View {
                         
                         SingleLineTextField(
                             value: state.name,
-                            placeholderText: "placeholder"
+                            placeholderText: SharedR.strings().diary_areas_create_new_name_hint.desc().localized()
                         ) { value in
                             onNameChanged(value)
                         }
@@ -79,22 +80,27 @@ struct CreateNewAreaBottomSheet: View {
                     
                     MultilineTextField(
                         value: state.description_,
-                        placeholderText: "placeholder"
+                        placeholderText: SharedR.strings().diary_areas_create_new_description_hint.desc().localized()
                     ) { value in
                         onDescriptionChanged(value)
                     }
                     
                     RequiredLevelRow(
-                        title: "required level",
+                        title: SharedR.strings().diary_areas_create_new_required_level.desc().localized(),
                         level: Int(state.requiredLevel)
                     ) { value in
                         onRequiredLevelChanged(value)
                     }
                     
+                    PrivateSwitch(
+                        isPrivate: state.isPrivate,
+                        onCheckedChange: onPrivateChanged
+                    )
+                    
                     Spacer()
                     
                     AppButton(
-                        labelText: "Create",
+                        labelText: SharedR.strings().diary_areas_create_button.desc().localized(),
                         isLoading: false
                     ) {
                         onCreateClick()

@@ -70,6 +70,8 @@ struct DiaryScreen: View {
                 viewModel.dispatch(action: CreateNewAreaActionDescriptionChanged(value: value))
             } onRequiredLevelChanged: { value in
                 viewModel.dispatch(action: CreateNewAreaActionRequiredLevelChanged(value: Int32(value)))
+            } onPrivateChanged: { value in
+                viewModel.dispatch(action: CreateNewAreaActionPrivateChanged())
             } onCreateClick: {
                 viewModel.dispatch(action: CreateNewAreaActionCreateClick())
             }

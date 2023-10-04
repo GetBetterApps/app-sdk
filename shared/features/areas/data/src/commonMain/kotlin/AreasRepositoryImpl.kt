@@ -41,6 +41,7 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
     override fun createNewArea(
         name: String,
         description: String,
+        isPrivate: Boolean,
         requiredLevel: Int,
         emojiId: Int?,
         imageUrl: String?
@@ -56,6 +57,7 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
                 Area.authorPropertyName to userRef,
                 Area.namePropertyName to name,
                 Area.descriptionPropertyName to description,
+                Area.isPrivatePropertyName to isPrivate,
                 Area.requiredLevelPropertyName to requiredLevel,
                 Area.emojiIdPropertyName to emojiId,
                 Area.imageUrlPropertyName to imageUrl,

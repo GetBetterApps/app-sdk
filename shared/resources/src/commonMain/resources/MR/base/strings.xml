@@ -2,6 +2,8 @@
 <resources>
     <!--  GENERAL  -->
     <string name="cancel">Cancel</string>
+    <string name="private_state">Private</string>
+    <string name="public_state">Public</string>
 
     <!--  AUTH  -->
     <string name="auth_email_label">Email</string>
@@ -31,6 +33,13 @@
     <string name="diary_areas_add_existing_title">Add existing</string>
     <string name="diary_areas_create_new_title">Create new</string>
 
+    <string name="diary_areas_create_new_area_title">Create new area</string>
+    <string name="diary_areas_create_new_required_level">Required level</string>
+    <string name="diary_areas_create_new_name_hint">Enter area\'s name</string>
+    <string name="diary_areas_create_new_description_hint">Tell me what the area includes</string>
+
+    <string name="diary_areas_create_button">Create</string>
+
     <!--  PROFILE  -->
     <string name="profile_title">Profile</string>
 
@@ -53,7 +62,9 @@
     <string name="wisdom_psychology_of_success_title">Психология успеха</string>
     <string name="wisdom_motivation_title">Мотивация и вдохновение</string>
     <string name="wisdom_education_title">Саморазвитие и образование</string>
-    <string name="wisdom_psychology_of_happiness_title">Психология счастья и удовлетворенности жизнью</string>
+    <string name="wisdom_psychology_of_happiness_title">Психология счастья и удовлетворенности
+        жизнью
+    </string>
     <string name="wisdom_plans_title">Цели и планирование</string>
     <string name="wisdom_emotions_title">Эмоциональное здоровье и стресс</string>
     <string name="wisdom_self_discipline_title">Самодисциплина и самоконтроль</string>
@@ -69,24 +80,52 @@
     <string name="wisdom_social_title">Социальные навыки и коммуникация</string>
     <string name="wisdom_personality_types_title">Исследование личности и типы личности</string>
 
-    <string name="wisdom_affirmations_desc">Укрепление позитивного мышления и повышения самооценки</string>
-    <string name="wisdom_advices_desc">Рекомендации по улучшению навыков, развитию личности и достижению целей</string>
-    <string name="wisdom_psychology_of_success_desc">Психологические аспекты достижения успеха в разных сферах жизни</string>
+    <string name="wisdom_affirmations_desc">Укрепление позитивного мышления и повышения самооценки
+    </string>
+    <string name="wisdom_advices_desc">Рекомендации по улучшению навыков, развитию личности и
+        достижению целей
+    </string>
+    <string name="wisdom_psychology_of_success_desc">Психологические аспекты достижения успеха в
+        разных сферах жизни
+    </string>
     <string name="wisdom_motivation_desc">Истории успеха, цитаты и источники вдохновения</string>
     <string name="wisdom_education_desc">Саморазвитие через обучение и самообразование</string>
-    <string name="wisdom_psychology_of_happiness_desc">Исследования, какие факторы влияют на чувство счастья и удовлетворенности жизнью</string>
-    <string name="wisdom_plans_desc">Информация о постановке целей и разработке планов достижения</string>
-    <string name="wisdom_emotions_desc">Методы управления стрессом и укрепления эмоционального благополучия</string>
-    <string name="wisdom_self_discipline_desc">Методы развития самодисциплины и улучшения самоконтроля</string>
-    <string name="wisdom_sport_desc">Здоровый образ жизни и физическая активность как средства самосовершенствования</string>
-    <string name="wisdom_creativity_desc">Как развивать и раскрывать свой креативный потенциал</string>
-    <string name="wisdom_self_acceptance_desc">Как улучшить самооценку и развивать позитивное отношение к себе</string>
-    <string name="wisdom_family_desc">Советы по улучшению отношений в семье и поддержке друг друга</string>
-    <string name="wisdom_finance_desc">Стратегии управления финансами и инвестирования для достижения финансовых целей</string>
-    <string name="wisdom_personal_efficiency_desc">Методы повышения личной продуктивности и управления временем</string>
+    <string name="wisdom_psychology_of_happiness_desc">Исследования, какие факторы влияют на чувство
+        счастья и удовлетворенности жизнью
+    </string>
+    <string name="wisdom_plans_desc">Информация о постановке целей и разработке планов достижения
+    </string>
+    <string name="wisdom_emotions_desc">Методы управления стрессом и укрепления эмоционального
+        благополучия
+    </string>
+    <string name="wisdom_self_discipline_desc">Методы развития самодисциплины и улучшения
+        самоконтроля
+    </string>
+    <string name="wisdom_sport_desc">Здоровый образ жизни и физическая активность как средства
+        самосовершенствования
+    </string>
+    <string name="wisdom_creativity_desc">Как развивать и раскрывать свой креативный потенциал
+    </string>
+    <string name="wisdom_self_acceptance_desc">Как улучшить самооценку и развивать позитивное
+        отношение к себе
+    </string>
+    <string name="wisdom_family_desc">Советы по улучшению отношений в семье и поддержке друг друга
+    </string>
+    <string name="wisdom_finance_desc">Стратегии управления финансами и инвестирования для
+        достижения финансовых целей
+    </string>
+    <string name="wisdom_personal_efficiency_desc">Методы повышения личной продуктивности и
+        управления временем
+    </string>
     <string name="wisdom_self_reflection_desc">Техники самоанализа и развития осознанности</string>
     <string name="wisdom_meditation_desc">Пути духовного роста и методы медитации</string>
-    <string name="wisdom_carrier_desc">Советы по карьерному росту и улучшению профессиональных навыков</string>
-    <string name="wisdom_social_desc">Как улучшать коммуникативные навыки и отношения с окружающими</string>
-    <string name="wisdom_personality_types_desc">Различные методики оценки типов личности и их влияние на поведение</string>
+    <string name="wisdom_carrier_desc">Советы по карьерному росту и улучшению профессиональных
+        навыков
+    </string>
+    <string name="wisdom_social_desc">Как улучшать коммуникативные навыки и отношения с
+        окружающими
+    </string>
+    <string name="wisdom_personality_types_desc">Различные методики оценки типов личности и их
+        влияние на поведение
+    </string>
 </resources>

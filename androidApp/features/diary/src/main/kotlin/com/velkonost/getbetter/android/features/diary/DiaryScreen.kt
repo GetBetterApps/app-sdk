@@ -96,6 +96,9 @@ fun DiaryScreen(
             onRequiredLevelChanged = {
                 viewModel.dispatch(CreateNewAreaAction.RequiredLevelChanged(it))
             },
+            onPrivateChanged = {
+                viewModel.dispatch(CreateNewAreaAction.PrivateChanged)
+            },
             onCreateClick = {
                 viewModel.dispatch(CreateNewAreaAction.CreateClick)
             }
