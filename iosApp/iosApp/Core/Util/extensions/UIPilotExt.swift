@@ -91,8 +91,8 @@ public class UIPilot<T: Equatable>: ObservableObject {
     
     public func onSystemPop() {
         if !self._routes.isEmpty {
-//            let popped = self._routes.removeLast()
-//            logger.log("UIPilot - \(popped) route popped by system")
+            let popped = self._routes.removeLast()
+            logger.log("UIPilot - \(popped) route popped by system")
         }
     }
 }
@@ -120,7 +120,6 @@ public struct UIPilotHost<T: Equatable, Screen: View>: View {
         )
         .environmentObject(pilot)
         .environment(\.uipNavigationStyle, navigationStyle)
-
     }
 }
 
