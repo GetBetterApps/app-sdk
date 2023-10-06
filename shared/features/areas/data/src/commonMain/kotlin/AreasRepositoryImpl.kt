@@ -102,7 +102,7 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
                 }
 
                 emit(ResultState.Success(areas))
-                delay(5.seconds)
+                delay(3.seconds)
             }
         }.onFailure {
             emit(ResultState.Failure(it))
