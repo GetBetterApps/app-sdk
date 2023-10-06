@@ -12,6 +12,7 @@ import com.velkonost.getbetter.shared.features.addarea.presentation.contract.Add
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaNavigation
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaViewState
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.LoadNextPage
+import com.velkonost.getbetter.shared.features.addarea.presentation.contract.NavigateBack
 import com.velkonost.getbetter.shared.features.addarea.presentation.model.TermsOfMembership
 import com.velkonost.getbetter.shared.features.addarea.presentation.model.getUserTermsOfMembership
 import com.velkonost.getbetter.shared.features.addarea.presentation.model.toUI
@@ -35,6 +36,7 @@ internal constructor(
     override fun dispatch(action: AddAreaAction) = when (action) {
         is LoadNextPage -> fetchAreas()
         is AddAreaClick -> obtainAddAreaClick(action.areaId)
+        is NavigateBack -> emit(action)
     }
 
     private fun fetchAreas() {

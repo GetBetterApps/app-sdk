@@ -13,35 +13,67 @@ import KMMViewModelSwiftUI
 
 struct AddAreaScreen: View {
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var viewModel = AddAreaViewModelDelegate()
     
     var body: some View {
         @State var state = viewModel.state
-        //        @State var items = state.items
         
         ZStack {
             if state.isLoading && state.items.isEmpty {
                 Loader()
                     .frame(alignment: .center)
             } else {
-                
-                ScrollView(showsIndicators: false) {
-                    LazyVStack(spacing: 0) {
-                        ForEach(state.items, id: \.self) { item in
-                            AddAreaItem(item: item) { areaId in
-                                viewModel.dispatch(action: AddAreaClick_(areaId: areaId))
+                VStack {
+                    HStack {
+                        Image(uiImage: SharedR.images().ic_arrow_back.toUIImage()!)
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.iconActive)
+                            .frame(width: 32, height: 32)
+                            .scaledToFill()
+                            .padding(4)
+                            .background(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color.backgroundIcon)
+                            )
+                            .padding(.leading, 20)
+                            .onTapGesture {
+                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                                impactMed.impactOccurred()
+                                presentationMode.wrappedValue.dismiss()
                             }
-                            .onAppear {
-                                checkPaginationThreshold(currentItemId: item.id, isLoading: state.isLoading)
+                        
+                        Text("Public Areas")
+                            .style(.headlineSmall)
+                            .foregroundColor(.textTitle)
+                            .padding(.leading, 12)
+                        Spacer()
+                    }
+                    
+                    ScrollView(showsIndicators: false) {
+                       
+                        
+                        
+                        LazyVStack(spacing: 0) {
+                            ForEach(state.items, id: \.self) { item in
+                                AddAreaItem(item: item) { areaId in
+                                    viewModel.dispatch(action: AddAreaClick_(areaId: areaId))
+                                }
+                                .onAppear {
+                                    checkPaginationThreshold(currentItemId: item.id, isLoading: state.isLoading)
+                                }
                             }
                         }
+                        .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
+                        
+                        Loader()
+                            .opacity(state.isLoading ? 1 : 0)
                     }
-                    .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
-                    
-                    Loader()
-                        .opacity(state.isLoading ? 1 : 0)
+                    .fadingEdge()
                 }
-                .fadingEdge()
+                
+                
                 
             }
         }

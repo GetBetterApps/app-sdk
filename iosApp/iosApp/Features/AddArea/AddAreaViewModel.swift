@@ -19,7 +19,6 @@ class AddAreaViewModelDelegate: ObservableObject {
     
     private var stateStream: Task<(), Error>? = nil
     
-    
     func dispatch(action: AddAreaAction) {
         delegate.dispatch(action: action)
     }

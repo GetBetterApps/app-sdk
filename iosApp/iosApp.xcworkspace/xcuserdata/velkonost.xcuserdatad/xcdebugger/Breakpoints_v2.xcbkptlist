@@ -88,7 +88,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "AB11C100-994F-4884-93FA-777B3FC819D3"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iosApp/Core/Util/NavRoute.swift"
@@ -129,6 +129,21 @@
                   endingLineNumber = "72"
                   offsetFromSymbolStart = "256">
                </Location>
+               <Location
+                  uuid = "AB11C100-994F-4884-93FA-777B3FC819D3 - de217a9657d1989d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iosApp.NavRoute.onNavEvent(pilot: iosApp.UIPilot&lt;Swift.String&gt;, event: __C.SSDKNavigationEvent) -&gt; ()"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/velkonost/AndroidStudioProjects/GetBetter/iosApp/iosApp/Core/Util/NavRoute.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "280">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -152,7 +167,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "0843D8ED-229D-44C7-B9A8-215D85F0AA10"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iosApp/Core/Util/NavRoute.swift"
@@ -486,7 +501,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "F8420CF2-E193-455E-8E97-3B24AC4842EB"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iosApp/Core/Util/NavRoute.swift"
@@ -796,6 +811,38 @@
             startingLineNumber = "23"
             endingLineNumber = "23"
             landmarkName = "init(placeholderText:inputType:onValueChanged:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "40A555F3-F574-42DF-AF21-F96829844B8C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/Core/Util/NavRoute.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "onNavEvent(pilot:event:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "203476AD-8CA2-4DC1-BF16-9BC1031A4922"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/Core/Util/NavRoute.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "onNavEvent(pilot:event:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
