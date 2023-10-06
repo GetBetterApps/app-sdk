@@ -128,4 +128,11 @@
     <string name="wisdom_personality_types_desc">Различные методики оценки типов личности и их
         влияние на поведение
     </string>
+
+    <!--  ADD AREA  -->
+    <string name="add_area_title">Public Areas</string>
+    <string name="add_area_add_area_button">Add area</string>
+    <string name="add_area_already_added_button">Already added</string>
+    <string name="add_area_low_level_button">Low level</string>
+    <!--  ADD AREA  -->
 </resources>

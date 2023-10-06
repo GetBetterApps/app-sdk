@@ -92,7 +92,7 @@ struct AddAreaItem: View {
                 
                 if item.termsOfMembership == TermsOfMembership.allow {
                     AppButton(
-                        labelText: "Add Area",
+                        labelText: SharedR.strings().add_area_add_area_button.desc().localized(),
                         isLoading: item.isLoading
                     ) {
                         onAddAreaClick(item.id)
@@ -101,9 +101,9 @@ struct AddAreaItem: View {
                 } else {
                     let disabledButtonLabel =
                     if item.termsOfMembership == TermsOfMembership.alreadyjoined {
-                        "Already added"
+                        SharedR.strings().add_area_already_added_button.desc().localized()
                     } else {
-                        "Low level"
+                        SharedR.strings().add_area_low_level_button.desc().localized()
                     }
                     
                     DisabledAppButton(labelText: disabledButtonLabel)

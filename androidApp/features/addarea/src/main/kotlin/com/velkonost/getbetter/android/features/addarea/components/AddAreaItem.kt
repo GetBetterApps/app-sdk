@@ -1,6 +1,5 @@
 package com.velkonost.getbetter.android.features.addarea.components
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -30,6 +29,7 @@ import com.velkonost.getbetter.shared.features.addarea.presentation.model.TermsO
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
+import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
 fun AddAreaItem(
@@ -148,36 +148,28 @@ fun AddAreaItem(
                 }
             }
 
-
             if (item.termsOfMembership == TermsOfMembership.Allow) {
-                Log.d("keke", item.isLoading.toString())
                 AppButton(
                     modifier = modifier
                         .padding(top = 16.dp)
                         .align(Alignment.CenterHorizontally),
-                    labelText = "Add Area",
+                    labelText = stringResource(resource = SharedR.strings.add_area_add_area_button),
                     isLoading = item.isLoading
-                ) {
-                    onAddAreaClick(item.id)
-                }
-
+                ) { onAddAreaClick(item.id) }
             } else {
                 DisabledAppButton(
                     modifier = modifier
                         .padding(top = 16.dp)
                         .align(Alignment.CenterHorizontally),
-                    labelText =
-                    when (item.termsOfMembership) {
-                        TermsOfMembership.AlreadyJoined -> "Already added"
-                        TermsOfMembership.LowLevel -> "Low level"
-                        else -> ""
-                    }
+                    labelText = stringResource(
+                        resource =
+                        when (item.termsOfMembership) {
+                            TermsOfMembership.AlreadyJoined -> SharedR.strings.add_area_already_added_button
+                            else -> SharedR.strings.add_area_low_level_button
+                        }
+                    )
                 )
             }
-
-
         }
-
     }
-
 }

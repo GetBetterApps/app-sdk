@@ -85,6 +85,7 @@
 		46D857782ACFF2D200BE74DA /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D857772ACFF2D200BE74DA /* ArrayExt.swift */; };
 		46D8577A2ACFFC7C00BE74DA /* ScrollViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D857792ACFFC7C00BE74DA /* ScrollViewExt.swift */; };
 		46D8577C2AD0560B00BE74DA /* DisabledAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D8577B2AD0560B00BE74DA /* DisabledAppButton.swift */; };
+		46D8577E2AD0787E00BE74DA /* AddAreaHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D8577D2AD0787E00BE74DA /* AddAreaHeader.swift */; };
 		46D9381C2ABAECB70096A221 /* ProfileRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9381B2ABAECB70096A221 /* ProfileRoute.swift */; };
 		46D9381E2ABAECBE0096A221 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9381D2ABAECBE0096A221 /* ProfileScreen.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
@@ -170,6 +171,7 @@
 		46D857772ACFF2D200BE74DA /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
 		46D857792ACFFC7C00BE74DA /* ScrollViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewExt.swift; sourceTree = "<group>"; };
 		46D8577B2AD0560B00BE74DA /* DisabledAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabledAppButton.swift; sourceTree = "<group>"; };
+		46D8577D2AD0787E00BE74DA /* AddAreaHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaHeader.swift; sourceTree = "<group>"; };
 		46D9381B2ABAECB70096A221 /* ProfileRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRoute.swift; sourceTree = "<group>"; };
 		46D9381D2ABAECBE0096A221 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -494,6 +496,7 @@
 			isa = PBXGroup;
 			children = (
 				46D857712ACFF16600BE74DA /* AddAreaItem.swift */,
+				46D8577D2AD0787E00BE74DA /* AddAreaHeader.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -779,6 +782,7 @@
 				467BECCF2AC017CF00F74482 /* PrimaryTabs.swift in Sources */,
 				461F7C772AA8E371003791CF /* DetailScreen.swift in Sources */,
 				468B876A2ABC45C6001BBEB1 /* DiaryScreen.swift in Sources */,
+				46D8577E2AD0787E00BE74DA /* AddAreaHeader.swift in Sources */,
 				469D0FBE2AB1DE330060CE95 /* WhiteButton.swift in Sources */,
 				46059D262AC4037E00DC5015 /* TasksView.swift in Sources */,
 				461F7C682AA88B80003791CF /* StringExt.swift in Sources */,
