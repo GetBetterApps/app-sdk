@@ -30,7 +30,7 @@ struct AppButton: View {
         } label: {
             if (isLoading) {
                 ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: Color.textButtonEnabled))
+                    .progressViewStyle(CircularProgressViewStyle(tint: Color.textLight))
                     .frame(
                         width: UIScreen.screenWidth * 0.8,
                         height: 42,

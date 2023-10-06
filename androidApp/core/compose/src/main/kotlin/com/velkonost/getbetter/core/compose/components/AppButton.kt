@@ -56,7 +56,7 @@ fun AppButton(
     ) {
         if (isLoading) {
             CircularProgressIndicator(
-                modifier = modifier.size(24.dp),
+                modifier = Modifier.size(24.dp),
                 color = colorResource(resource = SharedR.colors.text_light)
             )
         } else {

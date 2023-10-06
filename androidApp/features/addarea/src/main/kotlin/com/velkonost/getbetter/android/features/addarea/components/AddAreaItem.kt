@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.android.features.addarea.components
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -34,6 +35,7 @@ import dev.icerock.moko.resources.compose.painterResource
 fun AddAreaItem(
     modifier: Modifier = Modifier,
     item: AreaUI,
+    onAddAreaClick: (String) -> Unit
 ) {
 
     val haptic = LocalHapticFeedback.current
@@ -148,14 +150,15 @@ fun AddAreaItem(
 
 
             if (item.termsOfMembership == TermsOfMembership.Allow) {
+                Log.d("keke", item.isLoading.toString())
                 AppButton(
                     modifier = modifier
                         .padding(top = 16.dp)
                         .align(Alignment.CenterHorizontally),
                     labelText = "Add Area",
-                    isLoading = false
+                    isLoading = item.isLoading
                 ) {
-
+                    onAddAreaClick(item.id)
                 }
 
             } else {

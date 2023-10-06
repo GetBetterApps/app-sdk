@@ -4,6 +4,7 @@ import com.velkonost.getbetter.shared.core.util.randomUUID
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.auth
 import dev.gitlive.firebase.firestore.Direction
+import dev.gitlive.firebase.firestore.DocumentReference
 import dev.gitlive.firebase.firestore.DocumentSnapshot
 import dev.gitlive.firebase.firestore.FirebaseFirestore
 import dev.gitlive.firebase.firestore.Timestamp
@@ -110,8 +111,34 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
     }
 
 
-    override fun addUserArea(area: Area): Flow<ResultState<Unit>> {
-        TODO("Not yet implemented")
+    override fun addUserArea(areaId: String): Flow<ResultState<String>> = flowRequest {
+        val userId = Firebase.auth.currentUser?.uid
+
+        if (userId != null) {
+            val userRef = db.collection("users").document(userId)
+            val area = db.collection("areas").document(areaId).get()
+
+            val areaMembers: List<DocumentReference> =
+                area.get<List<DocumentReference>>(Area.membersListPropertyName).plus(userRef)
+            val usersData = area.get<Map<String, Float>>(Area.usersDataPropertyName).toMutableMap()
+
+            if (!usersData.containsKey(userId)) {
+                usersData[userId] = 0f
+            }
+
+            val data = hashMapOf(
+                Area.membersListPropertyName to areaMembers,
+                Area.usersDataPropertyName to usersData
+            )
+
+            db.collection("areas")
+                .document(areaId)
+                .set(data, merge = true)
+
+            return@flowRequest areaId
+        }
+
+        throw Exception()
     }
 
     override suspend fun fetchPublicAreasToAdd(

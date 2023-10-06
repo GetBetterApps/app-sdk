@@ -3,11 +3,16 @@ package com.velkonost.getbetter.shared.features.addarea.presentation
 import AreasRepository
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.ResultState
+import com.velkonost.getbetter.shared.core.util.isLoading
+import com.velkonost.getbetter.shared.core.util.onFailure
+import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaAction
+import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaClick
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaNavigation
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaViewState
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.LoadNextPage
+import com.velkonost.getbetter.shared.features.addarea.presentation.model.TermsOfMembership
 import com.velkonost.getbetter.shared.features.addarea.presentation.model.getUserTermsOfMembership
 import com.velkonost.getbetter.shared.features.addarea.presentation.model.toUI
 import dev.gitlive.firebase.Firebase
@@ -29,6 +34,7 @@ internal constructor(
 
     override fun dispatch(action: AddAreaAction) = when (action) {
         is LoadNextPage -> fetchAreas()
+        is AddAreaClick -> obtainAddAreaClick(action.areaId)
     }
 
     private fun fetchAreas() {
@@ -64,6 +70,37 @@ internal constructor(
             }
 
             emit(viewState.value.copy(isLoading = false))
+        }
+    }
+
+    private fun obtainAddAreaClick(areaId: String) {
+        launchJob {
+            areasRepository.addUserArea(areaId)
+                .collect { result ->
+                    with(result) {
+                        isLoading {
+                            val items = viewState.value.items.toMutableList()
+                            val areaIndex = items.indexOfFirst { area -> area.id == areaId }
+                            items[areaIndex] = items[areaIndex].copy(isLoading = it)
+
+                            emit(viewState.value.copy(items = items))
+                        }
+
+                        onSuccess {
+                            val items = viewState.value.items.toMutableList()
+                            val areaIndex = items.indexOfFirst { area -> area.id == it }
+                            items[areaIndex] = items[areaIndex].copy(
+                                termsOfMembership = TermsOfMembership.AlreadyJoined
+                            )
+
+                            emit(viewState.value.copy(items = items))
+                        }
+
+                        onFailure {
+                            println()
+                        }
+                    }
+                }
         }
     }
 }

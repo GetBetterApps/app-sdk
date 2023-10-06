@@ -7,11 +7,12 @@ import model.AreaMember
 
 data class AreaUI(
     val id: String,
-    val name: String,
+    var name: String,
     val description: String,
     val emojiRes: ImageResource,
     val members: List<AreaMember>,
-    val termsOfMembership: TermsOfMembership
+    var termsOfMembership: TermsOfMembership,
+    var isLoading: Boolean = false
 )
 
 fun Area.toUI(termsOfMembership: TermsOfMembership) =

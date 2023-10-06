@@ -18,6 +18,7 @@ import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
 import com.velkonost.getbetter.core.compose.extensions.fadingEdge
 import com.velkonost.getbetter.shared.features.addarea.presentation.AddAreaViewModel
+import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaClick
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.LoadNextPage
 
 @Composable
@@ -41,8 +42,10 @@ fun AddAreaScreen(
                     contentPadding = PaddingValues(bottom = 140.dp)
                 ) {
 
-                    items(state.items) { item ->
-                        AddAreaItem(item = item)
+                    items(state.items, key = { area -> area.id }) { item ->
+                        AddAreaItem(item = item) {
+                            viewModel.dispatch(AddAreaClick(it))
+                        }
                     }
 
                     if (state.isLoading) {

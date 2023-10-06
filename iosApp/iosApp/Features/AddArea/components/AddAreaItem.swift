@@ -13,9 +13,11 @@ import SharedSDK
 struct AddAreaItem: View {
     
     private let item: AreaUI
+    private let onAddAreaClick: (String) -> Void
     
-    init(item: AreaUI) {
+    init(item: AreaUI, onAddAreaClick: @escaping (String) -> Void) {
         self.item = item
+        self.onAddAreaClick = onAddAreaClick
     }
     
     var body: some View {
@@ -91,9 +93,9 @@ struct AddAreaItem: View {
                 if item.termsOfMembership == TermsOfMembership.allow {
                     AppButton(
                         labelText: "Add Area",
-                        isLoading: false
+                        isLoading: item.isLoading
                     ) {
-                        
+                        onAddAreaClick(item.id)
                     }
                     .padding(.top, 16)
                 } else {

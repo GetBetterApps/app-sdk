@@ -23,7 +23,7 @@ interface AreasRepository {
 
     fun fetchUserAreas(): Flow<ResultState<List<Area>>>
 
-    fun addUserArea(area: Area): Flow<ResultState<Unit>>
+    fun addUserArea(areaId: String): Flow<ResultState<String>>
 
     suspend fun fetchPublicAreasToAdd(
         perPage: Int, lastElement: DocumentSnapshot?
