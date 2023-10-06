@@ -1,10 +1,10 @@
-import com.velkonost.getbetter.shared.core.model.response.FirestorePaginationInfo
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.flowRequest
 import com.velkonost.getbetter.shared.core.util.randomUUID
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.auth
 import dev.gitlive.firebase.firestore.Direction
+import dev.gitlive.firebase.firestore.DocumentSnapshot
 import dev.gitlive.firebase.firestore.FirebaseFirestore
 import dev.gitlive.firebase.firestore.Timestamp
 import dev.gitlive.firebase.firestore.orderBy
@@ -115,29 +115,42 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
     }
 
     override suspend fun fetchPublicAreasToAdd(
-        perPage: Int, pagination: FirestorePaginationInfo
+        perPage: Int, lastElement: DocumentSnapshot?
     ): ResultState<AreasPage> =
         kotlin.runCatching {
+            val userId = Firebase.auth.currentUser?.uid
+
             var dataRequest = db.collection("areas")
                 .where(Area.isActivePropertyName, true)
                 .where(Area.isPrivatePropertyName, false)
-//            .where(Area.membersListPropertyName, arrayContains = userRef)
                 .orderBy(Area.createdDatePropertyName, direction = Direction.DESCENDING)
                 .limit(perPage)
 
-            pagination.lastVisible?.let {
-                dataRequest = dataRequest.startAfter(pagination.lastVisible!!)
+            lastElement?.let {
+                dataRequest = dataRequest.startAfter(it)
             }
 
             val data = dataRequest.get()
 
             val lastVisible = data.documents.last()
+            val userAreasIds = mutableListOf<String>()
 
             val areas = data.documents.map { areaDocument ->
-                areaDocument.toAreaModel()
+                val model = areaDocument.toAreaModel()
+
+                if (model.membersList.any { it.userId == userId }) {
+                    userAreasIds.add(model.id)
+                }
+
+                model
             }
 
-            ResultState.Success(AreasPage(areas, FirestorePaginationInfo(lastVisible)))
+            ResultState.Success(
+                AreasPage(
+                    items = areas,
+                    lastElement = lastVisible
+                )
+            )
         }.onFailure {
             ResultState.Failure(it)
         }.getOrElse {

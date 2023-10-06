@@ -14,10 +14,8 @@ android {
 
 dependencies {
     implementation(libs.androidx.compose.paging)
-    implementation(libs.multiplatform.paging)
 
     implementation(projects.shared.core.util)
-    implementation(projects.shared.features.areas.api)
     implementation(projects.shared.features.addarea.presentation)
 
     implementation(projects.shared.resources)

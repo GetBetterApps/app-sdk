@@ -1,5 +1,5 @@
-import com.velkonost.getbetter.shared.core.model.response.FirestorePaginationInfo
 import com.velkonost.getbetter.shared.core.util.ResultState
+import dev.gitlive.firebase.firestore.DocumentSnapshot
 import kotlinx.coroutines.flow.Flow
 import model.Area
 import model.pagination.AreasPage
@@ -26,6 +26,6 @@ interface AreasRepository {
     fun addUserArea(area: Area): Flow<ResultState<Unit>>
 
     suspend fun fetchPublicAreasToAdd(
-        perPage: Int, pagination: FirestorePaginationInfo
+        perPage: Int, lastElement: DocumentSnapshot?
     ): ResultState<AreasPage>
 }

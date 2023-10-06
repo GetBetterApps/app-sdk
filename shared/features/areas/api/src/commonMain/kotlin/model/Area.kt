@@ -43,8 +43,7 @@ data class Area(
     val isActive: Boolean,
 
     @SerialName(isPrivatePropertyName)
-    val isPrivate: Boolean
-
+    val isPrivate: Boolean,
 ) {
     companion object {
         const val idPropertyName = "id"

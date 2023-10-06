@@ -1,25 +1,18 @@
 package com.velkonost.getbetter.shared.features.addarea.presentation
 
 import AreasRepository
-import com.kuuurt.paging.multiplatform.Pager
-import com.kuuurt.paging.multiplatform.PagingData
-import com.kuuurt.paging.multiplatform.PagingResult
-import com.kuuurt.paging.multiplatform.helpers.cachedIn
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
-import com.velkonost.getbetter.shared.core.model.response.FirestorePaginationInfo
+import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.ResultState
-import com.velkonost.getbetter.shared.core.util.extension.loadNextPage
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaAction
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaNavigation
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaViewState
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.LoadNextPage
-import com.velkonost.getbetter.shared.features.addarea.presentation.model.PagingConfig
-import com.velkonost.getbetter.shared.features.addarea.presentation.model.perPage
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
-import model.Area
-import model.pagination.PaginationParams
+import com.velkonost.getbetter.shared.features.addarea.presentation.model.getUserTermsOfMembership
+import com.velkonost.getbetter.shared.features.addarea.presentation.model.toUI
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.auth.auth
+import dev.gitlive.firebase.firestore.DocumentSnapshot
 
 class AddAreaViewModel
 internal constructor(
@@ -28,51 +21,49 @@ internal constructor(
     initialState = AddAreaViewState()
 ) {
 
-    private val _pager = Pager(
-        clientScope = vmScope,
-        config = PagingConfig,
-        initialKey = FirestorePaginationInfo()
-    ) { key, _ ->
-        val params = PaginationParams(perPage, pagination = key)
+    private val _areasPagingConfig = PagingConfig<DocumentSnapshot>()
 
-        var pagingResult = PagingResult(
-            items = emptyList<Area>(),
-            currentKey = params.pagination,
-            prevKey = { null },
-            nextKey = { null },
-        )
-
-        val result = areasRepository.fetchPublicAreasToAdd(params.perPage, params.pagination)
-        if (result is ResultState.Success) {
-            pagingResult = PagingResult(
-                items = result.data.items,
-                currentKey = params.pagination,
-                prevKey = { null },
-                nextKey = {
-                    if (result.data.items.isNotEmpty()) result.data.pagination
-                    else null
-                }
-            )
-        }
-
-        pagingResult
+    init {
+        fetchAreas()
     }
-
-
-    @NativeCoroutines
-    val pagingData: Flow<PagingData<Area>>
-        get() = _pager.pagingData
-            .distinctUntilChanged()
-            .cachedIn(vmScope)
 
     override fun dispatch(action: AddAreaAction) = when (action) {
-        is LoadNextPage -> obtainLoadNextPage()
+        is LoadNextPage -> fetchAreas()
     }
 
-    private fun obtainLoadNextPage() {
+    private fun fetchAreas() {
+        if (_areasPagingConfig.lastPageReached) return
+
         launchJob {
-            _pager.loadNextPage()
+            emit(viewState.value.copy(isLoading = true))
+
+            val result = areasRepository.fetchPublicAreasToAdd(
+                perPage = _areasPagingConfig.pageSize,
+                lastElement = _areasPagingConfig.lastElement
+            )
+
+            if (result is ResultState.Success) {
+                if (result.data.items.isEmpty()) {
+                    _areasPagingConfig.lastPageReached = true
+                }
+
+                _areasPagingConfig.lastElement = result.data.lastElement
+
+                val userId = Firebase.auth.currentUser!!.uid
+                val items = viewState.value.items.plus(
+                    result.data.items.map {
+                        val areaTermsOfMembership = it.getUserTermsOfMembership(userId)
+                        it.toUI(areaTermsOfMembership)
+                    }
+                )
+                emit(viewState.value.copy(items = items))
+            }
+
+            if (result is ResultState.Failure) {
+                _areasPagingConfig.lastPageReached = true
+            }
+
+            emit(viewState.value.copy(isLoading = false))
         }
     }
-
 }

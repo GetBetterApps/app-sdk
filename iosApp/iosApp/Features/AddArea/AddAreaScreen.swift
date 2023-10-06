@@ -9,32 +9,43 @@
 import Foundation
 import SwiftUI
 import SharedSDK
+import KMMViewModelSwiftUI
 
 struct AddAreaScreen: View {
     
     @StateObject var viewModel = AddAreaViewModelDelegate()
     
     var body: some View {
-        @State var isLoading = viewModel.state.isLoading
+        @State var state = viewModel.state
+//        @State var items = state.items
+        
         ZStack {
-            if isLoading {
+            if state.isLoading && state.items.isEmpty {
                 Loader()
                     .frame(alignment: .center)
             } else {
                 
                 ScrollView(showsIndicators: false) {
                     LazyVStack(spacing: 0) {
-                        ForEach(viewModel.pagingData, id: \.self) { item in
+                        ForEach(state.items, id: \.self) { item in
                             AddAreaItem(item: item)
                                 .onAppear {
-                                    checkPaginationThreshold(currentItemId: item.id)
+                                    let currentItemId = item.id
+                                    let data = viewModel.state.items
+                                    
+                                    let thresholdIndex = data.index(data.endIndex, offsetBy: -5)
+                                    
+                                    if data.firstIndex(where: { $0.id == currentItemId })! >= thresholdIndex && !state.isLoading {
+                                        viewModel.dispatch(action: LoadNextPage())
+                                    }
+//                                    checkPaginationThreshold(currentItemId: item.id)
                                 }
                         }
                     }
                     .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
                     
                     Loader()
-                        .opacity(viewModel.paginationState == .loading ? 1 : 0)
+                        .opacity(state.isLoading ? 1 : 0)
                 }
                 .fadingEdge()
               
@@ -49,13 +60,13 @@ struct AddAreaScreen: View {
 
 extension AddAreaScreen {
     func checkPaginationThreshold(currentItemId: String) {
-        let data = viewModel.pagingData
-        
-        let thresholdIndex = data.index(data.endIndex, offsetBy: -5)
-        
-        if data.firstIndex(where: { $0.id == currentItemId })! >= thresholdIndex && viewModel.paginationState != .loading {
-            viewModel.paginationState = .loading
-            viewModel.dispatch(action: LoadNextPage())
-        }
+//        let data = viewModel.state.items
+//        
+//        let thresholdIndex = data.index(data.endIndex, offsetBy: -5)
+//        
+//        if data.firstIndex(where: { $0.id == currentItemId })! >= thresholdIndex && viewModel.paginationState != .loading {
+//            viewModel.paginationState = .loading
+//            viewModel.dispatch(action: LoadNextPage())
+//        }
     }
 }

@@ -26,7 +26,6 @@ kotlin {
 
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.multiplatform.paging)
 
                 api(projects.shared.core.model)
                 implementation(projects.shared.resources)

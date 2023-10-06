@@ -24,16 +24,16 @@ import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.DisabledAppButton
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
-import com.velkonost.getbetter.shared.core.model.Emoji
+import com.velkonost.getbetter.shared.features.addarea.presentation.model.AreaUI
+import com.velkonost.getbetter.shared.features.addarea.presentation.model.TermsOfMembership
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
-import model.Area
 
 @Composable
 fun AddAreaItem(
     modifier: Modifier = Modifier,
-    item: Area
+    item: AreaUI,
 ) {
 
     val haptic = LocalHapticFeedback.current
@@ -51,16 +51,14 @@ fun AddAreaItem(
     ) {
         Column {
             Row {
-                if (item.emojiId != null) {
-                    Image(
-                        modifier = modifier
-                            .size(64.dp)
-                            .padding(8.dp),
-                        painter = painterResource(imageResource = Emoji.getIconById(item.emojiId!!)),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop
-                    )
-                }
+                Image(
+                    modifier = modifier
+                        .size(64.dp)
+                        .padding(8.dp),
+                    painter = painterResource(imageResource = item.emojiRes),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop
+                )
 
                 Column(
                     modifier = modifier
@@ -148,22 +146,33 @@ fun AddAreaItem(
                 }
             }
 
-            AppButton(
-                modifier = modifier
-                    .padding(top = 16.dp)
-                    .align(Alignment.CenterHorizontally),
-                labelText = "Add Area",
-                isLoading = false
-            ) {
 
+            if (item.termsOfMembership == TermsOfMembership.Allow) {
+                AppButton(
+                    modifier = modifier
+                        .padding(top = 16.dp)
+                        .align(Alignment.CenterHorizontally),
+                    labelText = "Add Area",
+                    isLoading = false
+                ) {
+
+                }
+
+            } else {
+                DisabledAppButton(
+                    modifier = modifier
+                        .padding(top = 16.dp)
+                        .align(Alignment.CenterHorizontally),
+                    labelText =
+                    when (item.termsOfMembership) {
+                        TermsOfMembership.AlreadyJoined -> "Already added"
+                        TermsOfMembership.LowLevel -> "Low level"
+                        else -> ""
+                    }
+                )
             }
 
-            DisabledAppButton(
-                modifier = modifier
-                    .padding(top = 16.dp)
-                    .align(Alignment.CenterHorizontally),
-                labelText = "Already added",
-            )
+
         }
 
     }

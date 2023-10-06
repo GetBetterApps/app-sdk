@@ -9,18 +9,15 @@
 import Foundation
 import KMPNativeCoroutinesAsync
 import SharedSDK
-
+ 
 @MainActor
 class AddAreaViewModelDelegate: ObservableObject {
     
     @LazyKoin private var delegate: SharedSDK.AddAreaViewModel
     
-    @Published var state = AddAreaViewState(isLoading: false, items: [])
-    @Published var pagingData = [Area]()
-    @Published var paginationState = PaginationState.loading
+    @Published var state = AddAreaViewState(isLoading: false, items: [], loadMorePrefetch: 0)
     
-    private var viewStateStream: Task<(), Error>? = nil
-    private var pagingDataStream: Task<(), Error>? = nil
+    private var stateStream: Task<(), Error>? = nil
     
     
     func dispatch(action: AddAreaAction) {
@@ -29,25 +26,15 @@ class AddAreaViewModelDelegate: ObservableObject {
     
     func onAppear() {
         resumeViewStateStream()
-        resumePagingDataStream()
     }
     
     func onDisappear() {
-        viewStateStream?.cancel()
-        pagingDataStream?.cancel()
+        stateStream?.cancel()
     }
     
-    private func resumePagingDataStream() {
-        pagingDataStream = Task {
-            for try await data in asyncSequence(for: delegate.pagingData) {
-                paginationState = .idle
-                pagingData = data.uniqued()
-            }
-        }
-    }
     
     private func resumeViewStateStream() {
-        viewStateStream = Task {
+        stateStream = Task {
             for try await data in asyncSequence(for: delegate.viewState) {
                 state = data as! AddAreaViewState
             }

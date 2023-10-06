@@ -63,7 +63,6 @@ ktor = "2.3.3"
 realm = "1.9.0"
 rickclephas-nativecoroutines = "1.0.0-ALPHA-18"
 rickclephas-kmm-viewmodel = "1.0.0-ALPHA-14"
-multiplatform-paging = "0.6.2"
 
 testing-arch-core = "2.2.0"
 testing-junit = "4.13.2"
@@ -173,7 +172,6 @@ realm-kotlin = { module = "io.realm.kotlin:library-base", version.ref = "realm" 
 libres-compose = { module = "io.github.skeptick.libres:libres-compose", version.ref = "libres" }
 
 rickclephas-kmm-viewmodel = { module = "com.rickclephas.kmm:kmm-viewmodel-core", version.ref = "rickclephas-kmm-viewmodel" }
-multiplatform-paging = { module = "io.github.kuuuurt:multiplatform-paging", version.ref = "multiplatform-paging" }
 
 firebase-android-core = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-android-bom" }
 firebase-android-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }

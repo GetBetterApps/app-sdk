@@ -12,16 +12,16 @@ import SharedSDK
 
 struct AddAreaItem: View {
     
-    private let item: Area
+    private let item: AreaUI
     
-    init(item: Area) {
+    init(item: AreaUI) {
         self.item = item
     }
     
     var body: some View {
         PrimaryBox {
             HStack {
-                Image(uiImage: Emoji.companion.getIconById(id: item.emojiId as! Int32).toUIImage()!)
+                Image(uiImage: item.emojiRes.toUIImage()!)
                     .resizable()
                     .padding(8)
                     .frame(width: 64, height: 64)
