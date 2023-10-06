@@ -47,13 +47,7 @@ struct AreasView: View {
                     .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
                     
                 }
-                .mask(LinearGradient(gradient: Gradient(stops: [
-                    .init(color: .clear, location: 0),
-                    .init(color: .black, location: 0.1),
-                    .init(color: .black, location: 0.75),
-                    .init(color: .clear, location: 1)
-                ]), startPoint: .top, endPoint: .bottom))
-                
+                .fadingEdge()
                 
                 VStack(alignment: .trailing) {
                     Spacer()

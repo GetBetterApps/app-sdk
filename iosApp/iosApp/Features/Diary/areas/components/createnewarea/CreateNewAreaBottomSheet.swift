@@ -110,9 +110,10 @@ struct CreateNewAreaBottomSheet: View {
             }.padding(20)
             
             
-        }.edgesIgnoringSafeArea(.all)
-            .onTapGesture {
-                self.endTextEditing()
-            }
+        }
+        .edgesIgnoringSafeArea(.all)
+        .onTapGesture {
+            self.endTextEditing()
+        }
     }
 }

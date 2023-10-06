@@ -14,15 +14,10 @@ import KMPNativeCoroutinesAsync
 
 struct DiaryScreen: View {
     
-    
     @StateViewModel var viewModel: DiaryViewModel
     @State private var eventsObserver: Task<(), Error>? = nil
-    
     @State private var showingCreateNewAreaSheet = false
-    
     @State private var selectedPage: Int = 0
-    
-    
     
     var body: some View {
         @State var state = viewModel.viewStateValue as! DiaryViewState
@@ -78,23 +73,29 @@ struct DiaryScreen: View {
             }
         }
         .onAppear {
-            if eventsObserver == nil {
-                eventsObserver = Task {
-                    for try await event in asyncSequence(for: viewModel.events) {
-                        switch(event) {
-                        case _ as CreateNewAreaEventCreatedSuccess: do {
-                            showingCreateNewAreaSheet = false
-                        }
-                        default:
-                            break
-                        }
-                    }
-                }
-            }
+            observeEvents()
         }
         .onDisappear {
             eventsObserver?.cancel()
             eventsObserver = nil
+        }
+    }
+}
+
+extension DiaryScreen {
+    func observeEvents() {
+        if eventsObserver == nil {
+            eventsObserver = Task {
+                for try await event in asyncSequence(for: viewModel.events) {
+                    switch(event) {
+                    case _ as CreateNewAreaEventCreatedSuccess: do {
+                        showingCreateNewAreaSheet = false
+                    }
+                    default:
+                        break
+                    }
+                }
+            }
         }
     }
 }

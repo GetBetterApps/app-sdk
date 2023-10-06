@@ -14,7 +14,6 @@ struct AddAreaScreen: View {
     
     @StateObject var viewModel = AddAreaViewModelDelegate()
     
-    
     var body: some View {
         @State var isLoading = viewModel.state.isLoading
         ZStack {
@@ -28,14 +27,7 @@ struct AddAreaScreen: View {
                         ForEach(viewModel.pagingData, id: \.self) { item in
                             AddAreaItem(item: item)
                                 .onAppear {
-                                    let data = viewModel.pagingData
-                                    
-                                    let thresholdIndex = data.index(data.endIndex, offsetBy: -5)
-                                    
-                                    if data.firstIndex(where: { $0.id == item.id })! >= thresholdIndex && viewModel.paginationState != .loading {
-                                        viewModel.paginationState = .loading
-                                        viewModel.dispatch(action: LoadNextPage())
-                                    }
+                                    checkPaginationThreshold(currentItemId: item.id)
                                 }
                         }
                     }
@@ -44,17 +36,26 @@ struct AddAreaScreen: View {
                     Loader()
                         .opacity(viewModel.paginationState == .loading ? 1 : 0)
                 }
-                .mask(LinearGradient(gradient: Gradient(stops: [
-                    .init(color: .clear, location: 0),
-                    .init(color: .black, location: 0.1),
-                    .init(color: .black, location: 0.75),
-                    .init(color: .clear, location: 1)
-                ]), startPoint: .top, endPoint: .bottom))
+                .fadingEdge()
               
             }
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
         .onAppear(perform: viewModel.onAppear)
         .onDisappear(perform: viewModel.onDisappear)
+    }
+}
+
+
+extension AddAreaScreen {
+    func checkPaginationThreshold(currentItemId: String) {
+        let data = viewModel.pagingData
+        
+        let thresholdIndex = data.index(data.endIndex, offsetBy: -5)
+        
+        if data.firstIndex(where: { $0.id == currentItemId })! >= thresholdIndex && viewModel.paginationState != .loading {
+            viewModel.paginationState = .loading
+            viewModel.dispatch(action: LoadNextPage())
+        }
     }
 }
