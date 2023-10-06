@@ -8,10 +8,12 @@ import com.kuuurt.paging.multiplatform.helpers.cachedIn
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import com.velkonost.getbetter.shared.core.model.response.FirestorePaginationInfo
 import com.velkonost.getbetter.shared.core.util.ResultState
+import com.velkonost.getbetter.shared.core.util.extension.loadNextPage
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaAction
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaNavigation
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaViewState
+import com.velkonost.getbetter.shared.features.addarea.presentation.contract.LoadNextPage
 import com.velkonost.getbetter.shared.features.addarea.presentation.model.PagingConfig
 import com.velkonost.getbetter.shared.features.addarea.presentation.model.perPage
 import kotlinx.coroutines.flow.Flow
@@ -56,6 +58,7 @@ internal constructor(
         pagingResult
     }
 
+
     @NativeCoroutines
     val pagingData: Flow<PagingData<Area>>
         get() = _pager.pagingData
@@ -63,7 +66,13 @@ internal constructor(
             .cachedIn(vmScope)
 
     override fun dispatch(action: AddAreaAction) = when (action) {
-        else -> {}
+        is LoadNextPage -> obtainLoadNextPage()
+    }
+
+    private fun obtainLoadNextPage() {
+        launchJob {
+            _pager.loadNextPage()
+        }
     }
 
 }

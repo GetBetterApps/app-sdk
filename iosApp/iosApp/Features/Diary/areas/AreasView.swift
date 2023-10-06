@@ -57,7 +57,7 @@ struct AreasView: View {
                 
                 VStack(alignment: .trailing) {
                     Spacer()
-                    AddAreaItem {
+                    AddAreaButton {
                         addExistingAreaClick()
                     } createNewClick: {
                         createNewAreaClick()

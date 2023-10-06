@@ -24,7 +24,7 @@
 		46059D242AC4037500DC5015 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D232AC4037500DC5015 /* NotesView.swift */; };
 		46059D262AC4037E00DC5015 /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D252AC4037E00DC5015 /* TasksView.swift */; };
 		46059D292AC405BA00DC5015 /* AreaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D282AC405BA00DC5015 /* AreaItem.swift */; };
-		46059D2B2AC409A900DC5015 /* AddAreaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D2A2AC409A900DC5015 /* AddAreaItem.swift */; };
+		46059D2B2AC409A900DC5015 /* AddAreaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D2A2AC409A900DC5015 /* AddAreaButton.swift */; };
 		46059D2D2AC41DB500DC5015 /* ExpandableButtonPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D2C2AC41DB500DC5015 /* ExpandableButtonPanel.swift */; };
 		461D21EC2AA8EC71007E84CE /* DetailRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21EB2AA8EC71007E84CE /* DetailRoute.swift */; };
 		461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */; };
@@ -49,6 +49,8 @@
 		4667C90A2AC59A9B00BAA9DD /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C9092AC59A9B00BAA9DD /* MultilineTextField.swift */; };
 		4667C90C2AC5A89000BAA9DD /* RequiredLevelRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C90B2AC5A89000BAA9DD /* RequiredLevelRow.swift */; };
 		4667C90E2AC5BA5900BAA9DD /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C90D2AC5BA5900BAA9DD /* Loader.swift */; };
+		466B497D2ACFF06C00AD3F6E /* AddAreaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B497C2ACFF06C00AD3F6E /* AddAreaScreen.swift */; };
+		466B497F2ACFF07300AD3F6E /* AddAreaRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B497E2ACFF07300AD3F6E /* AddAreaRoute.swift */; };
 		466C5CCB2AB73240002C089C /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C5CCA2AB73240002C089C /* BottomBar.swift */; };
 		4678E4482AAC6A67000B88E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4678E4472AAC6A67000B88E8 /* AppDelegate.swift */; };
 		4678E44C2AAC6CF8000B88E8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4678E44B2AAC6CF8000B88E8 /* GoogleService-Info.plist */; };
@@ -77,6 +79,10 @@
 		46C10D252AB4741100E62846 /* SwitchRegisteringText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C10D242AB4741100E62846 /* SwitchRegisteringText.swift */; };
 		46CDB56C2AADB45E00800096 /* AuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDB56B2AADB45E00800096 /* AuthScreen.swift */; };
 		46CDB56E2AADB46400800096 /* AuthRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDB56D2AADB46400800096 /* AuthRoute.swift */; };
+		46D857722ACFF16600BE74DA /* AddAreaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D857712ACFF16600BE74DA /* AddAreaItem.swift */; };
+		46D857742ACFF1C500BE74DA /* AddAreaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D857732ACFF1C500BE74DA /* AddAreaViewModel.swift */; };
+		46D857762ACFF23100BE74DA /* PaginationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D857752ACFF23100BE74DA /* PaginationState.swift */; };
+		46D857782ACFF2D200BE74DA /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D857772ACFF2D200BE74DA /* ArrayExt.swift */; };
 		46D9381C2ABAECB70096A221 /* ProfileRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9381B2ABAECB70096A221 /* ProfileRoute.swift */; };
 		46D9381E2ABAECBE0096A221 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9381D2ABAECBE0096A221 /* ProfileScreen.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
@@ -101,7 +107,7 @@
 		46059D232AC4037500DC5015 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		46059D252AC4037E00DC5015 /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
 		46059D282AC405BA00DC5015 /* AreaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaItem.swift; sourceTree = "<group>"; };
-		46059D2A2AC409A900DC5015 /* AddAreaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaItem.swift; sourceTree = "<group>"; };
+		46059D2A2AC409A900DC5015 /* AddAreaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaButton.swift; sourceTree = "<group>"; };
 		46059D2C2AC41DB500DC5015 /* ExpandableButtonPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableButtonPanel.swift; sourceTree = "<group>"; };
 		461D21EB2AA8EC71007E84CE /* DetailRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRoute.swift; sourceTree = "<group>"; };
 		461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifecycleAwareObservableObject.swift; sourceTree = "<group>"; };
@@ -126,6 +132,8 @@
 		4667C9092AC59A9B00BAA9DD /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		4667C90B2AC5A89000BAA9DD /* RequiredLevelRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequiredLevelRow.swift; sourceTree = "<group>"; };
 		4667C90D2AC5BA5900BAA9DD /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		466B497C2ACFF06C00AD3F6E /* AddAreaScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaScreen.swift; sourceTree = "<group>"; };
+		466B497E2ACFF07300AD3F6E /* AddAreaRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaRoute.swift; sourceTree = "<group>"; };
 		466C5CCA2AB73240002C089C /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		4678E4472AAC6A67000B88E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4678E44B2AAC6CF8000B88E8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -154,6 +162,10 @@
 		46C10D242AB4741100E62846 /* SwitchRegisteringText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchRegisteringText.swift; sourceTree = "<group>"; };
 		46CDB56B2AADB45E00800096 /* AuthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreen.swift; sourceTree = "<group>"; };
 		46CDB56D2AADB46400800096 /* AuthRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRoute.swift; sourceTree = "<group>"; };
+		46D857712ACFF16600BE74DA /* AddAreaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaItem.swift; sourceTree = "<group>"; };
+		46D857732ACFF1C500BE74DA /* AddAreaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaViewModel.swift; sourceTree = "<group>"; };
+		46D857752ACFF23100BE74DA /* PaginationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationState.swift; sourceTree = "<group>"; };
+		46D857772ACFF2D200BE74DA /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
 		46D9381B2ABAECB70096A221 /* ProfileRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRoute.swift; sourceTree = "<group>"; };
 		46D9381D2ABAECBE0096A221 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -244,7 +256,7 @@
 			children = (
 				4667C9002AC585A300BAA9DD /* createnewarea */,
 				46059D282AC405BA00DC5015 /* AreaItem.swift */,
-				46059D2A2AC409A900DC5015 /* AddAreaItem.swift */,
+				46059D2A2AC409A900DC5015 /* AddAreaButton.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -277,6 +289,7 @@
 				461F7C642AA88A39003791CF /* NavRoute.swift */,
 				461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */,
 				465C1FCB2AC1775200B7AE18 /* StorageDelegate.swift */,
+				46D857752ACFF23100BE74DA /* PaginationState.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -291,6 +304,7 @@
 				46B17E152AADF05D008C2BC4 /* ViewExt.swift */,
 				469D0FBF2AB20D5C0060CE95 /* UIScreenExt.swift */,
 				46C10D202AB46BF400E62846 /* UIPilotExt.swift */,
+				46D857772ACFF2D200BE74DA /* ArrayExt.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -298,6 +312,7 @@
 		461F7C6D2AA8D7DE003791CF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				466B497B2ACFF06000AD3F6E /* AddArea */,
 				46870C2C2AC092CB00BCBDB1 /* Splash */,
 				468B87662ABC4445001BBEB1 /* Diary */,
 				468B87652ABC443E001BBEB1 /* Calendars */,
@@ -355,6 +370,17 @@
 				46445AF92ACD5484008934B2 /* PrivateSwitch.swift */,
 			);
 			path = createnewarea;
+			sourceTree = "<group>";
+		};
+		466B497B2ACFF06000AD3F6E /* AddArea */ = {
+			isa = PBXGroup;
+			children = (
+				46D857702ACFF12600BE74DA /* components */,
+				466B497C2ACFF06C00AD3F6E /* AddAreaScreen.swift */,
+				466B497E2ACFF07300AD3F6E /* AddAreaRoute.swift */,
+				46D857732ACFF1C500BE74DA /* AddAreaViewModel.swift */,
+			);
+			path = AddArea;
 			sourceTree = "<group>";
 		};
 		46870C2C2AC092CB00BCBDB1 /* Splash */ = {
@@ -456,6 +482,14 @@
 				46CDB56D2AADB46400800096 /* AuthRoute.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		46D857702ACFF12600BE74DA /* components */ = {
+			isa = PBXGroup;
+			children = (
+				46D857712ACFF16600BE74DA /* AddAreaItem.swift */,
+			);
+			path = components;
 			sourceTree = "<group>";
 		};
 		46D9381A2ABAECA90096A221 /* Profile */ = {
@@ -683,6 +717,7 @@
 				461F7C652AA88A39003791CF /* NavRoute.swift in Sources */,
 				468B87702ABC45DB001BBEB1 /* SocialRoute.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				466B497D2ACFF06C00AD3F6E /* AddAreaScreen.swift in Sources */,
 				460054AB2ABB18FC00586767 /* MenuItem.swift in Sources */,
 				468B87722ABC45E1001BBEB1 /* SocialScreen.swift in Sources */,
 				46870C2E2AC092D300BCBDB1 /* SplashRoute.swift in Sources */,
@@ -696,6 +731,7 @@
 				4667C90A2AC59A9B00BAA9DD /* MultilineTextField.swift in Sources */,
 				46B17E162AADF05D008C2BC4 /* ViewExt.swift in Sources */,
 				460054A12ABB0D0100586767 /* SettingsButton.swift in Sources */,
+				46D857762ACFF23100BE74DA /* PaginationState.swift in Sources */,
 				464B60B42ABAF7C300369EC3 /* ProfileHeader.swift in Sources */,
 				46059D2D2AC41DB500DC5015 /* ExpandableButtonPanel.swift in Sources */,
 				468B87682ABC45BF001BBEB1 /* DiaryRoute.swift in Sources */,
@@ -709,6 +745,8 @@
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				466C5CCB2AB73240002C089C /* BottomBar.swift in Sources */,
 				461F7C6C2AA8D71F003791CF /* BaseViewModelExt.swift in Sources */,
+				46D857722ACFF16600BE74DA /* AddAreaItem.swift in Sources */,
+				46D857782ACFF2D200BE74DA /* ArrayExt.swift in Sources */,
 				46059D242AC4037500DC5015 /* NotesView.swift in Sources */,
 				461D21EC2AA8EC71007E84CE /* DetailRoute.swift in Sources */,
 				460054A92ABB18A800586767 /* AppSettings.swift in Sources */,
@@ -724,7 +762,8 @@
 				46B17E112AADE0DD008C2BC4 /* Color.swift in Sources */,
 				460054B42ABB56FF00586767 /* WisdomRoute.swift in Sources */,
 				46870C302AC092DA00BCBDB1 /* SplashScreen.swift in Sources */,
-				46059D2B2AC409A900DC5015 /* AddAreaItem.swift in Sources */,
+				466B497F2ACFF07300AD3F6E /* AddAreaRoute.swift in Sources */,
+				46059D2B2AC409A900DC5015 /* AddAreaButton.swift in Sources */,
 				460054B22ABB56F900586767 /* WisdomScreen.swift in Sources */,
 				4667C9082AC58DC800BAA9DD /* EmojiPicker.swift in Sources */,
 				46CDB56E2AADB46400800096 /* AuthRoute.swift in Sources */,
@@ -735,6 +774,7 @@
 				469D0FBE2AB1DE330060CE95 /* WhiteButton.swift in Sources */,
 				46059D262AC4037E00DC5015 /* TasksView.swift in Sources */,
 				461F7C682AA88B80003791CF /* StringExt.swift in Sources */,
+				46D857742ACFF1C500BE74DA /* AddAreaViewModel.swift in Sources */,
 				461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */,
 				460054A52ABB17BD00586767 /* SectionTitle.swift in Sources */,
 				46C10D1F2AB43FA300E62846 /* SnackBar.swift in Sources */,

@@ -51,6 +51,7 @@ struct DiaryScreen: View {
                 viewModel.dispatch(action: CreateNewAreaActionOpen())
                 showingCreateNewAreaSheet = true
             } addExistingAreaClick: {
+                viewModel.dispatch(action: AddAreaClick())
             }
                 
             default: TasksView(

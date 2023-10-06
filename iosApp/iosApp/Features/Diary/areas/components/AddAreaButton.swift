@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 import SharedSDK
 
-struct AddAreaItem: View {
+struct AddAreaButton: View {
     
     let addExistingClick: () -> Void
     let createNewClick: () -> Void
