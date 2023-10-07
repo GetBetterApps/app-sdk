@@ -26,15 +26,10 @@ fun AreaDetailScreen(
     modifier: Modifier = Modifier,
     viewModel: AreaDetailViewModel = koinViewModel(),
     modalSheetState: ModalBottomSheetState = rememberModalBottomSheetState(
-        initialValue = ModalBottomSheetValue.Expanded,
+        initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true,
     )
 ) {
-//    val modalSheetState = rememberModalBottomSheetState(
-//        initialValue = ModalBottomSheetValue.Expanded,
-//        skipHalfExpanded = true,
-//    )
-
     ModalBottomSheetLayout(
         sheetState = modalSheetState,
         sheetShape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),

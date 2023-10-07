@@ -14,16 +14,19 @@ struct AreasView: View {
     
     let items: [Area]
     let isLoading: Bool
+    let areaClick: () -> Void
     let createNewAreaClick: () -> Void
     let addExistingAreaClick: () -> Void
     
     init(
         items: [Area], isLoading: Bool,
+        areaClick: @escaping () -> Void,
         createNewAreaClick: @escaping () -> Void,
         addExistingAreaClick: @escaping () -> Void
     ) {
         self.items = items
         self.isLoading = isLoading
+        self.areaClick = areaClick
         self.createNewAreaClick = createNewAreaClick
         self.addExistingAreaClick = addExistingAreaClick
     }
@@ -40,7 +43,7 @@ struct AreasView: View {
                     LazyVStack(spacing: 0) {
                         ForEach(items, id: \.self) { item in
                             AreaItem(item: item) {
-                                
+                                areaClick()
                             }
                         }
                     }

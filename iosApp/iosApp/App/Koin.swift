@@ -26,6 +26,7 @@ extension KoinApplication {
          \.SocialViewModel,
          \.DiaryViewModel,
          \.AddAreaViewModel,
+         \.AreaDetailViewModel,
          \.CalendarsViewModel,
          \.WisdomViewModel,
          \.ProfileViewModel,

@@ -65,6 +65,8 @@
 		468B876E2ABC45D2001BBEB1 /* CalendarsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B876D2ABC45D2001BBEB1 /* CalendarsScreen.swift */; };
 		468B87702ABC45DB001BBEB1 /* SocialRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B876F2ABC45DB001BBEB1 /* SocialRoute.swift */; };
 		468B87722ABC45E1001BBEB1 /* SocialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B87712ABC45E1001BBEB1 /* SocialScreen.swift */; };
+		4696B6AE2AD15EE600DDD405 /* AreaDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4696B6AD2AD15EE600DDD405 /* AreaDetailScreen.swift */; };
+		4696B6B02AD15F6D00DDD405 /* AreaDetailVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4696B6AF2AD15F6D00DDD405 /* AreaDetailVIewModel.swift */; };
 		469D0FBE2AB1DE330060CE95 /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469D0FBD2AB1DE330060CE95 /* WhiteButton.swift */; };
 		469D0FC02AB20D5C0060CE95 /* UIScreenExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469D0FBF2AB20D5C0060CE95 /* UIScreenExt.swift */; };
 		46B17E0C2AADE081008C2BC4 /* TextExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B17E0B2AADE081008C2BC4 /* TextExt.swift */; };
@@ -151,6 +153,8 @@
 		468B876D2ABC45D2001BBEB1 /* CalendarsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarsScreen.swift; sourceTree = "<group>"; };
 		468B876F2ABC45DB001BBEB1 /* SocialRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialRoute.swift; sourceTree = "<group>"; };
 		468B87712ABC45E1001BBEB1 /* SocialScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialScreen.swift; sourceTree = "<group>"; };
+		4696B6AD2AD15EE600DDD405 /* AreaDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaDetailScreen.swift; sourceTree = "<group>"; };
+		4696B6AF2AD15F6D00DDD405 /* AreaDetailVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaDetailVIewModel.swift; sourceTree = "<group>"; };
 		469D0FBD2AB1DE330060CE95 /* WhiteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteButton.swift; sourceTree = "<group>"; };
 		469D0FBF2AB20D5C0060CE95 /* UIScreenExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenExt.swift; sourceTree = "<group>"; };
 		46B17E0B2AADE081008C2BC4 /* TextExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExt.swift; sourceTree = "<group>"; };
@@ -319,6 +323,7 @@
 		461F7C6D2AA8D7DE003791CF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				4696B6AC2AD15EDC00DDD405 /* AreaDetail */,
 				466B497B2ACFF06000AD3F6E /* AddArea */,
 				46870C2C2AC092CB00BCBDB1 /* Splash */,
 				468B87662ABC4445001BBEB1 /* Diary */,
@@ -442,6 +447,15 @@
 				468B87692ABC45C6001BBEB1 /* DiaryScreen.swift */,
 			);
 			path = Diary;
+			sourceTree = "<group>";
+		};
+		4696B6AC2AD15EDC00DDD405 /* AreaDetail */ = {
+			isa = PBXGroup;
+			children = (
+				4696B6AD2AD15EE600DDD405 /* AreaDetailScreen.swift */,
+				4696B6AF2AD15F6D00DDD405 /* AreaDetailVIewModel.swift */,
+			);
+			path = AreaDetail;
 			sourceTree = "<group>";
 		};
 		46B17E0D2AADE0AD008C2BC4 /* Theme */ = {
@@ -743,6 +757,7 @@
 				46B17E162AADF05D008C2BC4 /* ViewExt.swift in Sources */,
 				460054A12ABB0D0100586767 /* SettingsButton.swift in Sources */,
 				46D857762ACFF23100BE74DA /* PaginationState.swift in Sources */,
+				4696B6AE2AD15EE600DDD405 /* AreaDetailScreen.swift in Sources */,
 				464B60B42ABAF7C300369EC3 /* ProfileHeader.swift in Sources */,
 				46059D2D2AC41DB500DC5015 /* ExpandableButtonPanel.swift in Sources */,
 				468B87682ABC45BF001BBEB1 /* DiaryRoute.swift in Sources */,
@@ -769,6 +784,7 @@
 				46B17E1A2AADF523008C2BC4 /* AppButton.swift in Sources */,
 				461F7C712AA8D911003791CF /* HomeViewModelDelegate.swift in Sources */,
 				461F7C732AA8DC2B003791CF /* HomeRoute.swift in Sources */,
+				4696B6B02AD15F6D00DDD405 /* AreaDetailVIewModel.swift in Sources */,
 				46D9381C2ABAECB70096A221 /* ProfileRoute.swift in Sources */,
 				46B17E112AADE0DD008C2BC4 /* Color.swift in Sources */,
 				460054B42ABB56FF00586767 /* WisdomRoute.swift in Sources */,

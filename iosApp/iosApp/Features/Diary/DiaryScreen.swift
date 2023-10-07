@@ -16,7 +16,10 @@ struct DiaryScreen: View {
     
     @StateViewModel var viewModel: DiaryViewModel
     @State private var eventsObserver: Task<(), Error>? = nil
+    
     @State private var showingCreateNewAreaSheet = false
+    @State private var showingAreaDetailSheet = false
+    
     @State private var selectedPage: Int = 0
     
     var body: some View {
@@ -41,17 +44,23 @@ struct DiaryScreen: View {
             )
             case 1: AreasView(
                 items: state.areasViewState.items,
-                isLoading: state.areasViewState.isLoading
-            ) {
-                viewModel.dispatch(action: CreateNewAreaActionOpen())
-                showingCreateNewAreaSheet = true
-            } addExistingAreaClick: {
-                viewModel.dispatch(action: AddAreaClick())
-            }
-                
-            default: TasksView(
-                isLoading: state.tasksViewState.isLoading
+                isLoading: state.areasViewState.isLoading,
+                areaClick: {
+                    showingAreaDetailSheet = true
+                },
+                createNewAreaClick: {
+                    viewModel.dispatch(action: CreateNewAreaActionOpen())
+                    showingCreateNewAreaSheet = true
+                },
+                addExistingAreaClick: {
+                    viewModel.dispatch(action: AddAreaClick())
+                }
             )
+                
+            default:
+                TasksView(
+                    isLoading: state.tasksViewState.isLoading
+                )
             }
             Spacer()
             
@@ -66,11 +75,14 @@ struct DiaryScreen: View {
                 viewModel.dispatch(action: CreateNewAreaActionDescriptionChanged(value: value))
             } onRequiredLevelChanged: { value in
                 viewModel.dispatch(action: CreateNewAreaActionRequiredLevelChanged(value: Int32(value)))
-            } onPrivateChanged: { 
+            } onPrivateChanged: {
                 viewModel.dispatch(action: CreateNewAreaActionPrivateChanged())
             } onCreateClick: {
                 viewModel.dispatch(action: CreateNewAreaActionCreateClick())
             }
+        }
+        .sheet(isPresented: $showingAreaDetailSheet) {
+            AreaDetailScreen()
         }
         .onAppear {
             observeEvents()
