@@ -19,6 +19,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.velkonost.getbetter.android.features.areadetail.AreaDetailScreen
 import com.velkonost.getbetter.android.features.diary.areas.AreasView
 import com.velkonost.getbetter.android.features.diary.areas.components.createnewarea.CreateNewAreaBottomSheet
 import com.velkonost.getbetter.android.features.diary.notes.NotesView
@@ -32,6 +33,7 @@ import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaEven
 import com.velkonost.getbetter.shared.features.diary.contracts.NotesViewState
 import com.velkonost.getbetter.shared.features.diary.contracts.TasksViewState
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
@@ -51,6 +53,11 @@ fun DiaryScreen(
         skipHalfExpanded = true,
     )
 
+    val areaDetailSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = true
+    )
+
     Box {
         Column {
             PrimaryTabs(
@@ -62,6 +69,11 @@ fun DiaryScreen(
                 notesState = state.notesViewState,
                 areasState = state.areasViewState,
                 tasksState = state.tasksViewState,
+                areaClick = {
+                    scope.launch {
+                        areaDetailSheetState.show()
+                    }
+                },
                 createNewAreaClick = {
                     scope.launch {
                         viewModel.dispatch(CreateNewAreaAction.Open)
@@ -104,12 +116,26 @@ fun DiaryScreen(
                 viewModel.dispatch(CreateNewAreaAction.CreateClick)
             }
         )
+
+        AreaDetailScreen(
+            modalSheetState = areaDetailSheetState
+        )
     }
 
     LaunchedEffect(Unit) {
         snapshotFlow { createNewAreaSheetState.currentValue }
+            .combine(
+                snapshotFlow {
+                    areaDetailSheetState.currentValue
+                }
+            ) { createNewAreaState, areaDetailState ->
+                val hideBottomBar =
+                    createNewAreaState != ModalBottomSheetValue.Hidden
+                            || areaDetailState != ModalBottomSheetValue.Hidden
+                hideBottomBar
+            }
             .collect {
-                forceHideBottomBar.value = it != ModalBottomSheetValue.Hidden
+                forceHideBottomBar.value = it
             }
     }
 
@@ -133,6 +159,7 @@ fun DiaryScreenContent(
     notesState: NotesViewState,
     areasState: AreasViewState,
     tasksState: TasksViewState,
+    areaClick: () -> Unit,
     createNewAreaClick: () -> Unit,
     addExistingAreaClick: () -> Unit,
     createGoalClick: () -> Unit,
@@ -153,6 +180,7 @@ fun DiaryScreenContent(
             1 -> AreasView(
                 items = areasState.items,
                 isLoading = areasState.isLoading,
+                areaClick = areaClick,
                 createNewAreaClick = createNewAreaClick,
                 addExistingAreaClick = addExistingAreaClick
             )

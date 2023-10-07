@@ -20,4 +20,5 @@ dependencies {
     implementation(projects.shared.features.diary.presentation)
 
     implementation(projects.androidApp.core.compose)
+    implementation(projects.androidApp.features.areadetail)
 }
