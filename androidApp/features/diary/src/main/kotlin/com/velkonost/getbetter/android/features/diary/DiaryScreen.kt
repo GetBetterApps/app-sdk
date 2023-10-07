@@ -14,6 +14,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
@@ -58,6 +59,8 @@ fun DiaryScreen(
         skipHalfExpanded = true
     )
 
+    val selectedAreaId = remember { mutableStateOf("") }
+
     Box {
         Column {
             PrimaryTabs(
@@ -71,6 +74,7 @@ fun DiaryScreen(
                 tasksState = state.tasksViewState,
                 areaClick = {
                     scope.launch {
+                        selectedAreaId.value = it
                         areaDetailSheetState.show()
                     }
                 },
@@ -118,16 +122,16 @@ fun DiaryScreen(
         )
 
         AreaDetailScreen(
-            modalSheetState = areaDetailSheetState
+            modalSheetState = areaDetailSheetState,
+            areaId = selectedAreaId.value
         )
+
     }
 
     LaunchedEffect(Unit) {
         snapshotFlow { createNewAreaSheetState.currentValue }
             .combine(
-                snapshotFlow {
-                    areaDetailSheetState.currentValue
-                }
+                snapshotFlow { areaDetailSheetState.currentValue }
             ) { createNewAreaState, areaDetailState ->
                 val hideBottomBar =
                     createNewAreaState != ModalBottomSheetValue.Hidden
@@ -159,7 +163,7 @@ fun DiaryScreenContent(
     notesState: NotesViewState,
     areasState: AreasViewState,
     tasksState: TasksViewState,
-    areaClick: () -> Unit,
+    areaClick: (String) -> Unit,
     createNewAreaClick: () -> Unit,
     addExistingAreaClick: () -> Unit,
     createGoalClick: () -> Unit,

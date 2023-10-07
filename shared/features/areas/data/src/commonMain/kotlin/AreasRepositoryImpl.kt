@@ -38,8 +38,23 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
         }
     }
 
-    override fun editArea(): Flow<ResultState<Unit>> {
-        TODO("Not yet implemented")
+    override fun editArea(
+        id: String,
+        name: String,
+        description: String,
+        emojiId: Int?,
+        imageUrl: String?
+    ): Flow<ResultState<Unit>> = flowRequest {
+        val data = hashMapOf(
+            Area.namePropertyName to name,
+            Area.descriptionPropertyName to description,
+            Area.emojiIdPropertyName to emojiId,
+            Area.imageUrlPropertyName to imageUrl
+        )
+
+        db.collection("areas")
+            .document(id)
+            .set(data, merge = true)
     }
 
     override fun createNewArea(
@@ -75,11 +90,16 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
                 .document(areaId)
                 .set(data, merge = true)
         }
-
     }
 
 
-    override fun deleteArea(area: Area): Flow<ResultState<Unit>> {
+    override fun deleteArea(areaId: String): Flow<ResultState<Unit>> = flowRequest {
+        db.collection("areas")
+            .document(areaId)
+            .delete()
+    }
+
+    override fun leaveArea(areaId: String): Flow<ResultState<Unit>> {
         TODO("Not yet implemented")
     }
 
@@ -107,7 +127,6 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
         }.onFailure {
             emit(ResultState.Failure(it))
         }
-
     }
 
 
@@ -183,4 +202,12 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
         }.getOrElse {
             ResultState.Failure(it)
         }
+
+    override fun fetchAreaDetails(areaId: String): Flow<ResultState<Area>> = flowRequest {
+        val data = db.collection("areas").document(areaId).get()
+
+        val areaData = data.toAreaModel()
+
+        areaData
+    }
 }

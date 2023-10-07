@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.diary.areas.components.createnewarea
+package com.velkonost.getbetter.core.compose.components.area
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandIn

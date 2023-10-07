@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.addarea.presentation
 
 import AreasRepository
+import com.velkonost.getbetter.shared.core.model.TermsOfMembership
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.isLoading
@@ -13,12 +14,11 @@ import com.velkonost.getbetter.shared.features.addarea.presentation.contract.Add
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaViewState
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.LoadNextPage
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.NavigateBack
-import com.velkonost.getbetter.shared.features.addarea.presentation.model.TermsOfMembership
-import com.velkonost.getbetter.shared.features.addarea.presentation.model.getUserTermsOfMembership
 import com.velkonost.getbetter.shared.features.addarea.presentation.model.toUI
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.auth
 import dev.gitlive.firebase.firestore.DocumentSnapshot
+import model.getUserTermsOfMembership
 
 class AddAreaViewModel
 internal constructor(

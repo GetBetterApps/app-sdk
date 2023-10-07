@@ -1,5 +1,6 @@
 package model
 
+import com.velkonost.getbetter.shared.core.model.TermsOfMembership
 import dev.gitlive.firebase.firestore.DocumentReference
 import dev.gitlive.firebase.firestore.DocumentSnapshot
 import dev.gitlive.firebase.firestore.Timestamp
@@ -78,3 +79,10 @@ suspend fun DocumentSnapshot.toAreaModel() =
         author = get<DocumentReference>(Area.authorPropertyName).get().toAreaMember(),
         isPrivate = get(Area.isPrivatePropertyName)
     )
+
+fun Area.getUserTermsOfMembership(uid: String) =
+    if (membersList.any { it.userId == uid }) {
+        TermsOfMembership.AlreadyJoined
+    } else {
+        TermsOfMembership.Allow
+    }

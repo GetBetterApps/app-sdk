@@ -48,7 +48,7 @@ internal val AppTypography = Typography(
     // HEADLINE ....................................................................................
     headlineLarge = TextStyle(
         fontFamily = SFFontFamily,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Bold,
         fontSize = 32.sp,
         lineHeight = TextUnit(1.25F, TextUnitType.Em)
     ),

@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -21,6 +23,9 @@ fun MultilineTextField(
     minLines: Int = 3,
     value: String,
     placeholderText: String,
+    isEnabled: Boolean = true,
+    textAlign: TextAlign = TextAlign.Start,
+    textStyle: TextStyle = MaterialTheme.typography.titleMedium,
     onValueChanged: (String) -> Unit
 ) {
     TextField(
@@ -33,8 +38,11 @@ fun MultilineTextField(
             .padding(top = 12.dp)
             .wrapContentHeight()
             .clip(shape = MaterialTheme.shapes.medium),
-        textStyle = MaterialTheme.typography.titleMedium
-            .copy(color = colorResource(resource = SharedR.colors.text_secondary)),
+        textStyle = textStyle
+            .copy(
+                color = colorResource(resource = SharedR.colors.text_secondary),
+                textAlign = textAlign
+            ),
         minLines = minLines,
         placeholder = {
             Text(
@@ -47,10 +55,12 @@ fun MultilineTextField(
         colors = TextFieldDefaults.colors(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
+            disabledContainerColor = colorResource(resource = SharedR.colors.text_field_background),
             unfocusedContainerColor = colorResource(resource = SharedR.colors.text_field_background),
             focusedContainerColor = colorResource(resource = SharedR.colors.text_field_background),
             cursorColor = colorResource(resource = SharedR.colors.text_secondary)
         ),
+        enabled = isEnabled
     )
 
 }

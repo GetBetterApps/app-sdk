@@ -15,6 +15,11 @@ import KMPNativeCoroutinesAsync
 struct AreaDetailScreen: View {
     
     @StateObject var viewModel = AreaDetailVIewModelDelegate()
+    let areaId: String
+    
+    init(areaId: String) {
+        self.areaId = areaId
+    }
     
     var body: some View {
         

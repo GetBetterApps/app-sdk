@@ -8,7 +8,13 @@ interface AreasRepository {
 
     fun fetchAllAreas(): Flow<ResultState<List<Area>>>
 
-    fun editArea(): Flow<ResultState<Unit>>
+    fun editArea(
+        id: String,
+        name: String,
+        description: String,
+        emojiId: Int? = null,
+        imageUrl: String? = null
+    ): Flow<ResultState<Unit>>
 
     fun createNewArea(
         name: String,
@@ -19,7 +25,9 @@ interface AreasRepository {
         imageUrl: String? = null
     ): Flow<ResultState<Unit>>
 
-    fun deleteArea(area: Area): Flow<ResultState<Unit>>
+    fun deleteArea(areaId: String): Flow<ResultState<Unit>>
+
+    fun leaveArea(areaId: String): Flow<ResultState<Unit>>
 
     fun fetchUserAreas(): Flow<ResultState<List<Area>>>
 
@@ -28,4 +36,6 @@ interface AreasRepository {
     suspend fun fetchPublicAreasToAdd(
         perPage: Int, lastElement: DocumentSnapshot?
     ): ResultState<AreasPage>
+
+    fun fetchAreaDetails(areaId: String): Flow<ResultState<Area>>
 }

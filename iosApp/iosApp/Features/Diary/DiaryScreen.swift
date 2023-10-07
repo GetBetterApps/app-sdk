@@ -22,6 +22,8 @@ struct DiaryScreen: View {
     
     @State private var selectedPage: Int = 0
     
+    @State private var selectedAreaId: String? = nil
+    
     var body: some View {
         @State var state = viewModel.viewStateValue as! DiaryViewState
         @State var createNewAreaState = state.createNewAreaViewState
@@ -45,7 +47,8 @@ struct DiaryScreen: View {
             case 1: AreasView(
                 items: state.areasViewState.items,
                 isLoading: state.areasViewState.isLoading,
-                areaClick: {
+                areaClick: { areaId in
+                    selectedAreaId = areaId
                     showingAreaDetailSheet = true
                 },
                 createNewAreaClick: {
@@ -82,7 +85,9 @@ struct DiaryScreen: View {
             }
         }
         .sheet(isPresented: $showingAreaDetailSheet) {
-            AreaDetailScreen()
+            if self.selectedAreaId != nil {
+                AreaDetailScreen(areaId: self.selectedAreaId!)
+            }
         }
         .onAppear {
             observeEvents()

@@ -13,9 +13,9 @@ import SharedSDK
 struct AreaItem: View {
     
     let item: Area
-    let onClick: () -> Void
+    let onClick: (String) -> Void
     
-    init(item: Area, onClick: @escaping () -> Void) {
+    init(item: Area, onClick: @escaping (String) -> Void) {
         self.item = item
         self.onClick = onClick
     }
@@ -55,7 +55,7 @@ struct AreaItem: View {
         .onTapGesture {
             let impactMed = UIImpactFeedbackGenerator(style: .medium)
             impactMed.impactOccurred()
-            onClick()
+            onClick(item.id)
         }
     }
 }

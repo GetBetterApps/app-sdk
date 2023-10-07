@@ -23,6 +23,8 @@ import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
 import com.velkonost.getbetter.core.compose.components.SingleLineTextField
+import com.velkonost.getbetter.core.compose.components.area.EmojiPicker
+import com.velkonost.getbetter.core.compose.components.area.SelectedEmojiImage
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaViewState
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -96,9 +98,8 @@ fun CreateNewAreaBottomSheet(
 
                     MultilineTextField(
                         value = state.description,
-                        placeholderText = stringResource(resource = SharedR.strings.diary_areas_create_new_description_hint),
-                        onValueChanged = { onDescriptionChanged.invoke(it) }
-                    )
+                        placeholderText = stringResource(resource = SharedR.strings.diary_areas_create_new_description_hint)
+                    ) { onDescriptionChanged.invoke(it) }
 
                     RequiredLevelRow(
                         title = stringResource(resource = SharedR.strings.diary_areas_create_new_required_level),

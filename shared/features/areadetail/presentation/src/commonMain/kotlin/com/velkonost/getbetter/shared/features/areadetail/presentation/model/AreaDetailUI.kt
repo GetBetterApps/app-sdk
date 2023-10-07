@@ -1,28 +1,25 @@
-package com.velkonost.getbetter.shared.features.addarea.presentation.model
+package com.velkonost.getbetter.shared.features.areadetail.presentation.model
 
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.TermsOfMembership
-import dev.icerock.moko.resources.ImageResource
 import model.Area
 import model.AreaMember
 
-data class AreaUI(
+data class AreaDetailUI(
     val id: String,
     var name: String,
     val description: String,
-    val emojiRes: ImageResource,
+    val emoji: Emoji,
     val members: List<AreaMember>,
     var termsOfMembership: TermsOfMembership,
-    var isLoading: Boolean = false
 )
 
 fun Area.toUI(termsOfMembership: TermsOfMembership) =
-    AreaUI(
+    AreaDetailUI(
         id = id,
         name = name,
         description = description,
-        emojiRes = Emoji.getIconById(emojiId!!),
+        emoji = Emoji.getById(emojiId!!),
         members = membersList,
         termsOfMembership = termsOfMembership
     )
-

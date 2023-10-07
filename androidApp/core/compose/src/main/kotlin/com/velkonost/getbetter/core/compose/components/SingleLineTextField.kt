@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.core.compose.components
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -11,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -19,8 +22,12 @@ import dev.icerock.moko.resources.compose.colorResource
 fun SingleLineTextField(
     modifier: Modifier = Modifier,
     value: String,
+    isEnabled: Boolean = true,
+    textAlign: TextAlign = TextAlign.Start,
+    paddingValues: PaddingValues = PaddingValues(start = 12.dp),
     placeholderText: String,
-    onValueChanged: (String) -> Unit
+    textStyle: TextStyle = MaterialTheme.typography.titleMedium,
+    onValueChanged: (String) -> Unit,
 ) {
     TextField(
         value = value,
@@ -29,11 +36,14 @@ fun SingleLineTextField(
         },
         modifier = modifier
             .fillMaxWidth()
-            .padding(start = 12.dp)
+            .padding(paddingValues)
             .height(64.dp)
             .clip(shape = MaterialTheme.shapes.medium),
-        textStyle = MaterialTheme.typography.titleMedium
-            .copy(color = colorResource(resource = SharedR.colors.text_secondary)),
+        textStyle = textStyle
+            .copy(
+                color = colorResource(resource = SharedR.colors.text_secondary),
+                textAlign = textAlign
+            ),
         maxLines = 1,
         placeholder = {
             Text(
@@ -46,9 +56,11 @@ fun SingleLineTextField(
         colors = TextFieldDefaults.colors(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
+            disabledContainerColor = colorResource(resource = SharedR.colors.text_field_background),
             unfocusedContainerColor = colorResource(resource = SharedR.colors.text_field_background),
             focusedContainerColor = colorResource(resource = SharedR.colors.text_field_background),
             cursorColor = colorResource(resource = SharedR.colors.text_secondary)
         ),
+        enabled = isEnabled
     )
 }

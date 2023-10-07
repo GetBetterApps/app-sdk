@@ -22,7 +22,7 @@ fun AreasView(
     modifier: Modifier = Modifier,
     isLoading: Boolean,
     items: List<Area>,
-    areaClick: () -> Unit,
+    areaClick: (String) -> Unit,
     createNewAreaClick: () -> Unit,
     addExistingAreaClick: () -> Unit
 ) {
@@ -39,7 +39,7 @@ fun AreasView(
             ) {
                 items(items) { item ->
                     AreaItem(item) {
-                        areaClick()
+                        areaClick(it)
                     }
                 }
             }

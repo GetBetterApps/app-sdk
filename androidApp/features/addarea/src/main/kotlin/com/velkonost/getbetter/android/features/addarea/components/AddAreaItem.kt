@@ -24,8 +24,8 @@ import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.DisabledAppButton
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
+import com.velkonost.getbetter.shared.core.model.TermsOfMembership
 import com.velkonost.getbetter.shared.features.addarea.presentation.model.AreaUI
-import com.velkonost.getbetter.shared.features.addarea.presentation.model.TermsOfMembership
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource

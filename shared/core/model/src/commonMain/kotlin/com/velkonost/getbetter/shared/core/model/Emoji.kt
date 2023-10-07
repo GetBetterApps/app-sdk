@@ -355,6 +355,12 @@ enum class Emoji(
             }.icon
         }
 
+        fun getById(id: Int): Emoji {
+            return Emoji.values().first {
+                it.id == id
+            }
+        }
+
 
     }
 }

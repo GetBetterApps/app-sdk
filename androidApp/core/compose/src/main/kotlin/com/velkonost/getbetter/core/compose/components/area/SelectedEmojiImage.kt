@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.diary.areas.components.createnewarea
+package com.velkonost.getbetter.core.compose.components.area
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.Image
@@ -25,6 +25,7 @@ import dev.icerock.moko.resources.compose.painterResource
 fun SelectedEmojiImage(
     modifier: Modifier = Modifier,
     selectedEmoji: Emoji,
+    imageSize: Int = 48,
     onClick: () -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
@@ -45,7 +46,7 @@ fun SelectedEmojiImage(
         AnimatedContent(targetState = selectedEmoji, label = "") {
             Image(
                 modifier = modifier
-                    .size(48.dp)
+                    .size(imageSize.dp)
                     .background(
                         color = colorResource(resource = SharedR.colors.text_field_background),
                         shape = MaterialTheme.shapes.medium
