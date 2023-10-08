@@ -49,7 +49,10 @@ internal constructor(
 
                                 emit(
                                     viewState.value.copy(
-                                        item = area.toUI(areaTermsOfMembership)
+                                        item = area.toUI(areaTermsOfMembership),
+                                        isAllowDelete = area.author.userId == userId,
+                                        isAllowEdit = area.author.userId == userId,
+                                        isAllowLeave = area.membersList.any { it.userId == userId }
                                     )
                                 )
                             }

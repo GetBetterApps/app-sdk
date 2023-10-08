@@ -6,5 +6,8 @@ import com.velkonost.getbetter.shared.features.areadetail.presentation.model.Are
 data class AreaDetailViewState(
     val isLoading: Boolean = false,
     val isEditing: Boolean = false,
+    val isAllowDelete: Boolean = false,
+    val isAllowLeave: Boolean = false,
+    val isAllowEdit: Boolean = false,
     val item: AreaDetailUI? = null
 ) : UIContract.State
