@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.Button
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetState
@@ -58,6 +60,7 @@ fun AreaDetailScreen(
     val state by viewModel.viewState.collectAsStateWithLifecycle()
     val isEmojiPickerVisible = remember { mutableStateOf(false) }
     val interactionSource = remember { MutableInteractionSource() }
+    val confirmDeleteAreaDialog = remember { mutableStateOf(false) }
 
     ModalBottomSheetLayout(
         sheetState = modalSheetState,
@@ -188,7 +191,13 @@ fun AreaDetailScreen(
                                             .background(
                                                 color = colorResource(resource = SharedR.colors.onboarding_background_gradient_start)
                                             )
-                                            .padding(top = 24.dp, bottom = 48.dp),
+                                            .padding(top = 24.dp, bottom = 48.dp)
+                                            .clickable(
+                                                interactionSource = interactionSource,
+                                                indication = null
+                                            ) {
+                                                viewModel.dispatch(AreaDetailAction.LeaveClick)
+                                            },
                                         text = "Leave",
                                         textAlign = TextAlign.Center,
                                         style = androidx.compose.material3.MaterialTheme.typography.titleMedium,
@@ -200,7 +209,13 @@ fun AreaDetailScreen(
                                             .background(
                                                 color = colorResource(resource = SharedR.colors.background_item)
                                             )
-                                            .padding(top = 24.dp, bottom = 48.dp),
+                                            .padding(top = 24.dp, bottom = 48.dp)
+                                            .clickable(
+                                                interactionSource = interactionSource,
+                                                indication = null
+                                            ) {
+                                                confirmDeleteAreaDialog.value = true
+                                            },
                                         text = "Delete",
                                         textAlign = TextAlign.Center,
                                         style = androidx.compose.material3.MaterialTheme.typography.titleMedium,
@@ -245,6 +260,33 @@ fun AreaDetailScreen(
 
     ) {
 
+    }
+
+    if (confirmDeleteAreaDialog.value) {
+        AlertDialog(
+            title = {
+                Text(text = "Are you sure?")
+            },
+            text = {
+                Text(text = "Delete this area")
+            },
+            onDismissRequest = {
+                confirmDeleteAreaDialog.value = false
+            },
+            confirmButton = {
+                Button(onClick = {
+                    viewModel.dispatch(AreaDetailAction.DeleteClick)
+                    confirmDeleteAreaDialog.value = false
+                }) {
+                    Text(text = "Delete")
+                }
+            },
+            dismissButton = {
+                Button(onClick = { confirmDeleteAreaDialog.value = false }) {
+                    Text(text = "Cancel")
+                }
+            },
+        )
     }
 
     LaunchedEffect(areaId) {

@@ -21,7 +21,6 @@ internal constructor(
     initialState = AreaDetailViewState()
 ) {
 
-
     override fun dispatch(action: AreaDetailAction) = when (action) {
         is AreaDetailAction.Load -> fetchArea(action.areaId)
         is AreaDetailAction.EmojiChanged -> obtainEmojiChanged(action.value)
@@ -29,6 +28,8 @@ internal constructor(
         is AreaDetailAction.DescriptionChanged -> obtainDescriptionChanged(action.value)
         is AreaDetailAction.StartEdit -> obtainStartEdit()
         is AreaDetailAction.EndEdit -> obtainEndEdit()
+        is AreaDetailAction.DeleteClick -> obtainDeleteArea()
+        is AreaDetailAction.LeaveClick -> obtainLeaveArea()
     }
 
     private fun fetchArea(areaId: String) {
@@ -91,7 +92,9 @@ internal constructor(
     private fun obtainEndEdit() {
         emit(viewState.value.copy(isEditing = false))
 
-        checkNotNull(viewState.value.item)
+        checkNotNull(viewState.value.item) {
+            return
+        }
 
         launchJob {
             val area = viewState.value.item!!
@@ -115,6 +118,40 @@ internal constructor(
                     }
                 }
             }
+        }
+    }
+
+    private fun obtainDeleteArea() {
+        checkNotNull(viewState.value.item) {
+            return
+        }
+
+        launchJob {
+            areasRepository.deleteArea(viewState.value.item!!.id)
+                .collect { result ->
+                    with(result) {
+                        isLoading {
+                            emit(viewState.value.copy(isLoading = it))
+                        }
+                    }
+                }
+        }
+    }
+
+    private fun obtainLeaveArea() {
+        checkNotNull(viewState.value.item) {
+            return
+        }
+
+        launchJob {
+            areasRepository.leaveArea(viewState.value.item!!.id)
+                .collect { result ->
+                    with(result) {
+                        isLoading {
+                            emit(viewState.value.copy(isLoading = it))
+                        }
+                    }
+                }
         }
     }
 

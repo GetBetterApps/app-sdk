@@ -99,8 +99,25 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
             .delete()
     }
 
-    override fun leaveArea(areaId: String): Flow<ResultState<Unit>> {
-        TODO("Not yet implemented")
+    override fun leaveArea(areaId: String): Flow<ResultState<Unit>> = flowRequest {
+        val userId = Firebase.auth.currentUser?.uid
+
+        if (userId != null) {
+            val userRef = db.collection("users").document(userId)
+            val area = db.collection("areas").document(areaId).get()
+
+            val areaMembers: List<DocumentReference> =
+                area.get<List<DocumentReference>>(Area.membersListPropertyName)
+            areaMembers.toMutableList().removeAll { it.id == userRef.id }
+
+            val data = hashMapOf(
+                Area.membersListPropertyName to areaMembers
+            )
+
+            db.collection("areas")
+                .document(areaId)
+                .set(data, merge = true)
+        }
     }
 
     override fun fetchUserAreas(): Flow<ResultState<List<Area>>> = flow {
@@ -128,7 +145,6 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
             emit(ResultState.Failure(it))
         }
     }
-
 
     override fun addUserArea(areaId: String): Flow<ResultState<String>> = flowRequest {
         val userId = Firebase.auth.currentUser?.uid

@@ -15,4 +15,8 @@ sealed interface AreaDetailAction : UIContract.Action {
     data object StartEdit : AreaDetailAction
 
     data object EndEdit : AreaDetailAction
+
+    data object DeleteClick : AreaDetailAction
+
+    data object LeaveClick : AreaDetailAction
 }
