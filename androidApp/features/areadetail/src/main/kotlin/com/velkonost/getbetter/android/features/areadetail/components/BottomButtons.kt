@@ -18,6 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
+import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
 fun BottomButtons(
@@ -51,7 +52,7 @@ fun BottomButtons(
                             indication = null,
                             onClick = onEditClick
                         ),
-                    text = "Edit",
+                    text = stringResource(resource = SharedR.strings.add_area_edit_button),
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.titleMedium,
                     color = colorResource(resource = SharedR.colors.text_title)
@@ -79,7 +80,7 @@ fun BottomButtons(
                                 indication = null,
                                 onClick = onLeaveClick
                             ),
-                        text = "Leave",
+                        text = stringResource(resource = SharedR.strings.add_area_leave_button),
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.titleMedium,
                         color = colorResource(resource = SharedR.colors.text_light)
@@ -96,7 +97,7 @@ fun BottomButtons(
                                 indication = null,
                                 onClick = onDeleteClick
                             ),
-                        text = "Delete",
+                        text = stringResource(resource = SharedR.strings.add_area_delete_button),
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.titleMedium,
                         color = colorResource(resource = SharedR.colors.text_title)
@@ -124,7 +125,7 @@ fun BottomButtons(
                         indication = null,
                         onClick = onSaveClick
                     ),
-                text = "Save",
+                text = stringResource(resource = SharedR.strings.add_area_save_button),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.titleMedium,
                 color = colorResource(resource = SharedR.colors.text_light)

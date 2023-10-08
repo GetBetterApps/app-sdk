@@ -2,6 +2,7 @@
 <resources>
     <!--  GENERAL  -->
     <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
     <string name="private_state">Private</string>
     <string name="public_state">Public</string>
 
@@ -134,5 +135,17 @@
     <string name="add_area_add_area_button">Add area</string>
     <string name="add_area_already_added_button">Already added</string>
     <string name="add_area_low_level_button">Low level</string>
+
+    <string name="add_area_edit_button">Edit</string>
+    <string name="add_area_leave_button">Leave</string>
+    <string name="add_area_delete_button">Delete</string>
+    <string name="add_area_save_button">Save</string>
+
+    <string name="add_area_confirm_delete_title">Delete area</string>
+    <string name="add_area_confirm_delete_text">All your notes and experience will be saved but
+        tasks will be deleted
+    </string>
+    <string name="add_area_confirm_leave_title">Leave area</string>
+    <string name="add_area_confirm_leave_text">All your notes and experience will be saved</string>
     <!--  ADD AREA  -->
 </resources>
