@@ -26,5 +26,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "closure #1 in AreaDetailVIewModelDelegate.resumeViewStateStream():AreaDetailVIewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "data as! AreaDataViewState">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -14,6 +14,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -29,6 +31,7 @@ fun BottomButtons(
     onDeleteClick: () -> Unit,
     onSaveClick: () -> Unit
 ) {
+    val haptic = LocalHapticFeedback.current
     val interactionSource = remember { MutableInteractionSource() }
 
     Column {
@@ -50,7 +53,10 @@ fun BottomButtons(
                         .clickable(
                             interactionSource = interactionSource,
                             indication = null,
-                            onClick = onEditClick
+                            onClick = {
+                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                onEditClick()
+                            }
                         ),
                     text = stringResource(resource = SharedR.strings.add_area_edit_button),
                     textAlign = TextAlign.Center,
@@ -78,7 +84,10 @@ fun BottomButtons(
                             .clickable(
                                 interactionSource = interactionSource,
                                 indication = null,
-                                onClick = onLeaveClick
+                                onClick = {
+                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                    onLeaveClick()
+                                }
                             ),
                         text = stringResource(resource = SharedR.strings.add_area_leave_button),
                         textAlign = TextAlign.Center,
@@ -95,7 +104,10 @@ fun BottomButtons(
                             .clickable(
                                 interactionSource = interactionSource,
                                 indication = null,
-                                onClick = onDeleteClick
+                                onClick = {
+                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                    onDeleteClick()
+                                }
                             ),
                         text = stringResource(resource = SharedR.strings.add_area_delete_button),
                         textAlign = TextAlign.Center,
@@ -123,7 +135,10 @@ fun BottomButtons(
                     .clickable(
                         interactionSource = interactionSource,
                         indication = null,
-                        onClick = onSaveClick
+                        onClick = {
+                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                            onSaveClick()
+                        }
                     ),
                 text = stringResource(resource = SharedR.strings.add_area_save_button),
                 textAlign = TextAlign.Center,

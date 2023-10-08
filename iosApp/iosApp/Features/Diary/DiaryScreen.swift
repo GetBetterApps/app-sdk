@@ -45,7 +45,7 @@ struct DiaryScreen: View {
                 }
             )
             case 1: AreasView(
-                items: state.areasViewState.items,
+                items: state.areasViewState.items, 
                 isLoading: state.areasViewState.isLoading,
                 areaClick: { areaId in
                     selectedAreaId = areaId
@@ -85,9 +85,7 @@ struct DiaryScreen: View {
             }
         }
         .sheet(isPresented: $showingAreaDetailSheet) {
-            if self.selectedAreaId != nil {
-                AreaDetailScreen(areaId: self.selectedAreaId!)
-            }
+            AreaDetailScreen(areaId: $selectedAreaId)
         }
         .onAppear {
             observeEvents()

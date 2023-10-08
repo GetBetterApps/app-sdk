@@ -13,10 +13,12 @@ import SharedSDK
 struct SelectedEmojiImage: View {
     
     let selectedEmojiImage: UIImage
+    let imageSize: CGFloat
     let onClick: () -> Void
     
-    init(selectedEmoji: UIImage, onClick: @escaping () -> Void) {
+    init(selectedEmoji: UIImage, imageSize: CGFloat = CGFloat(48), onClick: @escaping () -> Void) {
         self.selectedEmojiImage = selectedEmoji
+        self.imageSize = imageSize
         self.onClick = onClick
     }
     
@@ -25,14 +27,13 @@ struct SelectedEmojiImage: View {
             Image(uiImage: selectedEmojiImage)
                 .resizable()
                 .padding(8)
-                .frame(width: 48, height: 48)
-                
+                .frame(width: imageSize, height: imageSize)
                 .background(
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.textFieldBackground)
                 )
         }
-        .frame(width: 64, height: 64)
+        .frame(width: imageSize + 16, height: imageSize + 16)
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color.backgroundItem)
