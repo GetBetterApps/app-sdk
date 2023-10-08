@@ -28,6 +28,7 @@ struct SelectedEmojiImage: View {
                 .resizable()
                 .padding(8)
                 .frame(width: imageSize, height: imageSize)
+                .animation(.easeInOut(duration: 1), value: selectedEmojiImage)
                 .background(
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.textFieldBackground)

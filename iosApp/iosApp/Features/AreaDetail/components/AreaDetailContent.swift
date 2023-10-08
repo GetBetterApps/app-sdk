@@ -28,7 +28,7 @@ struct AreaDetailContent: View {
         self.onNameChanged = onNameChanged
         self.onDescriptionChanged = onDescriptionChanged
     }
-
+    
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
@@ -39,7 +39,9 @@ struct AreaDetailContent: View {
                         imageSize: 96,
                         onClick: {
                             if isEditing {
-                                isEmojiPickerVisible.toggle()
+                                withAnimation {
+                                    isEmojiPickerVisible.toggle()
+                                }
                             }
                         }
                     )
@@ -51,10 +53,27 @@ struct AreaDetailContent: View {
                     items: Emoji.entries,
                     onEmojiClick: onEmojiClick
                 )
-
-                HStack {
-                    
-                }
+                
+                SingleLineTextField(
+                    value: areaData.name,
+                    placeholderText: SharedR.strings().diary_areas_create_new_name_hint.desc().localized(),
+                    isEnabled: isEditing,
+                    textAlign: .center,
+                    textStyle: .titleLarge,
+                    paddings: EdgeInsets.init(),
+                    onValueChanged: onNameChanged
+                ).padding(.top, 24)
+                
+                MultilineTextField(
+                    value: areaData.description_,
+                    placeholderText: SharedR.strings().diary_areas_create_new_description_hint.desc().localized(),
+                    minLines: 1,
+                    isEnabled: isEditing, 
+                    textAlign: .center,
+                    onValueChanged: onDescriptionChanged
+                )
+                
+                
             }.padding(20)
         }
         

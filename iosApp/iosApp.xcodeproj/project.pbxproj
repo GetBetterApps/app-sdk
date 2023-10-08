@@ -39,6 +39,7 @@
 		461F7C772AA8E371003791CF /* DetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C762AA8E371003791CF /* DetailScreen.swift */; };
 		46445AFA2ACD5484008934B2 /* PrivateSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46445AF92ACD5484008934B2 /* PrivateSwitch.swift */; };
 		4646BF9A2AD2AF0B000980DD /* AreaDetailContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4646BF992AD2AF0B000980DD /* AreaDetailContent.swift */; };
+		4646BF9C2AD2BD72000980DD /* AreaDetailBottomButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4646BF9B2AD2BD72000980DD /* AreaDetailBottomButtons.swift */; };
 		464B60B42ABAF7C300369EC3 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B60B32ABAF7C300369EC3 /* ProfileHeader.swift */; };
 		464B60B62ABAF81B00369EC3 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B60B52ABAF81B00369EC3 /* Avatar.swift */; };
 		465C1FCA2AC157C300B7AE18 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465C1FC92AC157C300B7AE18 /* ImagePicker.swift */; };
@@ -128,6 +129,7 @@
 		461F7C762AA8E371003791CF /* DetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreen.swift; sourceTree = "<group>"; };
 		46445AF92ACD5484008934B2 /* PrivateSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateSwitch.swift; sourceTree = "<group>"; };
 		4646BF992AD2AF0B000980DD /* AreaDetailContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaDetailContent.swift; sourceTree = "<group>"; };
+		4646BF9B2AD2BD72000980DD /* AreaDetailBottomButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaDetailBottomButtons.swift; sourceTree = "<group>"; };
 		464B60B32ABAF7C300369EC3 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		464B60B52ABAF81B00369EC3 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		465C1FC92AC157C300B7AE18 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				4646BF992AD2AF0B000980DD /* AreaDetailContent.swift */,
+				4646BF9B2AD2BD72000980DD /* AreaDetailBottomButtons.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -769,6 +772,7 @@
 				46B17E162AADF05D008C2BC4 /* ViewExt.swift in Sources */,
 				460054A12ABB0D0100586767 /* SettingsButton.swift in Sources */,
 				46D857762ACFF23100BE74DA /* PaginationState.swift in Sources */,
+				4646BF9C2AD2BD72000980DD /* AreaDetailBottomButtons.swift in Sources */,
 				4696B6AE2AD15EE600DDD405 /* AreaDetailScreen.swift in Sources */,
 				464B60B42ABAF7C300369EC3 /* ProfileHeader.swift in Sources */,
 				46059D2D2AC41DB500DC5015 /* ExpandableButtonPanel.swift in Sources */,

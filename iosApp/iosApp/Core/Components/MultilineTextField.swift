@@ -12,15 +12,28 @@ import SharedSDK
 
 struct MultilineTextField: View {
     
-    let minLines: Int = 3
+    let minLines: Int
     @State private var value: String = ""
     private let placeholderText: String
+    private let isEnabled: Bool
+    private let textAlign: TextAlignment
+    
     private let onValueChanged: (String) -> Void
     
     @FocusState private var isFocused: Bool
     
-    init(value: String, placeholderText: String, onValueChanged: @escaping (String) -> Void) {
+    init(
+        value: String,
+        placeholderText: String,
+        minLines: Int = 3,
+        isEnabled: Bool = true,
+        textAlign: TextAlignment = .leading,
+        onValueChanged: @escaping (String) -> Void
+    ) {
         self.value = value
+        self.minLines = minLines
+        self.textAlign = textAlign
+        self.isEnabled = isEnabled
         self.placeholderText = placeholderText
         self.onValueChanged = onValueChanged
     }
@@ -29,6 +42,7 @@ struct MultilineTextField: View {
         TextField("", text: $value, axis: .vertical)
             .style(.titleMedium)
             .keyboardType(.default)
+            .multilineTextAlignment(textAlign)
             .lineLimit(minLines...20)
             .foregroundColor(.textSecondaryTitle)
             .placeholder(when: value.isEmpty) {
@@ -45,6 +59,7 @@ struct MultilineTextField: View {
             .onChange(of: value) { newValue in
                 onValueChanged(newValue)
             }
+            .disabled(!isEnabled)
             .ignoresSafeArea(.keyboard, edges: .bottom)
     }
 }

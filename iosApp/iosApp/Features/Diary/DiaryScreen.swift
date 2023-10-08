@@ -85,11 +85,14 @@ struct DiaryScreen: View {
             }
         }
         .sheet(isPresented: $showingAreaDetailSheet) {
-            AreaDetailScreen(areaId: $selectedAreaId)
+            AreaDetailScreen(
+                areaId: $selectedAreaId,
+                onClose: {
+                    showingAreaDetailSheet = false
+                }
+            )
         }
-        .onAppear {
-            observeEvents()
-        }
+        .onAppear { observeEvents() }
         .onDisappear {
             eventsObserver?.cancel()
             eventsObserver = nil

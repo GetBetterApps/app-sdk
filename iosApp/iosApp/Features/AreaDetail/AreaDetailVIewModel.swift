@@ -13,7 +13,7 @@ import KMPNativeCoroutinesAsync
 @MainActor
 class AreaDetailVIewModelDelegate: ObservableObject {
     
-    @LazyKoin private var delegate: SharedSDK.AreaDetailViewModel
+    @LazyKoin var delegate: SharedSDK.AreaDetailViewModel
     
     @Published var state = AreaDetailViewState(isLoading: false, isEditing: false, item: nil)
     

@@ -26,7 +26,6 @@ struct EmojiPicker: View {
         ZStack {
             if isVisible {
                 PrimaryBox {
-                    
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHGrid(rows: [GridItem(.adaptive(minimum: 40, maximum: 50))]) {
                             ForEach(items, id: \.self) { item in

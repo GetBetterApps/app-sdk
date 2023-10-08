@@ -15,24 +15,41 @@ struct SingleLineTextField: View {
     @State private var value: String = ""
     private let placeholderText: String
     private let onValueChanged: (String) -> Void
+    private let isEnabled: Bool
+    private let textAlign: TextAlignment
+    private let textStyle: TextStyle
+    private let paddings: EdgeInsets
     
     @FocusState private var isFocused: Bool
     
-    init(value: String, placeholderText: String, onValueChanged: @escaping (String) -> Void) {
+    init(
+        value: String,
+        placeholderText: String,
+        isEnabled: Bool = true,
+        textAlign: TextAlignment = .leading,
+        textStyle: TextStyle = .titleMedium,
+        paddings: EdgeInsets = .init(top: .zero, leading: 12, bottom: .zero, trailing: .zero),
+        onValueChanged: @escaping (String) -> Void
+    ) {
         self.value = value
         self.placeholderText = placeholderText
+        self.textStyle = textStyle
+        self.textAlign = textAlign
+        self.isEnabled = isEnabled
+        self.paddings = paddings
         self.onValueChanged = onValueChanged
     }
     
     var body: some View {
         TextField("", text: $value)
-            .style(.titleMedium)
+            .style(textStyle)
             .foregroundColor(.textSecondaryTitle)
             .lineLimit(1)
+            .multilineTextAlignment(textAlign)
             .focused($isFocused)
             .placeholder(when: value.isEmpty) {
                 Text(placeholderText)
-                    .style(.titleMedium)
+                    .style(textStyle)
                     .foregroundColor(.hintColor)
             }
             .padding(.leading, 16)
@@ -40,7 +57,8 @@ struct SingleLineTextField: View {
             .frame(height: 64)
             .background(Color.textFieldBackground)
             .cornerRadius(12)
-            .padding(.leading, 12)
+            .disabled(!isEnabled)
+            .padding(paddings)
             .onChange(of: value) { newValue in
                 onValueChanged(newValue)
             }
