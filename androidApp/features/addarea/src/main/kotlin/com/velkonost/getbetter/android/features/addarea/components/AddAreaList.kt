@@ -19,6 +19,7 @@ fun AddAreaList(
     modifier: Modifier = Modifier,
     listState: LazyListState,
     items: List<AreaUI>,
+    onAreaClick: (String) -> Unit,
     onAddAreaClick: (String) -> Unit,
     isLoading: Boolean
 ) {
@@ -31,9 +32,11 @@ fun AddAreaList(
     ) {
 
         items(items, key = { area -> area.id }) { item ->
-            AddAreaItem(item = item) {
-                onAddAreaClick(it)
-            }
+            AddAreaItem(
+                item = item,
+                onAreaClick = onAreaClick,
+                onAddAreaClick = onAddAreaClick
+            )
         }
 
         if (isLoading) {

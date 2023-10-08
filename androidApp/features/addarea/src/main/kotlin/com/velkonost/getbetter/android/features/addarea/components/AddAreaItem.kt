@@ -35,6 +35,7 @@ import dev.icerock.moko.resources.compose.stringResource
 fun AddAreaItem(
     modifier: Modifier = Modifier,
     item: AreaUI,
+    onAreaClick: (String) -> Unit,
     onAddAreaClick: (String) -> Unit
 ) {
 
@@ -48,7 +49,7 @@ fun AddAreaItem(
                 indication = null
             ) {
                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-//                onClick.invoke("")
+                onAreaClick(item.id)
             }
     ) {
         Column {
