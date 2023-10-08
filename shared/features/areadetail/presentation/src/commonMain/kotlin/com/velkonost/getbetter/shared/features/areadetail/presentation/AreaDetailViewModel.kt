@@ -7,6 +7,7 @@ import com.velkonost.getbetter.shared.core.util.onFailure
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.AreaDetailAction
+import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.AreaDetailEvent
 import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.AreaDetailNavigation
 import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.AreaDetailViewState
 import com.velkonost.getbetter.shared.features.areadetail.presentation.model.toUI
@@ -17,7 +18,7 @@ import model.getUserTermsOfMembership
 class AreaDetailViewModel
 internal constructor(
     private val areasRepository: AreasRepository
-) : BaseViewModel<AreaDetailViewState, AreaDetailAction, AreaDetailNavigation, Nothing>(
+) : BaseViewModel<AreaDetailViewState, AreaDetailAction, AreaDetailNavigation, AreaDetailEvent>(
     initialState = AreaDetailViewState()
 ) {
 
@@ -133,6 +134,9 @@ internal constructor(
                         isLoading {
                             emit(viewState.value.copy(isLoading = it))
                         }
+                        onSuccess {
+                            emit(AreaDetailEvent.DeleteSuccess)
+                        }
                     }
                 }
         }
@@ -149,6 +153,9 @@ internal constructor(
                     with(result) {
                         isLoading {
                             emit(viewState.value.copy(isLoading = it))
+                        }
+                        onSuccess {
+                            emit(AreaDetailEvent.LeaveSuccess)
                         }
                     }
                 }

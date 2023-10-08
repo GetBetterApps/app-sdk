@@ -106,13 +106,11 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
             val userRef = db.collection("users").document(userId)
             val area = db.collection("areas").document(areaId).get()
 
-            val areaMembers: List<DocumentReference> =
-                area.get<List<DocumentReference>>(Area.membersListPropertyName)
-            areaMembers.toMutableList().removeAll { it.id == userRef.id }
+            val areaMembers: List<DocumentReference> = area.get(Area.membersListPropertyName)
+            val updatedAreaMembers = areaMembers.toMutableList()
+            updatedAreaMembers.removeAll { it.id == userRef.id }
 
-            val data = hashMapOf(
-                Area.membersListPropertyName to areaMembers
-            )
+            val data = hashMapOf(Area.membersListPropertyName to updatedAreaMembers)
 
             db.collection("areas")
                 .document(areaId)
