@@ -15,6 +15,9 @@ struct AddAreaScreen: View {
     
     @StateObject var viewModel = AddAreaViewModelDelegate()
     
+    @State private var showingAreaDetailSheet = false
+    @State private var selectedAreaId: String? = nil
+    
     var body: some View {
         @State var state = viewModel.state
         
@@ -28,9 +31,16 @@ struct AddAreaScreen: View {
                     ScrollView(showsIndicators: false) {
                         LazyVStack(spacing: 0) {
                             ForEach(state.items, id: \.self) { item in
-                                AddAreaItem(item: item) { areaId in
-                                    viewModel.dispatch(action: AddAreaClick_(areaId: areaId))
-                                }
+                                AddAreaItem(
+                                    item: item,
+                                    onAreaClick: { areaId in
+                                        selectedAreaId = areaId
+                                        showingAreaDetailSheet = true
+                                    },
+                                    onAddAreaClick: { areaId in
+                                        viewModel.dispatch(action: AddAreaClick_(areaId: areaId))
+                                    }
+                                )
                                 .onAppear {
                                     checkPaginationThreshold(currentItemId: item.id, isLoading: state.isLoading)
                                 }
@@ -46,6 +56,14 @@ struct AddAreaScreen: View {
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
         .onAppear(perform: viewModel.onAppear)
         .onDisappear(perform: viewModel.onDisappear)
+        .sheet(isPresented: $showingAreaDetailSheet) {
+            AreaDetailScreen(
+                areaId: $selectedAreaId,
+                onClose: {
+                    showingAreaDetailSheet = false
+                }
+            )
+        }
     }
 }
 
