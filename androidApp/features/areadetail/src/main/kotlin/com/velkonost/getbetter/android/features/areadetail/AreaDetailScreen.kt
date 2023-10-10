@@ -84,6 +84,9 @@ fun AreaDetailScreen(
                     }
 
                     BottomButtons(
+                        isEditButtonVisible = state.isAllowEdit,
+                        isDeleteButtonVisible = state.isAllowDelete,
+                        isLeaveButtonVisible = state.isAllowLeave,
                         isEditing = state.isEditing,
                         onEditClick = {
                             viewModel.dispatch(AreaDetailAction.StartEdit)

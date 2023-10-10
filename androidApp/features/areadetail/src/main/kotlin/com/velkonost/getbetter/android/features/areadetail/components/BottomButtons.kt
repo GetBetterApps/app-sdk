@@ -25,6 +25,9 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun BottomButtons(
     modifier: Modifier = Modifier,
+    isEditButtonVisible: Boolean,
+    isDeleteButtonVisible: Boolean,
+    isLeaveButtonVisible: Boolean,
     isEditing: Boolean,
     onEditClick: () -> Unit,
     onLeaveClick: () -> Unit,
@@ -41,7 +44,7 @@ fun BottomButtons(
             AnimatedVisibility(
                 modifier = modifier
                     .weight(1f),
-                visible = !isEditing
+                visible = !isEditing && isEditButtonVisible
             ) {
                 Text(
                     modifier = modifier
@@ -74,46 +77,51 @@ fun BottomButtons(
                 visible = !isEditing
             ) {
                 Row {
-                    Text(
-                        modifier = modifier
-                            .weight(1f)
-                            .background(
-                                color = colorResource(resource = SharedR.colors.onboarding_background_gradient_start)
-                            )
-                            .padding(top = 24.dp, bottom = 48.dp)
-                            .clickable(
-                                interactionSource = interactionSource,
-                                indication = null,
-                                onClick = {
-                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                    onLeaveClick()
-                                }
-                            ),
-                        text = stringResource(resource = SharedR.strings.add_area_leave_button),
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.titleMedium,
-                        color = colorResource(resource = SharedR.colors.text_light)
-                    )
-                    Text(
-                        modifier = modifier
-                            .weight(1f)
-                            .background(
-                                color = colorResource(resource = SharedR.colors.background_item)
-                            )
-                            .padding(top = 24.dp, bottom = 48.dp)
-                            .clickable(
-                                interactionSource = interactionSource,
-                                indication = null,
-                                onClick = {
-                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                    onDeleteClick()
-                                }
-                            ),
-                        text = stringResource(resource = SharedR.strings.add_area_delete_button),
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.titleMedium,
-                        color = colorResource(resource = SharedR.colors.text_title)
-                    )
+                    if (isLeaveButtonVisible) {
+                        Text(
+                            modifier = modifier
+                                .weight(1f)
+                                .background(
+                                    color = colorResource(resource = SharedR.colors.onboarding_background_gradient_start)
+                                )
+                                .padding(top = 24.dp, bottom = 48.dp)
+                                .clickable(
+                                    interactionSource = interactionSource,
+                                    indication = null,
+                                    onClick = {
+                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                        onLeaveClick()
+                                    }
+                                ),
+                            text = stringResource(resource = SharedR.strings.add_area_leave_button),
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.titleMedium,
+                            color = colorResource(resource = SharedR.colors.text_light)
+                        )
+                    }
+
+                    if (isDeleteButtonVisible) {
+                        Text(
+                            modifier = modifier
+                                .weight(1f)
+                                .background(
+                                    color = colorResource(resource = SharedR.colors.background_item)
+                                )
+                                .padding(top = 24.dp, bottom = 48.dp)
+                                .clickable(
+                                    interactionSource = interactionSource,
+                                    indication = null,
+                                    onClick = {
+                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                        onDeleteClick()
+                                    }
+                                ),
+                            text = stringResource(resource = SharedR.strings.add_area_delete_button),
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.titleMedium,
+                            color = colorResource(resource = SharedR.colors.text_title)
+                        )
+                    }
                 }
             }
         }
