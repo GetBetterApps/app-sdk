@@ -28,5 +28,4 @@ jobs:
           java-version: 11
 
       - name: Build app
-        working-directory: ./GetBetter
         run: ./gradlew assemble --stacktrace
