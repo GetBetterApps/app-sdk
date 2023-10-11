@@ -26,6 +26,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 18
+          cache: gradle
 
       - name: Build app
-        run: ./gradlew assemble --stacktrace
+        run: ./gradlew build #assemble --stacktrace
