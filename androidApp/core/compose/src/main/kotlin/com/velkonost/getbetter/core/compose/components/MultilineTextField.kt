@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.core.compose.components
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -26,6 +27,7 @@ fun MultilineTextField(
     isEnabled: Boolean = true,
     textAlign: TextAlign = TextAlign.Start,
     textStyle: TextStyle = MaterialTheme.typography.titleMedium,
+    paddingValues: PaddingValues = PaddingValues(top = 12.dp),
     onValueChanged: (String) -> Unit
 ) {
     TextField(
@@ -35,7 +37,7 @@ fun MultilineTextField(
         },
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 12.dp)
+            .padding(paddingValues)
             .wrapContentHeight()
             .clip(shape = MaterialTheme.shapes.medium),
         textStyle = textStyle

@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.android.features.areadetail
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +16,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -29,6 +31,7 @@ import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -44,9 +47,16 @@ fun AreaDetailScreen(
 ) {
     val state by viewModel.viewState.collectAsStateWithLifecycle()
     val isEmojiPickerVisible = remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
 
     val confirmDeleteAreaDialog = remember { mutableStateOf(false) }
     val confirmLeaveAreaDialog = remember { mutableStateOf(false) }
+
+    BackHandler {
+        scope.launch {
+            modalSheetState.hide()
+        }
+    }
 
     ModalBottomSheetLayout(
         sheetState = modalSheetState,
