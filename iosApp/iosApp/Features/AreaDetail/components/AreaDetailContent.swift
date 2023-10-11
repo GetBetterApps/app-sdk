@@ -87,7 +87,6 @@ struct AreaDetailContent: View {
 extension AreaDetailContent {
     private var AreaDataContent: some View {
         HStack {
-//            Spacer()
             Text("14000\nmembers")
                 .style(.titleSmall)
                 .foregroundColor(.textSecondaryTitle)
@@ -101,7 +100,6 @@ extension AreaDetailContent {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(Color.backgroundIcon)
                 )
-                
             Spacer()
             Text("20200\nnotes")
                 .style(.titleSmall)
@@ -130,8 +128,6 @@ extension AreaDetailContent {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(Color.backgroundIcon)
                 )
-                
-//            Spacer()
         }
         .padding(.top, 4)
     }

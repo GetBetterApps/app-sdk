@@ -69,7 +69,7 @@ struct AreaDetailBottomButtons: View {
                     }
                 }
             }
-            .padding(.bottom, 100)
+            .padding(.bottom, 80)
         }
         .animation(.easeInOut(duration: 0.5), value: isEditing)
     }
