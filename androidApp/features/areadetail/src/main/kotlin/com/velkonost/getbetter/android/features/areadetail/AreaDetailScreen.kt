@@ -66,7 +66,7 @@ fun AreaDetailScreen(
                         .fillMaxWidth()
                         .fillMaxHeight(0.9f)
                 ) {
-                    state.item?.let { area ->
+                    state.modifiedItem?.let { area ->
                         AreaDetailContent(
                             areaData = area,
                             isEditing = state.isEditing,
@@ -84,13 +84,13 @@ fun AreaDetailScreen(
                     }
 
                     BottomButtons(
-                        isJoinButtonVisible = true,
+                        isJoinButtonVisible = state.isAllowJoin,
                         isEditButtonVisible = state.isAllowEdit,
                         isDeleteButtonVisible = state.isAllowDelete,
                         isLeaveButtonVisible = state.isAllowLeave,
                         isEditing = state.isEditing,
                         onJoinClick = {
-
+                            viewModel.dispatch(AreaDetailAction.JoinClick)
                         },
                         onEditClick = {
                             viewModel.dispatch(AreaDetailAction.StartEdit)
