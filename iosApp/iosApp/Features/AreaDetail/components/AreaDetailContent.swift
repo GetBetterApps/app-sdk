@@ -70,11 +70,69 @@ struct AreaDetailContent: View {
                     minLines: 1,
                     isEnabled: isEditing, 
                     textAlign: .center,
+                    paddings: .init(top: 4, leading: .zero, bottom: .zero, trailing: .zero),
                     onValueChanged: onDescriptionChanged
                 )
+                
+                AreaDataContent
+                    .opacity(!isEditing ? 1 : 0)
+                    .animation(.easeInOut, value: isEditing)
                 
             }.padding(20)
         }
         
+    }
+}
+
+extension AreaDetailContent {
+    private var AreaDataContent: some View {
+        HStack {
+//            Spacer()
+            Text("14000\nmembers")
+                .style(.titleSmall)
+                .foregroundColor(.textSecondaryTitle)
+                .multilineTextAlignment(.center)
+                .frame(width: 80)
+                .padding(.top, 4)
+                .padding(.bottom, 4)
+                .padding(.leading)
+                .padding(.trailing)
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.backgroundIcon)
+                )
+                
+            Spacer()
+            Text("20200\nnotes")
+                .style(.titleSmall)
+                .foregroundColor(.textSecondaryTitle)
+                .multilineTextAlignment(.center)
+                .frame(width: 80)
+                .padding(.top, 4)
+                .padding(.bottom, 4)
+                .padding(.leading)
+                .padding(.trailing)
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.backgroundIcon)
+                )
+            Spacer()
+            Text("20200\ntasks")
+                .style(.titleSmall)
+                .foregroundColor(.textSecondaryTitle)
+                .multilineTextAlignment(.center)
+                .frame(width: 80)
+                .padding(.top, 4)
+                .padding(.bottom, 4)
+                .padding(.leading)
+                .padding(.trailing)
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.backgroundIcon)
+                )
+                
+//            Spacer()
+        }
+        .padding(.top, 4)
     }
 }

@@ -17,6 +17,7 @@ struct MultilineTextField: View {
     private let placeholderText: String
     private let isEnabled: Bool
     private let textAlign: TextAlignment
+    private let paddings: EdgeInsets
     
     private let onValueChanged: (String) -> Void
     
@@ -28,12 +29,14 @@ struct MultilineTextField: View {
         minLines: Int = 3,
         isEnabled: Bool = true,
         textAlign: TextAlignment = .leading,
+        paddings: EdgeInsets = .init(top: 12, leading: .zero, bottom: .zero, trailing: .zero),
         onValueChanged: @escaping (String) -> Void
     ) {
         self.value = value
         self.minLines = minLines
         self.textAlign = textAlign
         self.isEnabled = isEnabled
+        self.paddings = paddings
         self.placeholderText = placeholderText
         self.onValueChanged = onValueChanged
     }
@@ -55,7 +58,7 @@ struct MultilineTextField: View {
             .padding(16)
             .background(Color.textFieldBackground)
             .cornerRadius(12)
-            .padding(.top, 12)
+            .padding(paddings)
             .onChange(of: value) { newValue in
                 onValueChanged(newValue)
             }
