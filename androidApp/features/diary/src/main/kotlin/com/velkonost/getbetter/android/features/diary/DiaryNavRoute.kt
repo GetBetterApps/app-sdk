@@ -14,7 +14,7 @@ object DiaryNavRoute : NavRoute<DiaryViewModel> {
     override val route: String
         get() = NavigationScreen.DiaryNavScreen.route
 
-    override fun menuIcon(): ImageResource = SharedR.images.ic_menu_profile
+    override val menuIcon: ImageResource = SharedR.images.ic_menu_profile
 
     @Composable
     override fun Content(viewModel: DiaryViewModel) {

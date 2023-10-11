@@ -13,4 +13,4 @@ fun createDataStore(
     produceFile = { producePath().toPath() },
 )
 
-internal const val dataStoreFileName = "getbetter.preferences_pb"
+internal const val DataStoreFileName = "getbetter.preferences_pb"

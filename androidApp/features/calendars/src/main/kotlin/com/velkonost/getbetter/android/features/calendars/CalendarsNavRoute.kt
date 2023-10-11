@@ -13,7 +13,7 @@ object CalendarsNavRoute : NavRoute<CalendarsViewModel> {
     override val route: String
         get() = NavigationScreen.CalendarsNavScreen.route
 
-    override fun menuIcon(): ImageResource = SharedR.images.ic_menu_profile
+    override val menuIcon: ImageResource = SharedR.images.ic_menu_profile
 
     @Composable
     override fun Content(viewModel: CalendarsViewModel) = CalendarsScreen()

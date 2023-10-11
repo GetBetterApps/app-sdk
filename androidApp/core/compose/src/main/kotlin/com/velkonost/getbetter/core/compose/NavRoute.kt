@@ -25,7 +25,8 @@ interface NavRoute<T : RouteNavigator> {
 
     val route: String
 
-    fun menuIcon(): ImageResource? = null
+    val menuIcon: ImageResource?
+        get() = null
 
     @Composable
     fun Content(viewModel: T, forceHideBottomBar: MutableState<Boolean>) =

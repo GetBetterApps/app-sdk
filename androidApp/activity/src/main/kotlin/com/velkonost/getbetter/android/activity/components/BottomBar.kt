@@ -137,7 +137,7 @@ fun BottomBarItem(
     ) {
         Image(
             modifier = Modifier.align(Alignment.Center),
-            painter = painterResource(imageResource = screen.menuIcon()!!),
+            painter = painterResource(imageResource = screen.menuIcon!!),
             contentDescription = null,
             colorFilter =
             ColorFilter.tint(

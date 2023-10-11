@@ -13,7 +13,7 @@ object ProfileNavRoute: NavRoute<ProfileViewModel> {
     override val route: String
         get() = NavigationScreen.ProfileNavScreen.route
 
-    override fun menuIcon(): ImageResource = SharedR.images.ic_menu_profile
+    override val menuIcon: ImageResource = SharedR.images.ic_menu_profile
 
     @Composable
     override fun Content(viewModel: ProfileViewModel) = ProfileScreen(viewModel = viewModel)

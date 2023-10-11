@@ -24,7 +24,7 @@ internal constructor(
     }
 
     private fun obtainWisdomItemClick(item: WisdomType) {
-
+        TODO(item.toString())
     }
 
 }

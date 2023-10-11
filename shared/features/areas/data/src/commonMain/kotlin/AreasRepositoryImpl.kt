@@ -171,7 +171,8 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
             return@flowRequest areaId
         }
 
-        throw Exception()
+        // TODO: change to concrete exception
+        throw IllegalArgumentException()
     }
 
     override suspend fun fetchPublicAreasToAdd(

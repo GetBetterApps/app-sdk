@@ -34,13 +34,6 @@ import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 
-data class ExpandableButtonItem(
-    val title: String,
-    val icon: Painter,
-    val iconExpanded: Painter? = null,
-    val onClick: (() -> Unit)? = null
-)
-
 @Composable
 fun BoxScope.ExpandableButtonPanel(
     modifier: Modifier = Modifier,
@@ -52,9 +45,6 @@ fun BoxScope.ExpandableButtonPanel(
     val interactionSource = remember { MutableInteractionSource() }
 
     var isExpanded by remember { mutableStateOf(false) }
-    if (!expandable) {
-        isExpanded = false
-    }
 
     val fabSize = 64.dp
     val expandedFabWidth by animateDpAsState(
@@ -154,3 +144,10 @@ fun BoxScope.ExpandableButtonPanel(
 
     }
 }
+
+data class ExpandableButtonItem(
+    val title: String,
+    val icon: Painter,
+    val iconExpanded: Painter? = null,
+    val onClick: (() -> Unit)? = null
+)
