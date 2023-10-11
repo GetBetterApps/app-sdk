@@ -20,7 +20,7 @@ import dev.icerock.moko.resources.compose.colorResource
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
-    viewModel: SplashViewModel
+    @Suppress("unused") viewModel: SplashViewModel
 ) {
     Box(
         modifier = modifier

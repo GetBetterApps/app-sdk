@@ -73,7 +73,9 @@ fun CreateNewAreaBottomSheet(
 
                     Text(
                         modifier = modifier.align(Alignment.CenterHorizontally),
-                        text = stringResource(resource = SharedR.strings.diary_areas_create_new_area_title),
+                        text = stringResource(
+                            resource = SharedR.strings.diary_areas_create_new_area_title
+                        ),
                         color = colorResource(resource = SharedR.colors.text_title),
                         style = MaterialTheme.typography.headlineSmall
                     )
@@ -85,7 +87,9 @@ fun CreateNewAreaBottomSheet(
 
                         SingleLineTextField(
                             value = state.name,
-                            placeholderText = stringResource(resource = SharedR.strings.diary_areas_create_new_name_hint),
+                            placeholderText = stringResource(
+                                resource = SharedR.strings.diary_areas_create_new_name_hint
+                            ),
                             onValueChanged = { onNameChanged.invoke(it) }
                         )
                     }
@@ -98,11 +102,15 @@ fun CreateNewAreaBottomSheet(
 
                     MultilineTextField(
                         value = state.description,
-                        placeholderText = stringResource(resource = SharedR.strings.diary_areas_create_new_description_hint)
+                        placeholderText = stringResource(
+                            resource = SharedR.strings.diary_areas_create_new_description_hint
+                        )
                     ) { onDescriptionChanged.invoke(it) }
 
                     RequiredLevelRow(
-                        title = stringResource(resource = SharedR.strings.diary_areas_create_new_required_level),
+                        title = stringResource(
+                            resource = SharedR.strings.diary_areas_create_new_required_level
+                        ),
                         level = state.requiredLevel,
                         onRequiredLevelChanged = { onRequiredLevelChanged.invoke(it) }
                     )
@@ -117,7 +125,9 @@ fun CreateNewAreaBottomSheet(
                         modifier = modifier
                             .align(Alignment.CenterHorizontally)
                             .padding(bottom = 70.dp),
-                        labelText = stringResource(resource = SharedR.strings.diary_areas_create_button),
+                        labelText = stringResource(
+                            resource = SharedR.strings.diary_areas_create_button
+                        ),
                         isLoading = false
                     ) { onCreateClick.invoke() }
                 }

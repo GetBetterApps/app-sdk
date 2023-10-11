@@ -103,7 +103,9 @@ fun BoxScope.ExpandableButtonPanel(
                                     .padding(16.dp),
                                 painter = item.icon,
                                 contentDescription = null,
-                                colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_inactive))
+                                colorFilter = ColorFilter.tint(
+                                    color = colorResource(resource = SharedR.colors.icon_inactive)
+                                )
                             )
                             Text(
                                 text = item.title,
@@ -127,7 +129,9 @@ fun BoxScope.ExpandableButtonPanel(
                     modifier = Modifier
                         .size(64.dp)
                         .padding(16.dp),
-                    colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_inactive))
+                    colorFilter = ColorFilter.tint(
+                        color = colorResource(resource = SharedR.colors.icon_inactive)
+                    )
                 )
 
                 AnimatedVisibility(visible = isExpanded) {

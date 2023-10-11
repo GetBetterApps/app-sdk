@@ -17,7 +17,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.areadetail.AreaDetailScreen
@@ -40,7 +39,6 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun DiaryScreen(
-    modifier: Modifier = Modifier,
     viewModel: DiaryViewModel,
     forceHideBottomBar: MutableState<Boolean> = mutableStateOf(false)
 ) {
@@ -158,7 +156,6 @@ fun DiaryScreen(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DiaryScreenContent(
-    modifier: Modifier = Modifier,
     pagerState: PagerState,
     notesState: NotesViewState,
     areasState: AreasViewState,
