@@ -21,6 +21,7 @@ kotlin {
             dependencies {
                 implementation(libs.koin.core)
                 implementation(libs.datastore)
+                implementation(libs.kotlinx.coroutines.core)
             }
         }
     }
