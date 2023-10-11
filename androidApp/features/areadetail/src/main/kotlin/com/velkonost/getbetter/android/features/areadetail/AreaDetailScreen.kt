@@ -84,10 +84,14 @@ fun AreaDetailScreen(
                     }
 
                     BottomButtons(
+                        isJoinButtonVisible = true,
                         isEditButtonVisible = state.isAllowEdit,
                         isDeleteButtonVisible = state.isAllowDelete,
                         isLeaveButtonVisible = state.isAllowLeave,
                         isEditing = state.isEditing,
+                        onJoinClick = {
+
+                        },
                         onEditClick = {
                             viewModel.dispatch(AreaDetailAction.StartEdit)
                         },
@@ -100,6 +104,10 @@ fun AreaDetailScreen(
                         onSaveClick = {
                             isEmojiPickerVisible.value = false
                             viewModel.dispatch(AreaDetailAction.EndEdit)
+                        },
+                        onCancelSaveClick = {
+                            isEmojiPickerVisible.value = false
+                            viewModel.dispatch(AreaDetailAction.CancelEdit)
                         }
                     )
                 }
