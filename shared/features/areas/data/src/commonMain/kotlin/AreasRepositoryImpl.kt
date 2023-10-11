@@ -172,7 +172,7 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
         }
 
         // TODO: change to concrete exception
-        throw IllegalArgumentException()
+        "throw IllegalArgumentException()"
     }
 
     override suspend fun fetchPublicAreasToAdd(
