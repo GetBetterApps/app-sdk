@@ -12,24 +12,32 @@ import SharedSDK
 
 struct AreaDetailBottomButtons: View {
     
+    let isJoinButtonVisible: Bool
+    let isEditButtonVisible: Bool
+    let isDeleteButtonVisible: Bool
+    let isLeaveButtonVisible: Bool
+    
     let isEditing: Bool
+    
+    let onJoinClick: () -> Void
     let onEditClick: () -> Void
     let onLeaveClick: () -> Void
     let onDeleteClick: () -> Void
     let onSaveClick: () -> Void
+    let onCancelSaveClick: () -> Void
     
-    init(
-        isEditing: Bool,
-        onEditClick: @escaping () -> Void,
-        onLeaveClick: @escaping () -> Void,
-        onDeleteClick: @escaping () -> Void,
-        onSaveClick: @escaping () -> Void
-    ) {
+    init(isJoinButtonVisible: Bool, isEditButtonVisible: Bool, isDeleteButtonVisible: Bool, isLeaveButtonVisible: Bool, isEditing: Bool, onJoinClick: @escaping () -> Void, onEditClick: @escaping () -> Void, onLeaveClick: @escaping () -> Void, onDeleteClick: @escaping () -> Void, onSaveClick: @escaping () -> Void, onCancelSaveClick: @escaping () -> Void) {
+        self.isJoinButtonVisible = isJoinButtonVisible
+        self.isEditButtonVisible = isEditButtonVisible
+        self.isDeleteButtonVisible = isDeleteButtonVisible
+        self.isLeaveButtonVisible = isLeaveButtonVisible
         self.isEditing = isEditing
+        self.onJoinClick = onJoinClick
         self.onEditClick = onEditClick
         self.onLeaveClick = onLeaveClick
         self.onDeleteClick = onDeleteClick
         self.onSaveClick = onSaveClick
+        self.onCancelSaveClick = onCancelSaveClick
     }
     
     var body: some View {
@@ -37,68 +45,111 @@ struct AreaDetailBottomButtons: View {
             VStack(spacing: 0) {
                 Spacer()
                 
-                if !isEditing {
-                    Text(SharedR.strings().add_area_edit_button.desc().localized())
-                        .style(.titleMedium)
-                        .foregroundColor(.textTitle)
-                        .padding(.top, 24)
-                        .padding(.bottom, 24)
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .background(Color.textFieldBackground)
-                        .onTapGesture {
-                            let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                            impactMed.impactOccurred()
-                            onEditClick()
-                        }
-                    
-                    HStack(spacing: 0) {
-                        Text(SharedR.strings().add_area_leave_button.desc().localized())
-                            .style(.titleMedium)
-                            .foregroundColor(.textLight)
-                            .padding(.top, 24)
-                            .padding(.bottom, 36)
-                            .frame(width: UIScreen.screenWidth * 0.5)
-                            .background(Color.onboardingBackgroundGradientStart)
-                            .onTapGesture {
-                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                                impactMed.impactOccurred()
-                                onLeaveClick()
-                            }
+                HStack {
+                    if isEditing {
+                        CancelSaveButton
+                        SaveButton
+                    } else {
                         
-                        Text(SharedR.strings().add_area_delete_button.desc().localized())
-                            .style(.titleMedium)
-                            .foregroundColor(.textTitle)
-                            .padding(.top, 24)
-                            .padding(.bottom, 36)
-                            .frame(width: UIScreen.screenWidth * 0.5)
-                            .background(Color.backgroundItem)
-                            .onTapGesture {
-                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                                impactMed.impactOccurred()
-                                onDeleteClick()
-                            }
+                        if isJoinButtonVisible {
+                            JoinButton
+                        }
+                        
+                        if isLeaveButtonVisible {
+                            LeaveButton
+                        }
+                        
+                        if isEditButtonVisible {
+                            EditButton
+                        }
+                        
+                        if isDeleteButtonVisible {
+                            DeleteButton
+                        }
                     }
                 }
             }
-            
-            if isEditing {
-                VStack {
-                    Spacer()
-                    Text(SharedR.strings().add_area_save_button.desc().localized())
-                        .style(.titleMedium)
-                        .foregroundColor(.textLight)
-                        .padding(.top, 24)
-                        .padding(.bottom, 36)
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .background(Color.onboardingBackgroundGradientStart)
-                        .onTapGesture {
-                            let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                            impactMed.impactOccurred()
-                            onSaveClick()
-                        }
-                }
-            }
+            .padding(.bottom, 100)
         }
-        .animation(.easeInOut(duration: 1), value: isEditing)
+        .animation(.easeInOut(duration: 0.5), value: isEditing)
+    }
+}
+
+extension AreaDetailBottomButtons {
+    
+    private var LeaveButton: some View {
+        BottomButton(
+            icon: SharedR.images().ic_exit.toUIImage()!,
+            onClick: onLeaveClick
+        )
+    }
+    
+    private var EditButton: some View {
+        BottomButton(
+            icon: SharedR.images().ic_edit.toUIImage()!,
+            onClick: onEditClick
+        )
+    }
+    
+    private var SaveButton: some View {
+        BottomButton(
+            icon: SharedR.images().ic_save.toUIImage()!,
+            onClick: onSaveClick
+        )
+    }
+    
+    private var CancelSaveButton: some View {
+        BottomButton(
+            icon: SharedR.images().ic_cancel.toUIImage()!,
+            onClick: onCancelSaveClick
+        )
+    }
+    
+    private var DeleteButton: some View {
+        BottomButton(
+            icon: SharedR.images().ic_trash.toUIImage()!,
+            onClick: onDeleteClick
+        )
+    }
+    
+    private var JoinButton: some View {
+        BottomButton(
+            icon: SharedR.images().ic_enter.toUIImage()!,
+            onClick: onJoinClick
+        )
+    }
+    
+}
+
+internal struct BottomButton: View {
+    
+    let icon: UIImage
+    let onClick: () -> Void
+    
+    init(icon: UIImage, onClick: @escaping () -> Void) {
+        self.icon = icon
+        self.onClick = onClick
+    }
+    
+    var body: some View {
+        ZStack {
+            Image(uiImage: icon)
+                .resizable()
+                .renderingMode(.template)
+                .frame(width: 24, height: 24, alignment: .center)
+                .foregroundColor(.iconActive).opacity(0.5)
+        }
+        .frame(width: 48, height: 48)
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .fill(Color.backgroundIcon)
+                .shadow(radius: 8)
+        )
+        .onTapGesture {
+            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+            impactMed.impactOccurred()
+            onClick()
+        }
+        .padding()
     }
 }

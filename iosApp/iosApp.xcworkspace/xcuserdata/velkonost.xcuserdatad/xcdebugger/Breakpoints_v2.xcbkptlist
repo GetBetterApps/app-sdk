@@ -856,8 +856,8 @@
             filePath = "iosApp/Features/AreaDetail/AreaDetailVIewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "resumeViewStateStream()"
             landmarkType = "7">
             <Locations>

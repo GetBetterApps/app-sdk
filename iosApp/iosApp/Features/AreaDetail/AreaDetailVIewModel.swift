@@ -15,7 +15,16 @@ class AreaDetailVIewModelDelegate: ObservableObject {
     
     @LazyKoin var delegate: SharedSDK.AreaDetailViewModel
     
-    @Published var state = AreaDetailViewState(isLoading: false, isEditing: false, item: nil)
+    @Published var state = AreaDetailViewState(
+        isLoading: false,
+        isEditing: false,
+        isAllowJoin: false,
+        isAllowDelete: false,
+        isAllowLeave: false,
+        isAllowEdit: false,
+        initialItem: nil,
+        modifiedItem: nil
+    )
     
     private var stateStream: Task<(), Error>? = nil
     

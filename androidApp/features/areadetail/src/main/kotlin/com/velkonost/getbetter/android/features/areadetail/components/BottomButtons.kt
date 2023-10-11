@@ -68,22 +68,22 @@ fun BottomButtons(
             Spacer(modifier = modifier.weight(1f))
             Row {
                 JoinButton(
-                    isVisible = isJoinButtonVisible && !isEditing,
+                    isVisible = isJoinButtonVisible,
                     onClick = onJoinClick
                 )
 
                 LeaveButton(
-                    isVisible = isLeaveButtonVisible && !isEditing,
+                    isVisible = isLeaveButtonVisible,
                     onClick = onLeaveClick
                 )
 
                 EditButton(
-                    isVisible = isEditButtonVisible && !isEditing,
+                    isVisible = isEditButtonVisible,
                     onClick = onEditClick
                 )
 
                 DeleteButton(
-                    isVisible = isDeleteButtonVisible && !isEditing,
+                    isVisible = isDeleteButtonVisible,
                     onClick = onDeleteClick
                 )
             }

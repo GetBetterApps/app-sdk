@@ -73,7 +73,6 @@ struct AreaDetailContent: View {
                     onValueChanged: onDescriptionChanged
                 )
                 
-                
             }.padding(20)
         }
         

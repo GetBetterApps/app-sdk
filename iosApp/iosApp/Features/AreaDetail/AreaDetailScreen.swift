@@ -45,9 +45,9 @@ struct AreaDetailScreen: View {
                     Loader()
                 }
             } else {
-                if state.item != nil {
+                if state.modifiedItem != nil {
                     AreaDetailContent(
-                        areaData: state.item!,
+                        areaData: state.modifiedItem!,
                         isEditing: state.isEditing,
                         isEmojiPickerVisible: $isEmojiPickerVisible,
                         onEmojiClick: { value in
@@ -62,7 +62,14 @@ struct AreaDetailScreen: View {
                     )
                     
                     AreaDetailBottomButtons(
+                        isJoinButtonVisible: state.isAllowJoin,
+                        isEditButtonVisible: state.isAllowEdit,
+                        isDeleteButtonVisible: state.isAllowDelete,
+                        isLeaveButtonVisible: state.isAllowLeave,
                         isEditing: state.isEditing,
+                        onJoinClick: {
+                            viewModel.dispatch(action: AreaDetailActionJoinClick())
+                        },
                         onEditClick: {
                             viewModel.dispatch(action: AreaDetailActionStartEdit())
                         },
@@ -75,6 +82,11 @@ struct AreaDetailScreen: View {
                         onSaveClick: {
                             isEmojiPickerVisible = false
                             viewModel.dispatch(action: AreaDetailActionEndEdit())
+                        },
+                        onCancelSaveClick: {
+                            isEmojiPickerVisible = false
+                            viewModel.dispatch(action: AreaDetailActionCancelEdit())
+                            viewModel.onAppear(areaId: areaId!) // TODO: fix this with restore name & desc values locally
                         }
                     )
                 }

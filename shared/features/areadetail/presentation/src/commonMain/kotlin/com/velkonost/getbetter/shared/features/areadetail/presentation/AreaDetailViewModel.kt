@@ -67,7 +67,6 @@ internal constructor(
 
                         }
                     }
-
                 }
         }
     }
@@ -177,10 +176,15 @@ internal constructor(
 
     private fun obtainCancelEdit() {
         val initialItem = viewState.value.initialItem
+
+        checkNotNull(initialItem) {
+            return
+        }
+
         emit(
             viewState.value.copy(
                 isEditing = false,
-                modifiedItem = initialItem
+                modifiedItem = initialItem.copy()
             )
         )
     }

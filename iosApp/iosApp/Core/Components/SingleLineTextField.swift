@@ -12,7 +12,7 @@ import SharedSDK
 
 struct SingleLineTextField: View {
     
-    @State private var value: String = ""
+    @State private var value: String
     private let placeholderText: String
     private let onValueChanged: (String) -> Void
     private let isEnabled: Bool
@@ -31,16 +31,18 @@ struct SingleLineTextField: View {
         paddings: EdgeInsets = .init(top: .zero, leading: 12, bottom: .zero, trailing: .zero),
         onValueChanged: @escaping (String) -> Void
     ) {
-        self.value = value
+        self._value = State(initialValue: value)
         self.placeholderText = placeholderText
         self.textStyle = textStyle
         self.textAlign = textAlign
         self.isEnabled = isEnabled
         self.paddings = paddings
         self.onValueChanged = onValueChanged
+        
     }
     
     var body: some View {
+    
         TextField("", text: $value)
             .style(textStyle)
             .foregroundColor(.textSecondaryTitle)
