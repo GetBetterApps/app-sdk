@@ -19,6 +19,8 @@ repositories {
 }
 
 kotlin {
+    jvmToolchain(18)
+
     androidTarget()
     iosX64()
     iosArm64()

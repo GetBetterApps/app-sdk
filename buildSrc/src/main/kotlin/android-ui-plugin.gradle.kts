@@ -41,6 +41,8 @@ android {
 }
 
 kotlin {
+    jvmToolchain(18)
+
     sourceSets.all {
         languageSettings.apply {
             optIn("kotlin.RequiresOptIn")

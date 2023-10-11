@@ -88,6 +88,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_18
     }
 
+    kotlinOptions {
+        jvmTarget = "18"
+    }
+
     sourceSets.all {
         java.srcDirs("src/$name/kotlin")
     }
