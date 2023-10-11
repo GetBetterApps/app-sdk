@@ -84,7 +84,7 @@ fun AreaDetailContent(
                 placeholderText = stringResource(resource = SharedR.strings.diary_areas_create_new_description_hint),
                 textAlign = TextAlign.Center,
                 isEnabled = isEditing,
-                paddingValues = PaddingValues(top = 4.dp),
+                paddingValues = PaddingValues(top = 8.dp),
                 onValueChanged = onDescriptionChanged
             )
             Spacer(modifier = modifier.weight(1f))
@@ -101,7 +101,7 @@ internal fun AreaDataContent(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier.padding(top = 24.dp),
+        modifier = modifier.padding(top = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
