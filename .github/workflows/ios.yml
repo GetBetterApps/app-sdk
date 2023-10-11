@@ -1,4 +1,4 @@
-name: Android CI
+name: iOS CI
 
 on:
   push:
@@ -10,9 +10,8 @@ concurrency:
   group: build-${{ github.ref }}
   cancel-in-progress: true
 
-jobs:
-  build_android:
-    name: Build Android App
+  build_ios:
+    name: Build iOS App
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -22,11 +21,12 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
 
       - name: Set up JDK 18
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v1
         with:
-          distribution: 'zulu'
           java-version: 18
-          cache: gradle
+
+      - name: Initialize pods
+        run: ./gradlew shared:umbrella:podInstall
 
       - name: Build App
-        run: ./gradlew :androidApp:app:build
+        run: xcodebuild -workspace iosApp/iosApp.xcworkspace -configuration Debug -scheme iosApp -sdk iphonesimulator
