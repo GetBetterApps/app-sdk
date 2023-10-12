@@ -17,4 +17,9 @@ sealed interface CreateNewAreaAction : DiaryAction {
     data object CreateClick : CreateNewAreaAction
 }
 
+sealed interface CreateNewNoteAction : DiaryAction {
+    data object OpenDefault : CreateNewNoteAction
 
+    data object OpenGoal : CreateNewNoteAction
+
+}

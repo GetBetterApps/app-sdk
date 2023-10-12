@@ -13,7 +13,8 @@ data class DiaryViewState(
     val tasksViewState: TasksViewState = TasksViewState(),
     val createNewAreaViewState: CreateNewAreaViewState = CreateNewAreaViewState(
         selectedEmoji = emojiList.first()
-    )
+    ),
+    val createNewNoteViewState: CreateNewNoteViewState = CreateNewNoteViewState()
 ) : UIContract.State
 
 data class NotesViewState(
@@ -36,4 +37,8 @@ data class CreateNewAreaViewState(
     val description: String = "",
     val requiredLevel: Int = 1,
     val isPrivate: Boolean = true
+) : UIContract.State
+
+data class CreateNewNoteViewState(
+    val isLoading: Boolean = false
 ) : UIContract.State
