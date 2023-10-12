@@ -19,6 +19,7 @@ struct DiaryScreen: View {
     
     @State private var showingCreateNewAreaSheet = false
     @State private var showingAreaDetailSheet = false
+    @State private var showingCreateNewNoteSheet = false
     
     @State private var selectedPage: Int = 0
     
@@ -38,10 +39,12 @@ struct DiaryScreen: View {
             case 0: NotesView(
                 isLoading: state.notesViewState.isLoading,
                 createGoalClick: {
-                    
+                    viewModel.dispatch(action: CreateNewNoteActionOpenGoal())
+                    showingCreateNewNoteSheet = true
                 },
                 createNoteClick: {
-                    
+                    viewModel.dispatch(action: CreateNewNoteActionOpenDefault())
+                    showingCreateNewNoteSheet = true
                 }
             )
             case 1: AreasView(
@@ -92,6 +95,12 @@ struct DiaryScreen: View {
                 }
             )
         }
+        .sheet(isPresented: $showingCreateNewNoteSheet) {
+            CreateNewNoteBottomSheet(
+                isLoading: false,
+                areas: state.areasViewState.items
+            )
+        }
         .onAppear { observeEvents() }
         .onDisappear {
             eventsObserver?.cancel()
@@ -108,6 +117,9 @@ extension DiaryScreen {
                     switch(event) {
                     case _ as CreateNewAreaEventCreatedSuccess: do {
                         showingCreateNewAreaSheet = false
+                    }
+                    case _ as CreateNewNoteEventCreatedSuccess: do {
+                        showingCreateNewNoteSheet = false
                     }
                     default:
                         break

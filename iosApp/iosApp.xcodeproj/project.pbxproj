@@ -20,6 +20,7 @@
 		460054B22ABB56F900586767 /* WisdomScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460054B12ABB56F900586767 /* WisdomScreen.swift */; };
 		460054B42ABB56FF00586767 /* WisdomRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460054B32ABB56FF00586767 /* WisdomRoute.swift */; };
 		460054B72ABB576B00586767 /* WisdomItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460054B62ABB576B00586767 /* WisdomItem.swift */; };
+		460487952AD83989005E8A54 /* CreateNewNoteBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460487942AD83989005E8A54 /* CreateNewNoteBottomSheet.swift */; };
 		46059D222AC4037000DC5015 /* AreasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D212AC4037000DC5015 /* AreasView.swift */; };
 		46059D242AC4037500DC5015 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D232AC4037500DC5015 /* NotesView.swift */; };
 		46059D262AC4037E00DC5015 /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D252AC4037E00DC5015 /* TasksView.swift */; };
@@ -110,6 +111,7 @@
 		460054B12ABB56F900586767 /* WisdomScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomScreen.swift; sourceTree = "<group>"; };
 		460054B32ABB56FF00586767 /* WisdomRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomRoute.swift; sourceTree = "<group>"; };
 		460054B62ABB576B00586767 /* WisdomItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomItem.swift; sourceTree = "<group>"; };
+		460487942AD83989005E8A54 /* CreateNewNoteBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewNoteBottomSheet.swift; sourceTree = "<group>"; };
 		46059D212AC4037000DC5015 /* AreasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasView.swift; sourceTree = "<group>"; };
 		46059D232AC4037500DC5015 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		46059D252AC4037E00DC5015 /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
@@ -236,6 +238,14 @@
 				460054B62ABB576B00586767 /* WisdomItem.swift */,
 			);
 			path = components;
+			sourceTree = "<group>";
+		};
+		460487932AD83976005E8A54 /* createnewnote */ = {
+			isa = PBXGroup;
+			children = (
+				460487942AD83989005E8A54 /* CreateNewNoteBottomSheet.swift */,
+			);
+			path = createnewnote;
 			sourceTree = "<group>";
 		};
 		46059D1E2AC4035800DC5015 /* areas */ = {
@@ -427,6 +437,7 @@
 		468B794D2ACC577800A8886C /* components */ = {
 			isa = PBXGroup;
 			children = (
+				460487932AD83976005E8A54 /* createnewnote */,
 				468B794E2ACC57F000A8886C /* AddNoteItem.swift */,
 			);
 			path = components;
@@ -817,6 +828,7 @@
 				46D8577E2AD0787E00BE74DA /* AddAreaHeader.swift in Sources */,
 				469D0FBE2AB1DE330060CE95 /* WhiteButton.swift in Sources */,
 				46059D262AC4037E00DC5015 /* TasksView.swift in Sources */,
+				460487952AD83989005E8A54 /* CreateNewNoteBottomSheet.swift in Sources */,
 				461F7C682AA88B80003791CF /* StringExt.swift in Sources */,
 				46D857742ACFF1C500BE74DA /* AddAreaViewModel.swift in Sources */,
 				461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */,

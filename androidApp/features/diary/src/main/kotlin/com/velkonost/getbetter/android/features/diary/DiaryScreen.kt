@@ -31,6 +31,7 @@ import com.velkonost.getbetter.shared.features.diary.contracts.AddAreaClick
 import com.velkonost.getbetter.shared.features.diary.contracts.AreasViewState
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaEvent
+import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteEvent
 import com.velkonost.getbetter.shared.features.diary.contracts.NotesViewState
 import com.velkonost.getbetter.shared.features.diary.contracts.TasksViewState
@@ -94,11 +95,13 @@ fun DiaryScreen(
                 },
                 createGoalClick = {
                     scope.launch {
+                        viewModel.dispatch(CreateNewNoteAction.OpenGoal)
                         createNewNoteSheetState.show()
                     }
                 },
                 createNoteClick = {
                     scope.launch {
+                        viewModel.dispatch(CreateNewNoteAction.OpenDefault)
                         createNewNoteSheetState.show()
                     }
                 }

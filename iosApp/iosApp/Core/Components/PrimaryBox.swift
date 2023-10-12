@@ -10,13 +10,15 @@ import Foundation
 import SwiftUI
 
 struct PrimaryBox<Content: View>: View {
+    
+    var padding: EdgeInsets = .init(top: 16, leading: 16, bottom: 16, trailing: 16)
     @ViewBuilder let content: Content
     
     var body: some View {
         ZStack {
             content
         }
-        .padding(.init(top: 16, leading: 16, bottom: 16, trailing: 16))
+        .padding(padding)
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color.backgroundItem)
