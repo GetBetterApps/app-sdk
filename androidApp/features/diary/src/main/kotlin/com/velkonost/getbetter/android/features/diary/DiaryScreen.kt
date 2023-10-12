@@ -31,6 +31,7 @@ import com.velkonost.getbetter.shared.features.diary.contracts.AddAreaClick
 import com.velkonost.getbetter.shared.features.diary.contracts.AreasViewState
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaEvent
+import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteEvent
 import com.velkonost.getbetter.shared.features.diary.contracts.NotesViewState
 import com.velkonost.getbetter.shared.features.diary.contracts.TasksViewState
 import kotlinx.coroutines.flow.collectLatest
@@ -131,6 +132,7 @@ fun DiaryScreen(
 
         CreateNewNoteBottomSheet(
             isLoading = false,
+            areas = state.areasViewState.items,
             modalSheetState = createNewNoteSheetState
         )
 
@@ -162,6 +164,10 @@ fun DiaryScreen(
             when (it) {
                 is CreateNewAreaEvent.CreatedSuccess -> {
                     createNewAreaSheetState.hide()
+                }
+
+                is CreateNewNoteEvent.CreatedSuccess -> {
+                    createNewNoteSheetState.hide()
                 }
             }
         }

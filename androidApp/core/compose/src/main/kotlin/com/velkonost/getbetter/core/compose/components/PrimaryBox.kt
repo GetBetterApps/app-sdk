@@ -15,6 +15,7 @@ import dev.icerock.moko.resources.compose.colorResource
 @Composable
 fun PrimaryBox(
     modifier: Modifier = Modifier,
+    padding: Int = 16,
     content: @Composable () -> Unit
 ) {
     Box(
@@ -29,7 +30,7 @@ fun PrimaryBox(
                 color = colorResource(resource = SharedR.colors.background_item),
                 shape = MaterialTheme.shapes.medium
             )
-            .padding(16.dp)
+            .padding(padding.dp)
     ) {
         content()
     }
