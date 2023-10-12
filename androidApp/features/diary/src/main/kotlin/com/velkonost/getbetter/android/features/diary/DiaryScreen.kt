@@ -23,6 +23,7 @@ import com.velkonost.getbetter.android.features.areadetail.AreaDetailScreen
 import com.velkonost.getbetter.android.features.diary.areas.AreasView
 import com.velkonost.getbetter.android.features.diary.areas.components.createnewarea.CreateNewAreaBottomSheet
 import com.velkonost.getbetter.android.features.diary.notes.NotesView
+import com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.CreateNewNoteBottomSheet
 import com.velkonost.getbetter.android.features.diary.tasks.TasksView
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
 import com.velkonost.getbetter.shared.features.diary.DiaryViewModel
@@ -48,6 +49,11 @@ fun DiaryScreen(
 
     val scope = rememberCoroutineScope()
     val createNewAreaSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = true,
+    )
+
+    val createNewNoteSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true,
     )
@@ -86,10 +92,14 @@ fun DiaryScreen(
                     viewModel.dispatch(AddAreaClick)
                 },
                 createGoalClick = {
-
+                    scope.launch {
+                        createNewNoteSheetState.show()
+                    }
                 },
                 createNoteClick = {
-
+                    scope.launch {
+                        createNewNoteSheetState.show()
+                    }
                 }
             )
         }
@@ -119,6 +129,11 @@ fun DiaryScreen(
             }
         )
 
+        CreateNewNoteBottomSheet(
+            isLoading = false,
+            modalSheetState = createNewNoteSheetState
+        )
+
         AreaDetailScreen(
             modalSheetState = areaDetailSheetState,
             areaId = selectedAreaId.value
@@ -127,18 +142,19 @@ fun DiaryScreen(
     }
 
     LaunchedEffect(Unit) {
-        snapshotFlow { createNewAreaSheetState.currentValue }
-            .combine(
-                snapshotFlow { areaDetailSheetState.currentValue }
-            ) { createNewAreaState, areaDetailState ->
-                val hideBottomBar =
-                    createNewAreaState != ModalBottomSheetValue.Hidden
-                            || areaDetailState != ModalBottomSheetValue.Hidden
-                hideBottomBar
-            }
-            .collect {
-                forceHideBottomBar.value = it
-            }
+        combine(
+            snapshotFlow { createNewAreaSheetState.currentValue },
+            snapshotFlow { areaDetailSheetState.currentValue },
+            snapshotFlow { createNewNoteSheetState.currentValue },
+        ) { createNewAreaState, areaDetailState, createNewNoteState ->
+            val hideBottomBar =
+                createNewAreaState != ModalBottomSheetValue.Hidden
+                        || areaDetailState != ModalBottomSheetValue.Hidden
+                        || createNewNoteState != ModalBottomSheetValue.Hidden
+            hideBottomBar
+        }.collect {
+            forceHideBottomBar.value = it
+        }
     }
 
     LaunchedEffect(Unit) {

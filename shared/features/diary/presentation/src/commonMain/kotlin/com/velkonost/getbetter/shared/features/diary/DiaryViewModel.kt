@@ -26,6 +26,7 @@ internal constructor(
 
     init {
         fetchAreas()
+        fetchNotes()
     }
 
     override fun init() {
@@ -80,6 +81,12 @@ internal constructor(
                         }
                     }
                 }
+        }
+    }
+
+    private fun fetchNotes() {
+        launchJob {
+
         }
     }
 }
