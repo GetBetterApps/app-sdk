@@ -9,8 +9,9 @@
 import Foundation
 import SwiftUI
 import SharedSDK
+import SwiftUIPager
 
-struct AreaWrapper : Identifiable {
+struct AreaWrapper : Identifiable, Equatable, Hashable {
     var id: String = UUID().uuidString
     
     var area: Area
@@ -23,11 +24,9 @@ struct CreateNewNoteBottomSheet: View {
     
     @State private var isAreaPickerVisible = false
     @State var currentAreaIndex: Int = 0
+    @StateObject var areaPage: Page = .first()
     
-    
-    let rows = [
-        GridItem(.adaptive(minimum: 80))
-    ]
+    let items: [String] = ["1", "2", "3"]
     
     init(isLoading: Bool, areas: [Area]) {
         self.isLoading = isLoading
@@ -71,47 +70,43 @@ struct CreateNewNoteBottomSheet: View {
                             }
                             
                             if isAreaPickerVisible {
-                                ZStack {
-                                    Carousel(
-                                        index: $currentAreaIndex,
-                                        items: areas.map(
-                                            { area in AreaWrapper(area: area) }
-                                        )
-                                    ) { item in
-                                        ZStack {
-                                            VStack {
-                                                Image(uiImage: Emoji.companion.getIconById(id: item.area.emojiId as! Int32).toUIImage()!)
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(width: 64, height: 64)
-                                                
-                                                Text(item.area.name)
-                                                    .style(.titleLarge)
-                                                    .foregroundColor(.textPrimary)
-                                                    .padding(.top, 12)
-                                            }
-                                        }
-                                        .frame(minWidth: 0, maxWidth: .infinity)
-                                        .padding(16)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 12)
-                                                .fill(Color.textFieldBackground)
-                                        )
-                                    }
-                                    .frame(width: UIScreen.main.bounds.width - 80, height: 150)
+                                Pager(
+                                    page: areaPage,
+                                    data: areas.map(
+                                        { area in AreaWrapper(area: area) }
+                                    ),
+                                    id: \.self.area.id
+                                ) { areaWrapper in
                                     
-                                    .padding(.bottom, 16)
+                                    ZStack {
+                                        VStack {
+                                            Image(uiImage: Emoji.companion.getIconById(id: areaWrapper.area.emojiId as! Int32).toUIImage()!)
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 64, height: 64)
+                                            
+                                            Text(areaWrapper.area.name)
+                                                .style(.titleLarge)
+                                                .foregroundColor(.textPrimary)
+                                                .padding(.top, 12)
+                                        }
+                                    }
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                    .padding(16)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .fill(Color.textFieldBackground)
+                                    )
                                 }
-                                .frame(maxWidth: 150)
-                                
-                                
+                                .interactive(rotation: true)
+                                .interactive(scale: 0.8)
+                                .alignment(.center)
+                                .preferredItemSize(CGSize(width: 300, height: 150))
+                                .frame(height: 150)
+                                .padding(.bottom, 16)
                             }
                         }
                     }
-                    
-                    .frame(width: UIScreen.main.bounds.width - 40)
-                    
-                    
                     Spacer()
                 }
                 
@@ -119,66 +114,5 @@ struct CreateNewNoteBottomSheet: View {
             .padding(20)
         }
         .ignoresSafeArea(.all)
-    }
-}
-
-struct Carousel<Content: View, T: Identifiable> : View {
-    var content: (T) -> Content
-    var list: [T]
-    
-    var spacing: CGFloat
-    var trailingSpace: CGFloat
-    @Binding var index: Int
-    
-    init(spacing: CGFloat = 15, trailingSpace: CGFloat = 100, index: Binding<Int>, items: [T], @ViewBuilder content: @escaping (T) -> Content) {
-        
-        self.list = items
-        self.spacing = spacing
-        self.trailingSpace = trailingSpace
-        self._index = index
-        self.content = content
-    }
-    
-    @GestureState var offset: CGFloat = 0
-    @State var currentIndex: Int = 0
-    
-    var body: some View {
-        
-        GeometryReader { proxy in
-            
-            let width = proxy.size.width - (trailingSpace - spacing)
-            let adjustMentWidth = (trailingSpace / 2) - spacing
-            
-            HStack(spacing: spacing) {
-                ForEach(list) { item in
-                    content(item)
-                        .frame(width: proxy.size.width - trailingSpace, height: 150)
-                }
-            }
-            .padding(.horizontal, spacing)
-            .offset(x: (CGFloat(currentIndex) * -width) + (currentIndex != 0 ? adjustMentWidth : 0) + offset)
-            
-            .gesture(
-                DragGesture()
-                    .updating($offset, body: { value, out, _ in
-                        out = value.translation.width
-                    })
-                    .onEnded({ value in
-                        let offsetX = value.translation.width
-                        let progress = -offsetX / width
-                        let roundIndex = progress.rounded()
-                        currentIndex = max(min(currentIndex + Int(roundIndex), list.count - 1), 0)
-                        currentIndex = index
-                    })
-                    .onChanged({ value in
-                        let offsetX = value.translation.width
-                        let progress = -offsetX / width
-                        let roundIndex = progress.rounded()
-                        index = max(min(currentIndex + Int(roundIndex), list.count - 1), 0)
-                    })
-            )
-            
-        }
-        .animation(.easeInOut, value: offset == 0)
     }
 }

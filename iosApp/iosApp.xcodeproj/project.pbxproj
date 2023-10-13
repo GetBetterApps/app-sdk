@@ -68,6 +68,7 @@
 		468B876E2ABC45D2001BBEB1 /* CalendarsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B876D2ABC45D2001BBEB1 /* CalendarsScreen.swift */; };
 		468B87702ABC45DB001BBEB1 /* SocialRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B876F2ABC45DB001BBEB1 /* SocialRoute.swift */; };
 		468B87722ABC45E1001BBEB1 /* SocialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B87712ABC45E1001BBEB1 /* SocialScreen.swift */; };
+		469629C22AD9306200D41AF1 /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 469629C12AD9306200D41AF1 /* SwiftUIPager */; };
 		4696B6AE2AD15EE600DDD405 /* AreaDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4696B6AD2AD15EE600DDD405 /* AreaDetailScreen.swift */; };
 		4696B6B02AD15F6D00DDD405 /* AreaDetailVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4696B6AF2AD15F6D00DDD405 /* AreaDetailVIewModel.swift */; };
 		469D0FBE2AB1DE330060CE95 /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469D0FBD2AB1DE330060CE95 /* WhiteButton.swift */; };
@@ -197,6 +198,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				469629C22AD9306200D41AF1 /* SwiftUIPager in Frameworks */,
 				DD1CD8AC3CDFF9460475C5F4 /* Pods_iosApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -611,6 +613,7 @@
 			);
 			name = iosApp;
 			packageProductDependencies = (
+				469629C12AD9306200D41AF1 /* SwiftUIPager */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* iosApp.app */;
@@ -643,6 +646,7 @@
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
 				46B17E0A2AADCD94008C2BC4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -1031,6 +1035,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.4.0;
+			};
+		};
 		46B17E0A2AADCD94008C2BC4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1040,6 +1052,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		469629C12AD9306200D41AF1 /* SwiftUIPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
+			productName = SwiftUIPager;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7555FF73242A565900829871 /* Project object */;
 }
