@@ -37,6 +37,7 @@ import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.core.compose.extensions.horizontalFadingEdge
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.util.randomUUID
+import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteViewState
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
@@ -48,7 +49,7 @@ import model.Area
 fun CreateNewNoteBottomSheet(
     modifier: Modifier = Modifier,
     areas: List<Area>,
-    isLoading: Boolean,
+    state: CreateNewNoteViewState,
     modalSheetState: ModalBottomSheetState,
 ) {
 
@@ -61,7 +62,7 @@ fun CreateNewNoteBottomSheet(
         sheetShape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
         sheetBackgroundColor = colorResource(resource = SharedR.colors.main_background),
         sheetContent = {
-            if (isLoading) {
+            if (state.isLoading) {
                 Box(
                     modifier = modifier
                         .fillMaxWidth()

@@ -14,13 +14,15 @@ import com.velkonost.getbetter.shared.features.diary.contracts.DiaryEvent
 import com.velkonost.getbetter.shared.features.diary.contracts.DiaryNavigation
 import com.velkonost.getbetter.shared.features.diary.contracts.DiaryViewState
 import com.velkonost.getbetter.shared.features.diary.contracts.NavigateToAddArea
+import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 
 class DiaryViewModel
 internal constructor(
-    private val areasRepository: AreasRepository
+    private val areasRepository: AreasRepository,
+    private val notesRepository: NotesRepository
 ) : BaseViewModel<DiaryViewState, DiaryAction, DiaryNavigation, DiaryEvent>(
     initialState = DiaryViewState()
 ) {
@@ -62,7 +64,7 @@ internal constructor(
 
     @NativeCoroutinesState
     val createNewNoteViewModel: StateFlow<CreateNewNoteViewModel> =
-        MutableStateFlow(CreateNewNoteViewModel())
+        MutableStateFlow(CreateNewNoteViewModel(notesRepository))
 
     override fun dispatch(action: DiaryAction) = when (action) {
         is CreateNewAreaAction -> dispatchCreateNewAreaAction(action)

@@ -29,7 +29,9 @@ kotlin {
 
                 api(projects.shared.core.model)
                 implementation(projects.shared.resources)
+
                 implementation(projects.shared.features.areas.api)
+                implementation(projects.shared.features.notes.api)
             }
         }
 
