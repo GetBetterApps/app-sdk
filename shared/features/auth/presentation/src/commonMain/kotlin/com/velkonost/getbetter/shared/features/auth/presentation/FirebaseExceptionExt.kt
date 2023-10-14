@@ -1,7 +1,6 @@
 package com.velkonost.getbetter.shared.features.auth.presentation
 
 import com.velkonost.getbetter.shared.resources.SharedR
-import dev.gitlive.firebase.FirebaseException
 import dev.gitlive.firebase.auth.FirebaseAuthEmailException
 import dev.gitlive.firebase.auth.FirebaseAuthInvalidCredentialsException
 import dev.gitlive.firebase.auth.FirebaseAuthInvalidUserException

@@ -1,9 +1,9 @@
 package com.velkonost.getbetter.extensions
 
-import org.gradle.api.Project
-import com.velkonost.getbetter.util.getLocalProperty
-import com.velkonost.getbetter.util.getKeystoreProperty
 import com.velkonost.getbetter.util.getApiProperty
+import com.velkonost.getbetter.util.getKeystoreProperty
+import com.velkonost.getbetter.util.getLocalProperty
+import org.gradle.api.Project
 
 /**
  * Obtain property declared on `$projectRoot/local.properties` file.

@@ -78,30 +78,30 @@ fun BottomBar(
             targetOffsetY = { it }
         )
     ) {
-            Row(
-                modifier = Modifier
-                    .advancedShadow(
-                        cornersRadius = 32.dp,
-                        shadowBlurRadius = 8.dp
+        Row(
+            modifier = Modifier
+                .advancedShadow(
+                    cornersRadius = 32.dp,
+                    shadowBlurRadius = 8.dp
+                )
+                .fillMaxWidth()
+                .height(110.dp)
+                .background(
+                    color = colorResource(resource = SharedR.colors.background_item),
+                    shape = RoundedCornerShape(
+                        topStart = 32.dp,
+                        topEnd = 32.dp
                     )
-                    .fillMaxWidth()
-                    .height(110.dp)
-                    .background(
-                        color = colorResource(resource = SharedR.colors.background_item),
-                        shape = RoundedCornerShape(
-                            topStart = 32.dp,
-                            topEnd = 32.dp
-                        )
-                    ),
+                ),
 
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.Top
-            ) {
-                NavigationScreens.forEach { screen ->
-                    BottomBarItem(
-                        screen, currentDestination, navController, haptic
-                    )
-                }
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.Top
+        ) {
+            NavigationScreens.forEach { screen ->
+                BottomBarItem(
+                    screen, currentDestination, navController, haptic
+                )
+            }
         }
     }
 

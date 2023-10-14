@@ -6,4 +6,4 @@ import com.velkonost.getbetter.shared.features.presentation.model.WisdomType
 data class WisdomViewState(
     val isLoading: Boolean = false,
     val items: List<WisdomType> = WisdomType.values().toList()
-): UIContract.State
+) : UIContract.State

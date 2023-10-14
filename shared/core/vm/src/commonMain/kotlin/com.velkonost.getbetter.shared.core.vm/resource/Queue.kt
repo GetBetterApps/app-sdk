@@ -1,6 +1,6 @@
 package com.velkonost.getbetter.shared.core.vm.resource
 
-internal interface Queue<T: Any> {
+internal interface Queue<T : Any> {
 
     val count: Int
 

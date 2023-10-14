@@ -91,7 +91,10 @@ fun Iterable<NavRoute<*>>.provide(
 ) =
     forEach { it.asComposable(builder, navController, forceHideBottomBar) }
 
-private fun handleNavToRoute(controller: NavHostController, event: NavigationEvent.NavigateToRoute) {
+private fun handleNavToRoute(
+    controller: NavHostController,
+    event: NavigationEvent.NavigateToRoute
+) {
     if (controller.currentDestination?.route == event.route) {
         return
     }
@@ -106,7 +109,10 @@ private fun handleNavToRoute(controller: NavHostController, event: NavigationEve
     }
 }
 
-private fun onNavAndPopUpToRoute(controller: NavHostController, event: NavigationEvent.NavigateAndPopUpToRoute) {
+private fun onNavAndPopUpToRoute(
+    controller: NavHostController,
+    event: NavigationEvent.NavigateAndPopUpToRoute
+) {
     if (controller.currentDestination?.route == event.route) {
         return
     }

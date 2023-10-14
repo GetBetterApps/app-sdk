@@ -1,8 +1,5 @@
-
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 import org.gradle.kotlin.dsl.maven
-import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
-import com.velkonost.getbetter.util.libs
 
 fun RepositoryHandler.applyDefault() {
     google()

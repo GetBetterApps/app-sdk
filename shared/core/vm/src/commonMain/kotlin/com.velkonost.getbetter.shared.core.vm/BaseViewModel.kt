@@ -40,7 +40,7 @@ constructor(
     val viewState
         get() = _viewState.asStateFlow()
 
-//    @NativeCoroutinesIgnore
+    //    @NativeCoroutinesIgnore
     private val _events by lazy { MutableSharedFlow<E>() }
 
     @NativeCoroutines

@@ -13,7 +13,7 @@ internal constructor() :
         initialState = DetailViewState()
     ) {
 
-    override fun dispatch(action: DetailAction) = when(action) {
+    override fun dispatch(action: DetailAction) = when (action) {
         is Increment -> obtainIncrement()
         is Decrement -> obtainDecrement()
     }

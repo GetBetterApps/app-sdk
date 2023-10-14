@@ -13,7 +13,7 @@ internal constructor() :
     ) {
 
 
-    override fun dispatch(action: HomeAction) = when(action) {
+    override fun dispatch(action: HomeAction) = when (action) {
         is NavigateToDetails -> emit(action)
     }
 

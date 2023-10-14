@@ -1,6 +1,5 @@
 package com.velkonost.getbetter
 
-import org.gradle.api.Project
 import org.gradle.api.internal.catalog.DelegatingProjectDependency
 
 typealias RootProjectAccessor = String

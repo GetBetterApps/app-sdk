@@ -9,7 +9,7 @@ inline fun <reified R : Any> flowRequest(noinline request: suspend () -> R): Flo
 
         runCatching<R> {
 //            withNetwork {
-                request.invoke()
+            request.invoke()
 //            }
         }.onFailure {
             emit(ResultState.Failure(it as Exception))

@@ -26,9 +26,11 @@ object WisdomNavRoute : NavRoute<WisdomViewModel> {
     override val viewModel: WisdomViewModel
         @Composable get() = koinViewModel()
 
-    override fun getEnterTransition(): (AnimatedBackStack.() -> EnterTransition?) = GeneralEnterTransition
+    override fun getEnterTransition(): (AnimatedBackStack.() -> EnterTransition?) =
+        GeneralEnterTransition
 
-    override fun getExitTransition(): (AnimatedBackStack.() -> ExitTransition?) = GeneralExitTransition
+    override fun getExitTransition(): (AnimatedBackStack.() -> ExitTransition?) =
+        GeneralExitTransition
 
     override fun getPopEnterTransition() = GeneralEnterTransition
 

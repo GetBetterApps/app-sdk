@@ -22,9 +22,7 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.resources.SharedR
-import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.compose.colorResource
-import dev.icerock.moko.resources.compose.painterResource
 
 @Composable
 fun WisdomItem(

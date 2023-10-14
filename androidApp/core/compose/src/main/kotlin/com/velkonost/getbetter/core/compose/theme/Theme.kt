@@ -25,7 +25,7 @@ fun ApplicationTheme(content: @Composable () -> Unit) {
     WindowCompat.setDecorFitsSystemWindows(window, false)
 
     window.statusBarColor = if (transparentStatus) colorTransparent else colorBlackTranslucent
-    window.navigationBarColor = if (transparentNav) colorTransparent else  colorBlackTranslucent
+    window.navigationBarColor = if (transparentNav) colorTransparent else colorBlackTranslucent
 
     windowsInsetsController.isAppearanceLightStatusBars = !darkTheme
     windowsInsetsController.isAppearanceLightNavigationBars = !darkTheme

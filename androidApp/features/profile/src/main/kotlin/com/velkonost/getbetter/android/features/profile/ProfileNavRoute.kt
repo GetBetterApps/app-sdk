@@ -8,7 +8,7 @@ import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.ImageResource
 import org.koin.androidx.compose.koinViewModel
 
-object ProfileNavRoute: NavRoute<ProfileViewModel> {
+object ProfileNavRoute : NavRoute<ProfileViewModel> {
 
     override val route: String
         get() = NavigationScreen.ProfileNavScreen.route

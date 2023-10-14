@@ -11,7 +11,7 @@ internal constructor(
 ) : BaseViewModel<SocialViewState, SocialAction, SocialNavigation, Nothing>(
     initialState = SocialViewState()
 ) {
-    override fun dispatch(action: SocialAction) = when(action) {
+    override fun dispatch(action: SocialAction) = when (action) {
 
         else -> {}
     }

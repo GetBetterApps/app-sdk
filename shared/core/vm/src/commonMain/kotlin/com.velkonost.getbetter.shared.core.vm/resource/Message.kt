@@ -1,6 +1,5 @@
 package com.velkonost.getbetter.shared.core.vm.resource
 
-import dev.icerock.moko.resources.StringResource
 import dev.icerock.moko.resources.desc.ResourceStringDesc
 import kotlin.random.Random
 

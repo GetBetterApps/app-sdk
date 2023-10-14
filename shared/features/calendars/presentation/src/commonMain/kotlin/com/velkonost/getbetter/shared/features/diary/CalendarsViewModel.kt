@@ -11,7 +11,7 @@ internal constructor(
 ) : BaseViewModel<CalendarsViewState, CalendarsAction, CalendarsNavigation, Nothing>(
     initialState = CalendarsViewState()
 ) {
-    override fun dispatch(action: CalendarsAction) = when(action) {
+    override fun dispatch(action: CalendarsAction) = when (action) {
 
         else -> {}
     }

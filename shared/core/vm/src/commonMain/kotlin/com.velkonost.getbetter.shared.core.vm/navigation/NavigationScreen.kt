@@ -10,8 +10,8 @@ sealed class NavigationScreen(val route: String) {
     data object AddAreaNavScreen : NavigationScreen(ADD_AREA_DESTINATION)
     data object AreaDetailNavScreen : NavigationScreen(AREA_DETAIL_DESTINATION)
     data object CalendarsNavScreen : NavigationScreen(CALENDARS_DESTINATION)
-    data object WisdomNavScreen: NavigationScreen(WISDOM_DESTINATION)
-    data object ProfileNavScreen: NavigationScreen(PROFILE_DESTINATION)
+    data object WisdomNavScreen : NavigationScreen(WISDOM_DESTINATION)
+    data object ProfileNavScreen : NavigationScreen(PROFILE_DESTINATION)
 
     data object HomeNavScreen : NavigationScreen(HOME_DESTINATION)
 

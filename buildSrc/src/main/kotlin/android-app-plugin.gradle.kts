@@ -2,7 +2,6 @@
 
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 import com.velkonost.getbetter.ANDROID_PACKAGE
-import com.velkonost.getbetter.SHARED_PACKAGE
 import com.velkonost.getbetter.extensions.BuildTypeDebug
 import com.velkonost.getbetter.extensions.BuildTypeRelease
 import com.velkonost.getbetter.extensions.getKeystoreProperty
@@ -41,7 +40,8 @@ android {
         variant.outputs
             .map { it as BaseVariantOutputImpl }
             .forEach { output ->
-                output.outputFileName = "app-${variant.baseName}-${variant.buildType.name}-${variant.versionName}.apk"
+                output.outputFileName =
+                    "app-${variant.baseName}-${variant.buildType.name}-${variant.versionName}.apk"
             }
     }
 

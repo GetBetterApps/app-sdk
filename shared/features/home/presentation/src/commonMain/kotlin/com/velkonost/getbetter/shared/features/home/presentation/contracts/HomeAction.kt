@@ -8,6 +8,6 @@ sealed interface HomeAction : UIContract.Action
 
 data object NavigateToDetails : HomeAction, HomeNavigation {
     override val event: NavigationEvent = NavigationEvent.NavigateToRoute(
-            route = NavigationScreen.DetailNavScreen.route,
-        )
+        route = NavigationScreen.DetailNavScreen.route,
+    )
 }
