@@ -1,9 +1,9 @@
 package com.velkonost.getbetter.shared.features.diary.contracts
 
 import com.velkonost.getbetter.shared.core.model.Emoji
+import com.velkonost.getbetter.shared.core.model.NoteType
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import com.velkonost.getbetter.shared.features.diary.model.DiaryTab
-import com.velkonost.getbetter.shared.features.diary.model.NoteType
 import model.Area
 
 data class DiaryViewState(

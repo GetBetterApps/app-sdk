@@ -1,10 +1,10 @@
 package com.velkonost.getbetter.shared.features.diary
 
+import com.velkonost.getbetter.shared.core.model.NoteType
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteEvent
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteViewState
-import com.velkonost.getbetter.shared.features.diary.model.NoteType
 
 class CreateNewNoteViewModel
 internal constructor(
