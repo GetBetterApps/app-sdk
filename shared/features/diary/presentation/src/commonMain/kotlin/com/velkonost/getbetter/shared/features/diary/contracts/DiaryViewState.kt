@@ -42,5 +42,14 @@ data class CreateNewAreaViewState(
 
 data class CreateNewNoteViewState(
     val isLoading: Boolean = false,
-    val type: NoteType = NoteType.Default
+    val type: NoteType = NoteType.Default,
+    val selectedArea: Area? = null,
+    val text: String = "",
+    val mediaUrls: List<String> = emptyList(),
+
+    val tags: List<String> = emptyList(),
+    val newTagText: String = "",
+
+    val subNotes: List<String> = emptyList(),
+    val newSubNoteText: String = ""
 ) : UIContract.State
