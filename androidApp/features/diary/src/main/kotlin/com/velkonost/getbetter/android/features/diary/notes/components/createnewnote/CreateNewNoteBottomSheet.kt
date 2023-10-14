@@ -1,15 +1,20 @@
 package com.velkonost.getbetter.android.features.diary.notes.components.createnewnote
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,11 +31,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
@@ -56,6 +66,15 @@ fun CreateNewNoteBottomSheet(
     val areasPagerState = rememberPagerState(initialPage = 0, pageCount = { areas.size })
     val selectedArea = remember { mutableStateOf<Area?>(null) }
     val isAreaPickerVisible = remember { mutableStateOf(false) }
+
+    val scope = rememberCoroutineScope()
+    val areaArrowRotationAngle by animateFloatAsState(
+        targetValue = if (isAreaPickerVisible.value) -90F else 90F,
+        animationSpec = tween(durationMillis = 500, easing = FastOutLinearInEasing),
+        label = ""
+    )
+
+    val interactionSource = remember { MutableInteractionSource() }
 
     ModalBottomSheetLayout(
         sheetState = modalSheetState,
@@ -93,7 +112,10 @@ fun CreateNewNoteBottomSheet(
                                 modifier = modifier
                                     .fillMaxWidth()
                                     .padding(16.dp)
-                                    .clickable {
+                                    .clickable(
+                                        interactionSource = interactionSource,
+                                        indication = null
+                                    ) {
                                         isAreaPickerVisible.value = !isAreaPickerVisible.value
                                     },
                                 verticalAlignment = Alignment.CenterVertically,
@@ -107,9 +129,24 @@ fun CreateNewNoteBottomSheet(
 
                                 Text(
                                     modifier = modifier.padding(start = 12.dp),
-                                    text = selectedArea.value?.name ?: "",
+                                    text = selectedArea.value?.name ?: "select area for note",
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
                                     color = colorResource(resource = SharedR.colors.text_primary),
                                     style = MaterialTheme.typography.titleMedium
+                                )
+
+                                Spacer(modifier = modifier.weight(1f))
+
+                                Image(
+                                    modifier = modifier
+                                        .size(24.dp)
+                                        .rotate(areaArrowRotationAngle),
+                                    painter = painterResource(imageResource = SharedR.images.ic_arrow_right),
+                                    contentDescription = null,
+                                    colorFilter = ColorFilter.tint(
+                                        color = colorResource(resource = SharedR.colors.icon_inactive)
+                                    )
                                 )
                             }
 

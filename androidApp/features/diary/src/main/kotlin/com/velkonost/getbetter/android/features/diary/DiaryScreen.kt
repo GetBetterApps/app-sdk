@@ -134,8 +134,8 @@ fun DiaryScreen(
         )
 
         CreateNewNoteBottomSheet(
-            isLoading = false,
             areas = state.areasViewState.items,
+            state = state.createNewNoteViewState,
             modalSheetState = createNewNoteSheetState
         )
 

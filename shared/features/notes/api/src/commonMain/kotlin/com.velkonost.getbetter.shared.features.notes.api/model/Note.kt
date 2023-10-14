@@ -37,9 +37,12 @@ data class Note(
     val isPrivate: Boolean,
 
     @SerialName(subNotesPropertyName)
-    val subNotes: List<SubNote>
+    val subNotes: List<SubNote>,
 
-) {
+    @SerialName(isCompletedPropertyName)
+    val isCompleted: Boolean,
+
+    ) {
     companion object {
         const val idPropertyName = "id"
         const val noteTypePropertyName = "noteType"
@@ -52,5 +55,6 @@ data class Note(
         const val isActivePropertyName = "isActive"
         const val isPrivatePropertyName = "isPrivate"
         const val subNotesPropertyName = "subNotes"
+        const val isCompletedPropertyName = "isCompleted"
     }
 }
