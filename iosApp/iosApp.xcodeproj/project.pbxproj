@@ -645,7 +645,6 @@
 			);
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
-				46B17E0A2AADCD94008C2BC4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
@@ -1041,14 +1040,6 @@
 			requirement = {
 				kind = exactVersion;
 				version = 2.4.0;
-			};
-		};
-		46B17E0A2AADCD94008C2BC4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = exactVersion;
-				version = 10.7.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

@@ -29,6 +29,7 @@ kotlin {
             export(projects.shared.core.datastore)
             export(projects.shared.core.util)
             export(projects.shared.core.vm)
+            export(projects.shared.core.network)
             export(projects.shared.resources)
 
             export(projects.shared.features.areas.api)
@@ -111,6 +112,7 @@ kotlin {
                 api(projects.shared.core.datastore)
                 api(projects.shared.core.util)
                 api(projects.shared.core.vm)
+                api(projects.shared.core.network)
                 api(projects.shared.resources)
 
                 api(projects.shared.features.areas.api)

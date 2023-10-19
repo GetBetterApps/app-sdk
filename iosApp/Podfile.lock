@@ -645,9 +645,6 @@ PODS:
   - Firebase/Crashlytics (10.14.0):
     - Firebase/CoreOnly
     - FirebaseCrashlytics (~> 10.14.0)
-  - Firebase/Firestore (10.14.0):
-    - Firebase/CoreOnly
-    - FirebaseFirestore (~> 10.14.0)
   - Firebase/Storage (10.14.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 10.14.0)
@@ -694,7 +691,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.8)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (~> 2.1)
-  - FirebaseFirestore (10.14.0):
+  - FirebaseFirestore (10.15.0):
     - abseil/algorithm (~> 1.20220623.0)
     - abseil/base (~> 1.20220623.0)
     - abseil/container/flat_hash_map (~> 1.20220623.0)
@@ -856,8 +853,8 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Crashlytics
-  - Firebase/Firestore
   - Firebase/Storage
+  - FirebaseFirestore
   - KMMViewModelSwiftUI (= 1.0.0-ALPHA-14)
   - KMPNativeCoroutinesAsync (= 1.0.0-ALPHA-18)
   - lottie-ios
@@ -914,7 +911,7 @@ SPEC CHECKSUMS:
   FirebaseCoreExtension: d3f1ea3725fb41f56e8fbfb29eeaff54e7ffb8f6
   FirebaseCoreInternal: d558159ee6cc4b823c2296ecc193de9f6d9a5bb3
   FirebaseCrashlytics: 0fbfa4efa57e8a09d8bf195393b50c237e3322b5
-  FirebaseFirestore: 808dd08cbc1c7be9052055f62ab312fdae611e37
+  FirebaseFirestore: b4c0eaaf24efda5732ec21d9e6c788d083118ca6
   FirebaseInstallations: f672b1eda64e6381c21d424a2f680a943fd83f3b
   FirebaseSessions: ee59a7811bef4c15f65ef6472f3210faa293f9c8
   FirebaseStorage: e97b4bdd84b21ec060d5737a9c4f8f8fc6a0d041
@@ -937,6 +934,6 @@ SPEC CHECKSUMS:
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   umbrella: e75f2a7eabf35a2fbad73ae6869d1803e4be4d41
 
-PODFILE CHECKSUM: 6d4c55b0e498f04c3b7a26780b4eefe5ca613c72
+PODFILE CHECKSUM: 0f035c6e7952107dd49354e965cc72307d46784a
 
 COCOAPODS: 1.12.1

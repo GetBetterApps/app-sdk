@@ -1,31 +1,31 @@
 target 'iosApp' do
   use_frameworks!
-  platform :ios, '15.0'
+  platform :ios, '16.0'
   pod 'umbrella', :path => '../shared/umbrella'
   pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-18'
   pod 'KMMViewModelSwiftUI', '1.0.0-ALPHA-14'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Crashlytics'
-  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestore'
   pod 'Firebase/Storage'
   pod 'lottie-ios'
 
 end
 
-post_install do |installer|
-  installer.aggregate_targets.each do |target|
-    target.xcconfigs.each do |variant, xcconfig|
-      xcconfig_path = target.client_root + target.xcconfig_relative_path(variant)
-      IO.write(xcconfig_path, IO.read(xcconfig_path).gsub("DT_TOOLCHAIN_DIR", "TOOLCHAIN_DIR"))
-    end
-  end
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      if config.base_configuration_reference.is_a? Xcodeproj::Project::Object::PBXFileReference
-        xcconfig_path = config.base_configuration_reference.real_path
-        IO.write(xcconfig_path, IO.read(xcconfig_path).gsub("DT_TOOLCHAIN_DIR", "TOOLCHAIN_DIR"))
-      end
-    end
-  end
-end
+ post_install do |installer|
+   installer.aggregate_targets.each do |target|
+     target.xcconfigs.each do |variant, xcconfig|
+       xcconfig_path = target.client_root + target.xcconfig_relative_path(variant)
+       IO.write(xcconfig_path, IO.read(xcconfig_path).gsub("DT_TOOLCHAIN_DIR", "TOOLCHAIN_DIR"))
+     end
+   end
+   installer.pods_project.targets.each do |target|
+     target.build_configurations.each do |config|
+       if config.base_configuration_reference.is_a? Xcodeproj::Project::Object::PBXFileReference
+         xcconfig_path = config.base_configuration_reference.real_path
+         IO.write(xcconfig_path, IO.read(xcconfig_path).gsub("DT_TOOLCHAIN_DIR", "TOOLCHAIN_DIR"))
+       end
+     end
+   end
+ end

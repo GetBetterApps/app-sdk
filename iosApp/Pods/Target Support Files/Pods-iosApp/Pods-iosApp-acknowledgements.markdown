@@ -363,16 +363,16 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
 4. Redistribution. You may reproduce and distribute copies of the
    Work or Derivative Works thereof in any medium, with or without
-      modifications, and in Source or Object form, provided that You
-      meet the following conditions:
+   modifications, and in Source or Object form, provided that You
+   meet the following conditions:
 
-      (a) You must give any other recipients of the Work or
-          Derivative Works a copy of this License; and
+   (a) You must give any other recipients of the Work or
+   Derivative Works a copy of this License; and
 
-      (b) You must cause any modified files to carry prominent notices
-          stating that You changed the files; and
+   (b) You must cause any modified files to carry prominent notices
+   stating that You changed the files; and
 
-      (c) You must retain, in the Source form of any Derivative Works
+   (c) You must retain, in the Source form of any Derivative Works
           that You distribute, all copyright, patent, trademark, and
           attribution notices from the Source form of the Work,
           excluding those notices that do not pertain to any part of
@@ -956,15 +956,15 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
    excluding communication that is conspicuously marked or otherwise
    designated in writing by the copyright owner as "Not a Contribution."
 
-      "Contributor" shall mean Licensor and any individual or Legal Entity
+   "Contributor" shall mean Licensor and any individual or Legal Entity
    on behalf of whom a Contribution has been received by Licensor and
    subsequently incorporated within the Work.
 
-   2. Grant of Copyright License. Subject to the terms and conditions of
-      this License, each Contributor hereby grants to You a perpetual,
-      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
-      copyright license to reproduce, prepare Derivative Works of,
-      publicly display, publicly perform, sublicense, and distribute the
+2. Grant of Copyright License. Subject to the terms and conditions of
+   this License, each Contributor hereby grants to You a perpetual,
+   worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+   copyright license to reproduce, prepare Derivative Works of,
+   publicly display, publicly perform, sublicense, and distribute the
       Work and such Derivative Works in Source or Object form.
 
    3. Grant of Patent License. Subject to the terms and conditions of
@@ -2492,16 +2492,16 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
 4. Redistribution. You may reproduce and distribute copies of the
    Work or Derivative Works thereof in any medium, with or without
-      modifications, and in Source or Object form, provided that You
-      meet the following conditions:
+   modifications, and in Source or Object form, provided that You
+   meet the following conditions:
 
-      (a) You must give any other recipients of the Work or
-          Derivative Works a copy of this License; and
+   (a) You must give any other recipients of the Work or
+   Derivative Works a copy of this License; and
 
-      (b) You must cause any modified files to carry prominent notices
-          stating that You changed the files; and
+   (b) You must cause any modified files to carry prominent notices
+   stating that You changed the files; and
 
-      (c) You must retain, in the Source form of any Derivative Works
+   (c) You must retain, in the Source form of any Derivative Works
           that You distribute, all copyright, patent, trademark, and
           attribution notices from the Source form of the Work,
           excluding those notices that do not pertain to any part of
@@ -3081,15 +3081,15 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
    excluding communication that is conspicuously marked or otherwise
    designated in writing by the copyright owner as "Not a Contribution."
 
-      "Contributor" shall mean Licensor and any individual or Legal Entity
+   "Contributor" shall mean Licensor and any individual or Legal Entity
    on behalf of whom a Contribution has been received by Licensor and
    subsequently incorporated within the Work.
 
-   2. Grant of Copyright License. Subject to the terms and conditions of
-      this License, each Contributor hereby grants to You a perpetual,
-      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
-      copyright license to reproduce, prepare Derivative Works of,
-      publicly display, publicly perform, sublicense, and distribute the
+2. Grant of Copyright License. Subject to the terms and conditions of
+   this License, each Contributor hereby grants to You a perpetual,
+   worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+   copyright license to reproduce, prepare Derivative Works of,
+   publicly display, publicly perform, sublicense, and distribute the
       Work and such Derivative Works in Source or Object form.
 
    3. Grant of Patent License. Subject to the terms and conditions of
