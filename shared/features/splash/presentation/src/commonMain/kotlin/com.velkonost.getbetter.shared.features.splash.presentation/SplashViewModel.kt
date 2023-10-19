@@ -7,16 +7,15 @@ import com.velkonost.getbetter.shared.features.splash.presentation.contract.Navi
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.SplashAction
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.SplashNavigation
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.SplashViewState
-import dev.gitlive.firebase.auth.FirebaseUser
+import com.velkonost.getbetter.shared.features.userinfo.api.model.UserInfo
 import kotlinx.coroutines.delay
 
 class SplashViewModel
 internal constructor(
-    private val authRepository: AuthRepository<FirebaseUser>
-) :
-    BaseViewModel<SplashViewState, SplashAction, SplashNavigation, Nothing>(
-        initialState = SplashViewState()
-    ) {
+    private val authRepository: AuthRepository<UserInfo>
+) : BaseViewModel<SplashViewState, SplashAction, SplashNavigation, Nothing>(
+    initialState = SplashViewState()
+) {
 
     init {
         setupStartDestination()

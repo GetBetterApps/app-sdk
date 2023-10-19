@@ -28,6 +28,7 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.firebase.auth)
+                implementation(projects.shared.features.userinfo.api)
             }
         }
 

@@ -36,6 +36,7 @@
         android:resizeableActivity="false"
         android:supportsRtl="true"
         android:theme="@style/MainTheme"
+        android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,DataExtractionRules,GoogleAppIndexingWarning,MissingApplicationIcon"
         tools:targetApi="o" />
 </manifest>

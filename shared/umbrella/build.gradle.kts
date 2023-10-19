@@ -27,7 +27,6 @@ kotlin {
             baseName = "SharedSDK"
 
             export(projects.shared.core.datastore)
-            export(projects.shared.core.network)
             export(projects.shared.core.util)
             export(projects.shared.core.vm)
             export(projects.shared.resources)
@@ -110,7 +109,6 @@ kotlin {
         iosMain {
             dependencies {
                 api(projects.shared.core.datastore)
-                api(projects.shared.core.network)
                 api(projects.shared.core.util)
                 api(projects.shared.core.vm)
                 api(projects.shared.resources)
