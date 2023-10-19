@@ -22,7 +22,6 @@ internal val KtorClient: HttpClient
             Logging {
                 logger = Logger.SIMPLE
                 level = LogLevel.BODY
-
             }
 
             httpTimeout {
@@ -42,6 +41,7 @@ internal val KtorClient: HttpClient
             }
 
             defaultRequest {
+                url("http://62.113.117.236")
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
             }
         }
