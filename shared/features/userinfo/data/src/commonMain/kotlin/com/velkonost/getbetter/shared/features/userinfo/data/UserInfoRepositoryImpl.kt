@@ -34,8 +34,11 @@ constructor(
         mapper = KtorUserInfo::asExternalModel,
         request = {
             val token = getUserToken()
+            var name = email.substringBefore("@")
+            if (name.isEmpty()) name = "Anon"
+
             val body = InitSettingsRequest(
-                name = email.substringBefore("@"),
+                name = name,
                 locale = locale
             )
 
