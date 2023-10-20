@@ -11,6 +11,6 @@ val AuthDataModule = module {
     singleOf(::AuthRemoteDataSource)
 
     single<AuthRepository<UserInfo>> {
-        AuthRepositoryImpl(get())
+        AuthRepositoryImpl(get(), get())
     }
 }

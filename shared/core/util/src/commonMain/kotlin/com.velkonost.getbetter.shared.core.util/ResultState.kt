@@ -2,7 +2,11 @@ package com.velkonost.getbetter.shared.core.util
 
 sealed class ResultState<out T> {
     data class Success<out T : Any?>(val data: T) : ResultState<T>()
-    data class Failure(val throwable: Throwable? = null) : ResultState<Nothing>()
+    data class Failure(
+        val throwable: Throwable? = null,
+        val errorCode: Int? = null
+    ) : ResultState<Nothing>()
+
     data object Loading : ResultState<Nothing>()
 }
 

@@ -13,8 +13,8 @@ data class KtorUserInfo(
     val email: String? = null,
 )
 
-val KtorUserInfo.asExternalModel: UserInfo
-    get() = UserInfo(
+fun KtorUserInfo.asExternalModel() =
+    UserInfo(
         registrationDate = 0L,
         lastLoginDate = 0L,
         locale = "",

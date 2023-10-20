@@ -13,6 +13,9 @@ android {
 }
 
 dependencies {
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+
     implementation(projects.shared.umbrella)
     implementation(projects.androidApp.activity)
 }

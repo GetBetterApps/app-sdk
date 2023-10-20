@@ -23,10 +23,13 @@ import di.NotesDataModule
 import di.TasksDataModule
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
+import org.koin.dsl.KoinAppDeclaration
 
 object PlatformSDK {
 
-    fun init(modules: List<Module>? = null) = startKoin {
+    fun init(modules: List<Module>? = null, appDeclaration: KoinAppDeclaration = {}) = startKoin {
+        appDeclaration()
+
         modules(
             CoreDataStoreModule,
             CoreNetworkModule,
