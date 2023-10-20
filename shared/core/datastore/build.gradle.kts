@@ -19,8 +19,9 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                api(libs.datastore)
+                
                 implementation(libs.koin.core)
-                implementation(libs.datastore)
                 implementation(libs.kotlinx.coroutines.core)
             }
         }

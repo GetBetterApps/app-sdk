@@ -23,8 +23,6 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.koin.core)
-                implementation(libs.datastore)
-                implementation(libs.bundles.ktor.common)
 
                 implementation(projects.shared.core.util)
                 implementation(projects.shared.core.network)

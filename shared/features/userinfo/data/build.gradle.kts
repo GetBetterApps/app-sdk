@@ -23,13 +23,11 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.koin.core)
-                implementation(libs.bundles.ktor.common)
-
-                implementation(libs.firebase.auth)
-                implementation(libs.firebase.firestore)
 
                 implementation(projects.shared.core.util)
                 implementation(projects.shared.core.network)
+                implementation(projects.shared.core.datastore)
+
                 implementation(projects.shared.features.userinfo.api)
             }
         }

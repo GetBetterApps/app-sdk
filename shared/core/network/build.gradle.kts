@@ -20,7 +20,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.koin.core)
-                implementation(libs.bundles.ktor.common)
+                api(libs.bundles.ktor.common)
             }
         }
 

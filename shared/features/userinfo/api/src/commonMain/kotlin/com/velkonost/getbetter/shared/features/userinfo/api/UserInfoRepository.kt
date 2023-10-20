@@ -8,16 +8,16 @@ interface UserInfoRepository {
 
     suspend fun fetchInfo(): Flow<ResultState<UserInfo>>
 
-    suspend fun initSettings(email: String): Flow<ResultState<Unit>>
+    suspend fun initSettings(email: String): Flow<ResultState<UserInfo>>
 
-    suspend fun updateRegistrationTime(): Flow<ResultState<Unit>>
+    suspend fun updateRegistrationTime(): Flow<ResultState<UserInfo>>
 
-    suspend fun updateLastLogin(): Flow<ResultState<Unit>>
+    suspend fun updateLastLogin(): Flow<ResultState<UserInfo>>
 
-    suspend fun updateLocale(locale: String): Flow<ResultState<Unit>>
+    suspend fun updateLocale(locale: String): Flow<ResultState<UserInfo>>
 
-    suspend fun updateName(newName: String): Flow<ResultState<Unit>>
+    suspend fun updateName(newName: String): Flow<ResultState<UserInfo>>
 
-    suspend fun updateAvatarUrl(newUrl: String): Flow<ResultState<Unit>>
+    suspend fun updateAvatarUrl(newUrl: String): Flow<ResultState<UserInfo>>
 
 }

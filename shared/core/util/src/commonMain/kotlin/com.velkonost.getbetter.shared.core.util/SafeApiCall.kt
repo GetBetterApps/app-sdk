@@ -4,7 +4,6 @@ import com.velkonost.getbetter.shared.core.network.model.RemoteResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-@Deprecated("does not match the server response")
 inline fun <reified R : Any> flowRequest(noinline request: suspend () -> R): Flow<ResultState<R>> =
     flow {
         emit(ResultState.Loading)
