@@ -10,7 +10,7 @@ import Foundation
 import SharedSDK
 
 extension KoinApplication {
-    static let shared = PlatformSDK().doInit(modules: nil)
+    static let shared = PlatformSDK().doInit(modules: nil, appDeclaration: {_ in })
     
     @discardableResult
     static func start() -> KoinApplication { shared }

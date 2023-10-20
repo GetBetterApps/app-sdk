@@ -27,7 +27,10 @@ import org.koin.dsl.KoinAppDeclaration
 
 object PlatformSDK {
 
-    fun init(modules: List<Module>? = null, appDeclaration: KoinAppDeclaration = {}) = startKoin {
+    fun init(
+        modules: List<Module>? = null,
+        appDeclaration: KoinAppDeclaration = {}
+    ) = startKoin {
         appDeclaration()
 
         modules(
