@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.userinfo.data
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
 import com.velkonost.getbetter.shared.core.datastore.TOKEN_KEY
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.flowRequest
@@ -35,7 +36,7 @@ constructor(
         request = {
             val token = getUserToken()
             var name = email.substringBefore("@")
-            if (name.isEmpty()) name = "Anon"
+            if (name.isEmpty()) name = "Anonymous"
 
             val body = InitSettingsRequest(
                 name = name,
@@ -83,6 +84,19 @@ constructor(
     override suspend fun updateAvatarUrl(newUrl: String): Flow<ResultState<UserInfo>> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun logout(): Flow<ResultState<UserInfo>> = flowRequest(
+        mapper = KtorUserInfo::asExternalModel,
+        request = {
+            val token = getUserToken()
+            remoteDataSource.performLogout(token)
+        },
+        onSuccess = {
+            localDataSource.edit { preferences ->
+                preferences.remove(TOKEN_KEY)
+            }
+        }
+    )
 
     private suspend fun getUserToken(): String? =
         localDataSource.data.first()[TOKEN_KEY]

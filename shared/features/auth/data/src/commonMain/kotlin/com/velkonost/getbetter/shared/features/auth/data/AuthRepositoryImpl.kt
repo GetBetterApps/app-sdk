@@ -52,10 +52,6 @@ class AuthRepositoryImpl(
     override suspend fun isUserLoggedIn(): Boolean =
         localDataSource.data.first().contains(TOKEN_KEY)
 
-
-    override suspend fun logout(): Flow<ResultState<Unit>> = flowRequest {
-    }
-
     private suspend fun saveAuthToken(value: String) {
         localDataSource.edit { preferences ->
             preferences[TOKEN_KEY] = value

@@ -20,4 +20,6 @@ interface UserInfoRepository {
 
     suspend fun updateAvatarUrl(newUrl: String): Flow<ResultState<UserInfo>>
 
+    suspend fun logout(): Flow<ResultState<UserInfo>>
+
 }

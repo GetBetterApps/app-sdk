@@ -1,5 +1,5 @@
 import com.velkonost.getbetter.shared.core.util.ResultState
-import com.velkonost.getbetter.shared.core.util.flowRequest
+import com.velkonost.getbetter.shared.core.util.flowRequestOld
 import com.velkonost.getbetter.shared.core.util.randomUUID
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.auth
@@ -44,7 +44,7 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
         description: String,
         emojiId: Int?,
         imageUrl: String?
-    ): Flow<ResultState<Unit>> = flowRequest {
+    ): Flow<ResultState<Unit>> = flowRequestOld {
         val data = hashMapOf(
             Area.namePropertyName to name,
             Area.descriptionPropertyName to description,
@@ -64,7 +64,7 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
         requiredLevel: Int,
         emojiId: Int?,
         imageUrl: String?
-    ): Flow<ResultState<Unit>> = flowRequest {
+    ): Flow<ResultState<Unit>> = flowRequestOld {
         val userId = Firebase.auth.currentUser?.uid
 
         if (userId != null) {
@@ -93,13 +93,13 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
     }
 
 
-    override fun deleteArea(areaId: String): Flow<ResultState<Unit>> = flowRequest {
+    override fun deleteArea(areaId: String): Flow<ResultState<Unit>> = flowRequestOld {
         db.collection("areas")
             .document(areaId)
             .delete()
     }
 
-    override fun leaveArea(areaId: String): Flow<ResultState<Unit>> = flowRequest {
+    override fun leaveArea(areaId: String): Flow<ResultState<Unit>> = flowRequestOld {
         val userId = Firebase.auth.currentUser?.uid
 
         if (userId != null) {
@@ -144,7 +144,7 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
         }
     }
 
-    override fun addUserArea(areaId: String): Flow<ResultState<String>> = flowRequest {
+    override fun addUserArea(areaId: String): Flow<ResultState<String>> = flowRequestOld {
         val userId = Firebase.auth.currentUser?.uid
 
         if (userId != null) {
@@ -168,7 +168,7 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
                 .document(areaId)
                 .set(data, merge = true)
 
-            return@flowRequest areaId
+//            return@flowRequest areaId
         }
 
         // TODO: change to concrete exception
@@ -218,7 +218,7 @@ constructor(private val db: FirebaseFirestore) : AreasRepository {
             ResultState.Failure(it)
         }
 
-    override fun fetchAreaDetails(areaId: String): Flow<ResultState<Area>> = flowRequest {
+    override fun fetchAreaDetails(areaId: String): Flow<ResultState<Area>> = flowRequestOld {
         val data = db.collection("areas").document(areaId).get()
 
         val areaData = data.toAreaModel()

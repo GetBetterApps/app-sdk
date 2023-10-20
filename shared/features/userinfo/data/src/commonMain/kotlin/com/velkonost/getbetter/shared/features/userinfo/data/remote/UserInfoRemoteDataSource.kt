@@ -74,7 +74,7 @@ class UserInfoRemoteDataSource(
             )
         }.body()
 
-    suspend fun performLogout(token: String?): RemoteResponse<Nothing> =
+    suspend fun performLogout(token: String?): RemoteResponse<KtorUserInfo> =
         httpClient.post {
             makeRequest(
                 path = Route.LOGOUT,

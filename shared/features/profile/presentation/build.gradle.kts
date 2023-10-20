@@ -28,7 +28,6 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.firebase.auth)
 
-                implementation(projects.shared.features.auth.api)
                 implementation(projects.shared.features.profile.api)
                 implementation(projects.shared.features.userinfo.api)
             }
