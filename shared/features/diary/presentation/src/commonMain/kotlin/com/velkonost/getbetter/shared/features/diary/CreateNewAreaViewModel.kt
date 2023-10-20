@@ -3,9 +3,9 @@ package com.velkonost.getbetter.shared.features.diary
 import AreasRepository
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.util.isLoading
-import com.velkonost.getbetter.shared.core.util.onFailure
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaEvent
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaViewState
@@ -72,9 +72,8 @@ internal constructor(
                         onSuccess {
                             emit(CreateNewAreaEvent.CreatedSuccess)
                         }
-                        onFailure {
-                            println()
-
+                        onFailureWithMsg { _, message ->
+                            message?.let { emit(it) }
                         }
                     }
                 }

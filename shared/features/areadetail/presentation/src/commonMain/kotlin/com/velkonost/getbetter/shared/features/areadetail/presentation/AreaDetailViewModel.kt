@@ -3,9 +3,9 @@ package com.velkonost.getbetter.shared.features.areadetail.presentation
 import AreasRepository
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.util.isLoading
-import com.velkonost.getbetter.shared.core.util.onFailure
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.AreaDetailAction
 import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.AreaDetailEvent
 import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.AreaDetailNavigation
@@ -63,8 +63,8 @@ internal constructor(
 
                         }
 
-                        onFailure {
-
+                        onFailureWithMsg { _, message ->
+                            message?.let { emit(it) }
                         }
                     }
                 }
@@ -120,8 +120,8 @@ internal constructor(
 
                     }
 
-                    onFailure {
-
+                    onFailureWithMsg { _, message ->
+                        message?.let { emit(it) }
                     }
                 }
             }

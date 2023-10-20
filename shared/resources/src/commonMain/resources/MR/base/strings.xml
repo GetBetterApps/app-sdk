@@ -148,4 +148,18 @@
     <string name="add_area_confirm_leave_title">Leave area</string>
     <string name="add_area_confirm_leave_text">All your notes and experience will be saved</string>
     <!--  ADD AREA  -->
+
+
+    <!--  SERVER EXCEPTIONS  -->
+    <string name="error_default">Something went wrong. Try again</string>
+
+    <string name="error_1001">Your session expired. Log in again</string>
+    <string name="error_905">Incorrect user\'s name</string>
+    <string name="error_906">Incorrect user\'s locale</string>
+
+    <string name="error_901">This email already exist. Try different</string>
+    <string name="error_902">Incorrect email. Try different</string>
+    <string name="error_903">Weak password. Try different</string>
+    <string name="error_904">Invalid credentials</string>
+    <!--  SERVER EXCEPTIONS  -->
 </resources>

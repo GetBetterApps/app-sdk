@@ -3,9 +3,9 @@ package com.velkonost.getbetter.shared.features.diary
 import AreasRepository
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.velkonost.getbetter.shared.core.util.isLoading
-import com.velkonost.getbetter.shared.core.util.onFailure
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.features.diary.contracts.AddAreaClick
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteAction
@@ -101,7 +101,8 @@ internal constructor(
                             }
 
                         }
-                        onFailure {
+                        onFailureWithMsg { _, message ->
+                            message?.let { emit(it) }
                         }
                     }
                 }

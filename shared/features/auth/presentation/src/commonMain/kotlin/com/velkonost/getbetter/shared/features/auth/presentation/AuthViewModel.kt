@@ -1,9 +1,9 @@
 package com.velkonost.getbetter.shared.features.auth.presentation
 
 import com.velkonost.getbetter.shared.core.util.isLoading
-import com.velkonost.getbetter.shared.core.util.onFailure
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.core.vm.resource.Message
 import com.velkonost.getbetter.shared.core.vm.resource.MessageType
 import com.velkonost.getbetter.shared.features.auth.domain.LoginAnonymousUseCase
@@ -54,7 +54,7 @@ internal constructor(
                         onSuccess {
                             emit(NavigateToMainFlow)
                         }
-                        onFailure {
+                        onFailureWithMsg { throwable, errorMsg ->
                             emit(viewState.value.copy(isLoading = false))
 
                             val message = Message.Builder()
@@ -82,13 +82,8 @@ internal constructor(
                     onSuccess {
                         emit(NavigateToMainFlow)
                     }
-                    onFailure {
-                        val message = Message.Builder()
-                            .id("login_email_failure")
-                            .text(StringDesc.Resource(it.getEmailLoginError()))
-                            .messageType(MessageType.SnackBar.Builder().build())
-                            .build()
-                        emit(message)
+                    onFailureWithMsg { _, message ->
+                        message?.let { emit(it) }
                     }
                 }
             }
@@ -108,13 +103,8 @@ internal constructor(
                     onSuccess {
                         emit(NavigateToMainFlow)
                     }
-                    onFailure {
-                        val message = Message.Builder()
-                            .id("register_email_failure")
-                            .text(StringDesc.Resource(it.getEmailRegisterError()))
-                            .messageType(MessageType.SnackBar.Builder().build())
-                            .build()
-                        emit(message)
+                    onFailureWithMsg { _, message ->
+                        message?.let { emit(it) }
                     }
                 }
             }

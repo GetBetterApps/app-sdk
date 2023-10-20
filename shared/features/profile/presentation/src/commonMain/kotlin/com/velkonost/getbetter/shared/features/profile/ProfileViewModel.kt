@@ -1,9 +1,9 @@
 package com.velkonost.getbetter.shared.features.profile
 
 import com.velkonost.getbetter.shared.core.util.isLoading
-import com.velkonost.getbetter.shared.core.util.onFailure
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarUploaded
 import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
 import com.velkonost.getbetter.shared.features.profile.contracts.NavigateToAuth
@@ -46,8 +46,8 @@ internal constructor(
                                 )
                             }
                         }
-                        onFailure {
-
+                        onFailureWithMsg { _, message ->
+                            message?.let { emit(it) }
                         }
                     }
                 }
@@ -62,8 +62,8 @@ internal constructor(
                         isLoading {
                             emit(viewState.value.copy(isLoading = true))
                         }
-                        onFailure {
-
+                        onFailureWithMsg { _, message ->
+                            message?.let { emit(it) }
                         }
                     }
                 }
@@ -82,8 +82,8 @@ internal constructor(
                         onSuccess {
                             emit(NavigateToAuth)
                         }
-                        onFailure {
-
+                        onFailureWithMsg { _, message ->
+                            message?.let { emit(it) }
                         }
                     }
                 }

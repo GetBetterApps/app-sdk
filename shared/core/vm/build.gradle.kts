@@ -28,6 +28,7 @@ kotlin {
                 api(libs.rickclephas.kmm.viewmodel)
 
                 implementation(projects.shared.core.util)
+                implementation(projects.shared.resources)
             }
         }
 

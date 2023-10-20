@@ -5,9 +5,9 @@ import com.velkonost.getbetter.shared.core.model.TermsOfMembership
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.isLoading
-import com.velkonost.getbetter.shared.core.util.onFailure
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaAction
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaClick
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaNavigation
@@ -98,8 +98,8 @@ internal constructor(
                             emit(viewState.value.copy(items = items))
                         }
 
-                        onFailure {
-                            println()
+                        onFailureWithMsg { _, message ->
+                            message?.let { emit(it) }
                         }
                     }
                 }
