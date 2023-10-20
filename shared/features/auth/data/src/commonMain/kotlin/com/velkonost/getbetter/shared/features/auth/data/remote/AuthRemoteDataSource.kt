@@ -2,7 +2,7 @@ package com.velkonost.getbetter.shared.features.auth.data.remote
 
 import com.velkonost.getbetter.shared.core.network.model.RemoteResponse
 import com.velkonost.getbetter.shared.features.auth.data.remote.model.request.RegisterEmailRequest
-import com.velkonost.getbetter.shared.features.auth.data.remote.model.response.KtorUserInfo
+import com.velkonost.getbetter.shared.features.auth.data.remote.model.response.KtorLoginInfo
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post
@@ -13,26 +13,26 @@ class AuthRemoteDataSource(
     private val httpClient: HttpClient
 ) {
 
-    suspend fun registerEmail(body: RegisterEmailRequest): RemoteResponse<KtorUserInfo> =
+    suspend fun registerEmail(body: RegisterEmailRequest): RemoteResponse<KtorLoginInfo> =
         httpClient.post {
             url {
-                path("auth/registerEmail")
+                path(Route.REGISTER_EMAIL)
                 setBody(body)
             }
         }.body()
 
-    suspend fun loginEmail(body: RegisterEmailRequest): RemoteResponse<KtorUserInfo> =
+    suspend fun loginEmail(body: RegisterEmailRequest): RemoteResponse<KtorLoginInfo> =
         httpClient.post {
             url {
-                path("auth/loginEmail")
+                path(Route.LOGIN_EMAIL)
                 setBody(body)
             }
         }.body()
 
-    suspend fun registerAnonymously(): RemoteResponse<KtorUserInfo> =
+    suspend fun registerAnonymously(): RemoteResponse<KtorLoginInfo> =
         httpClient.post {
             url {
-                path("auth/registerAnonymously")
+                path(Route.REGISTER_ANONYMOUSLY)
             }
         }.body()
 

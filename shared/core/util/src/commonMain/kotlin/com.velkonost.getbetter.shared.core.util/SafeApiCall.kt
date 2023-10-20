@@ -4,14 +4,13 @@ import com.velkonost.getbetter.shared.core.network.model.RemoteResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
+@Deprecated("does not match the server response")
 inline fun <reified R : Any> flowRequest(noinline request: suspend () -> R): Flow<ResultState<R>> =
     flow {
         emit(ResultState.Loading)
 
         runCatching<R> {
-//            withNetwork {
             request.invoke()
-//            }
         }.onFailure {
             emit(ResultState.Failure(it as Exception))
         }.onSuccess { result ->
@@ -20,27 +19,27 @@ inline fun <reified R : Any> flowRequest(noinline request: suspend () -> R): Flo
 
     }
 
-inline fun <reified ResponseType, ReturnType : Any> flowRequest2(
+inline fun <reified ResponseType, ReturnType : Any> flowRequest(
     crossinline mapper: ResponseType.() -> ReturnType,
+    noinline onSuccess: (suspend (ReturnType) -> Unit)? = null,
     noinline request: suspend () -> RemoteResponse<ResponseType>,
 ): Flow<ResultState<ReturnType>> =
     flow {
         emit(ResultState.Loading)
 
         runCatching {
-//            withNetwork {
             val result = request.invoke()
+
             if (result.status.code == 200) {
-                emit(ResultState.Success(result.data!!.mapper()))
+                val data = result.data!!.mapper()
+
+                onSuccess?.invoke(data)
+                emit(ResultState.Success(data))
             } else {
-                emit(ResultState.Failure(errorCode = 2))
+                emit(ResultState.Failure(errorCode = result.status.code))
             }
-//            }
         }.onFailure {
             emit(ResultState.Failure(it as Exception))
         }
-//            .onSuccess { result ->
-//            emit(ResultState.Success(data = result))
-//        }
 
     }

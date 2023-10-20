@@ -7,12 +7,11 @@ import com.velkonost.getbetter.shared.features.splash.presentation.contract.Navi
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.SplashAction
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.SplashNavigation
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.SplashViewState
-import com.velkonost.getbetter.shared.features.userinfo.api.model.UserInfo
 import kotlinx.coroutines.delay
 
 class SplashViewModel
 internal constructor(
-    private val authRepository: AuthRepository<UserInfo>
+    private val authRepository: AuthRepository<String>
 ) : BaseViewModel<SplashViewState, SplashAction, SplashNavigation, Nothing>(
     initialState = SplashViewState()
 ) {
