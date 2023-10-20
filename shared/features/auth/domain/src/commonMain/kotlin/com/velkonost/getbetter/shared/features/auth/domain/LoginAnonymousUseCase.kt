@@ -3,17 +3,17 @@ package com.velkonost.getbetter.shared.features.auth.domain
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.features.auth.api.AuthRepository
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
-import dev.gitlive.firebase.auth.FirebaseUser
+import com.velkonost.getbetter.shared.features.userinfo.api.model.UserInfo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
 
 class LoginAnonymousUseCase constructor(
-    private val authRepository: AuthRepository<FirebaseUser>,
+    private val authRepository: AuthRepository<String>,
     private val userInfoRepository: UserInfoRepository
 ) {
 
-    suspend operator fun invoke(): Flow<ResultState<Unit>> =
+    suspend operator fun invoke(): Flow<ResultState<UserInfo>> =
         authRepository.registerAnonymously()
             .flatMapMerge { registerResult ->
                 when (registerResult) {

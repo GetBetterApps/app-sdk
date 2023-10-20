@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val UserInfoDataModule = module {
     single<UserInfoRepository> {
-        UserInfoRepositoryImpl(get())
+        UserInfoRepositoryImpl(get(), get())
     }
 }
