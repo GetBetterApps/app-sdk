@@ -1,5 +1,6 @@
 package remote.model.response
 
+import com.velkonost.getbetter.shared.core.model.TermsOfMembership
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.Area
@@ -34,7 +35,7 @@ data class KtorArea(
     val requiredLevel: Int = 0,
 
     @SerialName("userTermsOfMembership")
-    val userTermsOfMembership: String? = null
+    val userTermsOfMembership: String = TermsOfMembership.Allow.responseName
 )
 
 fun KtorArea.asExternalModel() =
@@ -48,4 +49,5 @@ fun KtorArea.asExternalModel() =
         imageUrl = imageUrl,
         emojiId = emojiId,
         requiredLevel = requiredLevel,
+        userTermsOfMembership = TermsOfMembership.valueOf(userTermsOfMembership)
     )

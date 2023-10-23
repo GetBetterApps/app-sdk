@@ -1,5 +1,6 @@
 package model
 
+import com.velkonost.getbetter.shared.core.model.TermsOfMembership
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -41,6 +42,9 @@ data class Area(
 
     @SerialName(isPrivatePropertyName)
     val isPrivate: Boolean,
+
+    @SerialName("userTermsOfMembership")
+    val userTermsOfMembership: TermsOfMembership
 ) {
     companion object {
         const val idPropertyName = "id"
