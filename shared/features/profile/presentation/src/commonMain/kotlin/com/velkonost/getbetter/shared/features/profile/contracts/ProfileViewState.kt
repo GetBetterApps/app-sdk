@@ -6,5 +6,5 @@ data class ProfileViewState(
     val isLoading: Boolean = false,
     val isLogoutLoading: Boolean = false,
     val userName: String = "",
-    val avatarUrl: String? = null
+    val avatarBytes: ByteArray? = null
 ) : UIContract.State

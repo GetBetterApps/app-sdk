@@ -21,8 +21,8 @@ data class KtorUserInfo(
     @SerialName("locale")
     val locale: String = "en",
 
-    @SerialName("avatarUrl")
-    val avatarUrl: String? = null
+    @SerialName("avatar")
+    val avatar: ByteArray? = null
 )
 
 fun KtorUserInfo.asExternalModel() =
@@ -32,5 +32,5 @@ fun KtorUserInfo.asExternalModel() =
         lastLoginDate = lastLoginDate,
         registrationDate = registrationDate,
         locale = locale,
-        avatarUrl = avatarUrl
+        avatar = avatar
     )

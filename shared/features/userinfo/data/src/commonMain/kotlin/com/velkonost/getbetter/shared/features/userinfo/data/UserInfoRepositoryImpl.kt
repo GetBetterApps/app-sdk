@@ -81,9 +81,16 @@ constructor(
         }
     )
 
-    override suspend fun updateAvatarUrl(newUrl: String): Flow<ResultState<UserInfo>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun updateAvatarUrl(
+        fileName: String,
+        fileContent: ByteArray
+    ): Flow<ResultState<UserInfo>> = flowRequest(
+        mapper = KtorUserInfo::asExternalModel,
+        request = {
+            val token = localDataSource.getUserToken()
+            remoteDataSource.updateAvatar(token!!, fileName, fileContent)
+        }
+    )
 
     override suspend fun logout(): Flow<ResultState<UserInfo>> = flowRequest(
         mapper = KtorUserInfo::asExternalModel,

@@ -30,7 +30,7 @@ import dev.icerock.moko.resources.compose.painterResource
 fun Avatar(
     modifier: Modifier,
     isLoading: Boolean,
-    avatarUrl: String?,
+    avatarBytes: ByteArray?,
     onClick: () -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
@@ -65,13 +65,13 @@ fun Avatar(
                     .align(Alignment.Center),
                 color = colorResource(resource = SharedR.colors.text_light).copy(alpha = 0.5f)
             )
-        } else if (avatarUrl != null) {
+        } else if (avatarBytes != null) {
             SubcomposeAsyncImage(
                 modifier = modifier
                     .fillMaxSize()
                     .align(Alignment.Center),
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(avatarUrl)
+                    .data(avatarBytes)
                     .crossfade(true)
                     .build(),
                 contentScale = ContentScale.Crop,

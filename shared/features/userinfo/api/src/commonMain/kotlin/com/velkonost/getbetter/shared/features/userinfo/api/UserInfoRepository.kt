@@ -18,7 +18,10 @@ interface UserInfoRepository {
 
     suspend fun updateName(newName: String): Flow<ResultState<UserInfo>>
 
-    suspend fun updateAvatarUrl(newUrl: String): Flow<ResultState<UserInfo>>
+    suspend fun updateAvatarUrl(
+        fileName: String,
+        fileContent: ByteArray
+    ): Flow<ResultState<UserInfo>>
 
     suspend fun logout(): Flow<ResultState<UserInfo>>
 

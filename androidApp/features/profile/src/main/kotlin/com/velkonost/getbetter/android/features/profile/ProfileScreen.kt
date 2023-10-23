@@ -16,7 +16,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toFile
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.profile.components.AppSettings
 import com.velkonost.getbetter.android.features.profile.components.HelpAndSupport
@@ -26,12 +28,10 @@ import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.VersionName
 import com.velkonost.getbetter.core.utils.storage.StorageDelegate
 import com.velkonost.getbetter.shared.features.profile.ProfileViewModel
-import com.velkonost.getbetter.shared.features.profile.contracts.AvatarUploaded
+import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelected
 import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.stringResource
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 @SuppressLint("Recycle")
@@ -43,6 +43,7 @@ fun ProfileScreen(
     val scrollState = rememberScrollState()
     val state by viewModel.viewState.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     val uploadAvatarState = remember { mutableStateOf<StorageDelegate.UploadState?>(null) }
 
@@ -50,16 +51,19 @@ fun ProfileScreen(
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
         uri?.let {
-            scope.launch(Dispatchers.IO) {
-                StorageDelegate().uploadAvatar(it)
-                    .collect { result ->
-                        uploadAvatarState.value = result
-
-                        if (result is StorageDelegate.UploadState.Success) {
-                            viewModel.dispatch(AvatarUploaded(result.fileUrl))
-                        }
-                    }
-            }
+            val bytes =
+                context.contentResolver.openInputStream(uri)?.use { it.buffered().readBytes() }
+            viewModel.dispatch(AvatarSelected(uri.toFile().name, bytes!!))
+//            scope.launch(Dispatchers.IO) {
+//                StorageDelegate().uploadAvatar(it)
+//                    .collect { result ->
+//                        uploadAvatarState.value = result
+//
+//                        if (result is StorageDelegate.UploadState.Success) {
+//                            viewModel.dispatch(AvatarUploaded(result.fileUrl))
+//                        }
+//                    }
+//            }
         }
     }
 
@@ -74,7 +78,7 @@ fun ProfileScreen(
         ProfileHeader(
             userName = state.userName,
             isLoading = uploadAvatarState.value is StorageDelegate.UploadState.Loading,
-            avatarUrl = state.avatarUrl,
+            avatarBytes = state.avatarBytes,
             onAvatarClick = {
                 launcher.launch("image/*")
             },

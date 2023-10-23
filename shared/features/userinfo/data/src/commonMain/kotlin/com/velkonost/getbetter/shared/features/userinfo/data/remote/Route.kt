@@ -10,4 +10,6 @@ object Route {
     const val UPDATE_REGISTRATION_TIME = "$PREFIX/updateRegistrationTime"
     const val FETCH_INFO = "$PREFIX/fetchInfo"
     const val LOGOUT = "$PREFIX/logout"
+
+    const val UPLOAD_AVATAR = "$PREFIX/uploadAvatar"
 }

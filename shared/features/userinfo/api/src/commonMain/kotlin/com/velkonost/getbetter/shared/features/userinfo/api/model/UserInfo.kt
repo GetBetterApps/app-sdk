@@ -18,7 +18,7 @@ data class UserInfo(
     val displayName: String? = null,
 
     @SerialName(avatarUrlPropertyName)
-    val avatarUrl: String? = null,
+    val avatar: ByteArray? = null,
 
     @SerialName("email")
     val email: String? = null
