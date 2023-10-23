@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.core.network.extensions
 
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
+import io.ktor.client.request.parameter
 import io.ktor.client.request.setBody
 import io.ktor.http.path
 
@@ -32,4 +33,21 @@ inline fun HttpRequestBuilder.makeRequest(
         }
 
         path(path)
+    }
+
+inline fun HttpRequestBuilder.makeRequest(
+    path: String,
+    token: String? = null,
+    params: Map<String, String>
+) =
+    url {
+        token?.let {
+            header("Authorization", token)
+        }
+
+        path(path)
+
+        params.forEach {
+            parameter(it.key, it.value)
+        }
     }
