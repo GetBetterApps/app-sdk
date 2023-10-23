@@ -7,3 +7,5 @@ sealed interface ProfileAction : UIContract.Action
 data object LogoutClick : ProfileAction
 
 data class AvatarSelected(val avatarContent: ByteArray) : ProfileAction
+
+data class AvatarSelectedBase64(val avatarContent: String) : ProfileAction

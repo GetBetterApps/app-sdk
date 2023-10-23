@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #1 in closure #2 in ProfileScreen.body.getter:ProfileScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "image.pngData().base64EncodedString()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "PopAwareUINavigationController.gestureRecognizerShouldBegin(_:):UIPilotExt.swift">
          <PersistentStrings>
             <PersistentString

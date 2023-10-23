@@ -72,38 +72,10 @@ struct ProfileScreen: View {
             }
             .padding(.init(top: 16, leading: 16, bottom: 200, trailing: 16))
         }.sheet(isPresented: $showImagePicker) {
-//            PhotosPicker(
-//                selection: $selectedItem,
-//                matching: .images,
-//                photoLibrary: .shared()
-//            ) {
-//                
-//            }
-//            .onChange(of: selectedItem) { newItem in
-//                Task {
-//                    if let data = try? await newItem?.loadTransferable(type: Data.self) {
-//                        selectedImageData = data
-//                    }
-//                }
-//            }
-//            .onChange(of: selectedImageData) { newImageData in
-//                if newImageData != nil {
-//                    viewModel.dispatch(action: AvatarSelected(avatarContent: KotlinByteArray.from(data: newImageData!)))
-//                }
-//            }
-            
             ImagePicker(sourceType: .photoLibrary) { image in
-                showImagePicker = false
-                
-//                async {
-//                    await uploadAvatar(selectedImage: image)
-//                }
-//                async {
-                    if image.pngData() != nil {
-                        viewModel.dispatch(action: AvatarSelected(avatarContent: KotlinByteArray.from(data: image.pngData()!)))
-                    }
-//                }
-                
+                Task {
+                    await uploadAvatar(selectedImage: image)
+                }
             }.edgesIgnoringSafeArea(.all)
         }
     }
@@ -114,7 +86,7 @@ extension ProfileScreen {
     func uploadAvatar(selectedImage: UIImage?) async {
         let task = Task.detached {
             if selectedImage != nil {
-                let data = await KotlinByteArray.from(data: selectedImage!.pngData()!)
+                let data = KotlinByteArray.from(data: selectedImage!.jpegData(compressionQuality: 0.3)!)
                 await viewModel.dispatch(action: AvatarSelected(avatarContent: data))
             }
         }

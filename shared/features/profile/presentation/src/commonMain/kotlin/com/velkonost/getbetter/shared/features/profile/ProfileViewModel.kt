@@ -5,12 +5,14 @@ import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelected
+import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelectedBase64
 import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
 import com.velkonost.getbetter.shared.features.profile.contracts.NavigateToAuth
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileAction
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileNavigation
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileViewState
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
+import io.ktor.util.decodeBase64Bytes
 
 class ProfileViewModel
 internal constructor(
@@ -26,6 +28,7 @@ internal constructor(
     override fun dispatch(action: ProfileAction) = when (action) {
         is LogoutClick -> obtainLogout()
         is AvatarSelected -> obtainAvatarSelected(action.avatarContent)
+        is AvatarSelectedBase64 -> obtainAvatarSelected(action.avatarContent.decodeBase64Bytes())
     }
 
     private fun fetchUserInfo() {
