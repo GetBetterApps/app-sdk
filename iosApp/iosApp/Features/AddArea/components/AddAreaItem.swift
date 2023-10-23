@@ -13,13 +13,13 @@ import SharedSDK
 struct AddAreaItem: View {
     
     private let item: AreaUI
-    private let onAreaClick: (String) -> Void
-    private let onAddAreaClick: (String) -> Void
+    private let onAreaClick: (Int32) -> Void
+    private let onAddAreaClick: (Int32) -> Void
     
     init(
         item: AreaUI,
-        onAreaClick: @escaping (String) -> Void,
-        onAddAreaClick: @escaping (String) -> Void
+        onAreaClick: @escaping (Int32) -> Void,
+        onAddAreaClick: @escaping (Int32) -> Void
     ) {
         self.item = item
         self.onAreaClick = onAreaClick

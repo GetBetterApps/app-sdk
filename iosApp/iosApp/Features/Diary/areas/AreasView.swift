@@ -14,13 +14,13 @@ struct AreasView: View {
     
     let items: [Area]
     let isLoading: Bool
-    let areaClick: (String) -> Void
+    let areaClick: (Int32) -> Void
     let createNewAreaClick: () -> Void
     let addExistingAreaClick: () -> Void
     
     init(
         items: [Area], isLoading: Bool,
-        areaClick: @escaping (String) -> Void,
+        areaClick: @escaping (Int32) -> Void,
         createNewAreaClick: @escaping () -> Void,
         addExistingAreaClick: @escaping () -> Void
     ) {

@@ -13,9 +13,9 @@ import SharedSDK
 struct AreaItem: View {
     
     let item: Area
-    let onClick: (String) -> Void
+    let onClick: (Int32) -> Void
     
-    init(item: Area, onClick: @escaping (String) -> Void) {
+    init(item: Area, onClick: @escaping (Int32) -> Void) {
         self.item = item
         self.onClick = onClick
     }

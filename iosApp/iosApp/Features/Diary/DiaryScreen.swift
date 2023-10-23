@@ -23,7 +23,7 @@ struct DiaryScreen: View {
     
     @State private var selectedPage: Int = 0
     
-    @State private var selectedAreaId: String? = nil
+    @State private var selectedAreaId: Int32? = nil
     
     var body: some View {
         @State var state = viewModel.viewStateValue as! DiaryViewState

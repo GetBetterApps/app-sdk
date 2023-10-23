@@ -17,7 +17,7 @@ struct AreaDetailScreen: View {
     @StateObject var viewModel = AreaDetailVIewModelDelegate()
     @State private var eventsObserver: Task<(), Error>? = nil
     
-    @Binding var areaId: String?
+    @Binding var areaId: Int32?
     
     @State private var isEmojiPickerVisible = false
     
@@ -27,7 +27,7 @@ struct AreaDetailScreen: View {
     private let onClose: () -> Void
     
     init(
-        areaId: Binding<String?>,
+        areaId: Binding<Int32?>,
         onClose: @escaping () -> Void
     ) {
         self._areaId = areaId

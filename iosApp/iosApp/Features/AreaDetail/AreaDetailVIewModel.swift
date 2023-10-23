@@ -32,7 +32,7 @@ class AreaDetailVIewModelDelegate: ObservableObject {
         delegate.dispatch(action: action)
     }
     
-    func onAppear(areaId: String) {
+    func onAppear(areaId: Int32) {
         dispatch(action: AreaDetailActionLoad(areaId: areaId))
         resumeViewStateStream()
     }

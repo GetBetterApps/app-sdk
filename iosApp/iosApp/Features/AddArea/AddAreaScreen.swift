@@ -16,7 +16,7 @@ struct AddAreaScreen: View {
     @StateObject var viewModel = AddAreaViewModelDelegate()
     
     @State private var showingAreaDetailSheet = false
-    @State private var selectedAreaId: String? = nil
+    @State private var selectedAreaId: Int32? = nil
     
     var body: some View {
         @State var state = viewModel.state
@@ -69,7 +69,7 @@ struct AddAreaScreen: View {
 
 
 extension AddAreaScreen {
-    func checkPaginationThreshold(currentItemId: String, isLoading: Bool) {
+    func checkPaginationThreshold(currentItemId: Int32, isLoading: Bool) {
         let data = viewModel.state.items
         let thresholdIndex = data.index(data.endIndex, offsetBy: -5)
         
