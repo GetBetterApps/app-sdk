@@ -35,8 +35,8 @@ import dev.icerock.moko.resources.compose.stringResource
 fun AddAreaItem(
     modifier: Modifier = Modifier,
     item: AreaUI,
-    onAreaClick: (String) -> Unit,
-    onAddAreaClick: (String) -> Unit
+    onAreaClick: (Int) -> Unit,
+    onAddAreaClick: (Int) -> Unit
 ) {
 
     val haptic = LocalHapticFeedback.current

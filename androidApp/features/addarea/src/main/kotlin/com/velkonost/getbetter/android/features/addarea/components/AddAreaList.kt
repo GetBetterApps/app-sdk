@@ -19,8 +19,8 @@ fun AddAreaList(
     modifier: Modifier = Modifier,
     listState: LazyListState,
     items: List<AreaUI>,
-    onAreaClick: (String) -> Unit,
-    onAddAreaClick: (String) -> Unit,
+    onAreaClick: (Int) -> Unit,
+    onAddAreaClick: (Int) -> Unit,
     isLoading: Boolean
 ) {
     LazyColumn(

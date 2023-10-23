@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -65,7 +66,7 @@ fun DiaryScreen(
         skipHalfExpanded = true
     )
 
-    val selectedAreaId = remember { mutableStateOf("") }
+    val selectedAreaId = remember { mutableIntStateOf(0) }
 
     Box {
         Column {
@@ -80,7 +81,7 @@ fun DiaryScreen(
                 tasksState = state.tasksViewState,
                 areaClick = {
                     scope.launch {
-                        selectedAreaId.value = it
+                        selectedAreaId.intValue = it
                         areaDetailSheetState.show()
                     }
                 },
@@ -141,7 +142,7 @@ fun DiaryScreen(
 
         AreaDetailScreen(
             modalSheetState = areaDetailSheetState,
-            areaId = selectedAreaId.value
+            areaId = selectedAreaId.intValue
         )
 
     }
@@ -185,7 +186,7 @@ fun DiaryScreenContent(
     notesState: NotesViewState,
     areasState: AreasViewState,
     tasksState: TasksViewState,
-    areaClick: (String) -> Unit,
+    areaClick: (Int) -> Unit,
     createNewAreaClick: () -> Unit,
     addExistingAreaClick: () -> Unit,
     createGoalClick: () -> Unit,

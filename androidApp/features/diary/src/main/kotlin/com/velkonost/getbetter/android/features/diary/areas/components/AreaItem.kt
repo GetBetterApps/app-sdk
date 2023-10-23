@@ -29,7 +29,7 @@ import model.Area
 fun AreaItem(
     item: Area,
     modifier: Modifier = Modifier,
-    onClick: (String) -> Unit
+    onClick: (Int) -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
 

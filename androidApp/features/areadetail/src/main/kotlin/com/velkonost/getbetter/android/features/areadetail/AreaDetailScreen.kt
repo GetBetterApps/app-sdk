@@ -38,7 +38,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun AreaDetailScreen(
     modifier: Modifier = Modifier,
-    areaId: String,
+    areaId: Int,
     viewModel: AreaDetailViewModel = koinViewModel(),
     modalSheetState: ModalBottomSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,

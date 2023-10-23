@@ -9,7 +9,7 @@ import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -40,7 +40,7 @@ fun AddAreaScreen(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true
     )
-    val selectedAreaId = remember { mutableStateOf("") }
+    val selectedAreaId = remember { mutableIntStateOf(0) }
 
     Box(modifier = modifier.fillMaxSize()) {
         if (state.isLoading && state.items.isEmpty()) {
@@ -54,7 +54,7 @@ fun AddAreaScreen(
                     isLoading = state.isLoading,
                     onAreaClick = {
                         scope.launch {
-                            selectedAreaId.value = it
+                            selectedAreaId.intValue = it
                             areaDetailSheetState.show()
                         }
                     },
@@ -67,7 +67,7 @@ fun AddAreaScreen(
 
         AreaDetailScreen(
             modalSheetState = areaDetailSheetState,
-            areaId = selectedAreaId.value
+            areaId = selectedAreaId.intValue
         )
     }
 
