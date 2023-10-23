@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.android.features.profile.components
 
+import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -71,7 +72,7 @@ fun Avatar(
                     .fillMaxSize()
                     .align(Alignment.Center),
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(avatarBytes)
+                    .data(BitmapFactory.decodeByteArray(avatarBytes, 0, avatarBytes.size))
                     .crossfade(true)
                     .build(),
                 contentScale = ContentScale.Crop,

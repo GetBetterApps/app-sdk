@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response
 
 import com.velkonost.getbetter.shared.features.userinfo.api.model.UserInfo
+import io.ktor.util.decodeBase64Bytes
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -22,7 +23,7 @@ data class KtorUserInfo(
     val locale: String = "en",
 
     @SerialName("avatar")
-    val avatar: ByteArray? = null
+    val avatar: String? = null
 )
 
 fun KtorUserInfo.asExternalModel() =
@@ -32,5 +33,5 @@ fun KtorUserInfo.asExternalModel() =
         lastLoginDate = lastLoginDate,
         registrationDate = registrationDate,
         locale = locale,
-        avatar = avatar
+        avatar = avatar?.decodeBase64Bytes()
     )

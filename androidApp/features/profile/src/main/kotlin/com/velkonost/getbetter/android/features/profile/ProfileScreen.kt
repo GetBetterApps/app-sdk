@@ -18,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toFile
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.profile.components.AppSettings
 import com.velkonost.getbetter.android.features.profile.components.HelpAndSupport
@@ -51,19 +50,11 @@ fun ProfileScreen(
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
         uri?.let {
-            val bytes =
-                context.contentResolver.openInputStream(uri)?.use { it.buffered().readBytes() }
-            viewModel.dispatch(AvatarSelected(uri.toFile().name, bytes!!))
-//            scope.launch(Dispatchers.IO) {
-//                StorageDelegate().uploadAvatar(it)
-//                    .collect { result ->
-//                        uploadAvatarState.value = result
-//
-//                        if (result is StorageDelegate.UploadState.Success) {
-//                            viewModel.dispatch(AvatarUploaded(result.fileUrl))
-//                        }
-//                    }
-//            }
+            context.contentResolver.openInputStream(uri)
+                ?.use { it.buffered().readBytes() }
+                ?.let {
+                    viewModel.dispatch(AvatarSelected(it))
+                }
         }
     }
 

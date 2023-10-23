@@ -82,13 +82,12 @@ constructor(
     )
 
     override suspend fun updateAvatarUrl(
-        fileName: String,
         fileContent: ByteArray
     ): Flow<ResultState<UserInfo>> = flowRequest(
         mapper = KtorUserInfo::asExternalModel,
         request = {
             val token = localDataSource.getUserToken()
-            remoteDataSource.updateAvatar(token!!, fileName, fileContent)
+            remoteDataSource.updateAvatar(token!!, fileContent)
         }
     )
 

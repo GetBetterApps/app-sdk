@@ -6,6 +6,4 @@ sealed interface ProfileAction : UIContract.Action
 
 data object LogoutClick : ProfileAction
 
-data class AvatarUploaded(val fileUrl: String) : ProfileAction
-
-data class AvatarSelected(val avatarName: String, val avatarContent: ByteArray) : ProfileAction
+data class AvatarSelected(val avatarContent: ByteArray) : ProfileAction

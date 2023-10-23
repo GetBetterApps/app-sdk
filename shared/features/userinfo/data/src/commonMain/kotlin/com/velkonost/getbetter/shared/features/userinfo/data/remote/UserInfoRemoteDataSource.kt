@@ -91,7 +91,6 @@ class UserInfoRemoteDataSource(
 
     suspend fun updateAvatar(
         token: String,
-        fileName: String,
         fileContent: ByteArray
     ): RemoteResponse<KtorUserInfo> =
         httpClient.post {
@@ -102,11 +101,11 @@ class UserInfoRemoteDataSource(
                 val body = MultiPartFormDataContent(
                     formData {
                         append(
-                            "image",
+                            "file",
                             fileContent,
                             Headers.build {
                                 append(HttpHeaders.ContentType, "image/jpg")
-                                append(HttpHeaders.ContentDisposition, " filename=${fileName}")
+                                append(HttpHeaders.ContentDisposition, " filename=file.jpeg")
                             }
                         )
                     }

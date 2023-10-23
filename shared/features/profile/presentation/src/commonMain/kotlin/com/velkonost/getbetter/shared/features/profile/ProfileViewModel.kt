@@ -5,7 +5,6 @@ import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelected
-import com.velkonost.getbetter.shared.features.profile.contracts.AvatarUploaded
 import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
 import com.velkonost.getbetter.shared.features.profile.contracts.NavigateToAuth
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileAction
@@ -26,8 +25,7 @@ internal constructor(
 
     override fun dispatch(action: ProfileAction) = when (action) {
         is LogoutClick -> obtainLogout()
-        is AvatarUploaded -> obtainAvatarUploaded(action.fileUrl)
-        is AvatarSelected -> obtainAvatarSelected(action.avatarName, action.avatarContent)
+        is AvatarSelected -> obtainAvatarSelected(action.avatarContent)
     }
 
     private fun fetchUserInfo() {
@@ -56,25 +54,9 @@ internal constructor(
         }
     }
 
-    private fun obtainAvatarUploaded(fileUrl: String) {
-//        launchJob {
-//            userInfoRepository.updateAvatarUrl(fileUrl)
-//                .collect { result ->
-//                    with(result) {
-//                        isLoading {
-//                            emit(viewState.value.copy(isLoading = true))
-//                        }
-//                        onFailureWithMsg { _, message ->
-//                            message?.let { emit(it) }
-//                        }
-//                    }
-//                }
-//        }
-    }
-
-    private fun obtainAvatarSelected(fileName: String, fileContent: ByteArray) {
+    private fun obtainAvatarSelected(fileContent: ByteArray) {
         launchJob {
-            userInfoRepository.updateAvatarUrl(fileName, fileContent)
+            userInfoRepository.updateAvatarUrl(fileContent)
                 .collect { result ->
                     with(result) {
                         isLoading {
