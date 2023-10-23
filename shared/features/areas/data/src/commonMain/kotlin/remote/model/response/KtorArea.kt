@@ -61,7 +61,8 @@ fun KtorArea.asExternalModel() =
         imageUrl = imageUrl,
         emojiId = emojiId,
         requiredLevel = requiredLevel,
-        userTermsOfMembership = TermsOfMembership.valueOf(userTermsOfMembership),
+        userTermsOfMembership = TermsOfMembership.values()
+            .first { it.responseName == userTermsOfMembership },
         isAllowJoin = isAllowJoin,
         isAllowLeave = isAllowLeave,
         isAllowEdit = isAllowEdit,

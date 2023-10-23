@@ -110,7 +110,7 @@ class AreasRemoteDataSource(
         pageSize: Int
     ): RemoteResponse<List<KtorArea>> = httpClient.get {
         makeRequest(
-            path = Route.FETCH_ALL_AREAS,
+            path = Route.FETCH_PUBLIC_AREAS_TO_ADD,
             token = token,
             params = mapOf(
                 "page" to page,

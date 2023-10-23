@@ -38,13 +38,15 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun AreaDetailScreen(
     modifier: Modifier = Modifier,
-    areaId: Int,
+    areaId: Int?,
     viewModel: AreaDetailViewModel = koinViewModel(),
     modalSheetState: ModalBottomSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true,
     )
 ) {
+    if (areaId == null) return
+
     val state by viewModel.viewState.collectAsStateWithLifecycle()
     val isEmojiPickerVisible = remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()

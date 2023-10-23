@@ -11,8 +11,6 @@ import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.
 import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.AreaDetailNavigation
 import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.AreaDetailViewState
 import com.velkonost.getbetter.shared.features.areadetail.presentation.model.toUI
-import dev.gitlive.firebase.Firebase
-import dev.gitlive.firebase.auth.auth
 
 class AreaDetailViewModel
 internal constructor(
@@ -45,8 +43,6 @@ internal constructor(
 
                         onSuccess {
                             it?.let { area ->
-                                val userId = Firebase.auth.currentUser!!.uid
-
                                 emit(
                                     viewState.value.copy(
                                         initialItem = area.toUI(),

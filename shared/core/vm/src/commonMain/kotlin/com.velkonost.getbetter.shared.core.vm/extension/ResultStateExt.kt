@@ -37,7 +37,7 @@ val Int.asText: ResourceStringDesc
             905 -> SharedR.strings.error_905
             906 -> SharedR.strings.error_906
             1001 -> SharedR.strings.error_1001
-            else -> SharedR.strings.auth_error_email_exist
+            else -> SharedR.strings.error_default
         }
 
         return StringDesc.Resource(resId)
