@@ -7,6 +7,7 @@ plugins {
     `kmm-shared-module-plugin`
     alias(libs.plugins.ksp)
     alias(libs.plugins.nativecoroutines)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -22,11 +23,11 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.koin.core)
-                implementation(libs.firebase.auth)
-                implementation(libs.firebase.firestore)
 
                 implementation(projects.shared.core.util)
                 implementation(projects.shared.core.model)
+                implementation(projects.shared.core.network)
+                implementation(projects.shared.core.datastore)
                 implementation(projects.shared.features.areas.api)
             }
         }
