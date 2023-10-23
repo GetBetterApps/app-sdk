@@ -35,10 +35,10 @@ inline fun HttpRequestBuilder.makeRequest(
         path(path)
     }
 
-inline fun HttpRequestBuilder.makeRequest(
+inline fun <reified T> HttpRequestBuilder.makeRequest(
     path: String,
     token: String? = null,
-    params: Map<String, String>
+    params: Map<String, T>
 ) =
     url {
         token?.let {

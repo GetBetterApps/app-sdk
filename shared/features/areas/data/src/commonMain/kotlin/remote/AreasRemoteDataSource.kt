@@ -4,6 +4,7 @@ import com.velkonost.getbetter.shared.core.network.extensions.makeRequest
 import com.velkonost.getbetter.shared.core.network.model.RemoteResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.request.get
 import io.ktor.client.request.post
 import remote.model.request.CreateNewAreaRequest
 import remote.model.request.UpdateAreaStateRequest
@@ -71,6 +72,51 @@ class AreasRemoteDataSource(
     suspend fun getAreaDetails(
         token: String?,
         areaId: Int
-    ): RemoteResponse<KtorArea> = httpClient.engine
+    ): RemoteResponse<KtorArea> = httpClient.get {
+        makeRequest(
+            path = Route.FETCH_AREA_DETAILS,
+            token = token,
+            params = mapOf("areaId" to areaId)
+        )
+    }.body()
+
+    suspend fun getAllAreas(
+        token: String?,
+        page: Int,
+        pageSize: Int
+    ): RemoteResponse<List<KtorArea>> = httpClient.get {
+        makeRequest(
+            path = Route.FETCH_ALL_AREAS,
+            token = token,
+            params = mapOf(
+                "page" to page,
+                "pageSize" to pageSize
+            )
+        )
+    }.body()
+
+    suspend fun getUserAreas(
+        token: String?
+    ): RemoteResponse<List<KtorArea>> = httpClient.get {
+        makeRequest(
+            path = Route.FETCH_USER_AREAS,
+            token = token
+        )
+    }.body()
+
+    suspend fun getPublicAreas(
+        token: String?,
+        page: Int,
+        pageSize: Int
+    ): RemoteResponse<List<KtorArea>> = httpClient.get {
+        makeRequest(
+            path = Route.FETCH_ALL_AREAS,
+            token = token,
+            params = mapOf(
+                "page" to page,
+                "pageSize" to pageSize
+            )
+        )
+    }.body()
 
 }
