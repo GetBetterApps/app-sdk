@@ -9,6 +9,8 @@ data object LoadNextPage : AddAreaAction
 
 data class AddAreaClick(val areaId: Int) : AddAreaAction
 
+data class AreaChanged(val areaId: Int) : AddAreaAction
+
 data object NavigateBack : AddAreaAction, AddAreaNavigation {
     override val event: NavigationEvent = NavigationEvent.NavigateUp()
 }

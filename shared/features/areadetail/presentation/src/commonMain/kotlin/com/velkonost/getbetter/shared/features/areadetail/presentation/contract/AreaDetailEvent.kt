@@ -4,5 +4,8 @@ import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 
 sealed interface AreaDetailEvent : UIContract.Event {
     data object DeleteSuccess : AreaDetailEvent
+
     data object LeaveSuccess : AreaDetailEvent
+
+    data object EditSuccess : AreaDetailEvent
 }

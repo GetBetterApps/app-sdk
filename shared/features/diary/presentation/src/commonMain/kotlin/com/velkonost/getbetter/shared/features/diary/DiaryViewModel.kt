@@ -27,7 +27,7 @@ internal constructor(
     initialState = DiaryViewState()
 ) {
 
-    init {
+    fun refreshData() {
         fetchAreas()
         fetchNotes()
     }
@@ -70,7 +70,6 @@ internal constructor(
         is CreateNewAreaAction -> dispatchCreateNewAreaAction(action)
         is CreateNewNoteAction -> dispatchCreateNewNoteAction(action)
         is AddAreaClick -> emit(NavigateToAddArea)
-        else -> {}
     }
 
     private fun dispatchCreateNewAreaAction(action: CreateNewAreaAction) {
@@ -87,16 +86,15 @@ internal constructor(
                 .collectLatest { result ->
                     with(result) {
                         isLoading {
-                            val areasViewState = viewState.value.areasViewState.copy(
-                                isLoading = it
-                            )
-                            emit(viewState.value.copy(areasViewState = areasViewState))
+                            if (viewState.value.areasViewState.items.isEmpty()) {
+                                val areasViewState =
+                                    viewState.value.areasViewState.copy(isLoading = it)
+                                emit(viewState.value.copy(areasViewState = areasViewState))
+                            }
                         }
                         onSuccess { list ->
                             list?.let {
-                                val areasViewState = viewState.value.areasViewState.copy(
-                                    items = it
-                                )
+                                val areasViewState = viewState.value.areasViewState.copy(items = it)
                                 emit(viewState.value.copy(areasViewState = areasViewState))
                             }
 

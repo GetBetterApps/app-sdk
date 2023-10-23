@@ -22,6 +22,7 @@ import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
 import com.velkonost.getbetter.shared.features.addarea.presentation.AddAreaViewModel
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaClick
+import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AreaChanged
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.LoadNextPage
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.NavigateBack
 import kotlinx.coroutines.launch
@@ -67,7 +68,8 @@ fun AddAreaScreen(
 
         AreaDetailScreen(
             modalSheetState = areaDetailSheetState,
-            areaId = selectedAreaId.value
+            areaId = selectedAreaId.value,
+            onAreaChanged = { viewModel.dispatch(AreaChanged(it)) }
         )
     }
 

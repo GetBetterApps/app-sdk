@@ -14,6 +14,7 @@ import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -43,10 +44,12 @@ fun AreaDetailScreen(
     modalSheetState: ModalBottomSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true,
-    )
+    ),
+    onAreaChanged: (Int) -> Unit
 ) {
     if (areaId == null) return
 
+    val areaIdState = remember { mutableIntStateOf(areaId) }
     val state by viewModel.viewState.collectAsStateWithLifecycle()
     val isEmojiPickerVisible = remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
@@ -146,11 +149,12 @@ fun AreaDetailScreen(
         viewModel.events.collectLatest {
             when (it) {
                 is AreaDetailEvent.DeleteSuccess -> {
+                    onAreaChanged.invoke(areaIdState.intValue)
                     modalSheetState.hide()
                 }
 
-                is AreaDetailEvent.LeaveSuccess -> {
-                    modalSheetState.hide()
+                is AreaDetailEvent.LeaveSuccess, AreaDetailEvent.EditSuccess -> {
+                    onAreaChanged.invoke(areaIdState.intValue)
                 }
             }
         }

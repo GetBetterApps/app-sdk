@@ -93,9 +93,7 @@ internal constructor(
     private fun obtainEndEdit() {
         emit(viewState.value.copy(isEditing = false))
 
-        checkNotNull(viewState.value.modifiedItem) {
-            return
-        }
+        checkNotNull(viewState.value.modifiedItem) { return }
 
         launchJob {
             val area = viewState.value.modifiedItem!!
@@ -111,7 +109,7 @@ internal constructor(
                     }
 
                     onSuccess {
-
+                        emit(AreaDetailEvent.EditSuccess)
                     }
 
                     onFailureWithMsg { _, message ->
@@ -123,9 +121,7 @@ internal constructor(
     }
 
     private fun obtainDeleteArea() {
-        checkNotNull(viewState.value.modifiedItem) {
-            return
-        }
+        checkNotNull(viewState.value.modifiedItem) { return }
 
         launchJob {
             areasRepository.deleteArea(viewState.value.modifiedItem!!.id)
@@ -161,7 +157,7 @@ internal constructor(
                                     isAllowLeave = false
                                 )
                             )
-//                            emit(AreaDetailEvent.LeaveSuccess)
+                            emit(AreaDetailEvent.LeaveSuccess)
                         }
                     }
                 }

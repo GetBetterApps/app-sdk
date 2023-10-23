@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.areadetail.AreaDetailScreen
 import com.velkonost.getbetter.android.features.diary.areas.AreasView
@@ -26,6 +27,7 @@ import com.velkonost.getbetter.android.features.diary.notes.NotesView
 import com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.CreateNewNoteBottomSheet
 import com.velkonost.getbetter.android.features.diary.tasks.TasksView
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
+import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
 import com.velkonost.getbetter.shared.features.diary.DiaryViewModel
 import com.velkonost.getbetter.shared.features.diary.contracts.AddAreaClick
 import com.velkonost.getbetter.shared.features.diary.contracts.AreasViewState
@@ -141,7 +143,8 @@ fun DiaryScreen(
 
         AreaDetailScreen(
             modalSheetState = areaDetailSheetState,
-            areaId = selectedAreaId.value
+            areaId = selectedAreaId.value,
+            onAreaChanged = { viewModel.refreshData() }
         )
 
     }
@@ -167,6 +170,7 @@ fun DiaryScreen(
             when (it) {
                 is CreateNewAreaEvent.CreatedSuccess -> {
                     createNewAreaSheetState.hide()
+                    viewModel.refreshData()
                 }
 
                 is CreateNewNoteEvent.CreatedSuccess -> {
@@ -175,6 +179,17 @@ fun DiaryScreen(
             }
         }
     }
+
+    OnLifecycleEvent { owner, event ->
+        when (event) {
+            Lifecycle.Event.ON_RESUME -> {
+                viewModel.refreshData()
+            }
+
+            else -> {}
+        }
+    }
+
 
 }
 

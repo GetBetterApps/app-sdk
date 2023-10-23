@@ -4,6 +4,7 @@ import AreasRepository
 import com.velkonost.getbetter.shared.core.model.TermsOfMembership
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
+import com.velkonost.getbetter.shared.core.util.onFailure
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
@@ -11,6 +12,7 @@ import com.velkonost.getbetter.shared.features.addarea.presentation.contract.Add
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaClick
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaNavigation
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaViewState
+import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AreaChanged
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.LoadNextPage
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.NavigateBack
 import com.velkonost.getbetter.shared.features.addarea.presentation.model.toUI
@@ -32,6 +34,7 @@ internal constructor(
     override fun dispatch(action: AddAreaAction) = when (action) {
         is LoadNextPage -> fetchAreas()
         is AddAreaClick -> obtainAddAreaClick(action.areaId)
+        is AreaChanged -> obtainAreaChanged(action.areaId)
         is NavigateBack -> emit(action)
     }
 
@@ -65,37 +68,6 @@ internal constructor(
                     }
                 }
             }
-
-//            emit(viewState.value.copy(isLoading = true))
-//
-//            val result = areasRepository.fetchPublicAreasToAdd(
-//                page = _areasPagingConfig.page,
-//                perPage = _areasPagingConfig.pageSize,
-//            )
-//
-//            if (result is ResultState.Success) {
-//                if (result.data.items.isEmpty()) {
-//                    _areasPagingConfig.lastPageReached = true
-//                }
-//
-//                _areasPagingConfig.page++
-//                _areasPagingConfig.lastElement = result.data.lastElement
-//
-//                val userId = Firebase.auth.currentUser!!.uid
-//                val items = viewState.value.items.plus(
-//                    result.data.items.map {
-//                        val areaTermsOfMembership = it.getUserTermsOfMembership(userId)
-//                        it.toUI(areaTermsOfMembership)
-//                    }
-//                )
-//                emit(viewState.value.copy(items = items))
-//            }
-//
-//            if (result is ResultState.Failure) {
-//                _areasPagingConfig.lastPageReached = true
-//            }
-//
-//            emit(viewState.value.copy(isLoading = false))
         }
     }
 
@@ -125,7 +97,39 @@ internal constructor(
                             message?.let { emit(it) }
                         }
                     }
+            }
+        }
+    }
+
+    private fun obtainAreaChanged(areaId: Int) {
+        launchJob {
+            areasRepository.fetchAreaDetails(areaId).collect { result ->
+                with(result) {
+                    isLoading {
+                        val items = viewState.value.items.toMutableList()
+                        val areaIndex = items.indexOfFirst { area -> area.id == areaId }
+                        items[areaIndex] = items[areaIndex].copy(isLoading = it)
+
+                        emit(viewState.value.copy(items = items))
+                    }
+                    onSuccess { updatedArea ->
+                        val items = viewState.value.items.toMutableList()
+                        val areaIndex = items.indexOfFirst { area -> area.id == areaId }
+
+                        updatedArea?.let {
+                            items[areaIndex] = it.toUI()
+                            emit(viewState.value.copy(items = items))
+                        }
+
+                    }
+                    onFailure {
+                        val items = viewState.value.items
+                        val areaIndex = items.indexOfFirst { area -> area.id == areaId }
+                        emit(viewState.value.copy(items = items.minus(items[areaIndex])))
+                    }
                 }
+
+            }
         }
     }
 }
