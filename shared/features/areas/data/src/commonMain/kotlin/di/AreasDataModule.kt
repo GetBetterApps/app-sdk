@@ -1,14 +1,14 @@
 package di
 
 import AreasRepository
-import AreasRepositoryImpl
+import AreasRepositoryFirebaseImpl
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.firestore.firestore
 import org.koin.dsl.module
 
 val AreasDataModule = module {
     single<AreasRepository> {
-        AreasRepositoryImpl(
+        AreasRepositoryFirebaseImpl(
             db = Firebase.firestore
         )
     }

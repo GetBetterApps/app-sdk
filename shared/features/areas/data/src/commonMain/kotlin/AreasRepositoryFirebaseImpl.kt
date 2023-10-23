@@ -19,7 +19,7 @@ import model.pagination.AreasPage
 import model.toAreaModel
 import kotlin.time.Duration.Companion.seconds
 
-class AreasRepositoryImpl
+class AreasRepositoryFirebaseImpl
 constructor(private val db: FirebaseFirestore) : AreasRepository {
 
     override fun fetchAllAreas(): Flow<ResultState<List<Area>>> = flow {
