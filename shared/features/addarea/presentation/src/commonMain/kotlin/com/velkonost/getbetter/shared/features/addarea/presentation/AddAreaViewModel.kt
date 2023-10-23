@@ -128,9 +128,6 @@ internal constructor(
                     }
                     onFailureWithMsg { _, message ->
                         message?.let { emit(it) }
-                        val items = viewState.value.items
-                        val areaIndex = items.indexOfFirst { area -> area.id == areaId }
-                        emit(viewState.value.copy(items = items.minus(items[areaIndex])))
                     }
                 }
 
