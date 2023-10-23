@@ -108,8 +108,10 @@ internal constructor(
                         emit(viewState.value.copy(isLoading = it))
                     }
 
-                    onSuccess {
-                        emit(AreaDetailEvent.EditSuccess)
+                    onSuccess { area ->
+                        area?.let {
+                            emit(AreaDetailEvent.EditSuccess(area.id))
+                        }
                     }
 
                     onFailureWithMsg { _, message ->
@@ -130,8 +132,8 @@ internal constructor(
                         isLoading {
                             emit(viewState.value.copy(isLoading = it))
                         }
-                        onSuccess {
-                            emit(AreaDetailEvent.DeleteSuccess)
+                        onSuccess { area ->
+                            area?.let { emit(AreaDetailEvent.DeleteSuccess(it.id)) }
                         }
                     }
                 }
@@ -150,14 +152,17 @@ internal constructor(
                         isLoading {
                             emit(viewState.value.copy(isLoading = it))
                         }
-                        onSuccess {
-                            emit(
-                                viewState.value.copy(
-                                    isAllowJoin = true,
-                                    isAllowLeave = false
+                        onSuccess { area ->
+                            area?.let {
+                                emit(
+                                    viewState.value.copy(
+                                        isAllowJoin = true,
+                                        isAllowLeave = false
+                                    )
                                 )
-                            )
-                            emit(AreaDetailEvent.LeaveSuccess)
+                                emit(AreaDetailEvent.LeaveSuccess(area.id))
+                            }
+
                         }
                     }
                 }
@@ -193,13 +198,17 @@ internal constructor(
                         isLoading {
                             emit(viewState.value.copy(isLoading = it))
                         }
-                        onSuccess {
-                            emit(
-                                viewState.value.copy(
-                                    isAllowJoin = false,
-                                    isAllowLeave = true
+                        onSuccess { area ->
+                            area?.let {
+                                emit(
+                                    viewState.value.copy(
+                                        isAllowJoin = false,
+                                        isAllowLeave = true
+                                    )
                                 )
-                            )
+                                emit(AreaDetailEvent.JoinSuccess(area.id))
+                            }
+
                         }
                     }
                 }

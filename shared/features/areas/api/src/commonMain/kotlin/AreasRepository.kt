@@ -26,13 +26,13 @@ interface AreasRepository {
         imageUrl: String? = null
     ): Flow<ResultState<Area>>
 
-    fun deleteArea(areaId: Int): Flow<ResultState<List<Area>>>
+    fun deleteArea(areaId: Int): Flow<ResultState<Area>>
 
-    fun leaveArea(areaId: Int): Flow<ResultState<List<Area>>>
+    fun leaveArea(areaId: Int): Flow<ResultState<Area>>
 
     fun fetchUserAreas(): Flow<ResultState<List<Area>>>
 
-    fun addUserArea(areaId: Int): Flow<ResultState<List<Area>>>
+    fun addUserArea(areaId: Int): Flow<ResultState<Area>>
 
     suspend fun fetchPublicAreasToAdd(
         page: Int,

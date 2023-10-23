@@ -39,7 +39,7 @@ class AreasRemoteDataSource(
     suspend fun leaveArea(
         token: String?,
         body: UpdateAreaStateRequest
-    ): RemoteResponse<List<KtorArea>> = httpClient.post {
+    ): RemoteResponse<KtorArea> = httpClient.post {
         makeRequest(
             path = Route.LEAVE_AREA,
             token = token,
@@ -50,7 +50,7 @@ class AreasRemoteDataSource(
     suspend fun deleteArea(
         token: String?,
         body: UpdateAreaStateRequest
-    ): RemoteResponse<List<KtorArea>> = httpClient.post {
+    ): RemoteResponse<KtorArea> = httpClient.post {
         makeRequest(
             path = Route.DELETE_AREA,
             token = token,
@@ -61,7 +61,7 @@ class AreasRemoteDataSource(
     suspend fun addUserArea(
         token: String?,
         body: UpdateAreaStateRequest
-    ): RemoteResponse<List<KtorArea>> = httpClient.post {
+    ): RemoteResponse<KtorArea> = httpClient.post {
         makeRequest(
             path = Route.ADD_USER_AREA,
             token = token,

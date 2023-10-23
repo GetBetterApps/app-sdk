@@ -4,7 +4,6 @@ import AreasRepository
 import com.velkonost.getbetter.shared.core.model.TermsOfMembership
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
-import com.velkonost.getbetter.shared.core.util.onFailure
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
@@ -74,29 +73,29 @@ internal constructor(
     private fun obtainAddAreaClick(areaId: Int) {
         launchJob {
             areasRepository.addUserArea(areaId).collect { result ->
-                    with(result) {
-                        isLoading {
-                            val items = viewState.value.items.toMutableList()
-                            val areaIndex = items.indexOfFirst { area -> area.id == areaId }
-                            items[areaIndex] = items[areaIndex].copy(isLoading = it)
+                with(result) {
+                    isLoading {
+                        val items = viewState.value.items.toMutableList()
+                        val areaIndex = items.indexOfFirst { area -> area.id == areaId }
+                        items[areaIndex] = items[areaIndex].copy(isLoading = it)
 
-                            emit(viewState.value.copy(items = items))
-                        }
-
-                        onSuccess {
-                            val items = viewState.value.items.toMutableList()
-                            val areaIndex = items.indexOfFirst { area -> area.id == areaId }
-                            items[areaIndex] = items[areaIndex].copy(
-                                termsOfMembership = TermsOfMembership.AlreadyJoined
-                            )
-
-                            emit(viewState.value.copy(items = items))
-                        }
-
-                        onFailureWithMsg { _, message ->
-                            message?.let { emit(it) }
-                        }
+                        emit(viewState.value.copy(items = items))
                     }
+
+                    onSuccess {
+                        val items = viewState.value.items.toMutableList()
+                        val areaIndex = items.indexOfFirst { area -> area.id == areaId }
+                        items[areaIndex] = items[areaIndex].copy(
+                            termsOfMembership = TermsOfMembership.AlreadyJoined
+                        )
+
+                        emit(viewState.value.copy(items = items))
+                    }
+
+                    onFailureWithMsg { _, message ->
+                        message?.let { emit(it) }
+                    }
+                }
             }
         }
     }
@@ -113,16 +112,22 @@ internal constructor(
                         emit(viewState.value.copy(items = items))
                     }
                     onSuccess { updatedArea ->
-                        val items = viewState.value.items.toMutableList()
-                        val areaIndex = items.indexOfFirst { area -> area.id == areaId }
-
                         updatedArea?.let {
-                            items[areaIndex] = it.toUI()
+                            val items = viewState.value.items.toMutableList()
+                            val areaIndex = items.indexOfFirst { area -> area.id == updatedArea.id }
+
+                            if (!updatedArea.isActive) {
+                                items.removeAt(areaIndex)
+                            } else {
+                                items[areaIndex] = it.toUI()
+                            }
+
                             emit(viewState.value.copy(items = items))
                         }
 
                     }
-                    onFailure {
+                    onFailureWithMsg { _, message ->
+                        message?.let { emit(it) }
                         val items = viewState.value.items
                         val areaIndex = items.indexOfFirst { area -> area.id == areaId }
                         emit(viewState.value.copy(items = items.minus(items[areaIndex])))

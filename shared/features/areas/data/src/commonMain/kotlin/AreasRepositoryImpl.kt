@@ -61,8 +61,8 @@ constructor(
         }
     )
 
-    override fun leaveArea(areaId: Int): Flow<ResultState<List<Area>>> = flowRequest(
-        mapper = { map(KtorArea::asExternalModel) },
+    override fun leaveArea(areaId: Int): Flow<ResultState<Area>> = flowRequest(
+        mapper = KtorArea::asExternalModel,
         request = {
             val token = localDataSource.getUserToken()
             val body = UpdateAreaStateRequest(areaId)
@@ -70,8 +70,8 @@ constructor(
         }
     )
 
-    override fun deleteArea(areaId: Int): Flow<ResultState<List<Area>>> = flowRequest(
-        mapper = { map(KtorArea::asExternalModel) },
+    override fun deleteArea(areaId: Int): Flow<ResultState<Area>> = flowRequest(
+        mapper = KtorArea::asExternalModel,
         request = {
             val token = localDataSource.getUserToken()
             val body = UpdateAreaStateRequest(areaId)
@@ -79,8 +79,8 @@ constructor(
         }
     )
 
-    override fun addUserArea(areaId: Int): Flow<ResultState<List<Area>>> = flowRequest(
-        mapper = { map(KtorArea::asExternalModel) },
+    override fun addUserArea(areaId: Int): Flow<ResultState<Area>> = flowRequest(
+        mapper = KtorArea::asExternalModel,
         request = {
             val token = localDataSource.getUserToken()
             val body = UpdateAreaStateRequest(areaId)

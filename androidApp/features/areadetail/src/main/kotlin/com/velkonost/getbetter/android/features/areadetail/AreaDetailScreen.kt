@@ -149,12 +149,20 @@ fun AreaDetailScreen(
         viewModel.events.collectLatest {
             when (it) {
                 is AreaDetailEvent.DeleteSuccess -> {
-                    onAreaChanged.invoke(areaIdState.intValue)
+                    onAreaChanged.invoke(it.areaId)
                     modalSheetState.hide()
                 }
 
-                is AreaDetailEvent.LeaveSuccess, AreaDetailEvent.EditSuccess -> {
-                    onAreaChanged.invoke(areaIdState.intValue)
+                is AreaDetailEvent.LeaveSuccess -> {
+                    onAreaChanged.invoke(it.areaId)
+                }
+
+                is AreaDetailEvent.EditSuccess -> {
+                    onAreaChanged.invoke(it.areaId)
+                }
+
+                is AreaDetailEvent.JoinSuccess -> {
+                    onAreaChanged.invoke(it.areaId)
                 }
             }
         }
