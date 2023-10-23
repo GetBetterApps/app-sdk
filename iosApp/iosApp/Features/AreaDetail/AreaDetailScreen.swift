@@ -25,13 +25,16 @@ struct AreaDetailScreen: View {
     @State private var confirmLeaveAreaDialog = false
     
     private let onClose: () -> Void
+    private let onAreaChanged: (Int32) -> Void
     
     init(
         areaId: Binding<Int32?>,
-        onClose: @escaping () -> Void
+        onClose: @escaping () -> Void,
+        onAreaChanged: @escaping (Int32) -> Void
     ) {
         self._areaId = areaId
         self.onClose = onClose
+        self.onAreaChanged = onAreaChanged
     }
     
     var body: some View {
@@ -128,10 +131,23 @@ extension AreaDetailScreen {
                 for try await event in asyncSequence(for: viewModel.delegate.events) {
                     switch(event) {
                     case _ as AreaDetailEventLeaveSuccess: do {
-                        onClose()
+                        let areaId = (event as! AreaDetailEventLeaveSuccess).areaId
+                        onAreaChanged(areaId)
                     }
                     case _ as AreaDetailEventDeleteSuccess: do {
+                        let areaId = (event as! AreaDetailEventDeleteSuccess).areaId
+                        onAreaChanged(areaId)
                         onClose()
+                    }
+                        
+                    case _ as AreaDetailEventEditSuccess: do {
+                        let areaId = (event as! AreaDetailEventEditSuccess).areaId
+                        onAreaChanged(areaId)
+                    }
+                        
+                    case _ as AreaDetailEventJoinSuccess: do {
+                        let areaId = (event as! AreaDetailEventJoinSuccess).areaId
+                        onAreaChanged(areaId)
                     }
                     
                     default:

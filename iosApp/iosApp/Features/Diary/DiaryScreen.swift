@@ -92,6 +92,9 @@ struct DiaryScreen: View {
                 areaId: $selectedAreaId,
                 onClose: {
                     showingAreaDetailSheet = false
+                },
+                onAreaChanged: { areaId in
+                    viewModel.refreshData()
                 }
             )
         }
@@ -101,7 +104,10 @@ struct DiaryScreen: View {
                 areas: state.areasViewState.items
             )
         }
-        .onAppear { observeEvents() }
+        .onAppear {
+            viewModel.refreshData()
+            observeEvents()
+        }
         .onDisappear {
             eventsObserver?.cancel()
             eventsObserver = nil
@@ -117,6 +123,7 @@ extension DiaryScreen {
                     switch(event) {
                     case _ as CreateNewAreaEventCreatedSuccess: do {
                         showingCreateNewAreaSheet = false
+                        viewModel.refreshData()
                     }
                     case _ as CreateNewNoteEventCreatedSuccess: do {
                         showingCreateNewNoteSheet = false

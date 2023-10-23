@@ -61,6 +61,9 @@ struct AddAreaScreen: View {
                 areaId: $selectedAreaId,
                 onClose: {
                     showingAreaDetailSheet = false
+                },
+                onAreaChanged: { areaId in
+                    viewModel.dispatch(action: AreaChanged(areaId: areaId))
                 }
             )
         }
