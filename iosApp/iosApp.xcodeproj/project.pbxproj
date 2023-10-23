@@ -27,6 +27,7 @@
 		46059D292AC405BA00DC5015 /* AreaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D282AC405BA00DC5015 /* AreaItem.swift */; };
 		46059D2B2AC409A900DC5015 /* AddAreaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D2A2AC409A900DC5015 /* AddAreaButton.swift */; };
 		46059D2D2AC41DB500DC5015 /* ExpandableButtonPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D2C2AC41DB500DC5015 /* ExpandableButtonPanel.swift */; };
+		46182DC12AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */; };
 		461D21EC2AA8EC71007E84CE /* DetailRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21EB2AA8EC71007E84CE /* DetailRoute.swift */; };
 		461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */; };
 		461F7C612AA878EB003791CF /* Koin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C602AA878EB003791CF /* Koin.swift */; };
@@ -119,6 +120,7 @@
 		46059D282AC405BA00DC5015 /* AreaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaItem.swift; sourceTree = "<group>"; };
 		46059D2A2AC409A900DC5015 /* AddAreaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaButton.swift; sourceTree = "<group>"; };
 		46059D2C2AC41DB500DC5015 /* ExpandableButtonPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableButtonPanel.swift; sourceTree = "<group>"; };
+		46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinByteArrayExt.swift; sourceTree = "<group>"; };
 		461D21EB2AA8EC71007E84CE /* DetailRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRoute.swift; sourceTree = "<group>"; };
 		461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifecycleAwareObservableObject.swift; sourceTree = "<group>"; };
 		461F7C602AA878EB003791CF /* Koin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Koin.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				46C10D202AB46BF400E62846 /* UIPilotExt.swift */,
 				46D857772ACFF2D200BE74DA /* ArrayExt.swift */,
 				46D857792ACFFC7C00BE74DA /* ScrollViewExt.swift */,
+				46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -828,6 +831,7 @@
 				467BECCF2AC017CF00F74482 /* PrimaryTabs.swift in Sources */,
 				461F7C772AA8E371003791CF /* DetailScreen.swift in Sources */,
 				468B876A2ABC45C6001BBEB1 /* DiaryScreen.swift in Sources */,
+				46182DC12AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift in Sources */,
 				46D8577E2AD0787E00BE74DA /* AddAreaHeader.swift in Sources */,
 				469D0FBE2AB1DE330060CE95 /* WhiteButton.swift in Sources */,
 				46059D262AC4037E00DC5015 /* TasksView.swift in Sources */,

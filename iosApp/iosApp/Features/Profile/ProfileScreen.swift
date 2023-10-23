@@ -9,6 +9,7 @@
 import Foundation
 import SharedSDK
 import SwiftUI
+import PhotosUI
 import KMMViewModelSwiftUI
 
 struct ProfileScreen: View {
@@ -19,6 +20,9 @@ struct ProfileScreen: View {
     
     @State var showImagePicker: Bool = false
     @State private var uploadAvatarState: UploadState = UploadState.Idle
+    
+    @State private var selectedItem: PhotosPickerItem? = nil
+    @State private var selectedImageData: Data? = nil
     
     var body: some View {
         @State var state = viewModel.viewStateValue as! ProfileViewState
@@ -34,7 +38,7 @@ struct ProfileScreen: View {
             VStack {
                 ProfileHeader(
                     userName: state.userName,
-                    avatarUrl: state.avatarUrl,
+                    avatarBytes: state.avatarBytes,
                     isLoading: isAvatarLoading
                 ) {
                     self.showImagePicker.toggle()
@@ -53,9 +57,9 @@ struct ProfileScreen: View {
                     labelText: SharedR.strings().profile_logout.desc().localized(),
                     isLoading: state.isLogoutLoading
                 ) {
-                        viewModel.dispatch(action: LogoutClick())
-                    }
-                    .padding(.top, 48)
+                    viewModel.dispatch(action: LogoutClick())
+                }
+                .padding(.top, 48)
                 
                 HStack {
                     Spacer()
@@ -68,14 +72,52 @@ struct ProfileScreen: View {
             }
             .padding(.init(top: 16, leading: 16, bottom: 200, trailing: 16))
         }.sheet(isPresented: $showImagePicker) {
+//            PhotosPicker(
+//                selection: $selectedItem,
+//                matching: .images,
+//                photoLibrary: .shared()
+//            ) {
+//                
+//            }
+//            .onChange(of: selectedItem) { newItem in
+//                Task {
+//                    if let data = try? await newItem?.loadTransferable(type: Data.self) {
+//                        selectedImageData = data
+//                    }
+//                }
+//            }
+//            .onChange(of: selectedImageData) { newImageData in
+//                if newImageData != nil {
+//                    viewModel.dispatch(action: AvatarSelected(avatarContent: KotlinByteArray.from(data: newImageData!)))
+//                }
+//            }
+            
             ImagePicker(sourceType: .photoLibrary) { image in
-                if image.pngData() != nil {
-                    StorageDelegate(uploadState: $uploadAvatarState).uploadAvatar(file: image.pngData()!) { url in
-                        viewModel.dispatch(action: AvatarUploaded(fileUrl: url))
+                showImagePicker = false
+                
+//                async {
+//                    await uploadAvatar(selectedImage: image)
+//                }
+//                async {
+                    if image.pngData() != nil {
+                        viewModel.dispatch(action: AvatarSelected(avatarContent: KotlinByteArray.from(data: image.pngData()!)))
                     }
-                }
+//                }
+                
             }.edgesIgnoringSafeArea(.all)
         }
     }
     
+}
+
+extension ProfileScreen {
+    func uploadAvatar(selectedImage: UIImage?) async {
+        let task = Task.detached {
+            if selectedImage != nil {
+                let data = await KotlinByteArray.from(data: selectedImage!.pngData()!)
+                await viewModel.dispatch(action: AvatarSelected(avatarContent: data))
+            }
+        }
+        
+    }
 }

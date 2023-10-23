@@ -13,12 +13,12 @@ import SharedSDK
 struct Avatar: View {
     
     let isLoading: Bool
-    let avatarUrl: String?
+    let avatarBytes: KotlinByteArray?
     let onClick: () -> Void
     
-    init(isLoading: Bool, avatarUrl: String?, onClick: @escaping () -> Void) {
+    init(isLoading: Bool, avatarBytes: KotlinByteArray?, onClick: @escaping () -> Void) {
         self.isLoading = isLoading
-        self.avatarUrl = avatarUrl
+        self.avatarBytes = avatarBytes
         self.onClick = onClick
     }
     
@@ -31,24 +31,13 @@ struct Avatar: View {
                     .opacity(0.5)
                     .frame(width: 64, height: 64, alignment: .center)
                     .scaleEffect(2)
-            } else if (avatarUrl != nil) {
-                AsyncImage(url: URL(string: avatarUrl!)) { image in
-                    image.resizable()
-                        
-//                        .aspectRatio(contentMode: .fill)
-                        .scaledToFill()
-                        .frame(width: 128, height: 128)
-                        .clipped()
-                        .cornerRadius(12)
-                        
-                } placeholder: {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color.textLight))
-                        .opacity(0.5)
-                        .frame(width: 64, height: 64, alignment: .center)
-                        .scaleEffect(2)
-                }
-                    
+            } else if (avatarBytes != nil) {
+                Image(uiImage: UIImage(data: avatarBytes!.toData()!)!)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 128, height: 128)
+                    .clipped()
+                    .cornerRadius(12)
             } else {
                 Placeholder()
             }
