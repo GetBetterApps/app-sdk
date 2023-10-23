@@ -4,6 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import com.velkonost.getbetter.shared.core.datastore.TOKEN_KEY
+import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.flowRequest
 import com.velkonost.getbetter.shared.core.util.locale
@@ -15,7 +16,6 @@ import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.reques
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response.KtorUserInfo
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response.asExternalModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 
 class UserInfoRepositoryImpl
 constructor(
@@ -26,7 +26,7 @@ constructor(
     override suspend fun fetchInfo(): Flow<ResultState<UserInfo>> = flowRequest(
         mapper = KtorUserInfo::asExternalModel,
         request = {
-            val token = getUserToken()
+            val token = localDataSource.getUserToken()
             remoteDataSource.getInfo(token)
         }
     )
@@ -34,7 +34,7 @@ constructor(
     override suspend fun initSettings(email: String): Flow<ResultState<UserInfo>> = flowRequest(
         mapper = KtorUserInfo::asExternalModel,
         request = {
-            val token = getUserToken()
+            val token = localDataSource.getUserToken()
             var name = email.substringBefore("@")
             if (name.isEmpty()) name = "Anonymous"
 
@@ -50,7 +50,7 @@ constructor(
     override suspend fun updateRegistrationTime(): Flow<ResultState<UserInfo>> = flowRequest(
         mapper = KtorUserInfo::asExternalModel,
         request = {
-            val token = getUserToken()
+            val token = localDataSource.getUserToken()
             remoteDataSource.updateRegistrationDate(token)
         }
     )
@@ -58,7 +58,7 @@ constructor(
     override suspend fun updateLastLogin(): Flow<ResultState<UserInfo>> = flowRequest(
         mapper = KtorUserInfo::asExternalModel,
         request = {
-            val token = getUserToken()
+            val token = localDataSource.getUserToken()
             remoteDataSource.updateLastLogin(token)
         }
     )
@@ -66,7 +66,7 @@ constructor(
     override suspend fun updateLocale(locale: String): Flow<ResultState<UserInfo>> = flowRequest(
         mapper = KtorUserInfo::asExternalModel,
         request = {
-            val token = getUserToken()
+            val token = localDataSource.getUserToken()
             val body = UpdateValueRequest(locale)
             remoteDataSource.updateLocale(token, body)
         }
@@ -75,7 +75,7 @@ constructor(
     override suspend fun updateName(newName: String): Flow<ResultState<UserInfo>> = flowRequest(
         mapper = KtorUserInfo::asExternalModel,
         request = {
-            val token = getUserToken()
+            val token = localDataSource.getUserToken()
             val body = UpdateValueRequest(newName)
             remoteDataSource.updateName(token, body)
         }
@@ -88,7 +88,7 @@ constructor(
     override suspend fun logout(): Flow<ResultState<UserInfo>> = flowRequest(
         mapper = KtorUserInfo::asExternalModel,
         request = {
-            val token = getUserToken()
+            val token = localDataSource.getUserToken()
             remoteDataSource.performLogout(token)
         },
         onSuccess = {
@@ -97,8 +97,5 @@ constructor(
             }
         }
     )
-
-    private suspend fun getUserToken(): String? =
-        localDataSource.data.first()[TOKEN_KEY]
 
 }
