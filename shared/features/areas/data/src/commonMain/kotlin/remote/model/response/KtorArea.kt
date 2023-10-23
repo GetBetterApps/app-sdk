@@ -35,7 +35,19 @@ data class KtorArea(
     val requiredLevel: Int = 0,
 
     @SerialName("userTermsOfMembership")
-    val userTermsOfMembership: String = TermsOfMembership.Allow.responseName
+    val userTermsOfMembership: String = TermsOfMembership.Allow.responseName,
+
+    @SerialName("isAllowJoin")
+    val isAllowJoin: Boolean = false,
+
+    @SerialName("isAllowDelete")
+    val isAllowDelete: Boolean = false,
+
+    @SerialName("isAllowEdit")
+    val isAllowEdit: Boolean = false,
+
+    @SerialName("isAllowLeave")
+    val isAllowLeave: Boolean = false
 )
 
 fun KtorArea.asExternalModel() =
@@ -49,5 +61,9 @@ fun KtorArea.asExternalModel() =
         imageUrl = imageUrl,
         emojiId = emojiId,
         requiredLevel = requiredLevel,
-        userTermsOfMembership = TermsOfMembership.valueOf(userTermsOfMembership)
+        userTermsOfMembership = TermsOfMembership.valueOf(userTermsOfMembership),
+        isAllowJoin = isAllowJoin,
+        isAllowLeave = isAllowLeave,
+        isAllowEdit = isAllowEdit,
+        isAllowDelete = isAllowDelete
     )

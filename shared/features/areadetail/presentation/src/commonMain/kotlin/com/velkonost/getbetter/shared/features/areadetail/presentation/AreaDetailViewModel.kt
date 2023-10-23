@@ -13,7 +13,6 @@ import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.
 import com.velkonost.getbetter.shared.features.areadetail.presentation.model.toUI
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.auth
-import model.getUserTermsOfMembership
 
 class AreaDetailViewModel
 internal constructor(
@@ -35,7 +34,7 @@ internal constructor(
         is AreaDetailAction.CancelEdit -> obtainCancelEdit()
     }
 
-    private fun fetchArea(areaId: String) {
+    private fun fetchArea(areaId: Int) {
         launchJob {
             areasRepository.fetchAreaDetails(areaId)
                 .collect { result ->
@@ -47,16 +46,15 @@ internal constructor(
                         onSuccess {
                             it?.let { area ->
                                 val userId = Firebase.auth.currentUser!!.uid
-                                val areaTermsOfMembership = area.getUserTermsOfMembership(userId)
 
                                 emit(
                                     viewState.value.copy(
-                                        initialItem = area.toUI(areaTermsOfMembership),
-                                        modifiedItem = area.toUI(areaTermsOfMembership),
-                                        isAllowJoin = area.membersList.none { it.userId == userId },
-                                        isAllowDelete = area.author.userId == userId,
-                                        isAllowEdit = area.author.userId == userId,
-                                        isAllowLeave = area.membersList.any { it.userId == userId }
+                                        initialItem = area.toUI(),
+                                        modifiedItem = area.toUI(),
+                                        isAllowJoin = area.isAllowJoin,
+                                        isAllowDelete = area.isAllowDelete,
+                                        isAllowEdit = area.isAllowEdit,
+                                        isAllowLeave = area.isAllowLeave
                                     )
                                 )
                             }

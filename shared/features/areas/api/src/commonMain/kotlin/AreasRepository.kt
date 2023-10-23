@@ -10,7 +10,7 @@ interface AreasRepository {
     ): Flow<ResultState<List<Area>>>
 
     fun editArea(
-        id: String,
+        id: Int,
         name: String,
         description: String,
         emojiId: Int? = null,

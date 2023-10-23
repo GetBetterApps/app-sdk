@@ -44,7 +44,19 @@ data class Area(
     val isPrivate: Boolean,
 
     @SerialName("userTermsOfMembership")
-    val userTermsOfMembership: TermsOfMembership
+    val userTermsOfMembership: TermsOfMembership,
+
+    @SerialName("isAllowJoin")
+    val isAllowJoin: Boolean = false,
+
+    @SerialName("isAllowDelete")
+    val isAllowDelete: Boolean = false,
+
+    @SerialName("isAllowEdit")
+    val isAllowEdit: Boolean = false,
+
+    @SerialName("isAllowLeave")
+    val isAllowLeave: Boolean = false
 ) {
     companion object {
         const val idPropertyName = "id"

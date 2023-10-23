@@ -4,7 +4,7 @@ import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 
 sealed interface AreaDetailAction : UIContract.Action {
-    data class Load(val areaId: String) : AreaDetailAction
+    data class Load(val areaId: Int) : AreaDetailAction
 
     data class EmojiChanged(val value: Emoji) : AreaDetailAction
 

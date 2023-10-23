@@ -41,7 +41,7 @@ constructor(
     )
 
     override fun editArea(
-        id: String,
+        id: Int,
         name: String,
         description: String,
         emojiId: Int?,
@@ -51,6 +51,7 @@ constructor(
         request = {
             val token = localDataSource.getUserToken()
             val body = CreateNewAreaRequest(
+                areaId = id,
                 areaName = name,
                 areaDescription = description,
                 areaEmojiId = emojiId,
