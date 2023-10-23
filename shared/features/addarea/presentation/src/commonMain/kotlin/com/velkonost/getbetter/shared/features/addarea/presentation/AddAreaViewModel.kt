@@ -55,6 +55,7 @@ internal constructor(
                     _areasPagingConfig.lastPageReached = true
                 }
 
+                _areasPagingConfig.page++
                 _areasPagingConfig.lastElement = result.data.lastElement
 
                 val userId = Firebase.auth.currentUser!!.uid

@@ -1,9 +1,5 @@
 package model
 
-import com.velkonost.getbetter.shared.core.model.TermsOfMembership
-import dev.gitlive.firebase.firestore.DocumentReference
-import dev.gitlive.firebase.firestore.DocumentSnapshot
-import dev.gitlive.firebase.firestore.Timestamp
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,7 +7,7 @@ import kotlinx.serialization.Serializable
 data class Area(
 
     @SerialName(idPropertyName)
-    val id: String,
+    val id: Int,
 
     @SerialName(namePropertyName)
     val name: String,
@@ -22,8 +18,8 @@ data class Area(
     @SerialName(createdDatePropertyName)
     val createdDate: Long,
 
-    @SerialName(authorPropertyName)
-    val author: AreaMember,
+//    @SerialName(authorPropertyName)
+//    val author: AreaMember,
 
     @SerialName(imageUrlPropertyName)
     val imageUrl: String? = null,
@@ -34,11 +30,11 @@ data class Area(
     @SerialName(requiredLevelPropertyName)
     val requiredLevel: Int,
 
-    @SerialName(usersDataPropertyName)
-    val usersData: Map<String, Float>,
+//    @SerialName(usersDataPropertyName)
+//    val usersData: Map<String, Float>,
 
-    @SerialName(membersListPropertyName)
-    val membersList: List<AreaMember>,
+//    @SerialName(membersListPropertyName)
+//    val membersList: List<AreaMember>,
 
     @SerialName(isActivePropertyName)
     val isActive: Boolean,
@@ -61,28 +57,3 @@ data class Area(
         const val isPrivatePropertyName = "isPrivate"
     }
 }
-
-suspend fun DocumentSnapshot.toAreaModel() =
-    Area(
-        id = get(Area.idPropertyName),
-        name = get(Area.namePropertyName),
-        description = get(Area.descriptionPropertyName),
-        isActive = get(Area.isActivePropertyName),
-        createdDate = get<Timestamp>(Area.createdDatePropertyName).seconds,
-        imageUrl = get(Area.imageUrlPropertyName),
-        emojiId = get(Area.emojiIdPropertyName),
-        requiredLevel = get(Area.requiredLevelPropertyName),
-        usersData = get(Area.usersDataPropertyName),
-        membersList = get<List<DocumentReference>>(Area.membersListPropertyName).map {
-            it.get().toAreaMember()
-        },
-        author = get<DocumentReference>(Area.authorPropertyName).get().toAreaMember(),
-        isPrivate = get(Area.isPrivatePropertyName)
-    )
-
-fun Area.getUserTermsOfMembership(uid: String) =
-    if (membersList.any { it.userId == uid }) {
-        TermsOfMembership.AlreadyJoined
-    } else {
-        TermsOfMembership.Allow
-    }

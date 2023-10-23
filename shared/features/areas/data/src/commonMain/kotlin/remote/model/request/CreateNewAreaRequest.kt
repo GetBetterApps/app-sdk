@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CreateNewAreaRequest(
     @SerialName("areaId")
-    val areaId: Int,
+    val areaId: Int = -1,
 
     @SerialName("areaName")
     val areaName: String,
@@ -15,14 +15,14 @@ data class CreateNewAreaRequest(
     val areaDescription: String,
 
     @SerialName("isAreaPrivate")
-    val isAreaPrivate: Boolean,
+    val isAreaPrivate: Boolean? = null,
 
     @SerialName("areaRequiredLevel")
-    val areaRequiredLevel: Int,
+    val areaRequiredLevel: Int? = null,
 
     @SerialName("areaEmojiId")
-    val areaEmojiId: Int,
+    val areaEmojiId: Int?,
 
     @SerialName("areaImageUrl")
-    val areaImageUrl: String
+    val areaImageUrl: String?
 )

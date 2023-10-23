@@ -1,12 +1,13 @@
 import com.velkonost.getbetter.shared.core.util.ResultState
-import dev.gitlive.firebase.firestore.DocumentSnapshot
 import kotlinx.coroutines.flow.Flow
 import model.Area
-import model.pagination.AreasPage
 
 interface AreasRepository {
 
-    fun fetchAllAreas(): Flow<ResultState<List<Area>>>
+    fun fetchAllAreas(
+        page: Int,
+        perPage: Int
+    ): Flow<ResultState<List<Area>>>
 
     fun editArea(
         id: String,
@@ -14,7 +15,7 @@ interface AreasRepository {
         description: String,
         emojiId: Int? = null,
         imageUrl: String? = null
-    ): Flow<ResultState<Unit>>
+    ): Flow<ResultState<Area>>
 
     fun createNewArea(
         name: String,
@@ -23,19 +24,20 @@ interface AreasRepository {
         requiredLevel: Int,
         emojiId: Int? = null,
         imageUrl: String? = null
-    ): Flow<ResultState<Unit>>
+    ): Flow<ResultState<Area>>
 
-    fun deleteArea(areaId: String): Flow<ResultState<Unit>>
+    fun deleteArea(areaId: Int): Flow<ResultState<List<Area>>>
 
-    fun leaveArea(areaId: String): Flow<ResultState<Unit>>
+    fun leaveArea(areaId: Int): Flow<ResultState<List<Area>>>
 
     fun fetchUserAreas(): Flow<ResultState<List<Area>>>
 
-    fun addUserArea(areaId: String): Flow<ResultState<String>>
+    fun addUserArea(areaId: Int): Flow<ResultState<List<Area>>>
 
     suspend fun fetchPublicAreasToAdd(
-        perPage: Int, lastElement: DocumentSnapshot?
-    ): ResultState<AreasPage>
+        page: Int,
+        perPage: Int
+    ): Flow<ResultState<List<Area>>>
 
-    fun fetchAreaDetails(areaId: String): Flow<ResultState<Area>>
+    fun fetchAreaDetails(areaId: Int): Flow<ResultState<Area>>
 }
