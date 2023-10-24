@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Note(
     @SerialName(idPropertyName)
-    val id: String,
+    val id: Int,
 
     @SerialName(noteTypePropertyName)
     val noteType: NoteType,
@@ -16,13 +16,13 @@ data class Note(
     val text: String,
 
     @SerialName(authorPropertyName)
-    val author: NoteAuthor,
+    val authorId: String,
 
     @SerialName(createdDatePropertyName)
     val createdDate: Long,
 
     @SerialName(completionDatePropertyName)
-    val completionDate: Long,
+    val completionDate: Long?,
 
     @SerialName(mediaUrlsPropertyName)
     val mediaUrls: List<String>,
@@ -38,9 +38,6 @@ data class Note(
 
     @SerialName(subNotesPropertyName)
     val subNotes: List<SubNote>,
-
-    @SerialName(isCompletedPropertyName)
-    val isCompleted: Boolean,
 
     ) {
     companion object {

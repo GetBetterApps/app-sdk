@@ -5,19 +5,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SubNote(
-    @SerialName(textPropertyName)
+    @SerialName("id")
+    val id: Int,
+
+    @SerialName("text")
     val text: String,
 
-    @SerialName(statePropertyName)
-    val state: State
-) {
-
-    enum class State {
-        InProgress, Done
-    }
-
-    companion object {
-        const val textPropertyName = "text"
-        const val statePropertyName = "state"
-    }
-}
+    @SerialName("completionDate")
+    val completionDate: Long
+)
