@@ -143,6 +143,9 @@ internal constructor(
                         onSuccess { area ->
                             area?.let { emit(AreaDetailEvent.DeleteSuccess(it.id)) }
                         }
+                        onFailureWithMsg { _, message ->
+                            message?.let { emit(it) }
+                        }
                     }
                 }
         }
@@ -158,6 +161,7 @@ internal constructor(
                         isLoading {
                             emit(viewState.value.copy(isLoading = it))
                         }
+
                         onSuccess { area ->
                             area?.let {
                                 emit(
@@ -169,6 +173,10 @@ internal constructor(
                                 emit(AreaDetailEvent.LeaveSuccess(area.id))
                             }
 
+                        }
+
+                        onFailureWithMsg { _, message ->
+                            message?.let { emit(it) }
                         }
                     }
                 }

@@ -31,7 +31,7 @@ constructor(
     override var coroutineScope = vmScope
     override val error = kotlinx.coroutines.flow.MutableStateFlow<Throwable?>(null)
 
-    val vmScope
+    private val vmScope
         get() = viewModelScope.coroutineScope
 
     private val _viewState = MutableStateFlow(viewModelScope, initialState)
