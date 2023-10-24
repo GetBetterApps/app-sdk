@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.diary
 
 import AreasRepository
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
@@ -26,6 +27,8 @@ internal constructor(
 ) : BaseViewModel<DiaryViewState, DiaryAction, DiaryNavigation, DiaryEvent>(
     initialState = DiaryViewState()
 ) {
+
+    private val _notesPagingConfig = PagingConfig()
 
     fun refreshData() {
         fetchAreas()
@@ -108,8 +111,31 @@ internal constructor(
     }
 
     private fun fetchNotes() {
-        launchJob {
+        if (_notesPagingConfig.lastPageReached) return
 
+        launchJob {
+            notesRepository.fetchUserDetails(
+                page = _notesPagingConfig.page,
+                perPage = _notesPagingConfig.pageSize
+            ).collect { result ->
+                with(result) {
+                    isLoading {
+                        val notesViewState = viewState.value.notesViewState.copy(isLoading = it)
+                        emit(viewState.value.copy(notesViewState = notesViewState))
+                    }
+                    onSuccess { items ->
+                        _notesPagingConfig.lastPageReached = items.isNullOrEmpty()
+                        _notesPagingConfig.page++
+
+                        items?.let {
+
+                        }
+                    }
+                    onFailureWithMsg { _, message ->
+                        message?.let { emit(it) }
+                    }
+                }
+            }
         }
     }
 }

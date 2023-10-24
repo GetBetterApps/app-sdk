@@ -15,7 +15,6 @@ import com.velkonost.getbetter.shared.features.addarea.presentation.contract.Are
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.LoadNextPage
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.NavigateBack
 import com.velkonost.getbetter.shared.features.addarea.presentation.model.toUI
-import dev.gitlive.firebase.firestore.DocumentSnapshot
 
 class AddAreaViewModel
 internal constructor(
@@ -24,7 +23,7 @@ internal constructor(
     initialState = AddAreaViewState()
 ) {
 
-    private val _areasPagingConfig = PagingConfig<DocumentSnapshot>()
+    private val _areasPagingConfig = PagingConfig()
 
     init {
         fetchAreas()
