@@ -1,18 +1,8 @@
 package com.velkonost.getbetter.android.activity
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.widget.Toast
-import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -23,17 +13,16 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.velkonost.getbetter.android.activity.components.BottomBar
 import com.velkonost.getbetter.android.activity.components.MainSnackBarHost
+import com.velkonost.getbetter.android.activity.components.bottomBarEnter
+import com.velkonost.getbetter.android.activity.components.bottomBarExit
 import com.velkonost.getbetter.android.activity.components.rememberSnackBarHostState
 import com.velkonost.getbetter.android.activity.di.AppScreens
 import com.velkonost.getbetter.core.compose.provide
 import com.velkonost.getbetter.core.compose.theme.ApplicationTheme
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationScreen
-import com.velkonost.getbetter.shared.core.vm.resource.Message
 import com.velkonost.getbetter.shared.core.vm.resource.MessageDeque
-import com.velkonost.getbetter.shared.core.vm.resource.MessageType
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -41,62 +30,23 @@ import kotlinx.coroutines.flow.collectLatest
 internal fun MainContent() {
     val context = LocalContext.current
     val navController = rememberAnimatedNavController()
-    val snackbarHostState = rememberSnackBarHostState()
+    val snackBarHostState = rememberSnackBarHostState()
 
     val forceHideBottomBar = remember { mutableStateOf(false) }
 
     ApplicationTheme {
         Scaffold(
-            snackbarHost = { MainSnackBarHost(snackbarHostState) },
-            modifier = Modifier
-                .fillMaxSize(),
+            snackbarHost = { MainSnackBarHost(snackBarHostState) },
+            modifier = Modifier.fillMaxSize(),
             bottomBar = {
                 BottomBar(navController, forceHideBottomBar)
             },
             containerColor = colorResource(resource = SharedR.colors.main_background)
         ) {
-            AnimatedNavHost(
-                navController = navController,
+            AnimatedNavHost(navController = navController,
                 startDestination = NavigationScreen.SplashNavScreen.route,
-                enterTransition = {
-                    slideIntoContainer(
-                        towards = AnimatedContentTransitionScope.SlideDirection.Up,
-                        animationSpec = tween(
-                            durationMillis = 290,
-                            delayMillis = 10,
-                            easing = FastOutSlowInEasing
-                        ),
-                        initialOffset = { it / 4 }
-                    ).plus(
-                        fadeIn(
-                            animationSpec = tween(
-                                durationMillis = 150,
-                                delayMillis = 10,
-                                easing = FastOutSlowInEasing
-                            )
-                        )
-                    )
-                },
-                exitTransition = {
-                    slideOutOfContainer(
-                        towards = AnimatedContentTransitionScope.SlideDirection.Down,
-                        animationSpec = tween(
-                            durationMillis = 280,
-                            delayMillis = 20,
-                            easing = FastOutSlowInEasing
-                        ),
-                        targetOffset = { it / 4 }
-                    ).plus(
-                        fadeOut(
-                            animationSpec = tween(
-                                durationMillis = 280,
-                                delayMillis = 20,
-                                easing = FastOutSlowInEasing
-                            )
-                        )
-                    )
-                }
-            ) {
+                enterTransition = { bottomBarEnter() },
+                exitTransition = { bottomBarExit() }) {
                 AppScreens.provide(this@AnimatedNavHost, navController, forceHideBottomBar)
             }
         }
@@ -104,51 +54,7 @@ internal fun MainContent() {
 
     LaunchedEffect(Unit) {
         MessageDeque().collectLatest {
-            onMessageReceived(it, snackbarHostState, context)
-        }
-    }
-}
-
-private suspend fun onMessageReceived(
-    message: Message,
-    snackbarHostState: SnackbarHostState,
-    context: Context
-) {
-    when (val component = message.messageType) {
-        is MessageType.SnackBar -> {
-            val text = message.text ?: message.textResource?.toString(context = context) ?: ""
-            val result = snackbarHostState.showSnackbar(
-                message = text,
-                actionLabel = component.actionLabel,
-                withDismissAction = true,
-                duration = SnackbarDuration.Short
-            )
-
-            when (result) {
-                SnackbarResult.Dismissed -> {
-                    component.onDismiss.invoke()
-                    MessageDeque.dequeue()
-                }
-
-                SnackbarResult.ActionPerformed -> {
-                    component.onAction.invoke()
-                    MessageDeque.dequeue()
-                }
-            }
-
-        }
-
-        is MessageType.Toast -> {
-            Toast.makeText(context, message.text, Toast.LENGTH_LONG).show()
-
-            delay(timeMillis = 4_000)
-            MessageDeque.dequeue()
-        }
-
-        else -> {
-            // Ignore this block
-            // MessageType could be .None
-            // or message could be null
+            onMessageReceived(it, snackBarHostState, context)
         }
     }
 }

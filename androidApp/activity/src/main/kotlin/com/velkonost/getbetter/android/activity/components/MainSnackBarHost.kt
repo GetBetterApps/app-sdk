@@ -26,7 +26,7 @@ import dev.icerock.moko.resources.compose.colorResource
 internal fun MainSnackBarHost(snackBarHostState: SnackbarHostState) {
     SnackbarHost(
         hostState = snackBarHostState,
-        snackbar = { snackbarData: SnackbarData ->
+        snackbar = { snackBarData: SnackbarData ->
             Surface(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -44,7 +44,7 @@ internal fun MainSnackBarHost(snackBarHostState: SnackbarHostState) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = snackbarData.visuals.message,
+                        text = snackBarData.visuals.message,
                         color = colorResource(resource = SharedR.colors.text_title),
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier
@@ -54,7 +54,7 @@ internal fun MainSnackBarHost(snackBarHostState: SnackbarHostState) {
                             .weight(1f)
                             .align(Alignment.CenterVertically)
                     )
-                    snackbarData.visuals.actionLabel?.let { action ->
+                    snackBarData.visuals.actionLabel?.let { action ->
                         Text(
                             text = action.uppercase(),
                             color = MaterialTheme.colorScheme.background,

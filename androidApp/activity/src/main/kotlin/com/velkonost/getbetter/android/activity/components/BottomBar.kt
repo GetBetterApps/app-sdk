@@ -93,7 +93,6 @@ fun BottomBar(
                         topEnd = 32.dp
                     )
                 ),
-
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.Top
         ) {
@@ -114,7 +113,6 @@ fun BottomBarItem(
     navController: NavHostController,
     haptic: HapticFeedback
 ) {
-
     val selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true
 
     Box(
