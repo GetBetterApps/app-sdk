@@ -31,7 +31,6 @@ struct ContentView: View {
             }).contains(route)
             
             ZStack {
-                
                 Color.mainBackground.edgesIgnoringSafeArea(.all)
                 
                 switch route {
@@ -64,8 +63,6 @@ struct ContentView: View {
                     
                 case _ where route.starts(with: NavigationScreenKt.ADD_AREA_DESTINATION) :
                     AddAreaRoute().view(pilot: pilot, route: route)
-                    
-                
                     
                 default : EmptyView()
                 }

@@ -27,6 +27,11 @@ struct AreaDetailScreen: View {
     private let onClose: () -> Void
     private let onAreaChanged: (Int32) -> Void
     
+    @State private var resourceMessageText: String?
+    @State private var snackBar: MessageType.SnackBar?
+    @State private var showSnackBar: Bool = false
+    @State private var messageDequeObserver: Task<(), Error>? = nil
+    
     init(
         areaId: Binding<Int32?>,
         onClose: @escaping () -> Void,
@@ -95,11 +100,28 @@ struct AreaDetailScreen: View {
                 }
             }
         }
+        .snackBar(
+            isShowing: $showSnackBar,
+            text: resourceMessageText ?? "",
+            snackBar: snackBar
+        )
         .onAppear {
             viewModel.onAppear(areaId: areaId!)
             observeEvents()
+            
+            if messageDequeObserver == nil {
+                messageDequeObserver = Task {
+                    for try await message in asyncSequence(for: MessageDeque.shared.invoke()) {
+                        handle(resource: message)
+                    }
+                }
+            }
         }
-        .onDisappear(perform: viewModel.onDisappear)
+        .onDisappear {
+            viewModel.onDisappear()
+            messageDequeObserver?.cancel()
+            messageDequeObserver = nil
+        }
         .edgesIgnoringSafeArea(.all)
         .onTapGesture {
             self.endTextEditing()
@@ -155,6 +177,26 @@ extension AreaDetailScreen {
                     }
                 }
             }
+        }
+    }
+    
+    private func handle(resource message: Message) {
+        switch message.messageType {
+            
+        case let snackBar as MessageType.SnackBar : do {
+            if showSnackBar == false {
+                resourceMessageText = message.text != nil ? message.text : message.textResource?.localized()
+                self.snackBar = snackBar
+                withAnimation {
+                    showSnackBar.toggle()
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    Task { try await MessageDeque.shared.dequeue() }
+                }
+            }
+        }
+            
+        default: break
         }
     }
 }
