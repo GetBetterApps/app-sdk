@@ -12,7 +12,7 @@ data class EditNoteRequest(
     val noteText: String,
 
     @SerialName("noteMedia")
-    val noteMedia: List<String>,
+    val noteMedia: List<String> = emptyList(),
 
     @SerialName("noteTags")
     val noteTags: List<String>,
