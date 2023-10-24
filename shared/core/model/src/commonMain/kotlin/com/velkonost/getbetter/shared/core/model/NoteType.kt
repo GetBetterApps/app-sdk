@@ -1,6 +1,6 @@
 package com.velkonost.getbetter.shared.core.model
 
-enum class NoteType {
-    Default,
-    Goal
+enum class NoteType(val responseName: String) {
+    Default(responseName = "default"),
+    Goal(responseName = "goal")
 }
