@@ -48,9 +48,12 @@ fun MultilineTextField(
         minLines = minLines,
         placeholder = {
             Text(
-                modifier = modifier.padding(top = 4.dp),
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(top = 4.dp),
                 text = placeholderText,
                 color = colorResource(resource = SharedR.colors.hint_color),
+                textAlign = textAlign,
                 style = MaterialTheme.typography.titleMedium.copy(textAlign = textAlign)
             )
         },

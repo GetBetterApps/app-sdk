@@ -51,6 +51,7 @@ struct MultilineTextField: View {
             .placeholder(when: value.isEmpty) {
                 Text(placeholderText)
                     .style(.titleMedium)
+                    .multilineTextAlignment(textAlign)
                     .lineLimit(minLines...20)
                     .foregroundColor(.hintColor)
             }
