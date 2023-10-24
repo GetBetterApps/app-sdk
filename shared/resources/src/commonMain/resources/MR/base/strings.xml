@@ -161,5 +161,19 @@
     <string name="error_902">Incorrect email. Try different</string>
     <string name="error_903">Weak password. Try different</string>
     <string name="error_904">Invalid credentials</string>
+
+    <string name="error_801">Incorrect area\'s name</string>
+    <string name="error_802">Incorrect area\'s description</string>
+    <string name="error_803">Incorrect area\'s required level</string>
+    <string name="error_804">You are already joined</string>
+    <string name="error_805">You are already leaved</string>
+    <string name="error_806">You don\'t have permissions to edit this area</string>
+    <string name="error_807">You don\'t have permissions to delete this area</string>
+    <string name="error_808">Area doesn\'t exist</string>
+    <string name="error_809">Your level is too low to join</string>
+    <string name="error_810">You can\'t join because area is private</string>
+    <string name="error_811">You can\'t join because area is inactive</string>
+    <string name="error_812">You can\'t delete because area is inactive</string>
+    <string name="error_813">You can't edit because area is inactive</string>
     <!--  SERVER EXCEPTIONS  -->
 </resources>
