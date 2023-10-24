@@ -51,7 +51,7 @@ fun MultilineTextField(
                 modifier = modifier.padding(top = 4.dp),
                 text = placeholderText,
                 color = colorResource(resource = SharedR.colors.hint_color),
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleMedium.copy(textAlign = textAlign)
             )
         },
         colors = TextFieldDefaults.colors(

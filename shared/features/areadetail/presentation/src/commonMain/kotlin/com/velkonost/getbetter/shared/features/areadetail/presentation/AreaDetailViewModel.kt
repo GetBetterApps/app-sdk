@@ -116,6 +116,14 @@ internal constructor(
 
                     onFailureWithMsg { _, message ->
                         message?.let { emit(it) }
+
+                        val initialItem = viewState.value.initialItem
+                        emit(
+                            viewState.value.copy(
+                                isEditing = false,
+                                modifiedItem = initialItem?.copy()
+                            )
+                        )
                     }
                 }
             }
@@ -141,9 +149,7 @@ internal constructor(
     }
 
     private fun obtainLeaveArea() {
-        checkNotNull(viewState.value.modifiedItem) {
-            return
-        }
+        checkNotNull(viewState.value.modifiedItem) { return }
 
         launchJob {
             areasRepository.leaveArea(viewState.value.modifiedItem!!.id)
@@ -172,9 +178,7 @@ internal constructor(
     private fun obtainCancelEdit() {
         val initialItem = viewState.value.initialItem
 
-        checkNotNull(initialItem) {
-            return
-        }
+        checkNotNull(initialItem) { return }
 
         emit(
             viewState.value.copy(
@@ -187,9 +191,7 @@ internal constructor(
     private fun obtainJoinArea() {
         val item = viewState.value.initialItem
 
-        checkNotNull(item) {
-            return
-        }
+        checkNotNull(item) { return }
 
         launchJob {
             areasRepository.addUserArea(item.id)
@@ -208,7 +210,10 @@ internal constructor(
                                 )
                                 emit(AreaDetailEvent.JoinSuccess(area.id))
                             }
+                        }
 
+                        onFailureWithMsg { _, message ->
+                            message?.let { emit(it) }
                         }
                     }
                 }
