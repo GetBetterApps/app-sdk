@@ -104,8 +104,9 @@ fun CreateNewAreaBottomSheet(
                         value = state.description,
                         placeholderText = stringResource(
                             resource = SharedR.strings.diary_areas_create_new_description_hint
-                        )
-                    ) { onDescriptionChanged.invoke(it) }
+                        ),
+                        onValueChanged = { onDescriptionChanged.invoke(it) }
+                    )
 
                     RequiredLevelRow(
                         title = stringResource(
@@ -128,8 +129,9 @@ fun CreateNewAreaBottomSheet(
                         labelText = stringResource(
                             resource = SharedR.strings.diary_areas_create_button
                         ),
-                        isLoading = false
-                    ) { onCreateClick.invoke() }
+                        isLoading = false,
+                        onClick = onCreateClick
+                    )
                 }
             }
         }

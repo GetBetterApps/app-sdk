@@ -63,6 +63,8 @@ fun AreaItem(
             ) {
                 Text(
                     text = item.name,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
                     color = colorResource(resource = SharedR.colors.text_title),
                     style = MaterialTheme.typography.labelLarge
                 )

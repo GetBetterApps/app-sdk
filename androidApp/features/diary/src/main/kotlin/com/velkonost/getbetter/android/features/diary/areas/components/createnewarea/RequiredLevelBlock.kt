@@ -42,7 +42,9 @@ fun ColumnScope.RequiredLevelRow(
             style = MaterialTheme.typography.titleMedium,
             color = colorResource(resource = SharedR.colors.text_secondary)
         )
+
         Spacer(modifier = modifier.weight(1f))
+
         Image(
             modifier = modifier
                 .size(32.dp)
@@ -62,12 +64,14 @@ fun ColumnScope.RequiredLevelRow(
             contentDescription = null,
             colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_inactive))
         )
+
         Text(
             modifier = modifier.padding(start = 16.dp, end = 16.dp),
             text = level.toString(),
             style = MaterialTheme.typography.titleMedium,
             color = colorResource(resource = SharedR.colors.text_secondary)
         )
+
         Image(
             modifier = modifier
                 .size(32.dp)

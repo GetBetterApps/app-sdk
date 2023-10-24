@@ -11,9 +11,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -25,7 +22,6 @@ import com.velkonost.getbetter.android.features.profile.components.ProfileHeader
 import com.velkonost.getbetter.android.features.profile.components.SubscriptionBox
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.VersionName
-import com.velkonost.getbetter.core.utils.storage.StorageDelegate
 import com.velkonost.getbetter.shared.features.profile.ProfileViewModel
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelected
 import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
@@ -41,10 +37,7 @@ fun ProfileScreen(
 ) {
     val scrollState = rememberScrollState()
     val state by viewModel.viewState.collectAsStateWithLifecycle()
-    val scope = rememberCoroutineScope()
     val context = LocalContext.current
-
-    val uploadAvatarState = remember { mutableStateOf<StorageDelegate.UploadState?>(null) }
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
@@ -68,7 +61,7 @@ fun ProfileScreen(
 
         ProfileHeader(
             userName = state.userName,
-            isLoading = uploadAvatarState.value is StorageDelegate.UploadState.Loading,
+            isLoading = state.isLoading,
             avatarBytes = state.avatarBytes,
             onAvatarClick = {
                 launcher.launch("image/*")

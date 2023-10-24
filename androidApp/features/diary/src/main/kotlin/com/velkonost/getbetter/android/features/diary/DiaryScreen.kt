@@ -75,6 +75,7 @@ fun DiaryScreen(
                 tabs = state.tabs.map { it.title.toString(LocalContext.current) },
                 pagerState = pagerState
             )
+
             DiaryScreenContent(
                 pagerState = pagerState,
                 notesState = state.notesViewState,
