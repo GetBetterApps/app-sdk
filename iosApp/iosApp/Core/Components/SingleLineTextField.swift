@@ -54,6 +54,7 @@ struct SingleLineTextField: View {
                     .style(textStyle)
                     .multilineTextAlignment(textAlign)
                     .foregroundColor(.hintColor)
+                    .frame(minWidth: 0, maxWidth: .infinity)
             }
             .padding(.leading, 16)
             .padding(.trailing, 16)

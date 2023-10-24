@@ -54,6 +54,7 @@ struct MultilineTextField: View {
                     .multilineTextAlignment(textAlign)
                     .lineLimit(minLines...20)
                     .foregroundColor(.hintColor)
+                    .frame(minWidth: 0, maxWidth: .infinity)
             }
             .focused($isFocused)
             .padding(16)
