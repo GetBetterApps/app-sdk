@@ -51,6 +51,26 @@ val Int.asText: ResourceStringDesc
             811 -> SharedR.strings.error_811
             812 -> SharedR.strings.error_812
             813 -> SharedR.strings.error_813
+            814 -> SharedR.strings.error_814
+
+            699 -> SharedR.strings.error_699
+            700 -> SharedR.strings.error_700
+            701 -> SharedR.strings.error_701
+            702 -> SharedR.strings.error_702
+            703 -> SharedR.strings.error_703
+            704 -> SharedR.strings.error_704
+            705 -> SharedR.strings.error_705
+            706 -> SharedR.strings.error_706
+            707 -> SharedR.strings.error_707
+            708 -> SharedR.strings.error_708
+            709 -> SharedR.strings.error_709
+            710 -> SharedR.strings.error_710
+            711 -> SharedR.strings.error_711
+            712 -> SharedR.strings.error_712
+            713 -> SharedR.strings.error_713
+            714 -> SharedR.strings.error_714
+            715 -> SharedR.strings.error_715
+            716 -> SharedR.strings.error_716
             else -> SharedR.strings.error_default
         }
 

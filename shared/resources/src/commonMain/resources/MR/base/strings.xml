@@ -175,5 +175,25 @@
     <string name="error_811">You can\'t join because area is inactive</string>
     <string name="error_812">You can\'t delete because area is inactive</string>
     <string name="error_813">You can't edit because area is inactive</string>
+    <string name="error_814">Your can\'t get area\'s details because its private</string>
+
+    <string name="error_699">Incorrect note\'s type</string>
+    <string name="error_700">Incorrect note\'s text</string>
+    <string name="error_701">Incorrect area selected</string>
+    <string name="error_702">You are not a member of this area</string>
+    <string name="error_703">Incorrect sub note text</string>
+    <string name="error_704">You don\'t have permissions to edit this note</string>
+    <string name="error_705">You don\'t have permission to delete this note</string>
+    <string name="error_706">Note doesn\'t exist</string>
+    <string name="error_707">You can\'t edit because note is inactive</string>
+    <string name="error_708">You can\'t delete because note is inactive</string>
+    <string name="error_709">You can\'t complete because note is inactive</string>
+    <string name="error_710">Goal already completed</string>
+    <string name="error_711">Sub goal already completed</string>
+    <string name="error_712">This note is not a goal</string>
+    <string name="error_713">You don\'t have permissions to complete this goal</string>
+    <string name="error_714">Sub goal doesn\'t exist</string>
+    <string name="error_715">This note doesn\'t contain such sub goal</string>
+    <string name="error_716">You can\'t get details because note is private</string>
     <!--  SERVER EXCEPTIONS  -->
 </resources>
