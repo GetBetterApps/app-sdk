@@ -54,6 +54,9 @@ struct CreateNewNoteBottomSheet: View {
                         isAreaPickerVisible: $isAreaPickerVisible
                     )
                     
+            
+                    
+                    
                     Spacer()
                 }
                 

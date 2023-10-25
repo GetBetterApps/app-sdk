@@ -13,8 +13,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.android.richtext)
-
     implementation(projects.shared.core.util)
     implementation(projects.shared.resources)
 

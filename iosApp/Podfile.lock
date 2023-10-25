@@ -642,9 +642,6 @@ PODS:
     - FirebaseAnalytics (~> 10.14.0)
   - Firebase/CoreOnly (10.14.0):
     - FirebaseCore (= 10.14.0)
-  - Firebase/Crashlytics (10.14.0):
-    - Firebase/CoreOnly
-    - FirebaseCrashlytics (~> 10.14.0)
   - Firebase/Storage (10.14.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 10.14.0)
@@ -683,7 +680,7 @@ PODS:
     - FirebaseCore (~> 10.0)
   - FirebaseCoreInternal (10.14.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseCrashlytics (10.14.0):
+  - FirebaseCrashlytics (10.15.0):
     - FirebaseCore (~> 10.5)
     - FirebaseInstallations (~> 10.0)
     - FirebaseSessions (~> 10.5)
@@ -852,8 +849,8 @@ PODS:
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
-  - Firebase/Crashlytics
   - Firebase/Storage
+  - FirebaseCrashlytics
   - FirebaseFirestore
   - KMMViewModelSwiftUI (= 1.0.0-ALPHA-14)
   - KMPNativeCoroutinesAsync (= 1.0.0-ALPHA-18)
@@ -910,7 +907,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 6fc17ac9f03509d51c131298aacb3ee5698b4f02
   FirebaseCoreExtension: d3f1ea3725fb41f56e8fbfb29eeaff54e7ffb8f6
   FirebaseCoreInternal: d558159ee6cc4b823c2296ecc193de9f6d9a5bb3
-  FirebaseCrashlytics: 0fbfa4efa57e8a09d8bf195393b50c237e3322b5
+  FirebaseCrashlytics: a83f26fb922a3fe181eb738fb4dcf0c92bba6455
   FirebaseFirestore: b4c0eaaf24efda5732ec21d9e6c788d083118ca6
   FirebaseInstallations: f672b1eda64e6381c21d424a2f680a943fd83f3b
   FirebaseSessions: ee59a7811bef4c15f65ef6472f3210faa293f9c8
@@ -934,6 +931,6 @@ SPEC CHECKSUMS:
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   umbrella: e75f2a7eabf35a2fbad73ae6869d1803e4be4d41
 
-PODFILE CHECKSUM: 0f035c6e7952107dd49354e965cc72307d46784a
+PODFILE CHECKSUM: c6161951ce16a495d044f2cc668cbb01d4e17c9d
 
 COCOAPODS: 1.12.1
