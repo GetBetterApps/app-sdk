@@ -35,7 +35,11 @@ struct AreaPicker: View {
             padding: .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
         ) {
             VStack {
-                AreaPickerHeader(selectedArea: selectedArea, noteType: noteType) {
+                AreaPickerHeader(
+                    selectedArea: selectedArea,
+                    noteType: noteType,
+                    isAreaPickerVisible: isAreaPickerVisible
+                ) {
                     withAnimation {
                         isAreaPickerVisible.toggle()
                     }

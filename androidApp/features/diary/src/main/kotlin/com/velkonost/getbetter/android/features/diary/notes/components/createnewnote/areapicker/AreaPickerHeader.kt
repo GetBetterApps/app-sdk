@@ -88,7 +88,9 @@ fun AreaPickerHeader(
                     )
 
                     Text(
-                        modifier = modifier.padding(start = 12.dp),
+                        modifier = modifier
+                            .padding(start = 12.dp)
+                            .fillMaxWidth(0.8f),
                         text = area.name,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -98,7 +100,6 @@ fun AreaPickerHeader(
                 }
             }
         }
-
 
         Spacer(modifier = modifier.weight(1f))
 
