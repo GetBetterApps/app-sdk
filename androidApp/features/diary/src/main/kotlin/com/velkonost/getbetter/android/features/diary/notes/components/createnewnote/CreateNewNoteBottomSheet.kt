@@ -33,7 +33,8 @@ fun CreateNewNoteBottomSheet(
     areas: List<Area>,
     state: CreateNewNoteViewState,
     modalSheetState: ModalBottomSheetState,
-    onAreaSelect: (Area) -> Unit
+    onAreaSelect: (Area) -> Unit,
+    onAreasError: () -> Unit
 ) {
 
     val isAreaPickerVisible = remember { mutableStateOf(false) }
@@ -80,6 +81,4 @@ fun CreateNewNoteBottomSheet(
     ) {
 
     }
-
-
 }

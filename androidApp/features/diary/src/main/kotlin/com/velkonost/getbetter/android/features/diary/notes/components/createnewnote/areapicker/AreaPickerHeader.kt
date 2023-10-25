@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.areapicker
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -22,16 +23,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
+import model.Area
 
 @Composable
 fun AreaPickerHeader(
     modifier: Modifier = Modifier,
-    selectedAreaName: String?,
+    selectedArea: Area?,
     isAreaPickerVisible: MutableState<Boolean>,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -54,20 +58,40 @@ fun AreaPickerHeader(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        Image(
-            modifier = modifier.size(32.dp),
-            painter = painterResource(imageResource = SharedR.images.emoji_1),
-            contentDescription = null
-        )
+        AnimatedContent(targetState = selectedArea, label = "") { area ->
+            if (area == null) {
+                Text(
+                    modifier = modifier.fillMaxWidth(),
+                    text = "select area for note",
+                    maxLines = 1,
+                    textAlign = TextAlign.Center,
+                    overflow = TextOverflow.Ellipsis,
+                    color = colorResource(resource = SharedR.colors.text_primary),
+                    style = MaterialTheme.typography.titleMedium
+                )
+            } else {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        modifier = modifier.size(32.dp),
+                        painter = painterResource(imageResource = Emoji.getIconById(area.emojiId!!)),
+                        contentDescription = null
+                    )
 
-        Text(
-            modifier = modifier.padding(start = 12.dp),
-            text = selectedAreaName ?: "select area for note",
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            color = colorResource(resource = SharedR.colors.text_primary),
-            style = MaterialTheme.typography.titleMedium
-        )
+                    Text(
+                        modifier = modifier.padding(start = 12.dp),
+                        text = area.name,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        color = colorResource(resource = SharedR.colors.text_primary),
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                }
+            }
+        }
+
 
         Spacer(modifier = modifier.weight(1f))
 

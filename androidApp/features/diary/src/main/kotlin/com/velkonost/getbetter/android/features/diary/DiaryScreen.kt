@@ -142,6 +142,12 @@ fun DiaryScreen(
             modalSheetState = createNewNoteSheetState,
             onAreaSelect = {
                 viewModel.dispatch(CreateNewNoteAction.AreaSelect(it))
+            },
+            onAreasError = {
+                viewModel.dispatch(CreateNewNoteAction.CloseBecauseZeroAreas)
+                scope.launch {
+                    createNewNoteSheetState.hide()
+                }
             }
         )
 

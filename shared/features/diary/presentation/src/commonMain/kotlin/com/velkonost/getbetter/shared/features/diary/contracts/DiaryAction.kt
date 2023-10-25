@@ -42,4 +42,6 @@ sealed interface CreateNewNoteAction : DiaryAction {
     data class AddImageUrl(val value: String) : CreateNewNoteAction
 
     data class RemoveImageUrl(val value: String) : CreateNewNoteAction
+
+    data object CloseBecauseZeroAreas : CreateNewNoteAction
 }

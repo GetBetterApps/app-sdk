@@ -34,7 +34,7 @@ fun AreaPicker(
     PrimaryBox(padding = 0) {
         Column {
             AreaPickerHeader(
-                selectedAreaName = selectedArea?.name,
+                selectedArea = selectedArea,
                 isAreaPickerVisible = isAreaPickerVisible
             )
 

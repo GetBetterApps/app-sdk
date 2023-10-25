@@ -149,6 +149,14 @@
     <string name="add_area_confirm_leave_text">All your notes and experience will be saved</string>
     <!--  ADD AREA  -->
 
+    <!--  CREATE NOTE  -->
+    <string name="create_note_title">Create new note</string>
+    <string name="create_goal_title">Create new goal</string>
+    <string name="create_note_error_no_areas">You must first add or create an area</string>
+    <string name="select_area_for_note">Select area for note</string>
+    <string name="select_area_for_goal">Select area for goal</string>
+    <!--  CREATE NOTE  -->
+
 
     <!--  SERVER EXCEPTIONS  -->
     <string name="error_default">Something went wrong. Try again</string>

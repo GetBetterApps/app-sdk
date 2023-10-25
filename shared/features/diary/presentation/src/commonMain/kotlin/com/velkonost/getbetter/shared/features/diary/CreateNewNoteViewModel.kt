@@ -27,6 +27,7 @@ internal constructor(
         is CreateNewNoteAction.RemoveSubNote -> removeSubNote(action.value)
         is CreateNewNoteAction.AddImageUrl -> TODO()
         is CreateNewNoteAction.RemoveImageUrl -> TODO()
+        is CreateNewNoteAction.CloseBecauseZeroAreas -> obtainZeroAreasError()
     }
 
     private fun obtainOpenDefault() {
@@ -95,6 +96,10 @@ internal constructor(
         if (subNotesList.contains(value)) {
             emit(viewState.value.copy(subNotes = subNotesList.minus(value)))
         }
+    }
+
+    private fun obtainZeroAreasError() {
+
     }
 
 }
