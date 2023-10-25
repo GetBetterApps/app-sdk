@@ -27,9 +27,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.core.model.Emoji
+import com.velkonost.getbetter.shared.core.model.NoteType
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
+import dev.icerock.moko.resources.compose.stringResource
 import model.Area
 
 @Composable
@@ -37,6 +39,7 @@ fun AreaPickerHeader(
     modifier: Modifier = Modifier,
     selectedArea: Area?,
     isAreaPickerVisible: MutableState<Boolean>,
+    noteType: NoteType
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val areaArrowRotationAngle by animateFloatAsState(
@@ -62,7 +65,11 @@ fun AreaPickerHeader(
             if (area == null) {
                 Text(
                     modifier = modifier.fillMaxWidth(),
-                    text = "select area for note",
+                    text = stringResource(
+                        resource =
+                        if (noteType == NoteType.Default) SharedR.strings.select_area_for_note
+                        else SharedR.strings.select_area_for_goal
+                    ),
                     maxLines = 1,
                     textAlign = TextAlign.Center,
                     overflow = TextOverflow.Ellipsis,

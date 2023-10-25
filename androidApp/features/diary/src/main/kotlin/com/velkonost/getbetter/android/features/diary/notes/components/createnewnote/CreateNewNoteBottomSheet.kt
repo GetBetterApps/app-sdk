@@ -72,7 +72,8 @@ fun CreateNewNoteBottomSheet(
                         selectedArea = state.selectedArea,
                         isAreaPickerVisible = isAreaPickerVisible,
                         onAreaSelect = onAreaSelect,
-                        modalSheetState = modalSheetState
+                        modalSheetState = modalSheetState,
+                        noteType = state.type
                     )
                 }
             }

@@ -28,6 +28,7 @@ struct DiaryScreen: View {
     var body: some View {
         @State var state = viewModel.viewStateValue as! DiaryViewState
         @State var createNewAreaState = state.createNewAreaViewState
+        @State var createNewNoteState = state.createNewNoteViewState
         
         VStack {
             PrimaryTabs(
@@ -109,8 +110,10 @@ struct DiaryScreen: View {
         }
         .sheet(isPresented: $showingCreateNewNoteSheet) {
             CreateNewNoteBottomSheet(
-                isLoading: false,
-                areas: state.areasViewState.items
+                state: $createNewNoteState,
+                onAreaSelect: { area in
+                    viewModel.dispatch(action: CreateNewNoteActionAreaSelect(value: area))
+                }
             )
         }
         .onAppear {

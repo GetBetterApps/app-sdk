@@ -19,18 +19,16 @@ struct AreaWrapper : Identifiable, Equatable, Hashable {
 
 struct CreateNewNoteBottomSheet: View {
     
-    let isLoading: Bool
-    let areas: [Area]
+    @Binding private var state: CreateNewNoteViewState
     
     @State private var isAreaPickerVisible = false
     @State var currentAreaIndex: Int = 0
-    @StateObject var areaPage: Page = .first()
     
-    let items: [String] = ["1", "2", "3"]
+    let onAreaSelect: (Area) -> Void
     
-    init(isLoading: Bool, areas: [Area]) {
-        self.isLoading = isLoading
-        self.areas = areas
+    init(state: Binding<CreateNewNoteViewState>, onAreaSelect: @escaping (Area) -> Void) {
+        self._state = state
+        self.onAreaSelect = onAreaSelect
     }
     
     var body: some View {
@@ -38,7 +36,7 @@ struct CreateNewNoteBottomSheet: View {
             Color.mainBackground
             
             VStack {
-                if isLoading {
+                if state.isLoading {
                     Loader()
                 } else {
                     Text(SharedR.strings().diary_areas_create_new_area_title.desc().localized())
@@ -46,67 +44,14 @@ struct CreateNewNoteBottomSheet: View {
                         .foregroundColor(.textTitle)
                         .frame(alignment: .center)
                     
-                    PrimaryBox(
-                        padding: .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
-                    ) {
-                        VStack {
-                            HStack {
-                                Image(uiImage: SharedR.images().emoji_1.toUIImage()!)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 32, height: 32)
-                                
-                                Text("selected area name")
-                                    .style(.titleMedium)
-                                    .foregroundColor(.textPrimary)
-                                    .padding(.leading, 12)
-                            }
-                            .padding(16)
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                            .onTapGesture {
-                                withAnimation {
-                                    isAreaPickerVisible.toggle()
-                                }
-                            }
-                            
-                            if isAreaPickerVisible {
-                                Pager(
-                                    page: areaPage,
-                                    data: areas.map(
-                                        { area in AreaWrapper(area: area) }
-                                    ),
-                                    id: \.self.area.id
-                                ) { areaWrapper in
-                                    
-                                    ZStack {
-                                        VStack {
-                                            Image(uiImage: Emoji.companion.getIconById(id: areaWrapper.area.emojiId as! Int32).toUIImage()!)
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 64, height: 64)
-                                            
-                                            Text(areaWrapper.area.name)
-                                                .style(.titleLarge)
-                                                .foregroundColor(.textPrimary)
-                                                .padding(.top, 12)
-                                        }
-                                    }
-                                    .frame(minWidth: 0, maxWidth: .infinity)
-                                    .padding(16)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .fill(Color.textFieldBackground)
-                                    )
-                                }
-                                .interactive(rotation: true)
-                                .interactive(scale: 0.8)
-                                .alignment(.center)
-                                .preferredItemSize(CGSize(width: 300, height: 150))
-                                .frame(height: 150)
-                                .padding(.bottom, 16)
-                            }
-                        }
-                    }
+                    AreaPicker(
+                        areas: state.availableAreas,
+                        selectedArea: state.selectedArea,
+                        noteType: state.type,
+                        onAreaSelect: onAreaSelect,
+                        isAreaPickerVisible: $isAreaPickerVisible
+                    )
+                    
                     Spacer()
                 }
                 

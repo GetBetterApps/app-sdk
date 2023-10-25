@@ -34,6 +34,8 @@ struct AreaItem: View {
                     Spacer()
                     Text(item.name)
                         .style(.labelLarge)
+                        .lineLimit(1)
+                        .fixedSize(horizontal: false, vertical: true)
                         .foregroundColor(.textTitle)
                         .multilineTextAlignment(.leading)
                     

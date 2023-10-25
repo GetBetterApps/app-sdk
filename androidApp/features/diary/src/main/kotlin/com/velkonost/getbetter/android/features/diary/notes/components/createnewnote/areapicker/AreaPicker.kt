@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.core.compose.extensions.horizontalFadingEdge
+import com.velkonost.getbetter.shared.core.model.NoteType
 import com.velkonost.getbetter.shared.core.util.randomUUID
 import kotlinx.coroutines.launch
 import model.Area
@@ -30,6 +31,7 @@ fun AreaPicker(
     modifier: Modifier = Modifier,
     areas: List<Area>,
     selectedArea: Area?,
+    noteType: NoteType,
     isAreaPickerVisible: MutableState<Boolean>,
     modalSheetState: ModalBottomSheetState,
     onAreaSelect: (Area) -> Unit
@@ -43,7 +45,8 @@ fun AreaPicker(
         Column {
             AreaPickerHeader(
                 selectedArea = selectedArea,
-                isAreaPickerVisible = isAreaPickerVisible
+                isAreaPickerVisible = isAreaPickerVisible,
+                noteType = noteType
             )
 
             AnimatedVisibility(visible = isAreaPickerVisible.value) {
