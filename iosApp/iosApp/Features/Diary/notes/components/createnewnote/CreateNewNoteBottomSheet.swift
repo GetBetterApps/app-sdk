@@ -39,7 +39,9 @@ struct CreateNewNoteBottomSheet: View {
                 if state.isLoading {
                     Loader()
                 } else {
-                    Text(SharedR.strings().diary_areas_create_new_area_title.desc().localized())
+                    Text(
+                        state.type == NoteType.default_ ? SharedR.strings().create_note_title.desc().localized() : SharedR.strings().create_goal_title.desc().localized()
+                    )
                         .style(.headlineSmall)
                         .foregroundColor(.textTitle)
                         .frame(alignment: .center)
