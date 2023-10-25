@@ -39,12 +39,21 @@ struct DiaryScreen: View {
             case 0: NotesView(
                 isLoading: state.notesViewState.isLoading,
                 createGoalClick: {
-                    viewModel.dispatch(action: CreateNewNoteActionOpenGoal())
-                    showingCreateNewNoteSheet = true
+                    if state.createNewNoteViewState.availableAreas.isEmpty {
+                        viewModel.dispatch(action: CreateNewNoteActionCloseBecauseZeroAreas())
+                    } else {
+                        viewModel.dispatch(action: CreateNewNoteActionOpenGoal())
+                        showingCreateNewNoteSheet = true
+                    }
+                    
                 },
                 createNoteClick: {
-                    viewModel.dispatch(action: CreateNewNoteActionOpenDefault())
-                    showingCreateNewNoteSheet = true
+                    if state.createNewNoteViewState.availableAreas.isEmpty {
+                        viewModel.dispatch(action: CreateNewNoteActionCloseBecauseZeroAreas())
+                    } else {
+                        viewModel.dispatch(action: CreateNewNoteActionOpenDefault())
+                        showingCreateNewNoteSheet = true
+                    }
                 }
             )
             case 1: AreasView(

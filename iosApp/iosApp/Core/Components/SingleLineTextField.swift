@@ -52,9 +52,14 @@ struct SingleLineTextField: View {
             .placeholder(when: value.isEmpty) {
                 Text(placeholderText)
                     .style(textStyle)
+                    .lineLimit(1)
                     .multilineTextAlignment(textAlign)
                     .foregroundColor(.hintColor)
-                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .frame(
+                        minWidth: 0,
+                        maxWidth: .infinity,
+                        alignment: textAlign == .leading ? .leading : .center
+                    )
             }
             .padding(.leading, 16)
             .padding(.trailing, 16)
