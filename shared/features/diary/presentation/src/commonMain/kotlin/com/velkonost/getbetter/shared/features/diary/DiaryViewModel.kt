@@ -103,11 +103,10 @@ internal constructor(
                                     viewState.value.copy(areasViewState = areasViewState)
                                 )
 
-                                if (it.isNotEmpty()) {
-                                    createNewNoteViewModel.value.dispatch(
-                                        CreateNewNoteAction.InitAvailableAreas(it)
-                                    )
-                                }
+                                createNewNoteViewModel.value.dispatch(
+                                    CreateNewNoteAction.InitAvailableAreas(it)
+                                )
+
                             }
 
                         }

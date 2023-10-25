@@ -1,6 +1,5 @@
 package com.velkonost.getbetter.android.features.diary.notes.components.createnewnote
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -27,15 +26,13 @@ import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
 import model.Area
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CreateNewNoteBottomSheet(
     modifier: Modifier = Modifier,
-    areas: List<Area>,
     state: CreateNewNoteViewState,
     modalSheetState: ModalBottomSheetState,
     onAreaSelect: (Area) -> Unit,
-    onAreasError: () -> Unit
 ) {
 
     val isAreaPickerVisible = remember { mutableStateOf(false) }
@@ -71,7 +68,7 @@ fun CreateNewNoteBottomSheet(
                     )
 
                     AreaPicker(
-                        areas = areas,
+                        areas = state.availableAreas,
                         selectedArea = state.selectedArea,
                         isAreaPickerVisible = isAreaPickerVisible,
                         onAreaSelect = onAreaSelect,

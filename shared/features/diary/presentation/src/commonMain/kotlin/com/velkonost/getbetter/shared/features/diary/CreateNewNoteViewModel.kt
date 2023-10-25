@@ -2,10 +2,15 @@ package com.velkonost.getbetter.shared.features.diary
 
 import com.velkonost.getbetter.shared.core.model.NoteType
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.core.vm.resource.Message
+import com.velkonost.getbetter.shared.core.vm.resource.MessageType
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteEvent
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteViewState
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
+import com.velkonost.getbetter.shared.resources.SharedR
+import dev.icerock.moko.resources.desc.Resource
+import dev.icerock.moko.resources.desc.StringDesc
 import model.Area
 
 class CreateNewNoteViewModel
@@ -48,6 +53,7 @@ internal constructor(
                 newSubNoteText = ""
             )
         )
+
     }
 
     private fun obtainOpenGoal() {
@@ -126,7 +132,12 @@ internal constructor(
     }
 
     private fun obtainZeroAreasError() {
-
+        val message = Message.Builder()
+            .id("error_code_message")
+            .text(StringDesc.Resource(SharedR.strings.create_note_error_no_areas))
+            .messageType(MessageType.SnackBar.Builder().build())
+            .build()
+        emit(message)
     }
 
 }

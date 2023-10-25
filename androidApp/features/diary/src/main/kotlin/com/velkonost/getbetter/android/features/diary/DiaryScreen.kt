@@ -98,14 +98,22 @@ fun DiaryScreen(
                 },
                 createGoalClick = {
                     scope.launch {
-                        viewModel.dispatch(CreateNewNoteAction.OpenGoal)
-                        createNewNoteSheetState.show()
+                        if (state.createNewNoteViewState.availableAreas.isEmpty()) {
+                            viewModel.dispatch(CreateNewNoteAction.CloseBecauseZeroAreas)
+                        } else {
+                            viewModel.dispatch(CreateNewNoteAction.OpenGoal)
+                            createNewNoteSheetState.show()
+                        }
                     }
                 },
                 createNoteClick = {
                     scope.launch {
-                        viewModel.dispatch(CreateNewNoteAction.OpenDefault)
-                        createNewNoteSheetState.show()
+                        if (state.createNewNoteViewState.availableAreas.isEmpty()) {
+                            viewModel.dispatch(CreateNewNoteAction.CloseBecauseZeroAreas)
+                        } else {
+                            viewModel.dispatch(CreateNewNoteAction.OpenDefault)
+                            createNewNoteSheetState.show()
+                        }
                     }
                 }
             )
@@ -137,17 +145,10 @@ fun DiaryScreen(
         )
 
         CreateNewNoteBottomSheet(
-            areas = state.areasViewState.items,
             state = state.createNewNoteViewState,
             modalSheetState = createNewNoteSheetState,
             onAreaSelect = {
                 viewModel.dispatch(CreateNewNoteAction.AreaSelect(it))
-            },
-            onAreasError = {
-                viewModel.dispatch(CreateNewNoteAction.CloseBecauseZeroAreas)
-                scope.launch {
-                    createNewNoteSheetState.hide()
-                }
             }
         )
 
