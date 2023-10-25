@@ -139,7 +139,10 @@ fun DiaryScreen(
         CreateNewNoteBottomSheet(
             areas = state.areasViewState.items,
             state = state.createNewNoteViewState,
-            modalSheetState = createNewNoteSheetState
+            modalSheetState = createNewNoteSheetState,
+            onAreaSelect = {
+                viewModel.dispatch(CreateNewNoteAction.AreaSelect(it))
+            }
         )
 
         AreaDetailScreen(
