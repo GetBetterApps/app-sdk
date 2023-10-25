@@ -1,4 +1,4 @@
-package remote
+package com.velkonost.getbetter.shared.features.areas.data.remote
 
 object Route {
     private const val PREFIX = "areas"

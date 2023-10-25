@@ -1,3 +1,5 @@
+package com.velkonost.getbetter.shared.features.notes.data
+
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
@@ -7,16 +9,16 @@ import com.velkonost.getbetter.shared.core.util.flowRequest
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.notes.api.model.Note
 import com.velkonost.getbetter.shared.features.notes.api.model.SubNote
+import com.velkonost.getbetter.shared.features.notes.data.remote.NotesRemoteDataSource
+import com.velkonost.getbetter.shared.features.notes.data.remote.model.request.CreateNewNoteRequest
+import com.velkonost.getbetter.shared.features.notes.data.remote.model.request.EditNoteRequest
+import com.velkonost.getbetter.shared.features.notes.data.remote.model.request.EditSubNoteRequest
+import com.velkonost.getbetter.shared.features.notes.data.remote.model.request.SubNoteRequestData
+import com.velkonost.getbetter.shared.features.notes.data.remote.model.request.UpdateNoteStateRequest
+import com.velkonost.getbetter.shared.features.notes.data.remote.model.request.UpdateSubNoteStateRequest
+import com.velkonost.getbetter.shared.features.notes.data.remote.model.response.KtorNote
+import com.velkonost.getbetter.shared.features.notes.data.remote.model.response.asExternalModel
 import kotlinx.coroutines.flow.Flow
-import remote.NotesRemoteDataSource
-import remote.model.request.CreateNewNoteRequest
-import remote.model.request.EditNoteRequest
-import remote.model.request.EditSubNoteRequest
-import remote.model.request.SubNoteRequestData
-import remote.model.request.UpdateNoteStateRequest
-import remote.model.request.UpdateSubNoteStateRequest
-import remote.model.response.KtorNote
-import remote.model.response.asExternalModel
 
 class NotesRepositoryImpl
 constructor(

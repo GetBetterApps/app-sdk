@@ -1,4 +1,4 @@
-package remote.model.response
+package com.velkonost.getbetter.shared.features.notes.data.remote.model.response
 
 import com.velkonost.getbetter.shared.features.notes.api.model.SubNote
 import kotlinx.serialization.SerialName

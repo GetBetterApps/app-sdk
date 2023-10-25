@@ -174,7 +174,7 @@
     <string name="error_810">You can\'t join because area is private</string>
     <string name="error_811">You can\'t join because area is inactive</string>
     <string name="error_812">You can\'t delete because area is inactive</string>
-    <string name="error_813">You can't edit because area is inactive</string>
+    <string name="error_813">You can\'t edit because area is inactive</string>
     <string name="error_814">Your can\'t get area\'s details because its private</string>
 
     <string name="error_699">Incorrect note\'s type</string>

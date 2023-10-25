@@ -1,10 +1,10 @@
-package di
+package com.velkonost.getbetter.shared.features.areas.data.di
 
 import AreasRepository
-import AreasRepositoryImpl
+import com.velkonost.getbetter.shared.features.areas.data.AreasRepositoryImpl
+import com.velkonost.getbetter.shared.features.areas.data.remote.AreasRemoteDataSource
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
-import remote.AreasRemoteDataSource
 
 val AreasDataModule = module {
     singleOf(::AreasRemoteDataSource)

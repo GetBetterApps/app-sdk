@@ -1,14 +1,14 @@
-package remote
+package com.velkonost.getbetter.shared.features.areas.data.remote
 
 import com.velkonost.getbetter.shared.core.network.extensions.makeRequest
 import com.velkonost.getbetter.shared.core.network.model.RemoteResponse
+import com.velkonost.getbetter.shared.features.areas.data.remote.model.request.CreateNewAreaRequest
+import com.velkonost.getbetter.shared.features.areas.data.remote.model.request.UpdateAreaStateRequest
+import com.velkonost.getbetter.shared.features.areas.data.remote.model.response.KtorArea
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.post
-import remote.model.request.CreateNewAreaRequest
-import remote.model.request.UpdateAreaStateRequest
-import remote.model.response.KtorArea
 
 class AreasRemoteDataSource(
     private val httpClient: HttpClient

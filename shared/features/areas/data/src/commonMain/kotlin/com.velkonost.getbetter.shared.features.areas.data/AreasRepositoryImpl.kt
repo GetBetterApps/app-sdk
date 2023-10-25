@@ -1,15 +1,18 @@
+package com.velkonost.getbetter.shared.features.areas.data
+
+import AreasRepository
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.flowRequest
+import com.velkonost.getbetter.shared.features.areas.data.remote.AreasRemoteDataSource
+import com.velkonost.getbetter.shared.features.areas.data.remote.model.request.CreateNewAreaRequest
+import com.velkonost.getbetter.shared.features.areas.data.remote.model.request.UpdateAreaStateRequest
+import com.velkonost.getbetter.shared.features.areas.data.remote.model.response.KtorArea
+import com.velkonost.getbetter.shared.features.areas.data.remote.model.response.asExternalModel
 import kotlinx.coroutines.flow.Flow
 import model.Area
-import remote.AreasRemoteDataSource
-import remote.model.request.CreateNewAreaRequest
-import remote.model.request.UpdateAreaStateRequest
-import remote.model.response.KtorArea
-import remote.model.response.asExternalModel
 
 class AreasRepositoryImpl
 constructor(

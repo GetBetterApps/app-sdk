@@ -1,17 +1,17 @@
-package remote
+package com.velkonost.getbetter.shared.features.notes.data.remote
 
 import com.velkonost.getbetter.shared.core.network.extensions.makeRequest
 import com.velkonost.getbetter.shared.core.network.model.RemoteResponse
+import com.velkonost.getbetter.shared.features.notes.data.remote.model.request.CreateNewNoteRequest
+import com.velkonost.getbetter.shared.features.notes.data.remote.model.request.EditNoteRequest
+import com.velkonost.getbetter.shared.features.notes.data.remote.model.request.EditSubNoteRequest
+import com.velkonost.getbetter.shared.features.notes.data.remote.model.request.UpdateNoteStateRequest
+import com.velkonost.getbetter.shared.features.notes.data.remote.model.request.UpdateSubNoteStateRequest
+import com.velkonost.getbetter.shared.features.notes.data.remote.model.response.KtorNote
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.post
-import remote.model.request.CreateNewNoteRequest
-import remote.model.request.EditNoteRequest
-import remote.model.request.EditSubNoteRequest
-import remote.model.request.UpdateNoteStateRequest
-import remote.model.request.UpdateSubNoteStateRequest
-import remote.model.response.KtorNote
 
 class NotesRemoteDataSource(
     private val httpClient: HttpClient
