@@ -17,9 +17,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import com.mohamedrejeb.richeditor.annotation.ExperimentalRichTextApi
+import com.mohamedrejeb.richeditor.model.rememberRichTextState
+import com.mohamedrejeb.richeditor.ui.material3.RichTextEditor
+import com.mohamedrejeb.richeditor.ui.material3.RichTextEditorDefaults
 import com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.areapicker.AreaPicker
 import com.velkonost.getbetter.core.compose.components.Loader
+import com.velkonost.getbetter.core.compose.components.richtext.RichTextPanel
 import com.velkonost.getbetter.shared.core.model.NoteType
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteViewState
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -27,16 +34,28 @@ import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
 import model.Area
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalRichTextApi::class)
 @Composable
 fun CreateNewNoteBottomSheet(
     modifier: Modifier = Modifier,
     state: CreateNewNoteViewState,
     modalSheetState: ModalBottomSheetState,
     onAreaSelect: (Area) -> Unit,
+    onTextChanged: (String) -> Unit
 ) {
 
     val isAreaPickerVisible = remember { mutableStateOf(false) }
+
+    val richTextState = rememberRichTextState()
+    val openLinkDialog = remember { mutableStateOf(false) }
+
+    richTextState.setConfig(
+        linkColor = Color(0xFF1d9bd1),
+        linkTextDecoration = TextDecoration.None,
+        codeColor = Color(0xFFd7882d),
+        codeBackgroundColor = Color.Transparent,
+        codeStrokeColor = Color(0xFF494b4d),
+    )
 
     ModalBottomSheetLayout(
         sheetState = modalSheetState,
@@ -78,11 +97,35 @@ fun CreateNewNoteBottomSheet(
                         modalSheetState = modalSheetState,
                         noteType = state.type
                     )
+
+                    RichTextPanel(state = richTextState, openLinkDialog = openLinkDialog)
+                    RichTextEditor(
+                        state = richTextState,
+                        placeholder = {
+                            Text(
+                                text = "Message #compose-rich-text-editor",
+                            )
+                        },
+                        colors = RichTextEditorDefaults.richTextEditorColors(
+                            textColor = Color(0xFFCBCCCD),
+                            containerColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            placeholderColor = Color.White.copy(alpha = .6f),
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp),
+                    )
                 }
             }
         }
     ) {
 
+    }
+
+    LaunchedEffect(richTextState.toHtml()) {
+        onTextChanged(richTextState.toHtml())
     }
 
     LaunchedEffect(modalSheetState.currentValue) {

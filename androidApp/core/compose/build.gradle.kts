@@ -16,8 +16,13 @@ android {
 }
 
 dependencies {
+    api(libs.androidx.compose.icons)
+    api(libs.androidx.compose.material)
+    api(libs.androidx.compose.material3)
+
     implementation(libs.android.compose.lootie)
     implementation(libs.androidx.compose.paging)
+    implementation(libs.android.richtext)
 
     implementation(projects.shared.core.vm)
     implementation(projects.shared.core.model)

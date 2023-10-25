@@ -21,7 +21,7 @@ kotlin {
             dependencies {
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.kermit.log)
+                api(libs.kermit.log)
 
                 implementation(projects.shared.core.network)
             }

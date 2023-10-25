@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.diary
 
 import com.velkonost.getbetter.shared.core.model.NoteType
+import com.velkonost.getbetter.shared.core.util.BaseLogger
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.resource.Message
 import com.velkonost.getbetter.shared.core.vm.resource.MessageType
@@ -76,6 +77,8 @@ internal constructor(
     }
 
     private fun obtainTextChanged(value: String) {
+        print(value)
+        BaseLogger.d(value)
         emit(viewState.value.copy(text = value))
     }
 

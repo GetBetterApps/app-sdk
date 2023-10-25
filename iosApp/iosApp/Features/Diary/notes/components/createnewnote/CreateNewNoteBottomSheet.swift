@@ -42,9 +42,9 @@ struct CreateNewNoteBottomSheet: View {
                     Text(
                         state.type == NoteType.default_ ? SharedR.strings().create_note_title.desc().localized() : SharedR.strings().create_goal_title.desc().localized()
                     )
-                        .style(.headlineSmall)
-                        .foregroundColor(.textTitle)
-                        .frame(alignment: .center)
+                    .style(.headlineSmall)
+                    .foregroundColor(.textTitle)
+                    .frame(alignment: .center)
                     
                     AreaPicker(
                         areas: state.availableAreas,

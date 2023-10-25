@@ -149,6 +149,9 @@ fun DiaryScreen(
             modalSheetState = createNewNoteSheetState,
             onAreaSelect = {
                 viewModel.dispatch(CreateNewNoteAction.AreaSelect(it))
+            },
+            onTextChanged = {
+                viewModel.dispatch(CreateNewNoteAction.TextChanged(it))
             }
         )
 
