@@ -15,6 +15,7 @@ struct AreaPicker: View {
     
     let areas: [Area]
     private var selectedArea: Area?
+    
     let noteType: NoteType
     let onAreaSelect: (Area) -> Void
     @Binding private var isAreaPickerVisible: Bool
@@ -28,7 +29,6 @@ struct AreaPicker: View {
         self.onAreaSelect = onAreaSelect
         self._isAreaPickerVisible = isAreaPickerVisible
     }
-    
     
     var body: some View {
         PrimaryBox(
@@ -53,25 +53,7 @@ struct AreaPicker: View {
                         ),
                         id: \.self.area.id
                     ) { areaWrapper in
-                        ZStack {
-                            VStack {
-                                Image(uiImage: Emoji.companion.getIconById(id: areaWrapper.area.emojiId as! Int32).toUIImage()!)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 64, height: 64)
-                                
-                                Text(areaWrapper.area.name)
-                                    .style(.titleLarge)
-                                    .foregroundColor(.textPrimary)
-                                    .padding(.top, 12)
-                            }
-                        }
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .padding(16)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.textFieldBackground)
-                        )
+                        AreaPickerItem(area: areaWrapper.area)
                     }
                     .interactive(rotation: true)
                     .interactive(scale: 0.8)

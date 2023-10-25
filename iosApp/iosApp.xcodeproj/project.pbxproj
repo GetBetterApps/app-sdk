@@ -97,6 +97,7 @@
 		46D9381E2ABAECBE0096A221 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9381D2ABAECBE0096A221 /* ProfileScreen.swift */; };
 		46E2DD2D2AE9364D00B4B2B5 /* AreaPickerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E2DD2C2AE9364D00B4B2B5 /* AreaPickerHeader.swift */; };
 		46E2DD2F2AE93A3B00B4B2B5 /* AreaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E2DD2E2AE93A3B00B4B2B5 /* AreaPicker.swift */; };
+		46E2DD312AE9420600B4B2B5 /* AreaPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E2DD302AE9420600B4B2B5 /* AreaPickerItem.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		DD1CD8AC3CDFF9460475C5F4 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8F55E6D0C4FF45066520BAF /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
@@ -191,6 +192,7 @@
 		46D9381D2ABAECBE0096A221 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		46E2DD2C2AE9364D00B4B2B5 /* AreaPickerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPickerHeader.swift; sourceTree = "<group>"; };
 		46E2DD2E2AE93A3B00B4B2B5 /* AreaPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPicker.swift; sourceTree = "<group>"; };
+		46E2DD302AE9420600B4B2B5 /* AreaPickerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPickerItem.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 			children = (
 				46E2DD2C2AE9364D00B4B2B5 /* AreaPickerHeader.swift */,
 				46E2DD2E2AE93A3B00B4B2B5 /* AreaPicker.swift */,
+				46E2DD302AE9420600B4B2B5 /* AreaPickerItem.swift */,
 			);
 			path = areapicker;
 			sourceTree = "<group>";
@@ -826,6 +829,7 @@
 				461D21EC2AA8EC71007E84CE /* DetailRoute.swift in Sources */,
 				460054A92ABB18A800586767 /* AppSettings.swift in Sources */,
 				4667C9042AC589EC00BAA9DD /* SingleLineTextField.swift in Sources */,
+				46E2DD312AE9420600B4B2B5 /* AreaPickerItem.swift in Sources */,
 				4667C9062AC58B0700BAA9DD /* SelectedEmojiImage.swift in Sources */,
 				461F7C752AA8DCD0003791CF /* HomeScreen.swift in Sources */,
 				4667C90E2AC5BA5900BAA9DD /* Loader.swift in Sources */,

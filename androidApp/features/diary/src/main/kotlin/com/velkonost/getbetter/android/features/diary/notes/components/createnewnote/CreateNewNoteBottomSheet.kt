@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.areapicker.AreaPicker
 import com.velkonost.getbetter.core.compose.components.Loader
+import com.velkonost.getbetter.shared.core.model.NoteType
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteViewState
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -61,7 +62,9 @@ fun CreateNewNoteBottomSheet(
                     Text(
                         modifier = modifier.align(Alignment.CenterHorizontally),
                         text = stringResource(
-                            resource = SharedR.strings.diary_areas_create_new_area_title
+                            resource =
+                            if (state.type == NoteType.Default) SharedR.strings.create_note_title
+                            else SharedR.strings.create_goal_title
                         ),
                         color = colorResource(resource = SharedR.colors.text_title),
                         style = MaterialTheme.typography.headlineSmall
