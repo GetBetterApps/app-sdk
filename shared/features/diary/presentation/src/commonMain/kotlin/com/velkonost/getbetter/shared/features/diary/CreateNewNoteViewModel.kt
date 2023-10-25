@@ -15,6 +15,7 @@ internal constructor(
     initialState = CreateNewNoteViewState()
 ) {
     override fun dispatch(action: CreateNewNoteAction) = when (action) {
+        is CreateNewNoteAction.InitAvailableAreas -> initAvailableAreas(action.value)
         is CreateNewNoteAction.OpenDefault -> obtainOpenDefault()
         is CreateNewNoteAction.OpenGoal -> obtainOpenGoal()
         is CreateNewNoteAction.AreaSelect -> obtainAreaSelect(action.value)
@@ -30,12 +31,38 @@ internal constructor(
         is CreateNewNoteAction.CloseBecauseZeroAreas -> obtainZeroAreasError()
     }
 
+    private fun initAvailableAreas(value: List<Area>) {
+        emit(viewState.value.copy(availableAreas = value))
+    }
+
     private fun obtainOpenDefault() {
-        emit(initialState)
+        emit(
+            viewState.value.copy(
+                type = NoteType.Default,
+                selectedArea = viewState.value.availableAreas.firstOrNull(),
+                text = "",
+                mediaUrls = emptyList(),
+                tags = emptyList(),
+                newTagText = "",
+                subNotes = emptyList(),
+                newSubNoteText = ""
+            )
+        )
     }
 
     private fun obtainOpenGoal() {
-        emit(initialState.copy(type = NoteType.Goal))
+        emit(
+            viewState.value.copy(
+                type = NoteType.Goal,
+                selectedArea = viewState.value.availableAreas.firstOrNull(),
+                text = "",
+                mediaUrls = emptyList(),
+                tags = emptyList(),
+                newTagText = "",
+                subNotes = emptyList(),
+                newSubNoteText = ""
+            )
+        )
     }
 
     private fun obtainAreaSelect(value: Area) {

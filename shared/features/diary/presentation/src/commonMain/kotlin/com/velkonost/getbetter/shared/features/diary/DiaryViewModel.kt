@@ -98,7 +98,16 @@ internal constructor(
                         onSuccess { list ->
                             list?.let {
                                 val areasViewState = viewState.value.areasViewState.copy(items = it)
-                                emit(viewState.value.copy(areasViewState = areasViewState))
+
+                                emit(
+                                    viewState.value.copy(areasViewState = areasViewState)
+                                )
+
+                                if (it.isNotEmpty()) {
+                                    createNewNoteViewModel.value.dispatch(
+                                        CreateNewNoteAction.InitAvailableAreas(it)
+                                    )
+                                }
                             }
 
                         }

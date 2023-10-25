@@ -19,6 +19,9 @@ sealed interface CreateNewAreaAction : DiaryAction {
 }
 
 sealed interface CreateNewNoteAction : DiaryAction {
+
+    data class InitAvailableAreas(val value: List<Area>) : CreateNewNoteAction
+
     data object OpenDefault : CreateNewNoteAction
 
     data object OpenGoal : CreateNewNoteAction

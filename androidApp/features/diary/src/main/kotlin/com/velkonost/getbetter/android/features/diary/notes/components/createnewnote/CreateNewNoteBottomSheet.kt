@@ -13,6 +13,7 @@ import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -73,12 +74,17 @@ fun CreateNewNoteBottomSheet(
                         areas = areas,
                         selectedArea = state.selectedArea,
                         isAreaPickerVisible = isAreaPickerVisible,
-                        onAreaSelect = onAreaSelect
+                        onAreaSelect = onAreaSelect,
+                        modalSheetState = modalSheetState
                     )
                 }
             }
         }
     ) {
 
+    }
+
+    LaunchedEffect(modalSheetState.currentValue) {
+        isAreaPickerVisible.value = false
     }
 }
