@@ -12,7 +12,7 @@ import SharedSDK
 
 struct TagItem : View {
     
-    let tag: TagUI
+    let tag: TagUI 
     let onTagDelete: (String) -> Void
     
     init(tag: TagUI, onTagDelete: @escaping (String) -> Void) {
