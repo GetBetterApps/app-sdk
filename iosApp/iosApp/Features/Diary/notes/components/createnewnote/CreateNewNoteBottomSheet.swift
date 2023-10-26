@@ -70,66 +70,98 @@ struct CreateNewNoteBottomSheet: View {
         
         ZStack {
             Color.mainBackground
-            
-            VStack {
-                if state.isLoading {
-                    Loader()
-                } else {
-                    Text(
-                        state.type == NoteType.default_ ? SharedR.strings().create_note_title.desc().localized() : SharedR.strings().create_goal_title.desc().localized()
-                    )
-                    .style(.headlineSmall)
-                    .foregroundColor(.textTitle)
-                    .frame(alignment: .center)
-                    
-                    AreaPicker(
-                        areas: state.availableAreas,
-                        selectedArea: state.selectedArea,
-                        noteType: state.type,
-                        onAreaSelect: onAreaSelect,
-                        isAreaPickerVisible: $isAreaPickerVisible
-                    )
-                    
-                    MultilineTextField(
-                        value: state.text,
-                        placeholderText:
-                            state.type == NoteType.default_ ? SharedR.strings().create_note_text_hint.desc().localized() : SharedR.strings().create_goal_text_hint.desc().localized()
-                    ) { value in
-                        onTextChanged(value)
+        
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack {
+                    if state.isLoading {
+                        Loader()
+                    } else {
+                        Text(
+                            state.type == NoteType.default_ ? SharedR.strings().create_note_title.desc().localized() : SharedR.strings().create_goal_title.desc().localized()
+                        )
+                        .style(.headlineSmall)
+                        .foregroundColor(.textTitle)
+                        .frame(alignment: .center)
+                        
+                        AreaPicker(
+                            areas: state.availableAreas,
+                            selectedArea: state.selectedArea,
+                            noteType: state.type,
+                            onAreaSelect: onAreaSelect,
+                            isAreaPickerVisible: $isAreaPickerVisible
+                        )
+                        
+                        MultilineTextField(
+                            value: state.text,
+                            placeholderText:
+                                state.type == NoteType.default_ ? SharedR.strings().create_note_text_hint.desc().localized() : SharedR.strings().create_goal_text_hint.desc().localized()
+                        ) { value in
+                            onTextChanged(value)
+                        }
+                        
+                        PrivateSwitch(
+                            onCheckedChange: onPrivateChanged,
+                            isEnabled: state.selectedArea != nil && state.selectedArea?.isPrivate == false,
+                            isPrivate: $isNotePrivate
+                        )
+                        
+                        TagsBlock(
+                            tags: state.tags,
+                            newTag: $newTag,
+                            onNewTagChanged: onNewTagChanged,
+                            onAddNewTag: onAddNewTag,
+                            onTagDelete: onTagDelete
+                        )
+                        
+                        SubNotesBlock(
+                            items: state.subNotes,
+                            newSubNote: $newSubNote,
+                            onNewSubNoteChanged: onNewSubNoteChanged,
+                            onAddNewSubNote: onAddNewSubNote,
+                            onSubNoteDelete: onSubNoteDelete,
+                            isSubNotesBlockPickerVisible: $isSubNoteBlockVisible
+                        )
+                        
+                        Spacer()
                     }
                     
-                    PrivateSwitch(
-                        onCheckedChange: onPrivateChanged,
-                        isEnabled: state.selectedArea != nil && state.selectedArea?.isPrivate == false,
-                        isPrivate: $isNotePrivate
-                    )
-                    
-                    TagsBlock(
-                        tags: state.tags,
-                        newTag: $newTag,
-                        onNewTagChanged: onNewTagChanged,
-                        onAddNewTag: onAddNewTag,
-                        onTagDelete: onTagDelete
-                    )
-                    
-                    SubNotesBlock(
-                        items: state.subNotes,
-                        newSubNote: $newSubNote,
-                        onNewSubNoteChanged: onNewSubNoteChanged,
-                        onAddNewSubNote: onAddNewSubNote,
-                        onSubNoteDelete: onSubNoteDelete,
-                        isSubNotesBlockPickerVisible: $isSubNoteBlockVisible
-                    )
-                    
-                    Spacer()
                 }
-                
+                .padding(20)
+                .padding(.bottom, 400)
             }
-            .padding(20)
+            .ignoresSafeArea(.keyboard)
         }
+        .frame(minHeight: 0, maxHeight: .infinity)
         .ignoresSafeArea(.all)
         .onTapGesture {
             endTextEditing()
         }
     }
+}
+
+struct KeyboardResponsiveModifier: ViewModifier {
+  @State private var offset: CGFloat = 0
+
+  func body(content: Content) -> some View {
+    content
+      .padding(.bottom, offset)
+      .onAppear {
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { notif in
+          let value = notif.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+          let height = value.height
+          let bottomInset = UIApplication.shared.windows.first?.safeAreaInsets.bottom
+          self.offset = height - (bottomInset ?? 0)
+        }
+
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { notif in
+          self.offset = 0
+        }
+    }
+  }
+}
+
+extension View {
+  func keyboardResponsive() -> ModifiedContent<Self, KeyboardResponsiveModifier> {
+    return modifier(KeyboardResponsiveModifier())
+  }
 }

@@ -60,8 +60,14 @@ struct SubNotesBlock: View {
                             onAddSubNote: onAddNewSubNote
                         )
                     }
+                    .padding(.leading, 16)
+                    .padding(.trailing, 16)
+                    
                 }
             }
+            .padding(.bottom, 16)
+            
         }
+        .animation(.easeInOut, value: items)
     }
 }

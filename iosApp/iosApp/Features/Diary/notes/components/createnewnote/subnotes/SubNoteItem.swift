@@ -22,10 +22,14 @@ struct SubNoteItem: View {
     
     var body: some View {
         HStack {
-            Text(item.text)
-                .style(.titleSmall)
-                .foregroundColor(.textSecondaryTitle)
-                .padding(.leading, 12)
+            ScrollView(.horizontal, showsIndicators: false) {
+                Text(item.text)
+                    .style(.titleSmall)
+                    .lineLimit(1)
+                    .foregroundColor(.textSecondaryTitle)
+                    .padding(.leading, 12)
+            }
+            
             Spacer()
             
             ZStack {
@@ -33,17 +37,17 @@ struct SubNoteItem: View {
                     .resizable()
                     .renderingMode(.template)
                     .foregroundColor(.iconInactive)
-                    .frame(width: 24, height: 24, alignment: .leading)
+                    .frame(width: 24, height: 24, alignment: .center)
                     .onTapGesture {
                         onDeleteSubNote(item)
                     }
             }
-            .padding(.trailing, 12)
             .frame(width: 36, height: 36, alignment: .center)
             .background(
                 RoundedRectangle(cornerRadius: 12)
                     .fill(Color.backgroundItem)
             )
+            .padding(.trailing, 12)
         }
         .frame(height: 56)
         .background(

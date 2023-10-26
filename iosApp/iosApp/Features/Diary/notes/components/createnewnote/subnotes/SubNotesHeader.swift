@@ -41,7 +41,9 @@ struct SubNotesHeader: View {
                 .frame(width: 24, height: 24)
                 .rotationEffect(Angle(degrees: arrowRotationAngle))
         }
-        .padding(16)
+        .padding(.leading, 16)
+        .padding(.trailing, 16)
+        .padding(.top, 16)
         .frame(minWidth: 0, maxWidth: .infinity)
         .contentShape(Rectangle())
         .onTapGesture {

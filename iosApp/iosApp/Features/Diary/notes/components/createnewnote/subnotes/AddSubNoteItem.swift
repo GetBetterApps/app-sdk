@@ -52,12 +52,12 @@ struct AddSubNoteItem: View {
                         alignment: .leading
                     )
             }
-            
-            .padding(.leading, 6)
+            .padding(.leading, 12)
             .padding(.trailing, 6)
             .frame(height: 56)
             .background(Color.textFieldBackground)
             .cornerRadius(8)
+            
             .onChange(of: textFieldValue) { newValue in
                 onValueChanged(newValue)
             }
@@ -65,21 +65,21 @@ struct AddSubNoteItem: View {
             Spacer()
             
             ZStack {
-                Image(uiImage: SharedR.images().ic_close.toUIImage()!)
+                Image(uiImage: SharedR.images().ic_plus.toUIImage()!)
                     .resizable()
                     .renderingMode(.template)
-                    .foregroundColor(.iconInactive)
-                    .frame(width: 24, height: 24, alignment: .leading)
+                    .foregroundColor(.iconActive)
+                    .frame(width: 24, height: 24, alignment: .center)
                     .onTapGesture {
                         onAddSubNote()
                     }
             }
-            .padding(.trailing, 12)
             .frame(width: 36, height: 36, alignment: .center)
             .background(
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(Color.backgroundItem)
+                    .fill(Color.buttonGradientStart)
             )
+            .padding(.trailing, 12)
         }
         .frame(height: 56)
         .background(
