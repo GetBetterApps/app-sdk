@@ -55,9 +55,9 @@ struct NewTagField : View {
         }
         
         .autocorrectionDisabled()
-        .padding(.leading, 4)
-        .padding(.trailing, 4)
-        .frame(height: 24)
+        .padding(.leading, 6)
+        .padding(.trailing, 6)
+        .frame(height: 30)
         .background(Color.textFieldBackground)
         .cornerRadius(8)
         .onChange(of: textFieldValue) { newValue in
