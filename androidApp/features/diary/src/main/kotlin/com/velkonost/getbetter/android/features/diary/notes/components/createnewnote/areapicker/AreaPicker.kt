@@ -36,9 +36,7 @@ fun AreaPicker(
     modalSheetState: ModalBottomSheetState,
     onAreaSelect: (Area) -> Unit
 ) {
-    val areasPagerState = rememberPagerState(
-        initialPage = 0, pageCount = { areas.size },
-    )
+    val areasPagerState = rememberPagerState(initialPage = 0, pageCount = { areas.size })
     val scope = rememberCoroutineScope()
 
     PrimaryBox(padding = 0) {

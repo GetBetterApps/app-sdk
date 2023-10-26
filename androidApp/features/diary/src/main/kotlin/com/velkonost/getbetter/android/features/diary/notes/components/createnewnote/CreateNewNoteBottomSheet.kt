@@ -20,11 +20,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.areapicker.AreaPicker
+import com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.subnotes.SubNotesBlock
 import com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.tags.TagsBlock
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
 import com.velkonost.getbetter.shared.core.model.NoteType
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteViewState
+import com.velkonost.getbetter.shared.features.diary.model.SubNoteUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
@@ -41,10 +43,14 @@ fun CreateNewNoteBottomSheet(
     onPrivateChanged: (Boolean) -> Unit,
     onNewTagChanged: (String) -> Unit,
     onAddNewTag: () -> Unit,
-    onTagDelete: (String) -> Unit
+    onTagDelete: (String) -> Unit,
+    onNewSubNoteChanged: (String) -> Unit,
+    onAddNewSubNote: () -> Unit,
+    onSubNoteDelete: (SubNoteUI) -> Unit
 ) {
 
     val isAreaPickerVisible = remember { mutableStateOf(false) }
+    val isSubNotesBlockVisible = remember { mutableStateOf(false) }
 
     ModalBottomSheetLayout(
         sheetState = modalSheetState,
@@ -110,6 +116,15 @@ fun CreateNewNoteBottomSheet(
                         onAddNewTag = onAddNewTag,
                         onTagDelete = onTagDelete
                     )
+
+                    SubNotesBlock(
+                        items = state.subNotes,
+                        newSubNote = state.newSubNote,
+                        isSubNotesBlockVisible = isSubNotesBlockVisible,
+                        onAddNewSubNote = onAddNewSubNote,
+                        onNewSubNoteChanged = onNewSubNoteChanged,
+                        onSubNoteDelete = onSubNoteDelete
+                    )
                 }
             }
         }
@@ -119,5 +134,6 @@ fun CreateNewNoteBottomSheet(
 
     LaunchedEffect(modalSheetState.currentValue) {
         isAreaPickerVisible.value = false
+        isSubNotesBlockVisible.value = false
     }
 }

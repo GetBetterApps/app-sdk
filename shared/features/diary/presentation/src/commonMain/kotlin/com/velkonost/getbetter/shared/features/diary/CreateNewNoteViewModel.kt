@@ -53,7 +53,7 @@ internal constructor(
                 tags = emptyList(),
                 newTag = TagUI(),
                 subNotes = emptyList(),
-                newSubNoteText = SubNoteUI(),
+                newSubNote = SubNoteUI(),
                 isPrivate = true
             )
         )
@@ -69,7 +69,7 @@ internal constructor(
                 tags = emptyList(),
                 newTag = TagUI(),
                 subNotes = emptyList(),
-                newSubNoteText = SubNoteUI(),
+                newSubNote = SubNoteUI(),
                 isPrivate = true
             )
         )
@@ -130,17 +130,17 @@ internal constructor(
     }
 
     private fun obtainNewSubNoteTextChanged(value: String) {
-        emit(viewState.value.copy(newSubNoteText = SubNoteUI(text = value)))
+        emit(viewState.value.copy(newSubNote = SubNoteUI(text = value)))
     }
 
     private fun addSubNote() {
-        val subNote = viewState.value.newSubNoteText
+        val subNote = viewState.value.newSubNote
         val subNotesList = viewState.value.subNotes
 
         if (!subNotesList.contains(subNote)) {
             emit(
                 viewState.value.copy(
-                    newSubNoteText = SubNoteUI(),
+                    newSubNote = SubNoteUI(),
                     subNotes = subNotesList.plus(subNote)
                 )
             )

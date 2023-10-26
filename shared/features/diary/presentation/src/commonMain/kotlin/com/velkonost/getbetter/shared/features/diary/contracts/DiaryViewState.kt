@@ -54,7 +54,7 @@ data class CreateNewNoteViewState(
     val newTag: TagUI = TagUI(),
 
     val subNotes: List<SubNoteUI> = emptyList(),
-    val newSubNoteText: SubNoteUI = SubNoteUI(),
+    val newSubNote: SubNoteUI = SubNoteUI(),
 
     val isPrivate: Boolean = true
 ) : UIContract.State
