@@ -137,7 +137,7 @@ internal constructor(
         val subNote = viewState.value.newSubNote
         val subNotesList = viewState.value.subNotes
 
-        if (!subNotesList.contains(subNote)) {
+        if (!subNotesList.contains(subNote) && subNote.text.isNotEmpty()) {
             emit(
                 viewState.value.copy(
                     newSubNote = SubNoteUI(),
@@ -150,9 +150,11 @@ internal constructor(
     private fun removeSubNote(value: SubNoteUI) {
         val subNotesList = viewState.value.subNotes
 
-        if (subNotesList.contains(value)) {
-            emit(viewState.value.copy(subNotes = subNotesList.minus(value)))
-        }
+        emit(
+            viewState.value.copy(
+                subNotes = subNotesList.filter { it.id != value.id }
+            )
+        )
     }
 
     private fun obtainZeroAreasError() {
