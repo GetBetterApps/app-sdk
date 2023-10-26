@@ -64,7 +64,7 @@ fun SubNotesHeader(
         Text(
             modifier = modifier.fillMaxWidth(0.6f),
             text = stringResource(
-                resource = SharedR.strings.select_area_for_goal
+                resource = SharedR.strings.create_note_subnote_title
             ),
             maxLines = 1,
             textAlign = TextAlign.Start,

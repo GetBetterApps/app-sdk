@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.shared.features.diary.model.SubNoteUI
+import com.velkonost.getbetter.shared.resources.SharedR
+import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
 fun SubNotesBlock(
@@ -46,7 +48,7 @@ fun SubNotesBlock(
                         item {
                             AddSubNoteItem(
                                 value = newSubNote.text,
-                                placeholderText = "",
+                                placeholderText = stringResource(resource = SharedR.strings.create_note_subnote_hint),
                                 onValueChanged = onNewSubNoteChanged,
                                 onAddSubNote = onAddNewSubNote
                             )

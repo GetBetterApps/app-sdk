@@ -161,6 +161,9 @@
 
     <string name="create_note_tags_title">Tags</string>
     <string name="create_note_tags_hint">Enter your tag</string>
+
+    <string name="create_note_subnote_title">SubGoals</string>
+    <string name="create_note_subnote_hint">Enter here sub goals</string>
     <!--  CREATE NOTE  -->
 
 
