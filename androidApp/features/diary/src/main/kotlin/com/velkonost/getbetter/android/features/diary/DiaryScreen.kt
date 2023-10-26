@@ -161,6 +161,9 @@ fun DiaryScreen(
             },
             onAddNewTag = {
                 viewModel.dispatch(CreateNewNoteAction.AddNewTag)
+            },
+            onTagDelete = {
+                viewModel.dispatch(CreateNewNoteAction.RemoveTag(it))
             }
         )
 

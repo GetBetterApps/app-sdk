@@ -47,13 +47,16 @@ fun NewTagField(
         value = value,
         modifier = Modifier
             .defaultMinSize(
-                minWidth = 48.dp,
+                minWidth = 24.dp,
                 minHeight = 24.dp
             )
             .onKeyEvent {
-                if (it.nativeKeyEvent.keyCode == KeyEvent.KEYCODE_ENTER) {
+                if (it.nativeKeyEvent.keyCode in listOf(
+                        KeyEvent.KEYCODE_ENTER,
+                        KeyEvent.KEYCODE_SPACE
+                    )
+                ) {
                     onAddNewTag.invoke()
-                    true
                 }
                 false
             },

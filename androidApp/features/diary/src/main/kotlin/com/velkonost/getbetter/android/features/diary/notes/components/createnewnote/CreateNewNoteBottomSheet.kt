@@ -43,7 +43,8 @@ fun CreateNewNoteBottomSheet(
     onTextChanged: (String) -> Unit,
     onPrivateChanged: (Boolean) -> Unit,
     onNewTagChanged: (String) -> Unit,
-    onAddNewTag: () -> Unit
+    onAddNewTag: () -> Unit,
+    onTagDelete: (String) -> Unit
 ) {
 
     val isAreaPickerVisible = remember { mutableStateOf(false) }
@@ -112,9 +113,11 @@ fun CreateNewNoteBottomSheet(
                     ) {
 
                         state.tags.forEach { tag ->
-                            TagItem(tag = tag)
+                            TagItem(
+                                tag = tag,
+                                onTagDelete = onTagDelete
+                            )
                         }
-
 
                         NewTagField(
                             value = state.newTagText,
