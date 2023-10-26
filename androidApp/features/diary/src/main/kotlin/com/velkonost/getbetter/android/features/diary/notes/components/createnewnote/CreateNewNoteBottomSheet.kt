@@ -1,10 +1,8 @@
 package com.velkonost.getbetter.android.features.diary.notes.components.createnewnote
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,8 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.areapicker.AreaPicker
-import com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.tags.NewTagField
-import com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.tags.TagItem
+import com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.tags.TagsBlock
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
 import com.velkonost.getbetter.shared.core.model.NoteType
@@ -106,28 +103,13 @@ fun CreateNewNoteBottomSheet(
                         onCheckedChange = onPrivateChanged
                     )
 
-                    FlowRow(
-                        modifier = modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(6.dp),
-                        verticalArrangement = Arrangement.spacedBy(6.dp)
-                    ) {
-
-                        state.tags.forEach { tag ->
-                            TagItem(
-                                tag = tag,
-                                onTagDelete = onTagDelete
-                            )
-                        }
-
-                        NewTagField(
-                            value = state.newTagText,
-                            placeholderText = "Enter tag",
-                            onValueChanged = onNewTagChanged,
-                            onAddNewTag = onAddNewTag
-                        )
-                    }
-
-
+                    TagsBlock(
+                        tags = state.tags,
+                        newTagText = state.newTagText,
+                        onNewTagChanged = onNewTagChanged,
+                        onAddNewTag = onAddNewTag,
+                        onTagDelete = onTagDelete
+                    )
                 }
             }
         }
