@@ -35,7 +35,8 @@ fun CreateNewNoteBottomSheet(
     state: CreateNewNoteViewState,
     modalSheetState: ModalBottomSheetState,
     onAreaSelect: (Area) -> Unit,
-    onTextChanged: (String) -> Unit
+    onTextChanged: (String) -> Unit,
+    onPrivateChanged: (Boolean) -> Unit
 ) {
 
     val isAreaPickerVisible = remember { mutableStateOf(false) }
@@ -89,6 +90,12 @@ fun CreateNewNoteBottomSheet(
                             else SharedR.strings.create_goal_text_hint
                         ),
                         onValueChanged = { onTextChanged.invoke(it) }
+                    )
+
+                    PrivateSwitch(
+                        isPrivate = state.isPrivate,
+                        isEnable = state.selectedArea != null && state.selectedArea?.isPrivate == false,
+                        onCheckedChange = onPrivateChanged
                     )
                 }
             }

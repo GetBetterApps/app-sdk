@@ -152,6 +152,9 @@ fun DiaryScreen(
             },
             onTextChanged = {
                 viewModel.dispatch(CreateNewNoteAction.TextChanged(it))
+            },
+            onPrivateChanged = {
+                viewModel.dispatch(CreateNewNoteAction.PrivateChanged)
             }
         )
 

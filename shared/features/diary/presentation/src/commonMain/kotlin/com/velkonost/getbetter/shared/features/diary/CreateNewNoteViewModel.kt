@@ -25,6 +25,7 @@ internal constructor(
         is CreateNewNoteAction.OpenGoal -> obtainOpenGoal()
         is CreateNewNoteAction.AreaSelect -> obtainAreaSelect(action.value)
         is CreateNewNoteAction.TextChanged -> obtainTextChanged(action.value)
+        is CreateNewNoteAction.PrivateChanged -> obtainPrivateChanged()
         is CreateNewNoteAction.NewTagTextChanged -> obtainNewTagTextChanged(action.value)
         is CreateNewNoteAction.AddNewTag -> addNewTag()
         is CreateNewNoteAction.RemoveTag -> removeTag(action.value)
@@ -50,10 +51,10 @@ internal constructor(
                 tags = emptyList(),
                 newTagText = "",
                 subNotes = emptyList(),
-                newSubNoteText = ""
+                newSubNoteText = "",
+                isPrivate = true
             )
         )
-
     }
 
     private fun obtainOpenGoal() {
@@ -66,17 +67,28 @@ internal constructor(
                 tags = emptyList(),
                 newTagText = "",
                 subNotes = emptyList(),
-                newSubNoteText = ""
+                newSubNoteText = "",
+                isPrivate = true
             )
         )
     }
 
     private fun obtainAreaSelect(value: Area) {
         emit(viewState.value.copy(selectedArea = value))
+
+        val forceSetPrivate = value.isPrivate
+        if (forceSetPrivate) {
+            emit(viewState.value.copy(isPrivate = true))
+        }
     }
 
     private fun obtainTextChanged(value: String) {
         emit(viewState.value.copy(text = value))
+    }
+
+    private fun obtainPrivateChanged() {
+        val prevValue = viewState.value.isPrivate
+        emit(viewState.value.copy(isPrivate = !prevValue))
     }
 
     private fun obtainNewTagTextChanged(value: String) {

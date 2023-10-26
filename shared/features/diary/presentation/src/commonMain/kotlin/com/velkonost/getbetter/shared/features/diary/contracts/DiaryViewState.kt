@@ -52,5 +52,7 @@ data class CreateNewNoteViewState(
     val newTagText: String = "",
 
     val subNotes: List<String> = emptyList(),
-    val newSubNoteText: String = ""
+    val newSubNoteText: String = "",
+
+    val isPrivate: Boolean = true
 ) : UIContract.State
