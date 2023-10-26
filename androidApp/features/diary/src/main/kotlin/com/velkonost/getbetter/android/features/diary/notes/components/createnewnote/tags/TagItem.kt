@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.velkonost.getbetter.shared.features.diary.model.Tag
+import com.velkonost.getbetter.shared.features.diary.model.TagUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
@@ -26,7 +26,7 @@ import dev.icerock.moko.resources.compose.painterResource
 @Composable
 fun RowScope.TagItem(
     modifier: Modifier = Modifier,
-    tag: Tag,
+    tag: TagUI,
     onTagDelete: (String) -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }

@@ -7,7 +7,7 @@ import com.velkonost.getbetter.shared.core.vm.resource.MessageType
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteEvent
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteViewState
-import com.velkonost.getbetter.shared.features.diary.model.Tag
+import com.velkonost.getbetter.shared.features.diary.model.TagUI
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource
@@ -50,7 +50,7 @@ internal constructor(
                 text = "",
                 mediaUrls = emptyList(),
                 tags = emptyList(),
-                newTag = Tag(),
+                newTag = TagUI(),
                 subNotes = emptyList(),
                 newSubNoteText = "",
                 isPrivate = true
@@ -66,7 +66,7 @@ internal constructor(
                 text = "",
                 mediaUrls = emptyList(),
                 tags = emptyList(),
-                newTag = Tag(),
+                newTag = TagUI(),
                 subNotes = emptyList(),
                 newSubNoteText = "",
                 isPrivate = true
@@ -98,7 +98,7 @@ internal constructor(
         } else {
             emit(
                 viewState.value.copy(
-                    newTag = Tag(text = value.replace(" ", "").take(15))
+                    newTag = TagUI(text = value.replace(" ", "").take(15))
                 )
             )
         }
@@ -111,8 +111,8 @@ internal constructor(
         if (tagsList.none { it.text == tagText } && tagText.isNotEmpty()) {
             emit(
                 viewState.value.copy(
-                    newTag = Tag(),
-                    tags = tagsList.plus(Tag(text = tagText))
+                    newTag = TagUI(),
+                    tags = tagsList.plus(TagUI(text = tagText))
                 )
             )
         } else {

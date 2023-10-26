@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
-import com.velkonost.getbetter.shared.features.diary.model.Tag
+import com.velkonost.getbetter.shared.features.diary.model.TagUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
@@ -22,8 +22,8 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun TagsBlock(
     modifier: Modifier = Modifier,
-    tags: List<Tag>,
-    newTag: Tag,
+    tags: List<TagUI>,
+    newTag: TagUI,
     onNewTagChanged: (String) -> Unit,
     onAddNewTag: () -> Unit,
     onTagDelete: (String) -> Unit

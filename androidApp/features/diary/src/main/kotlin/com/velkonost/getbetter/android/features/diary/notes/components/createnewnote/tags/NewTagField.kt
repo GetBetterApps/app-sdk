@@ -21,14 +21,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.velkonost.getbetter.shared.features.diary.model.Tag
+import com.velkonost.getbetter.shared.features.diary.model.TagUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 
 @Composable
 fun NewTagField(
     modifier: Modifier = Modifier,
-    value: Tag,
+    value: TagUI,
     placeholderText: String,
     onValueChanged: (String) -> Unit,
     onAddNewTag: () -> Unit
