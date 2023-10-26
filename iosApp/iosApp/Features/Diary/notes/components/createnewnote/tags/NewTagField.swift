@@ -35,7 +35,7 @@ struct NewTagField : View {
             text:  Binding(
                 get: { value },
                 set: { newValue in
-                    textFieldValue = newValue
+                    textFieldValue = newValue.trimmingCharacters(in: CharacterSet(charactersIn: " "))
                 }
             )
         )

@@ -92,7 +92,11 @@ internal constructor(
     }
 
     private fun obtainNewTagTextChanged(value: String) {
-        emit(viewState.value.copy(newTagText = value))
+        if (value.isNotEmpty() && value.last() == ' ') {
+            addNewTag()
+        } else if (value.length < 15) {
+            emit(viewState.value.copy(newTagText = value))
+        }
     }
 
     private fun addNewTag() {
