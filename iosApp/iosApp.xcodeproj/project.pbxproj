@@ -60,6 +60,10 @@
 		466B497D2ACFF06C00AD3F6E /* AddAreaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B497C2ACFF06C00AD3F6E /* AddAreaScreen.swift */; };
 		466B497F2ACFF07300AD3F6E /* AddAreaRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B497E2ACFF07300AD3F6E /* AddAreaRoute.swift */; };
 		466C5CCB2AB73240002C089C /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C5CCA2AB73240002C089C /* BottomBar.swift */; };
+		467668BA2AEABFCA007C17DE /* SubNoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467668B92AEABFCA007C17DE /* SubNoteItem.swift */; };
+		467668BC2AEABFDE007C17DE /* AddSubNoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467668BB2AEABFDE007C17DE /* AddSubNoteItem.swift */; };
+		467668BE2AEABFF4007C17DE /* SubNotesBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467668BD2AEABFF4007C17DE /* SubNotesBlock.swift */; };
+		467668C02AEAC007007C17DE /* SubNotesHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467668BF2AEAC007007C17DE /* SubNotesHeader.swift */; };
 		4678E4482AAC6A67000B88E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4678E4472AAC6A67000B88E8 /* AppDelegate.swift */; };
 		4678E44C2AAC6CF8000B88E8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4678E44B2AAC6CF8000B88E8 /* GoogleService-Info.plist */; };
 		467BECCF2AC017CF00F74482 /* PrimaryTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467BECCE2AC017CF00F74482 /* PrimaryTabs.swift */; };
@@ -159,6 +163,10 @@
 		466B497C2ACFF06C00AD3F6E /* AddAreaScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaScreen.swift; sourceTree = "<group>"; };
 		466B497E2ACFF07300AD3F6E /* AddAreaRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaRoute.swift; sourceTree = "<group>"; };
 		466C5CCA2AB73240002C089C /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
+		467668B92AEABFCA007C17DE /* SubNoteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubNoteItem.swift; sourceTree = "<group>"; };
+		467668BB2AEABFDE007C17DE /* AddSubNoteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubNoteItem.swift; sourceTree = "<group>"; };
+		467668BD2AEABFF4007C17DE /* SubNotesBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubNotesBlock.swift; sourceTree = "<group>"; };
+		467668BF2AEAC007007C17DE /* SubNotesHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubNotesHeader.swift; sourceTree = "<group>"; };
 		4678E4472AAC6A67000B88E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4678E44B2AAC6CF8000B88E8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		467BECCE2AC017CF00F74482 /* PrimaryTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTabs.swift; sourceTree = "<group>"; };
@@ -261,6 +269,7 @@
 		460487932AD83976005E8A54 /* createnewnote */ = {
 			isa = PBXGroup;
 			children = (
+				467668B82AEABF91007C17DE /* subnotes */,
 				464A42692AEA62780019CB98 /* tags */,
 				46E2DD2B2AE935BE00B4B2B5 /* areapicker */,
 				460487942AD83989005E8A54 /* CreateNewNoteBottomSheet.swift */,
@@ -447,6 +456,17 @@
 				46D857732ACFF1C500BE74DA /* AddAreaViewModel.swift */,
 			);
 			path = AddArea;
+			sourceTree = "<group>";
+		};
+		467668B82AEABF91007C17DE /* subnotes */ = {
+			isa = PBXGroup;
+			children = (
+				467668B92AEABFCA007C17DE /* SubNoteItem.swift */,
+				467668BB2AEABFDE007C17DE /* AddSubNoteItem.swift */,
+				467668BD2AEABFF4007C17DE /* SubNotesBlock.swift */,
+				467668BF2AEAC007007C17DE /* SubNotesHeader.swift */,
+			);
+			path = subnotes;
 			sourceTree = "<group>";
 		};
 		46870C2C2AC092CB00BCBDB1 /* Splash */ = {
@@ -808,6 +828,7 @@
 				46B17E142AADE482008C2BC4 /* AuthTextField.swift in Sources */,
 				46E2DD2F2AE93A3B00B4B2B5 /* AreaPicker.swift in Sources */,
 				460054B72ABB576B00586767 /* WisdomItem.swift in Sources */,
+				467668BA2AEABFCA007C17DE /* SubNoteItem.swift in Sources */,
 				4667C9022AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift in Sources */,
 				461F7C652AA88A39003791CF /* NavRoute.swift in Sources */,
 				46E2DD2D2AE9364D00B4B2B5 /* AreaPickerHeader.swift in Sources */,
@@ -832,6 +853,7 @@
 				46D857762ACFF23100BE74DA /* PaginationState.swift in Sources */,
 				4646BF9C2AD2BD72000980DD /* AreaDetailBottomButtons.swift in Sources */,
 				4696B6AE2AD15EE600DDD405 /* AreaDetailScreen.swift in Sources */,
+				467668BE2AEABFF4007C17DE /* SubNotesBlock.swift in Sources */,
 				464B60B42ABAF7C300369EC3 /* ProfileHeader.swift in Sources */,
 				46059D2D2AC41DB500DC5015 /* ExpandableButtonPanel.swift in Sources */,
 				468B87682ABC45BF001BBEB1 /* DiaryRoute.swift in Sources */,
@@ -841,6 +863,7 @@
 				46C10D232AB4734200E62846 /* AuthAnonymousButton.swift in Sources */,
 				467BECD12AC0350400F74482 /* WisdomViewModel.swift in Sources */,
 				461F7C6A2AA8D6FF003791CF /* UINavigationControllerExt.swift in Sources */,
+				467668BC2AEABFDE007C17DE /* AddSubNoteItem.swift in Sources */,
 				4678E4482AAC6A67000B88E8 /* AppDelegate.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				466C5CCB2AB73240002C089C /* BottomBar.swift in Sources */,
@@ -873,6 +896,7 @@
 				46B17E0C2AADE081008C2BC4 /* TextExt.swift in Sources */,
 				467BECCF2AC017CF00F74482 /* PrimaryTabs.swift in Sources */,
 				464A426D2AEA63D00019CB98 /* TagsBlock.swift in Sources */,
+				467668C02AEAC007007C17DE /* SubNotesHeader.swift in Sources */,
 				461F7C772AA8E371003791CF /* DetailScreen.swift in Sources */,
 				468B876A2ABC45C6001BBEB1 /* DiaryScreen.swift in Sources */,
 				46182DC12AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift in Sources */,

@@ -128,6 +128,15 @@ struct DiaryScreen: View {
                 },
                 onTagDelete: { value in
                     viewModel.dispatch(action: CreateNewNoteActionRemoveTag(value: value))
+                },
+                onNewSubNoteChanged: { value in
+                    viewModel.dispatch(action: CreateNewNoteActionNewSubNoteTextChanged(value: value))
+                },
+                onAddNewSubNote: {
+                    viewModel.dispatch(action: CreateNewNoteActionAddSubNote())
+                },
+                onSubNoteDelete: { value in
+                    viewModel.dispatch(action: CreateNewNoteActionRemoveSubNote(value: value))
                 }
             )
         }
