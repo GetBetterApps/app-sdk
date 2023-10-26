@@ -119,6 +119,15 @@ struct DiaryScreen: View {
                 },
                 onPrivateChanged: {
                     viewModel.dispatch(action: CreateNewNoteActionPrivateChanged())
+                },
+                onNewTagChanged: { value in
+                    viewModel.dispatch(action: CreateNewNoteActionNewTagTextChanged(value: value))
+                },
+                onAddNewTag: {
+                    viewModel.dispatch(action: CreateNewNoteActionAddNewTag())
+                },
+                onTagDelete: { value in
+                    viewModel.dispatch(action: CreateNewNoteActionRemoveTag(value: value))
                 }
             )
         }

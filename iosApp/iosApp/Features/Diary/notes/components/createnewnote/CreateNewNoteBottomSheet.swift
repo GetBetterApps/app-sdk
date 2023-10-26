@@ -28,20 +28,31 @@ struct CreateNewNoteBottomSheet: View {
     let onTextChanged: (String) -> Void
     let onPrivateChanged: () -> Void
     
+    let onNewTagChanged: (String) -> Void
+    let onAddNewTag: () -> Void
+    let onTagDelete: (String) -> Void
+    
     init(
         state: Binding<CreateNewNoteViewState>,
         onAreaSelect: @escaping (Area) -> Void,
         onTextChanged: @escaping (String) -> Void,
-        onPrivateChanged: @escaping () -> Void
+        onPrivateChanged: @escaping () -> Void,
+        onNewTagChanged: @escaping (String) -> Void,
+        onAddNewTag: @escaping () -> Void,
+        onTagDelete: @escaping (String) -> Void
     ) {
         self._state = state
         self.onAreaSelect = onAreaSelect
         self.onTextChanged = onTextChanged
         self.onPrivateChanged = onPrivateChanged
+        self.onNewTagChanged = onNewTagChanged
+        self.onAddNewTag = onAddNewTag
+        self.onTagDelete = onTagDelete
     }
     
     var body: some View {
         @State var isNotePrivate = state.isPrivate
+        @State var newTagText = state.newTagText
         
         ZStack {
             Color.mainBackground
@@ -79,6 +90,14 @@ struct CreateNewNoteBottomSheet: View {
                         isPrivate: $isNotePrivate
                     )
                     
+                    TagsBlock(
+                        tags: state.tags,
+                        newTagText: $newTagText,
+                        onNewTagChanged: onNewTagChanged,
+                        onAddNewTag: onAddNewTag,
+                        onTagDelete: onTagDelete
+                    )
+                    
                     Spacer()
                 }
                 
@@ -86,5 +105,8 @@ struct CreateNewNoteBottomSheet: View {
             .padding(20)
         }
         .ignoresSafeArea(.all)
+        .onTapGesture {
+            endTextEditing()
+        }
     }
 }

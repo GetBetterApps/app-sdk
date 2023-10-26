@@ -96,10 +96,10 @@ internal constructor(
     }
 
     private fun addNewTag() {
-        val tag = viewState.value.newTagText
+        val tag = viewState.value.newTagText.trim()
         val tagsList = viewState.value.tags
 
-        if (!tagsList.contains(tag)) {
+        if (!tagsList.contains(tag) && tag.isNotEmpty()) {
             emit(
                 viewState.value.copy(
                     newTagText = "",
