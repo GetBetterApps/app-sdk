@@ -25,19 +25,20 @@ struct NewTagField : View {
         self.placeholderText = placeholderText
         self.onValueChanged = onValueChanged
         self.onAddNewTag = onAddNewTag
+        self.textFieldValue = value.wrappedValue
     }
     
+    @State private var textFieldValue: String
+    
     var body: some View {
-        TextField(
-            "",
-            text: Binding(
+        TextField("",
+            text:  Binding(
                 get: { value },
                 set: { newValue in
-                    onValueChanged(newValue)
+                    textFieldValue = newValue
                 }
             )
         )
-        
         .style(.bodyMedium)
         .foregroundColor(.textSecondaryTitle)
         .lineLimit(1)
@@ -58,8 +59,10 @@ struct NewTagField : View {
         .frame(height: 24)
         .background(Color.textFieldBackground)
         .cornerRadius(8)
+        .onChange(of: textFieldValue) { newValue in
+            onValueChanged(newValue)
+        }
         .onSubmit {
-            value = ""
             isFocused = true
             onAddNewTag()
         }
