@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.areapicker.AreaPicker
 import com.velkonost.getbetter.core.compose.components.Loader
+import com.velkonost.getbetter.core.compose.components.MultilineTextField
 import com.velkonost.getbetter.shared.core.model.NoteType
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteViewState
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -78,6 +79,16 @@ fun CreateNewNoteBottomSheet(
                         onAreaSelect = onAreaSelect,
                         modalSheetState = modalSheetState,
                         noteType = state.type
+                    )
+
+                    MultilineTextField(
+                        value = state.text,
+                        placeholderText = stringResource(
+                            resource =
+                            if (state.type == NoteType.Default) SharedR.strings.create_note_text_hint
+                            else SharedR.strings.create_goal_text_hint
+                        ),
+                        onValueChanged = { onTextChanged.invoke(it) }
                     )
                 }
             }

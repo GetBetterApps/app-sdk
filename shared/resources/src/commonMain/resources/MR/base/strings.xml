@@ -155,6 +155,9 @@
     <string name="create_note_error_no_areas">You must first add or create an area</string>
     <string name="select_area_for_note">Select area for note</string>
     <string name="select_area_for_goal">Select area for goal</string>
+
+    <string name="create_note_text_hint">Place here note\'s content</string>
+    <string name="create_goal_text_hint">Place here your goal</string>
     <!--  CREATE NOTE  -->
 
 

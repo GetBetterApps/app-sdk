@@ -25,10 +25,12 @@ struct CreateNewNoteBottomSheet: View {
     @State var currentAreaIndex: Int = 0
     
     let onAreaSelect: (Area) -> Void
+    let onTextChanged: (String) -> Void
     
-    init(state: Binding<CreateNewNoteViewState>, onAreaSelect: @escaping (Area) -> Void) {
+    init(state: Binding<CreateNewNoteViewState>, onAreaSelect: @escaping (Area) -> Void, onTextChanged: @escaping (String) -> Void) {
         self._state = state
         self.onAreaSelect = onAreaSelect
+        self.onTextChanged = onTextChanged
     }
     
     var body: some View {
@@ -54,7 +56,12 @@ struct CreateNewNoteBottomSheet: View {
                         isAreaPickerVisible: $isAreaPickerVisible
                     )
                     
-            
+                    MultilineTextField(
+                        value: state.description_,
+                        placeholderText: SharedR.strings().diary_areas_create_new_description_hint.desc().localized()
+                    ) { value in
+                        onTextChanged(value)
+                    }
                     
                     
                     Spacer()
