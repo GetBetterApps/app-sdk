@@ -29,20 +29,36 @@ struct TagsBlock: View {
     }
     
     var body: some View {
-        VFlow(alignment: .leading) {
-            ForEach(tags, id: \.self) { tag in
-                TagItem(
-                    tag: tag,
-                    onTagDelete: onTagDelete
-                )
+        PrimaryBox(
+            padding: .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
+        ){
+            VStack {
+                HStack {
+                    Text(SharedR.strings().create_note_tags_title.desc().localized())
+                        .style(.titleMedium)
+                        .foregroundColor(.textPrimary)
+                        .lineLimit(1)
+                    Spacer()
+                }
+                
+                
+                VFlow(alignment: .leading) {
+                    ForEach(tags, id: \.self) { tag in
+                        TagItem(
+                            tag: tag,
+                            onTagDelete: onTagDelete
+                        )
+                    }
+                    
+                    NewTagField(
+                        value: $newTag,
+                        placeholderText: SharedR.strings().create_note_tags_hint.desc().localized(),
+                        onValueChanged: onNewTagChanged,
+                        onAddNewTag: onAddNewTag
+                    )
+                }
             }
-            
-            NewTagField(
-                value: $newTag,
-                placeholderText: "Enter text",
-                onValueChanged: onNewTagChanged,
-                onAddNewTag: onAddNewTag
-            )
+            .padding(16)
         }
     }
 }

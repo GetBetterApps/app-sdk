@@ -35,7 +35,7 @@ struct PrivateSwitch: View {
         {
             Text(isPrivate ? SharedR.strings().private_state.desc().localized() : SharedR.strings().public_state.desc().localized())
                 .style(.titleMedium)
-                .foregroundColor(.textSecondaryTitle)
+                .foregroundColor(.textPrimary)
         }
         .disabled(!isEnabled)
         .tint(.iconActive)

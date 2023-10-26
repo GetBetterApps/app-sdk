@@ -26,7 +26,7 @@ struct RequiredLevelRow: View {
         HStack(alignment: .center) {
             Text(title)
                 .style(.titleMedium)
-                .foregroundColor(.textSecondaryTitle)
+                .foregroundColor(.textPrimary)
             
             Spacer()
             

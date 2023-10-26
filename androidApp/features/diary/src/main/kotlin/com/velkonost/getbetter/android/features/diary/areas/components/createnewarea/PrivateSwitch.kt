@@ -31,7 +31,7 @@ fun PrivateSwitch(
                 else SharedR.strings.public_state
             ),
             style = MaterialTheme.typography.titleMedium,
-            color = colorResource(resource = SharedR.colors.text_secondary)
+            color = colorResource(resource = SharedR.colors.text_primary)
         )
         Spacer(modifier = modifier.weight(1f))
         Switch(
