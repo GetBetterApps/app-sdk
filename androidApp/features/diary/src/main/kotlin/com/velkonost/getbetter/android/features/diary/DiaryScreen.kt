@@ -155,6 +155,12 @@ fun DiaryScreen(
             },
             onPrivateChanged = {
                 viewModel.dispatch(CreateNewNoteAction.PrivateChanged)
+            },
+            onNewTagChanged = {
+                viewModel.dispatch(CreateNewNoteAction.NewTagTextChanged(it))
+            },
+            onAddNewTag = {
+                viewModel.dispatch(CreateNewNoteAction.AddNewTag)
             }
         )
 

@@ -22,6 +22,7 @@ import dev.icerock.moko.resources.compose.colorResource
 fun SingleLineTextField(
     modifier: Modifier = Modifier,
     value: String,
+    height: Int = 64,
     isEnabled: Boolean = true,
     textAlign: TextAlign = TextAlign.Start,
     paddingValues: PaddingValues = PaddingValues(start = 12.dp),
@@ -37,7 +38,7 @@ fun SingleLineTextField(
         modifier = modifier
             .fillMaxWidth()
             .padding(paddingValues)
-            .height(64.dp)
+            .height(height.dp)
             .clip(shape = MaterialTheme.shapes.medium),
         textStyle = textStyle
             .copy(
