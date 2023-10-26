@@ -23,6 +23,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -48,6 +50,8 @@ fun AreaPickerHeader(
         label = ""
     )
 
+    val haptic = LocalHapticFeedback.current
+
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -56,6 +60,7 @@ fun AreaPickerHeader(
                 interactionSource = interactionSource,
                 indication = null
             ) {
+                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                 isAreaPickerVisible.value = !isAreaPickerVisible.value
             },
         verticalAlignment = Alignment.CenterVertically,

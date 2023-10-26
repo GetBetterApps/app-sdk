@@ -64,6 +64,8 @@ struct AreaPickerHeader: View {
         .frame(minWidth: 0, maxWidth: .infinity)
         .contentShape(Rectangle())
         .onTapGesture {
+            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+            impactMed.impactOccurred()
             onClick()
         }
         

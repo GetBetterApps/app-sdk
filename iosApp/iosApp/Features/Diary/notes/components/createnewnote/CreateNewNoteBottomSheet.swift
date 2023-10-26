@@ -57,8 +57,9 @@ struct CreateNewNoteBottomSheet: View {
                     )
                     
                     MultilineTextField(
-                        value: state.description_,
-                        placeholderText: SharedR.strings().diary_areas_create_new_description_hint.desc().localized()
+                        value: state.text,
+                        placeholderText:
+                            state.type == NoteType.default_ ? SharedR.strings().create_note_text_hint.desc().localized() : SharedR.strings().create_goal_text_hint.desc().localized()
                     ) { value in
                         onTextChanged(value)
                     }
