@@ -7,13 +7,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.shared.features.diary.model.Tag
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun TagsBlock(
     modifier: Modifier = Modifier,
-    tags: List<String>,
-    newTagText: String,
+    tags: List<Tag>,
+    newTag: Tag,
     onNewTagChanged: (String) -> Unit,
     onAddNewTag: () -> Unit,
     onTagDelete: (String) -> Unit
@@ -32,7 +33,7 @@ fun TagsBlock(
         }
 
         NewTagField(
-            value = newTagText,
+            value = newTag,
             placeholderText = "Enter tag",
             onValueChanged = onNewTagChanged,
             onAddNewTag = onAddNewTag

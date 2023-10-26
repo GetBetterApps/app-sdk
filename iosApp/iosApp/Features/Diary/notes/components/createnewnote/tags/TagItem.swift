@@ -12,17 +12,17 @@ import SharedSDK
 
 struct TagItem : View {
     
-    let tag: String
+    let tag: Tag
     let onTagDelete: (String) -> Void
     
-    init(tag: String, onTagDelete: @escaping (String) -> Void) {
+    init(tag: Tag, onTagDelete: @escaping (String) -> Void) {
         self.tag = tag
         self.onTagDelete = onTagDelete
     }
     
     var body: some View {
         HStack(spacing: 0) {
-            Text(tag)
+            Text(tag.text)
                 .style(.bodyMedium)
                 .foregroundColor(.textSecondaryTitle)
                 .frame(height: 24, alignment: .center)
@@ -35,7 +35,7 @@ struct TagItem : View {
                 .frame(width: 14, height: 14, alignment: .center)
                 .padding(.leading, 4)
                 .onTapGesture {
-                    onTagDelete(tag)
+                    onTagDelete(tag.text)
                 }
         }
         .padding(.init(top: 3, leading: 6, bottom: 3, trailing: 6))

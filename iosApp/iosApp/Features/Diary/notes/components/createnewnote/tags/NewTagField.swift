@@ -9,10 +9,11 @@
 import Foundation
 import SwiftUI
 import SharedSDK
+import Combine
 
 struct NewTagField : View {
     
-    @Binding var value: String
+    @Binding var value: Tag
     
     let placeholderText: String
     let onValueChanged: (String) -> Void
@@ -20,30 +21,28 @@ struct NewTagField : View {
     
     @FocusState private var isFocused: Bool
     
-    init(value: Binding<String>, placeholderText: String, onValueChanged: @escaping (String) -> Void, onAddNewTag: @escaping () -> Void) {
+    init(value: Binding<Tag>, placeholderText: String, onValueChanged: @escaping (String) -> Void, onAddNewTag: @escaping () -> Void) {
         self._value = value
         self.placeholderText = placeholderText
         self.onValueChanged = onValueChanged
         self.onAddNewTag = onAddNewTag
-        self.textFieldValue = value.wrappedValue
+        self.textFieldValue = value.wrappedValue.text
     }
     
     @State private var textFieldValue: String
     
     var body: some View {
         TextField("",
-            text:  Binding(
-                get: { value },
-                set: { newValue in
-                    textFieldValue = newValue.trimmingCharacters(in: CharacterSet(charactersIn: " "))
-                }
+            text: Binding(
+                get: { value.text },
+                set: { textFieldValue = $0 }
             )
         )
         .style(.bodyMedium)
         .foregroundColor(.textSecondaryTitle)
         .lineLimit(1)
         .focused($isFocused)
-        .placeholder(when: value.isEmpty) {
+        .placeholder(when: value.text.isEmpty) {
             Text(placeholderText)
                 .style(.bodyMedium)
                 .lineLimit(1)
@@ -54,6 +53,8 @@ struct NewTagField : View {
                     alignment: .leading
                 )
         }
+        
+        .autocorrectionDisabled()
         .padding(.leading, 4)
         .padding(.trailing, 4)
         .frame(height: 24)

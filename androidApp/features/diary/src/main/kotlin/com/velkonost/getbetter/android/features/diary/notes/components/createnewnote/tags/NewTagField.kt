@@ -21,13 +21,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.shared.features.diary.model.Tag
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 
 @Composable
 fun NewTagField(
     modifier: Modifier = Modifier,
-    value: String,
+    value: Tag,
     placeholderText: String,
     onValueChanged: (String) -> Unit,
     onAddNewTag: () -> Unit
@@ -44,7 +45,7 @@ fun NewTagField(
     )
 
     BasicTextField(
-        value = value,
+        value = value.text,
         modifier = Modifier
             .defaultMinSize(
                 minWidth = 24.dp,
@@ -53,7 +54,6 @@ fun NewTagField(
             .onKeyEvent {
                 if (it.nativeKeyEvent.keyCode in listOf(
                         KeyEvent.KEYCODE_ENTER,
-                        KeyEvent.KEYCODE_SPACE
                     )
                 ) {
                     onAddNewTag.invoke()
@@ -81,7 +81,7 @@ fun NewTagField(
         ),
         decorationBox = @Composable { innerTextField ->
             TextFieldDefaults.DecorationBox(
-                value = value,
+                value = value.text,
                 innerTextField = innerTextField,
                 placeholder = {
                     Text(

@@ -52,7 +52,7 @@ struct CreateNewNoteBottomSheet: View {
     
     var body: some View {
         @State var isNotePrivate = state.isPrivate
-        @State var newTagText = state.newTagText
+        @State var newTag = state.newTag
         
         ZStack {
             Color.mainBackground
@@ -92,7 +92,7 @@ struct CreateNewNoteBottomSheet: View {
                     
                     TagsBlock(
                         tags: state.tags,
-                        newTagText: $newTagText,
+                        newTag: $newTag,
                         onNewTagChanged: onNewTagChanged,
                         onAddNewTag: onAddNewTag,
                         onTagDelete: onTagDelete

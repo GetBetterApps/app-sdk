@@ -13,16 +13,16 @@ import SwiftUIFlow
 
 struct TagsBlock: View {
     
-    let tags: [String]
-    @Binding private var newTagText: String
+    let tags: [Tag]
+    @Binding private var newTag: Tag
     
     let onNewTagChanged: (String) -> Void
     let onAddNewTag: () -> Void
     let onTagDelete: (String) -> Void
     
-    init(tags: [String], newTagText: Binding<String>, onNewTagChanged: @escaping (String) -> Void, onAddNewTag: @escaping () -> Void, onTagDelete: @escaping (String) -> Void) {
+    init(tags: [Tag], newTag: Binding<Tag>, onNewTagChanged: @escaping (String) -> Void, onAddNewTag: @escaping () -> Void, onTagDelete: @escaping (String) -> Void) {
         self.tags = tags
-        self._newTagText = newTagText
+        self._newTag = newTag
         self.onNewTagChanged = onNewTagChanged
         self.onAddNewTag = onAddNewTag
         self.onTagDelete = onTagDelete
@@ -38,7 +38,7 @@ struct TagsBlock: View {
             }
             
             NewTagField(
-                value: $newTagText,
+                value: $newTag,
                 placeholderText: "Enter text",
                 onValueChanged: onNewTagChanged,
                 onAddNewTag: onAddNewTag

@@ -4,6 +4,7 @@ import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.NoteType
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import com.velkonost.getbetter.shared.features.diary.model.DiaryTab
+import com.velkonost.getbetter.shared.features.diary.model.Tag
 import model.Area
 
 data class DiaryViewState(
@@ -48,8 +49,8 @@ data class CreateNewNoteViewState(
     val text: String = "",
     val mediaUrls: List<String> = emptyList(),
 
-    val tags: List<String> = emptyList(),
-    val newTagText: String = "",
+    val tags: List<Tag> = emptyList(),
+    val newTag: Tag = Tag(),
 
     val subNotes: List<String> = emptyList(),
     val newSubNoteText: String = "",

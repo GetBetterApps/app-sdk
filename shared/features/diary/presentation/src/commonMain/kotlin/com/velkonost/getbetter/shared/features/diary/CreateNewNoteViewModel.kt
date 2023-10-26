@@ -7,6 +7,7 @@ import com.velkonost.getbetter.shared.core.vm.resource.MessageType
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteEvent
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteViewState
+import com.velkonost.getbetter.shared.features.diary.model.Tag
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource
@@ -49,7 +50,7 @@ internal constructor(
                 text = "",
                 mediaUrls = emptyList(),
                 tags = emptyList(),
-                newTagText = "",
+                newTag = Tag(),
                 subNotes = emptyList(),
                 newSubNoteText = "",
                 isPrivate = true
@@ -65,7 +66,7 @@ internal constructor(
                 text = "",
                 mediaUrls = emptyList(),
                 tags = emptyList(),
-                newTagText = "",
+                newTag = Tag(),
                 subNotes = emptyList(),
                 newSubNoteText = "",
                 isPrivate = true
@@ -94,30 +95,36 @@ internal constructor(
     private fun obtainNewTagTextChanged(value: String) {
         if (value.isNotEmpty() && value.last() == ' ') {
             addNewTag()
-        } else if (value.length < 15) {
-            emit(viewState.value.copy(newTagText = value))
+        } else {
+            emit(
+                viewState.value.copy(
+                    newTag = Tag(text = value.replace(" ", "").take(15))
+                )
+            )
         }
     }
 
     private fun addNewTag() {
-        val tag = viewState.value.newTagText.trim()
+        val tagText = viewState.value.newTag.text.replace(" ", "")
         val tagsList = viewState.value.tags
 
-        if (!tagsList.contains(tag) && tag.isNotEmpty()) {
+        if (tagsList.none { it.text == tagText } && tagText.isNotEmpty()) {
             emit(
                 viewState.value.copy(
-                    newTagText = "",
-                    tags = tagsList.plus(tag)
+                    newTag = Tag(),
+                    tags = tagsList.plus(Tag(text = tagText))
                 )
             )
+        } else {
+            obtainNewTagTextChanged(tagText)
         }
     }
 
     private fun removeTag(value: String) {
         val tagsList = viewState.value.tags
 
-        if (tagsList.contains(value)) {
-            emit(viewState.value.copy(tags = tagsList.minus(value)))
+        tagsList.firstOrNull { it.text == value }?.let {
+            emit(viewState.value.copy(tags = tagsList.minus(it)))
         }
     }
 

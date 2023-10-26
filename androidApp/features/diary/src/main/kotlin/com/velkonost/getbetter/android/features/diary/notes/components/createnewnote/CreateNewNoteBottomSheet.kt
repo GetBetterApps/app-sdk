@@ -105,7 +105,7 @@ fun CreateNewNoteBottomSheet(
 
                     TagsBlock(
                         tags = state.tags,
-                        newTagText = state.newTagText,
+                        newTag = state.newTag,
                         onNewTagChanged = onNewTagChanged,
                         onAddNewTag = onAddNewTag,
                         onTagDelete = onTagDelete
