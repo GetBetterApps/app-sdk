@@ -12,23 +12,33 @@ import SharedSDK
 
 struct PrivateSwitch: View {
     
-    @State private var isPrivate: Bool = true
+    @Binding var isPrivate: Bool
     let onCheckedChange: () -> Void
     
-    init(onCheckedChange: @escaping () -> Void) {
+    let isEnabled: Bool
+    
+    init(onCheckedChange: @escaping () -> Void, isEnabled: Bool = true, isPrivate: Binding<Bool>) {
         self.onCheckedChange = onCheckedChange
+        self.isEnabled = isEnabled
+        self._isPrivate = isPrivate
     }
     
     var body: some View {
-        Toggle(isOn: $isPrivate) {
+        Toggle(
+            isOn: Binding(
+                get: { isPrivate },
+                set: { newValue in
+                    onCheckedChange()
+                }
+            )
+        )
+        {
             Text(isPrivate ? SharedR.strings().private_state.desc().localized() : SharedR.strings().public_state.desc().localized())
                 .style(.titleMedium)
                 .foregroundColor(.textSecondaryTitle)
         }
+        .disabled(!isEnabled)
         .tint(.iconActive)
         .padding(.top, 12)
-        .onChange(of: isPrivate) { newValue in
-            onCheckedChange()
-        }
     }
 }

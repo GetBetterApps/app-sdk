@@ -44,6 +44,8 @@ struct CreateNewAreaBottomSheet: View {
     
     
     var body: some View {
+        @State var isAreaPrivate = state.isPrivate
+        
         ZStack {
             Color.mainBackground
             
@@ -93,7 +95,8 @@ struct CreateNewAreaBottomSheet: View {
                     }
                     
                     PrivateSwitch(
-                        onCheckedChange: onPrivateChanged
+                        onCheckedChange: onPrivateChanged,
+                        isPrivate: $isAreaPrivate
                     )
                     
                     Spacer()

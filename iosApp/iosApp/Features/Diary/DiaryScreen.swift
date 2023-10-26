@@ -116,6 +116,9 @@ struct DiaryScreen: View {
                 },
                 onTextChanged: { value in
                     viewModel.dispatch(action: CreateNewNoteActionTextChanged(value: value))
+                },
+                onPrivateChanged: {
+                    viewModel.dispatch(action: CreateNewNoteActionPrivateChanged())
                 }
             )
         }
