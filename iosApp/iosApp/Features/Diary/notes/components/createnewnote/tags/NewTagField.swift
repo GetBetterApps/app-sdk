@@ -13,7 +13,7 @@ import Combine
 
 struct NewTagField : View {
     
-    @Binding var value: Tag
+    @Binding var value: TagUI
     
     let placeholderText: String
     let onValueChanged: (String) -> Void
@@ -21,7 +21,7 @@ struct NewTagField : View {
     
     @FocusState private var isFocused: Bool
     
-    init(value: Binding<Tag>, placeholderText: String, onValueChanged: @escaping (String) -> Void, onAddNewTag: @escaping () -> Void) {
+    init(value: Binding<TagUI>, placeholderText: String, onValueChanged: @escaping (String) -> Void, onAddNewTag: @escaping () -> Void) {
         self._value = value
         self.placeholderText = placeholderText
         self.onValueChanged = onValueChanged

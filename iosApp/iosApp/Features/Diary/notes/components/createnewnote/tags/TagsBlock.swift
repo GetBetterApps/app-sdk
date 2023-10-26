@@ -13,14 +13,14 @@ import SwiftUIFlow
 
 struct TagsBlock: View {
     
-    let tags: [Tag]
-    @Binding private var newTag: Tag
+    let tags: [TagUI]
+    @Binding private var newTag: TagUI
     
     let onNewTagChanged: (String) -> Void
     let onAddNewTag: () -> Void
     let onTagDelete: (String) -> Void
     
-    init(tags: [Tag], newTag: Binding<Tag>, onNewTagChanged: @escaping (String) -> Void, onAddNewTag: @escaping () -> Void, onTagDelete: @escaping (String) -> Void) {
+    init(tags: [TagUI], newTag: Binding<TagUI>, onNewTagChanged: @escaping (String) -> Void, onAddNewTag: @escaping () -> Void, onTagDelete: @escaping (String) -> Void) {
         self.tags = tags
         self._newTag = newTag
         self.onNewTagChanged = onNewTagChanged
