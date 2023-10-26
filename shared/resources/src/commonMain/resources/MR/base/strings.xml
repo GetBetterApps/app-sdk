@@ -158,6 +158,9 @@
 
     <string name="create_note_text_hint">Place here note\'s content</string>
     <string name="create_goal_text_hint">Place here your goal</string>
+
+    <string name="create_note_tags_title">Tags</string>
+    <string name="create_note_tags_hint">Enter your tag</string>
     <!--  CREATE NOTE  -->
 
 
