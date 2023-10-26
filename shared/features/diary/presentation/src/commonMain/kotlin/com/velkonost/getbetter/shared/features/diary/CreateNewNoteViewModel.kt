@@ -7,6 +7,7 @@ import com.velkonost.getbetter.shared.core.vm.resource.MessageType
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteEvent
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteViewState
+import com.velkonost.getbetter.shared.features.diary.model.SubNoteUI
 import com.velkonost.getbetter.shared.features.diary.model.TagUI
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -52,7 +53,7 @@ internal constructor(
                 tags = emptyList(),
                 newTag = TagUI(),
                 subNotes = emptyList(),
-                newSubNoteText = "",
+                newSubNoteText = SubNoteUI(),
                 isPrivate = true
             )
         )
@@ -68,7 +69,7 @@ internal constructor(
                 tags = emptyList(),
                 newTag = TagUI(),
                 subNotes = emptyList(),
-                newSubNoteText = "",
+                newSubNoteText = SubNoteUI(),
                 isPrivate = true
             )
         )
@@ -129,7 +130,7 @@ internal constructor(
     }
 
     private fun obtainNewSubNoteTextChanged(value: String) {
-        emit(viewState.value.copy(newSubNoteText = value))
+        emit(viewState.value.copy(newSubNoteText = SubNoteUI(text = value)))
     }
 
     private fun addSubNote() {
@@ -139,14 +140,14 @@ internal constructor(
         if (!subNotesList.contains(subNote)) {
             emit(
                 viewState.value.copy(
-                    newSubNoteText = "",
+                    newSubNoteText = SubNoteUI(),
                     subNotes = subNotesList.plus(subNote)
                 )
             )
         }
     }
 
-    private fun removeSubNote(value: String) {
+    private fun removeSubNote(value: SubNoteUI) {
         val subNotesList = viewState.value.subNotes
 
         if (subNotesList.contains(value)) {

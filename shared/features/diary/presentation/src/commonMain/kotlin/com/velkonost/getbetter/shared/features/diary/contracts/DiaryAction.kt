@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.diary.contracts
 
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
+import com.velkonost.getbetter.shared.features.diary.model.SubNoteUI
 import model.Area
 
 sealed interface DiaryAction : UIContract.Action
@@ -40,7 +41,7 @@ sealed interface CreateNewNoteAction : DiaryAction {
 
     data object AddSubNote : CreateNewNoteAction
 
-    data class RemoveSubNote(val value: String) : CreateNewNoteAction
+    data class RemoveSubNote(val value: SubNoteUI) : CreateNewNoteAction
 
     data class AddImageUrl(val value: String) : CreateNewNoteAction
 
