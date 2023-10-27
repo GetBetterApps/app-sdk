@@ -109,6 +109,8 @@ fun CreateNewNoteBottomSheet(
                             onValueChanged = { onTextChanged.invoke(it) }
                         )
 
+                        CompletionDateBlock()
+
                         PrivateSwitch(
                             isPrivate = state.isPrivate,
                             isEnable = state.selectedArea != null && state.selectedArea?.isPrivate == false,
