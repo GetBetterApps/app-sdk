@@ -4,9 +4,7 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
@@ -34,25 +32,40 @@ fun SubNotesBlock(
 
             AnimatedVisibility(visible = isSubNotesBlockVisible.value) {
                 AnimatedContent(targetState = items, label = "") { subNotes ->
-                    LazyColumn(
+                    Column(
+                        modifier = modifier.padding(bottom = 16.dp),
                         verticalArrangement = Arrangement.spacedBy(6.dp),
-                        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp)
+//                        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp)
                     ) {
-                        items(subNotes, key = { it.id }) { item ->
+                        subNotes.forEach { item ->
                             SubNoteItem(
                                 item = item,
                                 onDeleteSubNote = onSubNoteDelete
                             )
                         }
 
-                        item {
-                            AddSubNoteItem(
-                                value = newSubNote.text,
-                                placeholderText = stringResource(resource = SharedR.strings.create_note_subnote_hint),
-                                onValueChanged = onNewSubNoteChanged,
-                                onAddSubNote = onAddNewSubNote
-                            )
-                        }
+                        AddSubNoteItem(
+                            value = newSubNote.text,
+                            placeholderText = stringResource(resource = SharedR.strings.create_note_subnote_hint),
+                            onValueChanged = onNewSubNoteChanged,
+                            onAddSubNote = onAddNewSubNote
+                        )
+
+//                        items(subNotes, key = { it.id }) { item ->
+//                            SubNoteItem(
+//                                item = item,
+//                                onDeleteSubNote = onSubNoteDelete
+//                            )
+//                        }
+//
+//                        item {
+//                            AddSubNoteItem(
+//                                value = newSubNote.text,
+//                                placeholderText = stringResource(resource = SharedR.strings.create_note_subnote_hint),
+//                                onValueChanged = onNewSubNoteChanged,
+//                                onAddSubNote = onAddNewSubNote
+//                            )
+//                        }
                     }
                 }
 

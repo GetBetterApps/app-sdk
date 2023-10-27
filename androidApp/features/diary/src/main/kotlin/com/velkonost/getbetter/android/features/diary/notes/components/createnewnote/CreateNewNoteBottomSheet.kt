@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetState
@@ -67,64 +69,69 @@ fun CreateNewNoteBottomSheet(
                     Loader(modifier = modifier.align(Alignment.Center))
                 }
             } else {
+
                 Column(
                     modifier = modifier
                         .fillMaxWidth()
                         .fillMaxHeight(0.9f)
                         .padding(20.dp)
+                        .verticalScroll(rememberScrollState())
+                        .padding(bottom = 100.dp)
                 ) {
-                    Text(
-                        modifier = modifier.align(Alignment.CenterHorizontally),
-                        text = stringResource(
-                            resource =
-                            if (state.type == NoteType.Default) SharedR.strings.create_note_title
-                            else SharedR.strings.create_goal_title
-                        ),
-                        color = colorResource(resource = SharedR.colors.text_title),
-                        style = MaterialTheme.typography.headlineSmall
-                    )
+                    Column {
+                        Text(
+                            modifier = modifier.align(Alignment.CenterHorizontally),
+                            text = stringResource(
+                                resource =
+                                if (state.type == NoteType.Default) SharedR.strings.create_note_title
+                                else SharedR.strings.create_goal_title
+                            ),
+                            color = colorResource(resource = SharedR.colors.text_title),
+                            style = MaterialTheme.typography.headlineSmall
+                        )
 
-                    AreaPicker(
-                        areas = state.availableAreas,
-                        selectedArea = state.selectedArea,
-                        isAreaPickerVisible = isAreaPickerVisible,
-                        onAreaSelect = onAreaSelect,
-                        modalSheetState = modalSheetState,
-                        noteType = state.type
-                    )
+                        AreaPicker(
+                            areas = state.availableAreas,
+                            selectedArea = state.selectedArea,
+                            isAreaPickerVisible = isAreaPickerVisible,
+                            onAreaSelect = onAreaSelect,
+                            modalSheetState = modalSheetState,
+                            noteType = state.type
+                        )
 
-                    MultilineTextField(
-                        value = state.text,
-                        placeholderText = stringResource(
-                            resource =
-                            if (state.type == NoteType.Default) SharedR.strings.create_note_text_hint
-                            else SharedR.strings.create_goal_text_hint
-                        ),
-                        onValueChanged = { onTextChanged.invoke(it) }
-                    )
+                        MultilineTextField(
+                            value = state.text,
+                            placeholderText = stringResource(
+                                resource =
+                                if (state.type == NoteType.Default) SharedR.strings.create_note_text_hint
+                                else SharedR.strings.create_goal_text_hint
+                            ),
+                            onValueChanged = { onTextChanged.invoke(it) }
+                        )
 
-                    PrivateSwitch(
-                        isPrivate = state.isPrivate,
-                        isEnable = state.selectedArea != null && state.selectedArea?.isPrivate == false,
-                        onCheckedChange = onPrivateChanged
-                    )
+                        PrivateSwitch(
+                            isPrivate = state.isPrivate,
+                            isEnable = state.selectedArea != null && state.selectedArea?.isPrivate == false,
+                            onCheckedChange = onPrivateChanged
+                        )
 
-                    TagsBlock(
-                        tags = state.tags,
-                        newTag = state.newTag,
-                        onNewTagChanged = onNewTagChanged,
-                        onAddNewTag = onAddNewTag,
-                        onTagDelete = onTagDelete
-                    )
+                        TagsBlock(
+                            tags = state.tags,
+                            newTag = state.newTag,
+                            onNewTagChanged = onNewTagChanged,
+                            onAddNewTag = onAddNewTag,
+                            onTagDelete = onTagDelete
+                        )
 
-                    SubNotesBlock(
-                        items = state.subNotes,
-                        newSubNote = state.newSubNote,
-                        isSubNotesBlockVisible = isSubNotesBlockVisible,
-                        onAddNewSubNote = onAddNewSubNote,
-                        onNewSubNoteChanged = onNewSubNoteChanged,
-                        onSubNoteDelete = onSubNoteDelete
-                    )
+                        SubNotesBlock(
+                            items = state.subNotes,
+                            newSubNote = state.newSubNote,
+                            isSubNotesBlockVisible = isSubNotesBlockVisible,
+                            onAddNewSubNote = onAddNewSubNote,
+                            onNewSubNoteChanged = onNewSubNoteChanged,
+                            onSubNoteDelete = onSubNoteDelete
+                        )
+                    }
                 }
             }
         }

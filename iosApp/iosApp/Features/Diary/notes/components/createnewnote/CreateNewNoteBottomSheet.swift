@@ -72,67 +72,80 @@ struct CreateNewNoteBottomSheet: View {
             Color.mainBackground
         
             ScrollView(.vertical, showsIndicators: false) {
-                VStack {
-                    if state.isLoading {
-                        Loader()
-                    } else {
-                        Text(
-                            state.type == NoteType.default_ ? SharedR.strings().create_note_title.desc().localized() : SharedR.strings().create_goal_title.desc().localized()
-                        )
-                        .style(.headlineSmall)
-                        .foregroundColor(.textTitle)
-                        .frame(alignment: .center)
-                        
-                        AreaPicker(
-                            areas: state.availableAreas,
-                            selectedArea: state.selectedArea,
-                            noteType: state.type,
-                            onAreaSelect: onAreaSelect,
-                            isAreaPickerVisible: $isAreaPickerVisible
-                        )
-                        
-                        MultilineTextField(
-                            value: state.text,
-                            placeholderText:
-                                state.type == NoteType.default_ ? SharedR.strings().create_note_text_hint.desc().localized() : SharedR.strings().create_goal_text_hint.desc().localized()
-                        ) { value in
-                            onTextChanged(value)
+                ScrollViewReader { value in
+                    VStack {
+                        if state.isLoading {
+                            Loader()
+                        } else {
+                            Text(
+                                state.type == NoteType.default_ ? SharedR.strings().create_note_title.desc().localized() : SharedR.strings().create_goal_title.desc().localized()
+                            )
+                            .style(.headlineSmall)
+                            .foregroundColor(.textTitle)
+                            .frame(alignment: .center)
+                            
+                            AreaPicker(
+                                areas: state.availableAreas,
+                                selectedArea: state.selectedArea,
+                                noteType: state.type,
+                                onAreaSelect: onAreaSelect,
+                                isAreaPickerVisible: $isAreaPickerVisible
+                            )
+                            
+                            MultilineTextField(
+                                value: state.text,
+                                placeholderText:
+                                    state.type == NoteType.default_ ? SharedR.strings().create_note_text_hint.desc().localized() : SharedR.strings().create_goal_text_hint.desc().localized()
+                            ) { value in
+                                onTextChanged(value)
+                            }
+                            
+                            PrivateSwitch(
+                                onCheckedChange: onPrivateChanged,
+                                isEnabled: state.selectedArea != nil && state.selectedArea?.isPrivate == false,
+                                isPrivate: $isNotePrivate
+                            )
+                            
+                            TagsBlock(
+                                tags: state.tags,
+                                newTag: $newTag,
+                                onNewTagChanged: onNewTagChanged,
+                                onAddNewTag: onAddNewTag,
+                                onTagDelete: onTagDelete
+                            )
+                            
+                            SubNotesBlock(
+                                items: state.subNotes,
+                                newSubNote: $newSubNote,
+                                onNewSubNoteChanged: onNewSubNoteChanged,
+                                onAddNewSubNote: onAddNewSubNote,
+                                onSubNoteDelete: onSubNoteDelete,
+                                isSubNotesBlockPickerVisible: $isSubNoteBlockVisible
+                            )
+                            .onTapGesture {
+                                withAnimation {
+                                    value.scrollTo(3, anchor: .bottom)
+                                }
+                            }
+                            .id(3)
+                            
+                            Spacer()
                         }
                         
-                        PrivateSwitch(
-                            onCheckedChange: onPrivateChanged,
-                            isEnabled: state.selectedArea != nil && state.selectedArea?.isPrivate == false,
-                            isPrivate: $isNotePrivate
-                        )
-                        
-                        TagsBlock(
-                            tags: state.tags,
-                            newTag: $newTag,
-                            onNewTagChanged: onNewTagChanged,
-                            onAddNewTag: onAddNewTag,
-                            onTagDelete: onTagDelete
-                        )
-                        
-                        SubNotesBlock(
-                            items: state.subNotes,
-                            newSubNote: $newSubNote,
-                            onNewSubNoteChanged: onNewSubNoteChanged,
-                            onAddNewSubNote: onAddNewSubNote,
-                            onSubNoteDelete: onSubNoteDelete,
-                            isSubNotesBlockPickerVisible: $isSubNoteBlockVisible
-                        )
-                        
-                        Spacer()
                     }
+                    //                .frame(minHeight: 0, maxHeight: .infinity)
+                    //                .ignoresSafeArea(.keyboard, edges: .bottom)
                     
+                    .padding(20)
                 }
-                .padding(20)
-                .padding(.bottom, 400)
+            Spacer()
             }
-            .ignoresSafeArea(.keyboard)
+            Spacer()
+         
         }
-        .frame(minHeight: 0, maxHeight: .infinity)
-        .ignoresSafeArea(.all)
+        .ignoresSafeArea(.container)
+//        .ignoresSafeArea(.all)
+        
         .onTapGesture {
             endTextEditing()
         }
@@ -164,4 +177,45 @@ extension View {
   func keyboardResponsive() -> ModifiedContent<Self, KeyboardResponsiveModifier> {
     return modifier(KeyboardResponsiveModifier())
   }
+}
+
+
+
+public class KeyboardInfo: ObservableObject {
+
+    public static var shared = KeyboardInfo()
+
+    @Published public var height: CGFloat = 0
+
+    private init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardChanged), name: UIApplication.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardChanged), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardChanged), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+
+    @objc func keyboardChanged(notification: Notification) {
+        if notification.name == UIApplication.keyboardWillHideNotification {
+            self.height = 0
+        } else {
+            self.height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.height ?? 0
+        }
+    }
+
+}
+
+struct KeyboardAware: ViewModifier {
+    @ObservedObject private var keyboard = KeyboardInfo.shared
+
+    func body(content: Content) -> some View {
+        content
+            .padding(.bottom, self.keyboard.height)
+            .edgesIgnoringSafeArea(self.keyboard.height > 0 ? .bottom : [])
+            .animation(.easeOut)
+    }
+}
+
+extension View {
+    public func keyboardAware() -> some View {
+        ModifiedContent(content: self, modifier: KeyboardAware())
+    }
 }

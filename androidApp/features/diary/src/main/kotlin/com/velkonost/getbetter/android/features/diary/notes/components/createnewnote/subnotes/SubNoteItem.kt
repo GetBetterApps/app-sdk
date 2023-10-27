@@ -41,11 +41,13 @@ fun SubNoteItem(
         modifier = modifier
             .fillMaxWidth()
             .height(56.dp)
+            .padding(horizontal = 16.dp)
             .clip(shape = MaterialTheme.shapes.medium)
             .background(
                 color = colorResource(resource = SharedR.colors.text_field_background),
                 shape = MaterialTheme.shapes.medium
             ),
+
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(

@@ -57,7 +57,6 @@ struct AddSubNoteItem: View {
             .frame(height: 56)
             .background(Color.textFieldBackground)
             .cornerRadius(8)
-            
             .onChange(of: textFieldValue) { newValue in
                 onValueChanged(newValue)
             }
@@ -71,6 +70,7 @@ struct AddSubNoteItem: View {
                     .foregroundColor(.iconActive)
                     .frame(width: 24, height: 24, alignment: .center)
                     .onTapGesture {
+                        
                         onAddSubNote()
                     }
             }
