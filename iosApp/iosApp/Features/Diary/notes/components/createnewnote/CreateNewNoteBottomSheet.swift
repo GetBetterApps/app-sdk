@@ -99,6 +99,12 @@ struct CreateNewNoteBottomSheet: View {
                             ) { value in
                                 onTextChanged(value)
                             }
+                            .onTapGesture {
+                                withAnimation {
+                                    value.scrollTo(1, anchor: .bottom)
+                                }
+                            }
+                            .id(1)
                             
                             PrivateSwitch(
                                 onCheckedChange: onPrivateChanged,
@@ -113,6 +119,12 @@ struct CreateNewNoteBottomSheet: View {
                                 onAddNewTag: onAddNewTag,
                                 onTagDelete: onTagDelete
                             )
+                            .onTapGesture {
+                                withAnimation {
+                                    value.scrollTo(2, anchor: .bottom)
+                                }
+                            }
+                            .id(2)
                             
                             SubNotesBlock(
                                 items: state.subNotes,
