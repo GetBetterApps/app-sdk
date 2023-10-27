@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -32,10 +33,11 @@ fun CompletionDateBlock(
 
     PrimaryBox(padding = 0) {
         Row(
-            modifier = modifier.padding(top = 12.dp),
+            modifier = modifier.height(60.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
+                modifier = modifier.padding(start = 12.dp),
                 text = "Completion date",
                 style = MaterialTheme.typography.titleMedium,
                 color = colorResource(resource = SharedR.colors.text_primary)
@@ -44,6 +46,7 @@ fun CompletionDateBlock(
 
             Text(
                 modifier = modifier
+                    .padding(end = 12.dp)
                     .background(
                         color = colorResource(resource = SharedR.colors.text_field_background),
                         shape = MaterialTheme.shapes.medium
