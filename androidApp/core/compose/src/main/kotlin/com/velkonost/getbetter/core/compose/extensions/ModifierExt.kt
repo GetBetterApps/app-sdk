@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.core.compose.extensions
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Modifier
@@ -16,6 +17,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import java.lang.Float.min
 
 fun Modifier.borderBevel(
     width: Dp = 1.dp,
@@ -84,3 +86,42 @@ fun Modifier.horizontalFadingEdge() = this
             blendMode = BlendMode.DstIn
         )
     }
+
+fun Modifier.fadingEdges(
+    scrollState: ScrollState,
+    topEdgeHeight: Dp = 72.dp,
+    bottomEdgeHeight: Dp = 72.dp
+): Modifier = this.then(
+    Modifier
+        // adding layer fixes issue with blending gradient and content
+        .graphicsLayer { alpha = 0.99F }
+
+        .drawWithContent {
+            drawContent()
+
+            val topColors = listOf(Color.Transparent, Color.Black)
+            val topStartY = scrollState.value.toFloat()
+            val topGradientHeight = min(topEdgeHeight.toPx(), topStartY)
+            drawRect(
+                brush = Brush.verticalGradient(
+                    colors = topColors,
+                    startY = topStartY,
+                    endY = topStartY + topGradientHeight
+                ),
+                blendMode = BlendMode.DstIn
+            )
+
+            val bottomColors = listOf(Color.Black, Color.Transparent)
+            val bottomEndY = size.height - scrollState.maxValue + scrollState.value
+            val bottomGradientHeight =
+                min(bottomEdgeHeight.toPx(), scrollState.maxValue.toFloat() - scrollState.value)
+            if (bottomGradientHeight != 0f) drawRect(
+                brush = Brush.verticalGradient(
+                    colors = bottomColors,
+                    startY = bottomEndY - bottomGradientHeight,
+                    endY = bottomEndY
+                ),
+                blendMode = BlendMode.DstIn
+            )
+        }
+)

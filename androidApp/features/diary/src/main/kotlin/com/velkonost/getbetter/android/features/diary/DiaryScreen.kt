@@ -176,6 +176,9 @@ fun DiaryScreen(
             },
             onSetCompletionDate = {
                 viewModel.dispatch(CreateNewNoteAction.SetCompletionDate(it))
+            },
+            onCreateClick = {
+
             }
         )
 
