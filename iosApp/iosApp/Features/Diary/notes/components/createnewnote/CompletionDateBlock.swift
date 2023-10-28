@@ -17,12 +17,12 @@ struct CompletionDateBlock: View {
 
     @Binding var date: Date?
     
-    init() {
-        _date = Binding<Date?>(get: {
-            Date.now
-        }, set: { value in
-            
-        })
+    let onSetCompletionDate: (Int64?) -> Void
+    
+    init(onSetCompletionDate: @escaping (Int64?) -> Void) {
+        self.onSetCompletionDate = onSetCompletionDate
+        
+        _date = Binding<Date?>(get: { Date.now }, set: { value in })
         
     }
     
@@ -54,11 +54,11 @@ struct CompletionDateBlock: View {
                         selection: $hidenDate,
                         in: Date()...,
                         displayedComponents: .date
-                        
                     )
                     .labelsHidden()
                     .onChange(of: hidenDate) { newDate in
                         date = newDate
+                        onSetCompletionDate(Int64((newDate.timeIntervalSince1970 * 1000.0).rounded()))
                     }
                     
                 } else {

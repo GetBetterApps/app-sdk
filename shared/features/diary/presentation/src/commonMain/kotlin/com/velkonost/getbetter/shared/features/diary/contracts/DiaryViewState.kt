@@ -56,5 +56,6 @@ data class CreateNewNoteViewState(
     val subNotes: List<SubNoteUI> = emptyList(),
     val newSubNote: SubNoteUI = SubNoteUI(),
 
-    val isPrivate: Boolean = true
+    val isPrivate: Boolean = true,
+    val completionDate: Long? = null
 ) : UIContract.State

@@ -137,6 +137,9 @@ struct DiaryScreen: View {
                 },
                 onSubNoteDelete: { value in
                     viewModel.dispatch(action: CreateNewNoteActionRemoveSubNote(value: value))
+                },
+                onSetCompletionDate: { value in
+                    viewModel.dispatch(action: CreateNewNoteActionSetCompletionDate(value: value != nil ? KotlinLong(value: value!) : nil))
                 }
             )
         }

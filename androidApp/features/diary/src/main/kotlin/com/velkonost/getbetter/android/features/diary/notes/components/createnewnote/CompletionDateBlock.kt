@@ -28,10 +28,9 @@ import dev.icerock.moko.resources.desc.StringDesc
 
 @Composable
 fun CompletionDateBlock(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onSetCompletionDate: (Long?) -> Unit
 ) {
-
-
     val context = LocalContext.current
     var date by remember {
         mutableStateOf(
@@ -81,6 +80,8 @@ fun CompletionDateBlock(
             onConfirm = { millis, selectedDate ->
                 showDatePicker = false
                 date = selectedDate
+
+                onSetCompletionDate.invoke(millis)
             },
             onDecline = {
                 showDatePicker = false

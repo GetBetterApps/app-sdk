@@ -13,7 +13,6 @@ import SwiftUIPager
 
 struct AreaWrapper : Identifiable, Equatable, Hashable {
     var id: String = UUID().uuidString
-    
     var area: Area
 }
 
@@ -37,6 +36,8 @@ struct CreateNewNoteBottomSheet: View {
     let onAddNewSubNote: () -> Void
     let onSubNoteDelete: (SubNoteUI) -> Void
     
+    let onSetCompletionDate: (Int64?) -> Void
+    
     init(
         state: Binding<CreateNewNoteViewState>,
         onAreaSelect: @escaping (Area) -> Void,
@@ -47,7 +48,8 @@ struct CreateNewNoteBottomSheet: View {
         onTagDelete: @escaping (String) -> Void,
         onNewSubNoteChanged: @escaping (String) -> Void,
         onAddNewSubNote: @escaping () -> Void,
-        onSubNoteDelete: @escaping (SubNoteUI) -> Void
+        onSubNoteDelete: @escaping (SubNoteUI) -> Void,
+        onSetCompletionDate: @escaping (Int64?) -> Void
     ) {
         self._state = state
         self.onAreaSelect = onAreaSelect
@@ -61,6 +63,8 @@ struct CreateNewNoteBottomSheet: View {
         self.onNewSubNoteChanged = onNewSubNoteChanged
         self.onAddNewSubNote = onAddNewSubNote
         self.onSubNoteDelete = onSubNoteDelete
+        
+        self.onSetCompletionDate = onSetCompletionDate
     }
     
     var body: some View {
@@ -106,7 +110,9 @@ struct CreateNewNoteBottomSheet: View {
                             }
                             .id(1)
                             
-                            CompletionDateBlock()
+                            CompletionDateBlock(
+                                onSetCompletionDate: onSetCompletionDate
+                            )
                             
                             PrivateSwitch(
                                 onCheckedChange: onPrivateChanged,

@@ -173,6 +173,9 @@ fun DiaryScreen(
             },
             onSubNoteDelete = {
                 viewModel.dispatch(CreateNewNoteAction.RemoveSubNote(it))
+            },
+            onSetCompletionDate = {
+                viewModel.dispatch(CreateNewNoteAction.SetCompletionDate(it))
             }
         )
 

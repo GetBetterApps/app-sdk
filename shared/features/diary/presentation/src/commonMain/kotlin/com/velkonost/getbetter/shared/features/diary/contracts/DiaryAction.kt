@@ -49,5 +49,7 @@ sealed interface CreateNewNoteAction : DiaryAction {
 
     data object PrivateChanged : CreateNewNoteAction
 
+    data class SetCompletionDate(val value: Long?) : CreateNewNoteAction
+
     data object CloseBecauseZeroAreas : CreateNewNoteAction
 }

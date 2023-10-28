@@ -48,7 +48,8 @@ fun CreateNewNoteBottomSheet(
     onTagDelete: (String) -> Unit,
     onNewSubNoteChanged: (String) -> Unit,
     onAddNewSubNote: () -> Unit,
-    onSubNoteDelete: (SubNoteUI) -> Unit
+    onSubNoteDelete: (SubNoteUI) -> Unit,
+    onSetCompletionDate: (Long?) -> Unit
 ) {
 
     val isAreaPickerVisible = remember { mutableStateOf(false) }
@@ -109,7 +110,9 @@ fun CreateNewNoteBottomSheet(
                             onValueChanged = { onTextChanged.invoke(it) }
                         )
 
-                        CompletionDateBlock()
+                        CompletionDateBlock(
+                            onSetCompletionDate = onSetCompletionDate
+                        )
 
                         PrivateSwitch(
                             isPrivate = state.isPrivate,

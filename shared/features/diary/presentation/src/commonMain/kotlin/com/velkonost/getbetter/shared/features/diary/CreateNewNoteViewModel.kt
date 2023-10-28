@@ -36,6 +36,7 @@ internal constructor(
         is CreateNewNoteAction.RemoveSubNote -> removeSubNote(action.value)
         is CreateNewNoteAction.AddImageUrl -> TODO()
         is CreateNewNoteAction.RemoveImageUrl -> TODO()
+        is CreateNewNoteAction.SetCompletionDate -> obtainSetCompletionDate(action.value)
         is CreateNewNoteAction.CloseBecauseZeroAreas -> obtainZeroAreasError()
     }
 
@@ -91,6 +92,10 @@ internal constructor(
     private fun obtainPrivateChanged() {
         val prevValue = viewState.value.isPrivate
         emit(viewState.value.copy(isPrivate = !prevValue))
+    }
+
+    private fun obtainSetCompletionDate(value: Long?) {
+        emit(viewState.value.copy(completionDate = value))
     }
 
     private fun obtainNewTagTextChanged(value: String) {
