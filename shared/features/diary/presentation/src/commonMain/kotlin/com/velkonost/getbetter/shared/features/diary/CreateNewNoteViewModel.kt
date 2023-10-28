@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.diary
 
 import com.velkonost.getbetter.shared.core.model.NoteType
+import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToServerDatetime
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.resource.Message
 import com.velkonost.getbetter.shared.core.vm.resource.MessageType
@@ -95,6 +96,7 @@ internal constructor(
     }
 
     private fun obtainSetCompletionDate(value: Long?) {
+        val serverValue = value?.convertToServerDatetime()
         emit(viewState.value.copy(completionDate = value))
     }
 
