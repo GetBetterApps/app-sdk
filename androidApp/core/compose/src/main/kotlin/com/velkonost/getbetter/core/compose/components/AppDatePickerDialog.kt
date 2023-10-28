@@ -42,7 +42,9 @@ fun AppDatePickerDialog(
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.width(96.dp),
                 onClick = {
-                    onConfirm(datePickerState.selectedDateMillis, selectedDate)
+                    if (datePickerState.selectedDateMillis != null && selectedDate.isNotEmpty()) {
+                        onConfirm(datePickerState.selectedDateMillis, selectedDate)
+                    }
                 },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = colorResource(resource = SharedR.colors.background_item)
