@@ -41,7 +41,7 @@ fun ColumnScope.RequiredLevelRow(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                modifier = modifier.padding(start = 12.dp),
+                modifier = modifier.padding(start = 16.dp),
                 text = title,
                 style = MaterialTheme.typography.titleMedium,
                 color = colorResource(resource = SharedR.colors.text_primary)
@@ -78,7 +78,7 @@ fun ColumnScope.RequiredLevelRow(
 
             Image(
                 modifier = modifier
-                    .padding(end = 12.dp)
+                    .padding(end = 16.dp)
                     .size(32.dp)
                     .background(
                         color = colorResource(resource = SharedR.colors.button_gradient_start),

@@ -24,21 +24,28 @@ struct PrivateSwitch: View {
     }
     
     var body: some View {
-        Toggle(
-            isOn: Binding(
-                get: { isPrivate },
-                set: { newValue in
-                    onCheckedChange()
-                }
-            )
-        )
-        {
-            Text(isPrivate ? SharedR.strings().private_state.desc().localized() : SharedR.strings().public_state.desc().localized())
-                .style(.titleMedium)
-                .foregroundColor(.textPrimary)
+        PrimaryBox(
+            padding: .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
+        ) {
+            Toggle(
+                isOn: Binding(
+                    get: { isPrivate },
+                    set: { newValue in
+                        onCheckedChange()
+                    }
+                )
+            ) {
+                Text(isPrivate ? SharedR.strings().private_state.desc().localized() : SharedR.strings().public_state.desc().localized())
+                    .style(.titleMedium)
+                    .foregroundColor(.textPrimary)
+            }
+            .disabled(!isEnabled)
+            .tint(.iconActive)
+            .padding(.trailing, 16)
+            .padding(.leading, 16)
+            .frame(height: 60)
+//            .padding(.top, 12)
         }
-        .disabled(!isEnabled)
-        .tint(.iconActive)
-        .padding(.top, 12)
+        
     }
 }

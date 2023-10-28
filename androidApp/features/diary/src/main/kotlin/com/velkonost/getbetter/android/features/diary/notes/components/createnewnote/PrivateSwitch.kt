@@ -31,7 +31,7 @@ fun PrivateSwitch(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                modifier = modifier.padding(start = 12.dp),
+                modifier = modifier.padding(start = 16.dp),
                 text = stringResource(
                     resource = if (isPrivate) SharedR.strings.private_state
                     else SharedR.strings.public_state
@@ -41,7 +41,7 @@ fun PrivateSwitch(
             )
             Spacer(modifier = modifier.weight(1f))
             Switch(
-                modifier = modifier.padding(end = 12.dp),
+                modifier = modifier.padding(end = 16.dp),
                 enabled = isEnable,
                 checked = isPrivate,
                 onCheckedChange = onCheckedChange,

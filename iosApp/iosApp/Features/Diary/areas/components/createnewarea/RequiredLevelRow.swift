@@ -23,48 +23,56 @@ struct RequiredLevelRow: View {
     }
     
     var body: some View {
-        HStack(alignment: .center) {
-            Text(title)
-                .style(.titleMedium)
-                .foregroundColor(.textPrimary)
-            
-            Spacer()
-            
-            Image(uiImage: SharedR.images().ic_plus.toUIImage()!)
-                .resizable()
-                .renderingMode(.template)
-                .foregroundColor(.iconInactive)
-                .frame(width: 32, height: 32)
-                .padding(4)
-                .background(Color.backgroundIcon)
-                .cornerRadius(12)
-                .onTapGesture {
-                    let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                    impactMed.impactOccurred()
-                    onRequiredLevelChanged(level - 1)
-                }
-            
-            Text(String(level))
-                .style(.titleMedium)
-                .foregroundColor(.textSecondaryTitle)
-                .padding(.leading, 16)
-                .padding(.trailing, 16)
-            
-            Image(uiImage: SharedR.images().ic_plus.toUIImage()!)
-                .resizable()
-                .renderingMode(.template)
-                .foregroundColor(.iconInactive)
-                .frame(width: 32, height: 32)
-                .padding(4)
-                .background(Color.backgroundIcon)
-                .cornerRadius(12)
-                .onTapGesture {
-                    let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                    impactMed.impactOccurred()
-                    onRequiredLevelChanged(level + 1)
-                }
+        PrimaryBox(
+            padding: .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
+        ) {
+            HStack(alignment: .center) {
+                Text(title)
+                    .style(.titleMedium)
+                    .foregroundColor(.textPrimary)
                 
+                Spacer()
+                
+                Image(uiImage: SharedR.images().ic_plus.toUIImage()!)
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(.iconActive)
+                    .frame(width: 24, height: 24)
+                    .padding(4)
+                    .background(Color.buttonGradientStart)
+                    .cornerRadius(12)
+                    .onTapGesture {
+                        let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                        impactMed.impactOccurred()
+                        onRequiredLevelChanged(level - 1)
+                    }
+                
+                Text(String(level))
+                    .style(.titleMedium)
+                    .foregroundColor(.textSecondaryTitle)
+                    .padding(.leading, 8)
+                    .padding(.trailing, 8)
+                
+                Image(uiImage: SharedR.images().ic_plus.toUIImage()!)
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(.iconActive)
+                    .frame(width: 24, height: 24)
+                    .padding(4)
+                    .background(Color.buttonGradientStart)
+                    .cornerRadius(12)
+                    .onTapGesture {
+                        let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                        impactMed.impactOccurred()
+                        onRequiredLevelChanged(level + 1)
+                    }
+                
+            }
+            .padding(.trailing, 16)
+            .padding(.leading, 16)
+            .frame(height: 60)
+//            .padding(.top, 12)
         }
-        .padding(.top, 12)
+        
     }
 }
