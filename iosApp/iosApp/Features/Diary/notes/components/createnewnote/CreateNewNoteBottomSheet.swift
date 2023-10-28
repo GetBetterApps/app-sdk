@@ -106,6 +106,8 @@ struct CreateNewNoteBottomSheet: View {
                             }
                             .id(1)
                             
+                            CompletionDateBlock()
+                            
                             PrivateSwitch(
                                 onCheckedChange: onPrivateChanged,
                                 isEnabled: state.selectedArea != nil && state.selectedArea?.isPrivate == false,

@@ -13,15 +13,31 @@ import SharedSDK
 struct CompletionDateBlock: View {
     
     @State private var showDate: Bool = false
-    @Binding var date: Date?
+    @State private var hidenDate: Date = Date()
 
+    @Binding var date: Date?
+    
+    init() {
+        _date = Binding<Date?>(get: {
+            Date.now
+        }, set: { value in
+            
+        })
+        
+    }
     
     var body: some View {
-        ZStack {
+        PrimaryBox(
+            padding: .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
+        ) {
             HStack {
-                Text(label)
+                Text(SharedR.strings().create_note_completion_date_title.desc().localized())
+                    .style(.titleMedium)
                     .multilineTextAlignment(.leading)
+                    .foregroundColor(.textPrimary)
+                
                 Spacer()
+                
                 if showDate {
                     Button {
                         showDate = false
@@ -32,11 +48,13 @@ struct CompletionDateBlock: View {
                             .frame(width: 16, height: 16)
                             .tint(.textPrimary)
                     }
+                    
                     DatePicker(
-                        label,
+                        SharedR.strings().create_note_completion_date_title.desc().localized(),
                         selection: $hidenDate,
-                        in: range,
+                        in: Date()...,
                         displayedComponents: .date
+                        
                     )
                     .labelsHidden()
                     .onChange(of: hidenDate) { newDate in
@@ -48,18 +66,21 @@ struct CompletionDateBlock: View {
                         showDate = true
                         date = hidenDate
                     } label: {
-                        Text(prompt)
+                        Text(SharedR.strings().create_note_completion_date_hint.desc().localized())
                             .multilineTextAlignment(.center)
                             .foregroundColor(.textPrimary)
                     }
                     .frame(width: 120, height: 34)
                     .background(
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.customPickerBackground)
+                            .fill(Color.mainBackground)
                     )
                     .multilineTextAlignment(.trailing)
                 }
             }
+            .padding(.trailing, 16)
+            .padding(.leading, 16)
+            .frame(height: 60)
         }
     }
 }

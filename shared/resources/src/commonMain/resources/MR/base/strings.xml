@@ -164,6 +164,9 @@
 
     <string name="create_note_subnote_title">SubGoals</string>
     <string name="create_note_subnote_hint">Enter here sub goals</string>
+
+    <string name="create_note_completion_date_title">Completion date</string>
+    <string name="create_note_completion_date_hint">Not set</string>
     <!--  CREATE NOTE  -->
 
 

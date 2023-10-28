@@ -76,7 +76,7 @@ fun AppDatePickerDialog(
             titleContentColor = colorResource(resource = SharedR.colors.text_title),
             headlineContentColor = colorResource(resource = SharedR.colors.text_title),
             weekdayContentColor = colorResource(resource = SharedR.colors.text_title),
-            subheadContentColor = colorResource(resource = SharedR.colors.text_light),
+            subheadContentColor = colorResource(resource = SharedR.colors.text_title),
             yearContentColor = colorResource(resource = SharedR.colors.text_title),
             currentYearContentColor = colorResource(resource = SharedR.colors.text_title),
             selectedYearContentColor = colorResource(resource = SharedR.colors.onboarding_background_gradient_start),
@@ -105,6 +105,9 @@ fun AppDatePickerDialog(
                     ),
                     text = title,
                 )
+            },
+            dateValidator = {
+                it >= (System.currentTimeMillis() - 86400000)
             },
             state = datePickerState,
             colors = DatePickerDefaults.colors(

@@ -16,18 +16,28 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.AppDatePickerDialog
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
+import dev.icerock.moko.resources.compose.stringResource
+import dev.icerock.moko.resources.desc.Resource
+import dev.icerock.moko.resources.desc.StringDesc
 
 @Composable
 fun CompletionDateBlock(
     modifier: Modifier = Modifier
 ) {
 
-    var date by remember { mutableStateOf("Not Set") }
+
+    val context = LocalContext.current
+    var date by remember {
+        mutableStateOf(
+            StringDesc.Resource(SharedR.strings.create_note_completion_date_hint).toString(context)
+        )
+    }
     var showDatePicker by remember { mutableStateOf(false) }
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -38,7 +48,7 @@ fun CompletionDateBlock(
         ) {
             Text(
                 modifier = modifier.padding(start = 16.dp),
-                text = "Completion date",
+                text = stringResource(resource = SharedR.strings.create_note_completion_date_title),
                 style = MaterialTheme.typography.titleMedium,
                 color = colorResource(resource = SharedR.colors.text_primary)
             )
@@ -67,7 +77,7 @@ fun CompletionDateBlock(
 
     if (showDatePicker) {
         AppDatePickerDialog(
-            title = "123",
+            title = stringResource(resource = SharedR.strings.create_note_completion_date_title),
             onConfirm = { millis, selectedDate ->
                 showDatePicker = false
                 date = selectedDate
