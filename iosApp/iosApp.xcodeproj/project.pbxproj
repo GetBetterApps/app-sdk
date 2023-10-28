@@ -57,6 +57,7 @@
 		4667C90A2AC59A9B00BAA9DD /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C9092AC59A9B00BAA9DD /* MultilineTextField.swift */; };
 		4667C90C2AC5A89000BAA9DD /* RequiredLevelRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C90B2AC5A89000BAA9DD /* RequiredLevelRow.swift */; };
 		4667C90E2AC5BA5900BAA9DD /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C90D2AC5BA5900BAA9DD /* Loader.swift */; };
+		466887302AECF8980002ABB6 /* CompletionDateBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4668872F2AECF8980002ABB6 /* CompletionDateBlock.swift */; };
 		466B497D2ACFF06C00AD3F6E /* AddAreaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B497C2ACFF06C00AD3F6E /* AddAreaScreen.swift */; };
 		466B497F2ACFF07300AD3F6E /* AddAreaRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B497E2ACFF07300AD3F6E /* AddAreaRoute.swift */; };
 		466C5CCB2AB73240002C089C /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C5CCA2AB73240002C089C /* BottomBar.swift */; };
@@ -160,6 +161,7 @@
 		4667C9092AC59A9B00BAA9DD /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 		4667C90B2AC5A89000BAA9DD /* RequiredLevelRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequiredLevelRow.swift; sourceTree = "<group>"; };
 		4667C90D2AC5BA5900BAA9DD /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		4668872F2AECF8980002ABB6 /* CompletionDateBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionDateBlock.swift; sourceTree = "<group>"; };
 		466B497C2ACFF06C00AD3F6E /* AddAreaScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaScreen.swift; sourceTree = "<group>"; };
 		466B497E2ACFF07300AD3F6E /* AddAreaRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaRoute.swift; sourceTree = "<group>"; };
 		466C5CCA2AB73240002C089C /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				464A42692AEA62780019CB98 /* tags */,
 				46E2DD2B2AE935BE00B4B2B5 /* areapicker */,
 				460487942AD83989005E8A54 /* CreateNewNoteBottomSheet.swift */,
+				4668872F2AECF8980002ABB6 /* CompletionDateBlock.swift */,
 			);
 			path = createnewnote;
 			sourceTree = "<group>";
@@ -872,6 +875,7 @@
 				46D857782ACFF2D200BE74DA /* ArrayExt.swift in Sources */,
 				46059D242AC4037500DC5015 /* NotesView.swift in Sources */,
 				461D21EC2AA8EC71007E84CE /* DetailRoute.swift in Sources */,
+				466887302AECF8980002ABB6 /* CompletionDateBlock.swift in Sources */,
 				460054A92ABB18A800586767 /* AppSettings.swift in Sources */,
 				4667C9042AC589EC00BAA9DD /* SingleLineTextField.swift in Sources */,
 				46E2DD312AE9420600B4B2B5 /* AreaPickerItem.swift in Sources */,
