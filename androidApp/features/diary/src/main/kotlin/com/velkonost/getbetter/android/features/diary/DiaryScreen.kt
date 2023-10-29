@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.android.features.diary
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -68,6 +69,18 @@ fun DiaryScreen(
     )
 
     val selectedAreaId = remember { mutableStateOf<Int?>(null) }
+
+    BackHandler {
+        scope.launch {
+            if (createNewAreaSheetState.currentValue == ModalBottomSheetValue.Expanded) {
+                createNewAreaSheetState.hide()
+            }
+
+            if (createNewNoteSheetState.currentValue == ModalBottomSheetValue.Expanded) {
+                createNewNoteSheetState.hide()
+            }
+        }
+    }
 
     Box {
         Column {
