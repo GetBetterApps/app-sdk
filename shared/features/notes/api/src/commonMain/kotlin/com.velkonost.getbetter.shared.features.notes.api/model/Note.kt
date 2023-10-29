@@ -3,6 +3,7 @@ package com.velkonost.getbetter.shared.features.notes.api.model
 import com.velkonost.getbetter.shared.core.model.NoteType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import model.Area
 
 @Serializable
 data class Note(
@@ -39,6 +40,7 @@ data class Note(
     @SerialName(subNotesPropertyName)
     val subNotes: List<SubNote>,
 
+    @SerialName("area")
     val area: Area
 
 ) {

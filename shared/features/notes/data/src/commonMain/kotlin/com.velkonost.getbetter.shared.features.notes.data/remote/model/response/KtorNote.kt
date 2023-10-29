@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.notes.data.remote.model.response
 
 import com.velkonost.getbetter.shared.core.model.NoteType
 import com.velkonost.getbetter.shared.features.areas.data.remote.model.response.KtorArea
+import com.velkonost.getbetter.shared.features.areas.data.remote.model.response.asExternalModel
 import com.velkonost.getbetter.shared.features.notes.api.model.Note
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -58,4 +59,5 @@ fun KtorNote.asExternalModel() =
         isActive = isActive,
         isPrivate = isPrivate,
         subNotes = subNotes.asExternalModel(),
+        area = ktorArea.asExternalModel()
     )
