@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.notes.data.remote.model.response
 
 import com.velkonost.getbetter.shared.core.model.NoteType
+import com.velkonost.getbetter.shared.features.areas.data.remote.model.response.KtorArea
 import com.velkonost.getbetter.shared.features.notes.api.model.Note
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -37,8 +38,8 @@ data class KtorNote(
     @SerialName("isPrivate")
     val isPrivate: Boolean,
 
-    @SerialName("areaId")
-    val areaId: Int?,
+    @SerialName("area")
+    val ktorArea: KtorArea,
 
     @SerialName("subNotes")
     val subNotes: List<KtorSubNote> = emptyList()

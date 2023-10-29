@@ -39,7 +39,9 @@ data class Note(
     @SerialName(subNotesPropertyName)
     val subNotes: List<SubNote>,
 
-    ) {
+    val area: Area
+
+) {
     companion object {
         const val idPropertyName = "id"
         const val noteTypePropertyName = "noteType"

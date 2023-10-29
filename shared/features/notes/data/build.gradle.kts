@@ -28,7 +28,9 @@ kotlin {
                 implementation(projects.shared.core.model)
                 implementation(projects.shared.core.network)
                 implementation(projects.shared.core.datastore)
+
                 implementation(projects.shared.features.notes.api)
+                implementation(projects.shared.features.areas.data)
             }
         }
     }
