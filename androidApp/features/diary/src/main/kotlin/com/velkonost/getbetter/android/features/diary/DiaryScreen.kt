@@ -268,6 +268,7 @@ fun DiaryScreenContent(
     ) { index ->
         when (index) {
             0 -> NotesView(
+                items = notesState.items,
                 isLoading = notesState.isLoading,
                 createGoalClick = createGoalClick,
                 createNoteClick = createNoteClick

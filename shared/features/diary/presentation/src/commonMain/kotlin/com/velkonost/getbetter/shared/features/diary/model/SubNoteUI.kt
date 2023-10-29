@@ -15,5 +15,5 @@ val SubNoteUI.asExternalModel: SubNote
     get() = SubNote(
         id = 0,
         text = text,
-        completionDate = 0L
+        completionDate = null
     )

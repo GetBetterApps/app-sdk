@@ -13,7 +13,7 @@ data class KtorSubNote(
     val text: String = "",
 
     @SerialName("completionDate")
-    val completionDate: Long = 0L
+    val completionDate: Long? = null
 )
 
 fun KtorSubNote.asExternalModel() =

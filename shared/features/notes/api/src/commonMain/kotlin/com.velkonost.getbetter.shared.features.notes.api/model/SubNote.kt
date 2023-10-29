@@ -12,5 +12,5 @@ data class SubNote(
     val text: String,
 
     @SerialName("completionDate")
-    val completionDate: Long
+    val completionDate: Long?
 )
