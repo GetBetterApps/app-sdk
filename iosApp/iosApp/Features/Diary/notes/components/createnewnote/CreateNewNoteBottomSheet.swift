@@ -38,6 +38,8 @@ struct CreateNewNoteBottomSheet: View {
     
     let onSetCompletionDate: (Int64?) -> Void
     
+    let onCreateClick: () -> Void
+    
     init(
         state: Binding<CreateNewNoteViewState>,
         onAreaSelect: @escaping (Area) -> Void,
@@ -49,7 +51,8 @@ struct CreateNewNoteBottomSheet: View {
         onNewSubNoteChanged: @escaping (String) -> Void,
         onAddNewSubNote: @escaping () -> Void,
         onSubNoteDelete: @escaping (SubNoteUI) -> Void,
-        onSetCompletionDate: @escaping (Int64?) -> Void
+        onSetCompletionDate: @escaping (Int64?) -> Void,
+        onCreateClick: @escaping () -> Void
     ) {
         self._state = state
         self.onAreaSelect = onAreaSelect
@@ -65,6 +68,7 @@ struct CreateNewNoteBottomSheet: View {
         self.onSubNoteDelete = onSubNoteDelete
         
         self.onSetCompletionDate = onSetCompletionDate
+        self.onCreateClick = onCreateClick
     }
     
     var body: some View {
@@ -74,7 +78,7 @@ struct CreateNewNoteBottomSheet: View {
         
         ZStack {
             Color.mainBackground
-        
+            
             ScrollView(.vertical, showsIndicators: false) {
                 ScrollViewReader { value in
                     VStack {
@@ -153,89 +157,52 @@ struct CreateNewNoteBottomSheet: View {
                         }
                         
                     }
-                    //                .frame(minHeight: 0, maxHeight: .infinity)
-                    //                .ignoresSafeArea(.keyboard, edges: .bottom)
-                    
                     .padding(20)
+                    .padding(.bottom, 140)
                 }
-            Spacer()
+                Spacer()
             }
+            
+            VStack {
+                Spacer()
+                
+                
+                
+                VStack {
+                    Spacer()
+                        .frame(height: 20)
+                    
+                    AppButton(
+                        labelText: SharedR.strings().diary_areas_create_button.desc().localized(),
+                        isLoading: false
+                    ) {
+                        onCreateClick()
+                    }
+                    .padding(.bottom, 70)
+                }
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .background(
+                    Rectangle()
+                        .fill(LinearGradient(gradient: Gradient(colors: [
+                            .mainBackground,
+                            .mainBackground,
+                            .mainBackground,
+                            .clear
+                        ]), startPoint: .bottom, endPoint: .top)
+                        )
+                    
+                )
+                
+              
+            }.ignoresSafeArea(.keyboard)
+            
             Spacer()
-         
         }
         .ignoresSafeArea(.container)
-//        .ignoresSafeArea(.all)
-        
         .onTapGesture {
             endTextEditing()
         }
     }
 }
 
-struct KeyboardResponsiveModifier: ViewModifier {
-  @State private var offset: CGFloat = 0
 
-  func body(content: Content) -> some View {
-    content
-      .padding(.bottom, offset)
-      .onAppear {
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { notif in
-          let value = notif.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-          let height = value.height
-          let bottomInset = UIApplication.shared.windows.first?.safeAreaInsets.bottom
-          self.offset = height - (bottomInset ?? 0)
-        }
-
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { notif in
-          self.offset = 0
-        }
-    }
-  }
-}
-
-extension View {
-  func keyboardResponsive() -> ModifiedContent<Self, KeyboardResponsiveModifier> {
-    return modifier(KeyboardResponsiveModifier())
-  }
-}
-
-
-
-public class KeyboardInfo: ObservableObject {
-
-    public static var shared = KeyboardInfo()
-
-    @Published public var height: CGFloat = 0
-
-    private init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardChanged), name: UIApplication.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardChanged), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardChanged), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-    }
-
-    @objc func keyboardChanged(notification: Notification) {
-        if notification.name == UIApplication.keyboardWillHideNotification {
-            self.height = 0
-        } else {
-            self.height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.height ?? 0
-        }
-    }
-
-}
-
-struct KeyboardAware: ViewModifier {
-    @ObservedObject private var keyboard = KeyboardInfo.shared
-
-    func body(content: Content) -> some View {
-        content
-            .padding(.bottom, self.keyboard.height)
-            .edgesIgnoringSafeArea(self.keyboard.height > 0 ? .bottom : [])
-            .animation(.easeOut)
-    }
-}
-
-extension View {
-    public func keyboardAware() -> some View {
-        ModifiedContent(content: self, modifier: KeyboardAware())
-    }
-}

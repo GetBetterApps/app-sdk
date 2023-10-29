@@ -90,7 +90,6 @@ fun CreateNewNoteBottomSheet(
                             .fillMaxHeight(0.9f)
                             .padding(bottom = 40.dp)
                             .verticalScroll(scrollState)
-//                            .fadingEdges(scrollState)
                     ) {
                         Column(
                             modifier = modifier
@@ -176,7 +175,7 @@ fun CreateNewNoteBottomSheet(
                                         ),
                                     ),
                                 )
-                        ) {}
+                        )
 
                         AppButton(
                             modifier = modifier

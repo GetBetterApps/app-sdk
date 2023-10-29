@@ -140,6 +140,9 @@ struct DiaryScreen: View {
                 },
                 onSetCompletionDate: { value in
                     viewModel.dispatch(action: CreateNewNoteActionSetCompletionDate(value: value != nil ? KotlinLong(value: value!) : nil))
+                },
+                onCreateClick: {
+                    
                 }
             )
         }
