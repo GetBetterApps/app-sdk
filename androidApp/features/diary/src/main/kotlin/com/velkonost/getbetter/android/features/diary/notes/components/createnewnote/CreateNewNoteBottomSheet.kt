@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.android.features.diary.notes.components.createnewnote
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -126,9 +127,11 @@ fun CreateNewNoteBottomSheet(
                                 onValueChanged = { onTextChanged.invoke(it) }
                             )
 
-                            CompletionDateBlock(
-                                onSetCompletionDate = onSetCompletionDate
-                            )
+                            AnimatedVisibility(visible = state.type == NoteType.Goal) {
+                                CompletionDateBlock(
+                                    onSetCompletionDate = onSetCompletionDate
+                                )
+                            }
 
                             PrivateSwitch(
                                 isPrivate = state.isPrivate,
@@ -144,14 +147,17 @@ fun CreateNewNoteBottomSheet(
                                 onTagDelete = onTagDelete
                             )
 
-                            SubNotesBlock(
-                                items = state.subNotes,
-                                newSubNote = state.newSubNote,
-                                isSubNotesBlockVisible = isSubNotesBlockVisible,
-                                onAddNewSubNote = onAddNewSubNote,
-                                onNewSubNoteChanged = onNewSubNoteChanged,
-                                onSubNoteDelete = onSubNoteDelete
-                            )
+                            AnimatedVisibility(visible = state.type == NoteType.Goal) {
+                                SubNotesBlock(
+                                    items = state.subNotes,
+                                    newSubNote = state.newSubNote,
+                                    isSubNotesBlockVisible = isSubNotesBlockVisible,
+                                    onAddNewSubNote = onAddNewSubNote,
+                                    onNewSubNoteChanged = onNewSubNoteChanged,
+                                    onSubNoteDelete = onSubNoteDelete
+                                )
+                            }
+
                         }
                     }
 
