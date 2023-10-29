@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SharedSDK
 
 struct NotesView: View {
     
@@ -15,8 +16,11 @@ struct NotesView: View {
     let createGoalClick: () -> Void
     let createNoteClick: () -> Void
     
-    init(isLoading: Bool, createGoalClick: @escaping () -> Void, createNoteClick: @escaping () -> Void) {
+    let items: [Area]
+    
+    init(isLoading: Bool, items: [Area], createGoalClick: @escaping () -> Void, createNoteClick: @escaping () -> Void) {
         self.isLoading = isLoading
+        self.items = items
         self.createGoalClick = createGoalClick
         self.createNoteClick = createNoteClick
     }
@@ -27,8 +31,15 @@ struct NotesView: View {
                 Loader()
             } else {
                 ScrollView(showsIndicators: false) {
-                    Text("notes")
+                    LazyVStack(spacing: 0) {
+                        ForEach(items, id: \.self) { item in
+                            NoteItem(item: item)
+                        }
+                    }
+                    .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
+                    
                 }
+                .fadingEdge()
                 
                 VStack(alignment: .trailing) {
                     Spacer()
