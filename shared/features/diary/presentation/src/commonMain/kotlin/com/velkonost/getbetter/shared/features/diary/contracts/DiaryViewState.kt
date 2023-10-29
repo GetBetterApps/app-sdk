@@ -23,18 +23,18 @@ data class DiaryViewState(
 ) : UIContract.State
 
 data class NotesViewState(
-    val isLoading: Boolean = false,
+    val isLoading: Boolean = true,
     val items: List<Note> = emptyList(),
     val loadMorePrefetch: Int = PrefetchDistanceValue
 ) : UIContract.State
 
 data class AreasViewState(
-    val isLoading: Boolean = false,
+    val isLoading: Boolean = true,
     val items: List<Area> = emptyList()
 ) : UIContract.State
 
 data class TasksViewState(
-    val isLoading: Boolean = false,
+    val isLoading: Boolean = true,
 ) : UIContract.State
 
 data class CreateNewAreaViewState(

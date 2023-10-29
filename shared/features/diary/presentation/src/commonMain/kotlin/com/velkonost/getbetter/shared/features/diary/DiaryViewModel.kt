@@ -121,7 +121,6 @@ internal constructor(
         notesLoadingJob?.cancel()
 
         _notesPagingConfig.page = 0
-        _notesPagingConfig.isActive = false
         _notesPagingConfig.lastPageReached = false
 
         val notesViewState = viewState.value.notesViewState.copy(items = emptyList())
@@ -130,10 +129,7 @@ internal constructor(
     }
 
     private fun fetchNotes() {
-        if (
-            _notesPagingConfig.lastPageReached
-            || (!_notesPagingConfig.isActive && _notesPagingConfig.page != 0)
-        ) return
+        if (_notesPagingConfig.lastPageReached) return
 
         notesLoadingJob = launchJob {
             notesRepository.fetchUserNotes(
@@ -147,7 +143,6 @@ internal constructor(
                     }
                     onSuccess { items ->
                         _notesPagingConfig.lastPageReached = items.isNullOrEmpty()
-                        _notesPagingConfig.isActive = true
                         _notesPagingConfig.page++
 
                         items?.let {
