@@ -30,6 +30,9 @@ struct DiaryScreen: View {
         @State var createNewAreaState = state.createNewAreaViewState
         @State var createNewNoteState = state.createNewNoteViewState
         
+        @State var notesViewState = state.notesViewState
+        @State var notesLoading = state.notesViewState.isLoading
+        
         VStack {
             PrimaryTabs(
                 selectedPage: $selectedPage,
@@ -38,7 +41,8 @@ struct DiaryScreen: View {
             
             switch(selectedPage) {
             case 0: NotesView(
-                isLoading: state.notesViewState.isLoading, 
+                state: $notesViewState,
+                isLoading: notesViewState.isLoading,
                 items: state.notesViewState.items,
                 createGoalClick: {
                     if state.createNewNoteViewState.availableAreas.isEmpty {
@@ -59,6 +63,9 @@ struct DiaryScreen: View {
                 },
                 itemClick: { value in
                     
+                },
+                onBottomReach: {
+                    viewModel.dispatch(action: DiaryActionNotesLoadNextPage())
                 }
             )
             case 1: AreasView(

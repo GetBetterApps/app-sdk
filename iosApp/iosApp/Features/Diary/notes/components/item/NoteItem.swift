@@ -56,7 +56,6 @@ struct NoteItem: View {
                     }
                     .padding(.top, 12)
                 }
-                
                 .padding(8)
                 .background(
                     RoundedRectangle(cornerRadius: 12)

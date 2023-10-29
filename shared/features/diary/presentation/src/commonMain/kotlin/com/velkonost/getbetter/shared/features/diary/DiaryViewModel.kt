@@ -129,7 +129,7 @@ internal constructor(
     }
 
     private fun fetchNotes() {
-        if (_notesPagingConfig.lastPageReached) return
+        if (_notesPagingConfig.lastPageReached || notesLoadingJob?.isActive == true) return
 
         notesLoadingJob = launchJob {
             notesRepository.fetchUserNotes(

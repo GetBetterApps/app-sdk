@@ -12,19 +12,29 @@ import SharedSDK
 
 struct NotesView: View {
     
-    let isLoading: Bool
+    @Binding var state: NotesViewState
+    
+    var isLoading: Bool
     let createGoalClick: () -> Void
     let createNoteClick: () -> Void
     
     let items: [Note]
     let itemClick: (Note) -> Void
+    let onBottomReach: () -> Void
     
-    init(isLoading: Bool, items: [Note], createGoalClick: @escaping () -> Void, createNoteClick: @escaping () -> Void, itemClick: @escaping (Note) -> Void) {
+    init(
+        state: Binding<NotesViewState>,
+        isLoading: Bool, items: [Note],
+        createGoalClick: @escaping () -> Void, createNoteClick: @escaping () -> Void,
+        itemClick: @escaping (Note) -> Void, onBottomReach: @escaping () -> Void
+    ) {
+        self._state = state
         self.isLoading = isLoading
         self.items = items
         self.createGoalClick = createGoalClick
         self.createNoteClick = createNoteClick
         self.itemClick = itemClick
+        self.onBottomReach = onBottomReach
     }
     
     var body: some View {
@@ -34,11 +44,14 @@ struct NotesView: View {
             } else {
                 ScrollView(showsIndicators: false) {
                     LazyVStack(spacing: 0) {
-                        ForEach(items, id: \.self) { item in
+                        ForEach(items, id: \.self.id) { item in
                             NoteItem(
                                 item: item,
                                 onClick: itemClick
                             )
+                            .onAppear {
+                                checkPaginationThreshold(currentItemId: item.id)
+                            }
                         }
                     }
                     .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
@@ -59,5 +72,17 @@ struct NotesView: View {
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
         
+    }
+}
+
+extension NotesView {
+    func checkPaginationThreshold(currentItemId: Int32) {
+        let data = items
+        let thresholdIndex = data.index(data.endIndex, offsetBy: -5)
+        
+        if data.firstIndex(where: { $0.id == currentItemId })! >= thresholdIndex && !isLoading {
+            onBottomReach()
+//            viewModel.dispatch(action: LoadNextPage())
+        }
     }
 }

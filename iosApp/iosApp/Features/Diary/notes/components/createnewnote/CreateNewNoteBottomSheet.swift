@@ -124,9 +124,11 @@ struct CreateNewNoteBottomSheet: View {
                             }
                             .id(1)
                             
-                            CompletionDateBlock(
-                                onSetCompletionDate: onSetCompletionDate
-                            )
+                            if state.type == NoteType.goal {
+                                CompletionDateBlock(
+                                    onSetCompletionDate: onSetCompletionDate
+                                )
+                            }
                             
                             PrivateSwitch(
                                 onCheckedChange: onPrivateChanged,
@@ -148,20 +150,22 @@ struct CreateNewNoteBottomSheet: View {
                             }
                             .id(2)
                             
-                            SubNotesBlock(
-                                items: state.subNotes,
-                                newSubNote: $newSubNote,
-                                onNewSubNoteChanged: onNewSubNoteChanged,
-                                onAddNewSubNote: onAddNewSubNote,
-                                onSubNoteDelete: onSubNoteDelete,
-                                isSubNotesBlockPickerVisible: $isSubNoteBlockVisible
-                            )
-                            .onTapGesture {
-                                withAnimation {
-                                    value.scrollTo(3, anchor: .bottom)
+                            if state.type == NoteType.goal {
+                                SubNotesBlock(
+                                    items: state.subNotes,
+                                    newSubNote: $newSubNote,
+                                    onNewSubNoteChanged: onNewSubNoteChanged,
+                                    onAddNewSubNote: onAddNewSubNote,
+                                    onSubNoteDelete: onSubNoteDelete,
+                                    isSubNotesBlockPickerVisible: $isSubNoteBlockVisible
+                                )
+                                .onTapGesture {
+                                    withAnimation {
+                                        value.scrollTo(3, anchor: .bottom)
+                                    }
                                 }
+                                .id(3)
                             }
-                            .id(3)
                             
                             Spacer()
                             

@@ -76,7 +76,7 @@ extension AddAreaScreen {
         let data = viewModel.state.items
         let thresholdIndex = data.index(data.endIndex, offsetBy: -5)
         
-        if data.firstIndex(where: { $0.id == currentItemId })! >= thresholdIndex && !isLoading {
+        if data.firstIndex(where: { $0.id == currentItemId })! >= thresholdIndex {
             viewModel.dispatch(action: LoadNextPage())
         }
     }
