@@ -9,6 +9,8 @@
 import Foundation
 import SwiftUI
 import SharedSDK
+import KMMViewModelSwiftUI
+import KMPNativeCoroutinesAsync
 
 struct CreateNewAreaBottomSheet: View {
     
@@ -122,6 +124,24 @@ struct CreateNewAreaBottomSheet: View {
         .edgesIgnoringSafeArea(.all)
         .onTapGesture {
             self.endTextEditing()
+        }
+        .snackBar(
+            isShowing: $showSnackBar,
+            text: resourceMessageText ?? "",
+            snackBar: snackBar
+        )
+        .onAppear {
+            if messageDequeObserver == nil {
+                messageDequeObserver = Task {
+                    for try await message in asyncSequence(for: MessageDeque.shared.invoke()) {
+                        handle(resource: message)
+                    }
+                }
+            }
+        }
+        .onDisappear {
+            messageDequeObserver?.cancel()
+            messageDequeObserver = nil
         }
     }
 }

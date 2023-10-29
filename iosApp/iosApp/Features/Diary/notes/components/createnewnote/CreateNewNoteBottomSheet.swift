@@ -10,6 +10,8 @@ import Foundation
 import SwiftUI
 import SharedSDK
 import SwiftUIPager
+import KMMViewModelSwiftUI
+import KMPNativeCoroutinesAsync
 
 struct AreaWrapper : Identifiable, Equatable, Hashable {
     var id: String = UUID().uuidString
@@ -84,12 +86,15 @@ struct CreateNewNoteBottomSheet: View {
         ZStack {
             Color.mainBackground
             
-            ScrollView(.vertical, showsIndicators: false) {
-                ScrollViewReader { value in
-                    VStack {
-                        if state.isLoading {
-                            Loader()
-                        } else {
+            if state.isLoading {
+                VStack {
+                    Loader()
+                }
+            } else {
+                
+                ScrollView(.vertical, showsIndicators: false) {
+                    ScrollViewReader { value in
+                        VStack {
                             Text(
                                 state.type == NoteType.default_ ? SharedR.strings().create_note_title.desc().localized() : SharedR.strings().create_goal_title.desc().localized()
                             )
@@ -159,14 +164,15 @@ struct CreateNewNoteBottomSheet: View {
                             .id(3)
                             
                             Spacer()
+                            
+                            
                         }
-                        
+                        .padding(20)
+                        .padding(.bottom, 140)
                     }
-                    .padding(20)
-                    .padding(.bottom, 140)
+                    Spacer()
                 }
-                Spacer()
-            }
+            
             
             VStack {
                 Spacer()
@@ -196,16 +202,35 @@ struct CreateNewNoteBottomSheet: View {
                     
                 )
                 
-              
+                
             }.ignoresSafeArea(.keyboard)
             
             Spacer()
         }
+    }
         .ignoresSafeArea(.container)
         .onTapGesture {
             endTextEditing()
         }
-    }
+        .snackBar(
+            isShowing: $showSnackBar,
+            text: resourceMessageText ?? "",
+            snackBar: snackBar
+        )
+        .onAppear {
+            if messageDequeObserver == nil {
+                messageDequeObserver = Task {
+                    for try await message in asyncSequence(for: MessageDeque.shared.invoke()) {
+                        handle(resource: message)
+                    }
+                }
+            }
+        }
+        .onDisappear {
+            messageDequeObserver?.cancel()
+            messageDequeObserver = nil
+        }
+}
 }
 
 extension CreateNewNoteBottomSheet {
