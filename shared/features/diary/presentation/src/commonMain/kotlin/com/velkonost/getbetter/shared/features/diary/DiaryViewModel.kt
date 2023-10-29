@@ -134,7 +134,8 @@ internal constructor(
                         _notesPagingConfig.page++
 
                         items?.let {
-
+                            val notesViewState = viewState.value.notesViewState.copy(items = it)
+                            emit(viewState.value.copy(notesViewState = notesViewState))
                         }
                     }
                     onFailureWithMsg { _, message ->
