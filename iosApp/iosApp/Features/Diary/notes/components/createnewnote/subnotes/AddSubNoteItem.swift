@@ -70,7 +70,6 @@ struct AddSubNoteItem: View {
                     .foregroundColor(.iconActive)
                     .frame(width: 24, height: 24, alignment: .center)
                     .onTapGesture {
-                        
                         onAddSubNote()
                     }
             }

@@ -24,6 +24,11 @@ struct CreateNewAreaBottomSheet: View {
     
     @State private var isEmojiPickerVisible = false
     
+    @State private var resourceMessageText: String?
+    @State private var snackBar: MessageType.SnackBar?
+    @State private var showSnackBar: Bool = false
+    @State private var messageDequeObserver: Task<(), Error>? = nil
+    
     init(state: Binding<CreateNewAreaViewState>,
          emojiItems: [Emoji],
          onEmojiClick: @escaping (Emoji) -> Void,
@@ -117,6 +122,28 @@ struct CreateNewAreaBottomSheet: View {
         .edgesIgnoringSafeArea(.all)
         .onTapGesture {
             self.endTextEditing()
+        }
+    }
+}
+
+extension CreateNewAreaBottomSheet {
+    private func handle(resource message: Message) {
+        switch message.messageType {
+            
+        case let snackBar as MessageType.SnackBar : do {
+            if showSnackBar == false {
+                resourceMessageText = message.text != nil ? message.text : message.textResource?.localized()
+                self.snackBar = snackBar
+                withAnimation {
+                    showSnackBar.toggle()
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    Task { try await MessageDeque.shared.dequeue() }
+                }
+            }
+        }
+            
+        default: break
         }
     }
 }

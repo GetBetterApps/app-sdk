@@ -6,6 +6,7 @@ import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import com.velkonost.getbetter.shared.features.diary.model.DiaryTab
 import com.velkonost.getbetter.shared.features.diary.model.SubNoteUI
 import com.velkonost.getbetter.shared.features.diary.model.TagUI
+import com.velkonost.getbetter.shared.features.notes.api.model.Note
 import model.Area
 
 data class DiaryViewState(
@@ -22,6 +23,7 @@ data class DiaryViewState(
 
 data class NotesViewState(
     val isLoading: Boolean = false,
+    val items: List<Note> = emptyList()
 ) : UIContract.State
 
 data class AreasViewState(

@@ -118,14 +118,16 @@ internal constructor(
         if (_notesPagingConfig.lastPageReached) return
 
         launchJob {
-            notesRepository.fetchUserDetails(
+            notesRepository.fetchUserNotes(
                 page = _notesPagingConfig.page,
                 perPage = _notesPagingConfig.pageSize
             ).collect { result ->
                 with(result) {
                     isLoading {
-                        val notesViewState = viewState.value.notesViewState.copy(isLoading = it)
-                        emit(viewState.value.copy(notesViewState = notesViewState))
+                        if (viewState.value.notesViewState.items.isEmpty()) {
+                            val notesViewState = viewState.value.notesViewState.copy(isLoading = it)
+                            emit(viewState.value.copy(notesViewState = notesViewState))
+                        }
                     }
                     onSuccess { items ->
                         _notesPagingConfig.lastPageReached = items.isNullOrEmpty()

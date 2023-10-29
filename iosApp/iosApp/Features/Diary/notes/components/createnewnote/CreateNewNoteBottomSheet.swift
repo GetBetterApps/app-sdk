@@ -40,6 +40,11 @@ struct CreateNewNoteBottomSheet: View {
     
     let onCreateClick: () -> Void
     
+    @State private var resourceMessageText: String?
+    @State private var snackBar: MessageType.SnackBar?
+    @State private var showSnackBar: Bool = false
+    @State private var messageDequeObserver: Task<(), Error>? = nil
+    
     init(
         state: Binding<CreateNewNoteViewState>,
         onAreaSelect: @escaping (Area) -> Void,
@@ -166,8 +171,6 @@ struct CreateNewNoteBottomSheet: View {
             VStack {
                 Spacer()
                 
-                
-                
                 VStack {
                     Spacer()
                         .frame(height: 20)
@@ -205,4 +208,24 @@ struct CreateNewNoteBottomSheet: View {
     }
 }
 
-
+extension CreateNewNoteBottomSheet {
+    private func handle(resource message: Message) {
+        switch message.messageType {
+            
+        case let snackBar as MessageType.SnackBar : do {
+            if showSnackBar == false {
+                resourceMessageText = message.text != nil ? message.text : message.textResource?.localized()
+                self.snackBar = snackBar
+                withAnimation {
+                    showSnackBar.toggle()
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    Task { try await MessageDeque.shared.dequeue() }
+                }
+            }
+        }
+            
+        default: break
+        }
+    }
+}

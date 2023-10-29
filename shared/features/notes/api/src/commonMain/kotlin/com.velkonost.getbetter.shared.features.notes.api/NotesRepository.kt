@@ -52,7 +52,7 @@ interface NotesRepository {
         noteId: Int
     ): Flow<ResultState<Note>>
 
-    fun fetchUserDetails(
+    fun fetchUserNotes(
         page: Int,
         perPage: Int
     ): Flow<ResultState<List<Note>>>

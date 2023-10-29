@@ -144,7 +144,7 @@ constructor(
         }
     )
 
-    override fun fetchUserDetails(page: Int, perPage: Int): Flow<ResultState<List<Note>>> =
+    override fun fetchUserNotes(page: Int, perPage: Int): Flow<ResultState<List<Note>>> =
         flowRequest(
             mapper = { this.map(KtorNote::asExternalModel) },
             request = {

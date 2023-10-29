@@ -1,7 +1,10 @@
 package com.velkonost.getbetter.shared.features.diary
 
 import com.velkonost.getbetter.shared.core.model.NoteType
+import com.velkonost.getbetter.shared.core.util.isLoading
+import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.core.vm.resource.Message
 import com.velkonost.getbetter.shared.core.vm.resource.MessageType
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteAction
@@ -9,6 +12,7 @@ import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteEven
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteViewState
 import com.velkonost.getbetter.shared.features.diary.model.SubNoteUI
 import com.velkonost.getbetter.shared.features.diary.model.TagUI
+import com.velkonost.getbetter.shared.features.diary.model.asExternalModels
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource
@@ -38,6 +42,7 @@ internal constructor(
         is CreateNewNoteAction.RemoveImageUrl -> TODO()
         is CreateNewNoteAction.SetCompletionDate -> obtainSetCompletionDate(action.value)
         is CreateNewNoteAction.CloseBecauseZeroAreas -> obtainZeroAreasError()
+        is CreateNewNoteAction.CreateClick -> obtainCreateClick()
     }
 
     private fun initAvailableAreas(value: List<Area>) {
@@ -169,6 +174,33 @@ internal constructor(
             .messageType(MessageType.SnackBar.Builder().build())
             .build()
         emit(message)
+    }
+
+    private fun obtainCreateClick() {
+        val data = viewState.value
+
+        launchJob {
+            notesRepository.createNewNote(
+                noteType = data.type,
+                text = data.text,
+                tags = data.tags.map { it.text },
+                isPrivate = data.isPrivate,
+                areaId = data.selectedArea!!.id,
+                subNotes = data.subNotes.asExternalModels
+            ).collect { result ->
+                with(result) {
+                    isLoading {
+                        emit(viewState.value.copy(isLoading = it))
+                    }
+                    onSuccess {
+                        emit(CreateNewNoteEvent.CreatedSuccess)
+                    }
+                    onFailureWithMsg { _, message ->
+                        message?.let { emit(it) }
+                    }
+                }
+            }
+        }
     }
 
 }

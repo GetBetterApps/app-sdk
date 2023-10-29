@@ -178,7 +178,7 @@ fun DiaryScreen(
                 viewModel.dispatch(CreateNewNoteAction.SetCompletionDate(it))
             },
             onCreateClick = {
-
+                viewModel.dispatch(CreateNewNoteAction.CreateClick)
             }
         )
 
@@ -216,6 +216,7 @@ fun DiaryScreen(
 
                 is CreateNewNoteEvent.CreatedSuccess -> {
                     createNewNoteSheetState.hide()
+                    viewModel.refreshData()
                 }
             }
         }
