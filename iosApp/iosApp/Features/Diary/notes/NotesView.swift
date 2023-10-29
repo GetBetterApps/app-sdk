@@ -16,13 +16,15 @@ struct NotesView: View {
     let createGoalClick: () -> Void
     let createNoteClick: () -> Void
     
-    let items: [Area]
+    let items: [Note]
+    let itemClick: (Note) -> Void
     
-    init(isLoading: Bool, items: [Area], createGoalClick: @escaping () -> Void, createNoteClick: @escaping () -> Void) {
+    init(isLoading: Bool, items: [Note], createGoalClick: @escaping () -> Void, createNoteClick: @escaping () -> Void, itemClick: @escaping (Note) -> Void) {
         self.isLoading = isLoading
         self.items = items
         self.createGoalClick = createGoalClick
         self.createNoteClick = createNoteClick
+        self.itemClick = itemClick
     }
     
     var body: some View {
@@ -33,7 +35,10 @@ struct NotesView: View {
                 ScrollView(showsIndicators: false) {
                     LazyVStack(spacing: 0) {
                         ForEach(items, id: \.self) { item in
-                            NoteItem(item: item)
+                            NoteItem(
+                                item: item,
+                                onClick: itemClick
+                            )
                         }
                     }
                     .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))

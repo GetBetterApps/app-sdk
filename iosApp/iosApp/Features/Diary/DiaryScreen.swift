@@ -39,7 +39,7 @@ struct DiaryScreen: View {
             switch(selectedPage) {
             case 0: NotesView(
                 isLoading: state.notesViewState.isLoading, 
-                items: state.areasViewState.items,
+                items: state.notesViewState.items,
                 createGoalClick: {
                     if state.createNewNoteViewState.availableAreas.isEmpty {
                         viewModel.dispatch(action: CreateNewNoteActionCloseBecauseZeroAreas())
@@ -56,6 +56,9 @@ struct DiaryScreen: View {
                         viewModel.dispatch(action: CreateNewNoteActionOpenDefault())
                         showingCreateNewNoteSheet = true
                     }
+                },
+                itemClick: { value in
+                    
                 }
             )
             case 1: AreasView(
