@@ -27,7 +27,7 @@ import dev.icerock.moko.resources.compose.painterResource
 fun RowScope.TagItem(
     modifier: Modifier = Modifier,
     tag: TagUI,
-    onTagDelete: (String) -> Unit
+    onTagDelete: ((String) -> Unit)? = null
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -56,22 +56,24 @@ fun RowScope.TagItem(
             style = MaterialTheme.typography.bodyMedium
         )
 
-        Image(
-            modifier = modifier
-                .padding(start = 4.dp)
-                .align(Alignment.CenterVertically)
-                .size(14.dp)
-                .clickable(
-                    interactionSource = interactionSource,
-                    indication = null
-                ) {
-                    onTagDelete.invoke(tag.text)
-                },
-            painter = painterResource(imageResource = SharedR.images.ic_close),
-            contentDescription = null,
-            colorFilter = ColorFilter.tint(
-                color = colorResource(resource = SharedR.colors.text_secondary)
+        if (onTagDelete != null) {
+            Image(
+                modifier = modifier
+                    .padding(start = 4.dp)
+                    .align(Alignment.CenterVertically)
+                    .size(14.dp)
+                    .clickable(
+                        interactionSource = interactionSource,
+                        indication = null
+                    ) {
+                        onTagDelete.invoke(tag.text)
+                    },
+                painter = painterResource(imageResource = SharedR.images.ic_close),
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(
+                    color = colorResource(resource = SharedR.colors.text_secondary)
+                )
             )
-        )
+        }
     }
 }
