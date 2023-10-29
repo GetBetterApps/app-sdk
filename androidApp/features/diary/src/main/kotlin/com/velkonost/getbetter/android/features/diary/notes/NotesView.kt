@@ -48,6 +48,14 @@ fun NotesView(
                     )
                 }
 
+                if (isLoading) {
+                    item {
+                        Box(modifier = modifier.fillMaxSize()) {
+                            Loader(modifier = modifier.align(Alignment.Center))
+                        }
+                    }
+                }
+
             }
 
             AddNoteItem(

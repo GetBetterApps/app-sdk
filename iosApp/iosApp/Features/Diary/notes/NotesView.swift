@@ -39,7 +39,7 @@ struct NotesView: View {
     
     var body: some View {
         ZStack {
-            if isLoading {
+            if isLoading && items.isEmpty {
                 Loader()
             } else {
                 ScrollView(showsIndicators: false) {
@@ -56,6 +56,7 @@ struct NotesView: View {
                     }
                     .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
                     
+                    Loader().opacity(state.isLoading ? 1 : 0)
                 }
                 .fadingEdge()
                 
