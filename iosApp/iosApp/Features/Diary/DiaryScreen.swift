@@ -38,7 +38,8 @@ struct DiaryScreen: View {
             
             switch(selectedPage) {
             case 0: NotesView(
-                isLoading: state.notesViewState.isLoading,
+                isLoading: state.notesViewState.isLoading, 
+                items: state.areasViewState.items,
                 createGoalClick: {
                     if state.createNewNoteViewState.availableAreas.isEmpty {
                         viewModel.dispatch(action: CreateNewNoteActionCloseBecauseZeroAreas())

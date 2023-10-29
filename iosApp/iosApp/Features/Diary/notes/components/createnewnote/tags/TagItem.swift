@@ -13,9 +13,9 @@ import SharedSDK
 struct TagItem : View {
     
     let tag: TagUI 
-    let onTagDelete: (String) -> Void
+    let onTagDelete: ((String) -> Void)?
     
-    init(tag: TagUI, onTagDelete: @escaping (String) -> Void) {
+    init(tag: TagUI, onTagDelete: ((String) -> Void)? = nil) {
         self.tag = tag
         self.onTagDelete = onTagDelete
     }
@@ -27,16 +27,18 @@ struct TagItem : View {
                 .foregroundColor(.textSecondaryTitle)
                 .frame(height: 30, alignment: .center)
             
-            Image(uiImage: SharedR.images().ic_close.toUIImage()!)
-                .resizable()
-                .renderingMode(.template)
-                .foregroundColor(.textSecondaryTitle)
-                .scaledToFit()
-                .frame(width: 18, height: 18, alignment: .center)
-                .padding(.leading, 4)
-                .onTapGesture {
-                    onTagDelete(tag.text)
-                }
+            if onTagDelete != nil {
+                Image(uiImage: SharedR.images().ic_close.toUIImage()!)
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(.textSecondaryTitle)
+                    .scaledToFit()
+                    .frame(width: 18, height: 18, alignment: .center)
+                    .padding(.leading, 4)
+                    .onTapGesture {
+                        onTagDelete?(tag.text)
+                    }
+            }
         }
         .padding(.init(top: 3, leading: 6, bottom: 3, trailing: 6))
         .frame(height: 30)
