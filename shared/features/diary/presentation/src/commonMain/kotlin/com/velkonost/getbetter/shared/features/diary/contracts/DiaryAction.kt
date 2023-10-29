@@ -5,7 +5,9 @@ import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import com.velkonost.getbetter.shared.features.diary.model.SubNoteUI
 import model.Area
 
-sealed interface DiaryAction : UIContract.Action
+sealed interface DiaryAction : UIContract.Action {
+    data object NotesLoadNextPage : DiaryAction
+}
 
 data object AddAreaClick : DiaryAction
 

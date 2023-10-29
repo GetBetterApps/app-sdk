@@ -54,13 +54,13 @@ internal constructor(
             viewState.value.copy(
                 type = NoteType.Default,
                 selectedArea = viewState.value.availableAreas.firstOrNull(),
-                text = "",
-                mediaUrls = emptyList(),
-                tags = emptyList(),
-                newTag = TagUI(),
-                subNotes = emptyList(),
-                newSubNote = SubNoteUI(),
-                isPrivate = true
+//                text = "",
+//                mediaUrls = emptyList(),
+//                tags = emptyList(),
+//                newTag = TagUI(),
+//                subNotes = emptyList(),
+//                newSubNote = SubNoteUI(),
+//                isPrivate = true
             )
         )
     }
@@ -70,13 +70,13 @@ internal constructor(
             viewState.value.copy(
                 type = NoteType.Goal,
                 selectedArea = viewState.value.availableAreas.firstOrNull(),
-                text = "",
-                mediaUrls = emptyList(),
-                tags = emptyList(),
-                newTag = TagUI(),
-                subNotes = emptyList(),
-                newSubNote = SubNoteUI(),
-                isPrivate = true
+//                text = "",
+//                mediaUrls = emptyList(),
+//                tags = emptyList(),
+//                newTag = TagUI(),
+//                subNotes = emptyList(),
+//                newSubNote = SubNoteUI(),
+//                isPrivate = true
             )
         )
     }
@@ -194,6 +194,20 @@ internal constructor(
                     }
                     onSuccess {
                         emit(CreateNewNoteEvent.CreatedSuccess)
+
+                        emit(
+                            viewState.value.copy(
+                                type = NoteType.Goal,
+                                selectedArea = viewState.value.availableAreas.firstOrNull(),
+                                text = "",
+                                mediaUrls = emptyList(),
+                                tags = emptyList(),
+                                newTag = TagUI(),
+                                subNotes = emptyList(),
+                                newSubNote = SubNoteUI(),
+                                isPrivate = true
+                            )
+                        )
                     }
                     onFailureWithMsg { _, message ->
                         message?.let { emit(it) }

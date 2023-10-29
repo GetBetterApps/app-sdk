@@ -52,7 +52,7 @@ fun NoteItemData(
             colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_inactive))
         )
 
-        AnimatedVisibility(visible = completionDate != null) {
+        AnimatedVisibility(visible = completionDate != null && noteType == NoteType.Goal) {
             Text(
                 modifier = modifier
                     .padding(start = 4.dp)
@@ -70,7 +70,7 @@ fun NoteItemData(
             )
         }
 
-        AnimatedVisibility(visible = subNotes.isNotEmpty()) {
+        AnimatedVisibility(visible = subNotes.isNotEmpty() && noteType == NoteType.Goal) {
             Text(
                 modifier = modifier
                     .padding(start = 4.dp)

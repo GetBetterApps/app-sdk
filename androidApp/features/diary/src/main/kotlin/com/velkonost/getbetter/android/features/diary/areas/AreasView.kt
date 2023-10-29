@@ -20,7 +20,7 @@ fun AreasView(
     modifier: Modifier = Modifier,
     isLoading: Boolean,
     items: List<Area>,
-    areaClick: (Int) -> Unit,
+    itemClick: (Int) -> Unit,
     createNewAreaClick: () -> Unit,
     addExistingAreaClick: () -> Unit
 ) {
@@ -36,9 +36,10 @@ fun AreasView(
                 contentPadding = PaddingValues(bottom = 140.dp)
             ) {
                 items(items) { item ->
-                    AreaItem(item) {
-                        areaClick(it)
-                    }
+                    AreaItem(
+                        item = item,
+                        onClick = itemClick
+                    )
                 }
             }
 

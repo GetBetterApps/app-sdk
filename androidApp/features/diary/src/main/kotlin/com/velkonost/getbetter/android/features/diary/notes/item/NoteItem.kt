@@ -30,7 +30,8 @@ import dev.icerock.moko.resources.compose.colorResource
 @Composable
 fun NoteItem(
     modifier: Modifier = Modifier,
-    item: Note
+    item: Note,
+    onClick: (Note) -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
 
@@ -42,6 +43,7 @@ fun NoteItem(
                 indication = null
             ) {
                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                onClick.invoke(item)
             }
     ) {
         Column {

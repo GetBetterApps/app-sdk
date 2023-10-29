@@ -16,6 +16,7 @@ import com.velkonost.getbetter.shared.features.diary.contracts.DiaryNavigation
 import com.velkonost.getbetter.shared.features.diary.contracts.DiaryViewState
 import com.velkonost.getbetter.shared.features.diary.contracts.NavigateToAddArea
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -29,10 +30,11 @@ internal constructor(
 ) {
 
     private val _notesPagingConfig = PagingConfig()
+    private var notesLoadingJob: Job? = null
 
     fun refreshData() {
         fetchAreas()
-        fetchNotes()
+        refreshNotePages()
     }
 
     override fun init() {
@@ -73,6 +75,7 @@ internal constructor(
         is CreateNewAreaAction -> dispatchCreateNewAreaAction(action)
         is CreateNewNoteAction -> dispatchCreateNewNoteAction(action)
         is AddAreaClick -> emit(NavigateToAddArea)
+        is DiaryAction.NotesLoadNextPage -> fetchNotes()
     }
 
     private fun dispatchCreateNewAreaAction(action: CreateNewAreaAction) {
@@ -114,27 +117,46 @@ internal constructor(
         }
     }
 
-    private fun fetchNotes() {
-        if (_notesPagingConfig.lastPageReached) return
+    private fun refreshNotePages() {
+        notesLoadingJob?.cancel()
 
-        launchJob {
+        _notesPagingConfig.page = 0
+        _notesPagingConfig.isActive = false
+        _notesPagingConfig.lastPageReached = false
+
+        val notesViewState = viewState.value.notesViewState.copy(items = emptyList())
+        emit(viewState.value.copy(notesViewState = notesViewState))
+        fetchNotes()
+    }
+
+    private fun fetchNotes() {
+        if (
+            _notesPagingConfig.lastPageReached
+            || (!_notesPagingConfig.isActive && _notesPagingConfig.page != 0)
+        ) return
+
+        notesLoadingJob = launchJob {
             notesRepository.fetchUserNotes(
                 page = _notesPagingConfig.page,
                 perPage = _notesPagingConfig.pageSize
             ).collect { result ->
                 with(result) {
                     isLoading {
-                        if (viewState.value.notesViewState.items.isEmpty()) {
-                            val notesViewState = viewState.value.notesViewState.copy(isLoading = it)
-                            emit(viewState.value.copy(notesViewState = notesViewState))
-                        }
+                        val notesViewState = viewState.value.notesViewState.copy(isLoading = true)
+                        emit(viewState.value.copy(notesViewState = notesViewState))
                     }
                     onSuccess { items ->
                         _notesPagingConfig.lastPageReached = items.isNullOrEmpty()
+                        _notesPagingConfig.isActive = true
                         _notesPagingConfig.page++
 
                         items?.let {
-                            val notesViewState = viewState.value.notesViewState.copy(items = it)
+                            val allItems = viewState.value.notesViewState.items.plus(it)
+                            val notesViewState =
+                                viewState.value.notesViewState.copy(
+                                    isLoading = false,
+                                    items = allItems
+                                )
                             emit(viewState.value.copy(notesViewState = notesViewState))
                         }
                     }

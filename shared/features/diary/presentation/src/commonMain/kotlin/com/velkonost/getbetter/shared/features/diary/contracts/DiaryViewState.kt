@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.diary.contracts
 
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.NoteType
+import com.velkonost.getbetter.shared.core.util.PrefetchDistanceValue
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import com.velkonost.getbetter.shared.features.diary.model.DiaryTab
 import com.velkonost.getbetter.shared.features.diary.model.SubNoteUI
@@ -23,7 +24,8 @@ data class DiaryViewState(
 
 data class NotesViewState(
     val isLoading: Boolean = false,
-    val items: List<Note> = emptyList()
+    val items: List<Note> = emptyList(),
+    val loadMorePrefetch: Int = PrefetchDistanceValue
 ) : UIContract.State
 
 data class AreasViewState(

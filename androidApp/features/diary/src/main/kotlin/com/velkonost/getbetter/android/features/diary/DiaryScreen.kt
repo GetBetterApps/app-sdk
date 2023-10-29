@@ -36,8 +36,10 @@ import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaActi
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaEvent
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteEvent
+import com.velkonost.getbetter.shared.features.diary.contracts.DiaryAction
 import com.velkonost.getbetter.shared.features.diary.contracts.NotesViewState
 import com.velkonost.getbetter.shared.features.diary.contracts.TasksViewState
+import com.velkonost.getbetter.shared.features.notes.api.model.Note
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
@@ -94,6 +96,9 @@ fun DiaryScreen(
                 notesState = state.notesViewState,
                 areasState = state.areasViewState,
                 tasksState = state.tasksViewState,
+                noteClick = {
+
+                },
                 areaClick = {
                     scope.launch {
                         selectedAreaId.value = it
@@ -128,6 +133,9 @@ fun DiaryScreen(
                             createNewNoteSheetState.show()
                         }
                     }
+                },
+                notesLoadNextPage = {
+                    viewModel.dispatch(DiaryAction.NotesLoadNextPage)
                 }
             )
         }
@@ -255,11 +263,13 @@ fun DiaryScreenContent(
     notesState: NotesViewState,
     areasState: AreasViewState,
     tasksState: TasksViewState,
+    noteClick: (Note) -> Unit,
     areaClick: (Int) -> Unit,
     createNewAreaClick: () -> Unit,
     addExistingAreaClick: () -> Unit,
     createGoalClick: () -> Unit,
-    createNoteClick: () -> Unit
+    createNoteClick: () -> Unit,
+    notesLoadNextPage: () -> Unit
 ) {
     HorizontalPager(
         state = pagerState,
@@ -270,14 +280,17 @@ fun DiaryScreenContent(
             0 -> NotesView(
                 items = notesState.items,
                 isLoading = notesState.isLoading,
+                loadMorePrefetch = notesState.loadMorePrefetch,
                 createGoalClick = createGoalClick,
-                createNoteClick = createNoteClick
+                createNoteClick = createNoteClick,
+                itemClick = noteClick,
+                onBottomReach = notesLoadNextPage
             )
 
             1 -> AreasView(
                 items = areasState.items,
                 isLoading = areasState.isLoading,
-                areaClick = areaClick,
+                itemClick = areaClick,
                 createNewAreaClick = createNewAreaClick,
                 addExistingAreaClick = addExistingAreaClick
             )
