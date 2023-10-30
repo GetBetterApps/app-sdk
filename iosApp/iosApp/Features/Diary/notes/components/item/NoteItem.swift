@@ -35,7 +35,7 @@ struct NoteItem: View {
                     
                     NoteItemData(
                         noteType: item.noteType,
-                        completionDate: nil,//item.completionDate,
+                        completionDate: item.createdDateStr,
                         subNotes: item.subNotes,
                         mediaAmount: item.mediaUrls.count,
                         isPrivate: item.isPrivate

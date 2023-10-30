@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.notes.api.model
 
 import com.velkonost.getbetter.shared.core.model.NoteType
+import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToLocalDatetime
 import kotlinx.serialization.Serializable
 import model.Area
 
@@ -24,4 +25,7 @@ data class Note(
 
     val subNotes: List<SubNote>,
     val area: Area
-)
+) {
+    val createdDateStr: String
+        get() = createdDate.convertToLocalDatetime()
+}
