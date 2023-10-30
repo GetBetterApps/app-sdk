@@ -28,7 +28,7 @@ struct AreaItem: View {
                     .padding(8)
                     .frame(width: 64, height: 64)
                     .scaledToFill()
-                    
+                
                 
                 VStack(alignment: .leading) {
                     Spacer()
@@ -50,7 +50,26 @@ struct AreaItem: View {
                     Spacer()
                 }
                 .padding(.leading, 12)
+                
                 Spacer()
+                
+                if item.isPrivate {
+                    VStack {
+                        Image(uiImage: SharedR.images().ic_lock.toUIImage()!)
+                            .resizable()
+                            .renderingMode(.template)
+                            .scaledToFit()
+                            .padding(4)
+                            .frame(width: 24, height: 24)
+                            .foregroundColor(.iconInactive)
+                            .background(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color.mainBackground)
+                            )
+                        Spacer()
+                    }
+                }
+                
             }.frame(minWidth: 0, maxWidth: .infinity)
         }
         .frame(minWidth: 0, maxWidth: .infinity)
