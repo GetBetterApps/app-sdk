@@ -28,10 +28,12 @@
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher"
         android:fullBackupContent="false"
         android:fullBackupOnly="false"
         android:hardwareAccelerated="true"
-        android:label="app_name"
+        android:label="GetBetter"
         android:requestLegacyExternalStorage="true"
         android:resizeableActivity="false"
         android:supportsRtl="true"
