@@ -13,14 +13,18 @@ data class KtorSubNote(
     val text: String = "",
 
     @SerialName("completionDate")
-    val completionDate: Long? = null
+    val completionDate: Long? = null,
+
+    @SerialName("expectedCompletionDate")
+    val expectedCompletionDate: Long? = null
 )
 
 fun KtorSubNote.asExternalModel() =
     SubNote(
         id = id,
         text = text,
-        completionDate = completionDate
+        completionDate = completionDate,
+        expectedCompletionDate = expectedCompletionDate
     )
 
 fun List<KtorSubNote>.asExternalModel() = this.map { it.asExternalModel() }

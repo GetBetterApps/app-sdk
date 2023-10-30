@@ -55,6 +55,8 @@ constructor(
         noteId: Int,
         text: String,
         tags: List<String>,
+        completionDate: Long?,
+        expectedCompletionDate: Long?,
         subNotes: List<SubNote>
     ): Flow<ResultState<Note>> = flowRequest(
         mapper = KtorNote::asExternalModel,
@@ -64,6 +66,8 @@ constructor(
                 noteId = noteId,
                 noteText = text,
                 noteTags = tags,
+                completionDate = completionDate,
+                expectedCompletionDate = expectedCompletionDate,
                 subNotes = subNotes.map {
                     SubNoteRequestData(subNoteText = it.text)
                 }
@@ -75,7 +79,9 @@ constructor(
     override fun editSubNote(
         noteId: Int,
         subNoteId: Int,
-        subNoteText: String
+        subNoteText: String,
+        subNoteCompletionDate: Long?,
+        subNoteExpectedCompletionDate: Long?
     ): Flow<ResultState<Note>> = flowRequest(
         mapper = KtorNote::asExternalModel,
         request = {
@@ -83,7 +89,9 @@ constructor(
             val body = EditSubNoteRequest(
                 noteId = noteId,
                 subNoteId = subNoteId,
-                subNoteText = subNoteText
+                subNoteText = subNoteText,
+                subNoteCompletionDate = subNoteCompletionDate,
+                subNoteExpectedCompletionDate = subNoteExpectedCompletionDate
             )
             remoteDataSource.editSubNote(token, body)
         }

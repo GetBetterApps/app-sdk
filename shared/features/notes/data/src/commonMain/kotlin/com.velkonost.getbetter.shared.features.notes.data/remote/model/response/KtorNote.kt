@@ -27,6 +27,9 @@ data class KtorNote(
     @SerialName("completionDate")
     val completionDate: Long?,
 
+    @SerialName("expectedCompletionDate")
+    val expectedCompletionDate: Long?,
+
     @SerialName("media")
     val media: List<ByteArray>,
 
@@ -54,10 +57,11 @@ fun KtorNote.asExternalModel() =
         authorId = authorId,
         createdDate = createdDate,
         completionDate = completionDate,
+        expectedCompletionDate = expectedCompletionDate,
         mediaUrls = emptyList(),
         tags = tags,
         isActive = isActive,
         isPrivate = isPrivate,
         subNotes = subNotes.asExternalModel(),
-        area = ktorArea.asExternalModel()
+        area = ktorArea.asExternalModel(),
     )

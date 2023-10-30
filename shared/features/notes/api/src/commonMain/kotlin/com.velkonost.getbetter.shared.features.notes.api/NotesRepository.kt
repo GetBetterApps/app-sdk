@@ -21,13 +21,17 @@ interface NotesRepository {
         noteId: Int,
         text: String,
         tags: List<String>,
-        subNotes: List<SubNote>
+        completionDate: Long?,
+        expectedCompletionDate: Long?,
+        subNotes: List<SubNote>,
     ): Flow<ResultState<Note>>
 
     fun editSubNote(
         noteId: Int,
         subNoteId: Int,
-        subNoteText: String
+        subNoteText: String,
+        subNoteCompletionDate: Long?,
+        subNoteExpectedCompletionDate: Long?
     ): Flow<ResultState<Note>>
 
     fun deleteNote(

@@ -12,5 +12,11 @@ data class EditSubNoteRequest(
     val subNoteId: Int,
 
     @SerialName("subNoteText")
-    val subNoteText: String
+    val subNoteText: String,
+
+    @SerialName("subNoteCompletionDate")
+    val subNoteCompletionDate: Long?,
+
+    @SerialName("subNoteExpectedCompletionDate")
+    val subNoteExpectedCompletionDate: Long?
 )

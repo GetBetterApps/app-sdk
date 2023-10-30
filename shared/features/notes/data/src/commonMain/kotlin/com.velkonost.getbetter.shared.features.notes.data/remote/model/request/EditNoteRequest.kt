@@ -11,6 +11,12 @@ data class EditNoteRequest(
     @SerialName("noteText")
     val noteText: String,
 
+    @SerialName("completionDate")
+    val completionDate: Long?,
+
+    @SerialName("expectedCompletionDate")
+    val expectedCompletionDate: Long?,
+
     @SerialName("noteMedia")
     val noteMedia: List<String> = emptyList(),
 
