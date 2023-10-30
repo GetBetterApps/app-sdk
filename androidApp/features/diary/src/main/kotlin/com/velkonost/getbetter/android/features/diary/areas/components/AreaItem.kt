@@ -1,10 +1,14 @@
 package com.velkonost.getbetter.android.features.diary.areas.components
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
@@ -13,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalHapticFeedback
@@ -59,6 +64,7 @@ fun AreaItem(
             Column(
                 modifier = modifier
                     .padding(start = 12.dp)
+                    .fillMaxWidth(0.9f)
                     .align(Alignment.CenterVertically)
             ) {
                 Text(
@@ -77,6 +83,29 @@ fun AreaItem(
                     color = colorResource(resource = SharedR.colors.text_secondary),
                     style = MaterialTheme.typography.bodySmall
                 )
+            }
+
+            Spacer(modifier.weight(1f))
+
+            AnimatedVisibility(
+                visible = item.isPrivate
+            ) {
+                Column {
+                    Image(
+                        modifier = modifier
+                            .size(24.dp)
+                            .background(
+                                colorResource(resource = SharedR.colors.main_background),
+                                shape = MaterialTheme.shapes.small
+                            )
+                            .padding(4.dp),
+                        painter = painterResource(imageResource = SharedR.images.ic_lock),
+                        contentDescription = null,
+                        colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_inactive))
+                    )
+                    Spacer(modifier.weight(1f))
+                }
+
             }
         }
     }
