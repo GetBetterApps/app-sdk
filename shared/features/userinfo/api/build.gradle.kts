@@ -27,6 +27,7 @@ kotlin {
                 implementation(libs.kotlinx.serialization)
 
                 implementation(projects.shared.core.util)
+                implementation(projects.shared.core.model)
             }
         }
     }

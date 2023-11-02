@@ -1,14 +1,14 @@
 package com.velkonost.getbetter.shared.features.diary.contracts
 
 import com.velkonost.getbetter.shared.core.model.Emoji
-import com.velkonost.getbetter.shared.core.model.NoteType
+import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.note.Note
+import com.velkonost.getbetter.shared.core.model.note.NoteType
 import com.velkonost.getbetter.shared.core.util.PrefetchDistanceValue
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import com.velkonost.getbetter.shared.features.diary.model.DiaryTab
 import com.velkonost.getbetter.shared.features.diary.model.SubNoteUI
 import com.velkonost.getbetter.shared.features.diary.model.TagUI
-import com.velkonost.getbetter.shared.features.notes.api.model.Note
-import model.Area
 
 data class DiaryViewState(
     val tabs: List<DiaryTab> = DiaryTab.values().toList(),

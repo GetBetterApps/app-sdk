@@ -1,9 +1,9 @@
 package com.velkonost.getbetter.shared.features.addarea.presentation.model
 
 import com.velkonost.getbetter.shared.core.model.Emoji
-import com.velkonost.getbetter.shared.core.model.TermsOfMembership
+import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.area.TermsOfMembership
 import dev.icerock.moko.resources.ImageResource
-import model.Area
 
 data class AreaUI(
     val id: Int,

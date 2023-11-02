@@ -29,6 +29,7 @@ import com.velkonost.getbetter.android.features.diary.notes.components.createnew
 import com.velkonost.getbetter.android.features.diary.tasks.TasksView
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
 import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
+import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.features.diary.DiaryViewModel
 import com.velkonost.getbetter.shared.features.diary.contracts.AddAreaClick
 import com.velkonost.getbetter.shared.features.diary.contracts.AreasViewState
@@ -39,7 +40,6 @@ import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteEven
 import com.velkonost.getbetter.shared.features.diary.contracts.DiaryAction
 import com.velkonost.getbetter.shared.features.diary.contracts.NotesViewState
 import com.velkonost.getbetter.shared.features.diary.contracts.TasksViewState
-import com.velkonost.getbetter.shared.features.notes.api.model.Note
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch

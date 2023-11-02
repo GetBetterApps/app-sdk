@@ -1,6 +1,6 @@
+import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.util.ResultState
 import kotlinx.coroutines.flow.Flow
-import model.Area
 
 interface AreasRepository {
 

@@ -1,9 +1,9 @@
 package com.velkonost.getbetter.shared.features.diary.contracts
 
 import com.velkonost.getbetter.shared.core.model.Emoji
+import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import com.velkonost.getbetter.shared.features.diary.model.SubNoteUI
-import model.Area
 
 sealed interface DiaryAction : UIContract.Action {
     data object NotesLoadNextPage : DiaryAction

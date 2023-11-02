@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.diary
 
-import com.velkonost.getbetter.shared.core.model.NoteType
+import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.note.NoteType
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
@@ -17,7 +18,6 @@ import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
-import model.Area
 
 class CreateNewNoteViewModel
 internal constructor(

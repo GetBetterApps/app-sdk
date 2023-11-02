@@ -5,6 +5,7 @@ import com.velkonost.getbetter.join
 
 plugins {
     `kmm-shared-module-plugin`
+    alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -20,8 +21,9 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.koin.core)
-                implementation(libs.firebase.firestore)
+                implementation(libs.kotlinx.serialization)
 
+                implementation(projects.shared.core.util)
                 implementation(projects.shared.resources)
             }
         }

@@ -1,9 +1,8 @@
-package com.velkonost.getbetter.shared.features.notes.api.model
+package com.velkonost.getbetter.shared.core.model.note
 
-import com.velkonost.getbetter.shared.core.model.NoteType
+import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToLocalDatetime
 import kotlinx.serialization.Serializable
-import model.Area
 
 @Serializable
 data class Note(

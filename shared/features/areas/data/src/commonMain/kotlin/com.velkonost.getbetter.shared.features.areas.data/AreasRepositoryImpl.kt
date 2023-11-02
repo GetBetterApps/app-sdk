@@ -4,6 +4,7 @@ import AreasRepository
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
+import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.flowRequest
 import com.velkonost.getbetter.shared.features.areas.data.remote.AreasRemoteDataSource
@@ -12,7 +13,6 @@ import com.velkonost.getbetter.shared.features.areas.data.remote.model.request.U
 import com.velkonost.getbetter.shared.features.areas.data.remote.model.response.KtorArea
 import com.velkonost.getbetter.shared.features.areas.data.remote.model.response.asExternalModel
 import kotlinx.coroutines.flow.Flow
-import model.Area
 
 class AreasRepositoryImpl
 constructor(

@@ -23,11 +23,11 @@ kotlin {
             dependencies {
                 api(projects.shared.core.vm)
                 api(projects.shared.core.util)
+                api(projects.shared.core.model)
 
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
 
-                api(projects.shared.core.model)
                 implementation(projects.shared.resources)
 
                 implementation(projects.shared.features.areas.api)

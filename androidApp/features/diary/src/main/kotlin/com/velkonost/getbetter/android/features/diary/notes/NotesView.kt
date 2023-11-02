@@ -15,7 +15,7 @@ import com.velkonost.getbetter.android.features.diary.notes.item.NoteItem
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
 import com.velkonost.getbetter.core.compose.extensions.fadingEdge
-import com.velkonost.getbetter.shared.features.notes.api.model.Note
+import com.velkonost.getbetter.shared.core.model.note.Note
 
 @Composable
 fun NotesView(

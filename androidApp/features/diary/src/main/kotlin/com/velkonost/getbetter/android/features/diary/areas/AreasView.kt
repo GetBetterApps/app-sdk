@@ -13,7 +13,7 @@ import com.velkonost.getbetter.android.features.diary.areas.components.AddAreaBu
 import com.velkonost.getbetter.android.features.diary.areas.components.AreaItem
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.extensions.fadingEdge
-import model.Area
+import com.velkonost.getbetter.shared.core.model.area.Area
 
 @Composable
 fun AreasView(

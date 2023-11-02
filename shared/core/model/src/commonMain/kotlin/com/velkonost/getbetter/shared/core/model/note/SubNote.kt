@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.shared.features.notes.api.model
+package com.velkonost.getbetter.shared.core.model.note
 
 import kotlinx.serialization.Serializable
 

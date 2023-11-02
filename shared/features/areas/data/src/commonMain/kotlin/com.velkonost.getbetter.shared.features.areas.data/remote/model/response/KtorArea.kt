@@ -1,9 +1,9 @@
 package com.velkonost.getbetter.shared.features.areas.data.remote.model.response
 
-import com.velkonost.getbetter.shared.core.model.TermsOfMembership
+import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.area.TermsOfMembership
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import model.Area
 
 @Serializable
 data class KtorArea(

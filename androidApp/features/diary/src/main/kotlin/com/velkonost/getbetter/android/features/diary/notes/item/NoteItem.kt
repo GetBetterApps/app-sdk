@@ -21,8 +21,8 @@ import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.tags.TagItem
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.shared.core.model.Emoji
+import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.features.diary.model.TagUI
-import com.velkonost.getbetter.shared.features.notes.api.model.Note
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 

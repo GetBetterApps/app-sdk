@@ -23,13 +23,12 @@ kotlin {
             dependencies {
                 api(projects.shared.core.util)
 
+                implementation(projects.shared.core.model)
                 implementation(projects.shared.features.auth.api)
                 implementation(projects.shared.features.userinfo.api)
 
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.koin.core)
-
-                implementation(libs.firebase.auth)
             }
         }
 

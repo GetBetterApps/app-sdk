@@ -1,9 +1,9 @@
 package com.velkonost.getbetter.shared.features.notes.api
 
-import com.velkonost.getbetter.shared.core.model.NoteType
+import com.velkonost.getbetter.shared.core.model.note.Note
+import com.velkonost.getbetter.shared.core.model.note.NoteType
+import com.velkonost.getbetter.shared.core.model.note.SubNote
 import com.velkonost.getbetter.shared.core.util.ResultState
-import com.velkonost.getbetter.shared.features.notes.api.model.Note
-import com.velkonost.getbetter.shared.features.notes.api.model.SubNote
 import kotlinx.coroutines.flow.Flow
 
 interface NotesRepository {

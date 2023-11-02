@@ -1,7 +1,7 @@
 package com.velkonost.getbetter.shared.features.diary.model
 
+import com.velkonost.getbetter.shared.core.model.note.SubNote
 import com.velkonost.getbetter.shared.core.util.randomUUID
-import com.velkonost.getbetter.shared.features.notes.api.model.SubNote
 
 data class SubNoteUI(
     val id: String = randomUUID(),

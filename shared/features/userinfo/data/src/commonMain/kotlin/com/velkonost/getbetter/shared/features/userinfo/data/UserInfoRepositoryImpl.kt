@@ -5,11 +5,11 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import com.velkonost.getbetter.shared.core.datastore.TOKEN_KEY
 import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
+import com.velkonost.getbetter.shared.core.model.user.UserInfo
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.flowRequest
 import com.velkonost.getbetter.shared.core.util.locale
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
-import com.velkonost.getbetter.shared.features.userinfo.api.model.UserInfo
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.UserInfoRemoteDataSource
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.InitSettingsRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.UpdateValueRequest

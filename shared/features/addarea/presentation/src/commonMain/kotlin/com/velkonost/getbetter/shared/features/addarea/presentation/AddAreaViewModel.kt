@@ -1,7 +1,7 @@
 package com.velkonost.getbetter.shared.features.addarea.presentation
 
 import AreasRepository
-import com.velkonost.getbetter.shared.core.model.TermsOfMembership
+import com.velkonost.getbetter.shared.core.model.area.TermsOfMembership
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess

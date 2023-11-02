@@ -1,7 +1,7 @@
 package com.velkonost.getbetter.shared.features.userinfo.api
 
+import com.velkonost.getbetter.shared.core.model.user.UserInfo
 import com.velkonost.getbetter.shared.core.util.ResultState
-import com.velkonost.getbetter.shared.features.userinfo.api.model.UserInfo
 import kotlinx.coroutines.flow.Flow
 
 interface UserInfoRepository {

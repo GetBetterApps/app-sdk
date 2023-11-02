@@ -1,6 +1,6 @@
 package com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response
 
-import com.velkonost.getbetter.shared.features.userinfo.api.model.UserInfo
+import com.velkonost.getbetter.shared.core.model.user.UserInfo
 import io.ktor.util.decodeBase64Bytes
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

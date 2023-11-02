@@ -25,11 +25,9 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.serialization)
-                implementation(libs.firebase.firestore)
 
                 implementation(projects.shared.core.util)
                 implementation(projects.shared.core.model)
-                implementation(projects.shared.features.userinfo.api)
             }
         }
     }
