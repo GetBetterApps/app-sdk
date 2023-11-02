@@ -186,7 +186,8 @@ internal constructor(
                 tags = data.tags.map { it.text },
                 isPrivate = data.isPrivate,
                 areaId = data.selectedArea!!.id,
-                subNotes = data.subNotes.asExternalModels
+                subNotes = data.subNotes.asExternalModels,
+                expectedCompletionDate = data.completionDate
             ).collect { result ->
                 with(result) {
                     isLoading {

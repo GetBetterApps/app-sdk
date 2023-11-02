@@ -66,7 +66,7 @@ fun NoteItem(
                 NoteItemData(
                     noteType = item.noteType,
                     subNotes = item.subNotes,
-                    completionDate = item.createdDateStr,
+                    completionDate = item.expectedCompletionDateStr,
                     mediaAmount = item.mediaUrls.size,
                     isPrivate = item.isPrivate
                 )

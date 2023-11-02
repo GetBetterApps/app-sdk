@@ -27,4 +27,10 @@ data class Note(
 ) {
     val createdDateStr: String
         get() = createdDate.convertToLocalDatetime()
+
+    val completionDateStr: String?
+        get() = completionDate?.convertToLocalDatetime()
+
+    val expectedCompletionDateStr: String?
+        get() = expectedCompletionDate?.convertToLocalDatetime()
 }

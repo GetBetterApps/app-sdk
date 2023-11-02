@@ -13,6 +13,7 @@ interface NotesRepository {
         text: String,
         tags: List<String>,
         isPrivate: Boolean,
+        expectedCompletionDate: Long?,
         areaId: Int,
         subNotes: List<SubNote>
     ): Flow<ResultState<Note>>

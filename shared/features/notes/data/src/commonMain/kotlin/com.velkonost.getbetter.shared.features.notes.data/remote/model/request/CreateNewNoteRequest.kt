@@ -20,6 +20,9 @@ data class CreateNewNoteRequest(
     @SerialName("isNotePrivate")
     val isNotePrivate: Boolean,
 
+    @SerialName("expectedCompletionDate")
+    val noteExpectedCompletionDate: Long?,
+
     @SerialName("areaId")
     val areaId: Int,
 
