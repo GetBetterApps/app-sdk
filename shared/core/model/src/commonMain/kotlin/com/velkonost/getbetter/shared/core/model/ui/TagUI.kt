@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.shared.features.diary.model
+package com.velkonost.getbetter.shared.core.model.ui
 
 import com.velkonost.getbetter.shared.core.util.randomUUID
 

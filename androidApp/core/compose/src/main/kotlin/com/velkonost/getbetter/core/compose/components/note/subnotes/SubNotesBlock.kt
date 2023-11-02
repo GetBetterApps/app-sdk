@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.subnotes
+package com.velkonost.getbetter.core.compose.components.note.subnotes
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
@@ -10,7 +10,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
-import com.velkonost.getbetter.shared.features.diary.model.SubNoteUI
+import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.stringResource
 

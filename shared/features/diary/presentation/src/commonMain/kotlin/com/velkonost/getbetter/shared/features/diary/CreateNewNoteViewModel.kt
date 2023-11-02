@@ -2,6 +2,9 @@ package com.velkonost.getbetter.shared.features.diary
 
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.note.NoteType
+import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
+import com.velkonost.getbetter.shared.core.model.ui.TagUI
+import com.velkonost.getbetter.shared.core.model.ui.asExternalModels
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
@@ -11,9 +14,6 @@ import com.velkonost.getbetter.shared.core.vm.resource.MessageType
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteEvent
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteViewState
-import com.velkonost.getbetter.shared.features.diary.model.SubNoteUI
-import com.velkonost.getbetter.shared.features.diary.model.TagUI
-import com.velkonost.getbetter.shared.features.diary.model.asExternalModels
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource

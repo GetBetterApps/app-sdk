@@ -20,6 +20,8 @@ dependencies {
     implementation(libs.androidx.compose.paging)
 
     implementation(projects.shared.core.vm)
+    implementation(projects.shared.core.util)
     implementation(projects.shared.core.model)
+
     implementation(projects.shared.resources)
 }

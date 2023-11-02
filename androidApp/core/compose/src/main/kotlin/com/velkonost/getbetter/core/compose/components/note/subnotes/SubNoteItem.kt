@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.subnotes
+package com.velkonost.getbetter.core.compose.components.note.subnotes
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,7 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.velkonost.getbetter.shared.features.diary.model.SubNoteUI
+import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource

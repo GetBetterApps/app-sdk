@@ -22,6 +22,15 @@ internal constructor(
     @NativeCoroutinesState
     private val note = savedStateHandle.note.stateInWhileSubscribed(initialValue = null)
 
+    init {
+        launchJob {
+            note.collect {
+                emit(viewState.value.copy(note = it))
+            }
+        }
+
+    }
+
     override fun dispatch(action: NoteDetailAction) = when (action) {
         is NavigateBack -> emit(action)
         else -> {}

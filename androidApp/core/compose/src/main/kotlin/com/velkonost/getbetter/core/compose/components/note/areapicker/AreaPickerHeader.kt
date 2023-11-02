@@ -1,5 +1,6 @@
-package com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.subnotes
+package com.velkonost.getbetter.core.compose.components.note.areapicker
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -27,20 +28,24 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.shared.core.model.Emoji
+import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.note.NoteType
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
-fun SubNotesHeader(
+fun AreaPickerHeader(
     modifier: Modifier = Modifier,
-    isSubNotesBlockVisible: MutableState<Boolean>,
+    selectedArea: Area?,
+    isAreaPickerVisible: MutableState<Boolean>,
+    noteType: NoteType
 ) {
-
     val interactionSource = remember { MutableInteractionSource() }
     val areaArrowRotationAngle by animateFloatAsState(
-        targetValue = if (isSubNotesBlockVisible.value) -90F else 90F,
+        targetValue = if (isAreaPickerVisible.value) -90F else 90F,
         animationSpec = tween(durationMillis = 500, easing = FastOutLinearInEasing),
         label = ""
     )
@@ -56,22 +61,50 @@ fun SubNotesHeader(
                 indication = null
             ) {
                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                isSubNotesBlockVisible.value = !isSubNotesBlockVisible.value
+                isAreaPickerVisible.value = !isAreaPickerVisible.value
             },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        Text(
-            modifier = modifier.fillMaxWidth(0.6f),
-            text = stringResource(
-                resource = SharedR.strings.create_note_subnote_title
-            ),
-            maxLines = 1,
-            textAlign = TextAlign.Start,
-            overflow = TextOverflow.Ellipsis,
-            color = colorResource(resource = SharedR.colors.text_primary),
-            style = MaterialTheme.typography.titleMedium
-        )
+        AnimatedContent(targetState = selectedArea, label = "") { area ->
+            if (area == null) {
+                Text(
+                    modifier = modifier.fillMaxWidth(),
+                    text = stringResource(
+                        resource =
+                        if (noteType == NoteType.Default) SharedR.strings.select_area_for_note
+                        else SharedR.strings.select_area_for_goal
+                    ),
+                    maxLines = 1,
+                    textAlign = TextAlign.Center,
+                    overflow = TextOverflow.Ellipsis,
+                    color = colorResource(resource = SharedR.colors.text_primary),
+                    style = MaterialTheme.typography.titleMedium
+                )
+            } else {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        modifier = modifier.size(32.dp),
+                        painter = painterResource(imageResource = Emoji.getIconById(area.emojiId!!)),
+                        contentDescription = null
+                    )
+
+                    Text(
+                        modifier = modifier
+                            .padding(start = 12.dp)
+                            .fillMaxWidth(0.8f),
+                        text = area.name,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        color = colorResource(resource = SharedR.colors.text_primary),
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                }
+            }
+        }
 
         Spacer(modifier = modifier.weight(1f))
 
@@ -86,5 +119,4 @@ fun SubNotesHeader(
             )
         )
     }
-
 }

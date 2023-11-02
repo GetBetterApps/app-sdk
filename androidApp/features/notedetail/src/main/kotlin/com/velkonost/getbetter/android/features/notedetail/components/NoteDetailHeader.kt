@@ -33,7 +33,6 @@ fun NoteDetailHeader(
     ) {
         Image(
             modifier = modifier
-                .padding(start = 20.dp)
                 .size(42.dp)
                 .background(
                     color = colorResource(resource = SharedR.colors.background_icon),

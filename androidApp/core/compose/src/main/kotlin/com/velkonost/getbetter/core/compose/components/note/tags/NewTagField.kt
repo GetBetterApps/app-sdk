@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.tags
+package com.velkonost.getbetter.core.compose.components.note.tags
 
 import android.view.KeyEvent
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -21,7 +21,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.velkonost.getbetter.shared.features.diary.model.TagUI
+import com.velkonost.getbetter.shared.core.model.ui.TagUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 

@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.areapicker
+package com.velkonost.getbetter.core.compose.components.note.areapicker
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.subnotes
+package com.velkonost.getbetter.core.compose.components.note.subnotes
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
