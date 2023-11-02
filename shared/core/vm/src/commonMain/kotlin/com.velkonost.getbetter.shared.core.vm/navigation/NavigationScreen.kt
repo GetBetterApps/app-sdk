@@ -9,7 +9,10 @@ sealed class NavigationScreen(val route: String) {
     data object DiaryNavScreen : NavigationScreen(DIARY_DESTINATION)
     data object AddAreaNavScreen : NavigationScreen(ADD_AREA_DESTINATION)
     data object AreaDetailNavScreen : NavigationScreen(AREA_DETAIL_DESTINATION)
-    data object NoteDetailNavScreen : NavigationScreen(NOTE_DETAIL_DESTINATION)
+    data object NoteDetailNavScreen : NavigationScreen(
+        "$NOTE_DETAIL_DESTINATION/?$ARG_NOTE={$ARG_NOTE}"
+    )
+
     data object CalendarsNavScreen : NavigationScreen(CALENDARS_DESTINATION)
     data object WisdomNavScreen : NavigationScreen(WISDOM_DESTINATION)
     data object ProfileNavScreen : NavigationScreen(PROFILE_DESTINATION)

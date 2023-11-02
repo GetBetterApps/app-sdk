@@ -3,6 +3,7 @@ package com.velkonost.getbetter.shared.features.notedetail.presentation
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.SavedStateHandle
+import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NavigateBack
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailAction
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailEvent
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailNavigation
@@ -22,6 +23,7 @@ internal constructor(
     private val note = savedStateHandle.note.stateInWhileSubscribed(initialValue = null)
 
     override fun dispatch(action: NoteDetailAction) = when (action) {
+        is NavigateBack -> emit(action)
         else -> {}
     }
 

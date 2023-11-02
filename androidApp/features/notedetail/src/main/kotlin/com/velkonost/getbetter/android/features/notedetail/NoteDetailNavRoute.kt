@@ -15,7 +15,7 @@ object NoteDetailNavRoute : NavRoute<NoteDetailViewModel> {
         get() = NavigationScreen.NoteDetailNavScreen.route
 
     @Composable
-    override fun Content(viewModel: NoteDetailViewModel) = NoteDetailScreen()
+    override fun Content(viewModel: NoteDetailViewModel) = NoteDetailScreen(viewModel = viewModel)
 
     override val viewModel: NoteDetailViewModel
         @Composable get() = koinViewModel()

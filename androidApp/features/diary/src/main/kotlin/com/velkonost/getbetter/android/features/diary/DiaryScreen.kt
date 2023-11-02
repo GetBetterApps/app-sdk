@@ -38,6 +38,7 @@ import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaEven
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteEvent
 import com.velkonost.getbetter.shared.features.diary.contracts.DiaryAction
+import com.velkonost.getbetter.shared.features.diary.contracts.NoteClick
 import com.velkonost.getbetter.shared.features.diary.contracts.NotesViewState
 import com.velkonost.getbetter.shared.features.diary.contracts.TasksViewState
 import kotlinx.coroutines.flow.collectLatest
@@ -97,7 +98,7 @@ fun DiaryScreen(
                 areasState = state.areasViewState,
                 tasksState = state.tasksViewState,
                 noteClick = {
-
+                    viewModel.dispatch(NoteClick(it))
                 },
                 areaClick = {
                     scope.launch {
