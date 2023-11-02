@@ -67,7 +67,7 @@ struct AddSubNoteItem: View {
                 Image(uiImage: SharedR.images().ic_plus.toUIImage()!)
                     .resizable()
                     .renderingMode(.template)
-                    .foregroundColor(.iconActive)
+                    .foregroundColor(.textLight)
                     .frame(width: 24, height: 24, alignment: .center)
                     .onTapGesture {
                         onAddSubNote()

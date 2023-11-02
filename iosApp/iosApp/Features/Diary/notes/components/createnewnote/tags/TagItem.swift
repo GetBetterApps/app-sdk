@@ -24,14 +24,14 @@ struct TagItem : View {
         HStack(spacing: 0) {
             Text(tag.text)
                 .style(.bodyMedium)
-                .foregroundColor(.textSecondaryTitle)
+                .foregroundColor(.textLight)
                 .frame(height: 30, alignment: .center)
             
             if onTagDelete != nil {
                 Image(uiImage: SharedR.images().ic_close.toUIImage()!)
                     .resizable()
                     .renderingMode(.template)
-                    .foregroundColor(.textSecondaryTitle)
+                    .foregroundColor(.textLight)
                     .scaledToFit()
                     .frame(width: 18, height: 18, alignment: .center)
                     .padding(.leading, 4)
