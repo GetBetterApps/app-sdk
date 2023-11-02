@@ -9,5 +9,11 @@ data class NoteDetailViewState(
     val isLoading: Boolean = false,
     val note: Note? = null,
     val newTag: TagUI = TagUI(),
-    val newSubNote: SubNoteUI = SubNoteUI()
-) : UIContract.State
+    val newSubNote: SubNoteUI = SubNoteUI(),
+    val noteState: State = State.View,
+
+    ) : UIContract.State
+
+enum class State {
+    View, Editing
+}

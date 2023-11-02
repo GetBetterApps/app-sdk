@@ -57,12 +57,13 @@ fun NoteDetailScreen(
     val state by viewModel.viewState.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
     val interactionSource = remember { MutableInteractionSource() }
-    val isSubNotesBlockVisible = remember { mutableStateOf(false) }
+    val isSubNotesBlockVisible = remember { mutableStateOf(true) }
 
     val areaDetailSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true
     )
+
     val selectedAreaId = remember { mutableStateOf<Int?>(null) }
 
     Box(modifier = modifier.fillMaxSize()) {

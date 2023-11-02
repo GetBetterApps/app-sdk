@@ -126,12 +126,10 @@ internal constructor(
         _notesPagingConfig.page = 0
         _notesPagingConfig.lastPageReached = false
 
-        val notesViewState = viewState.value.notesViewState.copy(items = emptyList())
-        emit(viewState.value.copy(notesViewState = notesViewState))
-        fetchNotes()
+        fetchNotes(resetList = true)
     }
 
-    private fun fetchNotes() {
+    private fun fetchNotes(resetList: Boolean = false) {
         if (_notesPagingConfig.lastPageReached || notesLoadingJob?.isActive == true) return
 
         notesLoadingJob = launchJob {
@@ -149,7 +147,9 @@ internal constructor(
                         _notesPagingConfig.page++
 
                         items?.let {
-                            val allItems = viewState.value.notesViewState.items.plus(it)
+                            val allItems =
+                                if (resetList) it
+                                else viewState.value.notesViewState.items.plus(it)
                             val notesViewState =
                                 viewState.value.notesViewState.copy(
                                     isLoading = false,
