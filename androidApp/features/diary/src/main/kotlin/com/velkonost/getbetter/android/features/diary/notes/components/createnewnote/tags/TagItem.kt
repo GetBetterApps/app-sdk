@@ -52,7 +52,7 @@ fun RowScope.TagItem(
                 .align(Alignment.CenterVertically),
             text = tag.text,
             textAlign = TextAlign.Center,
-            color = colorResource(resource = SharedR.colors.text_secondary),
+            color = colorResource(resource = SharedR.colors.text_light),
             style = MaterialTheme.typography.bodyMedium
         )
 
@@ -71,7 +71,7 @@ fun RowScope.TagItem(
                 painter = painterResource(imageResource = SharedR.images.ic_close),
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(
-                    color = colorResource(resource = SharedR.colors.text_secondary)
+                    color = colorResource(resource = SharedR.colors.text_light)
                 )
             )
         }

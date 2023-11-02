@@ -53,7 +53,7 @@ fun AppDatePickerDialog(
                 Text(
                     text = stringResource(resource = SharedR.strings.confirm),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = colorResource(resource = SharedR.colors.text_light)
+                    color = colorResource(resource = SharedR.colors.text_title)
                 )
             }
         },
@@ -69,7 +69,7 @@ fun AppDatePickerDialog(
                 Text(
                     text = stringResource(resource = SharedR.strings.cancel),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = colorResource(resource = SharedR.colors.text_light)
+                    color = colorResource(resource = SharedR.colors.text_title)
                 )
             }
         },

@@ -45,7 +45,7 @@ internal fun MainSnackBarHost(snackBarHostState: SnackbarHostState) {
                 ) {
                     Text(
                         text = snackBarData.visuals.message,
-                        color = colorResource(resource = SharedR.colors.text_title),
+                        color = colorResource(resource = SharedR.colors.text_light),
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier
                             .fillMaxWidth()

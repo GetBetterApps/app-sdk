@@ -66,7 +66,7 @@ fun ColumnScope.RequiredLevelRow(
                     },
                 painter = painterResource(imageResource = SharedR.images.ic_plus),
                 contentDescription = null,
-                colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_active))
+                colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.text_light))
             )
 
             Text(
@@ -94,7 +94,7 @@ fun ColumnScope.RequiredLevelRow(
                     },
                 painter = painterResource(imageResource = SharedR.images.ic_plus),
                 contentDescription = null,
-                colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_active))
+                colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.text_light))
             )
         }
     }

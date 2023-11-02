@@ -107,7 +107,7 @@ fun AddSubNoteItem(
                     ) { onAddSubNote.invoke() },
                 painter = painterResource(imageResource = SharedR.images.ic_plus),
                 contentDescription = null,
-                colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_active))
+                colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.text_light))
             )
         }
 
