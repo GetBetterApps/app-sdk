@@ -180,6 +180,7 @@ extension DiaryScreen {
                     }
                     case _ as CreateNewNoteEventCreatedSuccess: do {
                         showingCreateNewNoteSheet = false
+                        viewModel.refreshData()
                     }
                     default:
                         break
