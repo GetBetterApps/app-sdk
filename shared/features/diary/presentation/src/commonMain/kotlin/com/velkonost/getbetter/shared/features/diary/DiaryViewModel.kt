@@ -15,6 +15,8 @@ import com.velkonost.getbetter.shared.features.diary.contracts.DiaryEvent
 import com.velkonost.getbetter.shared.features.diary.contracts.DiaryNavigation
 import com.velkonost.getbetter.shared.features.diary.contracts.DiaryViewState
 import com.velkonost.getbetter.shared.features.diary.contracts.NavigateToAddArea
+import com.velkonost.getbetter.shared.features.diary.contracts.NavigateToNoteDetail
+import com.velkonost.getbetter.shared.features.diary.contracts.NoteClick
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -75,6 +77,7 @@ internal constructor(
         is CreateNewAreaAction -> dispatchCreateNewAreaAction(action)
         is CreateNewNoteAction -> dispatchCreateNewNoteAction(action)
         is AddAreaClick -> emit(NavigateToAddArea)
+        is NoteClick -> emit(NavigateToNoteDetail(action.value))
         is DiaryAction.NotesLoadNextPage -> fetchNotes()
     }
 

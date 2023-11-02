@@ -20,8 +20,10 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.koin.core)
+                implementation(libs.squareup.okio)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.kotlinx.coroutines.core)
+
                 api(libs.kermit.log)
 
                 implementation(projects.shared.core.network)

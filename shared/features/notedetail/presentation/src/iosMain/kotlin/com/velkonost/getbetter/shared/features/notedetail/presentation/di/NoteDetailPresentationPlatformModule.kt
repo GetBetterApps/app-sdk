@@ -1,12 +1,24 @@
 package com.velkonost.getbetter.shared.features.notedetail.presentation.di
 
+import com.velkonost.getbetter.shared.core.vm.SavedStateHandle
 import com.velkonost.getbetter.shared.features.notedetail.presentation.NoteDetailViewModel
 import org.koin.core.Koin
-import org.koin.core.module.dsl.factoryOf
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
+private const val SAVED_STATE_HANDLE_NAMED_QUALIFIER = "NoteDetailViewModel-SavedStateHandle"
+
 internal actual val NoteDetailPresentationPlatformModule = module {
-    factoryOf(::NoteDetailViewModel)
+    single(named(SAVED_STATE_HANDLE_NAMED_QUALIFIER)) {
+        SavedStateHandle()
+    }
+
+    factory {
+        NoteDetailViewModel(
+            notesRepository = get(),
+            savedStateHandle = get(named(SAVED_STATE_HANDLE_NAMED_QUALIFIER))
+        )
+    }
 }
 
 @Suppress("unused")

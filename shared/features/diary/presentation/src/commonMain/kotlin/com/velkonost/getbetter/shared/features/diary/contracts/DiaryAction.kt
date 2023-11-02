@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.diary.contracts
 
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import com.velkonost.getbetter.shared.features.diary.model.SubNoteUI
 
@@ -10,6 +11,8 @@ sealed interface DiaryAction : UIContract.Action {
 }
 
 data object AddAreaClick : DiaryAction
+
+data class NoteClick(val value: Note) : DiaryAction
 
 sealed interface CreateNewAreaAction : DiaryAction {
     data object Open : CreateNewAreaAction

@@ -35,3 +35,5 @@ const val PROFILE_DESTINATION: String = "$NAV_PREFIX.profile/ProfileScreen"
 
 const val HOME_DESTINATION: String = "$NAV_PREFIX.home/HomeScreen"
 const val DETAIL_DESTINATION: String = "$NAV_PREFIX.detail/DetailScreen"
+
+const val ARG_NOTE: String = "arg_note"
