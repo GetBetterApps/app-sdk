@@ -49,6 +49,7 @@ kotlin {
             export(projects.shared.features.diary.presentation)
             export(projects.shared.features.addarea.presentation)
             export(projects.shared.features.areadetail.presentation)
+            export(projects.shared.features.notedetail.presentation)
             export(projects.shared.features.calendars.presentation)
             export(projects.shared.features.wisdom.presentation)
             export(projects.shared.features.profile.presentation)
@@ -88,6 +89,7 @@ kotlin {
                 implementation(projects.shared.features.diary.presentation)
                 implementation(projects.shared.features.addarea.presentation)
                 implementation(projects.shared.features.areadetail.presentation)
+                implementation(projects.shared.features.notedetail.presentation)
                 implementation(projects.shared.features.calendars.presentation)
                 implementation(projects.shared.features.wisdom.presentation)
 
@@ -132,6 +134,7 @@ kotlin {
                 api(projects.shared.features.diary.presentation)
                 api(projects.shared.features.addarea.presentation)
                 api(projects.shared.features.areadetail.presentation)
+                api(projects.shared.features.notedetail.presentation)
                 api(projects.shared.features.calendars.presentation)
                 api(projects.shared.features.wisdom.presentation)
                 api(projects.shared.features.profile.presentation)

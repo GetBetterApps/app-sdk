@@ -64,6 +64,7 @@ include(
     ":shared:features:diary:presentation",
     ":shared:features:addarea:presentation",
     ":shared:features:areadetail:presentation",
+    ":shared:features:notedetail:presentation",
 
     ":androidApp:app",
     ":androidApp:activity",
