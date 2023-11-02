@@ -81,6 +81,7 @@ include(
     ":androidApp:features:diary",
     ":androidApp:features:addarea",
     ":androidApp:features:areadetail",
+    ":androidApp:features:notedetail",
     ":androidApp:features:calendars",
     ":androidApp:features:wisdom",
     ":androidApp:features:profile",

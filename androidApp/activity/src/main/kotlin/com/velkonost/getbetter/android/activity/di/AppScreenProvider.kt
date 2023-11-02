@@ -7,6 +7,7 @@ import com.velkonost.getbetter.android.features.detail.DetailNavRoute
 import com.velkonost.getbetter.android.features.diary.DiaryNavRoute
 import com.velkonost.getbetter.android.features.home.HomeNavRoute
 import com.velkonost.getbetter.android.features.home.WisdomNavRoute
+import com.velkonost.getbetter.android.features.notedetail.NoteDetailNavRoute
 import com.velkonost.getbetter.android.features.profile.ProfileNavRoute
 import com.velkonost.getbetter.android.features.social.SocialNavRoute
 import com.velkonost.getbetter.android.features.splash.SplashNavRoute
@@ -21,6 +22,8 @@ val AppScreens = setOf(
     CalendarsNavRoute,
     ProfileNavRoute,
     WisdomNavRoute,
+
+    NoteDetailNavRoute,
 
     HomeNavRoute,
     DetailNavRoute

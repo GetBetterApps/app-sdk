@@ -9,6 +9,7 @@ sealed class NavigationScreen(val route: String) {
     data object DiaryNavScreen : NavigationScreen(DIARY_DESTINATION)
     data object AddAreaNavScreen : NavigationScreen(ADD_AREA_DESTINATION)
     data object AreaDetailNavScreen : NavigationScreen(AREA_DETAIL_DESTINATION)
+    data object NoteDetailNavScreen : NavigationScreen(NOTE_DETAIL_DESTINATION)
     data object CalendarsNavScreen : NavigationScreen(CALENDARS_DESTINATION)
     data object WisdomNavScreen : NavigationScreen(WISDOM_DESTINATION)
     data object ProfileNavScreen : NavigationScreen(PROFILE_DESTINATION)
@@ -27,6 +28,7 @@ const val SOCIAL_DESTINATION: String = "$NAV_PREFIX.social/SocialScreen"
 const val DIARY_DESTINATION: String = "$NAV_PREFIX.diary/DiaryScreen"
 const val ADD_AREA_DESTINATION: String = "$NAV_PREFIX.diary/AddAreaScreen"
 const val AREA_DETAIL_DESTINATION: String = "$NAV_PREFIX.diary/AreaDetailScreen"
+const val NOTE_DETAIL_DESTINATION: String = "$NAV_PREFIX.diary/NoteDetailScreen"
 const val CALENDARS_DESTINATION: String = "$NAV_PREFIX.calendars/CalendarsScreen"
 const val WISDOM_DESTINATION: String = "$NAV_PREFIX.wisdom/WisdomScreen"
 const val PROFILE_DESTINATION: String = "$NAV_PREFIX.profile/ProfileScreen"

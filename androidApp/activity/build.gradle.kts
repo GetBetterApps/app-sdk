@@ -24,6 +24,7 @@ dependencies {
     implementation(projects.androidApp.features.calendars)
     implementation(projects.androidApp.features.wisdom)
     implementation(projects.androidApp.features.profile)
+    implementation(projects.androidApp.features.notedetail)
 
     implementation(projects.shared.core.util)
     implementation(projects.shared.core.vm)
