@@ -21,7 +21,9 @@ struct AreaData : View {
     }
     
     var body: some View {
-        PrimaryBox {
+        PrimaryBox(
+            padding: .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
+        ) {
             HStack {
                 Image(uiImage: Emoji.companion.getIconById(id: Int32(truncating: area.emojiId!)).toUIImage()!)
                     .resizable()
@@ -45,6 +47,5 @@ struct AreaData : View {
                 onClick()
             }
         }
-        .padding(0)
     }
 }
