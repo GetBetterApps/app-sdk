@@ -5,8 +5,10 @@ import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
+import com.velkonost.getbetter.shared.core.model.ui.asExternalModels
 import com.velkonost.getbetter.shared.core.model.ui.asTags
 import com.velkonost.getbetter.shared.core.model.ui.asUI
+import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.SavedStateHandle
@@ -16,7 +18,9 @@ import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailEvent
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailNavigation
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailViewState
+import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.State
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 
 class NoteDetailViewModel
@@ -35,7 +39,7 @@ internal constructor(
     init {
         launchJob {
             note.collectLatest { note ->
-                note?.let { updateData(it) }
+                note?.updateUI()
             }
         }
 
@@ -45,17 +49,88 @@ internal constructor(
         is NavigateBack -> emit(action)
         is NoteDetailAction.AreaChanged -> obtainAreaChanged()
         is NoteDetailAction.TextChanged -> obtainTextChanged(action.value)
+        is NoteDetailAction.SetCompletionDate -> obtainSetCompletionDate(action.value)
         is NoteDetailAction.NewTagTextChanged -> obtainNewTagTextChanged(action.value)
         is NoteDetailAction.AddNewTag -> addNewTag()
         is NoteDetailAction.RemoveTag -> removeTag(action.value)
         is NoteDetailAction.NewSubNoteTextChanged -> obtainNewSubNoteTextChanged(action.value)
         is NoteDetailAction.AddSubNote -> addSubNote()
         is NoteDetailAction.RemoveSubNote -> removeSubNote(action.value)
-        else -> {}
+        is NoteDetailAction.StartEditClick -> obtainStartEdit()
+        is NoteDetailAction.CancelEditClick -> obtainCancelEdit()
+        is NoteDetailAction.EndEditClick -> obtainSave()
+        is NoteDetailAction.DeleteClick -> obtainDelete()
+        is NoteDetailAction.CompleteClick -> TODO()
+        is NoteDetailAction.UnCompleteClick -> TODO()
     }
 
     private fun obtainTextChanged(value: String) {
         emit(viewState.value.copy(noteText = value))
+    }
+
+    private fun obtainSetCompletionDate(value: Long?) {
+        emit(viewState.value.copy(expectedCompletionDate = value))
+    }
+
+    private fun obtainStartEdit() {
+        emit(viewState.value.copy(noteState = State.Editing))
+    }
+
+    private fun obtainCancelEdit() {
+        val initialItem = viewState.value.initialItem
+
+        checkNotNull(initialItem) { return }
+
+        initialItem.updateUI()
+        emit(viewState.value.copy(noteState = State.View))
+    }
+
+    private fun obtainSave() {
+        emit(viewState.value.copy(noteState = State.View))
+
+        launchJob {
+            notesRepository.editNote(
+                noteId = viewState.value.initialItem!!.id,
+                text = viewState.value.noteText,
+                tags = viewState.value.tags.map { it.text },
+                subNotes = viewState.value.subNotes.asExternalModels,
+                completionDate = null,
+                expectedCompletionDate = viewState.value.expectedCompletionDate
+            ).collect { result ->
+                with(result) {
+                    isLoading {
+                        emit(viewState.value.copy(isLoading = it))
+                    }
+                    onSuccess { note ->
+                        note?.updateUI()
+                        emit(NoteDetailEvent.EditSuccess)
+                    }
+                    onFailureWithMsg { _, message ->
+                        message?.let { emit(it) }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun obtainDelete() {
+        launchJob {
+            notesRepository.deleteNote(
+                noteId = viewState.value.initialItem!!.id
+            ).collect { result ->
+                with(result) {
+                    isLoading {
+                        emit(viewState.value.copy(isLoading = it))
+                    }
+                    onSuccess {
+                        emit(NoteDetailEvent.DeleteSuccess)
+                    }
+                    onFailureWithMsg { _, message ->
+                        message?.let { emit(it) }
+                    }
+                }
+            }
+        }
     }
 
     private fun obtainNewTagTextChanged(value: String) {
@@ -142,21 +217,62 @@ internal constructor(
         }
     }
 
-    private fun updateData(value: Note) {
+    private fun completeGoal() {
+        launchJob {
+            notesRepository.completeGoal(
+                noteId = viewState.value.initialItem!!.id
+            ).collect { result ->
+                with(result) {
+                    isLoading {
+                        emit(viewState.value.copy(isCompleteGoalLoading = it))
+                    }
+                    onSuccess {
+                        it?.updateUI()
+                    }
+                    onFailureWithMsg { _, message ->
+                        message?.let { emit(it) }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun unCompleteGoal() {
+        launchJob {
+            notesRepository.(
+                    noteId = viewState.value.initialItem!!.id
+                    ).collect { result ->
+                with(result) {
+                    isLoading {
+                        emit(viewState.value.copy(isCompleteGoalLoading = it))
+                    }
+                    onSuccess {
+                        it?.updateUI()
+                    }
+                    onFailureWithMsg { _, message ->
+                        message?.let { emit(it) }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun Note.updateUI() {
         emit(
             viewState.value.copy(
-                isNotePrivate = value.isPrivate,
-                noteType = value.noteType,
-                area = value.area,
-                noteText = value.text,
-                tags = value.tags.asTags,
+                initialItem = this,
+                isNotePrivate = isPrivate,
+                noteType = noteType,
+                area = area,
+                noteText = text,
+                tags = tags.asTags,
                 newTag = TagUI(),
-                subNotes = value.subNotes.asUI,
-                expectedCompletionDate = value.expectedCompletionDate,
-                expectedCompletionDateStr = value.expectedCompletionDateStr,
-                completionDate = value.completionDate,
-                completionDateStr = value.completionDateStr,
-                allowEdit = value.allowEdit
+                subNotes = subNotes.asUI,
+                expectedCompletionDate = expectedCompletionDate,
+                expectedCompletionDateStr = expectedCompletionDateStr,
+                completionDate = completionDate,
+                completionDateStr = completionDateStr,
+                allowEdit = allowEdit
             )
         )
     }

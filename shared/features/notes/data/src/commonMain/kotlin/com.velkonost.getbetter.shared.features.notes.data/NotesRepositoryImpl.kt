@@ -68,6 +68,7 @@ constructor(
                 noteId = noteId,
                 noteText = text,
                 noteTags = tags,
+                noteMedia = emptyList(),
                 completionDate = completionDate,
                 expectedCompletionDate = expectedCompletionDate,
                 subNotes = subNotes.map {

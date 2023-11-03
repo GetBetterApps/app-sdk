@@ -18,6 +18,7 @@ import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,7 +29,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.areadetail.AreaDetailScreen
+import com.velkonost.getbetter.android.features.notedetail.components.ActionButtons
 import com.velkonost.getbetter.android.features.notedetail.components.NoteDetailHeader
+import com.velkonost.getbetter.core.compose.components.AppAlertDialog
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
@@ -40,11 +43,13 @@ import com.velkonost.getbetter.shared.core.model.note.NoteType
 import com.velkonost.getbetter.shared.features.notedetail.presentation.NoteDetailViewModel
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NavigateBack
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailAction
+import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailEvent
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.State
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -59,6 +64,8 @@ fun NoteDetailScreen(
     val interactionSource = remember { MutableInteractionSource() }
     val isSubNotesBlockVisible = remember { mutableStateOf(true) }
 
+
+    val confirmDeleteNoteDialog = remember { mutableStateOf(false) }
     val areaDetailSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true
@@ -140,7 +147,7 @@ fun NoteDetailScreen(
                             initialValue = state.expectedCompletionDate,
                             initialValueStr = state.expectedCompletionDateStr,
                             onSetCompletionDate = {
-
+                                viewModel.dispatch(NoteDetailAction.SetCompletionDate(it))
                             }
                         )
                     }
@@ -189,6 +196,30 @@ fun NoteDetailScreen(
                         )
                     }
                 }
+
+                item {
+                    AnimatedVisibility(
+                        modifier = modifier.padding(top = 12.dp),
+                        visible = state.allowEdit
+                    ) {
+                        ActionButtons(
+                            noteState = state.noteState,
+                            onEditClick = {
+                                viewModel.dispatch(NoteDetailAction.StartEditClick)
+                            },
+                            onDeleteClick = {
+                                confirmDeleteNoteDialog.value = true
+
+                            },
+                            onSaveClick = {
+                                viewModel.dispatch(NoteDetailAction.EndEditClick)
+                            },
+                            onCancelSaveClick = {
+                                viewModel.dispatch(NoteDetailAction.CancelEditClick)
+                            }
+                        )
+                    }
+                }
             }
 
 
@@ -202,5 +233,33 @@ fun NoteDetailScreen(
             viewModel.dispatch(NoteDetailAction.AreaChanged)
         }
     )
+
+    if (confirmDeleteNoteDialog.value) {
+        AppAlertDialog(
+            title = stringResource(resource = SharedR.strings.add_area_confirm_delete_title),
+            text = stringResource(resource = SharedR.strings.add_area_confirm_delete_text),
+            confirmTitle = stringResource(resource = SharedR.strings.confirm),
+            cancelTitle = stringResource(resource = SharedR.strings.cancel),
+            onDismiss = { confirmDeleteNoteDialog.value = false },
+            onConfirmClick = {
+                viewModel.dispatch(NoteDetailAction.DeleteClick)
+                confirmDeleteNoteDialog.value = false
+            }
+        )
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.events.collectLatest {
+            when (it) {
+                is NoteDetailEvent.DeleteSuccess -> {
+                    viewModel.dispatch(NavigateBack)
+                }
+
+                is NoteDetailEvent.EditSuccess -> {
+                    //TODO
+                }
+            }
+        }
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.notedetail.presentation.contract
 
 import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.note.NoteType
 import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
@@ -9,6 +10,10 @@ import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 
 data class NoteDetailViewState(
     val isLoading: Boolean = false,
+    val isCompleteGoalLoading: Boolean = false,
+
+    val initialItem: Note? = null,
+
     val noteState: State = State.View,
 
     val noteType: NoteType? = null,

@@ -9,6 +9,8 @@ sealed interface NoteDetailAction : UIContract.Action {
 
     data class TextChanged(val value: String) : NoteDetailAction
 
+    data class SetCompletionDate(val value: Long?) : NoteDetailAction
+
     data class NewTagTextChanged(val value: String) : NoteDetailAction
 
     data object AddNewTag : NoteDetailAction
