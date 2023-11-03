@@ -6,3 +6,9 @@ data class TagUI(
     val id: String = randomUUID(),
     val text: String = ""
 )
+
+val String.asTag: TagUI
+    get() = TagUI(text = this)
+
+val List<String>.asTags: List<TagUI>
+    get() = map { it.asTag }

@@ -8,3 +8,5 @@ sealed interface NoteDetailAction : UIContract.Action
 data object NavigateBack : NoteDetailAction, NoteDetailNavigation {
     override val event: NavigationEvent = NavigationEvent.NavigateUp()
 }
+
+data object AreaChanged : NoteDetailAction

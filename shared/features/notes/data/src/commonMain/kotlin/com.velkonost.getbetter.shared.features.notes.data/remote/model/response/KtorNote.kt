@@ -46,7 +46,10 @@ data class KtorNote(
     val ktorArea: KtorArea,
 
     @SerialName("subNotes")
-    val subNotes: List<KtorSubNote> = emptyList()
+    val subNotes: List<KtorSubNote> = emptyList(),
+
+    @SerialName("allowEdit")
+    val allowEdit: Boolean
 )
 
 fun KtorNote.asExternalModel() =
@@ -64,4 +67,5 @@ fun KtorNote.asExternalModel() =
         isPrivate = isPrivate,
         subNotes = subNotes.asExternalModel(),
         area = ktorArea.asExternalModel(),
+        allowEdit = allowEdit
     )

@@ -18,3 +18,12 @@ val SubNoteUI.asExternalModel: SubNote
         completionDate = null,
         expectedCompletionDate = null
     )
+
+val SubNote.asUI: SubNoteUI
+    get() = SubNoteUI(
+        id = id.toString(),
+        text = text
+    )
+
+val List<SubNote>.asUI: List<SubNoteUI>
+    get() = map { it.asUI }
