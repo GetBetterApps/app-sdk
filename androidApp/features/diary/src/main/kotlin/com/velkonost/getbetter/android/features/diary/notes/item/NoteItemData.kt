@@ -63,7 +63,7 @@ fun NoteItemData(
                     )
                     .padding(horizontal = 4.dp)
                     .wrapContentHeight(),
-                text = completionDate!!,
+                text = completionDate ?: "",
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.labelSmall,
                 color = colorResource(resource = SharedR.colors.text_primary)

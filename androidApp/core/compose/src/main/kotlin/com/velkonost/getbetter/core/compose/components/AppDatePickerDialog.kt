@@ -24,12 +24,12 @@ import java.util.Locale
 @Composable
 fun AppDatePickerDialog(
     title: String,
+    initialValue: Long? = null,
     onConfirm: (Long?, String) -> Unit,
     onDecline: () -> Unit
 ) {
 
     val datePickerState = rememberDatePickerState()
-
     val selectedDate = datePickerState.selectedDateMillis?.let {
         convertMillisToDate(it)
     } ?: ""

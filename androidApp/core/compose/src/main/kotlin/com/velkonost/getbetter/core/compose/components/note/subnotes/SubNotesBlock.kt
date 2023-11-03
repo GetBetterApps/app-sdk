@@ -19,6 +19,7 @@ fun SubNotesBlock(
     modifier: Modifier = Modifier,
     items: List<SubNoteUI>,
     newSubNote: SubNoteUI,
+    onlyView: Boolean = false,
     isSubNotesBlockVisible: MutableState<Boolean>,
     onNewSubNoteChanged: (String) -> Unit,
     onAddNewSubNote: () -> Unit,
@@ -35,37 +36,24 @@ fun SubNotesBlock(
                     Column(
                         modifier = modifier.padding(bottom = 16.dp),
                         verticalArrangement = Arrangement.spacedBy(6.dp),
-//                        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp)
                     ) {
                         subNotes.forEach { item ->
                             SubNoteItem(
                                 item = item,
+                                onlyView = onlyView,
                                 onDeleteSubNote = onSubNoteDelete
                             )
                         }
 
-                        AddSubNoteItem(
-                            value = newSubNote.text,
-                            placeholderText = stringResource(resource = SharedR.strings.create_note_subnote_hint),
-                            onValueChanged = onNewSubNoteChanged,
-                            onAddSubNote = onAddNewSubNote
-                        )
+                        AnimatedVisibility(visible = !onlyView) {
+                            AddSubNoteItem(
+                                value = newSubNote.text,
+                                placeholderText = stringResource(resource = SharedR.strings.create_note_subnote_hint),
+                                onValueChanged = onNewSubNoteChanged,
+                                onAddSubNote = onAddNewSubNote
+                            )
+                        }
 
-//                        items(subNotes, key = { it.id }) { item ->
-//                            SubNoteItem(
-//                                item = item,
-//                                onDeleteSubNote = onSubNoteDelete
-//                            )
-//                        }
-//
-//                        item {
-//                            AddSubNoteItem(
-//                                value = newSubNote.text,
-//                                placeholderText = stringResource(resource = SharedR.strings.create_note_subnote_hint),
-//                                onValueChanged = onNewSubNoteChanged,
-//                                onAddSubNote = onAddNewSubNote
-//                            )
-//                        }
                     }
                 }
 

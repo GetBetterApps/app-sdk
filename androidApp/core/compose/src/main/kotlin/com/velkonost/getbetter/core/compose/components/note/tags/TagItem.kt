@@ -27,6 +27,7 @@ import dev.icerock.moko.resources.compose.painterResource
 fun RowScope.TagItem(
     modifier: Modifier = Modifier,
     tag: TagUI,
+    onlyView: Boolean = false,
     onTagDelete: ((String) -> Unit)? = null
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -56,7 +57,7 @@ fun RowScope.TagItem(
             style = MaterialTheme.typography.bodyMedium
         )
 
-        if (onTagDelete != null) {
+        if (onTagDelete != null && !onlyView) {
             Image(
                 modifier = modifier
                     .padding(start = 4.dp)

@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.core.compose.components.note.tags
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -24,6 +25,7 @@ fun TagsBlock(
     modifier: Modifier = Modifier,
     tags: List<TagUI>,
     newTag: TagUI,
+    onlyView: Boolean = false,
     onNewTagChanged: (String) -> Unit,
     onAddNewTag: () -> Unit,
     onTagDelete: (String) -> Unit
@@ -54,16 +56,20 @@ fun TagsBlock(
                 tags.forEach { tag ->
                     TagItem(
                         tag = tag,
+                        onlyView = onlyView,
                         onTagDelete = onTagDelete
                     )
                 }
 
-                NewTagField(
-                    value = newTag,
-                    placeholderText = stringResource(resource = SharedR.strings.create_note_tags_hint),
-                    onValueChanged = onNewTagChanged,
-                    onAddNewTag = onAddNewTag
-                )
+                AnimatedVisibility(visible = !onlyView) {
+                    NewTagField(
+                        value = newTag,
+                        placeholderText = stringResource(resource = SharedR.strings.create_note_tags_hint),
+                        onValueChanged = onNewTagChanged,
+                        onAddNewTag = onAddNewTag
+                    )
+                }
+
             }
         }
     }

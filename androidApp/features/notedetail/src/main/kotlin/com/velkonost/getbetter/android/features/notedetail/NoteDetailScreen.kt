@@ -41,6 +41,7 @@ import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
 import com.velkonost.getbetter.shared.features.notedetail.presentation.NoteDetailViewModel
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NavigateBack
+import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.State
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
@@ -127,7 +128,7 @@ fun NoteDetailScreen(
                                 if (note.noteType == NoteType.Default) SharedR.strings.create_note_text_hint
                                 else SharedR.strings.create_goal_text_hint
                             ),
-                            isEnabled = false,
+                            isEnabled = state.noteState == State.Editing,
                             onValueChanged = {
 
                             }
@@ -137,6 +138,9 @@ fun NoteDetailScreen(
                     item {
                         AnimatedVisibility(visible = note.noteType == NoteType.Goal) {
                             CompletionDateBlock(
+                                enabled = state.noteState == State.Editing,
+                                initialValue = note.expectedCompletionDate,
+                                initialValueStr = note.expectedCompletionDateStr,
                                 onSetCompletionDate = {
 
                                 }
@@ -145,26 +149,35 @@ fun NoteDetailScreen(
                     }
 
                     item {
-                        TagsBlock(
-                            tags = note.tags.map { TagUI(text = it) },
-                            newTag = state.newTag,
-                            onNewTagChanged = {
+                        AnimatedVisibility(
+                            visible = note.tags.isNotEmpty() || state.noteState == State.Editing
+                        ) {
+                            TagsBlock(
+                                tags = note.tags.map { TagUI(text = it) },
+                                newTag = state.newTag,
+                                onlyView = state.noteState == State.View,
+                                onNewTagChanged = {
 
-                            },
-                            onAddNewTag = {
+                                },
+                                onAddNewTag = {
 
-                            },
-                            onTagDelete = {
+                                },
+                                onTagDelete = {
 
-                            }
-                        )
+                                }
+                            )
+                        }
                     }
 
                     item {
-                        AnimatedVisibility(visible = note.noteType == NoteType.Goal) {
+                        AnimatedVisibility(
+                            visible = note.noteType == NoteType.Goal
+                                    && (note.subNotes.isNotEmpty() || state.noteState == State.Editing)
+                        ) {
                             SubNotesBlock(
                                 items = note.subNotes.map { SubNoteUI(text = it.text) },
                                 newSubNote = state.newSubNote,
+                                onlyView = state.noteState == State.View,
                                 isSubNotesBlockVisible = isSubNotesBlockVisible,
                                 onAddNewSubNote = {
 

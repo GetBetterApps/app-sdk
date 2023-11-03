@@ -35,6 +35,9 @@ import dev.icerock.moko.resources.desc.StringDesc
 @Composable
 fun CompletionDateBlock(
     modifier: Modifier = Modifier,
+    initialValue: Long? = null,
+    initialValueStr: String? = null,
+    enabled: Boolean = true,
     onSetCompletionDate: (Long?) -> Unit
 ) {
     val context = LocalContext.current
@@ -42,7 +45,7 @@ fun CompletionDateBlock(
     val notSetText = StringDesc
         .Resource(SharedR.strings.create_note_completion_date_hint)
         .toString(context)
-    var date by remember { mutableStateOf(notSetText) }
+    var date by remember { mutableStateOf(initialValueStr ?: notSetText) }
     var showDatePicker by remember { mutableStateOf(false) }
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -59,7 +62,7 @@ fun CompletionDateBlock(
             )
             Spacer(modifier = modifier.weight(1f))
 
-            AnimatedVisibility(visible = date != notSetText) {
+            AnimatedVisibility(visible = date != notSetText && enabled) {
                 Image(
                     modifier = modifier
                         .padding(end = 4.dp)
@@ -90,7 +93,9 @@ fun CompletionDateBlock(
                             interactionSource = interactionSource,
                             indication = null
                         ) {
-                            showDatePicker = true
+                            if (enabled) {
+                                showDatePicker = true
+                            }
                         },
                     text = content,
                     style = MaterialTheme.typography.titleMedium,
@@ -103,6 +108,7 @@ fun CompletionDateBlock(
     if (showDatePicker) {
         AppDatePickerDialog(
             title = stringResource(resource = SharedR.strings.create_note_completion_date_title),
+            initialValue = initialValue,
             onConfirm = { millis, selectedDate ->
                 showDatePicker = false
                 date = selectedDate

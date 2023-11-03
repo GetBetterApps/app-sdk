@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.core.compose.components.note.subnotes
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -32,6 +33,7 @@ import dev.icerock.moko.resources.compose.painterResource
 fun SubNoteItem(
     modifier: Modifier = Modifier,
     item: SubNoteUI,
+    onlyView: Boolean = false,
     onDeleteSubNote: (SubNoteUI) -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -66,30 +68,33 @@ fun SubNoteItem(
 
         Spacer(modifier = modifier.weight(1f))
 
-        Box(
-            modifier = modifier
-                .padding(end = 12.dp)
-                .size(36.dp)
-                .background(
-                    color = colorResource(resource = SharedR.colors.background_item),
-                    shape = MaterialTheme.shapes.medium
-                )
-                .align(Alignment.CenterVertically)
-
-        ) {
-            Image(
+        AnimatedVisibility(visible = !onlyView) {
+            Box(
                 modifier = modifier
-                    .size(24.dp)
-                    .align(Alignment.Center)
-                    .clickable(
-                        interactionSource = interactionSource,
-                        indication = null
-                    ) { onDeleteSubNote.invoke(item) },
-                painter = painterResource(imageResource = SharedR.images.ic_close),
-                contentDescription = null,
-                colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_inactive))
-            )
+                    .padding(end = 12.dp)
+                    .size(36.dp)
+                    .background(
+                        color = colorResource(resource = SharedR.colors.background_item),
+                        shape = MaterialTheme.shapes.medium
+                    )
+                    .align(Alignment.CenterVertically)
+
+            ) {
+                Image(
+                    modifier = modifier
+                        .size(24.dp)
+                        .align(Alignment.Center)
+                        .clickable(
+                            interactionSource = interactionSource,
+                            indication = null
+                        ) { onDeleteSubNote.invoke(item) },
+                    painter = painterResource(imageResource = SharedR.images.ic_close),
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_inactive))
+                )
+            }
         }
+
 
     }
 
