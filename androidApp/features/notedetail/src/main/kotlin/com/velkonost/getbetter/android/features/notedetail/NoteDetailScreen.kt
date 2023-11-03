@@ -192,6 +192,7 @@ fun NoteDetailScreen(
                             items = state.subNotes,
                             newSubNote = state.newSubNote,
                             onlyView = state.noteState == State.View,
+                            isCompleteVisible = state.allowEdit,
                             isSubNotesBlockVisible = isSubNotesBlockVisible,
                             onAddNewSubNote = {
                                 viewModel.dispatch(NoteDetailAction.AddSubNote)
@@ -201,6 +202,13 @@ fun NoteDetailScreen(
                             },
                             onSubNoteDelete = {
                                 viewModel.dispatch(NoteDetailAction.RemoveSubNote(it))
+                            },
+                            onCompleteClick = {
+                                if (it.completionDate == null) {
+                                    viewModel.dispatch(NoteDetailAction.CompleteSubNoteClick(it))
+                                } else {
+                                    viewModel.dispatch(NoteDetailAction.UnCompleteSubNoteClick(it))
+                                }
                             }
                         )
                     }

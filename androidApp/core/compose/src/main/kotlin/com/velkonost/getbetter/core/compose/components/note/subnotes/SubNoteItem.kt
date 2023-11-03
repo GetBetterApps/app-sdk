@@ -33,8 +33,10 @@ import dev.icerock.moko.resources.compose.painterResource
 fun SubNoteItem(
     modifier: Modifier = Modifier,
     item: SubNoteUI,
+    isCompleteVisible: Boolean = false,
     onlyView: Boolean = false,
-    onDeleteSubNote: (SubNoteUI) -> Unit
+    onDeleteSubNote: (SubNoteUI) -> Unit,
+    onCompleteClick: ((SubNoteUI) -> Unit)? = null
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val scroll = rememberScrollState(0)
@@ -95,6 +97,36 @@ fun SubNoteItem(
             }
         }
 
+        AnimatedVisibility(visible = isCompleteVisible) {
+            Box(
+                modifier = modifier
+                    .padding(end = 12.dp)
+                    .size(36.dp)
+                    .background(
+                        color = colorResource(resource = SharedR.colors.button_gradient_start),
+                        shape = MaterialTheme.shapes.medium
+                    )
+                    .align(Alignment.CenterVertically)
+
+            ) {
+                Image(
+                    modifier = modifier
+                        .size(24.dp)
+                        .align(Alignment.Center)
+                        .clickable(
+                            interactionSource = interactionSource,
+                            indication = null
+                        ) { onCompleteClick?.invoke(item) },
+                    painter = painterResource(
+                        imageResource =
+                        if (item.completionDate != null) SharedR.images.ic_cancel
+                        else SharedR.images.ic_save
+                    ),
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.text_light))
+                )
+            }
+        }
 
     }
 

@@ -17,13 +17,15 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun SubNotesBlock(
     modifier: Modifier = Modifier,
-    items: List<SubNoteUI>,
-    newSubNote: SubNoteUI,
     onlyView: Boolean = false,
+    newSubNote: SubNoteUI,
+    items: List<SubNoteUI>,
+    isCompleteVisible: Boolean = false,
     isSubNotesBlockVisible: MutableState<Boolean>,
     onNewSubNoteChanged: (String) -> Unit,
     onAddNewSubNote: () -> Unit,
-    onSubNoteDelete: (SubNoteUI) -> Unit
+    onSubNoteDelete: (SubNoteUI) -> Unit,
+    onCompleteClick: ((SubNoteUI) -> Unit)? = null
 ) {
     PrimaryBox(padding = 0) {
         Column {
@@ -41,7 +43,9 @@ fun SubNotesBlock(
                             SubNoteItem(
                                 item = item,
                                 onlyView = onlyView,
-                                onDeleteSubNote = onSubNoteDelete
+                                isCompleteVisible = isCompleteVisible,
+                                onDeleteSubNote = onSubNoteDelete,
+                                onCompleteClick = onCompleteClick
                             )
                         }
 
