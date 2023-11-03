@@ -14,7 +14,7 @@ data class NoteDetailViewState(
 
     val initialItem: Note? = null,
 
-    val noteState: State = State.View,
+    val noteState: NoteState = NoteState.View,
 
     val noteType: NoteType = NoteType.Default,
     val isNotePrivate: Boolean = true,
@@ -37,6 +37,6 @@ data class NoteDetailViewState(
     val allowEdit: Boolean = false
 ) : UIContract.State
 
-enum class State {
+enum class NoteState {
     View, Editing
 }

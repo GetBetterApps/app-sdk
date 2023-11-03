@@ -1,7 +1,6 @@
 package com.velkonost.getbetter.shared.features.notedetail.presentation
 
 import AreasRepository
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
@@ -18,7 +17,7 @@ import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailEvent
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailNavigation
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailViewState
-import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.State
+import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteState
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import kotlinx.coroutines.flow.collectLatest
 
@@ -32,7 +31,7 @@ internal constructor(
     savedStateHandle = savedStateHandle
 ) {
 
-    @NativeCoroutinesState
+    //    @NativeCoroutinesState
     private val note = savedStateHandle.note.stateInWhileSubscribed(initialValue = null)
 
     init {
@@ -74,7 +73,7 @@ internal constructor(
     }
 
     private fun obtainStartEdit() {
-        emit(viewState.value.copy(noteState = State.Editing))
+        emit(viewState.value.copy(noteState = NoteState.Editing))
     }
 
     private fun obtainCancelEdit() {
@@ -83,11 +82,11 @@ internal constructor(
         checkNotNull(initialItem) { return }
 
         initialItem.updateUI()
-        emit(viewState.value.copy(noteState = State.View))
+        emit(viewState.value.copy(noteState = NoteState.View))
     }
 
     private fun obtainSave() {
-        emit(viewState.value.copy(noteState = State.View))
+        emit(viewState.value.copy(noteState = NoteState.View))
 
         launchJob {
             notesRepository.editNote(

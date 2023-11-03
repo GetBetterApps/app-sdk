@@ -12,14 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.BottomActionButton
-import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.State
+import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteState
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.painterResource
 
 @Composable
 fun ActionButtons(
     modifier: Modifier = Modifier,
-    noteState: State,
+    noteState: NoteState,
     onEditClick: () -> Unit,
     onDeleteClick: () -> Unit,
     onSaveClick: () -> Unit,
@@ -27,7 +27,7 @@ fun ActionButtons(
 ) {
 
     AnimatedVisibility(
-        visible = noteState == State.Editing,
+        visible = noteState == NoteState.Editing,
         enter = fadeIn(),
         exit = fadeOut()
     ) {
@@ -42,7 +42,7 @@ fun ActionButtons(
     }
 
     AnimatedVisibility(
-        visible = noteState == State.View,
+        visible = noteState == NoteState.View,
         enter = fadeIn(),
         exit = fadeOut()
     ) {

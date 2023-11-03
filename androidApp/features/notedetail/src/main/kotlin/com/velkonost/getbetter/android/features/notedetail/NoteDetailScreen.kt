@@ -33,7 +33,7 @@ import com.velkonost.getbetter.shared.features.notedetail.presentation.NoteDetai
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NavigateBack
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailAction
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailEvent
-import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.State
+import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteState
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.stringResource
 import kotlinx.coroutines.flow.collectLatest
@@ -95,7 +95,7 @@ fun NoteDetailScreen(
                             if (state.noteType == NoteType.Default) SharedR.strings.create_note_text_hint
                             else SharedR.strings.create_goal_text_hint
                         ),
-                        isEnabled = state.noteState == State.Editing,
+                        isEnabled = state.noteState == NoteState.Editing,
                         onValueChanged = {
                             viewModel.dispatch(NoteDetailAction.TextChanged(it))
                         }
@@ -105,7 +105,7 @@ fun NoteDetailScreen(
                 item {
                     AnimatedVisibility(visible = state.noteType == NoteType.Goal) {
                         CompletionDateBlock(
-                            enabled = state.noteState == State.Editing,
+                            enabled = state.noteState == NoteState.Editing,
                             isLoading = state.isCompleteGoalLoading,
                             initialValue = state.expectedCompletionDate,
                             initialValueStr = state.expectedCompletionDateStr,
@@ -127,12 +127,12 @@ fun NoteDetailScreen(
 
                 item {
                     AnimatedVisibility(
-                        visible = state.tags.isNotEmpty() || state.noteState == State.Editing
+                        visible = state.tags.isNotEmpty() || state.noteState == NoteState.Editing
                     ) {
                         TagsBlock(
                             tags = state.tags,
                             newTag = state.newTag,
-                            onlyView = state.noteState == State.View,
+                            onlyView = state.noteState == NoteState.View,
                             onNewTagChanged = {
                                 viewModel.dispatch(NoteDetailAction.NewTagTextChanged(it))
                             },
@@ -149,12 +149,12 @@ fun NoteDetailScreen(
                 item {
                     AnimatedVisibility(
                         visible = state.noteType == NoteType.Goal
-                                && (state.subNotes.isNotEmpty() || state.noteState == State.Editing)
+                                && (state.subNotes.isNotEmpty() || state.noteState == NoteState.Editing)
                     ) {
                         SubNotesBlock(
                             items = state.subNotes,
                             newSubNote = state.newSubNote,
-                            onlyView = state.noteState == State.View,
+                            onlyView = state.noteState == NoteState.View,
                             isCompleteVisible = state.allowEdit,
                             isSubNotesBlockVisible = isSubNotesBlockVisible,
                             onAddNewSubNote = {
