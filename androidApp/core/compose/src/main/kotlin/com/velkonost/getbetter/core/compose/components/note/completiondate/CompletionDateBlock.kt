@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.core.compose.components.note
+package com.velkonost.getbetter.core.compose.components.note.completiondate
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
@@ -25,7 +25,6 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.AppAlertDialog
-import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.AppDatePickerDialog
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -117,65 +116,15 @@ fun CompletionDateBlock(
 
             AnimatedVisibility(visible = isCompleteVisible) {
                 if (onCompleteClick != null) {
-                    AnimatedVisibility(visible = completionDateStr == null) {
-                        Row(
-                            modifier = modifier
-                                .padding(horizontal = 16.dp)
-                                .padding(bottom = 16.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Spacer(modifier.weight(1f))
+                    CompletionDateButton(
+                        label = completionDateStr,
+                        isLoading = isLoading,
+                        onCompleteClick = onCompleteClick
+                    )
 
-                            AppButton(
-                                labelText = "Complete",
-                                isLoading = isLoading,
-                                onClick = onCompleteClick
-                            )
-
-                            Spacer(modifier.weight(1f))
-                        }
+                    CompletedOnBlock(label = completionDateStr) {
+                        confirmCancelCompletionDialog.value = true
                     }
-                    AnimatedVisibility(visible = completionDateStr != null) {
-                        Row(
-                            modifier = modifier.height(60.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text(
-                                modifier = modifier.padding(start = 16.dp),
-                                text = stringResource(resource = SharedR.strings.create_note_completion_date_title),
-                                style = MaterialTheme.typography.titleMedium,
-                                color = colorResource(resource = SharedR.colors.text_primary)
-                            )
-                            Spacer(modifier = modifier.weight(1f))
-
-                            AnimatedContent(
-                                targetState = completionDateStr,
-                                label = ""
-                            ) { content ->
-                                if (content != null) {
-                                    Text(
-                                        modifier = modifier
-                                            .padding(end = 16.dp)
-                                            .background(
-                                                color = colorResource(resource = SharedR.colors.button_gradient_start),
-                                                shape = MaterialTheme.shapes.medium
-                                            )
-                                            .padding(12.dp)
-                                            .clickable(
-                                                interactionSource = interactionSource,
-                                                indication = null
-                                            ) {
-                                                confirmCancelCompletionDialog.value = true
-                                            },
-                                        text = content,
-                                        style = MaterialTheme.typography.titleMedium,
-                                        color = colorResource(resource = SharedR.colors.text_light),
-                                    )
-                                }
-                            }
-                        }
-                    }
-
                 }
             }
         }
@@ -211,4 +160,5 @@ fun CompletionDateBlock(
         )
     }
 }
+
 

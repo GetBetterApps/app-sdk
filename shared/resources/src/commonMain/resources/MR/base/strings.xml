@@ -165,7 +165,7 @@
     <string name="create_note_subnote_title">SubGoals</string>
     <string name="create_note_subnote_hint">Enter here sub goals</string>
 
-    <string name="create_note_completion_date_title">Completion date</string>
+    <string name="create_note_completion_date_title">Deadline</string>
     <string name="create_note_completion_date_hint">Not set</string>
     <!--  CREATE NOTE  -->
 
@@ -175,8 +175,10 @@
 
     <string name="note_detail_confirm_delete_title">Delete note</string>
     <string name="goal_detail_confirm_delete_title">Delete goal</string>
-
     <string name="note_detail_confirm_delete_text">Are you sure?</string>
+
+    <string name="note_detail_complete_goal_text">Complete</string>
+    <string name="note_detail_completed_goal_title">Completed on</string>
     <!--  NOTE DETAIL  -->
 
 

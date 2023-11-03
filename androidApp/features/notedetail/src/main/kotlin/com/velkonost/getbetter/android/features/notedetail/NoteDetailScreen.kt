@@ -1,7 +1,6 @@
 package com.velkonost.getbetter.android.features.notedetail
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -26,7 +25,7 @@ import com.velkonost.getbetter.android.features.notedetail.components.NoteDetail
 import com.velkonost.getbetter.core.compose.components.AppAlertDialog
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
-import com.velkonost.getbetter.core.compose.components.note.CompletionDateBlock
+import com.velkonost.getbetter.core.compose.components.note.completiondate.CompletionDateBlock
 import com.velkonost.getbetter.core.compose.components.note.subnotes.SubNotesBlock
 import com.velkonost.getbetter.core.compose.components.note.tags.TagsBlock
 import com.velkonost.getbetter.shared.core.model.note.NoteType
@@ -49,7 +48,6 @@ fun NoteDetailScreen(
 
     val state by viewModel.viewState.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
-    val interactionSource = remember { MutableInteractionSource() }
     val isSubNotesBlockVisible = remember { mutableStateOf(true) }
 
     val confirmDeleteNoteDialog = remember { mutableStateOf(false) }
