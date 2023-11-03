@@ -13,10 +13,12 @@ import SharedSDK
 struct TagItem : View {
     
     let tag: TagUI 
+    let onlyView: Bool
     let onTagDelete: ((String) -> Void)?
     
-    init(tag: TagUI, onTagDelete: ((String) -> Void)? = nil) {
+    init(tag: TagUI, onlyView: Bool = false, onTagDelete: ((String) -> Void)? = nil) {
         self.tag = tag
+        self.onlyView = onlyView
         self.onTagDelete = onTagDelete
     }
     
@@ -27,7 +29,7 @@ struct TagItem : View {
                 .foregroundColor(.textLight)
                 .frame(height: 30, alignment: .center)
             
-            if onTagDelete != nil {
+            if onTagDelete != nil && !onlyView {
                 Image(uiImage: SharedR.images().ic_close.toUIImage()!)
                     .resizable()
                     .renderingMode(.template)
@@ -40,6 +42,7 @@ struct TagItem : View {
                     }
             }
         }
+        .animation(.easeInOut, value: onlyView)
         .padding(.init(top: 3, leading: 6, bottom: 3, trailing: 6))
         .frame(height: 30)
         .background(

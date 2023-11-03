@@ -15,18 +15,25 @@ struct SubNotesBlock: View {
     let items: [SubNoteUI]
     @Binding var newSubNote: SubNoteUI
     
+    let onlyView: Bool
+    let isCompleteVisible: Bool
+    
     let onNewSubNoteChanged: (String) -> Void
     let onAddNewSubNote: () -> Void
     let onSubNoteDelete: (SubNoteUI) -> Void
+    let onCompleteClick: ((SubNoteUI) -> Void)?
     
     @Binding private var isSubNotesBlockPickerVisible: Bool
     
-    init(items: [SubNoteUI], newSubNote: Binding<SubNoteUI>, onNewSubNoteChanged: @escaping (String) -> Void, onAddNewSubNote: @escaping () -> Void, onSubNoteDelete: @escaping (SubNoteUI) -> Void, isSubNotesBlockPickerVisible: Binding<Bool>) {
+    init(items: [SubNoteUI], newSubNote: Binding<SubNoteUI>, onlyView: Bool = false, isCompleteVisible: Bool = false, onNewSubNoteChanged: @escaping (String) -> Void, onAddNewSubNote: @escaping () -> Void, onSubNoteDelete: @escaping (SubNoteUI) -> Void, isSubNotesBlockPickerVisible: Binding<Bool>, onCompleteClick: ((SubNoteUI) -> Void)? = nil) {
         self.items = items
         self._newSubNote = newSubNote
+        self.onlyView = onlyView
+        self.isCompleteVisible = isCompleteVisible
         self.onNewSubNoteChanged = onNewSubNoteChanged
         self.onAddNewSubNote = onAddNewSubNote
         self.onSubNoteDelete = onSubNoteDelete
+        self.onCompleteClick = onCompleteClick
         self._isSubNotesBlockPickerVisible = isSubNotesBlockPickerVisible
     }
     
@@ -49,22 +56,29 @@ struct SubNotesBlock: View {
                         ForEach(items, id: \.self.id) { item in
                             SubNoteItem(
                                 item: item,
-                                onDeleteSubNote: onSubNoteDelete
+                                onlyView: onlyView,
+                                isCompleteVisible: isCompleteVisible,
+                                onDeleteSubNote: onSubNoteDelete,
+                                onCompleteClick: onCompleteClick
                             )
                         }
                         
-                        AddSubNoteItem(
-                            value: $newSubNote,
-                            placeholderText: SharedR.strings().create_note_subnote_hint.desc().localized(),
-                            onValueChanged: onNewSubNoteChanged,
-                            onAddSubNote: onAddNewSubNote
-                        )
+                        if !onlyView {
+                            AddSubNoteItem(
+                                value: $newSubNote,
+                                placeholderText: SharedR.strings().create_note_subnote_hint.desc().localized(),
+                                onValueChanged: onNewSubNoteChanged,
+                                onAddSubNote: onAddNewSubNote
+                            )
+                        }
                     }
                     .padding(.leading, 16)
                     .padding(.trailing, 16)
                     
                 }
             }
+            .animation(.easeInOut, value: onlyView)
+            .animation(.easeInOut, value: isCompleteVisible)
             .padding(.bottom, 16)
             
         }

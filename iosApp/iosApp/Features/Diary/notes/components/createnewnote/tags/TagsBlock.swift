@@ -15,14 +15,18 @@ struct TagsBlock: View {
     
     let tags: [TagUI]
     @Binding private var newTag: TagUI
+
+    let onlyView: Bool
     
     let onNewTagChanged: (String) -> Void
     let onAddNewTag: () -> Void
     let onTagDelete: (String) -> Void
+
     
-    init(tags: [TagUI], newTag: Binding<TagUI>, onNewTagChanged: @escaping (String) -> Void, onAddNewTag: @escaping () -> Void, onTagDelete: @escaping (String) -> Void) {
+    init(tags: [TagUI], newTag: Binding<TagUI>, onlyView: Bool = false, onNewTagChanged: @escaping (String) -> Void, onAddNewTag: @escaping () -> Void, onTagDelete: @escaping (String) -> Void) {
         self.tags = tags
         self._newTag = newTag
+        self.onlyView = onlyView
         self.onNewTagChanged = onNewTagChanged
         self.onAddNewTag = onAddNewTag
         self.onTagDelete = onTagDelete
@@ -50,14 +54,17 @@ struct TagsBlock: View {
                         )
                     }
                     
-                    NewTagField(
-                        value: $newTag,
-                        placeholderText: SharedR.strings().create_note_tags_hint.desc().localized(),
-                        onValueChanged: onNewTagChanged,
-                        onAddNewTag: onAddNewTag
-                    )
+                    if !onlyView {
+                        NewTagField(
+                            value: $newTag,
+                            placeholderText: SharedR.strings().create_note_tags_hint.desc().localized(),
+                            onValueChanged: onNewTagChanged,
+                            onAddNewTag: onAddNewTag
+                        )
+                    }
                 }
             }
+            .animation(.easeInOut, value: onlyView)
             .padding(16)
         }
     }

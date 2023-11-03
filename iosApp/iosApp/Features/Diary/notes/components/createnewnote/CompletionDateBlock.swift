@@ -14,15 +14,41 @@ struct CompletionDateBlock: View {
     
     @State private var showDate: Bool = false
     @State private var hidenDate: Date = Date()
+    
+    let enabled: Bool
+    let isLoading: Bool
+    let initialValue: Int64?
+    let initialValueStr: String?
+    let isCompleteVisible: Bool
+    let completionDateStr: String?
 
     @Binding var date: Date?
     
     let onSetCompletionDate: (Int64?) -> Void
+    let onCompleteClick: (() -> Void)?
     
-    init(onSetCompletionDate: @escaping (Int64?) -> Void) {
+    init(
+        enabled: Bool = true,
+        isLoading: Bool = false,
+        initialValue: Int64? = nil,
+        initialValueStr: String? = nil,
+        isCompleteVisible: Bool = false,
+        completionDateStr: String? = nil,
+        onSetCompletionDate: @escaping (Int64?) -> Void,
+        onCompleteClick: (() -> Void)? = nil
+    ) {
+        self.enabled = enabled
+        self.isLoading = isLoading
+        self.initialValue = initialValue
+        self.initialValueStr = initialValueStr
+        self.isCompleteVisible = isCompleteVisible
+        self.completionDateStr = completionDateStr
         self.onSetCompletionDate = onSetCompletionDate
+        self.onCompleteClick = onCompleteClick
         
-        _date = Binding<Date?>(get: { Date.now }, set: { value in })
+        _date = Binding<Date?>(get: { 
+            Date.now
+        }, set: { value in })
         
     }
     
