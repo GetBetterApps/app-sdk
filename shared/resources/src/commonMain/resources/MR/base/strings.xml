@@ -169,6 +169,16 @@
     <string name="create_note_completion_date_hint">Not set</string>
     <!--  CREATE NOTE  -->
 
+    <!--  NOTE DETAIL  -->
+    <string name="note_detail_title">Note Info</string>
+    <string name="goal_detail_title">Goal Info</string>
+
+    <string name="note_detail_confirm_delete_title">Delete note</string>
+    <string name="goal_detail_confirm_delete_title">Delete goal</string>
+
+    <string name="note_detail_confirm_delete_text">Are you sure?</string>
+    <!--  NOTE DETAIL  -->
+
 
     <!--  SERVER EXCEPTIONS  -->
     <string name="error_default">Something went wrong. Try again</string>

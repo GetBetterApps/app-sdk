@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.shared.core.model.note.NoteType
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
@@ -24,6 +25,7 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun NoteDetailHeader(
     modifier: Modifier = Modifier,
+    noteType: NoteType,
     isNotePrivate: Boolean,
     onBackClick: () -> Unit
 ) {
@@ -54,7 +56,11 @@ fun NoteDetailHeader(
 
         Text(
             modifier = modifier.padding(start = 12.dp),
-            text = stringResource(resource = SharedR.strings.add_area_title),
+            text = stringResource(
+                resource =
+                if (noteType == NoteType.Default) SharedR.strings.note_detail_title
+                else SharedR.strings.goal_detail_title
+            ),
             style = MaterialTheme.typography.headlineSmall,
             color = colorResource(resource = SharedR.colors.text_title)
         )

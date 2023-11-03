@@ -16,7 +16,7 @@ data class NoteDetailViewState(
 
     val noteState: State = State.View,
 
-    val noteType: NoteType? = null,
+    val noteType: NoteType = NoteType.Default,
     val isNotePrivate: Boolean = true,
     val noteText: String = "",
 
