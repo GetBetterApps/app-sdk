@@ -38,7 +38,7 @@ struct NoteDetailScreen : View {
                     
                     
                 }
-                .ignoresSafeArea(.all)
+//                .ignoresSafeArea(.all)
                 .padding(.bottom, 40)
                 .padding(.horizontal, 20)
             }

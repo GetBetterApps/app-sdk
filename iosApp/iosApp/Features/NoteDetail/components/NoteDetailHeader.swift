@@ -35,7 +35,6 @@ struct NoteDetailHeader : View {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(Color.backgroundIcon)
                 )
-                .padding(.leading, 20)
                 .onTapGesture {
                     let impactMed = UIImpactFeedbackGenerator(style: .medium)
                     impactMed.impactOccurred()
@@ -62,8 +61,6 @@ struct NoteDetailHeader : View {
                         RoundedRectangle(cornerRadius: 8)
                             .fill(Color.backgroundIcon)
                     )
-                    .padding(.trailing, 20)
-                    
             }
         }
     }

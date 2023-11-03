@@ -231,19 +231,19 @@ class PopAwareUINavigationController<E: Equatable>: UINavigationController, UINa
         
         let availableRoutes = [
             AddAreaRoute().route,
-            NoteDetailRoute().route
+            String(NoteDetailRoute().route.prefix(while: { value in
+                value != "?"
+            }))
         ]
         
-        if availableRoutes.contains(route) {
+        if availableRoutes.contains(route) || !availableRoutes.filter({ route.hasPrefix($0) }).isEmpty {
             return true
         }
+        
         return false
-        
-        
     }
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        
         if let stackSizeProvider = stackSizeProvider, stackSizeProvider() > navigationController.viewControllers.count {
             self.popHandler?()
         }
