@@ -15,6 +15,7 @@ import KMPNativeCoroutinesAsync
 struct NoteDetailScreen : View {
     
     @StateViewModel var viewModel: NoteDetailViewModel
+    @State private var eventsObserver: Task<(), Error>? = nil
     
     @State private var confirmDeleteNoteDialog = false
     @State private var isSubNotesBlockVisible = true
@@ -141,6 +142,24 @@ struct NoteDetailScreen : View {
                                 }
                             }
                             .id(3)
+                            
+                            if state.allowEdit {
+                                ActionButtons(
+                                    noteState: state.noteState,
+                                    onEditClick: {
+                                        viewModel.dispatch(action: NoteDetailActionStartEditClick())
+                                    },
+                                    onDeleteClick: {
+                                        confirmDeleteNoteDialog = true
+                                    },
+                                    onSaveClick: {
+                                        viewModel.dispatch(action: NoteDetailActionEndEditClick())
+                                    },
+                                    onCancelSaveClick: {
+                                        viewModel.dispatch(action: NoteDetailActionCancelEditClick())
+                                    }
+                                )
+                            }
                         }
                         
                     }
@@ -153,6 +172,15 @@ struct NoteDetailScreen : View {
                 }
             }
         }
+        .alert(
+            state.noteType == NoteType.default_ ? SharedR.strings().note_detail_confirm_delete_title.desc().localized() : SharedR.strings().goal_detail_confirm_delete_title.desc().localized(), isPresented: $confirmDeleteNoteDialog) {
+            Button(SharedR.strings().confirm.desc().localized()) {
+                viewModel.dispatch(action: NoteDetailActionDeleteClick())
+            }
+            Button(SharedR.strings().cancel.desc().localized(), role: .cancel) {}
+        } message: {
+            Text(SharedR.strings().note_detail_confirm_delete_text.desc().localized())
+        }
         .sheet(isPresented: $showingAreaDetailSheet) {
             AreaDetailScreen(
                 areaId: $selectedAreaId,
@@ -164,5 +192,33 @@ struct NoteDetailScreen : View {
                 }
             )
         }
+        .onAppear {
+            observeEvents()
+        }
     }
+}
+
+extension NoteDetailScreen {
+    func observeEvents() {
+        if eventsObserver == nil {
+            eventsObserver = Task {
+                for try await event in asyncSequence(for: viewModel.events) {
+                    switch(event) {
+                    case _ as NoteDetailEventDeleteSuccess: do {
+                        viewModel.dispatch(action: NavigateBack_())
+                    }
+                        
+                    case _ as NoteDetailEventEditSuccess: do {
+                        // TODO
+                    }
+                   
+                    
+                    default:
+                        break
+                    }
+                }
+            }
+        }
+    }
+    
 }

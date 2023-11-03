@@ -78,78 +78,45 @@ struct AreaDetailBottomButtons: View {
 extension AreaDetailBottomButtons {
     
     private var LeaveButton: some View {
-        BottomButton(
+        BottomActionButton(
             icon: SharedR.images().ic_exit.toUIImage()!,
             onClick: onLeaveClick
         )
     }
     
     private var EditButton: some View {
-        BottomButton(
+        BottomActionButton(
             icon: SharedR.images().ic_edit.toUIImage()!,
             onClick: onEditClick
         )
     }
     
     private var SaveButton: some View {
-        BottomButton(
+        BottomActionButton(
             icon: SharedR.images().ic_save.toUIImage()!,
             onClick: onSaveClick
         )
     }
     
     private var CancelSaveButton: some View {
-        BottomButton(
+        BottomActionButton(
             icon: SharedR.images().ic_cancel.toUIImage()!,
             onClick: onCancelSaveClick
         )
     }
     
     private var DeleteButton: some View {
-        BottomButton(
+        BottomActionButton(
             icon: SharedR.images().ic_trash.toUIImage()!,
             onClick: onDeleteClick
         )
     }
     
     private var JoinButton: some View {
-        BottomButton(
+        BottomActionButton(
             icon: SharedR.images().ic_enter.toUIImage()!,
             onClick: onJoinClick
         )
     }
     
-}
-
-internal struct BottomButton: View {
-    
-    let icon: UIImage
-    let onClick: () -> Void
-    
-    init(icon: UIImage, onClick: @escaping () -> Void) {
-        self.icon = icon
-        self.onClick = onClick
-    }
-    
-    var body: some View {
-        ZStack {
-            Image(uiImage: icon)
-                .resizable()
-                .renderingMode(.template)
-                .frame(width: 24, height: 24, alignment: .center)
-                .foregroundColor(.iconActive).opacity(0.5)
-        }
-        .frame(width: 48, height: 48)
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Color.backgroundIcon)
-                .shadow(radius: 8)
-        )
-        .onTapGesture {
-            let impactMed = UIImpactFeedbackGenerator(style: .medium)
-            impactMed.impactOccurred()
-            onClick()
-        }
-        .padding()
-    }
 }
