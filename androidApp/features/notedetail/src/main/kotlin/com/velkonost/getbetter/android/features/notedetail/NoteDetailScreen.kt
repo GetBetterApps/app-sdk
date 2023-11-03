@@ -38,8 +38,8 @@ import com.velkonost.getbetter.core.compose.components.note.tags.TagsBlock
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.note.NoteType
 import com.velkonost.getbetter.shared.features.notedetail.presentation.NoteDetailViewModel
-import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.AreaChanged
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NavigateBack
+import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailAction
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.State
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -128,7 +128,7 @@ fun NoteDetailScreen(
                         ),
                         isEnabled = state.noteState == State.Editing,
                         onValueChanged = {
-
+                            viewModel.dispatch(NoteDetailAction.TextChanged(it))
                         }
                     )
                 }
@@ -155,13 +155,13 @@ fun NoteDetailScreen(
                             newTag = state.newTag,
                             onlyView = state.noteState == State.View,
                             onNewTagChanged = {
-
+                                viewModel.dispatch(NoteDetailAction.NewTagTextChanged(it))
                             },
                             onAddNewTag = {
-
+                                viewModel.dispatch(NoteDetailAction.AddNewTag)
                             },
                             onTagDelete = {
-
+                                viewModel.dispatch(NoteDetailAction.RemoveTag(it))
                             }
                         )
                     }
@@ -178,13 +178,13 @@ fun NoteDetailScreen(
                             onlyView = state.noteState == State.View,
                             isSubNotesBlockVisible = isSubNotesBlockVisible,
                             onAddNewSubNote = {
-
+                                viewModel.dispatch(NoteDetailAction.AddSubNote)
                             },
                             onNewSubNoteChanged = {
-
+                                viewModel.dispatch(NoteDetailAction.NewSubNoteTextChanged(it))
                             },
                             onSubNoteDelete = {
-
+                                viewModel.dispatch(NoteDetailAction.RemoveSubNote(it))
                             }
                         )
                     }
@@ -199,7 +199,7 @@ fun NoteDetailScreen(
         modalSheetState = areaDetailSheetState,
         areaId = selectedAreaId.value,
         onAreaChanged = {
-            viewModel.dispatch(AreaChanged)
+            viewModel.dispatch(NoteDetailAction.AreaChanged)
         }
     )
 
