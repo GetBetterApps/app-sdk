@@ -53,14 +53,7 @@ internal constructor(
         emit(
             viewState.value.copy(
                 type = NoteType.Default,
-                selectedArea = viewState.value.availableAreas.firstOrNull(),
-//                text = "",
-//                mediaUrls = emptyList(),
-//                tags = emptyList(),
-//                newTag = TagUI(),
-//                subNotes = emptyList(),
-//                newSubNote = SubNoteUI(),
-//                isPrivate = true
+                selectedArea = viewState.value.availableAreas.firstOrNull()
             )
         )
     }
@@ -69,14 +62,7 @@ internal constructor(
         emit(
             viewState.value.copy(
                 type = NoteType.Goal,
-                selectedArea = viewState.value.availableAreas.firstOrNull(),
-//                text = "",
-//                mediaUrls = emptyList(),
-//                tags = emptyList(),
-//                newTag = TagUI(),
-//                subNotes = emptyList(),
-//                newSubNote = SubNoteUI(),
-//                isPrivate = true
+                selectedArea = viewState.value.availableAreas.firstOrNull()
             )
         )
     }
