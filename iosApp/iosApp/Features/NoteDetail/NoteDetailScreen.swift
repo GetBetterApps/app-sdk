@@ -14,7 +14,7 @@ import KMPNativeCoroutinesAsync
 
 struct NoteDetailScreen : View {
     
-    @StateViewModel var viewModel: DiaryViewModel
+    @StateViewModel var viewModel: NoteDetailViewModel
     
     @State private var confirmDeleteNoteDialog = false
     @State private var isSubNotesBlockVisible = false

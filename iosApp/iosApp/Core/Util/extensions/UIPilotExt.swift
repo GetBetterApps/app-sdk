@@ -227,7 +227,14 @@ class PopAwareUINavigationController<E: Equatable>: UINavigationController, UINa
     }
     
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if uipilot?.routes.last as? String == AddAreaRoute().route {
+        guard let route = uipilot?.routes.last as? String else { return false }
+        
+        let availableRoutes = [
+            AddAreaRoute().route,
+            NoteDetailRoute().route
+        ]
+        
+        if availableRoutes.contains(route) {
             return true
         }
         return false

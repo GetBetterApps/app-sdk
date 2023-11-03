@@ -62,7 +62,7 @@ struct DiaryScreen: View {
                     }
                 },
                 itemClick: { value in
-                    
+                    viewModel.dispatch(action: NoteClick(value: value))
                 },
                 onBottomReach: {
                     viewModel.dispatch(action: DiaryActionNotesLoadNextPage())

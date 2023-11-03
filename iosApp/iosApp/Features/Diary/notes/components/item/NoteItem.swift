@@ -66,6 +66,7 @@ struct NoteItem: View {
             }
         }
         .onTapGesture {
+            onClick(item)
             let impactMed = UIImpactFeedbackGenerator(style: .medium)
             impactMed.impactOccurred()
         }
