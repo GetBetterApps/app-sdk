@@ -97,7 +97,7 @@ fun SubNoteItem(
             }
         }
 
-        AnimatedVisibility(visible = isCompleteVisible) {
+        AnimatedVisibility(visible = isCompleteVisible && onlyView) {
             Box(
                 modifier = modifier
                     .padding(end = 12.dp)

@@ -82,7 +82,9 @@ fun NoteDetailScreen(
                     .fillMaxSize()
             ) {
                 item {
-                    NoteDetailHeader {
+                    NoteDetailHeader(
+                        isNotePrivate = state.isNotePrivate
+                    ) {
                         viewModel.dispatch(NavigateBack)
                     }
                 }

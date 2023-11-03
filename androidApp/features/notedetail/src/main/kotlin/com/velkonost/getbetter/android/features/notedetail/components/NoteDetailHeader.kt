@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
@@ -23,6 +24,7 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun NoteDetailHeader(
     modifier: Modifier = Modifier,
+    isNotePrivate: Boolean,
     onBackClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -56,5 +58,27 @@ fun NoteDetailHeader(
             style = MaterialTheme.typography.headlineSmall,
             color = colorResource(resource = SharedR.colors.text_title)
         )
+        Spacer(modifier.weight(1f))
+
+        if (isNotePrivate) {
+            Image(
+                modifier = modifier
+                    .size(42.dp)
+                    .background(
+                        color = colorResource(resource = SharedR.colors.background_icon),
+                        shape = MaterialTheme.shapes.small
+                    )
+                    .padding(4.dp)
+                    .clickable(
+                        interactionSource = interactionSource,
+                        indication = null
+                    ) { onBackClick() },
+                painter = painterResource(imageResource = SharedR.images.ic_lock),
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(
+                    color = colorResource(resource = SharedR.colors.icon_inactive)
+                )
+            )
+        }
     }
 }
