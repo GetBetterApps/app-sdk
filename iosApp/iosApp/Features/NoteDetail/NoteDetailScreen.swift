@@ -14,6 +14,8 @@ import KMPNativeCoroutinesAsync
 
 struct NoteDetailScreen : View {
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @StateViewModel var viewModel: NoteDetailViewModel
     @State private var eventsObserver: Task<(), Error>? = nil
     
@@ -142,6 +144,7 @@ struct NoteDetailScreen : View {
                                 }
                             }
                             .id(3)
+                        }
                             
                             if state.allowEdit {
                                 ActionButtons(
@@ -160,7 +163,7 @@ struct NoteDetailScreen : View {
                                     }
                                 )
                             }
-                        }
+                        
                         
                     }
                 }
@@ -205,7 +208,7 @@ extension NoteDetailScreen {
                 for try await event in asyncSequence(for: viewModel.events) {
                     switch(event) {
                     case _ as NoteDetailEventDeleteSuccess: do {
-                        viewModel.dispatch(action: NavigateBack_())
+                        presentationMode.wrappedValue.dismiss()
                     }
                         
                     case _ as NoteDetailEventEditSuccess: do {
