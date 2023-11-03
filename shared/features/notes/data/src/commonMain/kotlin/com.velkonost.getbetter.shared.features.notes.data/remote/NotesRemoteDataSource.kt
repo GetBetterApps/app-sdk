@@ -83,12 +83,34 @@ class NotesRemoteDataSource(
         )
     }.body()
 
+    suspend fun unCompleteGoal(
+        token: String?,
+        body: UpdateNoteStateRequest
+    ): RemoteResponse<KtorNote> = httpClient.post {
+        makeRequest(
+            path = Route.UNCOMPLETE_GOAL,
+            token = token,
+            body = body
+        )
+    }.body()
+
     suspend fun completeSubGoal(
         token: String?,
         body: UpdateSubNoteStateRequest
     ): RemoteResponse<KtorNote> = httpClient.post {
         makeRequest(
             path = Route.COMPLETE_SUB_GOAL,
+            token = token,
+            body = body
+        )
+    }.body()
+
+    suspend fun unCompleteSubGoal(
+        token: String?,
+        body: UpdateSubNoteStateRequest
+    ): RemoteResponse<KtorNote> = httpClient.post {
+        makeRequest(
+            path = Route.UNCOMPLETE_SUB_GOAL,
             token = token,
             body = body
         )

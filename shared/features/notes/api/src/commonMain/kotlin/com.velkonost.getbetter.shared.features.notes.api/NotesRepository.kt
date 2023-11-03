@@ -48,7 +48,16 @@ interface NotesRepository {
         noteId: Int
     ): Flow<ResultState<Note>>
 
+    fun unCompleteGoal(
+        noteId: Int
+    ): Flow<ResultState<Note>>
+
     fun completeSubGoal(
+        noteId: Int,
+        subNoteId: Int
+    ): Flow<ResultState<Note>>
+
+    fun unCompleteSubGoal(
         noteId: Int,
         subNoteId: Int
     ): Flow<ResultState<Note>>

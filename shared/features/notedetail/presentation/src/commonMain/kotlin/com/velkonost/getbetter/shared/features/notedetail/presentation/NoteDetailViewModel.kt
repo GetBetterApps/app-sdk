@@ -20,7 +20,6 @@ import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailViewState
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.State
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 
 class NoteDetailViewModel
@@ -60,8 +59,8 @@ internal constructor(
         is NoteDetailAction.CancelEditClick -> obtainCancelEdit()
         is NoteDetailAction.EndEditClick -> obtainSave()
         is NoteDetailAction.DeleteClick -> obtainDelete()
-        is NoteDetailAction.CompleteClick -> TODO()
-        is NoteDetailAction.UnCompleteClick -> TODO()
+        is NoteDetailAction.CompleteClick -> completeGoal()
+        is NoteDetailAction.UnCompleteClick -> unCompleteGoal()
     }
 
     private fun obtainTextChanged(value: String) {
@@ -239,9 +238,9 @@ internal constructor(
 
     private fun unCompleteGoal() {
         launchJob {
-            notesRepository.(
-                    noteId = viewState.value.initialItem!!.id
-                    ).collect { result ->
+            notesRepository.unCompleteGoal(
+                noteId = viewState.value.initialItem!!.id
+            ).collect { result ->
                 with(result) {
                     isLoading {
                         emit(viewState.value.copy(isCompleteGoalLoading = it))

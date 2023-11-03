@@ -134,6 +134,17 @@ constructor(
         }
     )
 
+    override fun unCompleteGoal(noteId: Int): Flow<ResultState<Note>> = flowRequest(
+        mapper = KtorNote::asExternalModel,
+        request = {
+            val token = localDataSource.getUserToken()
+            val body = UpdateNoteStateRequest(
+                noteId = noteId
+            )
+            remoteDataSource.unCompleteGoal(token, body)
+        }
+    )
+
     override fun completeSubGoal(noteId: Int, subNoteId: Int): Flow<ResultState<Note>> =
         flowRequest(
             mapper = KtorNote::asExternalModel,
@@ -144,6 +155,19 @@ constructor(
                     subNoteId = subNoteId
                 )
                 remoteDataSource.completeSubGoal(token, body)
+            }
+        )
+
+    override fun unCompleteSubGoal(noteId: Int, subNoteId: Int): Flow<ResultState<Note>> =
+        flowRequest(
+            mapper = KtorNote::asExternalModel,
+            request = {
+                val token = localDataSource.getUserToken()
+                val body = UpdateSubNoteStateRequest(
+                    noteId = noteId,
+                    subNoteId = subNoteId
+                )
+                remoteDataSource.unCompleteSubGoal(token, body)
             }
         )
 

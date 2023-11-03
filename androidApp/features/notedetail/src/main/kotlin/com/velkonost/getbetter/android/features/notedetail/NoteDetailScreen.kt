@@ -64,7 +64,6 @@ fun NoteDetailScreen(
     val interactionSource = remember { MutableInteractionSource() }
     val isSubNotesBlockVisible = remember { mutableStateOf(true) }
 
-
     val confirmDeleteNoteDialog = remember { mutableStateOf(false) }
     val areaDetailSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
@@ -144,10 +143,20 @@ fun NoteDetailScreen(
                     AnimatedVisibility(visible = state.noteType == NoteType.Goal) {
                         CompletionDateBlock(
                             enabled = state.noteState == State.Editing,
+                            isLoading = state.isCompleteGoalLoading,
                             initialValue = state.expectedCompletionDate,
                             initialValueStr = state.expectedCompletionDateStr,
+                            isCompleteVisible = true,
+                            completionDateStr = state.completionDateStr,
                             onSetCompletionDate = {
                                 viewModel.dispatch(NoteDetailAction.SetCompletionDate(it))
+                            },
+                            onCompleteClick = {
+                                if (state.completionDate == null) {
+                                    viewModel.dispatch(NoteDetailAction.CompleteClick)
+                                } else {
+                                    viewModel.dispatch(NoteDetailAction.UnCompleteClick)
+                                }
                             }
                         )
                     }
@@ -221,8 +230,6 @@ fun NoteDetailScreen(
                     }
                 }
             }
-
-
         }
     }
 
