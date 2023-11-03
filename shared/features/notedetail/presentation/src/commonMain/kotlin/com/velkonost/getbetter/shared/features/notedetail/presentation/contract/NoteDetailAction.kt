@@ -25,7 +25,11 @@ sealed interface NoteDetailAction : UIContract.Action {
 
     data object CompleteClick : NoteDetailAction
 
+    data class CompleteSubNoteClick(val value: SubNoteUI) : NoteDetailAction
+
     data object UnCompleteClick : NoteDetailAction
+
+    data class UnCompleteSubNoteClick(val value: SubNoteUI) : NoteDetailAction
 
     data object StartEditClick : NoteDetailAction
 

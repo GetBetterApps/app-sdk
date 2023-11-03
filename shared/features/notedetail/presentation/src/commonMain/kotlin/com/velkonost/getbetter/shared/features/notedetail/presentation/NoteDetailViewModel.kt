@@ -60,7 +60,9 @@ internal constructor(
         is NoteDetailAction.EndEditClick -> obtainSave()
         is NoteDetailAction.DeleteClick -> obtainDelete()
         is NoteDetailAction.CompleteClick -> completeGoal()
+        is NoteDetailAction.CompleteSubNoteClick -> completeSubGoal(action.value)
         is NoteDetailAction.UnCompleteClick -> unCompleteGoal()
+        is NoteDetailAction.UnCompleteSubNoteClick -> unCompleteSubGoal(action.value)
     }
 
     private fun obtainTextChanged(value: String) {
@@ -236,6 +238,24 @@ internal constructor(
         }
     }
 
+    private fun completeSubGoal(value: SubNoteUI) {
+        launchJob {
+            notesRepository.completeSubGoal(
+                noteId = viewState.value.initialItem!!.id,
+                subNoteId = value.id.toInt()
+            ).collect { result ->
+                with(result) {
+                    onSuccess {
+                        it?.updateUI()
+                    }
+                    onFailureWithMsg { _, message ->
+                        message?.let { emit(it) }
+                    }
+                }
+            }
+        }
+    }
+
     private fun unCompleteGoal() {
         launchJob {
             notesRepository.unCompleteGoal(
@@ -245,6 +265,24 @@ internal constructor(
                     isLoading {
                         emit(viewState.value.copy(isCompleteGoalLoading = it))
                     }
+                    onSuccess {
+                        it?.updateUI()
+                    }
+                    onFailureWithMsg { _, message ->
+                        message?.let { emit(it) }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun unCompleteSubGoal(value: SubNoteUI) {
+        launchJob {
+            notesRepository.unCompleteSubGoal(
+                noteId = viewState.value.initialItem!!.id,
+                subNoteId = value.id.toInt()
+            ).collect { result ->
+                with(result) {
                     onSuccess {
                         it?.updateUI()
                     }
