@@ -112,6 +112,7 @@
 		46E2DD312AE9420600B4B2B5 /* AreaPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E2DD302AE9420600B4B2B5 /* AreaPickerItem.swift */; };
 		46FCD3D32AF530BD0025D2C6 /* NoteDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FCD3D22AF530BD0025D2C6 /* NoteDetailScreen.swift */; };
 		46FCD3D52AF530D40025D2C6 /* NoteDetailRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FCD3D42AF530D40025D2C6 /* NoteDetailRoute.swift */; };
+		46FCD3D72AF532450025D2C6 /* NoteDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FCD3D62AF532450025D2C6 /* NoteDetailHeader.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		DD1CD8AC3CDFF9460475C5F4 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8F55E6D0C4FF45066520BAF /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
@@ -220,6 +221,7 @@
 		46E2DD302AE9420600B4B2B5 /* AreaPickerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPickerItem.swift; sourceTree = "<group>"; };
 		46FCD3D22AF530BD0025D2C6 /* NoteDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailScreen.swift; sourceTree = "<group>"; };
 		46FCD3D42AF530D40025D2C6 /* NoteDetailRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailRoute.swift; sourceTree = "<group>"; };
+		46FCD3D62AF532450025D2C6 /* NoteDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailHeader.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -649,6 +651,7 @@
 		46FCD3D12AF530AF0025D2C6 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				46FCD3D62AF532450025D2C6 /* NoteDetailHeader.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -946,6 +949,7 @@
 				468B876A2ABC45C6001BBEB1 /* DiaryScreen.swift in Sources */,
 				46182DC12AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift in Sources */,
 				46D8577E2AD0787E00BE74DA /* AddAreaHeader.swift in Sources */,
+				46FCD3D72AF532450025D2C6 /* NoteDetailHeader.swift in Sources */,
 				469D0FBE2AB1DE330060CE95 /* WhiteButton.swift in Sources */,
 				46059D262AC4037E00DC5015 /* TasksView.swift in Sources */,
 				460487952AD83989005E8A54 /* CreateNewNoteBottomSheet.swift in Sources */,

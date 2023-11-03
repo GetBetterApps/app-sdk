@@ -9,9 +9,39 @@
 import Foundation
 import SwiftUI
 import SharedSDK
+import KMMViewModelSwiftUI
+import KMPNativeCoroutinesAsync
 
 struct NoteDetailScreen : View {
+    
+    @StateViewModel var viewModel: DiaryViewModel
+    
+    @State private var confirmDeleteNoteDialog = false
+    @State private var isSubNotesBlockVisible = false
+    
     var body: some View {
+        @State var state = viewModel.viewStateValue as! NoteDetailViewState
         
+        ZStack {
+            Color.mainBackground
+            
+            if state.isLoading {
+                VStack {
+                    Loader()
+                }
+            } else {
+                ScrollView(.vertical, showsIndicators: false) {
+                    NoteDetailHeader(
+                        noteType: state.noteType,
+                        isNotePrivate: state.isNotePrivate
+                    )
+                    
+                    
+                }
+                .ignoresSafeArea(.all)
+                .padding(.bottom, 40)
+                .padding(.horizontal, 20)
+            }
+        }
     }
 }

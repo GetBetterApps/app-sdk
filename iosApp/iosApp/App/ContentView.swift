@@ -64,6 +64,9 @@ struct ContentView: View {
                 case _ where route.starts(with: NavigationScreenKt.ADD_AREA_DESTINATION) :
                     AddAreaRoute().view(pilot: pilot, route: route)
                     
+                case _ where route.starts(with: NavigationScreenKt.NOTE_DETAIL_DESTINATION) :
+                    NoteDetailRoute().view(pilot: pilot, route: route)
+                    
                 default : EmptyView()
                 }
                 
