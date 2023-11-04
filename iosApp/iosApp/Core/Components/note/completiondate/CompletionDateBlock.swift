@@ -27,6 +27,8 @@ struct CompletionDateBlock: View {
     let onSetCompletionDate: (Int64?) -> Void
     let onCompleteClick: (() -> Void)?
     
+    @State private var confirmCancelCompletionDialog = false
+    
     init(
         enabled: Bool = true,
         isLoading: Bool = false,
@@ -56,63 +58,91 @@ struct CompletionDateBlock: View {
         PrimaryBox(
             padding: .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
         ) {
-            HStack {
-                Text(SharedR.strings().create_note_completion_date_title.desc().localized())
-                    .style(.titleMedium)
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.textPrimary)
-                
-                Spacer()
-                
-                if showDate && enabled {
-                    Button {
-                        showDate = false
-                        date = nil
-                    } label: {
-                        Image(systemName: "xmark.circle")
-                            .resizable()
-                            .frame(width: 16, height: 16)
-                            .tint(.textPrimary)
-                    }
+            VStack {
+                HStack {
+                    Text(SharedR.strings().create_note_completion_date_title.desc().localized())
+                        .style(.titleMedium)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(.textPrimary)
                     
-                    DatePicker(
-                        SharedR.strings().create_note_completion_date_title.desc().localized(),
-                        selection: $hidenDate,
-                        in: Date()...,
-                        displayedComponents: .date
-                    )
-                    .labelsHidden()
-                    .onChange(of: hidenDate) { newDate in
-                        date = newDate
-                        onSetCompletionDate(Int64((newDate.timeIntervalSince1970 * 1000.0).rounded()))
-                    }
+                    Spacer()
                     
-                } else {
-                    Button {
-                        if enabled {
-                            showDate = true
-                            date = hidenDate
+                    if showDate && enabled {
+                        Button {
+                            showDate = false
+                            date = nil
+                        } label: {
+                            Image(systemName: "xmark.circle")
+                                .resizable()
+                                .frame(width: 16, height: 16)
+                                .tint(.textPrimary)
                         }
-                    } label: {
-                        Text(
-                            initialValueStr != nil ? initialValueStr! :
-                            SharedR.strings().create_note_completion_date_hint.desc().localized()
+                        
+                        DatePicker(
+                            SharedR.strings().create_note_completion_date_title.desc().localized(),
+                            selection: $hidenDate,
+                            in: Date()...,
+                            displayedComponents: .date
                         )
+                        .labelsHidden()
+                        .onChange(of: hidenDate) { newDate in
+                            date = newDate
+                            onSetCompletionDate(Int64((newDate.timeIntervalSince1970 * 1000.0).rounded()))
+                        }
+                        
+                    } else {
+                        Button {
+                            if enabled {
+                                showDate = true
+                                date = hidenDate
+                            }
+                        } label: {
+                            Text(
+                                initialValueStr != nil ? initialValueStr! :
+                                    SharedR.strings().create_note_completion_date_hint.desc().localized()
+                            )
                             .multilineTextAlignment(.center)
                             .foregroundColor(.textPrimary)
+                        }
+                        .frame(width: 120, height: 34)
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color.mainBackground)
+                        )
+                        .multilineTextAlignment(.trailing)
                     }
-                    .frame(width: 120, height: 34)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.mainBackground)
+                }
+                .padding(.trailing, 16)
+                .padding(.leading, 16)
+                .frame(height: 60)
+                
+                if isCompleteVisible {
+                    if onCompleteClick != nil {
+                        CompletionDateButton(
+                            label: completionDateStr,
+                            isLoading: isLoading,
+                            onCompleteClick: onCompleteClick!
+                        )
+                    }
+                    
+                    CompletedOnBlock(
+                        label: completionDateStr,
+                        onClick: {
+                            confirmCancelCompletionDialog = true
+                        }
                     )
-                    .multilineTextAlignment(.trailing)
                 }
             }
-            .padding(.trailing, 16)
-            .padding(.leading, 16)
-            .frame(height: 60)
-        }
+            .animation(.easeInOut, value: isCompleteVisible)
+        }.alert(
+            SharedR.strings().addareacon, isPresented: $confirmDeleteNoteDialog) {
+                Button(SharedR.strings().confirm.desc().localized()) {
+                    viewModel.dispatch(action: NoteDetailActionDeleteClick())
+                }
+                Button(SharedR.strings().cancel.desc().localized(), role: .cancel) {}
+            } message: {
+                Text(SharedR.strings().note_detail_confirm_delete_text.desc().localized())
+            }
     }
 }
 

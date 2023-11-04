@@ -29,6 +29,8 @@
 		46059D2D2AC41DB500DC5015 /* ExpandableButtonPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D2C2AC41DB500DC5015 /* ExpandableButtonPanel.swift */; };
 		4616B0852AF626F900A4CDDE /* MultilineTextFieldBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B0842AF626F900A4CDDE /* MultilineTextFieldBinding.swift */; };
 		4616B0872AF629B100A4CDDE /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B0862AF629B100A4CDDE /* DateExt.swift */; };
+		4616B08B2AF62B9500A4CDDE /* CompletionDateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B08A2AF62B9500A4CDDE /* CompletionDateButton.swift */; };
+		4616B08D2AF62C7200A4CDDE /* CompletedOnBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B08C2AF62C7200A4CDDE /* CompletedOnBlock.swift */; };
 		46182DC12AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */; };
 		461D21EC2AA8EC71007E84CE /* DetailRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21EB2AA8EC71007E84CE /* DetailRoute.swift */; };
 		461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */; };
@@ -145,6 +147,8 @@
 		46059D2C2AC41DB500DC5015 /* ExpandableButtonPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableButtonPanel.swift; sourceTree = "<group>"; };
 		4616B0842AF626F900A4CDDE /* MultilineTextFieldBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextFieldBinding.swift; sourceTree = "<group>"; };
 		4616B0862AF629B100A4CDDE /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
+		4616B08A2AF62B9500A4CDDE /* CompletionDateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionDateButton.swift; sourceTree = "<group>"; };
+		4616B08C2AF62C7200A4CDDE /* CompletedOnBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedOnBlock.swift; sourceTree = "<group>"; };
 		46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinByteArrayExt.swift; sourceTree = "<group>"; };
 		461D21EB2AA8EC71007E84CE /* DetailRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRoute.swift; sourceTree = "<group>"; };
 		461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifecycleAwareObservableObject.swift; sourceTree = "<group>"; };
@@ -350,6 +354,8 @@
 			isa = PBXGroup;
 			children = (
 				4668872F2AECF8980002ABB6 /* CompletionDateBlock.swift */,
+				4616B08A2AF62B9500A4CDDE /* CompletionDateButton.swift */,
+				4616B08C2AF62C7200A4CDDE /* CompletedOnBlock.swift */,
 			);
 			path = completiondate;
 			sourceTree = "<group>";
@@ -910,6 +916,7 @@
 				46E2DD2D2AE9364D00B4B2B5 /* AreaPickerHeader.swift in Sources */,
 				468B87702ABC45DB001BBEB1 /* SocialRoute.swift in Sources */,
 				46D8577A2ACFFC7C00BE74DA /* ScrollViewExt.swift in Sources */,
+				4616B08B2AF62B9500A4CDDE /* CompletionDateButton.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				466B497D2ACFF06C00AD3F6E /* AddAreaScreen.swift in Sources */,
 				460054AB2ABB18FC00586767 /* MenuItem.swift in Sources */,
@@ -964,6 +971,7 @@
 				461F7C712AA8D911003791CF /* HomeViewModelDelegate.swift in Sources */,
 				461F7C732AA8DC2B003791CF /* HomeRoute.swift in Sources */,
 				4696B6B02AD15F6D00DDD405 /* AreaDetailVIewModel.swift in Sources */,
+				4616B08D2AF62C7200A4CDDE /* CompletedOnBlock.swift in Sources */,
 				46D9381C2ABAECB70096A221 /* ProfileRoute.swift in Sources */,
 				46B17E112AADE0DD008C2BC4 /* Color.swift in Sources */,
 				460054B42ABB56FF00586767 /* WisdomRoute.swift in Sources */,
