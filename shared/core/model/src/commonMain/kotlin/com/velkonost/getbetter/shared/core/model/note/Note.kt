@@ -12,7 +12,7 @@ data class Note(
     val text: String,
 
     val authorId: String,
-    val author: UserInfoShort,
+    val author: UserInfoShort?,
 
     val createdDate: Long,
     val completionDate: Long?,
@@ -38,3 +38,6 @@ data class Note(
     val expectedCompletionDateStr: String?
         get() = expectedCompletionDate?.convertToLocalDatetime()
 }
+
+fun Note.withoutAuthorData(): Note = copy(author = null)
+

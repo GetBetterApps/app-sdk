@@ -32,6 +32,7 @@ kotlin {
 
                 implementation(projects.shared.features.areas.api)
                 implementation(projects.shared.features.notes.api)
+                implementation(projects.shared.features.diary.api)
             }
         }
 

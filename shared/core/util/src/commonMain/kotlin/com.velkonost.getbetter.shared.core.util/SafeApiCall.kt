@@ -4,7 +4,7 @@ import com.velkonost.getbetter.shared.core.network.model.RemoteResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-inline fun <reified R : Any> flowRequestOld(noinline request: suspend () -> R): Flow<ResultState<R>> =
+inline fun <reified R : Any> flowLocalRequest(noinline request: suspend () -> R): Flow<ResultState<R>> =
     flow {
         emit(ResultState.Loading)
 

@@ -10,6 +10,7 @@ import com.velkonost.getbetter.shared.features.auth.data.di.AuthDataModule
 import com.velkonost.getbetter.shared.features.auth.domain.di.AuthDomainModule
 import com.velkonost.getbetter.shared.features.auth.presentation.di.AuthPresentationModule
 import com.velkonost.getbetter.shared.features.detail.presentation.di.DetailPresentationModule
+import com.velkonost.getbetter.shared.features.diary.data.di.DiaryDataModule
 import com.velkonost.getbetter.shared.features.diary.di.CalendarsPresentationModule
 import com.velkonost.getbetter.shared.features.diary.di.DiaryPresentationModule
 import com.velkonost.getbetter.shared.features.home.presentation.di.HomePresentationModule
@@ -43,7 +44,6 @@ object PlatformSDK {
             AreasDataModule,
             NotesDataModule,
             TasksDataModule,
-            SocialDataModule,
             UserInfoDataModule,
 
             AuthDataModule,
@@ -54,8 +54,13 @@ object PlatformSDK {
             DetailPresentationModule,
 
             SplashPresentationModule,
+
+            SocialDataModule,
             SocialPresentationModule,
+
+            DiaryDataModule,
             DiaryPresentationModule,
+
             AddAreaPresentationModule,
             AreaDetailPresentationModule,
             NoteDetailPresentationModule,

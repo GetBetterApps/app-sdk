@@ -11,6 +11,7 @@ import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.core.vm.resource.Message
 import com.velkonost.getbetter.shared.core.vm.resource.MessageType
+import com.velkonost.getbetter.shared.features.diary.api.DiaryRepository
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteEvent
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteViewState
@@ -21,7 +22,8 @@ import dev.icerock.moko.resources.desc.StringDesc
 
 class CreateNewNoteViewModel
 internal constructor(
-    private val notesRepository: NotesRepository
+    private val notesRepository: NotesRepository,
+    private val diaryRepository: DiaryRepository
 ) : BaseViewModel<CreateNewNoteViewState, CreateNewNoteAction, Nothing, CreateNewNoteEvent>(
     initialState = CreateNewNoteViewState()
 ) {
@@ -180,6 +182,7 @@ internal constructor(
                         emit(viewState.value.copy(isLoading = it))
                     }
                     onSuccess {
+                        saveCreatedNoteId(it?.id)
                         emit(CreateNewNoteEvent.CreatedSuccess)
 
                         emit(
@@ -200,6 +203,14 @@ internal constructor(
                         message?.let { emit(it) }
                     }
                 }
+            }
+        }
+    }
+
+    private fun saveCreatedNoteId(noteId: Int?) {
+        noteId?.let {
+            launchJob {
+                diaryRepository.saveUpdatedNoteId(noteId)
             }
         }
     }

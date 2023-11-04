@@ -2,11 +2,13 @@ package com.velkonost.getbetter.shared.features.diary
 
 import AreasRepository
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
+import com.velkonost.getbetter.shared.features.diary.api.DiaryRepository
 import com.velkonost.getbetter.shared.features.diary.contracts.AddAreaClick
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteAction
@@ -26,7 +28,8 @@ import kotlinx.coroutines.flow.collectLatest
 class DiaryViewModel
 internal constructor(
     private val areasRepository: AreasRepository,
-    private val notesRepository: NotesRepository
+    private val notesRepository: NotesRepository,
+    private val diaryRepository: DiaryRepository
 ) : BaseViewModel<DiaryViewState, DiaryAction, DiaryNavigation, DiaryEvent>(
     initialState = DiaryViewState()
 ) {
@@ -36,7 +39,8 @@ internal constructor(
 
     fun refreshData() {
         fetchAreas()
-        refreshNotePages()
+        fetchNotes()
+        checkUpdatedNote()
     }
 
     override fun init() {
@@ -71,13 +75,13 @@ internal constructor(
 
     @NativeCoroutinesState
     val createNewNoteViewModel: StateFlow<CreateNewNoteViewModel> =
-        MutableStateFlow(CreateNewNoteViewModel(notesRepository))
+        MutableStateFlow(CreateNewNoteViewModel(notesRepository, diaryRepository))
 
     override fun dispatch(action: DiaryAction) = when (action) {
         is CreateNewAreaAction -> dispatchCreateNewAreaAction(action)
         is CreateNewNoteAction -> dispatchCreateNewNoteAction(action)
         is AddAreaClick -> emit(NavigateToAddArea)
-        is NoteClick -> emit(NavigateToNoteDetail(action.value))
+        is NoteClick -> obtainNoteClick(action.value)
         is DiaryAction.NotesLoadNextPage -> fetchNotes()
     }
 
@@ -87,6 +91,55 @@ internal constructor(
 
     private fun dispatchCreateNewNoteAction(action: CreateNewNoteAction) {
         createNewNoteViewModel.value.dispatch(action)
+    }
+
+    private fun obtainNoteClick(value: Note) {
+        launchJob {
+            diaryRepository.saveUpdatedNoteId(value.id)
+            emit(NavigateToNoteDetail(value))
+        }
+    }
+
+    private fun checkUpdatedNote() {
+        launchJob {
+            diaryRepository.getUpdatedNoteId()
+                .collect { updatedNoteResult ->
+                    updatedNoteResult.onSuccess { noteId ->
+                        noteId?.let { refreshNoteData(it) }
+                    }
+                }
+        }
+    }
+
+    private fun refreshNoteData(noteId: Int) {
+        launchJob {
+            notesRepository.getNoteDetails(noteId)
+                .collect { noteDetailsResult ->
+                    noteDetailsResult.onSuccess { note ->
+                        note?.let {
+                            val indexOfChangedItem =
+                                viewState.value.notesViewState.items.indexOfFirst { it.id == note.id }
+                            val allItems =
+                                viewState.value.notesViewState.items.toMutableList()
+
+                            if (indexOfChangedItem == -1) {
+                                allItems.add(0, note)
+                            } else if (!note.isActive) {
+                                allItems.removeAt(indexOfChangedItem)
+                            } else {
+                                allItems[indexOfChangedItem] = note
+                            }
+
+                            val notesViewState =
+                                viewState.value.notesViewState.copy(
+                                    isLoading = false,
+                                    items = allItems
+                                )
+                            emit(viewState.value.copy(notesViewState = notesViewState))
+                        }
+                    }
+                }
+        }
     }
 
     private fun fetchAreas() {
@@ -120,18 +173,10 @@ internal constructor(
         }
     }
 
-    private fun refreshNotePages() {
-        notesLoadingJob?.cancel()
-
-        _notesPagingConfig.page = 0
-        _notesPagingConfig.lastPageReached = false
-
-        fetchNotes(resetList = true)
-    }
-
-    private fun fetchNotes(resetList: Boolean = false) {
+    private fun fetchNotes() {
         if (_notesPagingConfig.lastPageReached || notesLoadingJob?.isActive == true) return
 
+        notesLoadingJob?.cancel()
         notesLoadingJob = launchJob {
             notesRepository.fetchUserNotes(
                 page = _notesPagingConfig.page,
@@ -147,9 +192,7 @@ internal constructor(
                         _notesPagingConfig.page++
 
                         items?.let {
-                            val allItems =
-                                if (resetList) it
-                                else viewState.value.notesViewState.items.plus(it)
+                            val allItems = viewState.value.notesViewState.items.plus(it)
                             val notesViewState =
                                 viewState.value.notesViewState.copy(
                                     isLoading = false,

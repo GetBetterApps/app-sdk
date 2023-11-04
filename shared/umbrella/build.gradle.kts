@@ -75,7 +75,6 @@ kotlin {
                 implementation(projects.shared.features.areas.data)
                 implementation(projects.shared.features.notes.data)
                 implementation(projects.shared.features.tasks.data)
-                implementation(projects.shared.features.social.data)
                 implementation(projects.shared.features.userinfo.data)
 
                 implementation(projects.shared.features.auth.data)
@@ -86,8 +85,13 @@ kotlin {
                 implementation(projects.shared.features.detail.presentation)
 
                 implementation(projects.shared.features.splash.presentation)
+
+                implementation(projects.shared.features.social.data)
                 implementation(projects.shared.features.social.presentation)
+
+                implementation(projects.shared.features.diary.data)
                 implementation(projects.shared.features.diary.presentation)
+
                 implementation(projects.shared.features.addarea.presentation)
                 implementation(projects.shared.features.areadetail.presentation)
                 implementation(projects.shared.features.notedetail.presentation)
