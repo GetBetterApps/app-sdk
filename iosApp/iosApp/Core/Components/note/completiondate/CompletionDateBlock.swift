@@ -47,7 +47,7 @@ struct CompletionDateBlock: View {
         self.onCompleteClick = onCompleteClick
         
         _date = Binding<Date?>(get: { 
-            Date.now
+            initialValue != nil ? Date(milliseconds: initialValue!) : Date.now
         }, set: { value in })
         
     }
@@ -64,7 +64,7 @@ struct CompletionDateBlock: View {
                 
                 Spacer()
                 
-                if showDate {
+                if showDate && enabled {
                     Button {
                         showDate = false
                         date = nil
@@ -89,10 +89,15 @@ struct CompletionDateBlock: View {
                     
                 } else {
                     Button {
-                        showDate = true
-                        date = hidenDate
+                        if enabled {
+                            showDate = true
+                            date = hidenDate
+                        }
                     } label: {
-                        Text(SharedR.strings().create_note_completion_date_hint.desc().localized())
+                        Text(
+                            initialValueStr != nil ? initialValueStr! :
+                            SharedR.strings().create_note_completion_date_hint.desc().localized()
+                        )
                             .multilineTextAlignment(.center)
                             .foregroundColor(.textPrimary)
                     }

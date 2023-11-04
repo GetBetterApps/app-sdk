@@ -28,6 +28,7 @@
 		46059D2B2AC409A900DC5015 /* AddAreaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D2A2AC409A900DC5015 /* AddAreaButton.swift */; };
 		46059D2D2AC41DB500DC5015 /* ExpandableButtonPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D2C2AC41DB500DC5015 /* ExpandableButtonPanel.swift */; };
 		4616B0852AF626F900A4CDDE /* MultilineTextFieldBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B0842AF626F900A4CDDE /* MultilineTextFieldBinding.swift */; };
+		4616B0872AF629B100A4CDDE /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B0862AF629B100A4CDDE /* DateExt.swift */; };
 		46182DC12AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */; };
 		461D21EC2AA8EC71007E84CE /* DetailRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21EB2AA8EC71007E84CE /* DetailRoute.swift */; };
 		461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */; };
@@ -143,6 +144,7 @@
 		46059D2A2AC409A900DC5015 /* AddAreaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaButton.swift; sourceTree = "<group>"; };
 		46059D2C2AC41DB500DC5015 /* ExpandableButtonPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableButtonPanel.swift; sourceTree = "<group>"; };
 		4616B0842AF626F900A4CDDE /* MultilineTextFieldBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextFieldBinding.swift; sourceTree = "<group>"; };
+		4616B0862AF629B100A4CDDE /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
 		46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinByteArrayExt.swift; sourceTree = "<group>"; };
 		461D21EB2AA8EC71007E84CE /* DetailRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRoute.swift; sourceTree = "<group>"; };
 		461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifecycleAwareObservableObject.swift; sourceTree = "<group>"; };
@@ -291,11 +293,7 @@
 		460487932AD83976005E8A54 /* createnewnote */ = {
 			isa = PBXGroup;
 			children = (
-				467668B82AEABF91007C17DE /* subnotes */,
-				464A42692AEA62780019CB98 /* tags */,
-				46E2DD2B2AE935BE00B4B2B5 /* areapicker */,
 				460487942AD83989005E8A54 /* CreateNewNoteBottomSheet.swift */,
-				4668872F2AECF8980002ABB6 /* CompletionDateBlock.swift */,
 			);
 			path = createnewnote;
 			sourceTree = "<group>";
@@ -335,6 +333,25 @@
 				46059D2A2AC409A900DC5015 /* AddAreaButton.swift */,
 			);
 			path = components;
+			sourceTree = "<group>";
+		};
+		4616B0882AF62B4200A4CDDE /* note */ = {
+			isa = PBXGroup;
+			children = (
+				4616B0892AF62B6800A4CDDE /* completiondate */,
+				467668B82AEABF91007C17DE /* subnotes */,
+				464A42692AEA62780019CB98 /* tags */,
+				46E2DD2B2AE935BE00B4B2B5 /* areapicker */,
+			);
+			path = note;
+			sourceTree = "<group>";
+		};
+		4616B0892AF62B6800A4CDDE /* completiondate */ = {
+			isa = PBXGroup;
+			children = (
+				4668872F2AECF8980002ABB6 /* CompletionDateBlock.swift */,
+			);
+			path = completiondate;
 			sourceTree = "<group>";
 		};
 		461F7C5F2AA878D0003791CF /* App */ = {
@@ -383,6 +400,7 @@
 				46D857772ACFF2D200BE74DA /* ArrayExt.swift */,
 				46D857792ACFFC7C00BE74DA /* ScrollViewExt.swift */,
 				46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */,
+				4616B0862AF629B100A4CDDE /* DateExt.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -591,6 +609,7 @@
 		46B17E182AADF50D008C2BC4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				4616B0882AF62B4200A4CDDE /* note */,
 				46B17E192AADF523008C2BC4 /* AppButton.swift */,
 				469D0FBD2AB1DE330060CE95 /* WhiteButton.swift */,
 				46C10D1E2AB43FA300E62846 /* SnackBar.swift */,
@@ -969,6 +988,7 @@
 				46059D262AC4037E00DC5015 /* TasksView.swift in Sources */,
 				4616B0852AF626F900A4CDDE /* MultilineTextFieldBinding.swift in Sources */,
 				460487952AD83989005E8A54 /* CreateNewNoteBottomSheet.swift in Sources */,
+				4616B0872AF629B100A4CDDE /* DateExt.swift in Sources */,
 				461F7C682AA88B80003791CF /* StringExt.swift in Sources */,
 				46D857742ACFF1C500BE74DA /* AddAreaViewModel.swift in Sources */,
 				461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */,

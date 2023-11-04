@@ -41,113 +41,114 @@ struct NoteDetailScreen : View {
             } else {
                 ScrollView(.vertical, showsIndicators: false) {
                     ScrollViewReader { value in
-                        NoteDetailHeader(
-                            noteType: state.noteType,
-                            isNotePrivate: state.isNotePrivate
-                        )
-                        
-                        if state.area != nil {
-                            AreaData(
-                                area: state.area!,
-                                onClick: {
-                                    selectedAreaId = state.area!.id
-                                    showingAreaDetailSheet = true
-                                }
+                        VStack {
+                            NoteDetailHeader(
+                                noteType: state.noteType,
+                                isNotePrivate: state.isNotePrivate
                             )
-                        }
-                        
-                        if !noteText.isEmpty {
-                            MultilineTextFieldBinding(
-                                value: $noteText,
-                                placeholderText:
-                                    state.noteType == NoteType.default_ ? SharedR.strings().create_note_text_hint.desc().localized() : SharedR.strings().create_goal_text_hint.desc().localized(),
-                                isEnabled: state.noteState == NoteState.editing
-                            ) { value in
-                                viewModel.dispatch(action: NoteDetailActionTextChanged(value: value))
+                            
+                            if state.area != nil {
+                                AreaData(
+                                    area: state.area!,
+                                    onClick: {
+                                        selectedAreaId = state.area!.id
+                                        showingAreaDetailSheet = true
+                                    }
+                                )
                             }
-                            .onTapGesture {
-                                withAnimation {
-                                    value.scrollTo(1, anchor: .bottom)
+                            
+                            if !noteText.isEmpty {
+                                MultilineTextFieldBinding(
+                                    value: $noteText,
+                                    placeholderText:
+                                        state.noteType == NoteType.default_ ? SharedR.strings().create_note_text_hint.desc().localized() : SharedR.strings().create_goal_text_hint.desc().localized(),
+                                    isEnabled: state.noteState == NoteState.editing
+                                ) { value in
+                                    viewModel.dispatch(action: NoteDetailActionTextChanged(value: value))
                                 }
-                            }
-                            .id(1)
-                        }
-                        
-                        if state.noteType == NoteType.goal {
-                            CompletionDateBlock(
-                                enabled: state.noteState == NoteState.editing,
-                                isLoading: state.isCompleteGoalLoading,
-                                initialValue: state.expectedCompletionDate as? Int64,
-                                initialValueStr: state.expectedCompletionDateStr,
-                                isCompleteVisible: true,
-                                completionDateStr: state.completionDateStr,
-                                onSetCompletionDate: { value in
-                                    viewModel.dispatch(action: NoteDetailActionSetCompletionDate(value: KotlinLong(value: value!)))
-                                },
-                                onCompleteClick: {
-                                    if state.completionDate == nil {
-                                        viewModel.dispatch(action: NoteDetailActionCompleteClick())
-                                    } else {
-                                        viewModel.dispatch(action: NoteDetailActionUnCompleteClick())
+                                .onTapGesture {
+                                    withAnimation {
+                                        value.scrollTo(1, anchor: .bottom)
                                     }
                                 }
-                            )
-                        }
-                        
-                        if !state.tags.isEmpty || state.noteState == NoteState.editing {
-                            TagsBlock(
-                                tags: state.tags,
-                                newTag: $newTag,
-                                onlyView: state.noteState == NoteState.view,
-                                onNewTagChanged: { value in
-                                    viewModel.dispatch(action: NoteDetailActionNewTagTextChanged(value: value))
-                                },
-                                onAddNewTag: {
-                                    viewModel.dispatch(action: NoteDetailActionAddNewTag())
-                                },
-                                onTagDelete: { value in
-                                    viewModel.dispatch(action: NoteDetailActionRemoveTag(value: value))
-                                }
-                            )
-                            .onTapGesture {
-                                withAnimation {
-                                    value.scrollTo(2, anchor: .bottom)
-                                }
+                                .id(1)
                             }
-                            .id(2)
-                        }
-                        
-                        if state.noteType == NoteType.goal && (!state.subNotes.isEmpty || state.noteState == NoteState.editing) {
-                            SubNotesBlock(
-                                items: state.subNotes,
-                                newSubNote: $newSubNote,
-                                onlyView: state.noteState == NoteState.view,
-                                isCompleteVisible: state.allowEdit,
-                                onNewSubNoteChanged: { value in
-                                    viewModel.dispatch(action: NoteDetailActionNewSubNoteTextChanged(value: value))
-                                },
-                                onAddNewSubNote: {
-                                    viewModel.dispatch(action: NoteDetailActionAddSubNote())
-                                },
-                                onSubNoteDelete: { value in
-                                    viewModel.dispatch(action: NoteDetailActionRemoveSubNote(value: value))
-                                },
-                                isSubNotesBlockPickerVisible: $isSubNotesBlockVisible,
-                                onCompleteClick: { value in
-                                    if value.completionDate == nil {
-                                        viewModel.dispatch(action: NoteDetailActionCompleteSubNoteClick(value: value))
-                                    } else {
-                                        viewModel.dispatch(action: NoteDetailActionUnCompleteSubNoteClick(value: value))
+                            
+                            if state.noteType == NoteType.goal {
+                                CompletionDateBlock(
+                                    enabled: state.noteState == NoteState.editing,
+                                    isLoading: state.isCompleteGoalLoading,
+                                    initialValue: state.expectedCompletionDate as? Int64,
+                                    initialValueStr: state.expectedCompletionDateStr,
+                                    isCompleteVisible: true,
+                                    completionDateStr: state.completionDateStr,
+                                    onSetCompletionDate: { value in
+                                        viewModel.dispatch(action: NoteDetailActionSetCompletionDate(value: KotlinLong(value: value!)))
+                                    },
+                                    onCompleteClick: {
+                                        if state.completionDate == nil {
+                                            viewModel.dispatch(action: NoteDetailActionCompleteClick())
+                                        } else {
+                                            viewModel.dispatch(action: NoteDetailActionUnCompleteClick())
+                                        }
+                                    }
+                                )
+                            }
+                            
+                            if !state.tags.isEmpty || state.noteState == NoteState.editing {
+                                TagsBlock(
+                                    tags: state.tags,
+                                    newTag: $newTag,
+                                    onlyView: state.noteState == NoteState.view,
+                                    onNewTagChanged: { value in
+                                        viewModel.dispatch(action: NoteDetailActionNewTagTextChanged(value: value))
+                                    },
+                                    onAddNewTag: {
+                                        viewModel.dispatch(action: NoteDetailActionAddNewTag())
+                                    },
+                                    onTagDelete: { value in
+                                        viewModel.dispatch(action: NoteDetailActionRemoveTag(value: value))
+                                    }
+                                )
+                                .onTapGesture {
+                                    withAnimation {
+                                        value.scrollTo(2, anchor: .bottom)
                                     }
                                 }
-                            )
-                            .onTapGesture {
-                                withAnimation {
-                                    value.scrollTo(3, anchor: .bottom)
-                                }
+                                .id(2)
                             }
-                            .id(3)
-                        }
+                            
+                            if state.noteType == NoteType.goal && (!state.subNotes.isEmpty || state.noteState == NoteState.editing) {
+                                SubNotesBlock(
+                                    items: state.subNotes,
+                                    newSubNote: $newSubNote,
+                                    onlyView: state.noteState == NoteState.view,
+                                    isCompleteVisible: state.allowEdit,
+                                    onNewSubNoteChanged: { value in
+                                        viewModel.dispatch(action: NoteDetailActionNewSubNoteTextChanged(value: value))
+                                    },
+                                    onAddNewSubNote: {
+                                        viewModel.dispatch(action: NoteDetailActionAddSubNote())
+                                    },
+                                    onSubNoteDelete: { value in
+                                        viewModel.dispatch(action: NoteDetailActionRemoveSubNote(value: value))
+                                    },
+                                    isSubNotesBlockPickerVisible: $isSubNotesBlockVisible,
+                                    onCompleteClick: { value in
+                                        if value.completionDate == nil {
+                                            viewModel.dispatch(action: NoteDetailActionCompleteSubNoteClick(value: value))
+                                        } else {
+                                            viewModel.dispatch(action: NoteDetailActionUnCompleteSubNoteClick(value: value))
+                                        }
+                                    }
+                                )
+                                .onTapGesture {
+                                    withAnimation {
+                                        value.scrollTo(3, anchor: .bottom)
+                                    }
+                                }
+                                .id(3)
+                            }
                             
                             if state.allowEdit {
                                 ActionButtons(
@@ -166,43 +167,40 @@ struct NoteDetailScreen : View {
                                     }
                                 )
                             }
-                        
-                        
+                            
+                        }
+                        .padding(.horizontal, 20)
                     }
                 }
-//                .ignoresSafeArea(.keyboard)
-                //                .ignoresSafeArea(.all)
-//                .padding(.bottom, 40)
-                
                 .onTapGesture {
                     endTextEditing()
                 }
             }
         }
-        .padding(.horizontal, 20)
+        
         .alert(
             state.noteType == NoteType.default_ ? SharedR.strings().note_detail_confirm_delete_title.desc().localized() : SharedR.strings().goal_detail_confirm_delete_title.desc().localized(), isPresented: $confirmDeleteNoteDialog) {
-            Button(SharedR.strings().confirm.desc().localized()) {
-                viewModel.dispatch(action: NoteDetailActionDeleteClick())
-            }
-            Button(SharedR.strings().cancel.desc().localized(), role: .cancel) {}
-        } message: {
-            Text(SharedR.strings().note_detail_confirm_delete_text.desc().localized())
-        }
-        .sheet(isPresented: $showingAreaDetailSheet) {
-            AreaDetailScreen(
-                areaId: $selectedAreaId,
-                onClose: {
-                    showingAreaDetailSheet = false
-                },
-                onAreaChanged: { areaId in
-                    viewModel.dispatch(action: NoteDetailActionAreaChanged())
+                Button(SharedR.strings().confirm.desc().localized()) {
+                    viewModel.dispatch(action: NoteDetailActionDeleteClick())
                 }
-            )
-        }
-        .onAppear {
-            observeEvents()
-        }
+                Button(SharedR.strings().cancel.desc().localized(), role: .cancel) {}
+            } message: {
+                Text(SharedR.strings().note_detail_confirm_delete_text.desc().localized())
+            }
+            .sheet(isPresented: $showingAreaDetailSheet) {
+                AreaDetailScreen(
+                    areaId: $selectedAreaId,
+                    onClose: {
+                        showingAreaDetailSheet = false
+                    },
+                    onAreaChanged: { areaId in
+                        viewModel.dispatch(action: NoteDetailActionAreaChanged())
+                    }
+                )
+            }
+            .onAppear {
+                observeEvents()
+            }
     }
 }
 
@@ -219,8 +217,8 @@ extension NoteDetailScreen {
                     case _ as NoteDetailEventEditSuccess: do {
                         // TODO
                     }
-                   
-                    
+                        
+                        
                     default:
                         break
                     }
