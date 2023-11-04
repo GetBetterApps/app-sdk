@@ -31,7 +31,6 @@ internal constructor(
     savedStateHandle = savedStateHandle
 ) {
 
-    //    @NativeCoroutinesState
     private val note = savedStateHandle.note.stateInWhileSubscribed(initialValue = null)
 
     init {
@@ -213,7 +212,6 @@ internal constructor(
                         }
                     }
             }
-
         }
     }
 
