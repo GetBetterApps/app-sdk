@@ -67,7 +67,7 @@ struct SubNoteItem: View {
                     )
                     .resizable()
                     .renderingMode(.template)
-                    .foregroundColor(.iconInactive)
+                    .foregroundColor(.textLight)
                     .frame(width: 24, height: 24, alignment: .center)
                     .onTapGesture {
                         if onCompleteClick != nil {
@@ -78,7 +78,7 @@ struct SubNoteItem: View {
                 .frame(width: 36, height: 36, alignment: .center)
                 .background(
                     RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.backgroundItem)
+                        .fill(Color.buttonGradientStart)
                 )
                 .padding(.trailing, 12)
             }

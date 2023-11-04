@@ -50,6 +50,7 @@ struct TagsBlock: View {
                     ForEach(tags, id: \.self) { tag in
                         TagItem(
                             tag: tag,
+                            onlyView: onlyView,
                             onTagDelete: onTagDelete
                         )
                     }

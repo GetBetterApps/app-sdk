@@ -29,6 +29,7 @@ struct NoteDetailScreen : View {
         @State var state = viewModel.viewStateValue as! NoteDetailViewState
         @State var newTag = state.newTag
         @State var newSubNote = state.newSubNote
+        @State var noteText = state.noteText
         
         ZStack {
             Color.mainBackground
@@ -55,20 +56,22 @@ struct NoteDetailScreen : View {
                             )
                         }
                         
-                        MultilineTextField(
-                            value: state.noteText,
-                            placeholderText:
-                                state.noteType == NoteType.default_ ? SharedR.strings().create_note_text_hint.desc().localized() : SharedR.strings().create_goal_text_hint.desc().localized(),
-                            isEnabled: state.noteState == NoteState.editing
-                        ) { value in
-                            viewModel.dispatch(action: NoteDetailActionTextChanged(value: value))
-                        }
-                        .onTapGesture {
-                            withAnimation {
-                                value.scrollTo(1, anchor: .bottom)
+                        if !noteText.isEmpty {
+                            MultilineTextFieldBinding(
+                                value: $noteText,
+                                placeholderText:
+                                    state.noteType == NoteType.default_ ? SharedR.strings().create_note_text_hint.desc().localized() : SharedR.strings().create_goal_text_hint.desc().localized(),
+                                isEnabled: state.noteState == NoteState.editing
+                            ) { value in
+                                viewModel.dispatch(action: NoteDetailActionTextChanged(value: value))
                             }
+                            .onTapGesture {
+                                withAnimation {
+                                    value.scrollTo(1, anchor: .bottom)
+                                }
+                            }
+                            .id(1)
                         }
-                        .id(1)
                         
                         if state.noteType == NoteType.goal {
                             CompletionDateBlock(
@@ -167,14 +170,16 @@ struct NoteDetailScreen : View {
                         
                     }
                 }
+//                .ignoresSafeArea(.keyboard)
                 //                .ignoresSafeArea(.all)
-                .padding(.bottom, 40)
-                .padding(.horizontal, 20)
+//                .padding(.bottom, 40)
+                
                 .onTapGesture {
                     endTextEditing()
                 }
             }
         }
+        .padding(.horizontal, 20)
         .alert(
             state.noteType == NoteType.default_ ? SharedR.strings().note_detail_confirm_delete_title.desc().localized() : SharedR.strings().goal_detail_confirm_delete_title.desc().localized(), isPresented: $confirmDeleteNoteDialog) {
             Button(SharedR.strings().confirm.desc().localized()) {
