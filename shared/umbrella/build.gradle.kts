@@ -75,6 +75,7 @@ kotlin {
                 implementation(projects.shared.features.areas.data)
                 implementation(projects.shared.features.notes.data)
                 implementation(projects.shared.features.tasks.data)
+                implementation(projects.shared.features.social.data)
                 implementation(projects.shared.features.userinfo.data)
 
                 implementation(projects.shared.features.auth.data)
