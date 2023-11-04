@@ -148,8 +148,8 @@ fun CompletionDateBlock(
 
     if (confirmCancelCompletionDialog.value) {
         AppAlertDialog(
-            title = stringResource(resource = SharedR.strings.add_area_confirm_delete_title),
-            text = stringResource(resource = SharedR.strings.add_area_confirm_delete_text),
+            title = stringResource(resource = SharedR.strings.note_detail_cancel_completion_title),
+            text = stringResource(resource = SharedR.strings.note_detail_cancel_completion_text),
             confirmTitle = stringResource(resource = SharedR.strings.confirm),
             cancelTitle = stringResource(resource = SharedR.strings.cancel),
             onDismiss = { confirmCancelCompletionDialog.value = false },
