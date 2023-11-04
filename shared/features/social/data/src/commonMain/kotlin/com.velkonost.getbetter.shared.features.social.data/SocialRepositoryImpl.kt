@@ -17,6 +17,7 @@ constructor(
     private val remoteDataSource: SocialRemoteDataSource,
     private val localDataSource: DataStore<Preferences>
 ) : SocialRepository {
+
     override fun fetchAreasFeed(page: Int, pageSize: Int): Flow<ResultState<List<Note>>> =
         flowRequest(
             mapper = { this.map(KtorNote::asExternalModel) },

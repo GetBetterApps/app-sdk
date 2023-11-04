@@ -17,3 +17,12 @@ data class UserInfo(
     val email: String? = null
 
 )
+
+@Serializable
+data class UserInfoShort(
+    val id: String,
+
+    val displayName: String? = null,
+
+    val avatar: ByteArray? = null
+)

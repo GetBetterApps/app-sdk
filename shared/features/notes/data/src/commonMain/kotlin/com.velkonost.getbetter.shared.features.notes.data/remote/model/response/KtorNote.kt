@@ -4,6 +4,8 @@ import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.note.NoteType
 import com.velkonost.getbetter.shared.features.areas.data.remote.model.response.KtorArea
 import com.velkonost.getbetter.shared.features.areas.data.remote.model.response.asExternalModel
+import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response.KtorUserInfoShort
+import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response.asExternalModel
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -20,6 +22,9 @@ data class KtorNote(
 
     @SerialName("authorId")
     val authorId: String = "",
+
+    @SerialName("author")
+    val author: KtorUserInfoShort,
 
     @SerialName("createdDate")
     val createdDate: Long = 0L,
@@ -58,6 +63,7 @@ fun KtorNote.asExternalModel() =
         noteType = NoteType.values().first { it.responseName == noteType },
         text = text,
         authorId = authorId,
+        author = author.asExternalModel(),
         createdDate = createdDate,
         completionDate = completionDate,
         expectedCompletionDate = expectedCompletionDate,

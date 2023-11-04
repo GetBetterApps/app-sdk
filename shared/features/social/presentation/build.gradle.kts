@@ -25,6 +25,8 @@ kotlin {
 
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
+
+                implementation(projects.shared.features.social.api)
             }
         }
 

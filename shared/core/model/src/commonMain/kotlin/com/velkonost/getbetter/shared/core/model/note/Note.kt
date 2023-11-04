@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.core.model.note
 
 import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToLocalDatetime
 import kotlinx.serialization.Serializable
 
@@ -11,6 +12,7 @@ data class Note(
     val text: String,
 
     val authorId: String,
+    val author: UserInfoShort,
 
     val createdDate: Long,
     val completionDate: Long?,
