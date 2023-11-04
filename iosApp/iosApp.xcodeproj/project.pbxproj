@@ -27,6 +27,7 @@
 		46059D292AC405BA00DC5015 /* AreaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D282AC405BA00DC5015 /* AreaItem.swift */; };
 		46059D2B2AC409A900DC5015 /* AddAreaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D2A2AC409A900DC5015 /* AddAreaButton.swift */; };
 		46059D2D2AC41DB500DC5015 /* ExpandableButtonPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D2C2AC41DB500DC5015 /* ExpandableButtonPanel.swift */; };
+		4616B0852AF626F900A4CDDE /* MultilineTextFieldBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B0842AF626F900A4CDDE /* MultilineTextFieldBinding.swift */; };
 		46182DC12AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */; };
 		461D21EC2AA8EC71007E84CE /* DetailRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21EB2AA8EC71007E84CE /* DetailRoute.swift */; };
 		461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */; };
@@ -141,6 +142,7 @@
 		46059D282AC405BA00DC5015 /* AreaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaItem.swift; sourceTree = "<group>"; };
 		46059D2A2AC409A900DC5015 /* AddAreaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaButton.swift; sourceTree = "<group>"; };
 		46059D2C2AC41DB500DC5015 /* ExpandableButtonPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableButtonPanel.swift; sourceTree = "<group>"; };
+		4616B0842AF626F900A4CDDE /* MultilineTextFieldBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextFieldBinding.swift; sourceTree = "<group>"; };
 		46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinByteArrayExt.swift; sourceTree = "<group>"; };
 		461D21EB2AA8EC71007E84CE /* DetailRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRoute.swift; sourceTree = "<group>"; };
 		461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifecycleAwareObservableObject.swift; sourceTree = "<group>"; };
@@ -602,6 +604,7 @@
 				4667C90D2AC5BA5900BAA9DD /* Loader.swift */,
 				46D8577B2AD0560B00BE74DA /* DisabledAppButton.swift */,
 				46FCD3DC2AF540D70025D2C6 /* BottomActionButton.swift */,
+				4616B0842AF626F900A4CDDE /* MultilineTextFieldBinding.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -964,6 +967,7 @@
 				46FCD3D72AF532450025D2C6 /* NoteDetailHeader.swift in Sources */,
 				469D0FBE2AB1DE330060CE95 /* WhiteButton.swift in Sources */,
 				46059D262AC4037E00DC5015 /* TasksView.swift in Sources */,
+				4616B0852AF626F900A4CDDE /* MultilineTextFieldBinding.swift in Sources */,
 				460487952AD83989005E8A54 /* CreateNewNoteBottomSheet.swift in Sources */,
 				461F7C682AA88B80003791CF /* StringExt.swift in Sources */,
 				46D857742ACFF1C500BE74DA /* AddAreaViewModel.swift in Sources */,
