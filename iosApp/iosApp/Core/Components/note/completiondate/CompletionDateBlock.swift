@@ -58,7 +58,7 @@ struct CompletionDateBlock: View {
         PrimaryBox(
             padding: .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
         ) {
-            VStack {
+            VStack(spacing: 0) {
                 HStack {
                     Text(SharedR.strings().create_note_completion_date_title.desc().localized())
                         .style(.titleMedium)
@@ -117,7 +117,7 @@ struct CompletionDateBlock: View {
                 .frame(height: 60)
                 
                 if isCompleteVisible {
-                    if onCompleteClick != nil {
+                    if onCompleteClick != nil && completionDateStr == nil {
                         CompletionDateButton(
                             label: completionDateStr,
                             isLoading: isLoading,
@@ -125,23 +125,26 @@ struct CompletionDateBlock: View {
                         )
                     }
                     
-                    CompletedOnBlock(
-                        label: completionDateStr,
-                        onClick: {
-                            confirmCancelCompletionDialog = true
-                        }
-                    )
+                    if completionDateStr != nil {
+                        CompletedOnBlock(
+                            label: completionDateStr,
+                            onClick: {
+                                confirmCancelCompletionDialog = true
+                            }
+                        )
+                    }
                 }
             }
             .animation(.easeInOut, value: isCompleteVisible)
-        }.alert(
-            SharedR.strings().addareacon, isPresented: $confirmDeleteNoteDialog) {
+            .animation(.easeInOut, value: completionDateStr)
+        }
+        .alert(SharedR.strings().note_detail_cancel_completion_title.desc().localized(), isPresented: $confirmCancelCompletionDialog) {
                 Button(SharedR.strings().confirm.desc().localized()) {
-                    viewModel.dispatch(action: NoteDetailActionDeleteClick())
+                    onCompleteClick!()
                 }
                 Button(SharedR.strings().cancel.desc().localized(), role: .cancel) {}
             } message: {
-                Text(SharedR.strings().note_detail_confirm_delete_text.desc().localized())
+                Text(SharedR.strings().note_detail_cancel_completion_text.desc().localized())
             }
     }
 }

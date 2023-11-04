@@ -32,15 +32,16 @@ struct CompletedOnBlock: View {
                 Spacer()
                 
                 Text(label!)
-                    .style(.titleMedium)
+                    .style(.bodyMedium, withSize: 16)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.textLight)
-                    .padding(.trailing, 16)
+                    .padding(.horizontal, 19)
+                    .padding(.vertical, 6)
                     .background(
-                        RoundedRectangle(cornerRadius: 12)
+                        RoundedRectangle(cornerRadius: 8)
                             .fill(Color.buttonGradientStart)
                     )
-                    .padding(12)
+                    .padding(.trailing, 16)
                     .onTapGesture {
                         onClick()
                     }
