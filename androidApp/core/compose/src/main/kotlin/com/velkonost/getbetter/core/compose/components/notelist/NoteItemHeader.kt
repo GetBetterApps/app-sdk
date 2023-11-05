@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.diary.notes.item
+package com.velkonost.getbetter.core.compose.components.notelist
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image

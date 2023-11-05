@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.velkonost.getbetter.android.features.social.components.FeedNoteItem
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
 import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
@@ -30,7 +31,6 @@ import com.velkonost.getbetter.shared.features.social.contracts.SocialAction
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SocialScreen(
-    modifier: Modifier = Modifier,
     viewModel: SocialViewModel
 ) {
 
@@ -121,7 +121,7 @@ fun SocialFeedView(
                 contentPadding = PaddingValues(bottom = 140.dp)
             ) {
                 items(items) { item ->
-                    NoteItem(
+                    FeedNoteItem(
                         item = item,
                         onClick = itemClick
                     )

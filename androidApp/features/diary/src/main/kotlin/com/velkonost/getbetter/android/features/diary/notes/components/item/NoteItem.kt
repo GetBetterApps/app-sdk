@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.diary.notes.item
+package com.velkonost.getbetter.android.features.diary.notes.components.item
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,6 +20,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.core.compose.components.note.tags.TagItem
+import com.velkonost.getbetter.core.compose.components.notelist.NoteItemData
+import com.velkonost.getbetter.core.compose.components.notelist.NoteItemHeader
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
