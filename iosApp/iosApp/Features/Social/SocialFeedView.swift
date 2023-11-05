@@ -22,6 +22,7 @@ struct SocialFeedView: View {
          loadMorePrefetch: Int,
          items: [Note], itemClick: @escaping (Note) -> Void, onBottomReach: @escaping () -> Void) {
         self._isLoading = isLoading
+        self.loadMorePrefetch = loadMorePrefetch
         self.items = items
         self.itemClick = itemClick
         self.onBottomReach = onBottomReach

@@ -36,6 +36,7 @@ internal constructor(
         emit(NavigateToNoteDetail(value))
     }
 
+
     private fun fetchGeneralFeed() {
         if (_generalFeedPagingConfig.lastPageReached || generalFeedLoadingJob?.isActive == true) return
 
