@@ -15,4 +15,8 @@ interface SocialRepository {
         page: Int,
         pageSize: Int
     ): Flow<ResultState<List<Note>>>
+
+    suspend fun saveUpdatedNoteId(noteId: Int)
+
+    suspend fun getUpdatedNoteId(): Flow<ResultState<Int>>
 }

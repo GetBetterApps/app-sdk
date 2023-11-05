@@ -55,6 +55,7 @@ struct SocialScreen: View {
             }
         }
         .onAppear {
+            viewModel.onAppear()
             viewModel.dispatch(action: SocialActionGeneralFeedLoadNextPage())
             viewModel.dispatch(action: SocialActionAreasFeedLoadNextPage())
         }

@@ -30,6 +30,7 @@ kotlin {
                 implementation(projects.shared.core.model)
 
                 implementation(projects.shared.features.social.api)
+                implementation(projects.shared.features.notes.api)
                 implementation(projects.shared.resources)
             }
         }

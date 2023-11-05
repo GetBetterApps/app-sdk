@@ -129,15 +129,6 @@ fun FeedNoteItem(
                                 .build(),
                             contentScale = ContentScale.Crop,
                             contentDescription = null,
-                            loading = {
-                                Image(
-                                    modifier = modifier
-                                        .size(24.dp)
-                                        .clip(MaterialTheme.shapes.small),
-                                    painter = painterResource(imageResource = SharedR.images.logo),
-                                    contentDescription = null
-                                )
-                            }
                         )
                     }
                 } else {

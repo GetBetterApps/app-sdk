@@ -6,6 +6,7 @@ import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
+import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.social.api.SocialRepository
 import com.velkonost.getbetter.shared.features.social.contracts.NavigateToNoteDetail
 import com.velkonost.getbetter.shared.features.social.contracts.SocialAction
@@ -15,7 +16,8 @@ import kotlinx.coroutines.Job
 
 class SocialViewModel
 internal constructor(
-    private val socialRepository: SocialRepository
+    private val socialRepository: SocialRepository,
+    private val notesRepository: NotesRepository
 ) : BaseViewModel<SocialViewState, SocialAction, SocialNavigation, Nothing>(
     initialState = SocialViewState()
 ) {
@@ -26,6 +28,11 @@ internal constructor(
     private var generalFeedLoadingJob: Job? = null
     private var areasFeedLoadingJob: Job? = null
 
+
+    fun onAppear() {
+        checkUpdatedNote()
+    }
+
     override fun dispatch(action: SocialAction) = when (action) {
         is SocialAction.GeneralFeedLoadNextPage -> fetchGeneralFeed()
         is SocialAction.AreasFeedLoadNextPage -> fetchAreasFeed()
@@ -33,9 +40,88 @@ internal constructor(
     }
 
     private fun obtainNoteClick(value: Note) {
-        emit(NavigateToNoteDetail(value))
+        launchJob {
+            socialRepository.saveUpdatedNoteId(value.id)
+            emit(NavigateToNoteDetail(value))
+        }
+
     }
 
+    private fun checkUpdatedNote() {
+        launchJob {
+            socialRepository.getUpdatedNoteId()
+                .collect { updatedNoteResult ->
+                    updatedNoteResult.onSuccess { noteId ->
+                        noteId?.let { refreshNoteData(it) }
+                    }
+                }
+        }
+    }
+
+    private fun refreshNoteData(noteId: Int) {
+        launchJob {
+            notesRepository.getNoteDetails(noteId)
+                .collect { noteDetailsResult ->
+                    noteDetailsResult.onSuccess { note ->
+                        note?.let {
+                            val indexOfChangedItemInGeneralFeed =
+                                viewState.value.generalFeed.items.indexOfFirst { it.id == note.id }
+                            val indexOfChangedItemInAreasFeed =
+                                viewState.value.areasFeed.items.indexOfFirst { it.id == note.id }
+
+                            val allItemsGeneralFeed =
+                                viewState.value.generalFeed.items.toMutableList()
+                            val allItemsAreasFeed =
+                                viewState.value.areasFeed.items.toMutableList()
+
+                            when {
+                                indexOfChangedItemInGeneralFeed == -1 -> {
+                                    allItemsGeneralFeed.add(0, note)
+                                }
+
+                                !note.isActive -> {
+                                    allItemsGeneralFeed.removeAt(indexOfChangedItemInGeneralFeed)
+                                }
+
+                                else -> {
+                                    allItemsGeneralFeed[indexOfChangedItemInGeneralFeed] = note
+                                }
+                            }
+
+                            when {
+                                indexOfChangedItemInAreasFeed == -1 -> {
+                                    allItemsAreasFeed.add(0, note)
+                                }
+
+                                !note.isActive -> {
+                                    allItemsAreasFeed.removeAt(indexOfChangedItemInAreasFeed)
+                                }
+
+                                else -> {
+                                    allItemsAreasFeed[indexOfChangedItemInAreasFeed] = note
+                                }
+                            }
+
+                            val generalFeedViewState =
+                                viewState.value.generalFeed.copy(
+                                    items = allItemsGeneralFeed
+                                )
+                            val areasFeedViewState =
+                                viewState.value.areasFeed.copy(
+                                    items = allItemsAreasFeed
+                                )
+
+                            emit(
+                                viewState.value.copy(
+                                    generalFeed = generalFeedViewState,
+                                    areasFeed = areasFeedViewState
+                                )
+                            )
+                        }
+                    }
+                }
+        }
+    }
 
     private fun fetchGeneralFeed() {
         if (_generalFeedPagingConfig.lastPageReached || generalFeedLoadingJob?.isActive == true) return
