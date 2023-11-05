@@ -63,6 +63,39 @@ struct FeedNoteItem: View {
                 )
                 .padding(.top, 12)
                 
+                HStack(spacing: 0) {
+                    if item.author?.avatar != nil {
+                        Image(uiImage: UIImage(data: item.author!.avatar!.toData()!)!)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 24, height: 24)
+                            .clipped()
+                            .cornerRadius(8)
+                    } else {
+                        Image(uiImage: SharedR.images().logo.toUIImage()!)
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .clipped()
+                            .cornerRadius(8)
+                    }
+                    
+                    if item.author?.displayName != nil {
+                        Text(item.author!.displayName!)
+                            .style(.bodySmall)
+                            .foregroundColor(.textPrimary)
+                            .padding(.leading, 6)
+                    }
+                    
+                    Spacer()
+                    
+                    Text(item.createdDateStr)
+                        .style(.bodySmall)
+                        .foregroundColor(.textPrimary)
+                }
+                .padding(.top, 6)
+                .padding(.horizontal, 4)
+    
+                
             }
         }
         .onTapGesture {
