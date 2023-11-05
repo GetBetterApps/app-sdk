@@ -38,6 +38,9 @@ struct SocialScreen: View {
                 },
                 onBottomReach: {
                     viewModel.dispatch(action: SocialActionGeneralFeedLoadNextPage())
+                },
+                onRefresh: {
+                    viewModel.dispatch(action: SocialActionRefreshGeneralFeed())
                 }
             )
             default: SocialFeedView(
@@ -49,6 +52,9 @@ struct SocialScreen: View {
                 },
                 onBottomReach: {
                     viewModel.dispatch(action: SocialActionAreasFeedLoadNextPage())
+                },
+                onRefresh: {
+                    viewModel.dispatch(action: SocialActionRefreshAreasFeed())
                 }
             )
             

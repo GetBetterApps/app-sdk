@@ -28,7 +28,6 @@ internal constructor(
     private var generalFeedLoadingJob: Job? = null
     private var areasFeedLoadingJob: Job? = null
 
-
     fun onAppear() {
         checkUpdatedNote()
     }
@@ -37,6 +36,20 @@ internal constructor(
         is SocialAction.GeneralFeedLoadNextPage -> fetchGeneralFeed()
         is SocialAction.AreasFeedLoadNextPage -> fetchAreasFeed()
         is SocialAction.NoteClick -> obtainNoteClick(action.value)
+        is SocialAction.RefreshGeneralFeed -> obtainRefreshGeneralFeed()
+        is SocialAction.RefreshAreasFeed -> obtainRefreshAreasFeed()
+    }
+
+    private fun obtainRefreshGeneralFeed() {
+        _generalFeedPagingConfig.page = 0
+        _generalFeedPagingConfig.lastPageReached = false
+        fetchGeneralFeed(refreshList = true)
+    }
+
+    private fun obtainRefreshAreasFeed() {
+        _areasFeedPagingConfig.page = 0
+        _areasFeedPagingConfig.lastPageReached = false
+        fetchAreasFeed(refreshList = true)
     }
 
     private fun obtainNoteClick(value: Note) {
@@ -130,7 +143,7 @@ internal constructor(
         }
     }
 
-    private fun fetchGeneralFeed() {
+    private fun fetchGeneralFeed(refreshList: Boolean = false) {
         if (_generalFeedPagingConfig.lastPageReached || generalFeedLoadingJob?.isActive == true) return
 
         generalFeedLoadingJob?.cancel()
@@ -150,7 +163,9 @@ internal constructor(
                         _generalFeedPagingConfig.page++
 
                         items?.let {
-                            val allItems = viewState.value.generalFeed.items.plus(it)
+                            val allItems =
+                                if (refreshList) it
+                                else viewState.value.generalFeed.items.plus(it)
                             val generalFeedViewState = viewState.value.generalFeed.copy(
                                 isLoading = false,
                                 items = allItems
@@ -166,7 +181,7 @@ internal constructor(
         }
     }
 
-    private fun fetchAreasFeed() {
+    private fun fetchAreasFeed(refreshList: Boolean = false) {
         if (_areasFeedPagingConfig.lastPageReached || areasFeedLoadingJob?.isActive == true) return
 
         areasFeedLoadingJob?.cancel()
@@ -185,7 +200,9 @@ internal constructor(
                         _areasFeedPagingConfig.page++
 
                         items?.let {
-                            val allItems = viewState.value.areasFeed.items.plus(it)
+                            val allItems =
+                                if (refreshList) it
+                                else viewState.value.areasFeed.items.plus(it)
                             val areasFeedViewState = viewState.value.areasFeed.copy(
                                 isLoading = false,
                                 items = allItems

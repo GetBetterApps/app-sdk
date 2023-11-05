@@ -17,15 +17,17 @@ struct SocialFeedView: View {
     let loadMorePrefetch: Int
     let itemClick: (Note) -> Void
     let onBottomReach: () -> Void
+    let onRefresh: () -> Void
     
     init(isLoading: Binding<Bool>,
          loadMorePrefetch: Int,
-         items: [Note], itemClick: @escaping (Note) -> Void, onBottomReach: @escaping () -> Void) {
+         items: [Note], itemClick: @escaping (Note) -> Void, onBottomReach: @escaping () -> Void, onRefresh: @escaping () -> Void) {
         self._isLoading = isLoading
         self.loadMorePrefetch = loadMorePrefetch
         self.items = items
         self.itemClick = itemClick
         self.onBottomReach = onBottomReach
+        self.onRefresh = onRefresh
     }
     
     var body: some View {
@@ -53,6 +55,9 @@ struct SocialFeedView: View {
             }
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+        .refreshable {
+            onRefresh()
+        }
     }
 }
 
