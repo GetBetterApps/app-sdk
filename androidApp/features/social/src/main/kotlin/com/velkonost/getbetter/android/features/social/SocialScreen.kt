@@ -47,7 +47,6 @@ fun SocialScreen(
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { state.tabs.size })
 
 
-
     Box {
         Column {
             PrimaryTabs(
