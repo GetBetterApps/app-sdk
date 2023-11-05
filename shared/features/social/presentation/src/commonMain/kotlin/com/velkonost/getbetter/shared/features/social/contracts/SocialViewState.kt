@@ -1,14 +1,16 @@
 package com.velkonost.getbetter.shared.features.social.contracts
 
+import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import com.velkonost.getbetter.shared.features.social.model.SocialTab
 
 data class SocialViewState(
-    val isLoading: Boolean = false,
     val tabs: List<SocialTab> = SocialTab.values().toList(),
+    val generalFeed: FeedViewState = FeedViewState(),
+    val areasFeed: FeedViewState = FeedViewState()
 ) : UIContract.State
 
-data class GeneralFeedViewState(
+data class FeedViewState(
     val isLoading: Boolean = true,
-    val items: List<Note>
+    val items: List<Note> = emptyList()
 ) : UIContract.State

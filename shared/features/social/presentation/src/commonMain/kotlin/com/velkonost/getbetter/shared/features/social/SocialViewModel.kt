@@ -1,8 +1,13 @@
 package com.velkonost.getbetter.shared.features.social
 
+import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.util.PagingConfig
+import com.velkonost.getbetter.shared.core.util.isLoading
+import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.features.social.api.SocialRepository
+import com.velkonost.getbetter.shared.features.social.contracts.NavigateToNoteDetail
 import com.velkonost.getbetter.shared.features.social.contracts.SocialAction
 import com.velkonost.getbetter.shared.features.social.contracts.SocialNavigation
 import com.velkonost.getbetter.shared.features.social.contracts.SocialViewState
@@ -22,8 +27,13 @@ internal constructor(
     private var areasFeedLoadingJob: Job? = null
 
     override fun dispatch(action: SocialAction) = when (action) {
+        is SocialAction.GeneralFeedLoadNextPage -> fetchGeneralFeed()
+        is SocialAction.AreasFeedLoadNextPage -> fetchAreasFeed()
+        is SocialAction.NoteClick -> obtainNoteClick(action.value)
+    }
 
-        else -> {}
+    private fun obtainNoteClick(value: Note) {
+        emit(NavigateToNoteDetail(value))
     }
 
     private fun fetchGeneralFeed() {
@@ -36,7 +46,27 @@ internal constructor(
                 pageSize = _generalFeedPagingConfig.pageSize
             ).collect { result ->
                 with(result) {
+                    isLoading {
+                        val generalFeedViewState =
+                            viewState.value.generalFeed.copy(isLoading = true)
+                        emit(viewState.value.copy(generalFeed = generalFeedViewState))
+                    }
+                    onSuccess { items ->
+                        _generalFeedPagingConfig.lastPageReached = items.isNullOrEmpty()
+                        _generalFeedPagingConfig.page++
 
+                        items?.let {
+                            val allItems = viewState.value.generalFeed.items.plus(it)
+                            val generalFeedViewState = viewState.value.generalFeed.copy(
+                                isLoading = false,
+                                items = allItems
+                            )
+                            emit(viewState.value.copy(generalFeed = generalFeedViewState))
+                        }
+                    }
+                    onFailureWithMsg { _, message ->
+                        message?.let { emit(it) }
+                    }
                 }
             }
         }
@@ -46,6 +76,36 @@ internal constructor(
         if (_areasFeedPagingConfig.lastPageReached || areasFeedLoadingJob?.isActive == true) return
 
         areasFeedLoadingJob?.cancel()
+        areasFeedLoadingJob = launchJob {
+            socialRepository.fetchAreasFeed(
+                page = _areasFeedPagingConfig.page,
+                pageSize = _areasFeedPagingConfig.pageSize
+            ).collect { result ->
+                with(result) {
+                    isLoading {
+                        val areasFeedViewState = viewState.value.areasFeed.copy(isLoading = true)
+                        emit(viewState.value.copy(areasFeed = areasFeedViewState))
+                    }
+                    onSuccess { items ->
+                        _areasFeedPagingConfig.lastPageReached = items.isNullOrEmpty()
+                        _areasFeedPagingConfig.page++
+
+                        items?.let {
+                            val allItems = viewState.value.areasFeed.items.plus(it)
+                            val areasFeedViewState = viewState.value.areasFeed.copy(
+                                isLoading = false,
+                                items = allItems
+                            )
+                            emit(viewState.value.copy(areasFeed = areasFeedViewState))
+                        }
+                    }
+                    onFailureWithMsg { _, message ->
+                        message?.let { emit(it) }
+                    }
+                }
+
+            }
+        }
     }
 
 }
