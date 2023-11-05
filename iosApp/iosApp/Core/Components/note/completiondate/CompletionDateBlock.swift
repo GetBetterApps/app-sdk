@@ -21,7 +21,7 @@ struct CompletionDateBlock: View {
     let initialValueStr: String?
     let isCompleteVisible: Bool
     let completionDateStr: String?
-
+    
     @Binding var date: Date?
     
     let onSetCompletionDate: (Int64?) -> Void
@@ -48,7 +48,7 @@ struct CompletionDateBlock: View {
         self.onSetCompletionDate = onSetCompletionDate
         self.onCompleteClick = onCompleteClick
         
-        _date = Binding<Date?>(get: { 
+        _date = Binding<Date?>(get: {
             initialValue != nil ? Date(milliseconds: initialValue!) : Date.now
         }, set: { value in })
         
@@ -124,28 +124,31 @@ struct CompletionDateBlock: View {
                             onCompleteClick: onCompleteClick!
                         )
                     }
-                    
-                    if completionDateStr != nil {
-                        CompletedOnBlock(
-                            label: completionDateStr,
-                            onClick: {
+                }
+                
+                if completionDateStr != nil {
+                    CompletedOnBlock(
+                        label: completionDateStr,
+                        onClick: {
+                            if isCompleteVisible {
                                 confirmCancelCompletionDialog = true
                             }
-                        )
-                    }
+                        }
+                    )
                 }
+                
             }
             .animation(.easeInOut, value: isCompleteVisible)
             .animation(.easeInOut, value: completionDateStr)
         }
         .alert(SharedR.strings().note_detail_cancel_completion_title.desc().localized(), isPresented: $confirmCancelCompletionDialog) {
-                Button(SharedR.strings().confirm.desc().localized()) {
-                    onCompleteClick!()
-                }
-                Button(SharedR.strings().cancel.desc().localized(), role: .cancel) {}
-            } message: {
-                Text(SharedR.strings().note_detail_cancel_completion_text.desc().localized())
+            Button(SharedR.strings().confirm.desc().localized()) {
+                onCompleteClick!()
             }
+            Button(SharedR.strings().cancel.desc().localized(), role: .cancel) {}
+        } message: {
+            Text(SharedR.strings().note_detail_cancel_completion_text.desc().localized())
+        }
     }
 }
 
