@@ -130,6 +130,10 @@ internal constructor(
                                 allItems[indexOfChangedItem] = note
                             }
 
+                            allItems.filter { it.area.id == note.area.id }.forEach {
+                                it.area = note.area
+                            }
+
                             val notesViewState =
                                 viewState.value.notesViewState.copy(
                                     isLoading = false,

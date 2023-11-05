@@ -102,6 +102,13 @@ internal constructor(
                                 }
                             }
 
+                            allItemsGeneralFeed.filter { it.area.id == note.area.id }.forEach {
+                                it.area = note.area
+                            }
+                            allItemsAreasFeed.filter { it.area.id == note.area.id }.forEach {
+                                it.area = note.area
+                            }
+
                             val generalFeedViewState =
                                 viewState.value.generalFeed.copy(
                                     items = allItemsGeneralFeed

@@ -26,7 +26,7 @@ data class Note(
     val isPrivate: Boolean,
 
     val subNotes: List<SubNote>,
-    val area: Area,
+    var area: Area,
 
     val allowEdit: Boolean
 ) {
