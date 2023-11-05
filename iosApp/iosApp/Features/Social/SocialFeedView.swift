@@ -1,8 +1,8 @@
 //
-//  NotesView.swift
+//  SocialFeedView.swift
 //  iosApp
 //
-//  Created by velkonost on 27.09.2023.
+//  Created by velkonost on 05.11.2023.
 //  Copyright © 2023 orgName. All rights reserved.
 //
 
@@ -10,29 +10,19 @@ import Foundation
 import SwiftUI
 import SharedSDK
 
-struct NotesView: View {
+struct SocialFeedView: View {
     
-    @Binding var state: NotesViewState
-    
-    var isLoading: Bool
-    let createGoalClick: () -> Void
-    let createNoteClick: () -> Void
-    
+    @Binding var isLoading: Bool
     let items: [Note]
+    let loadMorePrefetch: Int
     let itemClick: (Note) -> Void
     let onBottomReach: () -> Void
     
-    init(
-        state: Binding<NotesViewState>,
-        isLoading: Bool, items: [Note],
-        createGoalClick: @escaping () -> Void, createNoteClick: @escaping () -> Void,
-        itemClick: @escaping (Note) -> Void, onBottomReach: @escaping () -> Void
-    ) {
-        self._state = state
-        self.isLoading = isLoading
+    init(isLoading: Binding<Bool>,
+         loadMorePrefetch: Int,
+         items: [Note], itemClick: @escaping (Note) -> Void, onBottomReach: @escaping () -> Void) {
+        self._isLoading = isLoading
         self.items = items
-        self.createGoalClick = createGoalClick
-        self.createNoteClick = createNoteClick
         self.itemClick = itemClick
         self.onBottomReach = onBottomReach
     }
@@ -45,7 +35,7 @@ struct NotesView: View {
                 ScrollView(showsIndicators: false) {
                     LazyVStack(spacing: 0) {
                         ForEach(items, id: \.self.id) { item in
-                            NoteItem(
+                            FeedNoteItem(
                                 item: item,
                                 onClick: itemClick
                             )
@@ -56,30 +46,19 @@ struct NotesView: View {
                     }
                     .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
                     
-                    Loader().opacity(state.isLoading ? 1 : 0)
+                    Loader().opacity(isLoading ? 1 : 0)
                 }
                 .fadingEdge()
-                
-                VStack(alignment: .trailing) {
-                    Spacer()
-                    AddNoteItem {
-                        createGoalClick()
-                    } createNoteClick: {
-                        createNoteClick()
-                    }
-                }
-                
             }
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        
     }
 }
 
-extension NotesView {
+extension SocialFeedView {
     func checkPaginationThreshold(currentItemId: Int32) {
         let data = items
-        let thresholdIndex = data.index(data.endIndex, offsetBy: -5)
+        let thresholdIndex = data.index(data.endIndex, offsetBy: -loadMorePrefetch)
         
         if data.firstIndex(where: { $0.id == currentItemId })! >= thresholdIndex && !isLoading {
             onBottomReach()

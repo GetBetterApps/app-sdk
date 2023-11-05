@@ -23,7 +23,7 @@ struct SocialRoute: NavRoute {
     }
     
     var content: some View {
-        return SocialScreen() //viewModel: viewModel
+        return SocialScreen(viewModel: viewModel)
     }
     
     var viewModel: SocialViewModel {

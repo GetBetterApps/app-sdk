@@ -65,6 +65,8 @@
 		466B497D2ACFF06C00AD3F6E /* AddAreaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B497C2ACFF06C00AD3F6E /* AddAreaScreen.swift */; };
 		466B497F2ACFF07300AD3F6E /* AddAreaRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B497E2ACFF07300AD3F6E /* AddAreaRoute.swift */; };
 		466C5CCB2AB73240002C089C /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C5CCA2AB73240002C089C /* BottomBar.swift */; };
+		4675C2A72AF76CAA00B90AC3 /* SocialFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4675C2A62AF76CAA00B90AC3 /* SocialFeedView.swift */; };
+		4675C2AA2AF76D9000B90AC3 /* FeedNoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4675C2A92AF76D9000B90AC3 /* FeedNoteItem.swift */; };
 		467668BA2AEABFCA007C17DE /* SubNoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467668B92AEABFCA007C17DE /* SubNoteItem.swift */; };
 		467668BC2AEABFDE007C17DE /* AddSubNoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467668BB2AEABFDE007C17DE /* AddSubNoteItem.swift */; };
 		467668BE2AEABFF4007C17DE /* SubNotesBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467668BD2AEABFF4007C17DE /* SubNotesBlock.swift */; };
@@ -182,6 +184,8 @@
 		466B497C2ACFF06C00AD3F6E /* AddAreaScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaScreen.swift; sourceTree = "<group>"; };
 		466B497E2ACFF07300AD3F6E /* AddAreaRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaRoute.swift; sourceTree = "<group>"; };
 		466C5CCA2AB73240002C089C /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
+		4675C2A62AF76CAA00B90AC3 /* SocialFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFeedView.swift; sourceTree = "<group>"; };
+		4675C2A92AF76D9000B90AC3 /* FeedNoteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedNoteItem.swift; sourceTree = "<group>"; };
 		467668B92AEABFCA007C17DE /* SubNoteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubNoteItem.swift; sourceTree = "<group>"; };
 		467668BB2AEABFDE007C17DE /* AddSubNoteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubNoteItem.swift; sourceTree = "<group>"; };
 		467668BD2AEABFF4007C17DE /* SubNotesBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubNotesBlock.swift; sourceTree = "<group>"; };
@@ -506,6 +510,23 @@
 			path = AddArea;
 			sourceTree = "<group>";
 		};
+		4675C2A52AF76C2200B90AC3 /* notelist */ = {
+			isa = PBXGroup;
+			children = (
+				46ACAF202AEEC9B8000A9CD8 /* NoteItemHeader.swift */,
+				46ACAF222AEECA74000A9CD8 /* NoteItemData.swift */,
+			);
+			path = notelist;
+			sourceTree = "<group>";
+		};
+		4675C2A82AF76D8400B90AC3 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				4675C2A92AF76D9000B90AC3 /* FeedNoteItem.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
 		467668B82AEABF91007C17DE /* subnotes */ = {
 			isa = PBXGroup;
 			children = (
@@ -546,8 +567,10 @@
 		468B87642ABC4439001BBEB1 /* Social */ = {
 			isa = PBXGroup;
 			children = (
+				4675C2A82AF76D8400B90AC3 /* components */,
 				468B876F2ABC45DB001BBEB1 /* SocialRoute.swift */,
 				468B87712ABC45E1001BBEB1 /* SocialScreen.swift */,
+				4675C2A62AF76CAA00B90AC3 /* SocialFeedView.swift */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -587,8 +610,6 @@
 			isa = PBXGroup;
 			children = (
 				46ACAF1D2AEE7A02000A9CD8 /* NoteItem.swift */,
-				46ACAF202AEEC9B8000A9CD8 /* NoteItemHeader.swift */,
-				46ACAF222AEECA74000A9CD8 /* NoteItemData.swift */,
 			);
 			path = item;
 			sourceTree = "<group>";
@@ -615,6 +636,7 @@
 		46B17E182AADF50D008C2BC4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				4675C2A52AF76C2200B90AC3 /* notelist */,
 				4616B0882AF62B4200A4CDDE /* note */,
 				46B17E192AADF523008C2BC4 /* AppButton.swift */,
 				469D0FBD2AB1DE330060CE95 /* WhiteButton.swift */,
@@ -952,6 +974,7 @@
 				4678E4482AAC6A67000B88E8 /* AppDelegate.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				466C5CCB2AB73240002C089C /* BottomBar.swift in Sources */,
+				4675C2A72AF76CAA00B90AC3 /* SocialFeedView.swift in Sources */,
 				461F7C6C2AA8D71F003791CF /* BaseViewModelExt.swift in Sources */,
 				46D857722ACFF16600BE74DA /* AddAreaItem.swift in Sources */,
 				46D857782ACFF2D200BE74DA /* ArrayExt.swift in Sources */,
@@ -984,6 +1007,7 @@
 				4667C9082AC58DC800BAA9DD /* EmojiPicker.swift in Sources */,
 				46CDB56E2AADB46400800096 /* AuthRoute.swift in Sources */,
 				46B17E0C2AADE081008C2BC4 /* TextExt.swift in Sources */,
+				4675C2AA2AF76D9000B90AC3 /* FeedNoteItem.swift in Sources */,
 				467BECCF2AC017CF00F74482 /* PrimaryTabs.swift in Sources */,
 				464A426D2AEA63D00019CB98 /* TagsBlock.swift in Sources */,
 				467668C02AEAC007007C17DE /* SubNotesHeader.swift in Sources */,
