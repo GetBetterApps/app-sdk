@@ -112,4 +112,14 @@
         <light>#b6bac3</light>
         <dark>#717e92</dark>
     </color>
+
+    <color name="red">
+        <light>#A75D86</light>
+        <dark>#A75D86</dark>
+    </color>
+
+    <color name="green">
+        <light>#69B177</light>
+        <dark>#69B177</dark>
+    </color>
 </resources>

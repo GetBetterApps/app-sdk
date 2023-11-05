@@ -80,7 +80,9 @@ fun FeedNoteItem(
                 NoteItemData(
                     noteType = item.noteType,
                     subNotes = item.subNotes,
-                    completionDate = item.expectedCompletionDateStr,
+                    expectedCompletionDate = item.expectedCompletionDateStr,
+                    expectedCompletionDateExpired = item.expectedCompletionDateExpired,
+                    completionDate = item.completionDateStr,
                     mediaAmount = item.mediaUrls.size,
                     isPrivate = item.isPrivate
                 )

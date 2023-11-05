@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.core.util
 
+import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
@@ -30,6 +31,15 @@ object DatetimeFormatter {
         return Instant.fromEpochMilliseconds(this)
             .toLocalDateTime(TimeZone.currentSystemDefault())
             .format("dd.MM.yyyy")
+    }
+
+    fun Long.isPast(): Boolean {
+        val firstDatetime = Instant.fromEpochMilliseconds(this)
+            .toLocalDateTime(TimeZone.currentSystemDefault())
+
+        val nowDatetime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+
+        return nowDatetime.compareTo(firstDatetime) > 1
     }
 
 }

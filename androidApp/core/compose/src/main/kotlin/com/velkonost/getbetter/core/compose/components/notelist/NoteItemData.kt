@@ -27,6 +27,8 @@ import dev.icerock.moko.resources.compose.painterResource
 fun NoteItemData(
     modifier: Modifier = Modifier,
     noteType: NoteType,
+    expectedCompletionDate: String? = null,
+    expectedCompletionDateExpired: Boolean = false,
     completionDate: String? = null,
     subNotes: List<SubNote>,
     mediaAmount: Int,
@@ -52,21 +54,33 @@ fun NoteItemData(
             colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_inactive))
         )
 
-        AnimatedVisibility(visible = completionDate != null && noteType == NoteType.Goal) {
+        AnimatedVisibility(
+            visible = (expectedCompletionDate != null || completionDate != null)
+                    && noteType == NoteType.Goal
+        ) {
             Text(
                 modifier = modifier
                     .padding(start = 4.dp)
                     .height(24.dp)
                     .background(
-                        colorResource(resource = SharedR.colors.background_item),
+                        colorResource(
+                            resource =
+                            if (completionDate != null) SharedR.colors.green
+                            else if (expectedCompletionDateExpired) SharedR.colors.red
+                            else SharedR.colors.background_item
+                        ),
                         shape = MaterialTheme.shapes.small
                     )
                     .padding(horizontal = 4.dp)
                     .wrapContentHeight(),
-                text = completionDate ?: "",
+                text = completionDate ?: expectedCompletionDate ?: "",
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.labelSmall,
-                color = colorResource(resource = SharedR.colors.text_primary)
+                color = colorResource(
+                    resource =
+                    if (completionDate != null || expectedCompletionDateExpired) SharedR.colors.text_light
+                    else SharedR.colors.text_primary
+                )
             )
         }
 
