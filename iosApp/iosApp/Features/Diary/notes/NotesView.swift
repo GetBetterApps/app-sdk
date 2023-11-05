@@ -78,11 +78,14 @@ struct NotesView: View {
 
 extension NotesView {
     func checkPaginationThreshold(currentItemId: Int32) {
-        let data = items
-        let thresholdIndex = data.index(data.endIndex, offsetBy: -5)
-        
-        if data.firstIndex(where: { $0.id == currentItemId })! >= thresholdIndex && !isLoading {
-            onBottomReach()
+        Task {
+            let data = items
+            let thresholdIndex = data.index(data.endIndex, offsetBy: -5)
+            
+            if data.firstIndex(where: { $0.id == currentItemId })! >= thresholdIndex && !isLoading {
+                onBottomReach()
+            }
         }
+        
     }
 }
