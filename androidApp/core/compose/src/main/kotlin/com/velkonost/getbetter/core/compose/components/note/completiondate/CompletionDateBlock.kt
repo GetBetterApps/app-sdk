@@ -121,12 +121,16 @@ fun CompletionDateBlock(
                         isLoading = isLoading,
                         onCompleteClick = onCompleteClick
                     )
-
-                    CompletedOnBlock(label = completionDateStr) {
-                        confirmCancelCompletionDialog.value = true
-                    }
                 }
             }
+
+            CompletedOnBlock(label = completionDateStr) {
+                if (isCompleteVisible) {
+                    confirmCancelCompletionDialog.value = true
+                }
+            }
+
+
         }
     }
 

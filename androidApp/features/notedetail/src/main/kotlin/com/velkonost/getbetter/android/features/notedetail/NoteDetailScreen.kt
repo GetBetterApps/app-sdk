@@ -103,13 +103,16 @@ fun NoteDetailScreen(
                 }
 
                 item {
-                    AnimatedVisibility(visible = state.noteType == NoteType.Goal) {
+                    AnimatedVisibility(
+                        visible = state.noteType == NoteType.Goal
+                                && (state.allowEdit || state.expectedCompletionDate != null || state.completionDate != null)
+                    ) {
                         CompletionDateBlock(
                             enabled = state.noteState == NoteState.Editing,
                             isLoading = state.isCompleteGoalLoading,
                             initialValue = state.expectedCompletionDate,
                             initialValueStr = state.expectedCompletionDateStr,
-                            isCompleteVisible = true,
+                            isCompleteVisible = state.allowEdit,
                             completionDateStr = state.completionDateStr,
                             onSetCompletionDate = {
                                 viewModel.dispatch(NoteDetailAction.SetCompletionDate(it))
