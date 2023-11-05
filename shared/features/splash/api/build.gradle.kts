@@ -13,7 +13,7 @@ android {
     namespace = SHARED_PACKAGE.join(
         projects.shared.features,
         projects.shared.features.splash,
-        projects.shared.features.splash.presentation
+        projects.shared.features.splash.api
     )
 }
 
@@ -21,19 +21,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                api(projects.shared.core.vm)
-
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
-
-                implementation(projects.shared.features.auth.api)
-                implementation(projects.shared.features.splash.api)
-            }
-        }
-
-        androidMain {
-            dependencies {
-                implementation(libs.koin.androidx.compose)
             }
         }
     }

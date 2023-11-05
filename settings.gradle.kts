@@ -24,6 +24,8 @@ include(
     ":shared:core:network",
     ":shared:core:datastore",
 
+    ":shared:features:splash:api",
+    ":shared:features:splash:data",
     ":shared:features:splash:presentation",
 
     ":shared:features:userinfo:api",

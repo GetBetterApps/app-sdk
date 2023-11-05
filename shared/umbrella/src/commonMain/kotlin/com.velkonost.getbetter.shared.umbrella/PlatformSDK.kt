@@ -21,6 +21,7 @@ import com.velkonost.getbetter.shared.features.profile.data.di.ProfileDataModule
 import com.velkonost.getbetter.shared.features.profile.di.ProfilePresentationModule
 import com.velkonost.getbetter.shared.features.social.data.di.SocialDataModule
 import com.velkonost.getbetter.shared.features.social.di.SocialPresentationModule
+import com.velkonost.getbetter.shared.features.splash.data.di.SplashDataModule
 import com.velkonost.getbetter.shared.features.splash.presentation.di.SplashPresentationModule
 import com.velkonost.getbetter.shared.features.userinfo.data.di.UserInfoDataModule
 import di.TasksDataModule
@@ -53,6 +54,7 @@ object PlatformSDK {
             HomePresentationModule,
             DetailPresentationModule,
 
+            SplashDataModule,
             SplashPresentationModule,
 
             SocialDataModule,

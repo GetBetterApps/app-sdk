@@ -45,6 +45,7 @@ kotlin {
             export(projects.shared.features.detail.presentation)
 
             export(projects.shared.features.splash.presentation)
+
             export(projects.shared.features.social.presentation)
             export(projects.shared.features.diary.presentation)
             export(projects.shared.features.addarea.presentation)
@@ -84,6 +85,7 @@ kotlin {
                 implementation(projects.shared.features.home.presentation)
                 implementation(projects.shared.features.detail.presentation)
 
+                implementation(projects.shared.features.splash.data)
                 implementation(projects.shared.features.splash.presentation)
 
                 implementation(projects.shared.features.social.data)
