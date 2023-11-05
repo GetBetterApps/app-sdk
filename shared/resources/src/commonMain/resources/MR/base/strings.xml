@@ -185,6 +185,11 @@
     <!--  NOTE DETAIL  -->
 
 
+    <!--  SOCIAL  -->
+    <string name="social_general_feed_title">All</string>
+    <string name="social_areas_feed_title">For You</string>
+    <!--  SOCIAL  -->
+
     <!--  SERVER EXCEPTIONS  -->
     <string name="error_default">Something went wrong. Try again</string>
 

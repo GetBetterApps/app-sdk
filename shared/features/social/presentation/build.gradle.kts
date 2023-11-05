@@ -27,6 +27,7 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.core)
 
                 implementation(projects.shared.core.util)
+                implementation(projects.shared.core.model)
 
                 implementation(projects.shared.features.social.api)
                 implementation(projects.shared.resources)
