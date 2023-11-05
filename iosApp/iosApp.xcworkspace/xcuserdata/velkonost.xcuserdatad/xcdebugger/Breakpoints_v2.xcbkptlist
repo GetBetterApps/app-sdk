@@ -961,7 +961,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "F3128F4B-9B3F-4FC4-8004-00ABB426C6FE"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iosApp/Features/NoteDetail/NoteDetailScreen.swift"
