@@ -12,6 +12,10 @@ internal constructor(
 ) : BaseViewModel<SocialViewState, SocialAction, SocialNavigation, Nothing>(
     initialState = SocialViewState()
 ) {
+
+    private val _generalFeedPagingConfig = PagingConfig()
+    private val _areasFeedPagingConfig = PagingConfig()
+
     override fun dispatch(action: SocialAction) = when (action) {
 
         else -> {}
