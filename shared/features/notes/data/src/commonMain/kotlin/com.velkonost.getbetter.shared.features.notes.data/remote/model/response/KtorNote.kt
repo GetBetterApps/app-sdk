@@ -35,6 +35,9 @@ data class KtorNote(
     @SerialName("expectedCompletionDate")
     val expectedCompletionDate: Long?,
 
+    @SerialName("expectedCompletionDateExpired")
+    val expectedCompletionDateExpired: Boolean,
+
     @SerialName("media")
     val media: List<ByteArray>,
 
@@ -67,6 +70,7 @@ fun KtorNote.asExternalModel() =
         createdDate = createdDate,
         completionDate = completionDate,
         expectedCompletionDate = expectedCompletionDate,
+        expectedCompletionDateExpired = expectedCompletionDateExpired,
         mediaUrls = emptyList(),
         tags = tags,
         isActive = isActive,

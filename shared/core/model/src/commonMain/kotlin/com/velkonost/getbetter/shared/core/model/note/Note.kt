@@ -3,7 +3,6 @@ package com.velkonost.getbetter.shared.core.model.note
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToLocalDatetime
-import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.isPast
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -18,6 +17,7 @@ data class Note(
     val createdDate: Long,
     val completionDate: Long?,
     val expectedCompletionDate: Long?,
+    val expectedCompletionDateExpired: Boolean,
 
     val mediaUrls: List<String>,
     val tags: List<String>,
@@ -39,8 +39,6 @@ data class Note(
     val expectedCompletionDateStr: String?
         get() = expectedCompletionDate?.convertToLocalDatetime()
 
-    val expectedCompletionDateExpired: Boolean
-        get() = expectedCompletionDate?.isPast() == true
 }
 
 fun Note.withoutAuthorData(): Note = copy(author = null)

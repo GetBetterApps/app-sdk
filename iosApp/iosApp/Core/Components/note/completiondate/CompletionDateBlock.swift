@@ -48,6 +48,7 @@ struct CompletionDateBlock: View {
         self.onSetCompletionDate = onSetCompletionDate
         self.onCompleteClick = onCompleteClick
         
+        
         _date = Binding<Date?>(get: {
             initialValue != nil ? Date(milliseconds: initialValue!) : Date.now
         }, set: { value in })
@@ -95,6 +96,7 @@ struct CompletionDateBlock: View {
                             if enabled {
                                 showDate = true
                                 date = hidenDate
+                                onSetCompletionDate(Int64((hidenDate.timeIntervalSince1970 * 1000.0).rounded()))
                             }
                         } label: {
                             Text(

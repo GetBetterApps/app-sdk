@@ -44,5 +44,8 @@ public extension SwiftUI.Color {
     
     static let iconActive = SwiftUI.Color(SharedR.colors.shared.icon_active.getUIColor())
     static let iconInactive = SwiftUI.Color(SharedR.colors.shared.icon_inactive.getUIColor())
+    
+    static let green = SwiftUI.Color(SharedR.colors.shared.green.getUIColor())
+    static let red = SwiftUI.Color(SharedR.colors.shared.red.getUIColor())
 }
 

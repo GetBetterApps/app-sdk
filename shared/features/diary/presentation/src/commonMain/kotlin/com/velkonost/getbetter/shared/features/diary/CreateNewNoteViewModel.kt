@@ -195,7 +195,8 @@ internal constructor(
                                 newTag = TagUI(),
                                 subNotes = emptyList(),
                                 newSubNote = SubNoteUI(),
-                                isPrivate = true
+                                isPrivate = true,
+                                completionDate = null
                             )
                         )
                     }

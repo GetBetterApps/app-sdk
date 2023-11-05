@@ -27,6 +27,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #4 in closure #1 in SocialScreen.body.getter:SocialScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "value.expectedCompletionDateExpired">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in BottomBarItem.body.getter:BottomBar.swift">
          <PersistentStrings>
             <PersistentString

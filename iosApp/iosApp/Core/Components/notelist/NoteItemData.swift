@@ -14,13 +14,17 @@ struct NoteItemData: View {
 
     let noteType: NoteType
     let completionDate: String?
+    let expectedCompletionDate: String?
+    let expectedCompletionDateExpired: Bool
     let subNotes: [SubNote]
     let mediaAmount: Int
     let isPrivate: Bool
     
-    init(noteType: NoteType, completionDate: String?, subNotes: [SubNote], mediaAmount: Int, isPrivate: Bool) {
+    init(noteType: NoteType, completionDate: String?, expectedCompletionDate: String?, expectedCompletionDateExpired: Bool, subNotes: [SubNote], mediaAmount: Int, isPrivate: Bool) {
         self.noteType = noteType
         self.completionDate = completionDate
+        self.expectedCompletionDate = expectedCompletionDate
+        self.expectedCompletionDateExpired = expectedCompletionDateExpired
         self.subNotes = subNotes
         self.mediaAmount = mediaAmount
         self.isPrivate = isPrivate
@@ -46,15 +50,31 @@ struct NoteItemData: View {
                         .fill(Color.backgroundItem)
                 )
             
-            if completionDate != nil && noteType == NoteType.goal {
-                Text(completionDate!)
+            if (completionDate != nil || expectedCompletionDate != nil) && noteType == NoteType.goal {
+                let completionDateBgColor =
+                if completionDate != nil {
+                    Color.green
+                } else if expectedCompletionDateExpired {
+                    Color.red
+                } else {
+                    Color.backgroundItem
+                }
+                
+                let completionDateTextColor =
+                if completionDate != nil || expectedCompletionDateExpired {
+                    Color.textLight
+                } else {
+                    Color.textPrimary
+                }
+                
+                Text((completionDate != nil) ? completionDate! : expectedCompletionDate!)
                     .style(.labelSmall)
-                    .foregroundColor(.textPrimary)
+                    .foregroundColor(completionDateTextColor)
                     .padding(.horizontal, 4)
                     .frame(height: 24)
                     .background(
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.backgroundItem)
+                            .fill(completionDateBgColor)
                     )
                     .padding(.leading, 4)
             }
