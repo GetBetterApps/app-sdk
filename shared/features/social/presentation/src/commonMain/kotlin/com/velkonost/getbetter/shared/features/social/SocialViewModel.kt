@@ -155,7 +155,10 @@ internal constructor(
                 with(result) {
                     isLoading {
                         val generalFeedViewState =
-                            viewState.value.generalFeed.copy(isLoading = true)
+                            viewState.value.generalFeed.copy(
+                                isLoading = true,
+                                isRefreshing = refreshList
+                            )
                         emit(viewState.value.copy(generalFeed = generalFeedViewState))
                     }
                     onSuccess { items ->
@@ -168,6 +171,7 @@ internal constructor(
                                 else viewState.value.generalFeed.items.plus(it)
                             val generalFeedViewState = viewState.value.generalFeed.copy(
                                 isLoading = false,
+                                isRefreshing = false,
                                 items = allItems
                             )
                             emit(viewState.value.copy(generalFeed = generalFeedViewState))
@@ -192,7 +196,10 @@ internal constructor(
             ).collect { result ->
                 with(result) {
                     isLoading {
-                        val areasFeedViewState = viewState.value.areasFeed.copy(isLoading = true)
+                        val areasFeedViewState = viewState.value.areasFeed.copy(
+                            isLoading = true,
+                            isRefreshing = refreshList
+                        )
                         emit(viewState.value.copy(areasFeed = areasFeedViewState))
                     }
                     onSuccess { items ->
@@ -205,6 +212,7 @@ internal constructor(
                                 else viewState.value.areasFeed.items.plus(it)
                             val areasFeedViewState = viewState.value.areasFeed.copy(
                                 isLoading = false,
+                                isRefreshing = false,
                                 items = allItems
                             )
                             emit(viewState.value.copy(areasFeed = areasFeedViewState))

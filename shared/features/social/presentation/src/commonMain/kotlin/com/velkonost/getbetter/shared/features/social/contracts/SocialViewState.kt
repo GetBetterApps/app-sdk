@@ -13,6 +13,7 @@ data class SocialViewState(
 
 data class FeedViewState(
     val isLoading: Boolean = false,
+    val isRefreshing: Boolean = false,
     val items: List<Note> = emptyList(),
     val loadMorePrefetch: Int = PrefetchDistanceValue
 ) : UIContract.State

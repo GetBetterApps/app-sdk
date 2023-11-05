@@ -15,6 +15,10 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -46,7 +50,6 @@ fun SocialScreen(
     val state by viewModel.viewState.collectAsStateWithLifecycle()
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { state.tabs.size })
 
-
     Box {
         Column {
             PrimaryTabs(
@@ -54,9 +57,7 @@ fun SocialScreen(
                 pagerState = pagerState
             )
 
-            Box(
-                modifier = Modifier.padding(top = 6.dp)
-            ) {
+            Box(modifier = Modifier.padding(top = 6.dp)) {
                 SocialScreenContent(
                     pagerState = pagerState,
                     generalFeedState = state.generalFeed,
@@ -69,6 +70,12 @@ fun SocialScreen(
                     },
                     areasFeedLoadNextPage = {
                         viewModel.dispatch(SocialAction.AreasFeedLoadNextPage)
+                    },
+                    onRefreshGeneralFeed = {
+                        viewModel.dispatch(SocialAction.RefreshGeneralFeed)
+                    },
+                    onRefreshAreasFeed = {
+                        viewModel.dispatch(SocialAction.RefreshAreasFeed)
                     }
                 )
 
@@ -111,7 +118,9 @@ fun SocialScreenContent(
     areasFeedState: FeedViewState,
     noteClick: (Note) -> Unit,
     generalFeedLoadNextPage: () -> Unit,
-    areasFeedLoadNextPage: () -> Unit
+    areasFeedLoadNextPage: () -> Unit,
+    onRefreshGeneralFeed: () -> Unit,
+    onRefreshAreasFeed: () -> Unit
 ) {
     HorizontalPager(
         state = pagerState,
@@ -122,34 +131,46 @@ fun SocialScreenContent(
             0 -> SocialFeedView(
                 loadMorePrefetch = generalFeedState.loadMorePrefetch,
                 isLoading = generalFeedState.isLoading,
+                isRefreshing = generalFeedState.isRefreshing,
                 items = generalFeedState.items,
                 itemClick = noteClick,
-                onBottomReach = generalFeedLoadNextPage
+                onBottomReach = generalFeedLoadNextPage,
+                onRefresh = onRefreshGeneralFeed
             )
 
             else -> SocialFeedView(
                 loadMorePrefetch = areasFeedState.loadMorePrefetch,
                 isLoading = areasFeedState.isLoading,
+                isRefreshing = areasFeedState.isRefreshing,
                 items = areasFeedState.items,
                 itemClick = noteClick,
-                onBottomReach = areasFeedLoadNextPage
+                onBottomReach = areasFeedLoadNextPage,
+                onRefresh = onRefreshAreasFeed
             )
         }
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SocialFeedView(
     modifier: Modifier = Modifier,
     loadMorePrefetch: Int,
     isLoading: Boolean,
+    isRefreshing: Boolean,
     items: List<Note>,
     itemClick: (Note) -> Unit,
-    onBottomReach: () -> Unit
+    onBottomReach: () -> Unit,
+    onRefresh: () -> Unit
 ) {
     val listState = rememberLazyListState()
+    val pullRefreshState = rememberPullRefreshState(isRefreshing, onRefresh)
 
-    Box(modifier = modifier.fillMaxSize()) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .pullRefresh(pullRefreshState)
+    ) {
         if (isLoading && items.isEmpty()) {
             Loader(modifier = Modifier.align(Alignment.Center))
         } else {
@@ -176,6 +197,13 @@ fun SocialFeedView(
 
             }
         }
+        PullRefreshIndicator(
+            refreshing = isRefreshing,
+            state = pullRefreshState,
+            modifier = Modifier.align(Alignment.TopCenter),
+            backgroundColor = colorResource(resource = SharedR.colors.button_gradient_start),
+            contentColor = colorResource(resource = SharedR.colors.text_light)
+        )
     }
 
     listState.OnBottomReached(
