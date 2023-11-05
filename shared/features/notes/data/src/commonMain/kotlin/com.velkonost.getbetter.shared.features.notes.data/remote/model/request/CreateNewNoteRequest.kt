@@ -33,5 +33,11 @@ data class CreateNewNoteRequest(
 @Serializable
 data class SubNoteRequestData(
     @SerialName("subNoteText")
-    val subNoteText: String
+    val subNoteText: String,
+
+    @SerialName("expectedCompletionDate")
+    val expectedCompletionDate: Long?,
+
+    @SerialName("completionDate")
+    val completionDate: Long?
 )

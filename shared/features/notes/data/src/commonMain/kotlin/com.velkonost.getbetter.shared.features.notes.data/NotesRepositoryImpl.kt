@@ -46,7 +46,11 @@ constructor(
                 noteExpectedCompletionDate = expectedCompletionDate,
                 areaId = areaId,
                 subNotes = subNotes.map {
-                    SubNoteRequestData(subNoteText = it.text)
+                    SubNoteRequestData(
+                        subNoteText = it.text,
+                        completionDate = it.completionDate,
+                        expectedCompletionDate = it.expectedCompletionDate
+                    )
                 }
             )
             remoteDataSource.createNewNote(token, body)
@@ -72,7 +76,11 @@ constructor(
                 completionDate = completionDate,
                 expectedCompletionDate = expectedCompletionDate,
                 subNotes = subNotes.map {
-                    SubNoteRequestData(subNoteText = it.text)
+                    SubNoteRequestData(
+                        subNoteText = it.text,
+                        completionDate = it.completionDate,
+                        expectedCompletionDate = it.expectedCompletionDate
+                    )
                 }
             )
             remoteDataSource.editNote(token, body)
