@@ -31,7 +31,6 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.velkonost.getbetter.android.activity.di.NavigationScreens
@@ -46,6 +45,7 @@ fun BottomBar(
     navController: NavHostController,
     forceHideBottomBar: MutableState<Boolean>
 ) {
+
     val navStackBackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navStackBackEntry?.destination
     val haptic = LocalHapticFeedback.current
@@ -121,16 +121,29 @@ fun BottomBarItem(
             .size(50.dp)
             .clip(shape = MaterialTheme.shapes.extraLarge)
             .clickable {
-                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-
-                navController.navigate(screen.route) {
-                    popUpTo(navController.graph.findStartDestination().id) {
-                        saveState = true
-                    }
-                    launchSingleTop = true
-                    restoreState = true
+                if (navController.currentDestination?.route == screen.route) {
+                    return@clickable
                 }
 
+                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+
+                navController.navigate("${screen.route}_root") {
+                    launchSingleTop = true
+                    restoreState = true
+
+                    val navigationRoutes = NavigationScreens
+                        .map { it.route }
+                    val firstBottomBarDestination = navController.currentBackStack.value
+                        .firstOrNull { navigationRoutes.contains(it.destination.route) }
+                        ?.destination
+
+                    if (firstBottomBarDestination != null) {
+                        popUpTo(firstBottomBarDestination.id) {
+                            inclusive = false
+                            saveState = true
+                        }
+                    }
+                }
             }
     ) {
         Image(

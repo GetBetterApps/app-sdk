@@ -9,6 +9,8 @@ sealed interface AuthNavigation : UIContract.Navigation
 data object NavigateToMainFlow : AuthNavigation {
     override val event: NavigationEvent = NavigationEvent.NavigateAndPopUpToRoute(
         route = NavigationScreen.SocialNavScreen.route,
+        rootRoute = true,
+        popUpToStart = true,
         popUpTo = NavigationScreen.AuthNavScreen.route,
     )
 }

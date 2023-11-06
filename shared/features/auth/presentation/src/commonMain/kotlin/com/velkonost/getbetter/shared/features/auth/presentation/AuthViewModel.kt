@@ -4,8 +4,6 @@ import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
-import com.velkonost.getbetter.shared.core.vm.resource.Message
-import com.velkonost.getbetter.shared.core.vm.resource.MessageType
 import com.velkonost.getbetter.shared.features.auth.domain.LoginAnonymousUseCase
 import com.velkonost.getbetter.shared.features.auth.domain.LoginEmailUseCase
 import com.velkonost.getbetter.shared.features.auth.domain.RegisterEmailUseCase
@@ -13,9 +11,6 @@ import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthA
 import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthNavigation
 import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthViewState
 import com.velkonost.getbetter.shared.features.auth.presentation.contracts.NavigateToMainFlow
-import com.velkonost.getbetter.shared.resources.SharedR
-import dev.icerock.moko.resources.desc.Resource
-import dev.icerock.moko.resources.desc.StringDesc
 
 class AuthViewModel
 internal constructor(
@@ -54,15 +49,9 @@ internal constructor(
                         onSuccess {
                             emit(NavigateToMainFlow)
                         }
-                        onFailureWithMsg { throwable, errorMsg ->
+                        onFailureWithMsg { _, message ->
                             emit(viewState.value.copy(isLoading = false))
-
-                            val message = Message.Builder()
-                                .id("login_anonymous_failure")
-                                .text(StringDesc.Resource(SharedR.strings.auth_login_anonymous_failure))
-                                .messageType(MessageType.SnackBar.Builder().build())
-                                .build()
-                            emit(message)
+                            message?.let { emit(it) }
                         }
                     }
                 }

@@ -9,6 +9,7 @@ sealed interface ProfileNavigation : UIContract.Navigation
 data object NavigateToAuth : ProfileNavigation {
     override val event: NavigationEvent = NavigationEvent.NavigateAndPopUpToRoute(
         route = NavigationScreen.AuthNavScreen.route,
-        popUpTo = NavigationScreen.ProfileNavScreen.route,
+        popUpToStart = true,
+        popUpTo = NavigationScreen.SplashNavScreen.route,
     )
 }

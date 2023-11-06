@@ -4,18 +4,19 @@ import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationEvent
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationScreen
 
-sealed class SplashNavigation : UIContract.Navigation
+sealed interface SplashNavigation : UIContract.Navigation
 
-data object NavigateToAuth : SplashNavigation() {
+data object NavigateToAuth : SplashNavigation {
     override val event: NavigationEvent = NavigationEvent.NavigateAndPopUpToRoute(
         route = NavigationScreen.AuthNavScreen.route,
         popUpTo = NavigationScreen.SplashNavScreen.route,
     )
 }
 
-data object NavigateToMainFlow : SplashNavigation() {
+data object NavigateToMainFlow : SplashNavigation {
     override val event: NavigationEvent = NavigationEvent.NavigateAndPopUpToRoute(
         route = NavigationScreen.SocialNavScreen.route,
         popUpTo = NavigationScreen.SplashNavScreen.route,
+        rootRoute = true
     )
 }

@@ -197,6 +197,7 @@ fun SocialFeedView(
 
             }
         }
+
         PullRefreshIndicator(
             refreshing = isRefreshing,
             state = pullRefreshState,

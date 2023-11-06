@@ -20,7 +20,9 @@ sealed class NavigationEvent {
         val id: String = Random.nextLong().toString(),
         val route: String,
         val popUpTo: String,
-        val args: HashMap<String, String>? = null
+        val popUpToStart: Boolean = false,
+        val args: HashMap<String, String>? = null,
+        val rootRoute: Boolean = false
     ) : NavigationEvent()
 
     data class NavigateUp(

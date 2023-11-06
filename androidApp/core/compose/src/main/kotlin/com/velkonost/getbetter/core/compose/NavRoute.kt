@@ -9,7 +9,6 @@ import androidx.compose.runtime.MutableState
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDeepLink
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.composable
@@ -88,8 +87,13 @@ fun Iterable<NavRoute<*>>.provide(
     builder: NavGraphBuilder,
     navController: NavHostController,
     forceHideBottomBar: MutableState<Boolean>
-) =
-    forEach { it.asComposable(builder, navController, forceHideBottomBar) }
+) = forEach { it.asComposable(builder, navController, forceHideBottomBar) }
+
+fun NavRoute<*>.provide(
+    builder: NavGraphBuilder,
+    navController: NavHostController,
+    forceHideBottomBar: MutableState<Boolean>
+) = asComposable(builder, navController, forceHideBottomBar)
 
 private fun handleNavToRoute(
     controller: NavHostController,
@@ -103,9 +107,9 @@ private fun handleNavToRoute(
     controller.navigate(currentRoute) {
         launchSingleTop = true
         restoreState = true
-        popUpTo(controller.graph.findStartDestination().id) {
-            saveState = true
-        }
+//        popUpTo(controller.graph.findStartDestination().id) {
+//            saveState = true
+//        }
     }
 }
 
@@ -117,14 +121,23 @@ private fun onNavAndPopUpToRoute(
         return
     }
 
-    val currentRoute = event.args.joinArgs(event.route)
+    var currentRoute = event.route
+    if (event.rootRoute) {
+        currentRoute += "_root"
+    }
+    currentRoute = event.args.joinArgs(currentRoute)
 
     controller.navigate(currentRoute) {
         launchSingleTop = true
-        restoreState = true
-        popUpTo(event.popUpTo) {
-            inclusive = true
-            saveState = true
+        restoreState = !event.popUpToStart
+
+        if (event.popUpToStart) {
+            popUpTo(0)
+        } else {
+            popUpTo(event.popUpTo) {
+                inclusive = true
+                saveState = true
+            }
         }
     }
 }
