@@ -129,36 +129,35 @@ internal constructor(
 
     private fun refreshNoteData(noteId: Int) {
         launchJob {
-            notesRepository.getNoteDetails(noteId)
-                .collect { noteDetailsResult ->
-                    noteDetailsResult.onSuccess { note ->
-                        note?.let {
-                            val indexOfChangedItem =
-                                viewState.value.notesViewState.items.indexOfFirst { it.id == note.id }
-                            val allItems =
-                                viewState.value.notesViewState.items.toMutableList()
+            notesRepository.getNoteDetails(noteId) collectAndProcess {
+                onSuccess { note ->
+                    note?.let {
+                        val indexOfChangedItem =
+                            viewState.value.notesViewState.items.indexOfFirst { it.id == note.id }
+                        val allItems =
+                            viewState.value.notesViewState.items.toMutableList()
 
-                            if (indexOfChangedItem == -1) {
-                                allItems.add(0, note)
-                            } else if (!note.isActive) {
-                                allItems.removeAt(indexOfChangedItem)
-                            } else {
-                                allItems[indexOfChangedItem] = note
-                            }
-
-                            allItems.filter { it.area.id == note.area.id }.forEach {
-                                it.area = note.area
-                            }
-
-                            val notesViewState =
-                                viewState.value.notesViewState.copy(
-                                    isLoading = false,
-                                    items = allItems
-                                )
-                            emit(viewState.value.copy(notesViewState = notesViewState))
+                        if (indexOfChangedItem == -1) {
+                            allItems.add(0, note)
+                        } else if (!note.isActive) {
+                            allItems.removeAt(indexOfChangedItem)
+                        } else {
+                            allItems[indexOfChangedItem] = note
                         }
+
+                        allItems.filter { it.area.id == note.area.id }.forEach {
+                            it.area = note.area
+                        }
+
+                        val notesViewState =
+                            viewState.value.notesViewState.copy(
+                                isLoading = false,
+                                items = allItems
+                            )
+                        emit(viewState.value.copy(notesViewState = notesViewState))
                     }
                 }
+            }
         }
     }
 
@@ -184,31 +183,6 @@ internal constructor(
 
                 }
             }
-//                .collectLatest { result ->
-//                    with(result) {
-//                        isLoading {
-//                            if (viewState.value.areasViewState.items.isEmpty()) {
-//                                val areasViewState =
-//                                    viewState.value.areasViewState.copy(isLoading = it)
-//                                emit(viewState.value.copy(areasViewState = areasViewState))
-//                            }
-//                        }
-//                        onSuccess { list ->
-//                            list?.let {
-//                                val areasViewState = viewState.value.areasViewState.copy(items = it)
-//                                emit(viewState.value.copy(areasViewState = areasViewState))
-//
-//                                createNewNoteViewModel.value.dispatch(
-//                                    CreateNewNoteAction.InitAvailableAreas(it)
-//                                )
-//                            }
-//
-//                        }
-//                        onFailureWithMsg { _, message ->
-//                            message?.let { emit(it) }
-//                        }
-//                    }
-//                }
         }
     }
 
@@ -225,7 +199,6 @@ internal constructor(
                     val notesViewState = viewState.value.notesViewState.copy(isLoading = true)
                     emit(viewState.value.copy(notesViewState = notesViewState))
                 }
-
                 onSuccess { items ->
                     _notesPagingConfig.lastPageReached = items.isNullOrEmpty()
                     _notesPagingConfig.page++
@@ -241,31 +214,6 @@ internal constructor(
                     }
                 }
             }
-//                .collect { result ->
-//                with(result) {
-//                    isLoading {
-//                        val notesViewState = viewState.value.notesViewState.copy(isLoading = true)
-//                        emit(viewState.value.copy(notesViewState = notesViewState))
-//                    }
-//                    onSuccess { items ->
-//                        _notesPagingConfig.lastPageReached = items.isNullOrEmpty()
-//                        _notesPagingConfig.page++
-//
-//                        items?.let {
-//                            val allItems = viewState.value.notesViewState.items.plus(it)
-//                            val notesViewState =
-//                                viewState.value.notesViewState.copy(
-//                                    isLoading = false,
-//                                    items = allItems
-//                                )
-//                            emit(viewState.value.copy(notesViewState = notesViewState))
-//                        }
-//                    }
-//                    onFailureWithMsg { _, message ->
-//                        message?.let { emit(it) }
-//                    }
-//                }
-//            }
         }
     }
 }

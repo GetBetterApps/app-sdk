@@ -3,7 +3,6 @@ package com.velkonost.getbetter.shared.features.auth.presentation
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
-import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.features.auth.api.AuthRepository
 import com.velkonost.getbetter.shared.features.auth.domain.LoginAnonymousUseCase
 import com.velkonost.getbetter.shared.features.auth.domain.LoginEmailUseCase
@@ -51,21 +50,14 @@ internal constructor(
 
     private fun loginAnonymous() {
         launchJob {
-            loginAnonymousUseCase()
-                .collect { result ->
-                    with(result) {
-                        isLoading {
-                            emit(viewState.value.copy(isLoading = it))
-                        }
-                        onSuccess {
-                            emit(NavigateToMainFlow)
-                        }
-                        onFailureWithMsg { _, message ->
-                            emit(viewState.value.copy(isLoading = false))
-                            message?.let { emit(it) }
-                        }
-                    }
+            loginAnonymousUseCase() collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
                 }
+                onSuccess {
+                    emit(NavigateToMainFlow)
+                }
+            }
         }
     }
 
@@ -74,17 +66,12 @@ internal constructor(
             loginEmailUseCase(
                 email = viewState.value.email,
                 password = viewState.value.password
-            ).collect { result ->
-                with(result) {
-                    isLoading {
-                        emit(viewState.value.copy(isLoading = it))
-                    }
-                    onSuccess {
-                        emit(NavigateToMainFlow)
-                    }
-                    onFailureWithMsg { _, message ->
-                        message?.let { emit(it) }
-                    }
+            ) collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
+                }
+                onSuccess {
+                    emit(NavigateToMainFlow)
                 }
             }
         }
@@ -95,17 +82,12 @@ internal constructor(
             registerEmailUseCase(
                 email = viewState.value.email,
                 password = viewState.value.password
-            ).collect { result ->
-                with(result) {
-                    isLoading {
-                        emit(viewState.value.copy(isLoading = it))
-                    }
-                    onSuccess {
-                        emit(NavigateToMainFlow)
-                    }
-                    onFailureWithMsg { _, message ->
-                        message?.let { emit(it) }
-                    }
+            ) collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
+                }
+                onSuccess {
+                    emit(NavigateToMainFlow)
                 }
             }
         }

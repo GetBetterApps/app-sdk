@@ -5,7 +5,6 @@ import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
-import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaEvent
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaViewState
@@ -64,17 +63,12 @@ internal constructor(
                     emojiId = areaData.selectedEmoji.id,
                     isPrivate = areaData.isPrivate,
                     imageUrl = null
-                ).collect { result ->
-                    with(result) {
-                        isLoading {
-                            emit(viewState.value.copy(isLoading = it))
-                        }
-                        onSuccess {
-                            emit(CreateNewAreaEvent.CreatedSuccess)
-                        }
-                        onFailureWithMsg { _, message ->
-                            message?.let { emit(it) }
-                        }
+                ) collectAndProcess {
+                    isLoading {
+                        emit(viewState.value.copy(isLoading = it))
+                    }
+                    onSuccess {
+                        emit(CreateNewAreaEvent.CreatedSuccess)
                     }
                 }
             }

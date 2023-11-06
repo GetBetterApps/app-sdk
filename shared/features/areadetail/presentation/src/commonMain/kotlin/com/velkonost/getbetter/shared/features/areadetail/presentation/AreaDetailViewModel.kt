@@ -34,34 +34,25 @@ internal constructor(
 
     private fun fetchArea(areaId: Int) {
         launchJob {
-            areasRepository.fetchAreaDetails(areaId)
-                .collect { result ->
-                    with(result) {
-                        isLoading {
-                            emit(viewState.value.copy(isLoading = it))
-                        }
-
-                        onSuccess {
-                            it?.let { area ->
-                                emit(
-                                    viewState.value.copy(
-                                        initialItem = area.toUI(),
-                                        modifiedItem = area.toUI(),
-                                        isAllowJoin = area.isAllowJoin,
-                                        isAllowDelete = area.isAllowDelete,
-                                        isAllowEdit = area.isAllowEdit,
-                                        isAllowLeave = area.isAllowLeave
-                                    )
-                                )
-                            }
-
-                        }
-
-                        onFailureWithMsg { _, message ->
-                            message?.let { emit(it) }
-                        }
+            areasRepository.fetchAreaDetails(areaId) collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
+                }
+                onSuccess {
+                    it?.let { area ->
+                        emit(
+                            viewState.value.copy(
+                                initialItem = area.toUI(),
+                                modifiedItem = area.toUI(),
+                                isAllowJoin = area.isAllowJoin,
+                                isAllowDelete = area.isAllowDelete,
+                                isAllowEdit = area.isAllowEdit,
+                                isAllowLeave = area.isAllowLeave
+                            )
+                        )
                     }
                 }
+            }
         }
     }
 
@@ -102,29 +93,23 @@ internal constructor(
                 name = area.name,
                 description = area.description,
                 emojiId = area.emoji.id
-            ).collect { result ->
-                with(result) {
-                    isLoading {
-                        emit(viewState.value.copy(isLoading = it))
+            ) collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
+                }
+                onSuccess { area ->
+                    area?.let {
+                        emit(AreaDetailEvent.EditSuccess(area.id))
                     }
-
-                    onSuccess { area ->
-                        area?.let {
-                            emit(AreaDetailEvent.EditSuccess(area.id))
-                        }
-                    }
-
-                    onFailureWithMsg { _, message ->
-                        message?.let { emit(it) }
-
-                        val initialItem = viewState.value.initialItem
-                        emit(
-                            viewState.value.copy(
-                                isEditing = false,
-                                modifiedItem = initialItem?.copy()
-                            )
+                }
+                onFailureWithMsg { _, _ ->
+                    val initialItem = viewState.value.initialItem
+                    emit(
+                        viewState.value.copy(
+                            isEditing = false,
+                            modifiedItem = initialItem?.copy()
                         )
-                    }
+                    )
                 }
             }
         }
@@ -134,20 +119,14 @@ internal constructor(
         checkNotNull(viewState.value.modifiedItem) { return }
 
         launchJob {
-            areasRepository.deleteArea(viewState.value.modifiedItem!!.id)
-                .collect { result ->
-                    with(result) {
-                        isLoading {
-                            emit(viewState.value.copy(isLoading = it))
-                        }
-                        onSuccess { area ->
-                            area?.let { emit(AreaDetailEvent.DeleteSuccess(it.id)) }
-                        }
-                        onFailureWithMsg { _, message ->
-                            message?.let { emit(it) }
-                        }
-                    }
+            areasRepository.deleteArea(viewState.value.modifiedItem!!.id) collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
                 }
+                onSuccess { area ->
+                    area?.let { emit(AreaDetailEvent.DeleteSuccess(it.id)) }
+                }
+            }
         }
     }
 
@@ -155,31 +134,23 @@ internal constructor(
         checkNotNull(viewState.value.modifiedItem) { return }
 
         launchJob {
-            areasRepository.leaveArea(viewState.value.modifiedItem!!.id)
-                .collect { result ->
-                    with(result) {
-                        isLoading {
-                            emit(viewState.value.copy(isLoading = it))
-                        }
-
-                        onSuccess { area ->
-                            area?.let {
-                                emit(
-                                    viewState.value.copy(
-                                        isAllowJoin = true,
-                                        isAllowLeave = false
-                                    )
-                                )
-                                emit(AreaDetailEvent.LeaveSuccess(area.id))
-                            }
-
-                        }
-
-                        onFailureWithMsg { _, message ->
-                            message?.let { emit(it) }
-                        }
-                    }
+            areasRepository.leaveArea(viewState.value.modifiedItem!!.id) collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
                 }
+                onSuccess { area ->
+                    area?.let {
+                        emit(
+                            viewState.value.copy(
+                                isAllowJoin = true,
+                                isAllowLeave = false
+                            )
+                        )
+                        emit(AreaDetailEvent.LeaveSuccess(area.id))
+                    }
+
+                }
+            }
         }
     }
 
@@ -202,30 +173,22 @@ internal constructor(
         checkNotNull(item) { return }
 
         launchJob {
-            areasRepository.addUserArea(item.id)
-                .collect { result ->
-                    with(result) {
-                        isLoading {
-                            emit(viewState.value.copy(isLoading = it))
-                        }
-                        onSuccess { area ->
-                            area?.let {
-                                emit(
-                                    viewState.value.copy(
-                                        isAllowJoin = false,
-                                        isAllowLeave = true
-                                    )
-                                )
-                                emit(AreaDetailEvent.JoinSuccess(area.id))
-                            }
-                        }
-
-                        onFailureWithMsg { _, message ->
-                            message?.let { emit(it) }
-                        }
+            areasRepository.addUserArea(item.id) collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
+                }
+                onSuccess { area ->
+                    area?.let {
+                        emit(
+                            viewState.value.copy(
+                                isAllowJoin = false,
+                                isAllowLeave = true
+                            )
+                        )
+                        emit(AreaDetailEvent.JoinSuccess(area.id))
                     }
                 }
+            }
         }
     }
-
 }

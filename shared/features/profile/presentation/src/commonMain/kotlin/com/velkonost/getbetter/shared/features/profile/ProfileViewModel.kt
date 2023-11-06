@@ -3,7 +3,6 @@ package com.velkonost.getbetter.shared.features.profile
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
-import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelected
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelectedBase64
 import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
@@ -33,77 +32,54 @@ internal constructor(
 
     private fun fetchUserInfo() {
         launchJob {
-            userInfoRepository.fetchInfo()
-                .collect { result ->
-                    with(result) {
-                        isLoading {
-                            emit(viewState.value.copy(isLoading = it))
-                        }
-                        onSuccess { userInfo ->
-                            userInfo?.let {
-                                emit(
-                                    viewState.value.copy(
-                                        userName = it.locale,
-                                        avatarBytes = it.avatar
-                                    )
-                                )
-                            }
-                        }
-                        onFailureWithMsg { _, message ->
-                            message?.let { emit(it) }
-                        }
+            userInfoRepository.fetchInfo() collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
+                }
+                onSuccess { userInfo ->
+                    userInfo?.let {
+                        emit(
+                            viewState.value.copy(
+                                userName = it.displayName ?: "",
+                                avatarBytes = it.avatar
+                            )
+                        )
                     }
                 }
+            }
         }
     }
 
     private fun obtainAvatarSelected(fileContent: ByteArray) {
         launchJob {
-            userInfoRepository.updateAvatarUrl(fileContent)
-                .collect { result ->
-                    with(result) {
-                        isLoading {
-                            emit(viewState.value.copy(isLoading = it))
-                        }
-
-                        onSuccess { userInfo ->
-                            userInfo?.let {
-                                emit(
-                                    viewState.value.copy(
-                                        userName = it.locale,
-                                        avatarBytes = it.avatar
-                                    )
-                                )
-                            }
-                        }
-
-                        onFailureWithMsg { _, message ->
-                            message?.let { emit(it) }
-                        }
-                    }
-
+            userInfoRepository.updateAvatarUrl(fileContent) collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
                 }
+                onSuccess { userInfo ->
+                    userInfo?.let {
+                        emit(
+                            viewState.value.copy(
+                                userName = it.displayName ?: "",
+                                avatarBytes = it.avatar
+                            )
+                        )
+                    }
+                }
+            }
         }
     }
 
     private fun obtainLogout() {
         launchJob {
-            userInfoRepository.logout()
-                .collect { result ->
-
-                    with(result) {
-                        isLoading {
-                            emit(viewState.value.copy(isLogoutLoading = it))
-                        }
-                        onSuccess {
-                            emit(NavigateToAuth)
-                        }
-                        onFailureWithMsg { _, message ->
-                            message?.let { emit(it) }
-                        }
-                    }
+            userInfoRepository.logout() collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLogoutLoading = it))
                 }
+                onSuccess {
+                    emit(NavigateToAuth)
+                }
+            }
         }
     }
-
 }

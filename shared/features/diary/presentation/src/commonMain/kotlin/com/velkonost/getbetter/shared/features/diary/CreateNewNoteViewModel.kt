@@ -8,7 +8,6 @@ import com.velkonost.getbetter.shared.core.model.ui.asExternalModels
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
-import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.core.vm.resource.Message
 import com.velkonost.getbetter.shared.core.vm.resource.MessageType
 import com.velkonost.getbetter.shared.features.diary.api.DiaryRepository
@@ -176,33 +175,28 @@ internal constructor(
                 areaId = data.selectedArea!!.id,
                 subNotes = data.subNotes.asExternalModels,
                 expectedCompletionDate = data.completionDate
-            ).collect { result ->
-                with(result) {
-                    isLoading {
-                        emit(viewState.value.copy(isLoading = it))
-                    }
-                    onSuccess {
-                        saveCreatedNoteId(it?.id)
-                        emit(CreateNewNoteEvent.CreatedSuccess)
+            ) collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
+                }
+                onSuccess {
+                    saveCreatedNoteId(it?.id)
+                    emit(CreateNewNoteEvent.CreatedSuccess)
 
-                        emit(
-                            viewState.value.copy(
-                                type = NoteType.Goal,
-                                selectedArea = viewState.value.availableAreas.firstOrNull(),
-                                text = "",
-                                mediaUrls = emptyList(),
-                                tags = emptyList(),
-                                newTag = TagUI(),
-                                subNotes = emptyList(),
-                                newSubNote = SubNoteUI(),
-                                isPrivate = true,
-                                completionDate = null
-                            )
+                    emit(
+                        viewState.value.copy(
+                            type = NoteType.Goal,
+                            selectedArea = viewState.value.availableAreas.firstOrNull(),
+                            text = "",
+                            mediaUrls = emptyList(),
+                            tags = emptyList(),
+                            newTag = TagUI(),
+                            subNotes = emptyList(),
+                            newSubNote = SubNoteUI(),
+                            isPrivate = true,
+                            completionDate = null
                         )
-                    }
-                    onFailureWithMsg { _, message ->
-                        message?.let { emit(it) }
-                    }
+                    )
                 }
             }
         }

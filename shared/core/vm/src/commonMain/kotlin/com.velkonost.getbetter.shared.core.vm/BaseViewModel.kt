@@ -84,7 +84,7 @@ constructor(
     ) = stateIn(viewModelScope = viewModelScope, started = started, initialValue = initialValue)
 
     protected suspend inline infix fun <T> Flow<ResultState<T>>.collectAndProcess(
-        crossinline resultProcessing: ResultState<T>.() -> Unit
+        crossinline resultProcessing: ResultState<T>.() -> Unit,
     ) {
         collect { result ->
             with(result) {

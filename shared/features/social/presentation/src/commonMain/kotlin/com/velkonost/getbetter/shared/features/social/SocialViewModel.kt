@@ -5,7 +5,6 @@ import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
-import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.social.api.SocialRepository
 import com.velkonost.getbetter.shared.features.social.contracts.NavigateToNoteDetail
@@ -69,84 +68,82 @@ internal constructor(
 
     private fun checkUpdatedNote() {
         launchJob {
-            socialRepository.getUpdatedNoteId()
-                .collect { updatedNoteResult ->
-                    updatedNoteResult.onSuccess { noteId ->
-                        noteId?.let { refreshNoteData(it) }
-                    }
+            socialRepository.getUpdatedNoteId() collectAndProcess {
+                onSuccess { noteId ->
+                    noteId?.let { refreshNoteData(it) }
                 }
+            }
         }
     }
 
     private fun refreshNoteData(noteId: Int) {
         launchJob {
-            notesRepository.getNoteDetails(noteId)
-                .collect { noteDetailsResult ->
-                    noteDetailsResult.onSuccess { note ->
-                        note?.let {
-                            val indexOfChangedItemInGeneralFeed =
-                                viewState.value.generalFeed.items.indexOfFirst { it.id == note.id }
-                            val indexOfChangedItemInAreasFeed =
-                                viewState.value.areasFeed.items.indexOfFirst { it.id == note.id }
+            notesRepository.getNoteDetails(noteId) collectAndProcess {
+                onSuccess { note ->
+                    note?.let {
+                        val indexOfChangedItemInGeneralFeed =
+                            viewState.value.generalFeed.items.indexOfFirst { it.id == note.id }
+                        val indexOfChangedItemInAreasFeed =
+                            viewState.value.areasFeed.items.indexOfFirst { it.id == note.id }
 
-                            val allItemsGeneralFeed =
-                                viewState.value.generalFeed.items.toMutableList()
-                            val allItemsAreasFeed =
-                                viewState.value.areasFeed.items.toMutableList()
+                        val allItemsGeneralFeed =
+                            viewState.value.generalFeed.items.toMutableList()
+                        val allItemsAreasFeed =
+                            viewState.value.areasFeed.items.toMutableList()
 
-                            when {
-                                indexOfChangedItemInGeneralFeed == -1 -> {
-                                    allItemsGeneralFeed.add(0, note)
-                                }
-
-                                !note.isActive -> {
-                                    allItemsGeneralFeed.removeAt(indexOfChangedItemInGeneralFeed)
-                                }
-
-                                else -> {
-                                    allItemsGeneralFeed[indexOfChangedItemInGeneralFeed] = note
-                                }
+                        when {
+                            indexOfChangedItemInGeneralFeed == -1 -> {
+                                allItemsGeneralFeed.add(0, note)
                             }
 
-                            when {
-                                indexOfChangedItemInAreasFeed == -1 -> {
-                                    allItemsAreasFeed.add(0, note)
-                                }
-
-                                !note.isActive -> {
-                                    allItemsAreasFeed.removeAt(indexOfChangedItemInAreasFeed)
-                                }
-
-                                else -> {
-                                    allItemsAreasFeed[indexOfChangedItemInAreasFeed] = note
-                                }
+                            !note.isActive -> {
+                                allItemsGeneralFeed.removeAt(indexOfChangedItemInGeneralFeed)
                             }
 
-                            allItemsGeneralFeed.filter { it.area.id == note.area.id }.forEach {
-                                it.area = note.area
+                            else -> {
+                                allItemsGeneralFeed[indexOfChangedItemInGeneralFeed] = note
                             }
-                            allItemsAreasFeed.filter { it.area.id == note.area.id }.forEach {
-                                it.area = note.area
-                            }
-
-                            val generalFeedViewState =
-                                viewState.value.generalFeed.copy(
-                                    items = allItemsGeneralFeed
-                                )
-                            val areasFeedViewState =
-                                viewState.value.areasFeed.copy(
-                                    items = allItemsAreasFeed
-                                )
-
-                            emit(
-                                viewState.value.copy(
-                                    generalFeed = generalFeedViewState,
-                                    areasFeed = areasFeedViewState
-                                )
-                            )
                         }
+
+                        when {
+                            indexOfChangedItemInAreasFeed == -1 -> {
+                                allItemsAreasFeed.add(0, note)
+                            }
+
+                            !note.isActive -> {
+                                allItemsAreasFeed.removeAt(indexOfChangedItemInAreasFeed)
+                            }
+
+                            else -> {
+                                allItemsAreasFeed[indexOfChangedItemInAreasFeed] = note
+                            }
+                        }
+
+                        allItemsGeneralFeed.filter { it.area.id == note.area.id }.forEach {
+                            it.area = note.area
+                        }
+                        allItemsAreasFeed.filter { it.area.id == note.area.id }.forEach {
+                            it.area = note.area
+                        }
+
+                        val generalFeedViewState =
+                            viewState.value.generalFeed.copy(
+                                items = allItemsGeneralFeed
+                            )
+                        val areasFeedViewState =
+                            viewState.value.areasFeed.copy(
+                                items = allItemsAreasFeed
+                            )
+
+                        emit(
+                            viewState.value.copy(
+                                generalFeed = generalFeedViewState,
+                                areasFeed = areasFeedViewState
+                            )
+                        )
                     }
                 }
+            }
         }
     }
 
@@ -158,34 +155,29 @@ internal constructor(
             socialRepository.fetchGeneralFeed(
                 page = _generalFeedPagingConfig.page,
                 pageSize = _generalFeedPagingConfig.pageSize
-            ).collect { result ->
-                with(result) {
-                    isLoading {
-                        val generalFeedViewState =
-                            viewState.value.generalFeed.copy(
-                                isLoading = true,
-                                isRefreshing = refreshList
-                            )
-                        emit(viewState.value.copy(generalFeed = generalFeedViewState))
-                    }
-                    onSuccess { items ->
-                        _generalFeedPagingConfig.lastPageReached = items.isNullOrEmpty()
-                        _generalFeedPagingConfig.page++
+            ) collectAndProcess {
+                isLoading {
+                    val generalFeedViewState =
+                        viewState.value.generalFeed.copy(
+                            isLoading = true,
+                            isRefreshing = refreshList
+                        )
+                    emit(viewState.value.copy(generalFeed = generalFeedViewState))
+                }
+                onSuccess { items ->
+                    _generalFeedPagingConfig.lastPageReached = items.isNullOrEmpty()
+                    _generalFeedPagingConfig.page++
 
-                        items?.let {
-                            val allItems =
-                                if (refreshList) it
-                                else viewState.value.generalFeed.items.plus(it)
-                            val generalFeedViewState = viewState.value.generalFeed.copy(
-                                isLoading = false,
-                                isRefreshing = false,
-                                items = allItems
-                            )
-                            emit(viewState.value.copy(generalFeed = generalFeedViewState))
-                        }
-                    }
-                    onFailureWithMsg { _, message ->
-                        message?.let { emit(it) }
+                    items?.let {
+                        val allItems =
+                            if (refreshList) it
+                            else viewState.value.generalFeed.items.plus(it)
+                        val generalFeedViewState = viewState.value.generalFeed.copy(
+                            isLoading = false,
+                            isRefreshing = false,
+                            items = allItems
+                        )
+                        emit(viewState.value.copy(generalFeed = generalFeedViewState))
                     }
                 }
             }
@@ -200,36 +192,30 @@ internal constructor(
             socialRepository.fetchAreasFeed(
                 page = _areasFeedPagingConfig.page,
                 pageSize = _areasFeedPagingConfig.pageSize
-            ).collect { result ->
-                with(result) {
-                    isLoading {
+            ) collectAndProcess {
+                isLoading {
+                    val areasFeedViewState = viewState.value.areasFeed.copy(
+                        isLoading = true,
+                        isRefreshing = refreshList
+                    )
+                    emit(viewState.value.copy(areasFeed = areasFeedViewState))
+                }
+                onSuccess { items ->
+                    _areasFeedPagingConfig.lastPageReached = items.isNullOrEmpty()
+                    _areasFeedPagingConfig.page++
+
+                    items?.let {
+                        val allItems =
+                            if (refreshList) it
+                            else viewState.value.areasFeed.items.plus(it)
                         val areasFeedViewState = viewState.value.areasFeed.copy(
-                            isLoading = true,
-                            isRefreshing = refreshList
+                            isLoading = false,
+                            isRefreshing = false,
+                            items = allItems
                         )
                         emit(viewState.value.copy(areasFeed = areasFeedViewState))
                     }
-                    onSuccess { items ->
-                        _areasFeedPagingConfig.lastPageReached = items.isNullOrEmpty()
-                        _areasFeedPagingConfig.page++
-
-                        items?.let {
-                            val allItems =
-                                if (refreshList) it
-                                else viewState.value.areasFeed.items.plus(it)
-                            val areasFeedViewState = viewState.value.areasFeed.copy(
-                                isLoading = false,
-                                isRefreshing = false,
-                                items = allItems
-                            )
-                            emit(viewState.value.copy(areasFeed = areasFeedViewState))
-                        }
-                    }
-                    onFailureWithMsg { _, message ->
-                        message?.let { emit(it) }
-                    }
                 }
-
             }
         }
     }

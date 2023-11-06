@@ -11,7 +11,6 @@ import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.SavedStateHandle
-import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NavigateBack
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailAction
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailEvent
@@ -39,7 +38,6 @@ internal constructor(
                 note?.updateUI()
             }
         }
-
     }
 
     override fun dispatch(action: NoteDetailAction) = when (action) {
@@ -95,18 +93,13 @@ internal constructor(
                 subNotes = viewState.value.subNotes.asExternalModels,
                 completionDate = null,
                 expectedCompletionDate = viewState.value.expectedCompletionDate
-            ).collect { result ->
-                with(result) {
-                    isLoading {
-                        emit(viewState.value.copy(isLoading = it))
-                    }
-                    onSuccess { note ->
-                        note?.updateUI()
-                        emit(NoteDetailEvent.EditSuccess)
-                    }
-                    onFailureWithMsg { _, message ->
-                        message?.let { emit(it) }
-                    }
+            ) collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
+                }
+                onSuccess { note ->
+                    note?.updateUI()
+                    emit(NoteDetailEvent.EditSuccess)
                 }
             }
         }
@@ -116,17 +109,12 @@ internal constructor(
         launchJob {
             notesRepository.deleteNote(
                 noteId = viewState.value.initialItem!!.id
-            ).collect { result ->
-                with(result) {
-                    isLoading {
-                        emit(viewState.value.copy(isLoading = it))
-                    }
-                    onSuccess {
-                        emit(NoteDetailEvent.DeleteSuccess)
-                    }
-                    onFailureWithMsg { _, message ->
-                        message?.let { emit(it) }
-                    }
+            ) collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
+                }
+                onSuccess {
+                    emit(NoteDetailEvent.DeleteSuccess)
                 }
             }
         }
@@ -189,28 +177,18 @@ internal constructor(
     private fun removeSubNote(value: SubNoteUI) {
         val subNotesList = viewState.value.subNotes
 
-        emit(
-            viewState.value.copy(
-                subNotes = subNotesList.filter { it.id != value.id }
-            )
-        )
+        emit(viewState.value.copy(subNotes = subNotesList.filter { it.id != value.id }))
     }
 
 
     private fun obtainAreaChanged() {
         launchJob {
             viewState.value.area?.let { area ->
-                areasRepository.fetchAreaDetails(area.id)
-                    .collect { result ->
-                        with(result) {
-                            onSuccess {
-                                emit(viewState.value.copy(area = it))
-                            }
-                            onFailureWithMsg { _, message ->
-                                message?.let { emit(it) }
-                            }
-                        }
+                areasRepository.fetchAreaDetails(area.id) collectAndProcess {
+                    onSuccess {
+                        emit(viewState.value.copy(area = it))
                     }
+                }
             }
         }
     }
@@ -219,17 +197,12 @@ internal constructor(
         launchJob {
             notesRepository.completeGoal(
                 noteId = viewState.value.initialItem!!.id
-            ).collect { result ->
-                with(result) {
-                    isLoading {
-                        emit(viewState.value.copy(isCompleteGoalLoading = it))
-                    }
-                    onSuccess {
-                        it?.updateUI()
-                    }
-                    onFailureWithMsg { _, message ->
-                        message?.let { emit(it) }
-                    }
+            ) collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isCompleteGoalLoading = it))
+                }
+                onSuccess {
+                    it?.updateUI()
                 }
             }
         }
@@ -240,14 +213,9 @@ internal constructor(
             notesRepository.completeSubGoal(
                 noteId = viewState.value.initialItem!!.id,
                 subNoteId = value.id.toInt()
-            ).collect { result ->
-                with(result) {
-                    onSuccess {
-                        it?.updateUI()
-                    }
-                    onFailureWithMsg { _, message ->
-                        message?.let { emit(it) }
-                    }
+            ) collectAndProcess {
+                onSuccess {
+                    it?.updateUI()
                 }
             }
         }
@@ -257,17 +225,12 @@ internal constructor(
         launchJob {
             notesRepository.unCompleteGoal(
                 noteId = viewState.value.initialItem!!.id
-            ).collect { result ->
-                with(result) {
-                    isLoading {
-                        emit(viewState.value.copy(isCompleteGoalLoading = it))
-                    }
-                    onSuccess {
-                        it?.updateUI()
-                    }
-                    onFailureWithMsg { _, message ->
-                        message?.let { emit(it) }
-                    }
+            ) collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isCompleteGoalLoading = it))
+                }
+                onSuccess {
+                    it?.updateUI()
                 }
             }
         }
@@ -278,14 +241,9 @@ internal constructor(
             notesRepository.unCompleteSubGoal(
                 noteId = viewState.value.initialItem!!.id,
                 subNoteId = value.id.toInt()
-            ).collect { result ->
-                with(result) {
-                    onSuccess {
-                        it?.updateUI()
-                    }
-                    onFailureWithMsg { _, message ->
-                        message?.let { emit(it) }
-                    }
+            ) collectAndProcess {
+                onSuccess {
+                    it?.updateUI()
                 }
             }
         }
