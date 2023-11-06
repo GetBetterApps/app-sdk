@@ -332,8 +332,8 @@
             filePath = "iosApp/Core/Util/extensions/UIPilotExt.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
             landmarkName = "gestureRecognizerShouldBegin(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -348,8 +348,8 @@
             filePath = "iosApp/Core/Util/extensions/UIPilotExt.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -571,8 +571,8 @@
             filePath = "iosApp/Core/Util/extensions/UIPilotExt.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "makeUIViewController(context:)"
             landmarkType = "7">
             <Locations>
@@ -619,8 +619,8 @@
             filePath = "iosApp/Core/Util/extensions/UIPilotExt.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "makeUIViewController(context:)"
             landmarkType = "7">
             <Locations>
@@ -682,8 +682,8 @@
             filePath = "iosApp/Core/Util/extensions/UIPilotExt.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "makeUIViewController(context:)"
             landmarkType = "7">
             <Locations>
@@ -745,8 +745,8 @@
             filePath = "iosApp/Core/Util/extensions/UIPilotExt.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "makeUIViewController(context:)"
             landmarkType = "7">
             <Locations>
@@ -802,7 +802,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "19DB6C3C-8646-4DB1-BB9F-E111365C8F89"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iosApp/Features/Auth/components/AuthTextField.swift"
@@ -1049,6 +1049,70 @@
             endingLineNumber = "37"
             landmarkName = "body"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ED39DE48-1647-444E-B2EF-2541905CB81A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/Core/Util/extensions/UIPilotExt.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "makeUIViewController(context:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A2B47C1B-BCA6-4D35-8C6F-DCF80C4038F5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/Core/Util/extensions/UIPilotExt.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "makeUIViewController(context:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A2B47C1B-BCA6-4D35-8C6F-DCF80C4038F5 - 96076b711969adbe"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (&#x3c4;_0_0, Swift.Optional&lt;Swift.Int&gt;) -&gt; () in iosApp.NavigationControllerHost.makeUIViewController(context: SwiftUI.UIViewControllerRepresentableContext&lt;iosApp.NavigationControllerHost&lt;&#x3c4;_0_0, &#x3c4;_0_1&gt;&gt;) -&gt; __C.UINavigationController"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/velkonost/AndroidStudioProjects/GetBetter/iosApp/iosApp/Core/Util/extensions/UIPilotExt.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "195"
+                  endingLineNumber = "195"
+                  offsetFromSymbolStart = "2760">
+               </Location>
+               <Location
+                  uuid = "A2B47C1B-BCA6-4D35-8C6F-DCF80C4038F5 - 96076b711969ad01"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (&#x3c4;_0_0, Swift.Optional&lt;Swift.Int&gt;) -&gt; () in iosApp.NavigationControllerHost.makeUIViewController(context: SwiftUI.UIViewControllerRepresentableContext&lt;iosApp.NavigationControllerHost&lt;&#x3c4;_0_0, &#x3c4;_0_1&gt;&gt;) -&gt; __C.UINavigationController"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/velkonost/AndroidStudioProjects/GetBetter/iosApp/iosApp/Core/Util/extensions/UIPilotExt.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "192"
+                  endingLineNumber = "192"
+                  offsetFromSymbolStart = "2676">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

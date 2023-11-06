@@ -159,6 +159,7 @@ struct NavigationControllerHost<T: Equatable, Screen: View>: UIViewControllerRep
         }
         
         uipilot.onSetRoot = { route, lastIndex in
+            
             addTransition(nav: navigation)
             
             if lastIndex != nil {
@@ -166,7 +167,7 @@ struct NavigationControllerHost<T: Equatable, Screen: View>: UIViewControllerRep
                 var vc = navigation.viewControllers
                 let prevC = vc[lastIndex!]
                 vc.remove(at: lastIndex!)
-                vc.append(prevC )
+                vc.append(prevC)
                 navigation.setViewControllers(vc, animated: false)
             } else {
                 navigation.pushViewController(
