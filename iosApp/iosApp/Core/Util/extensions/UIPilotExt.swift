@@ -159,7 +159,6 @@ struct NavigationControllerHost<T: Equatable, Screen: View>: UIViewControllerRep
         }
         
         uipilot.onSetRoot = { route, lastIndex in
-            
             addTransition(nav: navigation)
             
             if lastIndex != nil {

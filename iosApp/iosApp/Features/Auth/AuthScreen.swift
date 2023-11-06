@@ -96,6 +96,9 @@ struct AuthScreen: View {
         }
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            viewModel.onAppear()
+        }
         .onTapGesture {
             self.endTextEditing()
         }

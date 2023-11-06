@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import com.velkonost.getbetter.shared.core.datastore.TOKEN_KEY
 import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
+import com.velkonost.getbetter.shared.core.datastore.extension.resetStates
 import com.velkonost.getbetter.shared.core.model.user.UserInfo
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.flowRequest
@@ -98,6 +99,7 @@ constructor(
             remoteDataSource.performLogout(token)
         },
         onSuccess = {
+            localDataSource.resetStates()
             localDataSource.edit { preferences ->
                 preferences.remove(TOKEN_KEY)
             }

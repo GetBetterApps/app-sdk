@@ -4,6 +4,7 @@ import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
+import com.velkonost.getbetter.shared.features.auth.api.AuthRepository
 import com.velkonost.getbetter.shared.features.auth.domain.LoginAnonymousUseCase
 import com.velkonost.getbetter.shared.features.auth.domain.LoginEmailUseCase
 import com.velkonost.getbetter.shared.features.auth.domain.RegisterEmailUseCase
@@ -14,12 +15,22 @@ import com.velkonost.getbetter.shared.features.auth.presentation.contracts.Navig
 
 class AuthViewModel
 internal constructor(
+    private val authRepository: AuthRepository<String>,
     private val registerEmailUseCase: RegisterEmailUseCase,
     private val loginEmailUseCase: LoginEmailUseCase,
     private val loginAnonymousUseCase: LoginAnonymousUseCase
 ) : BaseViewModel<AuthViewState, AuthAction, AuthNavigation, Nothing>(
     initialState = AuthViewState()
 ) {
+
+    @Suppress("unused")
+    fun onAppear() {
+        launchJob {
+            if (authRepository.checkNeedsResetState()) {
+                emit(initialState)
+            }
+        }
+    }
 
     override fun dispatch(action: AuthAction) = when (action) {
         is AuthAction.EmailChanged -> obtainEmailChanged(action.value)
