@@ -9,4 +9,6 @@ interface DiaryRepository {
 
     suspend fun getUpdatedNoteId(): Flow<ResultState<Int>>
 
+    suspend fun checkNeedsResetState(): Boolean
+
 }

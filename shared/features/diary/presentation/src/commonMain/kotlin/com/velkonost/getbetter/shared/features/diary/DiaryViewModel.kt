@@ -39,8 +39,16 @@ internal constructor(
 
     fun refreshData() {
         fetchAreas()
-        fetchNotes()
-        checkUpdatedNote()
+
+        launchJob {
+            if (diaryRepository.checkNeedsResetState()) {
+                refreshNotesState()
+            } else {
+                checkUpdatedNote()
+            }
+
+            fetchNotes()
+        }
     }
 
     override fun init() {
@@ -83,6 +91,16 @@ internal constructor(
         is AddAreaClick -> emit(NavigateToAddArea)
         is NoteClick -> obtainNoteClick(action.value)
         is DiaryAction.NotesLoadNextPage -> fetchNotes()
+    }
+
+    private fun refreshNotesState() {
+        _notesPagingConfig.page = 0
+        _notesPagingConfig.lastPageReached = false
+        val notesViewState = viewState.value.notesViewState.copy(
+            isLoading = true,
+            items = emptyList()
+        )
+        emit(viewState.value.copy(notesViewState = notesViewState))
     }
 
     private fun dispatchCreateNewAreaAction(action: CreateNewAreaAction) {

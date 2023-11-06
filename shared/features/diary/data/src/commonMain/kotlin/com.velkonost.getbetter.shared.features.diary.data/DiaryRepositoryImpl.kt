@@ -3,6 +3,7 @@ package com.velkonost.getbetter.shared.features.diary.data
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import com.velkonost.getbetter.shared.core.datastore.NEW_USER_RESET_DIARY_STATE
 import com.velkonost.getbetter.shared.core.datastore.UPDATED_NOTE_ID
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.flowLocalRequest
@@ -27,5 +28,14 @@ class DiaryRepositoryImpl(
         }
 
         noteId!!
+    }
+
+    override suspend fun checkNeedsResetState(): Boolean {
+        val value = localDataSource.data.first()[NEW_USER_RESET_DIARY_STATE] == true
+        localDataSource.edit { preferences ->
+            preferences[NEW_USER_RESET_DIARY_STATE] = false
+        }
+
+        return value
     }
 }
