@@ -62,8 +62,14 @@ struct SocialScreen: View {
         }
         .onAppear {
             viewModel.onAppear()
-            viewModel.dispatch(action: SocialActionGeneralFeedLoadNextPage())
-            viewModel.dispatch(action: SocialActionAreasFeedLoadNextPage())
+            
+            if state.generalFeed.items.isEmpty {
+                viewModel.dispatch(action: SocialActionGeneralFeedLoadNextPage())
+            }
+            
+            if state.areasFeed.items.isEmpty {
+                viewModel.dispatch(action: SocialActionAreasFeedLoadNextPage())
+            }
         }
     }
 }

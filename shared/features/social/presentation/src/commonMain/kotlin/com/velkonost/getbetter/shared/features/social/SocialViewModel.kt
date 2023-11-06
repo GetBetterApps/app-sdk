@@ -30,6 +30,13 @@ internal constructor(
 
     fun onAppear() {
         checkUpdatedNote()
+
+        launchJob {
+            if (socialRepository.checkNeedsResetState()) {
+                obtainRefreshGeneralFeed()
+                obtainRefreshAreasFeed()
+            }
+        }
     }
 
     override fun dispatch(action: SocialAction) = when (action) {

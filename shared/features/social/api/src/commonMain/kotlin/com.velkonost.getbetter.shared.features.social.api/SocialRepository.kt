@@ -19,4 +19,6 @@ interface SocialRepository {
     suspend fun saveUpdatedNoteId(noteId: Int)
 
     suspend fun getUpdatedNoteId(): Flow<ResultState<Int>>
+
+    suspend fun checkNeedsResetState(): Boolean
 }
