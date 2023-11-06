@@ -7,7 +7,6 @@ import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
-import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.features.diary.api.DiaryRepository
 import com.velkonost.getbetter.shared.features.diary.contracts.AddAreaClick
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaAction
@@ -23,7 +22,6 @@ import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectLatest
 
 class DiaryViewModel
 internal constructor(
@@ -166,32 +164,51 @@ internal constructor(
 
     private fun fetchAreas() {
         launchJob {
-            areasRepository.fetchUserAreas()
-                .collectLatest { result ->
-                    with(result) {
-                        isLoading {
-                            if (viewState.value.areasViewState.items.isEmpty()) {
-                                val areasViewState =
-                                    viewState.value.areasViewState.copy(isLoading = it)
-                                emit(viewState.value.copy(areasViewState = areasViewState))
-                            }
-                        }
-                        onSuccess { list ->
-                            list?.let {
-                                val areasViewState = viewState.value.areasViewState.copy(items = it)
-                                emit(viewState.value.copy(areasViewState = areasViewState))
-
-                                createNewNoteViewModel.value.dispatch(
-                                    CreateNewNoteAction.InitAvailableAreas(it)
-                                )
-                            }
-
-                        }
-                        onFailureWithMsg { _, message ->
-                            message?.let { emit(it) }
-                        }
+            areasRepository.fetchUserAreas() collectAndProcess {
+                isLoading {
+                    if (viewState.value.areasViewState.items.isEmpty()) {
+                        val areasViewState =
+                            viewState.value.areasViewState.copy(isLoading = it)
+                        emit(viewState.value.copy(areasViewState = areasViewState))
                     }
                 }
+                onSuccess { list ->
+                    list?.let {
+                        val areasViewState = viewState.value.areasViewState.copy(items = it)
+                        emit(viewState.value.copy(areasViewState = areasViewState))
+
+                        createNewNoteViewModel.value.dispatch(
+                            CreateNewNoteAction.InitAvailableAreas(it)
+                        )
+                    }
+
+                }
+            }
+//                .collectLatest { result ->
+//                    with(result) {
+//                        isLoading {
+//                            if (viewState.value.areasViewState.items.isEmpty()) {
+//                                val areasViewState =
+//                                    viewState.value.areasViewState.copy(isLoading = it)
+//                                emit(viewState.value.copy(areasViewState = areasViewState))
+//                            }
+//                        }
+//                        onSuccess { list ->
+//                            list?.let {
+//                                val areasViewState = viewState.value.areasViewState.copy(items = it)
+//                                emit(viewState.value.copy(areasViewState = areasViewState))
+//
+//                                createNewNoteViewModel.value.dispatch(
+//                                    CreateNewNoteAction.InitAvailableAreas(it)
+//                                )
+//                            }
+//
+//                        }
+//                        onFailureWithMsg { _, message ->
+//                            message?.let { emit(it) }
+//                        }
+//                    }
+//                }
         }
     }
 
@@ -203,31 +220,52 @@ internal constructor(
             notesRepository.fetchUserNotes(
                 page = _notesPagingConfig.page,
                 perPage = _notesPagingConfig.pageSize
-            ).collect { result ->
-                with(result) {
-                    isLoading {
-                        val notesViewState = viewState.value.notesViewState.copy(isLoading = true)
-                        emit(viewState.value.copy(notesViewState = notesViewState))
-                    }
-                    onSuccess { items ->
-                        _notesPagingConfig.lastPageReached = items.isNullOrEmpty()
-                        _notesPagingConfig.page++
+            ) collectAndProcess {
+                isLoading {
+                    val notesViewState = viewState.value.notesViewState.copy(isLoading = true)
+                    emit(viewState.value.copy(notesViewState = notesViewState))
+                }
 
-                        items?.let {
-                            val allItems = viewState.value.notesViewState.items.plus(it)
-                            val notesViewState =
-                                viewState.value.notesViewState.copy(
-                                    isLoading = false,
-                                    items = allItems
-                                )
-                            emit(viewState.value.copy(notesViewState = notesViewState))
-                        }
-                    }
-                    onFailureWithMsg { _, message ->
-                        message?.let { emit(it) }
+                onSuccess { items ->
+                    _notesPagingConfig.lastPageReached = items.isNullOrEmpty()
+                    _notesPagingConfig.page++
+
+                    items?.let {
+                        val allItems = viewState.value.notesViewState.items.plus(it)
+                        val notesViewState =
+                            viewState.value.notesViewState.copy(
+                                isLoading = false,
+                                items = allItems
+                            )
+                        emit(viewState.value.copy(notesViewState = notesViewState))
                     }
                 }
             }
+//                .collect { result ->
+//                with(result) {
+//                    isLoading {
+//                        val notesViewState = viewState.value.notesViewState.copy(isLoading = true)
+//                        emit(viewState.value.copy(notesViewState = notesViewState))
+//                    }
+//                    onSuccess { items ->
+//                        _notesPagingConfig.lastPageReached = items.isNullOrEmpty()
+//                        _notesPagingConfig.page++
+//
+//                        items?.let {
+//                            val allItems = viewState.value.notesViewState.items.plus(it)
+//                            val notesViewState =
+//                                viewState.value.notesViewState.copy(
+//                                    isLoading = false,
+//                                    items = allItems
+//                                )
+//                            emit(viewState.value.copy(notesViewState = notesViewState))
+//                        }
+//                    }
+//                    onFailureWithMsg { _, message ->
+//                        message?.let { emit(it) }
+//                    }
+//                }
+//            }
         }
     }
 }

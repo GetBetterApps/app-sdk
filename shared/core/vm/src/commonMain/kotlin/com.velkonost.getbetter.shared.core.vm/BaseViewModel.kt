@@ -5,8 +5,10 @@ import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import com.rickclephas.kmm.viewmodel.coroutineScope
 import com.rickclephas.kmm.viewmodel.stateIn
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.vm.contracts.ActionDispatcher
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
+import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationEvent
 import com.velkonost.getbetter.shared.core.vm.navigation.RouteNavigator
 import com.velkonost.getbetter.shared.core.vm.resource.Message
@@ -80,5 +82,19 @@ constructor(
         started: SharingStarted = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5_000),
         initialValue: T
     ) = stateIn(viewModelScope = viewModelScope, started = started, initialValue = initialValue)
+
+    protected suspend inline infix fun <T> Flow<ResultState<T>>.collectAndProcess(
+        crossinline resultProcessing: ResultState<T>.() -> Unit
+    ) {
+        collect { result ->
+            with(result) {
+                resultProcessing.invoke(this)
+
+                onFailureWithMsg { _, message ->
+                    message?.let { emit(it) }
+                }
+            }
+        }
+    }
 
 }
