@@ -12,6 +12,7 @@ import com.velkonost.getbetter.shared.features.social.contracts.SocialAction
 import com.velkonost.getbetter.shared.features.social.contracts.SocialNavigation
 import com.velkonost.getbetter.shared.features.social.contracts.SocialViewState
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 
 class SocialViewModel
 internal constructor(
@@ -152,6 +153,7 @@ internal constructor(
 
         generalFeedLoadingJob?.cancel()
         generalFeedLoadingJob = launchJob {
+
             socialRepository.fetchGeneralFeed(
                 page = _generalFeedPagingConfig.page,
                 pageSize = _generalFeedPagingConfig.pageSize
@@ -165,19 +167,25 @@ internal constructor(
                     emit(viewState.value.copy(generalFeed = generalFeedViewState))
                 }
                 onSuccess { items ->
-                    _generalFeedPagingConfig.lastPageReached = items.isNullOrEmpty()
-                    _generalFeedPagingConfig.page++
+                    launchJob {
+                        if (_generalFeedPagingConfig.page == 0) {
+                            delay(500)
+                        }
 
-                    items?.let {
-                        val allItems =
-                            if (refreshList) it
-                            else viewState.value.generalFeed.items.plus(it)
-                        val generalFeedViewState = viewState.value.generalFeed.copy(
-                            isLoading = false,
-                            isRefreshing = false,
-                            items = allItems
-                        )
-                        emit(viewState.value.copy(generalFeed = generalFeedViewState))
+                        _generalFeedPagingConfig.lastPageReached = items.isNullOrEmpty()
+                        _generalFeedPagingConfig.page++
+
+                        items?.let {
+                            val allItems =
+                                if (refreshList) it
+                                else viewState.value.generalFeed.items.plus(it)
+                            val generalFeedViewState = viewState.value.generalFeed.copy(
+                                isLoading = false,
+                                isRefreshing = false,
+                                items = allItems
+                            )
+                            emit(viewState.value.copy(generalFeed = generalFeedViewState))
+                        }
                     }
                 }
             }
@@ -201,19 +209,21 @@ internal constructor(
                     emit(viewState.value.copy(areasFeed = areasFeedViewState))
                 }
                 onSuccess { items ->
-                    _areasFeedPagingConfig.lastPageReached = items.isNullOrEmpty()
-                    _areasFeedPagingConfig.page++
+                    launchJob {
+                        _areasFeedPagingConfig.lastPageReached = items.isNullOrEmpty()
+                        _areasFeedPagingConfig.page++
 
-                    items?.let {
-                        val allItems =
-                            if (refreshList) it
-                            else viewState.value.areasFeed.items.plus(it)
-                        val areasFeedViewState = viewState.value.areasFeed.copy(
-                            isLoading = false,
-                            isRefreshing = false,
-                            items = allItems
-                        )
-                        emit(viewState.value.copy(areasFeed = areasFeedViewState))
+                        items?.let {
+                            val allItems =
+                                if (refreshList) it
+                                else viewState.value.areasFeed.items.plus(it)
+                            val areasFeedViewState = viewState.value.areasFeed.copy(
+                                isLoading = false,
+                                isRefreshing = false,
+                                items = allItems
+                            )
+                            emit(viewState.value.copy(areasFeed = areasFeedViewState))
+                        }
                     }
                 }
             }
