@@ -47,6 +47,16 @@ struct NoteDetailScreen : View {
                                 isNotePrivate: state.isNotePrivate
                             )
                             
+                            if !state.allowEdit {
+                                AuthorData(
+                                    isLoading: state.authorLoading,
+                                    author: state.author,
+                                    onClick: {
+                                        viewModel.dispatch(action: NoteDetailActionAuthorClick())
+                                    }
+                                )
+                            }
+                            
                             if state.area != nil {
                                 AreaData(
                                     area: state.area!,

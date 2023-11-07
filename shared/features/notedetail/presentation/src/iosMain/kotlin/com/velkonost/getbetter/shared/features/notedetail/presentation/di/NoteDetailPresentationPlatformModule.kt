@@ -17,6 +17,7 @@ internal actual val NoteDetailPresentationPlatformModule = module {
         NoteDetailViewModel(
             notesRepository = get(),
             areasRepository = get(),
+            userInfoRepository = get(),
             savedStateHandle = get(named(SAVED_STATE_HANDLE_NAMED_QUALIFIER))
         )
     }

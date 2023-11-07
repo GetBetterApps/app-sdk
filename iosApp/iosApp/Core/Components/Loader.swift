@@ -14,17 +14,22 @@ import Lottie
 struct Loader: View {
     @Environment(\.colorScheme) var colorScheme
     
+    let size: CGFloat
+    init(size: Int = 40) {
+        self.size = CGFloat(size)
+    }
+    
     var body: some View {
-        var isDark: Bool = colorScheme == .dark
+        let isDark: Bool = colorScheme == .dark
         
         ZStack {
             if isDark {
                 LottieView(isDark: true)
-                    .frame(width: 40, height: 40)
+                    .frame(width: size, height: size)
                     .scaleEffect(0.2)
             } else{
                 LottieView(isDark: false)
-                    .frame(width: 40, height: 40)
+                    .frame(width: size, height: size)
                     .scaleEffect(0.2)
             }
             
