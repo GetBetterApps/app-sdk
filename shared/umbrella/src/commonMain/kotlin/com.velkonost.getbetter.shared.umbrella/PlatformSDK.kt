@@ -9,6 +9,7 @@ import com.velkonost.getbetter.shared.features.areas.data.di.AreasDataModule
 import com.velkonost.getbetter.shared.features.auth.data.di.AuthDataModule
 import com.velkonost.getbetter.shared.features.auth.domain.di.AuthDomainModule
 import com.velkonost.getbetter.shared.features.auth.presentation.di.AuthPresentationModule
+import com.velkonost.getbetter.shared.features.comments.data.di.CommentsDataModule
 import com.velkonost.getbetter.shared.features.detail.presentation.di.DetailPresentationModule
 import com.velkonost.getbetter.shared.features.diary.data.di.DiaryDataModule
 import com.velkonost.getbetter.shared.features.diary.di.CalendarsPresentationModule
@@ -48,6 +49,7 @@ object PlatformSDK {
             TasksDataModule,
             UserInfoDataModule,
             LikesDataModule,
+            CommentsDataModule,
 
             AuthDataModule,
             AuthDomainModule,
