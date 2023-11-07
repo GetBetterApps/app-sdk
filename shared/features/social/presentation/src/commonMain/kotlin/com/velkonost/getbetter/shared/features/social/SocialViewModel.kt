@@ -64,7 +64,6 @@ internal constructor(
             socialRepository.saveUpdatedNoteId(value.id)
             emit(NavigateToNoteDetail(value))
         }
-
     }
 
     private fun checkUpdatedNote() {

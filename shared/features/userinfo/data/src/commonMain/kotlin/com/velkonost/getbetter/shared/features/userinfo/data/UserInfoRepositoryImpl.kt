@@ -7,6 +7,7 @@ import com.velkonost.getbetter.shared.core.datastore.TOKEN_KEY
 import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
 import com.velkonost.getbetter.shared.core.datastore.extension.resetStates
 import com.velkonost.getbetter.shared.core.model.user.UserInfo
+import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.flowRequest
 import com.velkonost.getbetter.shared.core.util.locale
@@ -15,6 +16,7 @@ import com.velkonost.getbetter.shared.features.userinfo.data.remote.UserInfoRemo
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.InitSettingsRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.UpdateValueRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response.KtorUserInfo
+import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response.KtorUserInfoShort
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response.asExternalModel
 import kotlinx.coroutines.flow.Flow
 
@@ -31,6 +33,15 @@ constructor(
             remoteDataSource.getInfo(token)
         }
     )
+
+    override suspend fun fetchInfoAboutOtherUser(userId: String): Flow<ResultState<UserInfoShort>> =
+        flowRequest(
+            mapper = KtorUserInfoShort::asExternalModel,
+            request = {
+                val token = localDataSource.getUserToken()
+                remoteDataSource.getShortInfo(token, userId)
+            }
+        )
 
     override suspend fun initSettings(email: String): Flow<ResultState<UserInfo>> = flowRequest(
         mapper = KtorUserInfo::asExternalModel,

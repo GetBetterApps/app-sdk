@@ -5,6 +5,7 @@ import com.velkonost.getbetter.shared.core.network.model.RemoteResponse
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.InitSettingsRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.UpdateValueRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response.KtorUserInfo
+import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response.KtorUserInfoShort
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.forms.MultiPartFormDataContent
@@ -26,6 +27,17 @@ class UserInfoRemoteDataSource(
             makeRequest(
                 path = Route.FETCH_INFO,
                 token = token
+            )
+        }.body()
+
+    suspend fun getShortInfo(token: String?, userId: String): RemoteResponse<KtorUserInfoShort> =
+        httpClient.get {
+            makeRequest(
+                path = Route.FETCH_SHORT_INFO,
+                token = token,
+                params = mapOf(
+                    "userId" to userId
+                )
             )
         }.body()
 
