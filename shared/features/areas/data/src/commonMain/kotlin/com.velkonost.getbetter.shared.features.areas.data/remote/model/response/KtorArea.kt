@@ -47,7 +47,10 @@ data class KtorArea(
     val isAllowEdit: Boolean = false,
 
     @SerialName("isAllowLeave")
-    val isAllowLeave: Boolean = false
+    val isAllowLeave: Boolean = false,
+
+    @SerialName("experience")
+    val experience: Int = 0
 )
 
 fun KtorArea.asExternalModel() =
@@ -66,5 +69,6 @@ fun KtorArea.asExternalModel() =
         isAllowJoin = isAllowJoin,
         isAllowLeave = isAllowLeave,
         isAllowEdit = isAllowEdit,
-        isAllowDelete = isAllowDelete
+        isAllowDelete = isAllowDelete,
+        experience = experience
     )

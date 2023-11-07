@@ -13,9 +13,6 @@ data class Area(
 
     val createdDate: Long,
 
-//    @SerialName(authorPropertyName)
-//    val author: AreaMember,
-
     val imageUrl: String? = null,
 
     val emojiId: Int? = null,
@@ -34,5 +31,7 @@ data class Area(
 
     val isAllowEdit: Boolean = false,
 
-    val isAllowLeave: Boolean = false
+    val isAllowLeave: Boolean = false,
+
+    val experience: Int = 0
 )

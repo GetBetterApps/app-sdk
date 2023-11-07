@@ -14,7 +14,9 @@ data class UserInfo(
 
     val avatar: ByteArray? = null,
 
-    val email: String? = null
+    val email: String? = null,
+
+    val experience: Int = 0
 
 )
 
@@ -24,5 +26,7 @@ data class UserInfoShort(
 
     val displayName: String? = null,
 
-    val avatar: ByteArray? = null
+    val avatar: ByteArray? = null,
+
+    val experience: Int = 0
 )
