@@ -21,6 +21,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.areadetail.AreaDetailScreen
 import com.velkonost.getbetter.android.features.notedetail.components.ActionButtons
 import com.velkonost.getbetter.android.features.notedetail.components.AreaData
+import com.velkonost.getbetter.android.features.notedetail.components.AuthorData
 import com.velkonost.getbetter.android.features.notedetail.components.NoteDetailHeader
 import com.velkonost.getbetter.core.compose.components.AppAlertDialog
 import com.velkonost.getbetter.core.compose.components.Loader
@@ -73,6 +74,18 @@ fun NoteDetailScreen(
                         isNotePrivate = state.isNotePrivate
                     ) {
                         viewModel.dispatch(NavigateBack)
+                    }
+                }
+
+                if (!state.allowEdit) {
+                    item {
+                        AuthorData(
+                            isLoading = state.authorLoading,
+                            author = state.author,
+                            onClick = {
+                                viewModel.dispatch(NoteDetailAction.AuthorClick)
+                            }
+                        )
                     }
                 }
 

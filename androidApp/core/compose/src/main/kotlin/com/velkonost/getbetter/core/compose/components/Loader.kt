@@ -14,7 +14,8 @@ import com.velkonost.getbetter.shared.resources.SharedR
 
 @Composable
 fun Loader(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    size: Int = 128,
 ) {
     val composition by rememberLottieComposition(
         LottieCompositionSpec.RawRes(
@@ -24,7 +25,7 @@ fun Loader(
     )
 
     LottieAnimation(
-        modifier = modifier.size(128.dp),
+        modifier = modifier.size(size.dp),
         composition = composition,
         iterations = LottieConstants.IterateForever,
     )

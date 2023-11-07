@@ -62,6 +62,7 @@ internal constructor(
         is NoteDetailAction.CompleteSubNoteClick -> completeSubGoal(action.value)
         is NoteDetailAction.UnCompleteClick -> unCompleteGoal()
         is NoteDetailAction.UnCompleteSubNoteClick -> unCompleteSubGoal(action.value)
+        is NoteDetailAction.AuthorClick -> TODO()
     }
 
     private fun getNoteAuthor(authorId: String) {
