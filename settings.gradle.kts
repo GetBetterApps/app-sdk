@@ -38,6 +38,11 @@ include(
     ":shared:features:tasks:api",
     ":shared:features:tasks:data",
 
+    ":shared:features:likes:api",
+    ":shared:features:likes:data",
+    ":shared:features:comments:api",
+    ":shared:features:comments:data",
+
     ":shared:features:auth:api",
     ":shared:features:auth:data",
     ":shared:features:auth:domain",
