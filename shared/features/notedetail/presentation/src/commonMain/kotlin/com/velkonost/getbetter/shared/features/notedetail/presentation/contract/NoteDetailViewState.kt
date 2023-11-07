@@ -5,6 +5,7 @@ import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.note.NoteType
 import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
+import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToLocalDatetime
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 
@@ -33,6 +34,8 @@ data class NoteDetailViewState(
     val completionDateStr: String? = completionDate?.convertToLocalDatetime(),
 
     val area: Area? = null,
+    val authorLoading: Boolean = true,
+    val author: UserInfoShort? = null,
 
     val allowEdit: Boolean = false
 ) : UIContract.State

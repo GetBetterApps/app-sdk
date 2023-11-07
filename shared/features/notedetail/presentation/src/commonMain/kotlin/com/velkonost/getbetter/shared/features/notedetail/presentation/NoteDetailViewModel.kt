@@ -18,13 +18,15 @@ import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailViewState
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteState
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
+import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 import kotlinx.coroutines.flow.collectLatest
 
 class NoteDetailViewModel
 internal constructor(
     savedStateHandle: SavedStateHandle,
     private val areasRepository: AreasRepository,
-    private val notesRepository: NotesRepository
+    private val notesRepository: NotesRepository,
+    private val userInfoRepository: UserInfoRepository
 ) : BaseViewModel<NoteDetailViewState, NoteDetailAction, NoteDetailNavigation, NoteDetailEvent>(
     initialState = NoteDetailViewState(),
     savedStateHandle = savedStateHandle
@@ -36,6 +38,7 @@ internal constructor(
         launchJob {
             note.collectLatest { note ->
                 note?.updateUI()
+                note?.authorId?.let { getNoteAuthor(it) }
             }
         }
     }
@@ -59,6 +62,19 @@ internal constructor(
         is NoteDetailAction.CompleteSubNoteClick -> completeSubGoal(action.value)
         is NoteDetailAction.UnCompleteClick -> unCompleteGoal()
         is NoteDetailAction.UnCompleteSubNoteClick -> unCompleteSubGoal(action.value)
+    }
+
+    private fun getNoteAuthor(authorId: String) {
+        launchJob {
+            userInfoRepository.fetchInfoAboutOtherUser(authorId) collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(authorLoading = it))
+                }
+                onSuccess {
+                    emit(viewState.value.copy(author = it))
+                }
+            }
+        }
     }
 
     private fun obtainTextChanged(value: String) {
