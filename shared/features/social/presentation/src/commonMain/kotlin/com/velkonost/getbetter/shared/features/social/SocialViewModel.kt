@@ -63,15 +63,14 @@ internal constructor(
                 LikeType.Positive -> LikeType.None
                 else -> LikeType.Positive
             }
+
             likesRepository.addLike(
                 entityType = EntityType.Note,
                 entityId = value.id,
                 likeType = likeType
             ) collectAndProcess {
                 isLoading {
-                    val itemLikesData = value.likesData.copy(
-                        isLikesLoading = true
-                    )
+                    val itemLikesData = value.likesData.copy(isLikesLoading = true)
 
                     val indexOfChangedItemInGeneralFeed =
                         viewState.value.generalFeed.items.indexOfFirst { item -> item.id == value.id }
@@ -96,13 +95,9 @@ internal constructor(
                     }
 
                     val generalFeedViewState =
-                        viewState.value.generalFeed.copy(
-                            items = allItemsGeneralFeed.toList()
-                        )
+                        viewState.value.generalFeed.copy(items = allItemsGeneralFeed)
                     val areasFeedViewState =
-                        viewState.value.areasFeed.copy(
-                            items = allItemsAreasFeed.toList()
-                        )
+                        viewState.value.areasFeed.copy(items = allItemsAreasFeed)
 
                     emit(
                         viewState.value.copy(
@@ -110,11 +105,9 @@ internal constructor(
                             areasFeed = areasFeedViewState
                         )
                     )
-
                 }
                 onSuccess { entityLikes ->
                     entityLikes?.let {
-
                         val itemLikesData = LikesData(
                             totalLikes = it.total,
                             userLike = it.userLikeType
@@ -143,13 +136,9 @@ internal constructor(
                         }
 
                         val generalFeedViewState =
-                            viewState.value.generalFeed.copy(
-                                items = allItemsGeneralFeed.toList()
-                            )
+                            viewState.value.generalFeed.copy(items = allItemsGeneralFeed)
                         val areasFeedViewState =
-                            viewState.value.areasFeed.copy(
-                                items = allItemsAreasFeed.toList()
-                            )
+                            viewState.value.areasFeed.copy(items = allItemsAreasFeed)
 
                         emit(
                             viewState.value.copy(
@@ -158,7 +147,6 @@ internal constructor(
                             )
                         )
                     }
-
                 }
             }
         }.also {
