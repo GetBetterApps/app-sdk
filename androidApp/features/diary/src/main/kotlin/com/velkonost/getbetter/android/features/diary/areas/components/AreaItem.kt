@@ -70,7 +70,7 @@ fun AreaItem(
             Column(
                 modifier = modifier
                     .padding(start = 12.dp)
-                    .fillMaxWidth(0.9f)
+                    .fillMaxWidth(0.87f)
                     .align(Alignment.CenterVertically)
             ) {
                 Text(
@@ -126,7 +126,7 @@ fun AreaItem(
                             ) {
                                 Image(
                                     modifier = modifier
-                                        .size(32.dp)
+                                        .size(28.dp)
                                         .padding(2.dp),
                                     painter = painterResource(
                                         imageResource = if (item.likesData.userLike == LikeType.Positive) SharedR.images.ic_heart
@@ -142,7 +142,7 @@ fun AreaItem(
                                 )
                             }
                         } else {
-                            Loader(size = 32)
+                            Loader(size = 28)
                         }
                     }
                 }
