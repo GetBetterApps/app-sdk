@@ -40,6 +40,8 @@ sealed interface NoteDetailAction : UIContract.Action {
     data object DeleteClick : NoteDetailAction
 
     data object AuthorClick : NoteDetailAction
+
+    data object LikeClick : NoteDetailAction
 }
 
 data object NavigateBack : NoteDetailAction, NoteDetailNavigation {

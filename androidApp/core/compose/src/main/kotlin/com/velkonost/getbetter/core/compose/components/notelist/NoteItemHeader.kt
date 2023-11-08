@@ -36,6 +36,7 @@ fun NoteItemHeader(
     areaName: String,
     taskName: String? = null,
     areaIcon: ImageResource,
+    showLikes: Boolean = true,
     onLikeClick: () -> Unit,
     likesData: LikesData,
 ) {
@@ -78,42 +79,41 @@ fun NoteItemHeader(
         }
 
         Spacer(modifier = modifier.weight(1f))
-
-        Box {
-            AnimatedContent(targetState = likesData.isLikesLoading, label = "") {
-                if (!it) {
-                    Column(
-                        modifier = modifier.clickable(
-                            interactionSource = interactionSource,
-                            indication = null,
-                            onClick = onLikeClick
-                        ),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center,
-                    ) {
-                        Image(
-                            modifier = modifier
-                                .size(32.dp)
-                                .padding(2.dp),
-                            painter = painterResource(
-                                imageResource = if (likesData.userLike == LikeType.Positive) SharedR.images.ic_heart
-                                else SharedR.images.ic_heart_empty
+        if (showLikes) {
+            Box {
+                AnimatedContent(targetState = likesData.isLikesLoading, label = "") {
+                    if (!it) {
+                        Column(
+                            modifier = modifier.clickable(
+                                interactionSource = interactionSource,
+                                indication = null,
+                                onClick = onLikeClick
                             ),
-                            contentDescription = null,
-                            colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.button_gradient_start))
-                        )
-                        Text(
-                            text = likesData.totalLikes.toString(),
-                            color = colorResource(resource = SharedR.colors.text_primary),
-                            style = MaterialTheme.typography.bodySmall
-                        )
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center,
+                        ) {
+                            Image(
+                                modifier = modifier
+                                    .size(32.dp)
+                                    .padding(2.dp),
+                                painter = painterResource(
+                                    imageResource = if (likesData.userLike == LikeType.Positive) SharedR.images.ic_heart
+                                    else SharedR.images.ic_heart_empty
+                                ),
+                                contentDescription = null,
+                                colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.button_gradient_start))
+                            )
+                            Text(
+                                text = likesData.totalLikes.toString(),
+                                color = colorResource(resource = SharedR.colors.text_primary),
+                                style = MaterialTheme.typography.bodySmall
+                            )
+                        }
+                    } else {
+                        Loader(size = 32)
                     }
-                } else {
-                    Loader(size = 32)
                 }
             }
         }
-
-
     }
 }

@@ -73,10 +73,15 @@ fun NoteDetailScreen(
                 item {
                     NoteDetailHeader(
                         noteType = state.noteType,
-                        isNotePrivate = state.isNotePrivate
-                    ) {
-                        viewModel.dispatch(NavigateBack)
-                    }
+                        isNotePrivate = state.isNotePrivate,
+                        likesData = state.likesData,
+                        onBackClick = {
+                            viewModel.dispatch(NavigateBack)
+                        },
+                        onLikeClick = {
+                            viewModel.dispatch(NoteDetailAction.LikeClick)
+                        }
+                    )
                 }
 
                 if (!state.allowEdit) {

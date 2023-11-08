@@ -71,7 +71,6 @@ struct NoteItemHeader: View {
                         .foregroundColor(.buttonGradientStart)
                         .scaledToFill()
                         .frame(width: 24, height: 24)
-//                        .padding(2)
                         
                         Text(String(likesData.totalLikes))
                             .style(.bodySmall)
@@ -81,14 +80,15 @@ struct NoteItemHeader: View {
                         onLikeClick()
                     }
                 } else {
-                    VStack {
+                    HStack {
                         Spacer()
-                        Loader(size: 12)
+                        Loader()
+                            .scaleEffect(0.5)
                         Spacer()
                     }
                 }
             }
-            .frame(height: 32)
+            .frame(width: 32, height: 32)
             .animation(.easeInOut, value: likesData.isLikesLoading)
         }
     }

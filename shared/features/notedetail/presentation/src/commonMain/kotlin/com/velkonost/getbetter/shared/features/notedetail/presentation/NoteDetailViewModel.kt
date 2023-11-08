@@ -1,6 +1,9 @@
 package com.velkonost.getbetter.shared.features.notedetail.presentation
 
 import AreasRepository
+import com.velkonost.getbetter.shared.core.model.EntityType
+import com.velkonost.getbetter.shared.core.model.likes.LikeType
+import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
@@ -11,6 +14,7 @@ import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.SavedStateHandle
+import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NavigateBack
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailAction
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailEvent
@@ -19,6 +23,7 @@ import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteState
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 
 class NoteDetailViewModel
@@ -26,13 +31,16 @@ internal constructor(
     savedStateHandle: SavedStateHandle,
     private val areasRepository: AreasRepository,
     private val notesRepository: NotesRepository,
-    private val userInfoRepository: UserInfoRepository
+    private val userInfoRepository: UserInfoRepository,
+    private val likesRepository: LikesRepository
 ) : BaseViewModel<NoteDetailViewState, NoteDetailAction, NoteDetailNavigation, NoteDetailEvent>(
     initialState = NoteDetailViewState(),
     savedStateHandle = savedStateHandle
 ) {
 
     private val note = savedStateHandle.note.stateInWhileSubscribed(initialValue = null)
+
+    private val likesJob: Job? = null
 
     init {
         launchJob {
@@ -62,7 +70,38 @@ internal constructor(
         is NoteDetailAction.CompleteSubNoteClick -> completeSubGoal(action.value)
         is NoteDetailAction.UnCompleteClick -> unCompleteGoal()
         is NoteDetailAction.UnCompleteSubNoteClick -> unCompleteSubGoal(action.value)
+        is NoteDetailAction.LikeClick -> obtainLikeClick()
         is NoteDetailAction.AuthorClick -> TODO()
+    }
+
+    private fun obtainLikeClick() {
+        if (likesJob?.isActive == true) return
+
+        launchJob {
+            val likeType = when (viewState.value.likesData.userLike) {
+                LikeType.Positive -> LikeType.None
+                else -> LikeType.Positive
+            }
+            likesRepository.addLike(
+                entityType = EntityType.Note,
+                entityId = viewState.value.initialItem!!.id,
+                likeType = likeType
+            ) collectAndProcess {
+                isLoading {
+                    val itemLikesData = viewState.value.likesData.copy(isLikesLoading = true)
+                    emit(viewState.value.copy(likesData = itemLikesData))
+                }
+                onSuccess { entityLikes ->
+                    entityLikes?.let {
+                        val itemLikesData = LikesData(
+                            totalLikes = it.total,
+                            userLike = it.userLikeType
+                        )
+                        emit(viewState.value.copy(likesData = itemLikesData))
+                    }
+                }
+            }
+        }
     }
 
     private fun getNoteAuthor(authorId: String) {
@@ -281,7 +320,8 @@ internal constructor(
                 expectedCompletionDateStr = expectedCompletionDateStr,
                 completionDate = completionDate,
                 completionDateStr = completionDateStr,
-                allowEdit = allowEdit
+                allowEdit = allowEdit,
+                likesData = likesData
             )
         )
     }

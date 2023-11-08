@@ -56,6 +56,7 @@ fun NoteItem(
                 areaName = item.area.name,
                 areaIcon = Emoji.getIconById(item.area.emojiId!!),
                 likesData = item.likesData,
+                showLikes = !item.isPrivate,
                 onLikeClick = {
                     onLikeClick.invoke(item)
                 }
