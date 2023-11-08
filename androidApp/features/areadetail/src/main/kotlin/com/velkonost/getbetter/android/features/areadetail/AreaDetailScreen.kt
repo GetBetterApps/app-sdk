@@ -92,6 +92,9 @@ fun AreaDetailScreen(
                             },
                             onDescriptionChanged = {
                                 viewModel.dispatch(AreaDetailAction.DescriptionChanged(it))
+                            },
+                            onLikeClick = {
+                                viewModel.dispatch(AreaDetailAction.LikeClick)
                             }
                         )
                     }

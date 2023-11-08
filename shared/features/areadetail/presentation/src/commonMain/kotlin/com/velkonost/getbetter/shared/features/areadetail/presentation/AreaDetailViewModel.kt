@@ -2,6 +2,9 @@ package com.velkonost.getbetter.shared.features.areadetail.presentation
 
 import AreasRepository
 import com.velkonost.getbetter.shared.core.model.Emoji
+import com.velkonost.getbetter.shared.core.model.EntityType
+import com.velkonost.getbetter.shared.core.model.likes.LikeType
+import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
@@ -11,13 +14,18 @@ import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.
 import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.AreaDetailNavigation
 import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.AreaDetailViewState
 import com.velkonost.getbetter.shared.features.areadetail.presentation.model.toUI
+import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
+import kotlinx.coroutines.Job
 
 class AreaDetailViewModel
 internal constructor(
-    private val areasRepository: AreasRepository
+    private val areasRepository: AreasRepository,
+    private val likesRepository: LikesRepository
 ) : BaseViewModel<AreaDetailViewState, AreaDetailAction, AreaDetailNavigation, AreaDetailEvent>(
     initialState = AreaDetailViewState()
 ) {
+
+    private var likesJob: Job? = null
 
     override fun dispatch(action: AreaDetailAction) = when (action) {
         is AreaDetailAction.Load -> fetchArea(action.areaId)
@@ -30,6 +38,55 @@ internal constructor(
         is AreaDetailAction.LeaveClick -> obtainLeaveArea()
         is AreaDetailAction.JoinClick -> obtainJoinArea()
         is AreaDetailAction.CancelEdit -> obtainCancelEdit()
+        is AreaDetailAction.LikeClick -> obtainLikeClick()
+    }
+
+    private fun obtainLikeClick() {
+        if (likesJob?.isActive == true) return
+
+        launchJob {
+            val likeType = when (viewState.value.initialItem!!.likesData.userLike) {
+                LikeType.Positive -> LikeType.None
+                else -> LikeType.Positive
+            }
+            likesRepository.addLike(
+                entityType = EntityType.Note,
+                entityId = viewState.value.initialItem!!.id,
+                likeType = likeType
+            ) collectAndProcess {
+                isLoading {
+                    val itemLikesData =
+                        viewState.value.initialItem!!.likesData.copy(isLikesLoading = true)
+                    val initialItem = viewState.value.initialItem!!.copy(likesData = itemLikesData)
+                    val modifierItem =
+                        viewState.value.modifiedItem!!.copy(likesData = itemLikesData)
+                    emit(
+                        viewState.value.copy(
+                            initialItem = initialItem,
+                            modifiedItem = modifierItem
+                        )
+                    )
+                }
+                onSuccess { entityLikes ->
+                    entityLikes?.let {
+                        val itemLikesData = LikesData(
+                            totalLikes = it.total,
+                            userLike = it.userLikeType
+                        )
+                        val initialItem =
+                            viewState.value.initialItem!!.copy(likesData = itemLikesData)
+                        val modifierItem =
+                            viewState.value.modifiedItem!!.copy(likesData = itemLikesData)
+                        emit(
+                            viewState.value.copy(
+                                initialItem = initialItem,
+                                modifiedItem = modifierItem
+                            )
+                        )
+                    }
+                }
+            }
+        }
     }
 
     private fun fetchArea(areaId: Int) {

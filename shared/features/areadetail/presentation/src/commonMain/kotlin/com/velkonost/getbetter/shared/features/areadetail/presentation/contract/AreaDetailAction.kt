@@ -12,6 +12,8 @@ sealed interface AreaDetailAction : UIContract.Action {
 
     data class DescriptionChanged(val value: String) : AreaDetailAction
 
+    data object LikeClick : AreaDetailAction
+
     data object StartEdit : AreaDetailAction
 
     data object EndEdit : AreaDetailAction

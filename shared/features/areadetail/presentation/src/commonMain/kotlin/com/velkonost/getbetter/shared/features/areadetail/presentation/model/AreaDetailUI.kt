@@ -3,6 +3,7 @@ package com.velkonost.getbetter.shared.features.areadetail.presentation.model
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.area.TermsOfMembership
+import com.velkonost.getbetter.shared.core.model.likes.LikesData
 
 data class AreaDetailUI(
     val id: Int,
@@ -11,6 +12,8 @@ data class AreaDetailUI(
     val emoji: Emoji,
 //    val members: List<AreaMember>,
     var termsOfMembership: TermsOfMembership,
+
+    var likesData: LikesData
 )
 
 fun Area.toUI() =
@@ -20,5 +23,6 @@ fun Area.toUI() =
         description = description,
         emoji = Emoji.getById(emojiId!!),
 //        members = membersList,
-        termsOfMembership = userTermsOfMembership
+        termsOfMembership = userTermsOfMembership,
+        likesData = likesData
     )
