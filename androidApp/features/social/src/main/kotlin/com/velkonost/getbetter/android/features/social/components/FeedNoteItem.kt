@@ -47,6 +47,7 @@ fun FeedNoteItem(
     modifier: Modifier = Modifier,
     item: Note,
     onClick: (Note) -> Unit,
+    isLikeLoading: Boolean,
     onLikeClick: () -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
@@ -69,6 +70,7 @@ fun FeedNoteItem(
                 areaIcon = Emoji.getIconById(item.area.emojiId!!),
                 isLiked = item.userLike == LikeType.Positive,
                 likesAmount = item.totalLikes,
+                isLikeLoading = true,
                 onLikeClick = onLikeClick
             )
 

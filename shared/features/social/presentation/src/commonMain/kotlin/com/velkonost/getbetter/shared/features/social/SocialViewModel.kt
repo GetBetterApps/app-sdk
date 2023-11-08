@@ -1,10 +1,13 @@
 package com.velkonost.getbetter.shared.features.social
 
+import com.velkonost.getbetter.shared.core.model.EntityType
+import com.velkonost.getbetter.shared.core.model.LikeType
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.social.api.SocialRepository
 import com.velkonost.getbetter.shared.features.social.contracts.NavigateToNoteDetail
@@ -17,7 +20,8 @@ import kotlinx.coroutines.delay
 class SocialViewModel
 internal constructor(
     private val socialRepository: SocialRepository,
-    private val notesRepository: NotesRepository
+    private val notesRepository: NotesRepository,
+    private val likesRepository: LikesRepository
 ) : BaseViewModel<SocialViewState, SocialAction, SocialNavigation, Nothing>(
     initialState = SocialViewState()
 ) {
@@ -43,8 +47,82 @@ internal constructor(
         is SocialAction.GeneralFeedLoadNextPage -> fetchGeneralFeed()
         is SocialAction.AreasFeedLoadNextPage -> fetchAreasFeed()
         is SocialAction.NoteClick -> obtainNoteClick(action.value)
+        is SocialAction.NoteLikeClick -> obtainNoteClick(action.value)
         is SocialAction.RefreshGeneralFeed -> obtainRefreshGeneralFeed()
         is SocialAction.RefreshAreasFeed -> obtainRefreshAreasFeed()
+    }
+
+    private fun obtainNoteLikeClick(value: Note) {
+        launchJob {
+            val likeType = when (value.userLike) {
+                LikeType.Positive -> LikeType.None
+                else -> LikeType.Positive
+            }
+            likesRepository.addLike(
+                entityType = EntityType.Note,
+                entityId = value.id,
+                likeType = likeType
+            ) collectAndProcess {
+                isLoading {
+                    val generalFeedItems = viewState.value.generalFeed.items.toMutableList()
+                    generalFeedItems.firstOrNull { item ->
+                        item.id == value.id
+                    }?.isLikesLoading = it
+
+                    val areasFeedItems = viewState.value.areasFeed.items.toMutableList()
+                    areasFeedItems.firstOrNull { item ->
+                        item.id == value.id
+                    }?.isLikesLoading = it
+
+                    val generalFeedViewState = viewState.value.generalFeed.copy(
+                        items = generalFeedItems
+                    )
+                    val areasFeedViewState = viewState.value.areasFeed.copy(
+                        items = areasFeedItems
+                    )
+                    emit(
+                        viewState.value.copy(
+                            generalFeed = generalFeedViewState,
+                            areasFeed = areasFeedViewState
+                        )
+                    )
+
+                }
+                onSuccess { entityLikes ->
+                    entityLikes?.let {
+                        val generalFeedItems = viewState.value.generalFeed.items.toMutableList()
+                        val itemInGeneralFeed = generalFeedItems.firstOrNull { item ->
+                            item.id == value.id
+                        }
+                        itemInGeneralFeed?.totalLikes = it.total
+                        itemInGeneralFeed?.userLike = it.userLikeType
+
+                        val areasFeedItems = viewState.value.areasFeed.items.toMutableList()
+                        val itemInAreasFeed = areasFeedItems.firstOrNull { item ->
+                            item.id == value.id
+                        }
+                        itemInAreasFeed?.totalLikes = it.total
+                        itemInAreasFeed?.userLike = it.userLikeType
+
+                        val generalFeedViewState = viewState.value.generalFeed.copy(
+                            items = generalFeedItems
+                        )
+                        val areasFeedViewState = viewState.value.areasFeed.copy(
+                            items = areasFeedItems
+                        )
+                        emit(
+                            viewState.value.copy(
+                                generalFeed = generalFeedViewState,
+                                areasFeed = areasFeedViewState
+                            )
+                        )
+                    }
+
+                }
+            }
+        }
+
+
     }
 
     private fun obtainRefreshGeneralFeed() {

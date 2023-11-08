@@ -32,8 +32,9 @@ data class Note(
 
     val allowEdit: Boolean,
 
-    val totalLikes: Int,
-    val userLike: LikeType
+    var isLikesLoading: Boolean = false,
+    var totalLikes: Int,
+    var userLike: LikeType
 ) {
     val createdDateStr: StringDesc
         get() = createdDate.convertToLocalDatetime()
