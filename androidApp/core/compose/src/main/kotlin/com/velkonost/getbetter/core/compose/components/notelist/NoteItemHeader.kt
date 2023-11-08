@@ -2,15 +2,22 @@ package com.velkonost.getbetter.core.compose.components.notelist
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -23,8 +30,13 @@ fun NoteItemHeader(
     modifier: Modifier = Modifier,
     areaName: String,
     taskName: String? = null,
-    areaIcon: ImageResource
+    areaIcon: ImageResource,
+    onLikeClick: () -> Unit,
+    isLiked: Boolean,
+    likesAmount: Int
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
+
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -35,7 +47,9 @@ fun NoteItemHeader(
         )
 
         Column(
-            modifier = modifier.padding(start = 6.dp)
+            modifier = modifier
+                .padding(start = 6.dp)
+                .fillMaxSize(0.9f)
         ) {
             Text(
                 modifier = modifier.padding(bottom = 2.dp),
@@ -58,5 +72,34 @@ fun NoteItemHeader(
             }
 
         }
+
+        Spacer(modifier = modifier.weight(1f))
+        Column(
+            modifier = modifier.clickable(
+                interactionSource = interactionSource,
+                indication = null,
+                onClick = onLikeClick
+            ),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Image(
+                modifier = modifier
+                    .size(32.dp)
+                    .padding(2.dp),
+                painter = painterResource(
+                    imageResource = if (isLiked) SharedR.images.ic_heart
+                    else SharedR.images.ic_heart_empty
+                ),
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.button_gradient_start))
+            )
+            Text(
+                text = likesAmount.toString(),
+                color = colorResource(resource = SharedR.colors.text_primary),
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
+
     }
 }

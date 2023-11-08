@@ -45,7 +45,8 @@ import dev.icerock.moko.resources.compose.painterResource
 fun FeedNoteItem(
     modifier: Modifier = Modifier,
     item: Note,
-    onClick: (Note) -> Unit
+    onClick: (Note) -> Unit,
+    onLikeClick: () -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
     val context = LocalContext.current
@@ -64,7 +65,10 @@ fun FeedNoteItem(
         Column {
             NoteItemHeader(
                 areaName = item.area.name,
-                areaIcon = Emoji.getIconById(item.area.emojiId!!)
+                areaIcon = Emoji.getIconById(item.area.emojiId!!),
+                isLiked = item,
+                likesAmount =,
+                onLikeClick = onLikeClick
             )
 
             Column(

@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.core.model.note
 
+import com.velkonost.getbetter.shared.core.model.LikeType
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToLocalDatetime
@@ -29,7 +30,10 @@ data class Note(
     val subNotes: List<SubNote>,
     var area: Area,
 
-    val allowEdit: Boolean
+    val allowEdit: Boolean,
+
+    val totalLikes: Int,
+    val userLike: LikeType
 ) {
     val createdDateStr: StringDesc
         get() = createdDate.convertToLocalDatetime()

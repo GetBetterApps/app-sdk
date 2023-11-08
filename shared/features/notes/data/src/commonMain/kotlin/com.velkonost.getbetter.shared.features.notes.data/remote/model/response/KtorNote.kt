@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.notes.data.remote.model.response
 
+import com.velkonost.getbetter.shared.core.model.LikeType
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.note.NoteType
 import com.velkonost.getbetter.shared.features.areas.data.remote.model.response.KtorArea
@@ -57,7 +58,13 @@ data class KtorNote(
     val subNotes: List<KtorSubNote> = emptyList(),
 
     @SerialName("allowEdit")
-    val allowEdit: Boolean
+    val allowEdit: Boolean,
+
+    @SerialName("totalLikes")
+    val totalLikes: Int,
+
+    @SerialName("userLike")
+    val userLike: String
 )
 
 fun KtorNote.asExternalModel() =
@@ -77,5 +84,7 @@ fun KtorNote.asExternalModel() =
         isPrivate = isPrivate,
         subNotes = subNotes.asExternalModel(),
         area = ktorArea.asExternalModel(),
-        allowEdit = allowEdit
+        allowEdit = allowEdit,
+        totalLikes = totalLikes,
+        userLike = LikeType.entries.first { it.responseName == userLike }
     )
