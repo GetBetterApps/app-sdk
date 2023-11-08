@@ -14,12 +14,17 @@ struct NoteDetailHeader : View {
     
     let noteType: NoteType
     let isNotePrivate: Bool
+    let likesData: LikesData
+    
+    let onLikeClick: () -> Void
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    init(noteType: NoteType, isNotePrivate: Bool) {
+    init(noteType: NoteType, isNotePrivate: Bool, likesData: LikesData, onLikeClick: @escaping () -> Void) {
         self.noteType = noteType
         self.isNotePrivate = isNotePrivate
+        self.likesData = likesData
+        self.onLikeClick = onLikeClick
     }
     
     var body: some View {
@@ -61,6 +66,37 @@ struct NoteDetailHeader : View {
                         RoundedRectangle(cornerRadius: 8)
                             .fill(Color.backgroundIcon)
                     )
+            } else {
+                ZStack(alignment: .center) {
+                    if (!likesData.isLikesLoading) {
+                        VStack {
+                            Image(
+                                uiImage: likesData.userLike == LikeType.positive ? SharedR.images().ic_heart.toUIImage()! : SharedR.images().ic_heart_empty.toUIImage()!
+                            )
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.buttonGradientStart)
+                            .scaledToFill()
+                            .frame(width: 28, height: 28)
+                            
+                            Text(String(likesData.totalLikes))
+                                .style(.bodySmall)
+                                .foregroundColor(.textPrimary)
+                        }
+                        .onTapGesture {
+                            onLikeClick()
+                        }
+                    } else {
+                        HStack {
+                            Spacer()
+                            Loader()
+                                .scaleEffect(0.5)
+                            Spacer()
+                        }
+                    }
+                }
+                .frame(width: 32, height: 32)
+                .animation(.easeInOut, value: likesData.isLikesLoading)
             }
         }
     }

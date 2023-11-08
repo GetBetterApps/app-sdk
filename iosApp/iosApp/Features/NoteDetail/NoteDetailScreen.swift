@@ -44,7 +44,11 @@ struct NoteDetailScreen : View {
                         VStack {
                             NoteDetailHeader(
                                 noteType: state.noteType,
-                                isNotePrivate: state.isNotePrivate
+                                isNotePrivate: state.isNotePrivate,
+                                likesData: state.likesData,
+                                onLikeClick: {
+                                    viewModel.dispatch(action: NoteDetailActionLikeClick())
+                                }
                             )
                             
                             if !state.allowEdit {

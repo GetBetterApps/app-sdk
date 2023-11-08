@@ -31,6 +31,7 @@ struct NoteItem: View {
                     areaName: item.area.name,
                     taskName: nil,
                     areaIcon: Emoji.companion.getIconById(id: Int32(truncating: item.area.emojiId!)).toUIImage()!,
+                    showLikes: !item.isPrivate,
                     likesData: item.likesData,
                     onLikeClick: {
                         onLikeClick(item)

@@ -15,13 +15,15 @@ struct NoteItemHeader: View {
     let areaName: String
     let taskName: String?
     let areaIcon: UIImage
+    let showLikes: Bool
     let likesData: LikesData
     let onLikeClick: () -> Void
     
-    init(areaName: String, taskName: String? = nil, areaIcon: UIImage, likesData: LikesData, onLikeClick: @escaping () -> Void) {
+    init(areaName: String, taskName: String? = nil, areaIcon: UIImage, showLikes: Bool = true, likesData: LikesData, onLikeClick: @escaping () -> Void) {
         self.areaName = areaName
         self.taskName = taskName
         self.areaIcon = areaIcon
+        self.showLikes = showLikes
         self.likesData = likesData
         self.onLikeClick = onLikeClick
     }
@@ -60,36 +62,38 @@ struct NoteItemHeader: View {
             
             Spacer()
             
-            ZStack(alignment: .center) {
-                if (!likesData.isLikesLoading) {
-                    VStack {
-                        Image(
-                            uiImage: likesData.userLike == LikeType.positive ? SharedR.images().ic_heart.toUIImage()! : SharedR.images().ic_heart_empty.toUIImage()!
-                        )
-                        .resizable()
-                        .renderingMode(.template)
-                        .foregroundColor(.buttonGradientStart)
-                        .scaledToFill()
-                        .frame(width: 24, height: 24)
-                        
-                        Text(String(likesData.totalLikes))
-                            .style(.bodySmall)
-                            .foregroundColor(.textPrimary)
-                    }
-                    .onTapGesture {
-                        onLikeClick()
-                    }
-                } else {
-                    HStack {
-                        Spacer()
-                        Loader()
-                            .scaleEffect(0.5)
-                        Spacer()
+            if showLikes {
+                ZStack(alignment: .center) {
+                    if (!likesData.isLikesLoading) {
+                        VStack {
+                            Image(
+                                uiImage: likesData.userLike == LikeType.positive ? SharedR.images().ic_heart.toUIImage()! : SharedR.images().ic_heart_empty.toUIImage()!
+                            )
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.buttonGradientStart)
+                            .scaledToFill()
+                            .frame(width: 24, height: 24)
+                            
+                            Text(String(likesData.totalLikes))
+                                .style(.bodySmall)
+                                .foregroundColor(.textPrimary)
+                        }
+                        .onTapGesture {
+                            onLikeClick()
+                        }
+                    } else {
+                        HStack {
+                            Spacer()
+                            Loader()
+                                .scaleEffect(0.5)
+                            Spacer()
+                        }
                     }
                 }
+                .frame(width: 32, height: 32)
+                .animation(.easeInOut, value: likesData.isLikesLoading)
             }
-            .frame(width: 32, height: 32)
-            .animation(.easeInOut, value: likesData.isLikesLoading)
         }
     }
 }
