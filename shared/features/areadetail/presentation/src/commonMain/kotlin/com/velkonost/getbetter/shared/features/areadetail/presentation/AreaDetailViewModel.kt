@@ -50,7 +50,7 @@ internal constructor(
                 else -> LikeType.Positive
             }
             likesRepository.addLike(
-                entityType = EntityType.Note,
+                entityType = EntityType.Area,
                 entityId = viewState.value.initialItem!!.id,
                 likeType = likeType
             ) collectAndProcess {
