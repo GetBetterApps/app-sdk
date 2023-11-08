@@ -15,18 +15,21 @@ struct AreasView: View {
     let items: [Area]
     let isLoading: Bool
     let areaClick: (Int32) -> Void
+    let areaLikeClick: (Area) -> Void
     let createNewAreaClick: () -> Void
     let addExistingAreaClick: () -> Void
     
     init(
         items: [Area], isLoading: Bool,
         areaClick: @escaping (Int32) -> Void,
+        areaLikeClick: @escaping (Area) -> Void,
         createNewAreaClick: @escaping () -> Void,
         addExistingAreaClick: @escaping () -> Void
     ) {
         self.items = items
         self.isLoading = isLoading
         self.areaClick = areaClick
+        self.areaLikeClick = areaLikeClick
         self.createNewAreaClick = createNewAreaClick
         self.addExistingAreaClick = addExistingAreaClick
     }
@@ -42,9 +45,11 @@ struct AreasView: View {
                 ScrollView(showsIndicators: false) {
                     LazyVStack(spacing: 0) {
                         ForEach(items, id: \.self) { item in
-                            AreaItem(item: item) { areaId in
-                                areaClick(areaId)
-                            }
+                            AreaItem(
+                                item: item,
+                                onClick: areaClick,
+                                onLikeClick: areaLikeClick
+                            )
                         }
                     }
                     .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))

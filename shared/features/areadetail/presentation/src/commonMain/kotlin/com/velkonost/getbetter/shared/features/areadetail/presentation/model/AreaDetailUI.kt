@@ -10,7 +10,7 @@ data class AreaDetailUI(
     var name: String,
     val description: String,
     val emoji: Emoji,
-//    val members: List<AreaMember>,
+    val isPrivate: Boolean,
     var termsOfMembership: TermsOfMembership,
 
     var likesData: LikesData
@@ -22,7 +22,7 @@ fun Area.toUI() =
         name = name,
         description = description,
         emoji = Emoji.getById(emojiId!!),
-//        members = membersList,
+        isPrivate = isPrivate,
         termsOfMembership = userTermsOfMembership,
         likesData = likesData
     )

@@ -78,6 +78,9 @@ struct DiaryScreen: View {
                     selectedAreaId = areaId
                     showingAreaDetailSheet = true
                 },
+                areaLikeClick: { value in
+                    viewModel.dispatch(action: AreaLikeClick(value: value))
+                },
                 createNewAreaClick: {
                     viewModel.dispatch(action: CreateNewAreaActionOpen())
                     showingCreateNewAreaSheet = true

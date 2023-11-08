@@ -66,6 +66,9 @@ struct AreaDetailScreen: View {
                         },
                         onDescriptionChanged: { value in
                             viewModel.dispatch(action: AreaDetailActionDescriptionChanged(value: value))
+                        },
+                        onLikeClick: {
+                            viewModel.dispatch(action: AreaDetailActionLikeClick())
                         }
                     )
                     

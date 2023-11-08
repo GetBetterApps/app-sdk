@@ -14,10 +14,12 @@ struct AreaItem: View {
     
     let item: Area
     let onClick: (Int32) -> Void
+    let onLikeClick: (Area) -> Void
     
-    init(item: Area, onClick: @escaping (Int32) -> Void) {
+    init(item: Area, onClick: @escaping (Int32) -> Void, onLikeClick: @escaping (Area) -> Void) {
         self.item = item
         self.onClick = onClick
+        self.onLikeClick = onLikeClick
     }
     
     var body: some View {
@@ -68,6 +70,37 @@ struct AreaItem: View {
                             )
                         Spacer()
                     }
+                } else {
+                    ZStack(alignment: .center) {
+                        if (!item.likesData.isLikesLoading) {
+                            VStack {
+                                Image(
+                                    uiImage: item.likesData.userLike == LikeType.positive ? SharedR.images().ic_heart.toUIImage()! : SharedR.images().ic_heart_empty.toUIImage()!
+                                )
+                                .resizable()
+                                .renderingMode(.template)
+                                .foregroundColor(.buttonGradientStart)
+                                .scaledToFill()
+                                .frame(width: 24, height: 24)
+                                
+                                Text(String(item.likesData.totalLikes))
+                                    .style(.bodySmall)
+                                    .foregroundColor(.textPrimary)
+                            }
+                            .onTapGesture {
+                                onLikeClick(item)
+                            }
+                        } else {
+                            HStack {
+                                Spacer()
+                                Loader()
+                                    .scaleEffect(0.5)
+                                Spacer()
+                            }
+                        }
+                    }
+                    .frame(width: 32, height: 32)
+                    .animation(.easeInOut, value: item.likesData.isLikesLoading)
                 }
                 
             }.frame(minWidth: 0, maxWidth: .infinity)

@@ -19,33 +19,72 @@ struct AreaDetailContent: View {
     let onEmojiClick: (Emoji) -> Void
     let onNameChanged: (String) -> Void
     let onDescriptionChanged: (String) -> Void
+    let onLikeClick: () -> Void
     
-    init(areaData: AreaDetailUI, isEditing: Bool, isEmojiPickerVisible: Binding<Bool>, onEmojiClick: @escaping (Emoji) -> Void, onNameChanged: @escaping (String) -> Void, onDescriptionChanged: @escaping (String) -> Void) {
+    init(areaData: AreaDetailUI, isEditing: Bool, isEmojiPickerVisible: Binding<Bool>, onEmojiClick: @escaping (Emoji) -> Void, onNameChanged: @escaping (String) -> Void, onDescriptionChanged: @escaping (String) -> Void, onLikeClick: @escaping () -> Void) {
         self.areaData = areaData
         self.isEditing = isEditing
         self._isEmojiPickerVisible = isEmojiPickerVisible
         self.onEmojiClick = onEmojiClick
         self.onNameChanged = onNameChanged
         self.onDescriptionChanged = onDescriptionChanged
+        self.onLikeClick = onLikeClick
     }
     
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
-                HStack {
-                    Spacer()
-                    SelectedEmojiImage(
-                        selectedEmoji: areaData.emoji.icon.toUIImage()!,
-                        imageSize: 96,
-                        onClick: {
-                            if isEditing {
-                                withAnimation {
-                                    isEmojiPickerVisible.toggle()
+                
+                ZStack {
+                    HStack {
+                        Spacer()
+                        SelectedEmojiImage(
+                            selectedEmoji: areaData.emoji.icon.toUIImage()!,
+                            imageSize: 96,
+                            onClick: {
+                                if isEditing {
+                                    withAnimation {
+                                        isEmojiPickerVisible.toggle()
+                                    }
+                                }
+                            }
+                        )
+                        Spacer()
+                    }
+                    
+                    HStack {
+                        Spacer()
+                        ZStack(alignment: .center) {
+                            if (!areaData.likesData.isLikesLoading) {
+                                VStack {
+                                    Image(
+                                        uiImage: areaData.likesData.userLike == LikeType.positive ? SharedR.images().ic_heart.toUIImage()! : SharedR.images().ic_heart_empty.toUIImage()!
+                                    )
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .foregroundColor(.buttonGradientStart)
+                                    .scaledToFill()
+                                    .frame(width: 24, height: 24)
+                                    
+                                    Text(String(areaData.likesData.totalLikes))
+                                        .style(.bodySmall)
+                                        .foregroundColor(.textPrimary)
+                                }
+                                .onTapGesture {
+                                    onLikeClick()
+                                }
+                            } else {
+                                HStack {
+                                    Spacer()
+                                    Loader()
+                                        .scaleEffect(0.5)
+                                    Spacer()
                                 }
                             }
                         }
-                    )
-                    Spacer()
+                        .frame(width: 32, height: 32)
+                        .animation(.easeInOut, value: areaData.likesData.isLikesLoading)
+                    }
                 }
                 
                 EmojiPicker(
