@@ -2,6 +2,9 @@ package com.velkonost.getbetter.shared.features.diary
 
 import AreasRepository
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+import com.velkonost.getbetter.shared.core.model.EntityType
+import com.velkonost.getbetter.shared.core.model.likes.LikeType
+import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
@@ -18,6 +21,8 @@ import com.velkonost.getbetter.shared.features.diary.contracts.DiaryViewState
 import com.velkonost.getbetter.shared.features.diary.contracts.NavigateToAddArea
 import com.velkonost.getbetter.shared.features.diary.contracts.NavigateToNoteDetail
 import com.velkonost.getbetter.shared.features.diary.contracts.NoteClick
+import com.velkonost.getbetter.shared.features.diary.contracts.NoteLikeClick
+import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,13 +32,16 @@ class DiaryViewModel
 internal constructor(
     private val areasRepository: AreasRepository,
     private val notesRepository: NotesRepository,
-    private val diaryRepository: DiaryRepository
+    private val diaryRepository: DiaryRepository,
+    private val likesRepository: LikesRepository
 ) : BaseViewModel<DiaryViewState, DiaryAction, DiaryNavigation, DiaryEvent>(
     initialState = DiaryViewState()
 ) {
 
     private val _notesPagingConfig = PagingConfig()
     private var notesLoadingJob: Job? = null
+
+    private val likesJobsMap: HashMap<Int, Job> = hashMapOf()
 
     fun refreshData() {
         fetchAreas()
@@ -88,7 +96,67 @@ internal constructor(
         is CreateNewNoteAction -> dispatchCreateNewNoteAction(action)
         is AddAreaClick -> emit(NavigateToAddArea)
         is NoteClick -> obtainNoteClick(action.value)
+        is NoteLikeClick -> obtainNoteLikeClick(action.value)
         is DiaryAction.NotesLoadNextPage -> fetchNotes()
+    }
+
+    private fun obtainNoteLikeClick(value: Note) {
+        if (likesJobsMap.containsKey(value.id)) return
+
+        launchJob {
+            val likeType = when (value.likesData.userLike) {
+                LikeType.Positive -> LikeType.None
+                else -> LikeType.Positive
+            }
+
+            likesRepository.addLike(
+                entityType = EntityType.Note,
+                entityId = value.id,
+                likeType = likeType
+            ) collectAndProcess {
+                isLoading {
+                    val itemLikesData = value.likesData.copy(isLikesLoading = true)
+
+                    val indexOfChangedItem =
+                        viewState.value.notesViewState.items.indexOfFirst { item -> item.id == value.id }
+
+                    val allItems = viewState.value.notesViewState.items.toMutableList()
+
+                    if (indexOfChangedItem != -1) {
+                        allItems[indexOfChangedItem] = value.copy(likesData = itemLikesData)
+                    }
+
+                    val notesViewState = viewState.value.notesViewState.copy(items = allItems)
+                    emit(viewState.value.copy(notesViewState = notesViewState))
+                }
+                onSuccess { entityLikes ->
+                    entityLikes?.let {
+                        val itemLikesData =
+                            LikesData(
+                                totalLikes = it.total,
+                                userLike = it.userLikeType
+                            )
+
+                        val indexOfChangedItem =
+                            viewState.value.notesViewState.items.indexOfFirst { item -> item.id == value.id }
+
+                        val allItems = viewState.value.notesViewState.items.toMutableList()
+
+                        if (indexOfChangedItem != -1) {
+                            allItems[indexOfChangedItem] = value.copy(likesData = itemLikesData)
+                        }
+
+                        val notesViewState =
+                            viewState.value.notesViewState.copy(items = allItems)
+                        emit(viewState.value.copy(notesViewState = notesViewState))
+                    }
+                }
+            }
+        }.also {
+            likesJobsMap[value.id] = it
+        }.invokeOnCompletion {
+            likesJobsMap.remove(value.id)
+        }
     }
 
     private fun refreshNotesState() {

@@ -35,7 +35,7 @@ fun NoteItem(
     modifier: Modifier = Modifier,
     item: Note,
     onClick: (Note) -> Unit,
-    onLikeClick: () -> Unit
+    onLikeClick: (Note) -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
     val context = LocalContext.current
@@ -56,7 +56,9 @@ fun NoteItem(
                 areaName = item.area.name,
                 areaIcon = Emoji.getIconById(item.area.emojiId!!),
                 likesData = item.likesData,
-                onLikeClick = onLikeClick
+                onLikeClick = {
+                    onLikeClick.invoke(item)
+                }
             )
 
             Column(

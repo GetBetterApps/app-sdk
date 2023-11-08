@@ -46,9 +46,7 @@ fun NotesView(
                     NoteItem(
                         item = item,
                         onClick = itemClick,
-                        onLikeClick = {
-                            itemLikeClick.invoke(item)
-                        }
+                        onLikeClick = itemLikeClick
                     )
                 }
 
