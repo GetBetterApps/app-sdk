@@ -3,6 +3,7 @@ package com.velkonost.getbetter.shared.core.model.note
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToLocalDatetime
+import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -30,13 +31,13 @@ data class Note(
 
     val allowEdit: Boolean
 ) {
-    val createdDateStr: String
+    val createdDateStr: StringDesc
         get() = createdDate.convertToLocalDatetime()
 
-    val completionDateStr: String?
+    val completionDateStr: StringDesc?
         get() = completionDate?.convertToLocalDatetime()
 
-    val expectedCompletionDateStr: String?
+    val expectedCompletionDateStr: StringDesc?
         get() = expectedCompletionDate?.convertToLocalDatetime()
 
 }

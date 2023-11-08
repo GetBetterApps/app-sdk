@@ -236,4 +236,13 @@
     <string name="error_715">This note doesn\'t contain such sub goal</string>
     <string name="error_716">You can\'t get details because note is private</string>
     <!--  SERVER EXCEPTIONS  -->
+
+    <!--  DATE FORMATTER  -->
+    <string name="date_just_now">Just now</string>
+    <string name="date_one_min">1 min ago</string>
+    <string name="date_minutes">%s minutes ago</string>
+    <string name="date_one_hour">1 hour ago</string>
+    <string name="date_hours">%s hours ago</string>
+    <string name="date_yesterday">Yesterday at %s</string>
+    <string name="date_same_year">%s</string>
 </resources>

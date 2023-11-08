@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.areadetail.AreaDetailScreen
@@ -48,6 +49,7 @@ fun NoteDetailScreen(
 ) {
 
     val state by viewModel.viewState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val isSubNotesBlockVisible = remember { mutableStateOf(true) }
 
@@ -124,9 +126,9 @@ fun NoteDetailScreen(
                             enabled = state.noteState == NoteState.Editing,
                             isLoading = state.isCompleteGoalLoading,
                             initialValue = state.expectedCompletionDate,
-                            initialValueStr = state.expectedCompletionDateStr,
+                            initialValueStr = state.expectedCompletionDateStr?.toString(context),
                             isCompleteVisible = state.allowEdit,
-                            completionDateStr = state.completionDateStr,
+                            completionDateStr = state.completionDateStr?.toString(context),
                             onSetCompletionDate = {
                                 viewModel.dispatch(NoteDetailAction.SetCompletionDate(it))
                             },

@@ -3,6 +3,7 @@ package com.velkonost.getbetter.shared.core.model.ui
 import com.velkonost.getbetter.shared.core.model.note.SubNote
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToLocalDatetime
 import com.velkonost.getbetter.shared.core.util.randomUUID
+import dev.icerock.moko.resources.desc.StringDesc
 
 data class SubNoteUI(
     val id: String = randomUUID(),
@@ -10,10 +11,10 @@ data class SubNoteUI(
     val completionDate: Long? = null,
     val expectedCompletionDate: Long? = null
 ) {
-    val completionDateStr: String?
+    val completionDateStr: StringDesc?
         get() = completionDate?.convertToLocalDatetime()
 
-    val expectedCompletionDateStr: String?
+    val expectedCompletionDateStr: StringDesc?
         get() = expectedCompletionDate?.convertToLocalDatetime()
 }
 

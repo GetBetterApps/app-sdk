@@ -89,9 +89,9 @@ struct NoteDetailScreen : View {
                                     enabled: state.noteState == NoteState.editing,
                                     isLoading: state.isCompleteGoalLoading,
                                     initialValue: state.expectedCompletionDate as? Int64,
-                                    initialValueStr: state.expectedCompletionDateStr,
+                                    initialValueStr: state.expectedCompletionDateStr.localized(),
                                     isCompleteVisible: state.allowEdit,
-                                    completionDateStr: state.completionDateStr,
+                                    completionDateStr: state.completionDateStr.localized(),
                                     onSetCompletionDate: { value in
                                         viewModel.dispatch(action: NoteDetailActionSetCompletionDate(value: KotlinLong(value: value!)))
                                     },

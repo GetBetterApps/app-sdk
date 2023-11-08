@@ -8,6 +8,7 @@ import com.velkonost.getbetter.shared.core.model.ui.TagUI
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToLocalDatetime
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
+import dev.icerock.moko.resources.desc.StringDesc
 
 data class NoteDetailViewState(
     val isLoading: Boolean = false,
@@ -30,8 +31,8 @@ data class NoteDetailViewState(
     val expectedCompletionDate: Long? = null,
     val completionDate: Long? = null,
 
-    val expectedCompletionDateStr: String? = expectedCompletionDate?.convertToLocalDatetime(),
-    val completionDateStr: String? = completionDate?.convertToLocalDatetime(),
+    val expectedCompletionDateStr: StringDesc? = expectedCompletionDate?.convertToLocalDatetime(),
+    val completionDateStr: StringDesc? = completionDate?.convertToLocalDatetime(),
 
     val area: Area? = null,
     val authorLoading: Boolean = true,

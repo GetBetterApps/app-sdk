@@ -48,6 +48,7 @@ fun FeedNoteItem(
     onClick: (Note) -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
+    val context = LocalContext.current
 
     PrimaryBox(
         modifier = modifier
@@ -80,9 +81,9 @@ fun FeedNoteItem(
                 NoteItemData(
                     noteType = item.noteType,
                     subNotes = item.subNotes,
-                    expectedCompletionDate = item.expectedCompletionDateStr,
+                    expectedCompletionDate = item.expectedCompletionDateStr?.toString(context),
                     expectedCompletionDateExpired = item.expectedCompletionDateExpired,
-                    completionDate = item.completionDateStr,
+                    completionDate = item.completionDateStr?.toString(context),
                     mediaAmount = item.mediaUrls.size,
                     isPrivate = item.isPrivate
                 )
@@ -153,7 +154,7 @@ fun FeedNoteItem(
                 Spacer(modifier.weight(1f))
 
                 Text(
-                    text = item.createdDateStr,
+                    text = item.createdDateStr.toString(context),
                     style = MaterialTheme.typography.bodySmall,
                     color = colorResource(resource = SharedR.colors.text_primary)
                 )

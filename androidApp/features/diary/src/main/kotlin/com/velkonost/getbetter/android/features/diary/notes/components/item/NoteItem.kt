@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -36,6 +37,7 @@ fun NoteItem(
     onClick: (Note) -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
+    val context = LocalContext.current
 
     PrimaryBox(
         modifier = modifier
@@ -68,9 +70,9 @@ fun NoteItem(
                 NoteItemData(
                     noteType = item.noteType,
                     subNotes = item.subNotes,
-                    expectedCompletionDate = item.expectedCompletionDateStr,
+                    expectedCompletionDate = item.expectedCompletionDateStr?.toString(context),
                     expectedCompletionDateExpired = item.expectedCompletionDateExpired,
-                    completionDate = item.completionDateStr,
+                    completionDate = item.completionDateStr?.toString(context),
                     mediaAmount = item.mediaUrls.size,
                     isPrivate = item.isPrivate
                 )

@@ -1,5 +1,9 @@
 package com.velkonost.getbetter.shared.core.util
 
+import com.velkonost.getbetter.shared.resources.SharedR
+import dev.icerock.moko.resources.desc.Resource
+import dev.icerock.moko.resources.desc.ResourceFormatted
+import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
@@ -33,7 +37,7 @@ object DatetimeFormatter {
         return serverDatetime.toInstant(UtcOffset.ZERO).toEpochMilliseconds()
     }
 
-    fun Long.convertToLocalDatetime(): String {
+    fun Long.convertToLocalDatetime(): StringDesc {
         val requestedTime = Instant.fromEpochMilliseconds(this)
             .toLocalDateTime(TimeZone.currentSystemDefault())
         val requestedMillis = requestedTime.toInstant(UtcOffset.ZERO).toEpochMilliseconds()
@@ -43,27 +47,54 @@ object DatetimeFormatter {
 
         val diff = nowMillis - requestedMillis
 
-        if (diff < MINUTE_MILLIS) {
-            return "Just now"
-        } else if (diff < 2 * MINUTE_MILLIS) {
-            return "1 min"
-        } else if (diff < 59 * MINUTE_MILLIS) {
-            return "${diff / MINUTE_MILLIS} mins"
-        } else if (diff < 2 * HOUR_MILLIS) {
-            return "1 hr"
-        } else if (diff < 24 * HOUR_MILLIS) {
-            return "${diff / HOUR_MILLIS} hrs"
-        } else if (diff < 48 * HOUR_MILLIS) {
-            return ("Yesterday at " + requestedTime.format("HH:mm"))
-        } else if (requestedTime.year == nowDatetime.year) {
-            return requestedTime.format("dd.MM")
-        } else {
-            return requestedTime.format("dd.MM.yyyy")
-        }
+        return when {
+            diff < MINUTE_MILLIS -> {
+                StringDesc.Resource(SharedR.strings.date_just_now)
+            }
 
-//        return Instant.fromEpochMilliseconds(this)
-//            .toLocalDateTime(TimeZone.currentSystemDefault())
-//            .format("dd.MM.yyyy HH:mm")
+            diff < 2 * MINUTE_MILLIS -> {
+                StringDesc.Resource(SharedR.strings.date_one_min)
+            }
+
+            diff < 59 * MINUTE_MILLIS -> {
+                StringDesc.ResourceFormatted(
+                    SharedR.strings.date_minutes,
+                    "${diff / MINUTE_MILLIS}"
+                )
+            }
+
+            diff < 2 * HOUR_MILLIS -> {
+                StringDesc.Resource(SharedR.strings.date_one_hour)
+            }
+
+            diff < 24 * HOUR_MILLIS -> {
+                StringDesc.ResourceFormatted(
+                    SharedR.strings.date_hours,
+                    "${diff / HOUR_MILLIS}"
+                )
+            }
+
+            diff < 48 * HOUR_MILLIS -> {
+                StringDesc.ResourceFormatted(
+                    SharedR.strings.date_yesterday,
+                    requestedTime.format("HH:mm")
+                )
+            }
+
+            requestedTime.year == nowDatetime.year -> {
+                StringDesc.ResourceFormatted(
+                    SharedR.strings.date_same_year,
+                    requestedTime.format("dd.MM")
+                )
+            }
+
+            else -> {
+                StringDesc.ResourceFormatted(
+                    SharedR.strings.date_same_year,
+                    requestedTime.format("dd.MM.yyyy")
+                )
+            }
+        }
     }
 
     fun Long.isPast(): Boolean {

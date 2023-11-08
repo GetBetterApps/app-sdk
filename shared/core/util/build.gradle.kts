@@ -27,6 +27,7 @@ kotlin {
                 api(libs.kermit.log)
 
                 implementation(projects.shared.core.network)
+                implementation(projects.shared.resources)
             }
         }
     }

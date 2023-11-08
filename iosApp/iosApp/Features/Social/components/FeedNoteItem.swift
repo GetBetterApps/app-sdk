@@ -35,8 +35,8 @@ struct FeedNoteItem: View {
                     
                     NoteItemData(
                         noteType: item.noteType,
-                        completionDate: item.completionDateStr,
-                        expectedCompletionDate: item.expectedCompletionDateStr,
+                        completionDate: item.completionDateStr.localized(),
+                        expectedCompletionDate: item.expectedCompletionDateStr.localized(),
                         expectedCompletionDateExpired: item.expectedCompletionDateExpired,
                         subNotes: item.subNotes,
                         mediaAmount: item.mediaUrls.count,
@@ -90,7 +90,7 @@ struct FeedNoteItem: View {
                     
                     Spacer()
                     
-                    Text(item.createdDateStr)
+                    Text(item.createdDateStr.localized())
                         .style(.bodySmall)
                         .foregroundColor(.textPrimary)
                 }
