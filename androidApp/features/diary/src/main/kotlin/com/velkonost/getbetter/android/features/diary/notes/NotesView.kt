@@ -26,6 +26,7 @@ fun NotesView(
     createGoalClick: () -> Unit,
     createNoteClick: () -> Unit,
     itemClick: (Note) -> Unit,
+    itemLikeClick: (Note) -> Unit,
     onBottomReach: () -> Unit
 ) {
     val listState = rememberLazyListState()
@@ -44,7 +45,10 @@ fun NotesView(
                 items(items) { item ->
                     NoteItem(
                         item = item,
-                        onClick = itemClick
+                        onClick = itemClick,
+                        onLikeClick = {
+                            itemLikeClick.invoke(item)
+                        }
                     )
                 }
 

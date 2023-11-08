@@ -100,6 +100,9 @@ fun DiaryScreen(
                 noteClick = {
                     viewModel.dispatch(NoteClick(it))
                 },
+                noteLikeClick = {
+
+                },
                 areaClick = {
                     scope.launch {
                         selectedAreaId.value = it
@@ -265,6 +268,7 @@ fun DiaryScreenContent(
     areasState: AreasViewState,
     tasksState: TasksViewState,
     noteClick: (Note) -> Unit,
+    noteLikeClick: (Note) -> Unit,
     areaClick: (Int) -> Unit,
     createNewAreaClick: () -> Unit,
     addExistingAreaClick: () -> Unit,
@@ -285,6 +289,7 @@ fun DiaryScreenContent(
                 createGoalClick = createGoalClick,
                 createNoteClick = createNoteClick,
                 itemClick = noteClick,
+                itemLikeClick = noteLikeClick,
                 onBottomReach = notesLoadNextPage
             )
 
