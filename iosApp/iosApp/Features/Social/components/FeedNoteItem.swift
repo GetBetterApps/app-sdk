@@ -35,8 +35,8 @@ struct FeedNoteItem: View {
                     
                     NoteItemData(
                         noteType: item.noteType,
-                        completionDate: item.completionDateStr.localized(),
-                        expectedCompletionDate: item.expectedCompletionDateStr.localized(),
+                        completionDate: item.completionDateStr?.localized(),
+                        expectedCompletionDate: item.expectedCompletionDateStr?.localized(),
                         expectedCompletionDateExpired: item.expectedCompletionDateExpired,
                         subNotes: item.subNotes,
                         mediaAmount: item.mediaUrls.count,
