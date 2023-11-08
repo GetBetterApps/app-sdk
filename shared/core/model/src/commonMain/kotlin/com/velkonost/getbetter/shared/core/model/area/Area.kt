@@ -1,6 +1,6 @@
 package com.velkonost.getbetter.shared.core.model.area
 
-import com.velkonost.getbetter.shared.core.model.LikeType
+import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import kotlinx.serialization.Serializable
 
 @Serializable

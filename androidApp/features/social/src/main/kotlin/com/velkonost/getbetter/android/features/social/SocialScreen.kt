@@ -148,8 +148,8 @@ fun SocialScreenContent(
                 isLoading = areasFeedState.isLoading,
                 isRefreshing = areasFeedState.isRefreshing,
                 items = areasFeedState.items,
-                itemLikeClick = noteLikeClick,
                 itemClick = noteClick,
+                itemLikeClick = noteLikeClick,
                 onBottomReach = areasFeedLoadNextPage,
                 onRefresh = onRefreshAreasFeed
             )
@@ -191,9 +191,7 @@ fun SocialFeedView(
                     FeedNoteItem(
                         item = item,
                         onClick = itemClick,
-                        onLikeClick = {
-                            itemLikeClick.invoke(item)
-                        }
+                        onLikeClick = itemLikeClick
                     )
                 }
 

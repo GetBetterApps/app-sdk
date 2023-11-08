@@ -1,7 +1,7 @@
 package com.velkonost.getbetter.shared.core.model.note
 
-import com.velkonost.getbetter.shared.core.model.LikeType
 import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToLocalDatetime
 import dev.icerock.moko.resources.desc.StringDesc
@@ -32,9 +32,7 @@ data class Note(
 
     val allowEdit: Boolean,
 
-    var isLikesLoading: Boolean = false,
-    var totalLikes: Int,
-    var userLike: LikeType
+    var likesData: LikesData
 ) {
     val createdDateStr: StringDesc
         get() = createdDate.convertToLocalDatetime()

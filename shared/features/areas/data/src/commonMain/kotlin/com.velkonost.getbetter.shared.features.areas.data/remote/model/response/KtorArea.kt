@@ -1,8 +1,8 @@
 package com.velkonost.getbetter.shared.features.areas.data.remote.model.response
 
-import com.velkonost.getbetter.shared.core.model.LikeType
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.area.TermsOfMembership
+import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

@@ -24,7 +24,6 @@ import com.velkonost.getbetter.core.compose.components.note.tags.TagItem
 import com.velkonost.getbetter.core.compose.components.notelist.NoteItemData
 import com.velkonost.getbetter.core.compose.components.notelist.NoteItemHeader
 import com.velkonost.getbetter.shared.core.model.Emoji
-import com.velkonost.getbetter.shared.core.model.LikeType
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -56,9 +55,7 @@ fun NoteItem(
             NoteItemHeader(
                 areaName = item.area.name,
                 areaIcon = Emoji.getIconById(item.area.emojiId!!),
-                isLikeLoading = item.isLikesLoading,
-                isLiked = item.userLike == LikeType.Positive,
-                likesAmount = item.totalLikes,
+                likesData = item.likesData,
                 onLikeClick = onLikeClick
             )
 

@@ -1,7 +1,8 @@
 package com.velkonost.getbetter.shared.features.social
 
 import com.velkonost.getbetter.shared.core.model.EntityType
-import com.velkonost.getbetter.shared.core.model.LikeType
+import com.velkonost.getbetter.shared.core.model.likes.LikeType
+import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
@@ -32,6 +33,8 @@ internal constructor(
     private var generalFeedLoadingJob: Job? = null
     private var areasFeedLoadingJob: Job? = null
 
+    private val likesJobsMap: HashMap<Int, Job> = hashMapOf()
+
     fun onAppear() {
         checkUpdatedNote()
 
@@ -47,14 +50,16 @@ internal constructor(
         is SocialAction.GeneralFeedLoadNextPage -> fetchGeneralFeed()
         is SocialAction.AreasFeedLoadNextPage -> fetchAreasFeed()
         is SocialAction.NoteClick -> obtainNoteClick(action.value)
-        is SocialAction.NoteLikeClick -> obtainNoteClick(action.value)
+        is SocialAction.NoteLikeClick -> obtainNoteLikeClick(action.value)
         is SocialAction.RefreshGeneralFeed -> obtainRefreshGeneralFeed()
         is SocialAction.RefreshAreasFeed -> obtainRefreshAreasFeed()
     }
 
     private fun obtainNoteLikeClick(value: Note) {
+        if (likesJobsMap.containsKey(value.id)) return
+
         launchJob {
-            val likeType = when (value.userLike) {
+            val likeType = when (value.likesData.userLike) {
                 LikeType.Positive -> LikeType.None
                 else -> LikeType.Positive
             }
@@ -64,22 +69,41 @@ internal constructor(
                 likeType = likeType
             ) collectAndProcess {
                 isLoading {
-                    val generalFeedItems = viewState.value.generalFeed.items.toMutableList()
-                    generalFeedItems.firstOrNull { item ->
-                        item.id == value.id
-                    }?.isLikesLoading = it
-
-                    val areasFeedItems = viewState.value.areasFeed.items.toMutableList()
-                    areasFeedItems.firstOrNull { item ->
-                        item.id == value.id
-                    }?.isLikesLoading = it
-
-                    val generalFeedViewState = viewState.value.generalFeed.copy(
-                        items = generalFeedItems
+                    val itemLikesData = value.likesData.copy(
+                        isLikesLoading = true
                     )
-                    val areasFeedViewState = viewState.value.areasFeed.copy(
-                        items = areasFeedItems
-                    )
+
+                    val indexOfChangedItemInGeneralFeed =
+                        viewState.value.generalFeed.items.indexOfFirst { item -> item.id == value.id }
+                    val indexOfChangedItemInAreasFeed =
+                        viewState.value.areasFeed.items.indexOfFirst { item -> item.id == value.id }
+
+                    val allItemsGeneralFeed =
+                        viewState.value.generalFeed.items.toMutableList()
+                    val allItemsAreasFeed =
+                        viewState.value.areasFeed.items.toMutableList()
+
+                    if (indexOfChangedItemInGeneralFeed != -1) {
+                        allItemsGeneralFeed[indexOfChangedItemInGeneralFeed] = value.copy(
+                            likesData = itemLikesData
+                        )
+                    }
+
+                    if (indexOfChangedItemInAreasFeed != -1) {
+                        allItemsAreasFeed[indexOfChangedItemInAreasFeed] = value.copy(
+                            likesData = itemLikesData
+                        )
+                    }
+
+                    val generalFeedViewState =
+                        viewState.value.generalFeed.copy(
+                            items = allItemsGeneralFeed.toList()
+                        )
+                    val areasFeedViewState =
+                        viewState.value.areasFeed.copy(
+                            items = allItemsAreasFeed.toList()
+                        )
+
                     emit(
                         viewState.value.copy(
                             generalFeed = generalFeedViewState,
@@ -90,26 +114,43 @@ internal constructor(
                 }
                 onSuccess { entityLikes ->
                     entityLikes?.let {
-                        val generalFeedItems = viewState.value.generalFeed.items.toMutableList()
-                        val itemInGeneralFeed = generalFeedItems.firstOrNull { item ->
-                            item.id == value.id
-                        }
-                        itemInGeneralFeed?.totalLikes = it.total
-                        itemInGeneralFeed?.userLike = it.userLikeType
 
-                        val areasFeedItems = viewState.value.areasFeed.items.toMutableList()
-                        val itemInAreasFeed = areasFeedItems.firstOrNull { item ->
-                            item.id == value.id
-                        }
-                        itemInAreasFeed?.totalLikes = it.total
-                        itemInAreasFeed?.userLike = it.userLikeType
+                        val itemLikesData = LikesData(
+                            totalLikes = it.total,
+                            userLike = it.userLikeType
+                        )
 
-                        val generalFeedViewState = viewState.value.generalFeed.copy(
-                            items = generalFeedItems
-                        )
-                        val areasFeedViewState = viewState.value.areasFeed.copy(
-                            items = areasFeedItems
-                        )
+                        val indexOfChangedItemInGeneralFeed =
+                            viewState.value.generalFeed.items.indexOfFirst { item -> item.id == value.id }
+                        val indexOfChangedItemInAreasFeed =
+                            viewState.value.areasFeed.items.indexOfFirst { item -> item.id == value.id }
+
+                        val allItemsGeneralFeed =
+                            viewState.value.generalFeed.items.toMutableList()
+                        val allItemsAreasFeed =
+                            viewState.value.areasFeed.items.toMutableList()
+
+                        if (indexOfChangedItemInGeneralFeed != -1) {
+                            allItemsGeneralFeed[indexOfChangedItemInGeneralFeed] = value.copy(
+                                likesData = itemLikesData
+                            )
+                        }
+
+                        if (indexOfChangedItemInAreasFeed != -1) {
+                            allItemsAreasFeed[indexOfChangedItemInAreasFeed] = value.copy(
+                                likesData = itemLikesData
+                            )
+                        }
+
+                        val generalFeedViewState =
+                            viewState.value.generalFeed.copy(
+                                items = allItemsGeneralFeed.toList()
+                            )
+                        val areasFeedViewState =
+                            viewState.value.areasFeed.copy(
+                                items = allItemsAreasFeed.toList()
+                            )
+
                         emit(
                             viewState.value.copy(
                                 generalFeed = generalFeedViewState,
@@ -120,9 +161,11 @@ internal constructor(
 
                 }
             }
+        }.also {
+            likesJobsMap[value.id] = it
+        }.invokeOnCompletion {
+            likesJobsMap.remove(value.id)
         }
-
-
     }
 
     private fun obtainRefreshGeneralFeed() {

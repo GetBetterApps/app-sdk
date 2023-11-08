@@ -1,6 +1,6 @@
 package com.velkonost.getbetter.shared.features.likes.data.remote.model.response
 
-import com.velkonost.getbetter.shared.core.model.LikeType
+import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import com.velkonost.getbetter.shared.features.likes.api.model.EntityLikes
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

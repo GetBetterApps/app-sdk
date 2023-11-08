@@ -23,6 +23,8 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.Loader
+import com.velkonost.getbetter.shared.core.model.likes.LikeType
+import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.compose.colorResource
@@ -35,9 +37,7 @@ fun NoteItemHeader(
     taskName: String? = null,
     areaIcon: ImageResource,
     onLikeClick: () -> Unit,
-    isLiked: Boolean,
-    isLikeLoading: Boolean,
-    likesAmount: Int
+    likesData: LikesData,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -80,8 +80,8 @@ fun NoteItemHeader(
         Spacer(modifier = modifier.weight(1f))
 
         Box {
-            AnimatedContent(targetState = isLikeLoading, label = "") {
-                if (it) {
+            AnimatedContent(targetState = likesData.isLikesLoading, label = "") {
+                if (!it) {
                     Column(
                         modifier = modifier.clickable(
                             interactionSource = interactionSource,
@@ -96,14 +96,14 @@ fun NoteItemHeader(
                                 .size(32.dp)
                                 .padding(2.dp),
                             painter = painterResource(
-                                imageResource = if (isLiked) SharedR.images.ic_heart
+                                imageResource = if (likesData.userLike == LikeType.Positive) SharedR.images.ic_heart
                                 else SharedR.images.ic_heart_empty
                             ),
                             contentDescription = null,
                             colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.button_gradient_start))
                         )
                         Text(
-                            text = likesAmount.toString(),
+                            text = likesData.totalLikes.toString(),
                             color = colorResource(resource = SharedR.colors.text_primary),
                             style = MaterialTheme.typography.bodySmall
                         )
