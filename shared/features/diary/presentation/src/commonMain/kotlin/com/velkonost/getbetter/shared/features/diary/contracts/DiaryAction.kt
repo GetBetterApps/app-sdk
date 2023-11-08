@@ -16,6 +16,8 @@ data class NoteClick(val value: Note) : DiaryAction
 
 data class NoteLikeClick(val value: Note) : DiaryAction
 
+data class AreaLikeClick(val value: Area) : DiaryAction
+
 sealed interface CreateNewAreaAction : DiaryAction {
     data object Open : CreateNewAreaAction
     data class EmojiSelect(val value: Emoji) : CreateNewAreaAction

@@ -1,10 +1,12 @@
 package com.velkonost.getbetter.android.features.diary.areas.components
 
-import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,9 +25,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
@@ -34,9 +38,11 @@ import dev.icerock.moko.resources.compose.painterResource
 fun AreaItem(
     item: Area,
     modifier: Modifier = Modifier,
-    onClick: (Int) -> Unit
+    onClick: (Int) -> Unit,
+    onLikeClick: (Area) -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
+    val interactionSource = remember { MutableInteractionSource() }
 
     PrimaryBox(
         modifier = modifier
@@ -87,9 +93,7 @@ fun AreaItem(
 
             Spacer(modifier.weight(1f))
 
-            AnimatedVisibility(
-                visible = item.isPrivate
-            ) {
+            if (item.isPrivate) {
                 Column {
                     Image(
                         modifier = modifier
@@ -105,8 +109,45 @@ fun AreaItem(
                     )
                     Spacer(modifier.weight(1f))
                 }
-
+            } else {
+                Box {
+                    AnimatedContent(targetState = item.likesData.isLikesLoading, label = "") {
+                        if (!it) {
+                            Column(
+                                modifier = modifier.clickable(
+                                    interactionSource = interactionSource,
+                                    indication = null,
+                                    onClick = {
+                                        onLikeClick.invoke(item)
+                                    }
+                                ),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center,
+                            ) {
+                                Image(
+                                    modifier = modifier
+                                        .size(32.dp)
+                                        .padding(2.dp),
+                                    painter = painterResource(
+                                        imageResource = if (item.likesData.userLike == LikeType.Positive) SharedR.images.ic_heart
+                                        else SharedR.images.ic_heart_empty
+                                    ),
+                                    contentDescription = null,
+                                    colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.button_gradient_start))
+                                )
+                                Text(
+                                    text = item.likesData.totalLikes.toString(),
+                                    color = colorResource(resource = SharedR.colors.text_primary),
+                                    style = MaterialTheme.typography.bodySmall
+                                )
+                            }
+                        } else {
+                            Loader(size = 32)
+                        }
+                    }
+                }
             }
+
         }
     }
 }

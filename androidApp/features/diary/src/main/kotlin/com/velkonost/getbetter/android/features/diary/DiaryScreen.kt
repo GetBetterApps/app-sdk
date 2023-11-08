@@ -29,9 +29,11 @@ import com.velkonost.getbetter.android.features.diary.notes.components.createnew
 import com.velkonost.getbetter.android.features.diary.tasks.TasksView
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
 import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
+import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.features.diary.DiaryViewModel
 import com.velkonost.getbetter.shared.features.diary.contracts.AddAreaClick
+import com.velkonost.getbetter.shared.features.diary.contracts.AreaLikeClick
 import com.velkonost.getbetter.shared.features.diary.contracts.AreasViewState
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaEvent
@@ -109,6 +111,9 @@ fun DiaryScreen(
                         selectedAreaId.value = it
                         areaDetailSheetState.show()
                     }
+                },
+                areaLikeClick = {
+                    viewModel.dispatch(AreaLikeClick(it))
                 },
                 createNewAreaClick = {
                     scope.launch {
@@ -271,6 +276,7 @@ fun DiaryScreenContent(
     noteClick: (Note) -> Unit,
     noteLikeClick: (Note) -> Unit,
     areaClick: (Int) -> Unit,
+    areaLikeClick: (Area) -> Unit,
     createNewAreaClick: () -> Unit,
     addExistingAreaClick: () -> Unit,
     createGoalClick: () -> Unit,
@@ -298,8 +304,9 @@ fun DiaryScreenContent(
                 items = areasState.items,
                 isLoading = areasState.isLoading,
                 itemClick = areaClick,
+                itemLikeClick = areaLikeClick,
                 createNewAreaClick = createNewAreaClick,
-                addExistingAreaClick = addExistingAreaClick
+                addExistingAreaClick = addExistingAreaClick,
             )
 
             else -> TasksView(

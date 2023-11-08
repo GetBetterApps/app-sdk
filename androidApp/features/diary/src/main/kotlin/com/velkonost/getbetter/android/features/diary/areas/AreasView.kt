@@ -21,6 +21,7 @@ fun AreasView(
     isLoading: Boolean,
     items: List<Area>,
     itemClick: (Int) -> Unit,
+    itemLikeClick: (Area) -> Unit,
     createNewAreaClick: () -> Unit,
     addExistingAreaClick: () -> Unit
 ) {
@@ -38,7 +39,8 @@ fun AreasView(
                 items(items) { item ->
                     AreaItem(
                         item = item,
-                        onClick = itemClick
+                        onClick = itemClick,
+                        onLikeClick = itemLikeClick
                     )
                 }
             }

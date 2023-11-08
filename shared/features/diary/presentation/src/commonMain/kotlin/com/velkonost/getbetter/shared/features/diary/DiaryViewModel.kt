@@ -3,6 +3,7 @@ package com.velkonost.getbetter.shared.features.diary
 import AreasRepository
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.velkonost.getbetter.shared.core.model.EntityType
+import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.model.note.Note
@@ -12,6 +13,7 @@ import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.diary.api.DiaryRepository
 import com.velkonost.getbetter.shared.features.diary.contracts.AddAreaClick
+import com.velkonost.getbetter.shared.features.diary.contracts.AreaLikeClick
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewAreaAction
 import com.velkonost.getbetter.shared.features.diary.contracts.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.diary.contracts.DiaryAction
@@ -41,7 +43,8 @@ internal constructor(
     private val _notesPagingConfig = PagingConfig()
     private var notesLoadingJob: Job? = null
 
-    private val likesJobsMap: HashMap<Int, Job> = hashMapOf()
+    private val notesLikesJobsMap: HashMap<Int, Job> = hashMapOf()
+    private val areasLikesJobsMap: HashMap<Int, Job> = hashMapOf()
 
     fun refreshData() {
         fetchAreas()
@@ -97,11 +100,12 @@ internal constructor(
         is AddAreaClick -> emit(NavigateToAddArea)
         is NoteClick -> obtainNoteClick(action.value)
         is NoteLikeClick -> obtainNoteLikeClick(action.value)
+        is AreaLikeClick -> obtainAreaLikeClick(action.value)
         is DiaryAction.NotesLoadNextPage -> fetchNotes()
     }
 
     private fun obtainNoteLikeClick(value: Note) {
-        if (likesJobsMap.containsKey(value.id)) return
+        if (notesLikesJobsMap.containsKey(value.id)) return
 
         launchJob {
             val likeType = when (value.likesData.userLike) {
@@ -153,9 +157,64 @@ internal constructor(
                 }
             }
         }.also {
-            likesJobsMap[value.id] = it
+            notesLikesJobsMap[value.id] = it
         }.invokeOnCompletion {
-            likesJobsMap.remove(value.id)
+            notesLikesJobsMap.remove(value.id)
+        }
+    }
+
+    private fun obtainAreaLikeClick(value: Area) {
+        if (areasLikesJobsMap.containsKey(value.id)) return
+
+        launchJob {
+            val likeType = when (value.likesData.userLike) {
+                LikeType.Positive -> LikeType.None
+                else -> LikeType.Positive
+            }
+
+            likesRepository.addLike(
+                entityType = EntityType.Area,
+                entityId = value.id,
+                likeType = likeType
+            ) collectAndProcess {
+                isLoading {
+                    val itemLikesData = value.likesData.copy(isLikesLoading = true)
+
+                    val indexOfChangedItem =
+                        viewState.value.areasViewState.items.indexOfFirst { item -> item.id == value.id }
+
+                    val allItems = viewState.value.areasViewState.items.toMutableList()
+
+                    if (indexOfChangedItem != -1) {
+                        allItems[indexOfChangedItem] = value.copy(likesData = itemLikesData)
+                    }
+
+                    val areasViewState = viewState.value.areasViewState.copy(items = allItems)
+                    emit(viewState.value.copy(areasViewState = areasViewState))
+                }
+                onSuccess { entityLikes ->
+                    entityLikes?.let {
+                        val itemLikesData =
+                            LikesData(
+                                totalLikes = it.total,
+                                userLike = it.userLikeType
+                            )
+
+                        val indexOfChangedItem =
+                            viewState.value.areasViewState.items.indexOfFirst { item -> item.id == value.id }
+
+                        val allItems = viewState.value.areasViewState.items.toMutableList()
+
+                        if (indexOfChangedItem != -1) {
+                            allItems[indexOfChangedItem] = value.copy(likesData = itemLikesData)
+                        }
+
+                        val areasViewState =
+                            viewState.value.areasViewState.copy(items = allItems)
+                        emit(viewState.value.copy(areasViewState = areasViewState))
+                    }
+                }
+            }
         }
     }
 
