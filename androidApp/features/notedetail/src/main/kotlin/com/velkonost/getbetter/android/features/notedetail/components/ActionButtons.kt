@@ -3,14 +3,13 @@ package com.velkonost.getbetter.android.features.notedetail.components
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.BottomActionButton
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteState
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -26,36 +25,37 @@ fun ActionButtons(
     onCancelSaveClick: () -> Unit
 ) {
 
-    AnimatedVisibility(
-        visible = noteState == NoteState.Editing,
-        enter = fadeIn(),
-        exit = fadeOut()
-    ) {
-        Column {
-            Spacer(modifier = modifier.weight(1f))
-            Row {
-                CancelSaveButton(onClick = onCancelSaveClick)
-                SaveButton(onClick = onSaveClick)
+    Box {
+        AnimatedVisibility(
+            visible = noteState == NoteState.Editing,
+            enter = fadeIn(),
+            exit = fadeOut()
+        ) {
+            Column {
+                Spacer(modifier = modifier.weight(1f))
+                Row {
+                    CancelSaveButton(onClick = onCancelSaveClick)
+                    SaveButton(onClick = onSaveClick)
+                }
             }
-            Spacer(modifier = modifier.height(64.dp))
         }
-    }
 
-    AnimatedVisibility(
-        visible = noteState == NoteState.View,
-        enter = fadeIn(),
-        exit = fadeOut()
-    ) {
-        Column {
-            Spacer(modifier = modifier.weight(1f))
-            Row {
-                DeleteButton(
-                    onClick = onDeleteClick
-                )
+        AnimatedVisibility(
+            visible = noteState == NoteState.View,
+            enter = fadeIn(),
+            exit = fadeOut()
+        ) {
+            Column {
+                Spacer(modifier = modifier.weight(1f))
+                Row {
+                    DeleteButton(
+                        onClick = onDeleteClick
+                    )
 
-                EditButton(
-                    onClick = onEditClick
-                )
+                    EditButton(
+                        onClick = onEditClick
+                    )
+                }
             }
         }
     }

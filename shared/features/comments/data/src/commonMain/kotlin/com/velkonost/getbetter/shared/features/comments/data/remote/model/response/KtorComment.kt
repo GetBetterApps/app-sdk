@@ -1,6 +1,6 @@
 package com.velkonost.getbetter.shared.features.comments.data.remote.model.response
 
-import com.velkonost.getbetter.shared.features.comments.api.model.Comment
+import com.velkonost.getbetter.shared.core.model.comments.Comment
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response.KtorUserInfoShort
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response.asExternalModel
 import kotlinx.serialization.SerialName

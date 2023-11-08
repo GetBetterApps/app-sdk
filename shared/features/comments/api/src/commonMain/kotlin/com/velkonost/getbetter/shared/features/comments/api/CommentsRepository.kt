@@ -1,8 +1,8 @@
 package com.velkonost.getbetter.shared.features.comments.api
 
 import com.velkonost.getbetter.shared.core.model.EntityType
+import com.velkonost.getbetter.shared.core.model.comments.Comment
 import com.velkonost.getbetter.shared.core.util.ResultState
-import com.velkonost.getbetter.shared.features.comments.api.model.Comment
 import kotlinx.coroutines.flow.Flow
 
 interface CommentsRepository {

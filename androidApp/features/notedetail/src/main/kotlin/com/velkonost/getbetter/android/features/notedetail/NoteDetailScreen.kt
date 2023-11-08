@@ -2,6 +2,9 @@ package com.velkonost.getbetter.android.features.notedetail
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,6 +27,8 @@ import com.velkonost.getbetter.android.features.notedetail.components.ActionButt
 import com.velkonost.getbetter.android.features.notedetail.components.AreaData
 import com.velkonost.getbetter.android.features.notedetail.components.AuthorData
 import com.velkonost.getbetter.android.features.notedetail.components.NoteDetailHeader
+import com.velkonost.getbetter.android.features.notedetail.components.comments.CommentItem
+import com.velkonost.getbetter.android.features.notedetail.components.comments.NewCommentTextField
 import com.velkonost.getbetter.core.compose.components.AppAlertDialog
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
@@ -67,8 +72,9 @@ fun NoteDetailScreen(
         } else {
             LazyColumn(
                 modifier = modifier
-                    .padding(start = 20.dp, end = 20.dp, bottom = 40.dp)
-                    .fillMaxSize()
+                    .padding(start = 20.dp, end = 20.dp)
+                    .fillMaxSize(),
+                contentPadding = PaddingValues(bottom = 120.dp)
             ) {
                 item {
                     NoteDetailHeader(
@@ -223,8 +229,28 @@ fun NoteDetailScreen(
                         )
                     }
                 }
+
+                state.commentsData.comments.forEach {
+                    item {
+                        CommentItem(item = it)
+
+                    }
+                }
             }
         }
+    }
+    Column(modifier = modifier.fillMaxSize()) {
+        Spacer(modifier.weight(1f))
+        NewCommentTextField(
+            value = state.commentsData.commentText,
+            placeholderText = "",
+            onValueChanged = {
+                viewModel.dispatch(NoteDetailAction.CommentTextChanged(it))
+            },
+            onSendClick = {
+                viewModel.dispatch(NoteDetailAction.CommentAddClick)
+            }
+        )
     }
 
     AreaDetailScreen(

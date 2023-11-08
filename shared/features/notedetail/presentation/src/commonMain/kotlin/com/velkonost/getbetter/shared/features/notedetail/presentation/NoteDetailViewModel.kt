@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.notedetail.presentation
 
 import AreasRepository
 import com.velkonost.getbetter.shared.core.model.EntityType
+import com.velkonost.getbetter.shared.core.model.comments.Comment
 import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.model.note.Note
@@ -14,6 +15,7 @@ import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.SavedStateHandle
+import com.velkonost.getbetter.shared.features.comments.api.CommentsRepository
 import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NavigateBack
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailAction
@@ -32,7 +34,8 @@ internal constructor(
     private val areasRepository: AreasRepository,
     private val notesRepository: NotesRepository,
     private val userInfoRepository: UserInfoRepository,
-    private val likesRepository: LikesRepository
+    private val likesRepository: LikesRepository,
+    private val commentsRepository: CommentsRepository
 ) : BaseViewModel<NoteDetailViewState, NoteDetailAction, NoteDetailNavigation, NoteDetailEvent>(
     initialState = NoteDetailViewState(),
     savedStateHandle = savedStateHandle
@@ -47,6 +50,7 @@ internal constructor(
             note.collectLatest { note ->
                 note?.updateUI()
                 note?.authorId?.let { getNoteAuthor(it) }
+                note?.id?.let { getNoteComments(it) }
             }
         }
     }
@@ -72,6 +76,42 @@ internal constructor(
         is NoteDetailAction.UnCompleteSubNoteClick -> unCompleteSubGoal(action.value)
         is NoteDetailAction.LikeClick -> obtainLikeClick()
         is NoteDetailAction.AuthorClick -> TODO()
+        is NoteDetailAction.CommentTextChanged -> obtainCommentTextChanged(action.value)
+        is NoteDetailAction.CommentAddClick -> obtainCommentAdd()
+        is NoteDetailAction.CommentRemoveClick -> obtainCommentRemove(action.value)
+    }
+
+    private fun obtainCommentRemove(value: Comment) {
+
+    }
+
+    private fun obtainCommentAdd() {
+        val newComment = viewState.value.commentsData.commentText.trim()
+        if (newComment.isEmpty()) return
+
+        launchJob {
+            commentsRepository.createComment(
+                entityType = EntityType.Note,
+                entityId = viewState.value.initialItem!!.id,
+                commentText = newComment
+            ) collectAndProcess {
+                isLoading {
+
+                }
+                onSuccess { comments ->
+                    comments?.let {
+                        val commentsData =
+                            viewState.value.commentsData.copy(comments = it, commentText = "")
+                        emit(viewState.value.copy(commentsData = commentsData))
+                    }
+                }
+            }
+        }
+    }
+
+    private fun obtainCommentTextChanged(value: String) {
+        val commentsData = viewState.value.commentsData.copy(commentText = value)
+        emit(viewState.value.copy(commentsData = commentsData))
     }
 
     private fun obtainLikeClick() {
@@ -112,6 +152,26 @@ internal constructor(
                 }
                 onSuccess {
                     emit(viewState.value.copy(author = it))
+                }
+            }
+        }
+    }
+
+    private fun getNoteComments(noteId: Int) {
+        launchJob {
+            commentsRepository.getComments(
+                entityType = EntityType.Note,
+                entityId = noteId
+            ) collectAndProcess {
+                isLoading {
+                    val commentsData = viewState.value.commentsData.copy(isLoading = it)
+                    emit(viewState.value.copy(commentsData = commentsData))
+                }
+                onSuccess { comments ->
+                    comments?.let {
+                        val commentsData = viewState.value.commentsData.copy(comments = it)
+                        emit(viewState.value.copy(commentsData = commentsData))
+                    }
                 }
             }
         }

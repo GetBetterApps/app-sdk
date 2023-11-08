@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.notedetail.presentation.contract
 
 import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.comments.Comment
 import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.model.note.Note
@@ -42,8 +43,15 @@ data class NoteDetailViewState(
 
     val allowEdit: Boolean = false,
 
-    val likesData: LikesData = LikesData(totalLikes = 0, userLike = LikeType.None)
+    val likesData: LikesData = LikesData(totalLikes = 0, userLike = LikeType.None),
+    val commentsData: CommentsData = CommentsData()
 ) : UIContract.State
+
+data class CommentsData(
+    val isLoading: Boolean = true,
+    val commentText: String = "",
+    val comments: List<Comment> = emptyList()
+)
 
 enum class NoteState {
     View, Editing

@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.notedetail.presentation.contract
 
+import com.velkonost.getbetter.shared.core.model.comments.Comment
 import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationEvent
@@ -42,6 +43,12 @@ sealed interface NoteDetailAction : UIContract.Action {
     data object AuthorClick : NoteDetailAction
 
     data object LikeClick : NoteDetailAction
+
+    data class CommentTextChanged(val value: String) : NoteDetailAction
+
+    data object CommentAddClick : NoteDetailAction
+
+    data class CommentRemoveClick(val value: Comment) : NoteDetailAction
 }
 
 data object NavigateBack : NoteDetailAction, NoteDetailNavigation {
