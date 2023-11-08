@@ -62,19 +62,24 @@ struct NoteItemHeader: View {
             
             ZStack {
                 if (!likesData.isLikesLoading) {
-                    Image(
-                        uiImage: likesData.userLike == LikeType.positive ? SharedR.images().ic_heart.toUIImage()! : SharedR.images().ic_heart_empty.toUIImage()!
-                    )
-                    .resizable()
-                    .renderingMode(.template)
-                    .foregroundColor(.buttonGradientStart)
-                    .scaledToFill()
-                    .frame(width: 32, height: 32)
-                    .padding(2)
-                    
-                    Text(String(likesData.totalLikes))
-                        .style(.bodySmall)
-                        .foregroundColor(.textPrimary)
+                    VStack {
+                        Image(
+                            uiImage: likesData.userLike == LikeType.positive ? SharedR.images().ic_heart.toUIImage()! : SharedR.images().ic_heart_empty.toUIImage()!
+                        )
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(.buttonGradientStart)
+                        .scaledToFill()
+                        .frame(width: 32, height: 32)
+                        .padding(2)
+                        
+                        Text(String(likesData.totalLikes))
+                            .style(.bodySmall)
+                            .foregroundColor(.textPrimary)
+                    }
+                    .onTapGesture {
+                        onLikeClick()
+                    }
                 } else {
                     Loader(size: 32)
                 }

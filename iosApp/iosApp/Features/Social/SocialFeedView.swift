@@ -15,17 +15,24 @@ struct SocialFeedView: View {
     @Binding var isLoading: Bool
     let items: [Note]
     let loadMorePrefetch: Int
+    
     let itemClick: (Note) -> Void
+    let itemLikeClick: (Note) -> Void
+    
     let onBottomReach: () -> Void
     let onRefresh: () -> Void
     
     init(isLoading: Binding<Bool>,
          loadMorePrefetch: Int,
-         items: [Note], itemClick: @escaping (Note) -> Void, onBottomReach: @escaping () -> Void, onRefresh: @escaping () -> Void) {
+         items: [Note], itemClick: @escaping (Note) -> Void, itemLikeClick: @escaping (Note) -> Void, onBottomReach: @escaping () -> Void, onRefresh: @escaping () -> Void) {
         self._isLoading = isLoading
         self.loadMorePrefetch = loadMorePrefetch
+        
         self.items = items
+        
         self.itemClick = itemClick
+        self.itemLikeClick = itemLikeClick
+        
         self.onBottomReach = onBottomReach
         self.onRefresh = onRefresh
     }
@@ -40,7 +47,8 @@ struct SocialFeedView: View {
                         ForEach(items, id: \.self.id) { item in
                             FeedNoteItem(
                                 item: item,
-                                onClick: itemClick
+                                onClick: itemClick,
+                                onLikeClick: itemLikeClick
                             )
                             .onAppear {
                                 checkPaginationThreshold(currentItemId: item.id)

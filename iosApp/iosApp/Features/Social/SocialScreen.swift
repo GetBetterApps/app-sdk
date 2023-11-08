@@ -36,6 +36,9 @@ struct SocialScreen: View {
                 itemClick: { value in
                     viewModel.dispatch(action: SocialActionNoteClick(value: value))
                 },
+                itemLikeClick: { value in
+                    viewModel.dispatch(action: SocialActionNoteClick(value: value))
+                },
                 onBottomReach: {
                     viewModel.dispatch(action: SocialActionGeneralFeedLoadNextPage())
                 },
@@ -48,6 +51,9 @@ struct SocialScreen: View {
                 loadMorePrefetch: Int(areasFeedState.loadMorePrefetch),
                 items: areasFeedState.items,
                 itemClick: { value in
+                    viewModel.dispatch(action: SocialActionNoteClick(value: value))
+                },
+                itemLikeClick: { value in
                     viewModel.dispatch(action: SocialActionNoteClick(value: value))
                 },
                 onBottomReach: {

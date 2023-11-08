@@ -20,20 +20,27 @@ struct NotesView: View {
     
     let items: [Note]
     let itemClick: (Note) -> Void
+    let itemLikeClick: (Note) -> Void
     let onBottomReach: () -> Void
     
     init(
         state: Binding<NotesViewState>,
         isLoading: Bool, items: [Note],
         createGoalClick: @escaping () -> Void, createNoteClick: @escaping () -> Void,
-        itemClick: @escaping (Note) -> Void, onBottomReach: @escaping () -> Void
+        itemClick: @escaping (Note) -> Void, 
+        itemLikeClick: @escaping (Note) -> Void,
+        onBottomReach: @escaping () -> Void
     ) {
         self._state = state
         self.isLoading = isLoading
         self.items = items
+        
         self.createGoalClick = createGoalClick
         self.createNoteClick = createNoteClick
+        
         self.itemClick = itemClick
+        self.itemLikeClick = itemLikeClick
+        
         self.onBottomReach = onBottomReach
     }
     
@@ -47,7 +54,8 @@ struct NotesView: View {
                         ForEach(items, id: \.self.id) { item in
                             NoteItem(
                                 item: item,
-                                onClick: itemClick
+                                onClick: itemClick,
+                                onLikeClick: itemLikeClick
                             )
                             .onAppear {
                                 checkPaginationThreshold(currentItemId: item.id)

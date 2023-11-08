@@ -64,6 +64,9 @@ struct DiaryScreen: View {
                 itemClick: { value in
                     viewModel.dispatch(action: NoteClick(value: value))
                 },
+                itemLikeClick: { value in
+                    viewModel.dispatch(action: NoteLikeClick(value: value))
+                },
                 onBottomReach: {
                     viewModel.dispatch(action: DiaryActionNotesLoadNextPage())
                 }
