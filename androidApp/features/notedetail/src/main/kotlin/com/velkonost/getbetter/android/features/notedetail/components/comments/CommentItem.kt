@@ -2,10 +2,13 @@ package com.velkonost.getbetter.android.features.notedetail.components.comments
 
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
@@ -36,10 +39,9 @@ fun CommentItem(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
-//            .padding(top = 16.dp)
+            .padding(top = 16.dp)
     ) {
         Row(
-            modifier = modifier.padding(top = 6.dp, start = 4.dp, end = 4.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
@@ -86,6 +88,8 @@ fun CommentItem(
                 style = MaterialTheme.typography.bodySmall,
                 color = colorResource(resource = SharedR.colors.text_primary)
             )
+
+
         }
 
         Text(
@@ -95,5 +99,16 @@ fun CommentItem(
             color = colorResource(resource = SharedR.colors.text_secondary)
         )
 
+        Box(
+            modifier = modifier
+                .padding(top = 12.dp)
+                .padding(horizontal = 12.dp)
+                .fillMaxWidth()
+                .height(1.dp)
+                .background(
+                    color = colorResource(resource = SharedR.colors.text_primary),
+                    shape = MaterialTheme.shapes.large
+                )
+        )
     }
 }

@@ -74,7 +74,7 @@ fun NoteDetailScreen(
                 modifier = modifier
                     .padding(start = 20.dp, end = 20.dp)
                     .fillMaxSize(),
-                contentPadding = PaddingValues(bottom = 120.dp)
+                contentPadding = PaddingValues(bottom = 220.dp)
             ) {
                 item {
                     NoteDetailHeader(
