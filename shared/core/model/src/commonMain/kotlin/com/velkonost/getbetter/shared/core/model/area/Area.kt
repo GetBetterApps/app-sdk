@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.core.model.area
 
+import com.velkonost.getbetter.shared.core.model.LikeType
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -33,5 +34,9 @@ data class Area(
 
     val isAllowLeave: Boolean = false,
 
-    val experience: Int = 0
+    val experience: Int = 0,
+
+    val totalLikes: Int,
+
+    val userLike: LikeType
 )

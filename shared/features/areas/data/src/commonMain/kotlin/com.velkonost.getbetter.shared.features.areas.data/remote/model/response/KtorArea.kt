@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.areas.data.remote.model.response
 
+import com.velkonost.getbetter.shared.core.model.LikeType
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.area.TermsOfMembership
 import kotlinx.serialization.SerialName
@@ -50,7 +51,13 @@ data class KtorArea(
     val isAllowLeave: Boolean = false,
 
     @SerialName("experience")
-    val experience: Int = 0
+    val experience: Int = 0,
+
+    @SerialName("totalLikes")
+    val totalLikes: Int,
+
+    @SerialName("userLike")
+    val userLike: String
 )
 
 fun KtorArea.asExternalModel() =
@@ -70,5 +77,7 @@ fun KtorArea.asExternalModel() =
         isAllowLeave = isAllowLeave,
         isAllowEdit = isAllowEdit,
         isAllowDelete = isAllowDelete,
-        experience = experience
+        experience = experience,
+        totalLikes = totalLikes,
+        userLike = LikeType.entries.first { it.responseName == userLike }
     )

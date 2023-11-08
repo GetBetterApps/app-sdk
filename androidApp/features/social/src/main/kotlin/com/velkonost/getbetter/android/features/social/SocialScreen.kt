@@ -65,6 +65,9 @@ fun SocialScreen(
                     noteClick = {
                         viewModel.dispatch(SocialAction.NoteClick(it))
                     },
+                    noteLikeClick = {
+                        viewModel.dispatch(SocialAction.NoteLikeClick(it))
+                    },
                     generalFeedLoadNextPage = {
                         viewModel.dispatch(SocialAction.GeneralFeedLoadNextPage)
                     },
@@ -117,6 +120,7 @@ fun SocialScreenContent(
     generalFeedState: FeedViewState,
     areasFeedState: FeedViewState,
     noteClick: (Note) -> Unit,
+    noteLikeClick: (Note) -> Unit,
     generalFeedLoadNextPage: () -> Unit,
     areasFeedLoadNextPage: () -> Unit,
     onRefreshGeneralFeed: () -> Unit,
@@ -134,6 +138,7 @@ fun SocialScreenContent(
                 isRefreshing = generalFeedState.isRefreshing,
                 items = generalFeedState.items,
                 itemClick = noteClick,
+                itemLikeClick = noteLikeClick,
                 onBottomReach = generalFeedLoadNextPage,
                 onRefresh = onRefreshGeneralFeed
             )
@@ -143,6 +148,7 @@ fun SocialScreenContent(
                 isLoading = areasFeedState.isLoading,
                 isRefreshing = areasFeedState.isRefreshing,
                 items = areasFeedState.items,
+                itemLikeClick = noteLikeClick,
                 itemClick = noteClick,
                 onBottomReach = areasFeedLoadNextPage,
                 onRefresh = onRefreshAreasFeed
@@ -160,6 +166,7 @@ fun SocialFeedView(
     isRefreshing: Boolean,
     items: List<Note>,
     itemClick: (Note) -> Unit,
+    itemLikeClick: (Note) -> Unit,
     onBottomReach: () -> Unit,
     onRefresh: () -> Unit
 ) {
@@ -183,7 +190,10 @@ fun SocialFeedView(
                 items(items) { item ->
                     FeedNoteItem(
                         item = item,
-                        onClick = itemClick
+                        onClick = itemClick,
+                        onLikeClick = {
+                            itemLikeClick.invoke(item)
+                        }
                     )
                 }
 

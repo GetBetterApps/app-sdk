@@ -10,6 +10,8 @@ sealed interface SocialAction : UIContract.Action {
 
     data class NoteClick(val value: Note) : SocialAction
 
+    data class NoteLikeClick(val value: Note) : SocialAction
+
     data object RefreshGeneralFeed : SocialAction
 
     data object RefreshAreasFeed : SocialAction
