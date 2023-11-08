@@ -15,10 +15,12 @@ struct NoteItem: View {
     
     let item: Note
     let onClick: (Note) -> Void
+    let onLikeClick: (Note) -> Void
     
-    init(item: Note, onClick: @escaping (Note) -> Void) {
+    init(item: Note, onClick: @escaping (Note) -> Void, onLikeClick: @escaping (Note) -> Void) {
         self.item = item
         self.onClick = onClick
+        self.onLikeClick = onLikeClick
     }
     
     var body: some View {
@@ -28,7 +30,11 @@ struct NoteItem: View {
                 NoteItemHeader(
                     areaName: item.area.name,
                     taskName: nil,
-                    areaIcon: Emoji.companion.getIconById(id: Int32(truncating: item.area.emojiId!)).toUIImage()!
+                    areaIcon: Emoji.companion.getIconById(id: Int32(truncating: item.area.emojiId!)).toUIImage()!,
+                    likesData: item.likesData,
+                    onLikeClick: {
+                        onLikeClick(item)
+                    }
                 )
                 
                 VStack(alignment: .leading) {

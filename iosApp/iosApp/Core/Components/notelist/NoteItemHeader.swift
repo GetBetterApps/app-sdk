@@ -15,11 +15,15 @@ struct NoteItemHeader: View {
     let areaName: String
     let taskName: String?
     let areaIcon: UIImage
+    let likesData: LikesData
+    let onLikeClick: () -> Void
     
-    init(areaName: String, taskName: String? = nil, areaIcon: UIImage) {
+    init(areaName: String, taskName: String? = nil, areaIcon: UIImage, likesData: LikesData, onLikeClick: @escaping () -> Void) {
         self.areaName = areaName
         self.taskName = taskName
         self.areaIcon = areaIcon
+        self.likesData = likesData
+        self.onLikeClick = onLikeClick
     }
 
     var body: some View {
@@ -53,6 +57,29 @@ struct NoteItemHeader: View {
                 Spacer()
             }
             .padding(.leading, 6)
+            
+            Spacer()
+            
+            ZStack {
+                if (!likesData.isLikesLoading) {
+                    Image(
+                        uiImage: likesData.userLike == LikeType.positive ? SharedR.images().ic_heart.toUIImage()! : SharedR.images().ic_heart_empty.toUIImage()!
+                    )
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(.buttonGradientStart)
+                    .scaledToFill()
+                    .frame(width: 32, height: 32)
+                    .padding(2)
+                    
+                    Text(String(likesData.totalLikes))
+                        .style(.bodySmall)
+                        .foregroundColor(.textPrimary)
+                } else {
+                    Loader(size: 32)
+                }
+            }
+            .animation(.easeInOut, value: likesData.isLikesLoading)
         }
     }
 }
