@@ -37,7 +37,7 @@ struct SocialScreen: View {
                     viewModel.dispatch(action: SocialActionNoteClick(value: value))
                 },
                 itemLikeClick: { value in
-                    viewModel.dispatch(action: SocialActionNoteClick(value: value))
+                    viewModel.dispatch(action: SocialActionNoteLikeClick(value: value))
                 },
                 onBottomReach: {
                     viewModel.dispatch(action: SocialActionGeneralFeedLoadNextPage())
@@ -54,7 +54,7 @@ struct SocialScreen: View {
                     viewModel.dispatch(action: SocialActionNoteClick(value: value))
                 },
                 itemLikeClick: { value in
-                    viewModel.dispatch(action: SocialActionNoteClick(value: value))
+                    viewModel.dispatch(action: SocialActionNoteLikeClick(value: value))
                 },
                 onBottomReach: {
                     viewModel.dispatch(action: SocialActionAreasFeedLoadNextPage())

@@ -60,7 +60,7 @@ struct NoteItemHeader: View {
             
             Spacer()
             
-            ZStack {
+            ZStack(alignment: .center) {
                 if (!likesData.isLikesLoading) {
                     VStack {
                         Image(
@@ -70,8 +70,8 @@ struct NoteItemHeader: View {
                         .renderingMode(.template)
                         .foregroundColor(.buttonGradientStart)
                         .scaledToFill()
-                        .frame(width: 32, height: 32)
-                        .padding(2)
+                        .frame(width: 24, height: 24)
+//                        .padding(2)
                         
                         Text(String(likesData.totalLikes))
                             .style(.bodySmall)
@@ -81,9 +81,14 @@ struct NoteItemHeader: View {
                         onLikeClick()
                     }
                 } else {
-                    Loader(size: 32)
+                    VStack {
+                        Spacer()
+                        Loader(size: 12)
+                        Spacer()
+                    }
                 }
             }
+            .frame(height: 32)
             .animation(.easeInOut, value: likesData.isLikesLoading)
         }
     }
