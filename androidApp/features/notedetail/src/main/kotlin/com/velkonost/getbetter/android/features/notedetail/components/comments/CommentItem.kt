@@ -2,6 +2,8 @@ package com.velkonost.getbetter.android.features.notedetail.components.comments
 
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,9 +13,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -27,15 +31,17 @@ import dev.icerock.moko.resources.compose.painterResource
 @Composable
 fun CommentItem(
     modifier: Modifier = Modifier,
-    item: Comment
+    item: Comment,
+    onDeleteClick: (Comment) -> Unit
 ) {
 
     val context = LocalContext.current
+    val interactionSource = remember { MutableInteractionSource() }
 
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 16.dp)
+            .padding(top = 16.dp, start = 8.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
 
@@ -76,6 +82,21 @@ fun CommentItem(
             }
 
             Spacer(modifier.weight(1f))
+
+            if (item.allowEdit) {
+                Image(
+                    modifier = modifier
+                        .size(24.dp)
+                        .padding(4.dp)
+                        .clickable(
+                            interactionSource = interactionSource,
+                            indication = null
+                        ) { onDeleteClick.invoke(item) },
+                    painter = painterResource(imageResource = SharedR.images.ic_trash),
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_inactive))
+                )
+            }
         }
 
         Text(

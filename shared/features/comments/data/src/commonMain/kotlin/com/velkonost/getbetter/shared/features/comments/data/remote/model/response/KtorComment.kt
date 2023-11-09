@@ -8,6 +8,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class KtorComment(
+
+    @SerialName("id")
+    val id: Int,
+
     @SerialName("text")
     val text: String,
 
@@ -29,6 +33,7 @@ data class KtorCommentsList(
 
 fun KtorComment.asExternalModel() =
     Comment(
+        id = id,
         text = text,
         allowEdit = allowEdit,
         createdDate = createdDate,

@@ -5,6 +5,7 @@ import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToLocal
 import dev.icerock.moko.resources.desc.StringDesc
 
 data class Comment(
+    val id: Int,
     val text: String,
     val createdDate: Long,
     val allowEdit: Boolean = false,

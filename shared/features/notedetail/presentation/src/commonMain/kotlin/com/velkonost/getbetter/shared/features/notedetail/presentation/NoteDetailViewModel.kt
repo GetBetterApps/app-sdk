@@ -82,7 +82,20 @@ internal constructor(
     }
 
     private fun obtainCommentRemove(value: Comment) {
+        launchJob {
+            commentsRepository.deleteComment(value.id) collectAndProcess {
+                isLoading {
 
+                }
+                onSuccess { comments ->
+                    comments?.let {
+                        val commentsData =
+                            viewState.value.commentsData.copy(comments = it, commentText = "")
+                        emit(viewState.value.copy(commentsData = commentsData))
+                    }
+                }
+            }
+        }
     }
 
     private fun obtainCommentAdd() {

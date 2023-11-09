@@ -6,11 +6,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -42,6 +45,7 @@ import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailEvent
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteState
 import com.velkonost.getbetter.shared.resources.SharedR
+import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -230,9 +234,27 @@ fun NoteDetailScreen(
                     }
                 }
 
+                item {
+                    AnimatedVisibility(visible = state.commentsData.comments.isNotEmpty()) {
+                        Text(
+                            modifier = modifier
+                                .padding(top = 24.dp)
+                                .fillMaxWidth(0.8f),
+                            text = stringResource(resource = SharedR.strings.note_detail_comments_title),
+                            color = colorResource(resource = SharedR.colors.text_primary),
+                            style = MaterialTheme.typography.headlineSmall
+                        )
+                    }
+                }
+
                 state.commentsData.comments.forEach {
                     item {
-                        CommentItem(item = it)
+                        CommentItem(
+                            item = it,
+                            onDeleteClick = {
+                                viewModel.dispatch(NoteDetailAction.CommentRemoveClick(it))
+                            }
+                        )
 
                     }
                 }
@@ -243,7 +265,6 @@ fun NoteDetailScreen(
         Spacer(modifier.weight(1f))
         NewCommentTextField(
             value = state.commentsData.commentText,
-            placeholderText = "",
             onValueChanged = {
                 viewModel.dispatch(NoteDetailAction.CommentTextChanged(it))
             },
