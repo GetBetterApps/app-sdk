@@ -97,6 +97,16 @@ object DatetimeFormatter {
         }
     }
 
+    fun Long.convertToLocalDatetimeWithoutRelation(): StringDesc {
+        val requestedTime = Instant.fromEpochMilliseconds(this)
+            .toLocalDateTime(TimeZone.currentSystemDefault())
+
+        return StringDesc.ResourceFormatted(
+            SharedR.strings.date_same_year,
+            requestedTime.format("dd.MM.yyyy")
+        )
+    }
+
     fun Long.isPast(): Boolean {
         val firstDatetime = Instant.fromEpochMilliseconds(this)
             .toLocalDateTime(TimeZone.currentSystemDefault())

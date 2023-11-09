@@ -4,6 +4,7 @@ import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToLocalDatetime
+import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToLocalDatetimeWithoutRelation
 import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.serialization.Serializable
 
@@ -41,7 +42,7 @@ data class Note(
         get() = completionDate?.convertToLocalDatetime()
 
     val expectedCompletionDateStr: StringDesc?
-        get() = expectedCompletionDate?.convertToLocalDatetime()
+        get() = expectedCompletionDate?.convertToLocalDatetimeWithoutRelation()
 
 }
 

@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.profile
 
+import com.velkonost.getbetter.shared.core.model.user.UserInfo
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
@@ -24,6 +25,11 @@ internal constructor(
         fetchUserInfo()
     }
 
+    fun onAppear() {
+        fetchUserInfo()
+    }
+
+
     override fun dispatch(action: ProfileAction) = when (action) {
         is LogoutClick -> obtainLogout()
         is AvatarSelected -> obtainAvatarSelected(action.avatarContent)
@@ -37,15 +43,7 @@ internal constructor(
                     emit(viewState.value.copy(isLoading = it))
                 }
                 onSuccess { userInfo ->
-                    userInfo?.let {
-                        emit(
-                            viewState.value.copy(
-                                userName = it.displayName ?: "",
-                                avatarBytes = it.avatar,
-                                experienceData = it.experienceData
-                            )
-                        )
-                    }
+                    userInfo?.toUI()
                 }
             }
         }
@@ -58,15 +56,7 @@ internal constructor(
                     emit(viewState.value.copy(isLoading = it))
                 }
                 onSuccess { userInfo ->
-                    userInfo?.let {
-                        emit(
-                            viewState.value.copy(
-                                userName = it.displayName ?: "",
-                                avatarBytes = it.avatar,
-                                experienceData = it.experienceData
-                            )
-                        )
-                    }
+                    userInfo?.toUI()
                 }
             }
         }
@@ -82,6 +72,18 @@ internal constructor(
                     emit(NavigateToAuth)
                 }
             }
+        }
+    }
+
+    private fun UserInfo?.toUI() {
+        this?.let {
+            emit(
+                viewState.value.copy(
+                    userName = it.displayName ?: "",
+                    avatarBytes = it.avatar,
+                    experienceData = it.experienceData
+                )
+            )
         }
     }
 }

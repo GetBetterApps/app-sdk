@@ -210,19 +210,21 @@ struct NoteDetailScreen : View {
                     endTextEditing()
                 }
                 
-                VStack(spacing: 0) {
-                    Spacer()
-                    NewCommentTextField(
-                        value: Binding(get: { state.commentsData.commentText }, set: { value in }),
-                        onValueChanged: { value in
-                            viewModel.dispatch(action: NoteDetailActionCommentTextChanged(value: value))
-                        },
-                        onSendClick: { 
-                            viewModel.dispatch(action: NoteDetailActionCommentAddClick())
-                        }
-                    )
+                if !state.isNotePrivate {
+                    VStack(spacing: 0) {
+                        Spacer()
+                        NewCommentTextField(
+                            value: Binding(get: { state.commentsData.commentText }, set: { value in }),
+                            onValueChanged: { value in
+                                viewModel.dispatch(action: NoteDetailActionCommentTextChanged(value: value))
+                            },
+                            onSendClick: {
+                                viewModel.dispatch(action: NoteDetailActionCommentAddClick())
+                            }
+                        )
+                    }
+                    .ignoresSafeArea(.container, edges: .bottom)
                 }
-                .ignoresSafeArea(.container, edges: .bottom)
             }
             
         }

@@ -262,17 +262,19 @@ fun NoteDetailScreen(
         }
     }
 
-    Column(modifier = modifier.fillMaxSize()) {
-        Spacer(modifier.weight(1f))
-        NewCommentTextField(
-            value = state.commentsData.commentText,
-            onValueChanged = {
-                viewModel.dispatch(NoteDetailAction.CommentTextChanged(it))
-            },
-            onSendClick = {
-                viewModel.dispatch(NoteDetailAction.CommentAddClick)
-            }
-        )
+    if (!state.isNotePrivate) {
+        Column(modifier = modifier.fillMaxSize()) {
+            Spacer(modifier.weight(1f))
+            NewCommentTextField(
+                value = state.commentsData.commentText,
+                onValueChanged = {
+                    viewModel.dispatch(NoteDetailAction.CommentTextChanged(it))
+                },
+                onSendClick = {
+                    viewModel.dispatch(NoteDetailAction.CommentAddClick)
+                }
+            )
+        }
     }
 
     AreaDetailScreen(
