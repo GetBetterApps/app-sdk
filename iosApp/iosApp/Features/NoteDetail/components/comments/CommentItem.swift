@@ -54,6 +54,9 @@ struct CommentItem: View {
                         .foregroundColor(.iconInactive)
                         .padding(4)
                         .frame(width: 24, height: 24)
+                        .onTapGesture {
+                            onDeleteClick(item)
+                        }
                 }
             }
             .padding(.top, 6)
@@ -77,7 +80,6 @@ struct CommentItem: View {
                 Spacer()
             }
         }
-//        .padding(.top, 16)
         .padding(.leading, 8)
     
     }
