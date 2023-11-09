@@ -46,6 +46,8 @@ struct ProfileScreen: View {
                     
                 }
                 
+                Spacer().frame(height: 20)
+                
                 if state.experienceData != nil {
                     LevelBlock(experienceData: state.experienceData!)
                 }
@@ -82,6 +84,9 @@ struct ProfileScreen: View {
                     await uploadAvatar(selectedImage: image)
                 }
             }.edgesIgnoringSafeArea(.all)
+        }
+        .onAppear {
+            viewModel.onAppear()
         }
     }
     

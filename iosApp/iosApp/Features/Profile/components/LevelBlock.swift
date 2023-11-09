@@ -19,8 +19,6 @@ struct LevelBlock: View {
     }
     
     var body: some View {
-        @State var remainExperience = Double(experienceData.remainExperience)
-        @State var currentLevelExperienceLimit = Double(experienceData.currentLevelExperienceLimit)
         
         PrimaryBox {
             VStack(spacing: 0) {
@@ -31,10 +29,11 @@ struct LevelBlock: View {
                         .foregroundColor(.textPrimary)
                 }
                 
-                ProgressView(value: 30, total: currentLevelExperienceLimit)
+                ProgressView(value: Double(experienceData.remainExperiencePercent))
                     .padding(.top, 6)
+                    .accentColor(.buttonGradientStart)
+                    
             }
         }
-        .padding(.top, 20)
     }
 }
