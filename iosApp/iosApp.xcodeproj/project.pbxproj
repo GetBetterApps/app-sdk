@@ -103,6 +103,7 @@
 		46C10D212AB46BF400E62846 /* UIPilotExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C10D202AB46BF400E62846 /* UIPilotExt.swift */; };
 		46C10D232AB4734200E62846 /* AuthAnonymousButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C10D222AB4734200E62846 /* AuthAnonymousButton.swift */; };
 		46C10D252AB4741100E62846 /* SwitchRegisteringText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C10D242AB4741100E62846 /* SwitchRegisteringText.swift */; };
+		46C6606A2AFCCCD900FA189C /* CommentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C660692AFCCCD900FA189C /* CommentItem.swift */; };
 		46CDB56C2AADB45E00800096 /* AuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDB56B2AADB45E00800096 /* AuthScreen.swift */; };
 		46CDB56E2AADB46400800096 /* AuthRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDB56D2AADB46400800096 /* AuthRoute.swift */; };
 		46D857722ACFF16600BE74DA /* AddAreaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D857712ACFF16600BE74DA /* AddAreaItem.swift */; };
@@ -222,6 +223,7 @@
 		46C10D202AB46BF400E62846 /* UIPilotExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPilotExt.swift; sourceTree = "<group>"; };
 		46C10D222AB4734200E62846 /* AuthAnonymousButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAnonymousButton.swift; sourceTree = "<group>"; };
 		46C10D242AB4741100E62846 /* SwitchRegisteringText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchRegisteringText.swift; sourceTree = "<group>"; };
+		46C660692AFCCCD900FA189C /* CommentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentItem.swift; sourceTree = "<group>"; };
 		46CDB56B2AADB45E00800096 /* AuthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreen.swift; sourceTree = "<group>"; };
 		46CDB56D2AADB46400800096 /* AuthRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRoute.swift; sourceTree = "<group>"; };
 		46D857712ACFF16600BE74DA /* AddAreaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaItem.swift; sourceTree = "<group>"; };
@@ -658,6 +660,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		46C660682AFCCCD300FA189C /* comments */ = {
+			isa = PBXGroup;
+			children = (
+				46C660692AFCCCD900FA189C /* CommentItem.swift */,
+			);
+			path = comments;
+			sourceTree = "<group>";
+		};
 		46CDB56A2AADB45200800096 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -710,6 +720,7 @@
 		46FCD3D12AF530AF0025D2C6 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				46C660682AFCCCD300FA189C /* comments */,
 				46FCD3D62AF532450025D2C6 /* NoteDetailHeader.swift */,
 				46FCD3D82AF537590025D2C6 /* AreaData.swift */,
 				46FCD3DE2AF541190025D2C6 /* ActionButtons.swift */,
@@ -957,6 +968,7 @@
 				46059D222AC4037000DC5015 /* AreasView.swift in Sources */,
 				460054A32ABB101600586767 /* SubscriptionBox.swift in Sources */,
 				4667C90A2AC59A9B00BAA9DD /* MultilineTextField.swift in Sources */,
+				46C6606A2AFCCCD900FA189C /* CommentItem.swift in Sources */,
 				46B17E162AADF05D008C2BC4 /* ViewExt.swift in Sources */,
 				46FCD3D92AF537590025D2C6 /* AreaData.swift in Sources */,
 				460054A12ABB0D0100586767 /* SettingsButton.swift in Sources */,

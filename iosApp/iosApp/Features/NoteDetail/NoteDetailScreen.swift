@@ -182,6 +182,27 @@ struct NoteDetailScreen : View {
                                 )
                             }
                             
+                            if !state.commentsData.comments.isEmpty {
+                                HStack {
+                                    Text(SharedR.strings().note_detail_comments_title.desc().localized())
+                                        .style(.headlineSmall)
+                                        .foregroundColor(.textPrimary)
+                                    Spacer()
+                                }
+                            }
+                            
+                            ForEach(state.commentsData.comments, id: \.self.id) { item in
+                                CommentItem(
+                                    item: item,
+                                    onDeleteClick: { value in
+                                        viewModel.dispatch(action: NoteDetailActionCommentRemoveClick(value: value))
+                                    }
+                                )
+                            }
+                            
+                            Spacer()
+                                .frame(height: 70)
+                            
                         }
                         .padding(.horizontal, 20)
                     }

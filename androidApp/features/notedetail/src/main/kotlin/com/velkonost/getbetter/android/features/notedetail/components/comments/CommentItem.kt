@@ -44,7 +44,6 @@ fun CommentItem(
             .padding(top = 16.dp, start = 8.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-
             if (item.author.avatar != null) {
                 item.author.avatar?.let { avatarBytes ->
                     SubcomposeAsyncImage(
@@ -65,7 +64,7 @@ fun CommentItem(
             } else {
                 Image(
                     modifier = modifier
-                        .size(24.dp)
+                        .size(28.dp)
                         .clip(MaterialTheme.shapes.small),
                     painter = painterResource(imageResource = SharedR.images.logo),
                     contentDescription = null
