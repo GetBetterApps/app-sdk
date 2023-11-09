@@ -221,7 +221,8 @@ struct NoteDetailScreen : View {
                             viewModel.dispatch(action: NoteDetailActionCommentAddClick())
                         }
                     )
-                }.ignoresSafeArea(.container, edges: .bottom)
+                }
+                .ignoresSafeArea(.container, edges: .bottom)
             }
             
         }

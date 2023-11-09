@@ -82,8 +82,7 @@ fun NewCommentTextField(
                 .background(
                     color = colorResource(resource = SharedR.colors.text_field_background),
                 )
-                .padding(bottom = 50.dp)
-//                .shadow(elevation = 8.dp)
+                .padding(bottom = 40.dp)
         ) {
             TextField(
                 value = value,

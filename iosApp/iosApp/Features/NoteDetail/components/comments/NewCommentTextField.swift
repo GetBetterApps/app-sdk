@@ -91,7 +91,6 @@ struct NewCommentTextField: View {
                         onValueChanged(newValue)
                     }
                     .disabled(!isEnabled)
-//                    .ignoresSafeArea(.keyboard, edges: .bottom)
                 
                 Spacer()
                 
@@ -103,23 +102,25 @@ struct NewCommentTextField: View {
                         .frame(width: 18, height: 18)
                 }
                 .frame(width: 32, height: 32, alignment: .center)
+                
                 .background(
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.buttonGradientStart)
-                        .shadow(radius: 8)
+                        .shadow(radius: 16)
                 )
                 .onTapGesture {
                     onSendClick()
                 }
+                .padding(.trailing, 6)
+                
                 
                 Spacer()
             
             }
             
-            Spacer()
-                .frame(height: 40)
-                .ignoresSafeArea(.all, edges: .bottom)
-            
+            if !isFocused {
+                Spacer().frame(height: 30)
+            }
             
         }
         .background(
