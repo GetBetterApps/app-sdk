@@ -182,6 +182,8 @@
 
     <string name="note_detail_cancel_completion_title">Cancel completion date</string>
     <string name="note_detail_cancel_completion_text">Goal become uncompleted again</string>
+
+    <string name="note_detail_add_comment_hint">Add comment...</string>
     <!--  NOTE DETAIL  -->
 
 

@@ -2,13 +2,10 @@ package com.velkonost.getbetter.android.features.notedetail.components.comments
 
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
@@ -38,18 +35,15 @@ fun CommentItem(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
             .padding(top = 16.dp)
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
 
             if (item.author.avatar != null) {
                 item.author.avatar?.let { avatarBytes ->
                     SubcomposeAsyncImage(
                         modifier = modifier
-                            .size(24.dp)
+                            .size(28.dp)
                             .clip(MaterialTheme.shapes.small),
                         model = ImageRequest.Builder(LocalContext.current)
                             .data(
@@ -76,39 +70,30 @@ fun CommentItem(
                 Text(
                     modifier = modifier.padding(start = 6.dp),
                     text = it,
-                    style = MaterialTheme.typography.bodySmall,
+                    style = MaterialTheme.typography.bodyLarge,
                     color = colorResource(resource = SharedR.colors.text_primary)
                 )
             }
 
             Spacer(modifier.weight(1f))
-
-            Text(
-                text = item.createdDateStr.toString(context),
-                style = MaterialTheme.typography.bodySmall,
-                color = colorResource(resource = SharedR.colors.text_primary)
-            )
-
-
         }
 
         Text(
-            modifier = modifier.padding(top = 12.dp),
+            modifier = modifier
+                .padding(top = 12.dp)
+                .padding(start = 12.dp),
             text = item.text,
             style = MaterialTheme.typography.bodyMedium,
             color = colorResource(resource = SharedR.colors.text_secondary)
         )
 
-        Box(
+        Text(
             modifier = modifier
-                .padding(top = 12.dp)
-                .padding(horizontal = 12.dp)
-                .fillMaxWidth()
-                .height(1.dp)
-                .background(
-                    color = colorResource(resource = SharedR.colors.text_primary),
-                    shape = MaterialTheme.shapes.large
-                )
+                .padding(top = 6.dp)
+                .padding(start = 12.dp),
+            text = item.createdDateStr.toString(context),
+            style = MaterialTheme.typography.labelSmall,
+            color = colorResource(resource = SharedR.colors.text_primary)
         )
     }
 }

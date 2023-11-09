@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -33,13 +32,13 @@ import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
+import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
 fun NewCommentTextField(
     modifier: Modifier = Modifier,
     minLines: Int = 1,
     value: String,
-    placeholderText: String,
     isEnabled: Boolean = true,
     textAlign: TextAlign = TextAlign.Start,
     textStyle: TextStyle = MaterialTheme.typography.titleMedium,
@@ -64,20 +63,27 @@ fun NewCommentTextField(
                     ),
                 )
         )
+
+        Box(
+            modifier = modifier
+                .fillMaxWidth()
+                .height(1.dp)
+                .background(
+                    color = colorResource(
+                        resource = SharedR.colors.button_gradient_start
+                    )
+                )
+        )
+
         Row(
             modifier = modifier
                 .fillMaxWidth()
                 .height(IntrinsicSize.Max)
-                .padding(horizontal = 12.dp)
                 .background(
-                    color = colorResource(resource = SharedR.colors.main_background),
+                    color = colorResource(resource = SharedR.colors.text_field_background),
                 )
                 .padding(bottom = 50.dp)
-                .shadow(
-                    elevation = 8.dp,
-                    shape = MaterialTheme.shapes.medium,
-                )
-                .clip(MaterialTheme.shapes.medium),
+//                .shadow(elevation = 8.dp)
         ) {
             TextField(
                 value = value,
@@ -85,7 +91,7 @@ fun NewCommentTextField(
                     onValueChanged.invoke(it)
                 },
                 modifier = modifier
-                    .fillMaxWidth(0.8f)
+                    .fillMaxWidth(0.85f)
                     .wrapContentHeight(),
                 textStyle = textStyle
                     .copy(
@@ -98,7 +104,7 @@ fun NewCommentTextField(
                         modifier = modifier
 //                        .fillMaxWidth()
                             .padding(top = 4.dp),
-                        text = placeholderText,
+                        text = stringResource(resource = SharedR.strings.note_detail_add_comment_hint),
                         color = colorResource(resource = SharedR.colors.hint_color),
                         textAlign = textAlign,
                         style = MaterialTheme.typography.titleMedium.copy(textAlign = textAlign)
@@ -115,29 +121,33 @@ fun NewCommentTextField(
                 enabled = isEnabled
             )
 
+            Spacer(modifier.weight(1f))
             Box(
                 modifier = modifier
+                    .size(32.dp)
                     .align(Alignment.CenterVertically)
+                    .shadow(elevation = 8.dp, shape = MaterialTheme.shapes.medium)
                     .background(
-                        color = colorResource(resource = SharedR.colors.button_gradient_start)
+                        color = colorResource(resource = SharedR.colors.button_gradient_start),
+                        shape = MaterialTheme.shapes.medium
                     )
-                    .fillMaxHeight()
-                    .fillMaxWidth()
                     .clickable(
                         interactionSource = interactionSource,
                         indication = null,
                         onClick = onSendClick
                     )
+
             ) {
                 Image(
                     modifier = modifier
-                        .size(24.dp)
+                        .size(18.dp)
                         .align(Alignment.Center),
                     painter = painterResource(imageResource = SharedR.images.ic_send),
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.text_light))
                 )
             }
+            Spacer(modifier.weight(1f))
         }
 
     }
