@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 import SharedSDK
- 
+
 struct NewCommentTextField: View {
     
     let minLines: Int
@@ -48,13 +48,14 @@ struct NewCommentTextField: View {
     var body: some View {
         
         VStack(spacing: 0) {
+            
             ZStack {}
-            .frame(minWidth: 0, maxWidth: .infinity)
-            .frame(height: 1)
-            .background(
-                Rectangle()
-                    .fill(Color.buttonGradientStart)
-            )
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .frame(height: 1)
+                .background(
+                    Rectangle()
+                        .fill(Color.buttonGradientStart)
+                )
             
             HStack(spacing: 0) {
                 TextField(
@@ -64,33 +65,33 @@ struct NewCommentTextField: View {
                         set: { textFieldValue = $0 }
                     ),
                     axis: .vertical)
-                    .style(.titleMedium)
-                    .keyboardType(.default)
-                    .multilineTextAlignment(textAlign)
-                    .lineLimit(minLines...20)
-                    .foregroundColor(.textSecondaryTitle)
-                    .placeholder(when: value.isEmpty) {
-                        Text(SharedR.strings().note_detail_add_comment_hint.desc().localized())
-                            .style(.titleMedium)
-                            .multilineTextAlignment(textAlign)
-                            .lineLimit(minLines...20)
-                            .foregroundColor(.hintColor)
-                            .frame(
-                                minWidth: 0,
-                                maxWidth: .infinity,
-                                alignment: textAlign == .leading ? .leading : .center
-                            )
-                        
-                        if textAlign == .leading {
-                            Spacer()
-                        }
+                .style(.titleMedium)
+                .keyboardType(.default)
+                .multilineTextAlignment(textAlign)
+                .lineLimit(minLines...20)
+                .foregroundColor(.textSecondaryTitle)
+                .placeholder(when: value.isEmpty) {
+                    Text(SharedR.strings().note_detail_add_comment_hint.desc().localized())
+                        .style(.titleMedium)
+                        .multilineTextAlignment(textAlign)
+                        .lineLimit(minLines...20)
+                        .foregroundColor(.hintColor)
+                        .frame(
+                            minWidth: 0,
+                            maxWidth: .infinity,
+                            alignment: textAlign == .leading ? .leading : .center
+                        )
+                    
+                    if textAlign == .leading {
+                        Spacer()
                     }
-                    .focused($isFocused)
-                    .padding(16)
-                    .onChange(of: textFieldValue) { newValue in
-                        onValueChanged(newValue)
-                    }
-                    .disabled(!isEnabled)
+                }
+                .focused($isFocused)
+                .padding(16)
+                .onChange(of: textFieldValue) { newValue in
+                    onValueChanged(newValue)
+                }
+                .disabled(!isEnabled)
                 
                 Spacer()
                 
@@ -115,7 +116,7 @@ struct NewCommentTextField: View {
                 
                 
                 Spacer()
-            
+                
             }
             
             if !isFocused {
@@ -126,6 +127,5 @@ struct NewCommentTextField: View {
         .background(
             Rectangle().fill(Color.textFieldBackground)
         )
-  
     }
 }
