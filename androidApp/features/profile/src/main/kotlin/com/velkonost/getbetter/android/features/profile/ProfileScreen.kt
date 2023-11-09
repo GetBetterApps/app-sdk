@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -18,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.profile.components.AppSettings
 import com.velkonost.getbetter.android.features.profile.components.HelpAndSupport
+import com.velkonost.getbetter.android.features.profile.components.LevelBlock
 import com.velkonost.getbetter.android.features.profile.components.ProfileHeader
 import com.velkonost.getbetter.android.features.profile.components.SubscriptionBox
 import com.velkonost.getbetter.core.compose.components.AppButton
@@ -70,6 +72,14 @@ fun ProfileScreen(
 
             }
         )
+
+        AnimatedVisibility(visible = state.experienceData != null) {
+            state.experienceData?.let {
+                LevelBlock(experienceData = it)
+            }
+
+        }
+
 
         SubscriptionBox(
             subscriptionPlan = stringResource(resource = SharedR.strings.profile_sub_basic)

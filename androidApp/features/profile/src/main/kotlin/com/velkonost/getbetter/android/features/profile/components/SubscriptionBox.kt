@@ -36,7 +36,7 @@ fun SubscriptionBox(
 
     Row(
         modifier = modifier
-            .padding(top = 32.dp)
+            .padding(top = 12.dp)
             .shadow(
                 elevation = 8.dp,
                 shape = MaterialTheme.shapes.medium,

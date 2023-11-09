@@ -41,7 +41,8 @@ internal constructor(
                         emit(
                             viewState.value.copy(
                                 userName = it.displayName ?: "",
-                                avatarBytes = it.avatar
+                                avatarBytes = it.avatar,
+                                experienceData = it.experienceData
                             )
                         )
                     }
@@ -61,7 +62,8 @@ internal constructor(
                         emit(
                             viewState.value.copy(
                                 userName = it.displayName ?: "",
-                                avatarBytes = it.avatar
+                                avatarBytes = it.avatar,
+                                experienceData = it.experienceData
                             )
                         )
                     }

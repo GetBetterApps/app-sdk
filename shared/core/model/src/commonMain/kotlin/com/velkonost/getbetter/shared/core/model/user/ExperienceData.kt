@@ -8,6 +8,8 @@ data class ExperienceData(
 
     val remainExperience: Int,
 
+    val remainExperiencePercent: Float,
+
     val currentLevelExperienceLimit: Int
 ) {
     companion object {
@@ -15,6 +17,7 @@ data class ExperienceData(
     }
 }
 
+//60 iz 135 == 60/135 =
 val Int.asLevel: Int
     get() = this / ExperienceData.LEVEL_LIMIT
 
@@ -22,5 +25,6 @@ val Int.asExperienceData: ExperienceData
     get() = ExperienceData(
         currentLevel = this.asLevel,
         remainExperience = this - (this.asLevel * ExperienceData.LEVEL_LIMIT),
-        currentLevelExperienceLimit = ExperienceData.LEVEL_LIMIT
+        currentLevelExperienceLimit = ExperienceData.LEVEL_LIMIT,
+        remainExperiencePercent = this / ExperienceData.LEVEL_LIMIT.toFloat()
     )
