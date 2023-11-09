@@ -210,9 +210,22 @@ struct NoteDetailScreen : View {
                 .onTapGesture {
                     endTextEditing()
                 }
+                
+                VStack(spacing: 0) {
+                    Spacer()
+                    NewCommentTextField(
+                        value: Binding(get: { state.commentsData.commentText }, set: { value in }),
+                        onValueChanged: { value in
+                            viewModel.dispatch(action: NoteDetailActionCommentTextChanged(value: value))
+                        },
+                        onSendClick: { 
+                            viewModel.dispatch(action: NoteDetailActionCommentAddClick())
+                        }
+                    )
+                }.ignoresSafeArea(.all)
             }
+            
         }
-        
         .alert(
             state.noteType == NoteType.default_ ? SharedR.strings().note_detail_confirm_delete_title.desc().localized() : SharedR.strings().goal_detail_confirm_delete_title.desc().localized(), isPresented: $confirmDeleteNoteDialog) {
                 Button(SharedR.strings().confirm.desc().localized()) {

@@ -261,6 +261,7 @@ fun NoteDetailScreen(
             }
         }
     }
+
     Column(modifier = modifier.fillMaxSize()) {
         Spacer(modifier.weight(1f))
         NewCommentTextField(

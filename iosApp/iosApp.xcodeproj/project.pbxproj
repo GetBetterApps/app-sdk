@@ -104,6 +104,7 @@
 		46C10D232AB4734200E62846 /* AuthAnonymousButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C10D222AB4734200E62846 /* AuthAnonymousButton.swift */; };
 		46C10D252AB4741100E62846 /* SwitchRegisteringText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C10D242AB4741100E62846 /* SwitchRegisteringText.swift */; };
 		46C6606A2AFCCCD900FA189C /* CommentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C660692AFCCCD900FA189C /* CommentItem.swift */; };
+		46C6606C2AFCD2D600FA189C /* NewCommentTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C6606B2AFCD2D600FA189C /* NewCommentTextField.swift */; };
 		46CDB56C2AADB45E00800096 /* AuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDB56B2AADB45E00800096 /* AuthScreen.swift */; };
 		46CDB56E2AADB46400800096 /* AuthRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDB56D2AADB46400800096 /* AuthRoute.swift */; };
 		46D857722ACFF16600BE74DA /* AddAreaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D857712ACFF16600BE74DA /* AddAreaItem.swift */; };
@@ -224,6 +225,7 @@
 		46C10D222AB4734200E62846 /* AuthAnonymousButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAnonymousButton.swift; sourceTree = "<group>"; };
 		46C10D242AB4741100E62846 /* SwitchRegisteringText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchRegisteringText.swift; sourceTree = "<group>"; };
 		46C660692AFCCCD900FA189C /* CommentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentItem.swift; sourceTree = "<group>"; };
+		46C6606B2AFCD2D600FA189C /* NewCommentTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCommentTextField.swift; sourceTree = "<group>"; };
 		46CDB56B2AADB45E00800096 /* AuthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreen.swift; sourceTree = "<group>"; };
 		46CDB56D2AADB46400800096 /* AuthRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRoute.swift; sourceTree = "<group>"; };
 		46D857712ACFF16600BE74DA /* AddAreaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaItem.swift; sourceTree = "<group>"; };
@@ -664,6 +666,7 @@
 			isa = PBXGroup;
 			children = (
 				46C660692AFCCCD900FA189C /* CommentItem.swift */,
+				46C6606B2AFCD2D600FA189C /* NewCommentTextField.swift */,
 			);
 			path = comments;
 			sourceTree = "<group>";
@@ -951,6 +954,7 @@
 				4667C9022AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift in Sources */,
 				461F7C652AA88A39003791CF /* NavRoute.swift in Sources */,
 				46E2DD2D2AE9364D00B4B2B5 /* AreaPickerHeader.swift in Sources */,
+				46C6606C2AFCD2D600FA189C /* NewCommentTextField.swift in Sources */,
 				468B87702ABC45DB001BBEB1 /* SocialRoute.swift in Sources */,
 				46D8577A2ACFFC7C00BE74DA /* ScrollViewExt.swift in Sources */,
 				4616B08B2AF62B9500A4CDDE /* CompletionDateButton.swift in Sources */,
