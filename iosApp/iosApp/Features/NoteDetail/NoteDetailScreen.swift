@@ -200,8 +200,7 @@ struct NoteDetailScreen : View {
                                 )
                             }
                             
-                            Spacer()
-                                .frame(height: 70)
+                            Spacer().frame(height: 140)
                             
                         }
                         .padding(.horizontal, 20)
@@ -222,7 +221,7 @@ struct NoteDetailScreen : View {
                             viewModel.dispatch(action: NoteDetailActionCommentAddClick())
                         }
                     )
-                }.ignoresSafeArea(.all)
+                }.ignoresSafeArea(.container, edges: .bottom)
             }
             
         }

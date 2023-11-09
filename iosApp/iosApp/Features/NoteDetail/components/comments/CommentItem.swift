@@ -50,6 +50,8 @@ struct CommentItem: View {
                 if item.allowEdit {
                     Image(uiImage: SharedR.images().ic_trash.toUIImage()!)
                         .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(.iconInactive)
                         .padding(4)
                         .frame(width: 24, height: 24)
                 }

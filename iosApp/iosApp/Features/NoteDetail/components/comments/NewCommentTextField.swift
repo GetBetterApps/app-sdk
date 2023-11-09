@@ -48,9 +48,7 @@ struct NewCommentTextField: View {
     var body: some View {
         
         VStack(spacing: 0) {
-            ZStack {
-                
-            }
+            ZStack {}
             .frame(minWidth: 0, maxWidth: .infinity)
             .frame(height: 1)
             .background(
@@ -89,13 +87,11 @@ struct NewCommentTextField: View {
                     }
                     .focused($isFocused)
                     .padding(16)
-//                    .background(Color.textFieldBackground)
-//                    .cornerRadius(12)
                     .onChange(of: textFieldValue) { newValue in
                         onValueChanged(newValue)
                     }
                     .disabled(!isEnabled)
-                    .ignoresSafeArea(.keyboard, edges: .bottom)
+//                    .ignoresSafeArea(.keyboard, edges: .bottom)
                 
                 Spacer()
                 
@@ -110,6 +106,7 @@ struct NewCommentTextField: View {
                 .background(
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.buttonGradientStart)
+                        .shadow(radius: 8)
                 )
                 .onTapGesture {
                     onSendClick()
@@ -118,15 +115,16 @@ struct NewCommentTextField: View {
                 Spacer()
             
             }
-            .padding(.bottom, 50)
-            .background(
-                Rectangle().fill(Color.textFieldBackground)
-            )
             
+            Spacer()
+                .frame(height: 40)
+                .ignoresSafeArea(.all, edges: .bottom)
             
             
         }
-        
+        .background(
+            Rectangle().fill(Color.textFieldBackground)
+        )
   
     }
 }
