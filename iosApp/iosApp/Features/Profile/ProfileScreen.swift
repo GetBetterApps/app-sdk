@@ -46,6 +46,10 @@ struct ProfileScreen: View {
                     
                 }
                 
+                if state.experienceData != nil {
+                    LevelBlock(experienceData: state.experienceData!)
+                }
+                
                 SubscriptionBox(subscriptionPlan: SharedR.strings().profile_sub_basic.desc().localized()) {
                     
                 }
@@ -71,6 +75,7 @@ struct ProfileScreen: View {
                 
             }
             .padding(.init(top: 16, leading: 16, bottom: 200, trailing: 16))
+            .animation(.easeInOut, value: state.experienceData)
         }.sheet(isPresented: $showImagePicker) {
             ImagePicker(sourceType: .photoLibrary) { image in
                 Task {

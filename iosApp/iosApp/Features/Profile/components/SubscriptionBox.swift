@@ -67,7 +67,7 @@ struct SubscriptionBox: View {
                 .shadow(radius: 8)
                 
         )
-        .padding(.init(top: 32, leading: .zero, bottom: .zero, trailing: .zero))
+        .padding(.init(top: 12, leading: .zero, bottom: .zero, trailing: .zero))
 
         
     }
