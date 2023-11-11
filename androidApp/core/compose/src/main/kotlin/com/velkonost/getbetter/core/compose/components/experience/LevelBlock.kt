@@ -22,13 +22,14 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun LevelBlock(
     modifier: Modifier = Modifier,
+    topPadding: Int = 20,
     experienceData: ExperienceData
 ) {
 
     val context = LocalContext.current
 
     PrimaryBox(
-        modifier = modifier.padding(top = 20.dp)
+        modifier = modifier.padding(top = topPadding.dp)
     ) {
         Column {
             Row {

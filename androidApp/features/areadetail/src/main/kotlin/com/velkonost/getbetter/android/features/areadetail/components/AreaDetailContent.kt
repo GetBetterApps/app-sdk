@@ -27,7 +27,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
-import com.velkonost.getbetter.core.compose.components.SingleLineTextField
 import com.velkonost.getbetter.core.compose.components.area.EmojiPicker
 import com.velkonost.getbetter.core.compose.components.area.SelectedEmojiImage
 import com.velkonost.getbetter.core.compose.components.experience.LevelBlock
@@ -126,17 +125,20 @@ fun AreaDetailContent(
             onEmojiClick = onEmojiClick
         )
 
-        LevelBlock(experienceData = areaData.experienceData)
+        LevelBlock(
+            topPadding = 2,
+            experienceData = areaData.experienceData
+        )
 
-        Row(modifier = modifier.padding(top = 24.dp)) {
+        Row(modifier = modifier.padding(top = 4.dp)) {
             Spacer(modifier = modifier.weight(1f))
-            SingleLineTextField(
+            MultilineTextField(
                 value = areaData.name,
+                minLines = 1,
                 placeholderText = stringResource(resource = SharedR.strings.diary_areas_create_new_name_hint),
                 isEnabled = isEditing,
                 textAlign = TextAlign.Center,
-                textStyle = MaterialTheme.typography.titleLarge,
-                paddingValues = PaddingValues(),
+                paddingValues = PaddingValues(top = 8.dp),
                 onValueChanged = onNameChanged
             )
             Spacer(modifier = modifier.weight(1f))
