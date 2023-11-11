@@ -35,5 +35,6 @@ struct LevelBlock: View {
                     
             }
         }
+        .padding(.top, 20)
     }
 }
