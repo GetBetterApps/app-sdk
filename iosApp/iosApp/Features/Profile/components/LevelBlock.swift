@@ -23,8 +23,11 @@ struct LevelBlock: View {
         PrimaryBox {
             VStack(spacing: 0) {
                 HStack {
+                    Text(SharedR.strings().experience_your_title.desc().localized())
+                        .style(.labelMedium)
+                        .foregroundColor(.textPrimary)
                     Spacer()
-                    Text("Level \(experienceData.currentLevel)")
+                    Text(experienceData.currentLevelStr.localized())
                         .style(.labelMedium)
                         .foregroundColor(.textPrimary)
                 }

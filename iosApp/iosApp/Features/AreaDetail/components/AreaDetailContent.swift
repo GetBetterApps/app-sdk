@@ -93,6 +93,8 @@ struct AreaDetailContent: View {
                     onEmojiClick: onEmojiClick
                 )
                 
+                LevelBlock(experienceData: areaData.experienceData)
+                
                 SingleLineTextField(
                     value: areaData.name,
                     placeholderText: SharedR.strings().diary_areas_create_new_name_hint.desc().localized(),
