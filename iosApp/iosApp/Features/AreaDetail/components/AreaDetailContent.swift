@@ -93,17 +93,17 @@ struct AreaDetailContent: View {
                     onEmojiClick: onEmojiClick
                 )
                 
-                LevelBlock(experienceData: areaData.experienceData)
+                LevelBlock(experienceData: areaData.experienceData, topPadding: 4)
                 
-                SingleLineTextField(
+                MultilineTextField(
                     value: areaData.name,
                     placeholderText: SharedR.strings().diary_areas_create_new_name_hint.desc().localized(),
+                    minLines: 1,
                     isEnabled: isEditing,
                     textAlign: .center,
-                    textStyle: .titleLarge,
-                    paddings: EdgeInsets.init(),
+                    paddings: .init(top: 4, leading: .zero, bottom: .zero, trailing: .zero),
                     onValueChanged: onNameChanged
-                ).padding(.top, 24)
+                ).padding(.top, 4)
                 
                 MultilineTextField(
                     value: areaData.description_,
@@ -132,7 +132,7 @@ extension AreaDetailContent {
                 .style(.titleSmall)
                 .foregroundColor(.textSecondaryTitle)
                 .multilineTextAlignment(.center)
-                .frame(width: 80)
+                .frame(width: 90)
                 .padding(.top, 4)
                 .padding(.bottom, 4)
                 .padding(.leading)
@@ -146,7 +146,7 @@ extension AreaDetailContent {
                 .style(.titleSmall)
                 .foregroundColor(.textSecondaryTitle)
                 .multilineTextAlignment(.center)
-                .frame(width: 80)
+                .frame(width: 90)
                 .padding(.top, 4)
                 .padding(.bottom, 4)
                 .padding(.leading)
@@ -160,7 +160,7 @@ extension AreaDetailContent {
                 .style(.titleSmall)
                 .foregroundColor(.textSecondaryTitle)
                 .multilineTextAlignment(.center)
-                .frame(width: 80)
+                .frame(width: 90)
                 .padding(.top, 4)
                 .padding(.bottom, 4)
                 .padding(.leading)

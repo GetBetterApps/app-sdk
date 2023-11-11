@@ -13,9 +13,11 @@ import SharedSDK
 struct LevelBlock: View {
     
     private let experienceData: ExperienceData
+    private let topPadding: CGFloat
     
-    init(experienceData: ExperienceData) {
+    init(experienceData: ExperienceData, topPadding: Int = 20) {
         self.experienceData = experienceData
+        self.topPadding = CGFloat(topPadding)
     }
     
     var body: some View {
@@ -38,6 +40,6 @@ struct LevelBlock: View {
                     
             }
         }
-        .padding(.top, 20)
+        .padding(.top, topPadding)
     }
 }
