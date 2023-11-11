@@ -57,6 +57,9 @@
     <string name="profile_help_contact_support">Contact Support</string>
     <string name="profile_logout">Logout</string>
 
+    <string name="experience_your_title">Your experience</string>
+    <string name="experience_level">Level %s</string>
+
     <!--  WISDOM  -->
     <string name="wisdom_affirmations_title">Аффирмации и позитивное мышление</string>
     <string name="wisdom_advices_title">Советы по самосовершенствованию</string>

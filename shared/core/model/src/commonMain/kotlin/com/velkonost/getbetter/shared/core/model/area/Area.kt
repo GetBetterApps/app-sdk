@@ -34,7 +34,7 @@ data class Area(
 
     val isAllowLeave: Boolean = false,
 
-    val experience: Int = 0,
+    val userExperience: Int = 0,
 
     val likesData: LikesData
 )

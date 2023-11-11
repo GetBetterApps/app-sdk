@@ -30,6 +30,7 @@ import com.velkonost.getbetter.core.compose.components.MultilineTextField
 import com.velkonost.getbetter.core.compose.components.SingleLineTextField
 import com.velkonost.getbetter.core.compose.components.area.EmojiPicker
 import com.velkonost.getbetter.core.compose.components.area.SelectedEmojiImage
+import com.velkonost.getbetter.core.compose.components.experience.LevelBlock
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import com.velkonost.getbetter.shared.features.areadetail.presentation.model.AreaDetailUI
@@ -124,6 +125,8 @@ fun AreaDetailContent(
             items = Emoji.values().toList(),
             onEmojiClick = onEmojiClick
         )
+
+        LevelBlock(experienceData = areaData.experienceData)
 
         Row(modifier = modifier.padding(top = 24.dp)) {
             Spacer(modifier = modifier.weight(1f))

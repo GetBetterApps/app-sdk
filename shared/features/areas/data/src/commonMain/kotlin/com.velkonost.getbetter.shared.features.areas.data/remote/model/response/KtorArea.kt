@@ -51,8 +51,8 @@ data class KtorArea(
     @SerialName("isAllowLeave")
     val isAllowLeave: Boolean = false,
 
-    @SerialName("experience")
-    val experience: Int = 0,
+    @SerialName("userExperience")
+    val userExperience: Int = 0,
 
     @SerialName("totalLikes")
     val totalLikes: Int,
@@ -78,7 +78,7 @@ fun KtorArea.asExternalModel() =
         isAllowLeave = isAllowLeave,
         isAllowEdit = isAllowEdit,
         isAllowDelete = isAllowDelete,
-        experience = experience,
+        userExperience = userExperience,
         likesData = LikesData(
             totalLikes = totalLikes,
             userLike = LikeType.entries.first { it.responseName == userLike }

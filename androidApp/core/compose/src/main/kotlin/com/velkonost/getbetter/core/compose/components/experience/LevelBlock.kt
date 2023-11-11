@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.profile.components
+package com.velkonost.getbetter.core.compose.components.experience
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,11 +11,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.shared.core.model.user.ExperienceData
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
+import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
 fun LevelBlock(
@@ -23,14 +25,21 @@ fun LevelBlock(
     experienceData: ExperienceData
 ) {
 
+    val context = LocalContext.current
+
     PrimaryBox(
         modifier = modifier.padding(top = 20.dp)
     ) {
         Column {
             Row {
+                Text(
+                    text = stringResource(resource = SharedR.strings.experience_your_title),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = colorResource(resource = SharedR.colors.text_primary)
+                )
                 Spacer(modifier.weight(1f))
                 Text(
-                    text = "Level ${experienceData.currentLevel}",
+                    text = experienceData.currentLevelStr.toString(context),
                     style = MaterialTheme.typography.labelMedium,
                     color = colorResource(resource = SharedR.colors.text_primary)
                 )

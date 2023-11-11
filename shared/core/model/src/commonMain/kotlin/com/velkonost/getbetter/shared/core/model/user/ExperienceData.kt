@@ -1,5 +1,8 @@
 package com.velkonost.getbetter.shared.core.model.user
 
+import com.velkonost.getbetter.shared.resources.SharedR
+import dev.icerock.moko.resources.desc.ResourceFormatted
+import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -15,6 +18,9 @@ data class ExperienceData(
     companion object {
         const val LEVEL_LIMIT = 100
     }
+
+    val currentLevelStr: StringDesc
+        get() = StringDesc.ResourceFormatted(SharedR.strings.experience_level, currentLevel)
 }
 
 //60 iz 135 == 60/135 =

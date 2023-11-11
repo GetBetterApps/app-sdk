@@ -20,11 +20,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.profile.components.AppSettings
 import com.velkonost.getbetter.android.features.profile.components.HelpAndSupport
-import com.velkonost.getbetter.android.features.profile.components.LevelBlock
 import com.velkonost.getbetter.android.features.profile.components.ProfileHeader
 import com.velkonost.getbetter.android.features.profile.components.SubscriptionBox
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.VersionName
+import com.velkonost.getbetter.core.compose.components.experience.LevelBlock
 import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
 import com.velkonost.getbetter.shared.features.profile.ProfileViewModel
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelected
