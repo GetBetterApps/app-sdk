@@ -39,7 +39,7 @@ data class Note(
         get() = createdDate.convertToLocalDatetime()
 
     val completionDateStr: StringDesc?
-        get() = completionDate?.convertToLocalDatetime()
+        get() = completionDate?.convertToLocalDatetimeWithoutRelation()
 
     val expectedCompletionDateStr: StringDesc?
         get() = expectedCompletionDate?.convertToLocalDatetimeWithoutRelation()

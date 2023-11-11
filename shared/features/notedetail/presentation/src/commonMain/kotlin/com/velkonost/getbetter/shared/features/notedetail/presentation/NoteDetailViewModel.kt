@@ -49,8 +49,12 @@ internal constructor(
         launchJob {
             note.collectLatest { note ->
                 note?.updateUI()
-                note?.authorId?.let { getNoteAuthor(it) }
-                note?.id?.let { getNoteComments(it) }
+                note?.authorId?.let {
+                    getNoteAuthor(it) {
+                        getNoteComments(note.id)
+                    }
+                }
+
             }
         }
     }
@@ -98,11 +102,19 @@ internal constructor(
         }
     }
 
+    private fun clearCommentText() {
+        val commentsData =
+            viewState.value.commentsData.copy(commentText = "")
+        emit(viewState.value.copy(commentsData = commentsData))
+    }
+
     private fun obtainCommentAdd() {
         val newComment = viewState.value.commentsData.commentText.trim()
         if (newComment.isEmpty()) return
 
         launchJob {
+            clearCommentText()
+
             commentsRepository.createComment(
                 entityType = EntityType.Note,
                 entityId = viewState.value.initialItem!!.id,
@@ -157,7 +169,7 @@ internal constructor(
         }
     }
 
-    private fun getNoteAuthor(authorId: String) {
+    private fun getNoteAuthor(authorId: String, onSuccess: () -> Unit) {
         launchJob {
             userInfoRepository.fetchInfoAboutOtherUser(authorId) collectAndProcess {
                 isLoading {
@@ -165,6 +177,7 @@ internal constructor(
                 }
                 onSuccess {
                     emit(viewState.value.copy(author = it))
+                    onSuccess.invoke()
                 }
             }
         }

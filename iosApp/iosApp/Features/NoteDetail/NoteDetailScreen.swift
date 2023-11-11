@@ -41,7 +41,8 @@ struct NoteDetailScreen : View {
             } else {
                 ScrollView(.vertical, showsIndicators: false) {
                     ScrollViewReader { value in
-                        VStack {
+                        
+                        LazyVStack {
                             NoteDetailHeader(
                                 noteType: state.noteType,
                                 isNotePrivate: state.isNotePrivate,
@@ -198,7 +199,7 @@ struct NoteDetailScreen : View {
                                         viewModel.dispatch(action: NoteDetailActionCommentRemoveClick(value: value))
                                     }
                                 )
-                            }
+                            }.id(UUID())
                             
                             Spacer().frame(height: 140)
                             
