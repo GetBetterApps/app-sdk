@@ -42,7 +42,7 @@ fun NotesView(
                 state = listState,
                 contentPadding = PaddingValues(bottom = 140.dp)
             ) {
-                items(items) { item ->
+                items(items, key = { it.id }) { item ->
                     NoteItem(
                         item = item,
                         onClick = itemClick,

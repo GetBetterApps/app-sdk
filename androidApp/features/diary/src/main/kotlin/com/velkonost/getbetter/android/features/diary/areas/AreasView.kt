@@ -36,7 +36,7 @@ fun AreasView(
                     .fadingEdge(),
                 contentPadding = PaddingValues(bottom = 140.dp)
             ) {
-                items(items) { item ->
+                items(items, key = { it.id }) { item ->
                     AreaItem(
                         item = item,
                         onClick = itemClick,

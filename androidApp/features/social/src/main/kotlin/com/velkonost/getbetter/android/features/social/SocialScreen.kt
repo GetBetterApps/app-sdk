@@ -126,6 +126,7 @@ fun SocialScreenContent(
     onRefreshGeneralFeed: () -> Unit,
     onRefreshAreasFeed: () -> Unit
 ) {
+
     HorizontalPager(
         state = pagerState,
         userScrollEnabled = false,
@@ -187,7 +188,7 @@ fun SocialFeedView(
                 state = listState,
                 contentPadding = PaddingValues(bottom = 140.dp)
             ) {
-                items(items) { item ->
+                items(items, key = { it.id }, contentType = { it.noteType }) { item ->
                     FeedNoteItem(
                         item = item,
                         onClick = itemClick,

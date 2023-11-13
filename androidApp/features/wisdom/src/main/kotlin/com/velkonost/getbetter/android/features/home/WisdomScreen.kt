@@ -31,7 +31,7 @@ fun WisdomScreen(
         contentPadding = PaddingValues(bottom = 140.dp, top = 28.dp)
     ) {
 
-        items(state.items) { item ->
+        items(state.items, key = { it.name }) { item ->
             WisdomItem(
                 title = item.title.toString(context = context),
                 description = item.description.toString(context = context),
