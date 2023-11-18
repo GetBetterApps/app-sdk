@@ -19,7 +19,6 @@ struct ProfileScreen: View {
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     
     @State var showImagePicker: Bool = false
-    @State private var uploadAvatarState: UploadState = UploadState.Idle
     
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var selectedImageData: Data? = nil
@@ -28,18 +27,11 @@ struct ProfileScreen: View {
         @State var state = viewModel.viewStateValue as! ProfileViewState
         
         ScrollView(showsIndicators: false) {
-            let isAvatarLoading = switch(uploadAvatarState) {
-            case .Loading:
-                true
-            default:
-                false
-            }
-            
             VStack {
                 ProfileHeader(
                     userName: state.userName,
                     avatarBytes: state.avatarBytes,
-                    isLoading: isAvatarLoading
+                    isLoading: state.isLoading
                 ) {
                     self.showImagePicker.toggle()
                 } onSettingsClick: {

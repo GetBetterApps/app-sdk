@@ -128,7 +128,7 @@ struct AreaDetailContent: View {
 extension AreaDetailContent {
     private var AreaDataContent: some View {
         HStack {
-            Text("14000\nmembers")
+            Text(areaData.statsData.membersAmountStr.localized())
                 .style(.titleSmall)
                 .foregroundColor(.textSecondaryTitle)
                 .multilineTextAlignment(.center)
@@ -142,7 +142,7 @@ extension AreaDetailContent {
                         .fill(Color.backgroundIcon)
                 )
             Spacer()
-            Text("20200\nnotes")
+            Text(areaData.statsData.notesAmountStr.localized())
                 .style(.titleSmall)
                 .foregroundColor(.textSecondaryTitle)
                 .multilineTextAlignment(.center)

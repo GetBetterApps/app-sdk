@@ -60,7 +60,7 @@ struct AddAreaItem: View {
                 
                 HStack(alignment: .center) {
                     Spacer()
-                    Text("14000\nmembers")
+                    Text(item.statsData.membersAmountStr.localized())
                         .style(.labelSmall)
                         .foregroundColor(.textSecondaryTitle)
                         .multilineTextAlignment(.center)
@@ -71,7 +71,7 @@ struct AddAreaItem: View {
                                 .fill(Color.backgroundIcon)
                         )
                     Spacer()
-                    Text("20200\nnotes")
+                    Text(item.statsData.notesAmountStr.localized())
                         .style(.labelSmall)
                         .foregroundColor(.textSecondaryTitle)
                         .multilineTextAlignment(.center)
