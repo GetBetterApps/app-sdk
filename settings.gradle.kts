@@ -54,10 +54,6 @@ include(
     ":shared:features:profile:data",
     ":shared:features:profile:presentation",
 
-    ":shared:features:home:presentation",
-
-    ":shared:features:detail:presentation",
-
     ":shared:features:wisdom:presentation",
 
     ":shared:features:social:api",
@@ -81,9 +77,6 @@ include(
     ":androidApp:core:utils",
 
     ":androidApp:features:auth",
-
-    ":androidApp:features:home",
-    ":androidApp:features:detail",
 
     ":androidApp:features:splash",
     ":androidApp:features:social",

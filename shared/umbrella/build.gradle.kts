@@ -41,9 +41,6 @@ kotlin {
             export(projects.shared.features.auth.domain)
             export(projects.shared.features.auth.presentation)
 
-            export(projects.shared.features.home.presentation)
-            export(projects.shared.features.detail.presentation)
-
             export(projects.shared.features.splash.presentation)
 
             export(projects.shared.features.social.presentation)
@@ -84,9 +81,6 @@ kotlin {
                 implementation(projects.shared.features.auth.data)
                 implementation(projects.shared.features.auth.domain)
                 implementation(projects.shared.features.auth.presentation)
-
-                implementation(projects.shared.features.home.presentation)
-                implementation(projects.shared.features.detail.presentation)
 
                 implementation(projects.shared.features.splash.data)
                 implementation(projects.shared.features.splash.presentation)
@@ -135,9 +129,6 @@ kotlin {
                 api(projects.shared.features.auth.api)
                 api(projects.shared.features.auth.domain)
                 api(projects.shared.features.auth.presentation)
-
-                api(projects.shared.features.home.presentation)
-                api(projects.shared.features.detail.presentation)
 
                 api(projects.shared.features.splash.presentation)
                 api(projects.shared.features.social.presentation)

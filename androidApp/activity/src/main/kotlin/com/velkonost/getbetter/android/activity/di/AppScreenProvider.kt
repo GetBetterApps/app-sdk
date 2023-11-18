@@ -7,9 +7,7 @@ import androidx.navigation.navigation
 import com.velkonost.getbetter.android.features.addarea.AddAreaNavRoute
 import com.velkonost.getbetter.android.features.auth.AuthNavRoute
 import com.velkonost.getbetter.android.features.calendars.CalendarsNavRoute
-import com.velkonost.getbetter.android.features.detail.DetailNavRoute
 import com.velkonost.getbetter.android.features.diary.DiaryNavRoute
-import com.velkonost.getbetter.android.features.home.HomeNavRoute
 import com.velkonost.getbetter.android.features.home.WisdomNavRoute
 import com.velkonost.getbetter.android.features.notedetail.NoteDetailNavRoute
 import com.velkonost.getbetter.android.features.profile.ProfileNavRoute
@@ -20,13 +18,8 @@ import com.velkonost.getbetter.shared.core.vm.navigation.NavigationScreen
 
 val AppScreens = setOf(
     AuthNavRoute,
-
     AddAreaNavRoute,
-
     NoteDetailNavRoute,
-
-    HomeNavRoute,
-    DetailNavRoute
 )
 
 val NavigationScreens = setOf(
