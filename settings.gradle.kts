@@ -42,6 +42,8 @@ include(
     ":shared:features:likes:data",
     ":shared:features:comments:api",
     ":shared:features:comments:data",
+    ":shared:features:follows:api",
+    ":shared:features:follows:data",
 
     ":shared:features:auth:api",
     ":shared:features:auth:data",
