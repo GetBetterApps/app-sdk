@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.areas.data.remote.model.response
 
 import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.area.StatsData
 import com.velkonost.getbetter.shared.core.model.area.TermsOfMembership
 import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import com.velkonost.getbetter.shared.core.model.likes.LikesData
@@ -58,7 +59,13 @@ data class KtorArea(
     val totalLikes: Int,
 
     @SerialName("userLike")
-    val userLike: String
+    val userLike: String,
+
+    @SerialName("notesAmount")
+    val notesAmount: Int,
+
+    @SerialName("membersAmount")
+    val membersAmount: Int
 )
 
 fun KtorArea.asExternalModel() =
@@ -82,5 +89,9 @@ fun KtorArea.asExternalModel() =
         likesData = LikesData(
             totalLikes = totalLikes,
             userLike = LikeType.entries.first { it.responseName == userLike }
+        ),
+        statsData = StatsData(
+            notesAmount = notesAmount,
+            membersAmount = membersAmount
         )
     )

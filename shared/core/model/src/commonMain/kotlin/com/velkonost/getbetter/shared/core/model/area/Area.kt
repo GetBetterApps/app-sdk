@@ -36,5 +36,7 @@ data class Area(
 
     val userExperience: Int = 0,
 
-    val likesData: LikesData
+    val likesData: LikesData,
+
+    val statsData: StatsData
 )
