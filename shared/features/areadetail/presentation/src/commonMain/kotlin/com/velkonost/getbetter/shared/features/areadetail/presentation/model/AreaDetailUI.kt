@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.areadetail.presentation.model
 
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.area.StatsData
 import com.velkonost.getbetter.shared.core.model.area.TermsOfMembership
 import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.model.user.ExperienceData
@@ -16,7 +17,8 @@ data class AreaDetailUI(
     var termsOfMembership: TermsOfMembership,
 
     var likesData: LikesData,
-    var experienceData: ExperienceData
+    var experienceData: ExperienceData,
+    var statsData: StatsData
 )
 
 fun Area.toUI() =
@@ -28,5 +30,6 @@ fun Area.toUI() =
         isPrivate = isPrivate,
         termsOfMembership = userTermsOfMembership,
         likesData = likesData,
-        experienceData = userExperience.asExperienceData
+        experienceData = userExperience.asExperienceData,
+        statsData = statsData
     )

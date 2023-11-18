@@ -41,6 +41,10 @@
 
     <string name="diary_areas_create_button">Create</string>
 
+    <string name="diary_area_members">%s\nmembers</string>
+    <string name="diary_area_notes">%s\nnotes</string>
+    <string name="diary_area_tasks">%s\ntasks</string>
+
     <!--  PROFILE  -->
     <string name="profile_title">Profile</string>
 
@@ -251,4 +255,5 @@
     <string name="date_hours">%s hours ago</string>
     <string name="date_yesterday">Yesterday at %s</string>
     <string name="date_same_year">%s</string>
+    <!--  DATE FORMATTER  -->
 </resources>

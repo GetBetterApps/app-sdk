@@ -9,15 +9,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.shared.core.model.area.StatsData
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 
 
 @Composable
 internal fun AreaDataContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    statsData: StatsData
 ) {
     Row(
         modifier = modifier.padding(top = 8.dp),
@@ -35,7 +38,7 @@ internal fun AreaDataContent(
         ) {
             Text(
                 modifier = modifier.align(Alignment.Center),
-                text = "14000\nmembers",
+                text = statsData.membersAmountStr.toString(LocalContext.current),
                 color = colorResource(resource = SharedR.colors.text_secondary),
                 style = MaterialTheme.typography.titleSmall,
                 textAlign = TextAlign.Center
@@ -55,7 +58,7 @@ internal fun AreaDataContent(
             Text(
                 modifier = modifier
                     .align(Alignment.Center),
-                text = "20200\nnotes",
+                text = statsData.notesAmountStr.toString(LocalContext.current),
                 color = colorResource(resource = SharedR.colors.text_secondary),
                 style = MaterialTheme.typography.titleSmall,
                 textAlign = TextAlign.Center

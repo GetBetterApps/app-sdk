@@ -159,7 +159,7 @@ fun AreaDetailContent(
         }
 
         AnimatedVisibility(visible = !isEditing) {
-            AreaDataContent()
+            AreaDataContent(statsData = areaData.statsData)
         }
     }
 }
