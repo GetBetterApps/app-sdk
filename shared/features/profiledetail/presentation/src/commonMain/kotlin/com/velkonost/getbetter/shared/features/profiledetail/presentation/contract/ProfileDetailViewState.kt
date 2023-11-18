@@ -19,7 +19,7 @@ data class ProfileUI(
 
 data class NotesUI(
     val isLoading: Boolean = false,
-    val notes: List<Note> = emptyList()
+    val items: List<Note> = emptyList()
 )
 
 enum class FollowState {

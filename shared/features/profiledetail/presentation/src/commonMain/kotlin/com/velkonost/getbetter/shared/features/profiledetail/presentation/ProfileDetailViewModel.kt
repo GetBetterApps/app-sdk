@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.profiledetail.presentation
 
+import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
@@ -19,6 +20,9 @@ internal constructor(
 ) : BaseViewModel<ProfileDetailViewState, ProfileDetailAction, ProfileDetailNavigation, ProfileDetailEvent>(
     initialState = ProfileDetailViewState()
 ) {
+
+    private val _notesPagingConfig = PagingConfig()
+
     override fun dispatch(action: ProfileDetailAction) = when (action) {
         else -> {
 
@@ -47,9 +51,28 @@ internal constructor(
     }
 
     private fun fetchUserNotes(userId: String) {
-        launchJob {
-            notesRepository.fetchOtherUserNotes(userId) collectAndProcess {
+        if (_notesPagingConfig.lastPageReached) return
 
+        launchJob {
+            notesRepository.fetchOtherUserNotes(
+                userId = userId,
+                page = _notesPagingConfig.page,
+                pageSize = _notesPagingConfig.pageSize,
+            ) collectAndProcess {
+                isLoading {
+                    val notesData = viewState.value.notesData.copy(isLoading = it)
+                    emit(viewState.value.copy(notesData = notesData))
+                }
+                onSuccess { items ->
+                    _notesPagingConfig.lastPageReached = items.isNullOrEmpty()
+                    _notesPagingConfig.page++
+
+                    items?.let {
+                        val uiItems = viewState.value.notesData.items.plus(it)
+                        val notesData = viewState.value.notesData.copy(items = uiItems)
+                        emit(viewState.value.copy(notesData = notesData))
+                    }
+                }
             }
         }
     }
