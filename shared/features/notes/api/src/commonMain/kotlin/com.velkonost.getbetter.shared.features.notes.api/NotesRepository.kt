@@ -71,4 +71,10 @@ interface NotesRepository {
         perPage: Int
     ): Flow<ResultState<List<Note>>>
 
+    fun fetchOtherUserNotes(
+        userId: String,
+        page: Int,
+        pageSize: Int
+    ): Flow<ResultState<List<Note>>>
+
 }

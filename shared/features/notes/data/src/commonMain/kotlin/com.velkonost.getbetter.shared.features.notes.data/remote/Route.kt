@@ -14,4 +14,5 @@ object Route {
     const val DELETE_NOTE = "$PREFIX/deleteNote"
     const val DELETE_SUB_NOTE = "$PREFIX/deleteSubNote"
     const val GET_NOTE_DETAILS = "$PREFIX/getNoteDetails"
+    const val GET_OTHER_USER_NOTES = "$PREFIX/getOtherUserNotes"
 }

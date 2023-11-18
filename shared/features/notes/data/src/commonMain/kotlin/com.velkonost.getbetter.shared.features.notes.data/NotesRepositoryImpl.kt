@@ -195,4 +195,16 @@ constructor(
                 remoteDataSource.getUserNotes(token, page, perPage)
             }
         )
+
+    override fun fetchOtherUserNotes(
+        userId: String,
+        page: Int,
+        pageSize: Int
+    ): Flow<ResultState<List<Note>>> = flowRequest(
+        mapper = { this.map(KtorNote::asExternalModel) },
+        request = {
+            val token = localDataSource.getUserToken()
+            remoteDataSource.getOtherUserNotes(token, userId, page, pageSize)
+        }
+    )
 }

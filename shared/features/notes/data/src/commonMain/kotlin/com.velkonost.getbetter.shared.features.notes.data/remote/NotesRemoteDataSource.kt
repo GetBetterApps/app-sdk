@@ -141,4 +141,21 @@ class NotesRemoteDataSource(
             )
         )
     }.body()
+
+    suspend fun getOtherUserNotes(
+        token: String?,
+        userId: String,
+        page: Int,
+        pageSize: Int
+    ): RemoteResponse<List<KtorNote>> = httpClient.get {
+        makeRequest(
+            path = Route.GET_OTHER_USER_NOTES,
+            token = token,
+            params = mapOf(
+                "page" to page,
+                "pageSize" to pageSize,
+                "userId" to userId
+            )
+        )
+    }.body()
 }
