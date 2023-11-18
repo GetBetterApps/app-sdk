@@ -18,6 +18,7 @@ import dev.icerock.moko.resources.compose.colorResource
 fun ProfileHeader(
     modifier: Modifier = Modifier,
     isLoading: Boolean = true,
+    showSettings: Boolean = true,
     userName: String,
     avatarBytes: ByteArray?,
     onAvatarClick: () -> Unit,
@@ -38,11 +39,13 @@ fun ProfileHeader(
         }
 
         Column {
-            Row {
-                Spacer(modifier = modifier.weight(1f))
+            if (showSettings) {
+                Row {
+                    Spacer(modifier = modifier.weight(1f))
 
-                SettingsButton(modifier = modifier) {
-                    onSettingsClick.invoke()
+                    SettingsButton(modifier = modifier) {
+                        onSettingsClick.invoke()
+                    }
                 }
             }
 

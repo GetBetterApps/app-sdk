@@ -79,7 +79,6 @@ fun ProfileScreen(
             state.experienceData?.let {
                 LevelBlock(experienceData = it)
             }
-
         }
 
 
