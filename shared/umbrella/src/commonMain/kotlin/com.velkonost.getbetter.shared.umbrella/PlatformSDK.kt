@@ -14,6 +14,7 @@ import com.velkonost.getbetter.shared.features.detail.presentation.di.DetailPres
 import com.velkonost.getbetter.shared.features.diary.data.di.DiaryDataModule
 import com.velkonost.getbetter.shared.features.diary.di.CalendarsPresentationModule
 import com.velkonost.getbetter.shared.features.diary.di.DiaryPresentationModule
+import com.velkonost.getbetter.shared.features.follows.data.di.FollowsDataModule
 import com.velkonost.getbetter.shared.features.home.presentation.di.HomePresentationModule
 import com.velkonost.getbetter.shared.features.likes.data.di.LikesDataModule
 import com.velkonost.getbetter.shared.features.notedetail.presentation.di.NoteDetailPresentationModule
@@ -50,6 +51,7 @@ object PlatformSDK {
             UserInfoDataModule,
             LikesDataModule,
             CommentsDataModule,
+            FollowsDataModule,
 
             AuthDataModule,
             AuthDomainModule,
