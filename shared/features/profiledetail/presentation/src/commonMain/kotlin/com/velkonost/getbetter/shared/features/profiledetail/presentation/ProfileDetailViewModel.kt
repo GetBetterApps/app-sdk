@@ -1,0 +1,3 @@
+package com.velkonost.getbetter.shared.features.profiledetail.presentation
+
+class ProfileDetailViewModel

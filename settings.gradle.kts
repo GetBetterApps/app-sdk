@@ -70,6 +70,7 @@ include(
     ":shared:features:addarea:presentation",
     ":shared:features:areadetail:presentation",
     ":shared:features:notedetail:presentation",
+    ":shared:features:profiledetail:presentation",
 
     ":androidApp:app",
     ":androidApp:activity",
