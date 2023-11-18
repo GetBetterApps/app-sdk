@@ -265,6 +265,10 @@
     <string name="error_652">You already disliked it</string>
     <string name="error_653">You already removed like</string>
     <string name="error_654">Invalid entity type for like</string>
+
+    <string name="error_500">User to follow not found</string>
+    <string name="error_501">You already followed on this user</string>
+    <string name="error_502">You already unfollowed from this user</string>
     <!--  SERVER EXCEPTIONS  -->
 
     <!--  DATE FORMATTER  -->
