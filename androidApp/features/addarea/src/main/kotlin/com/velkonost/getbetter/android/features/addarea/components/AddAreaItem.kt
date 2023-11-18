@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -101,7 +102,7 @@ fun AddAreaItem(
                 ) {
                     Text(
                         modifier = modifier.align(Alignment.Center),
-                        text = "14000\nmembers",
+                        text = item.statsData.membersAmountStr.toString(LocalContext.current),
                         color = colorResource(resource = SharedR.colors.text_secondary),
                         style = MaterialTheme.typography.labelSmall,
                         textAlign = TextAlign.Center
@@ -121,7 +122,7 @@ fun AddAreaItem(
                     Text(
                         modifier = modifier
                             .align(Alignment.Center),
-                        text = "20200\nnotes",
+                        text = item.statsData.notesAmountStr.toString(LocalContext.current),
                         color = colorResource(resource = SharedR.colors.text_secondary),
                         style = MaterialTheme.typography.labelSmall,
                         textAlign = TextAlign.Center
