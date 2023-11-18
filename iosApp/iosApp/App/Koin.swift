@@ -18,8 +18,6 @@ extension KoinApplication {
 
 extension KoinApplication {
     private static let keyPaths: [PartialKeyPath<Koin>] = [
-        \.DetailViewModel,
-         \.HomeViewModel,
          \.AuthViewModel,
          
          \.SplashViewModel,

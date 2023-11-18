@@ -32,17 +32,12 @@
 		4616B08B2AF62B9500A4CDDE /* CompletionDateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B08A2AF62B9500A4CDDE /* CompletionDateButton.swift */; };
 		4616B08D2AF62C7200A4CDDE /* CompletedOnBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B08C2AF62C7200A4CDDE /* CompletedOnBlock.swift */; };
 		46182DC12AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */; };
-		461D21EC2AA8EC71007E84CE /* DetailRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21EB2AA8EC71007E84CE /* DetailRoute.swift */; };
 		461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */; };
 		461F7C612AA878EB003791CF /* Koin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C602AA878EB003791CF /* Koin.swift */; };
 		461F7C652AA88A39003791CF /* NavRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C642AA88A39003791CF /* NavRoute.swift */; };
 		461F7C682AA88B80003791CF /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C672AA88B80003791CF /* StringExt.swift */; };
 		461F7C6A2AA8D6FF003791CF /* UINavigationControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C692AA8D6FF003791CF /* UINavigationControllerExt.swift */; };
 		461F7C6C2AA8D71F003791CF /* BaseViewModelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C6B2AA8D71F003791CF /* BaseViewModelExt.swift */; };
-		461F7C712AA8D911003791CF /* HomeViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C702AA8D911003791CF /* HomeViewModelDelegate.swift */; };
-		461F7C732AA8DC2B003791CF /* HomeRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C722AA8DC2B003791CF /* HomeRoute.swift */; };
-		461F7C752AA8DCD0003791CF /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C742AA8DCD0003791CF /* HomeScreen.swift */; };
-		461F7C772AA8E371003791CF /* DetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C762AA8E371003791CF /* DetailScreen.swift */; };
 		463049E32AFD0590006F60D2 /* LevelBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463049E22AFD0590006F60D2 /* LevelBlock.swift */; };
 		46445AFA2ACD5484008934B2 /* PrivateSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46445AF92ACD5484008934B2 /* PrivateSwitch.swift */; };
 		4646BF9A2AD2AF0B000980DD /* AreaDetailContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4646BF992AD2AF0B000980DD /* AreaDetailContent.swift */; };
@@ -155,17 +150,12 @@
 		4616B08A2AF62B9500A4CDDE /* CompletionDateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionDateButton.swift; sourceTree = "<group>"; };
 		4616B08C2AF62C7200A4CDDE /* CompletedOnBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedOnBlock.swift; sourceTree = "<group>"; };
 		46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinByteArrayExt.swift; sourceTree = "<group>"; };
-		461D21EB2AA8EC71007E84CE /* DetailRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRoute.swift; sourceTree = "<group>"; };
 		461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifecycleAwareObservableObject.swift; sourceTree = "<group>"; };
 		461F7C602AA878EB003791CF /* Koin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Koin.swift; sourceTree = "<group>"; };
 		461F7C642AA88A39003791CF /* NavRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavRoute.swift; sourceTree = "<group>"; };
 		461F7C672AA88B80003791CF /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		461F7C692AA8D6FF003791CF /* UINavigationControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExt.swift; sourceTree = "<group>"; };
 		461F7C6B2AA8D71F003791CF /* BaseViewModelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelExt.swift; sourceTree = "<group>"; };
-		461F7C702AA8D911003791CF /* HomeViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelDelegate.swift; sourceTree = "<group>"; };
-		461F7C722AA8DC2B003791CF /* HomeRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRoute.swift; sourceTree = "<group>"; };
-		461F7C742AA8DCD0003791CF /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
-		461F7C762AA8E371003791CF /* DetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreen.swift; sourceTree = "<group>"; };
 		463049E22AFD0590006F60D2 /* LevelBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelBlock.swift; sourceTree = "<group>"; };
 		46445AF92ACD5484008934B2 /* PrivateSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateSwitch.swift; sourceTree = "<group>"; };
 		4646BF992AD2AF0B000980DD /* AreaDetailContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaDetailContent.swift; sourceTree = "<group>"; };
@@ -433,29 +423,8 @@
 				460054B02ABB56EC00586767 /* Wisdom */,
 				46D9381A2ABAECA90096A221 /* Profile */,
 				46CDB56A2AADB45200800096 /* Auth */,
-				461F7C6E2AA8D7FC003791CF /* Home */,
-				461F7C6F2AA8D802003791CF /* Detail */,
 			);
 			path = Features;
-			sourceTree = "<group>";
-		};
-		461F7C6E2AA8D7FC003791CF /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				461F7C702AA8D911003791CF /* HomeViewModelDelegate.swift */,
-				461F7C722AA8DC2B003791CF /* HomeRoute.swift */,
-				461F7C742AA8DCD0003791CF /* HomeScreen.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		461F7C6F2AA8D802003791CF /* Detail */ = {
-			isa = PBXGroup;
-			children = (
-				461F7C762AA8E371003791CF /* DetailScreen.swift */,
-				461D21EB2AA8EC71007E84CE /* DetailRoute.swift */,
-			);
-			path = Detail;
 			sourceTree = "<group>";
 		};
 		4646BF982AD2AE20000980DD /* components */ = {
@@ -999,20 +968,16 @@
 				46D857722ACFF16600BE74DA /* AddAreaItem.swift in Sources */,
 				46D857782ACFF2D200BE74DA /* ArrayExt.swift in Sources */,
 				46059D242AC4037500DC5015 /* NotesView.swift in Sources */,
-				461D21EC2AA8EC71007E84CE /* DetailRoute.swift in Sources */,
 				466887302AECF8980002ABB6 /* CompletionDateBlock.swift in Sources */,
 				460054A92ABB18A800586767 /* AppSettings.swift in Sources */,
 				4667C9042AC589EC00BAA9DD /* SingleLineTextField.swift in Sources */,
 				46E2DD312AE9420600B4B2B5 /* AreaPickerItem.swift in Sources */,
 				4667C9062AC58B0700BAA9DD /* SelectedEmojiImage.swift in Sources */,
-				461F7C752AA8DCD0003791CF /* HomeScreen.swift in Sources */,
 				4667C90E2AC5BA5900BAA9DD /* Loader.swift in Sources */,
 				464A42722AEA67020019CB98 /* NewTagField.swift in Sources */,
 				469D0FC02AB20D5C0060CE95 /* UIScreenExt.swift in Sources */,
 				46FCD3DD2AF540D70025D2C6 /* BottomActionButton.swift in Sources */,
 				46B17E1A2AADF523008C2BC4 /* AppButton.swift in Sources */,
-				461F7C712AA8D911003791CF /* HomeViewModelDelegate.swift in Sources */,
-				461F7C732AA8DC2B003791CF /* HomeRoute.swift in Sources */,
 				4696B6B02AD15F6D00DDD405 /* AreaDetailVIewModel.swift in Sources */,
 				4616B08D2AF62C7200A4CDDE /* CompletedOnBlock.swift in Sources */,
 				46D9381C2ABAECB70096A221 /* ProfileRoute.swift in Sources */,
@@ -1031,7 +996,6 @@
 				467BECCF2AC017CF00F74482 /* PrimaryTabs.swift in Sources */,
 				464A426D2AEA63D00019CB98 /* TagsBlock.swift in Sources */,
 				467668C02AEAC007007C17DE /* SubNotesHeader.swift in Sources */,
-				461F7C772AA8E371003791CF /* DetailScreen.swift in Sources */,
 				468B876A2ABC45C6001BBEB1 /* DiaryScreen.swift in Sources */,
 				46182DC12AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift in Sources */,
 				46D8577E2AD0787E00BE74DA /* AddAreaHeader.swift in Sources */,

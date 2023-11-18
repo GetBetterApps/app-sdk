@@ -10,7 +10,6 @@ struct ContentView: View {
         CalendarsRoute(),
         ProfileRoute(),
         WisdomRoute(),
-        DetailRoute()
     ]
     
     
@@ -36,12 +35,6 @@ struct ContentView: View {
                 switch route {
                 case _ where route.starts(with: NavigationScreenKt.SPLASH_DESTINATION) :
                     SplashRoute().view(pilot: pilot, route: route)
-                    
-                case _ where route.starts(with: NavigationScreenKt.HOME_DESTINATION) :
-                    HomeRoute().view(pilot: pilot, route: route)
-                    
-                case _ where route.starts(with: NavigationScreenKt.DETAIL_DESTINATION) :
-                    DetailRoute().view(pilot: pilot, route: route)
                     
                 case _ where route.starts(with: NavigationScreenKt.AUTH_DESTINATION) :
                     AuthRoute().view(pilot: pilot, route: route)
