@@ -4,6 +4,7 @@ import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.follows.api.FollowsRepository
+import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailAction
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailEvent
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailNavigation
@@ -12,8 +13,9 @@ import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 
 class ProfileDetailViewModel
 internal constructor(
+    private val notesRepository: NotesRepository,
+    private val followsRepository: FollowsRepository,
     private val userInfoRepository: UserInfoRepository,
-    private val followsRepository: FollowsRepository
 ) : BaseViewModel<ProfileDetailViewState, ProfileDetailAction, ProfileDetailNavigation, ProfileDetailEvent>(
     initialState = ProfileDetailViewState()
 ) {
@@ -33,6 +35,12 @@ internal constructor(
 
                 }
             }
+        }
+    }
+
+    private fun fetchUserNotes() {
+        launchJob {
+
         }
     }
 
