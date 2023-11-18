@@ -29,18 +29,28 @@ internal constructor(
         launchJob {
             userInfoRepository.fetchInfoAboutOtherUser(userId) collectAndProcess {
                 isLoading {
-                    emit(viewState.value.copy(isLoading = it))
+                    val profileData = viewState.value.profileData.copy(isLoading = it)
+                    emit(viewState.value.copy(profileData = profileData))
                 }
-                onSuccess {
-
+                onSuccess { userInfo ->
+                    userInfo?.let {
+                        val profileData = viewState.value.profileData.copy(
+                            userName = it.displayName ?: "",
+                            experienceData = it.experienceData,
+                            avatarBytes = it.avatar
+                        )
+                        emit(viewState.value.copy(profileData = profileData))
+                    }
                 }
             }
         }
     }
 
-    private fun fetchUserNotes() {
+    private fun fetchUserNotes(userId: String) {
         launchJob {
+            notesRepository.fetchOtherUserNotes(userId) collectAndProcess {
 
+            }
         }
     }
 
