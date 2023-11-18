@@ -7,7 +7,7 @@ import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 data class ProfileDetailViewState(
     val profileData: ProfileUI = ProfileUI(),
     val notesData: NotesUI = NotesUI(),
-    val followState: FollowState = FollowState.Unfollowed
+    val followData: FollowUI = FollowUI()
 ) : UIContract.State
 
 data class ProfileUI(
@@ -19,11 +19,23 @@ data class ProfileUI(
 )
 
 data class NotesUI(
-    val isLoading: Boolean = false,
+    val isLoading: Boolean = true,
     val items: List<Note> = emptyList()
+)
+
+data class FollowUI(
+    val isLoading: Boolean = true,
+    val state: FollowState = FollowState.Unfollowed
 )
 
 enum class FollowState {
     Followed,
-    Unfollowed
+    Unfollowed;
+
+    companion object {
+        fun FollowState.reverseState(): FollowState {
+            return if (this == Followed) Unfollowed
+            else Followed
+        }
+    }
 }

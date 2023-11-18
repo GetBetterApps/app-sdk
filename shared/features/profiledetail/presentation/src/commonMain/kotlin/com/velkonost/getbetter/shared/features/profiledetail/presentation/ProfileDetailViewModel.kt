@@ -6,6 +6,7 @@ import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.follows.api.FollowsRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
+import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.FollowState.Companion.reverseState
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailAction
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailEvent
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailNavigation
@@ -24,9 +25,10 @@ internal constructor(
     private val _notesPagingConfig = PagingConfig()
 
     override fun dispatch(action: ProfileDetailAction) = when (action) {
-        else -> {
-
-        }
+        is ProfileDetailAction.Load -> fetchUser(action.userId)
+        is ProfileDetailAction.FollowClick -> obtainFollow()
+        is ProfileDetailAction.UnfollowClick -> obtainUnfollow()
+        is ProfileDetailAction.NotesLoadNextPage -> fetchUserNotes()
     }
 
     private fun fetchUser(userId: String) {
@@ -44,19 +46,26 @@ internal constructor(
                             experienceData = it.experienceData,
                             avatarBytes = it.avatar
                         )
-                        emit(viewState.value.copy(profileData = profileData))
+                        val notesData = viewState.value.notesData.copy(isLoading = false)
+
+                        emit(
+                            viewState.value.copy(
+                                profileData = profileData,
+                                notesData = notesData
+                            )
+                        )
                     }
                 }
             }
         }
     }
 
-    private fun fetchUserNotes(userId: String) {
+    private fun fetchUserNotes() {
         if (_notesPagingConfig.lastPageReached) return
 
         launchJob {
             notesRepository.fetchOtherUserNotes(
-                userId = userId,
+                userId = viewState.value.profileData.userId,
                 page = _notesPagingConfig.page,
                 pageSize = _notesPagingConfig.pageSize,
             ) collectAndProcess {
@@ -73,6 +82,43 @@ internal constructor(
                         val notesData = viewState.value.notesData.copy(items = uiItems)
                         emit(viewState.value.copy(notesData = notesData))
                     }
+                }
+            }
+        }
+    }
+
+    private fun obtainFollow() {
+        launchJob {
+            followsRepository.addFollow(
+                followUserId = viewState.value.profileData.userId
+            ) collectAndProcess {
+                isLoading {
+                    val followData = viewState.value.followData.copy(isLoading = it)
+                    emit(viewState.value.copy(followData = followData))
+                }
+                onSuccess {
+                    val newFollowState = viewState.value.followData.state.reverseState()
+                    val followData = viewState.value.followData.copy(state = newFollowState)
+                    emit(viewState.value.copy(followData = followData))
+                }
+            }
+        }
+    }
+
+    private fun obtainUnfollow() {
+        launchJob {
+            followsRepository.removeFollow(
+                followUserId = viewState.value.profileData.userId
+            ) collectAndProcess {
+                isLoading {
+                    val followData = viewState.value.followData.copy(isLoading = it)
+                    emit(viewState.value.copy(followData = followData))
+                }
+
+                onSuccess {
+                    val newFollowState = viewState.value.followData.state.reverseState()
+                    val followData = viewState.value.followData.copy(state = newFollowState)
+                    emit(viewState.value.copy(followData = followData))
                 }
             }
         }
