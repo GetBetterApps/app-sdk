@@ -28,5 +28,7 @@ data class UserInfoShort(
 
     val avatar: ByteArray? = null,
 
-    val experienceData: ExperienceData? = null
+    val experienceData: ExperienceData? = null,
+
+    val isFollows: Boolean = false
 )

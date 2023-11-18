@@ -18,7 +18,10 @@ data class KtorUserInfoShort(
     val avatar: String? = null,
 
     @SerialName("experience")
-    val experience: Int = 0
+    val experience: Int = 0,
+
+    @SerialName("isFollows")
+    val isFollows: Boolean = false
 )
 
 fun KtorUserInfoShort.asExternalModel() =
@@ -26,5 +29,6 @@ fun KtorUserInfoShort.asExternalModel() =
         id = id,
         displayName = name,
         avatar = avatar?.decodeBase64Bytes(),
-        experienceData = experience.asExperienceData
+        experienceData = experience.asExperienceData,
+        isFollows = isFollows
     )
