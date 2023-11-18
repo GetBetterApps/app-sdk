@@ -39,6 +39,7 @@ internal constructor(
                 onSuccess { userInfo ->
                     userInfo?.let {
                         val profileData = viewState.value.profileData.copy(
+                            userId = it.id,
                             userName = it.displayName ?: "",
                             experienceData = it.experienceData,
                             avatarBytes = it.avatar

@@ -12,6 +12,7 @@ data class ProfileDetailViewState(
 
 data class ProfileUI(
     val isLoading: Boolean = false,
+    val userId: String = "",
     val userName: String = "",
     val avatarBytes: ByteArray? = null,
     val experienceData: ExperienceData? = null,
