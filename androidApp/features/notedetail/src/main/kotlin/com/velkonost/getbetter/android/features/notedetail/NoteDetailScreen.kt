@@ -32,6 +32,7 @@ import com.velkonost.getbetter.android.features.notedetail.components.AuthorData
 import com.velkonost.getbetter.android.features.notedetail.components.NoteDetailHeader
 import com.velkonost.getbetter.android.features.notedetail.components.comments.CommentItem
 import com.velkonost.getbetter.android.features.notedetail.components.comments.NewCommentTextField
+import com.velkonost.getbetter.android.features.profiledetail.ProfileDetailScreen
 import com.velkonost.getbetter.core.compose.components.AppAlertDialog
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
@@ -67,8 +68,13 @@ fun NoteDetailScreen(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true
     )
+    val profileDetailSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = true
+    )
 
     val selectedAreaId = remember { mutableStateOf<Int?>(null) }
+    val selectedUserId = remember { mutableStateOf<String?>(null) }
 
     Box(modifier = modifier.fillMaxSize()) {
         if (state.isLoading) {
@@ -100,7 +106,10 @@ fun NoteDetailScreen(
                             isLoading = state.authorLoading,
                             author = state.author,
                             onClick = {
-                                viewModel.dispatch(NoteDetailAction.AuthorClick)
+                                scope.launch {
+                                    selectedUserId.value = state.author?.id
+                                    profileDetailSheetState.show()
+                                }
                             }
                         )
                     }
@@ -283,6 +292,11 @@ fun NoteDetailScreen(
         onAreaChanged = {
             viewModel.dispatch(NoteDetailAction.AreaChanged)
         }
+    )
+
+    ProfileDetailScreen(
+        modalSheetState = profileDetailSheetState,
+        userId = selectedUserId.value
     )
 
     if (confirmDeleteNoteDialog.value) {
