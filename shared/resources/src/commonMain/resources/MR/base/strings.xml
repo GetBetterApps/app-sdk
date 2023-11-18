@@ -62,6 +62,7 @@
     <string name="profile_logout">Logout</string>
 
     <string name="experience_your_title">Your experience</string>
+    <string name="experience_user_title">User experience</string>
     <string name="experience_level">Level %s</string>
 
     <!--  WISDOM  -->

@@ -23,7 +23,8 @@ import dev.icerock.moko.resources.compose.stringResource
 fun LevelBlock(
     modifier: Modifier = Modifier,
     topPadding: Int = 20,
-    experienceData: ExperienceData
+    experienceData: ExperienceData,
+    isOwn: Boolean = true
 ) {
 
     val context = LocalContext.current
@@ -34,7 +35,11 @@ fun LevelBlock(
         Column {
             Row {
                 Text(
-                    text = stringResource(resource = SharedR.strings.experience_your_title),
+                    text = stringResource(
+                        resource =
+                        if (isOwn) SharedR.strings.experience_your_title
+                        else SharedR.strings.experience_user_title
+                    ),
                     style = MaterialTheme.typography.labelMedium,
                     color = colorResource(resource = SharedR.colors.text_primary)
                 )

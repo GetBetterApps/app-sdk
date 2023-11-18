@@ -16,6 +16,7 @@ import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -26,6 +27,7 @@ import com.velkonost.getbetter.android.features.profile.components.ProfileHeader
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.experience.LevelBlock
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.ProfileDetailViewModel
+import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailAction
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import kotlinx.coroutines.launch
@@ -80,15 +82,16 @@ fun ProfileDetailScreen(
                     ) {
                         ProfileHeader(
                             userName = state.profileData.userName,
+                            isLoading = state.profileData.isLoading,
                             showSettings = false,
                             avatarBytes = state.profileData.avatarBytes,
-                            onAvatarClick = { },
+                            onAvatarClick = {},
                             onSettingsClick = {}
                         )
 
                         AnimatedVisibility(visible = state.profileData.experienceData != null) {
                             state.profileData.experienceData?.let {
-                                LevelBlock(experienceData = it)
+                                LevelBlock(experienceData = it, isOwn = false)
                             }
                         }
                     }
@@ -97,4 +100,7 @@ fun ProfileDetailScreen(
         }
     ) {}
 
+    LaunchedEffect(userId) {
+        viewModel.dispatch(ProfileDetailAction.Load(userId))
+    }
 }
