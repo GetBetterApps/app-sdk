@@ -206,6 +206,7 @@
     <string name="error_1001">Your session expired. Log in again</string>
     <string name="error_905">Incorrect user\'s name</string>
     <string name="error_906">Incorrect user\'s locale</string>
+    <string name="error_907">User not found</string>
 
     <string name="error_901">This email already exist. Try different</string>
     <string name="error_902">Incorrect email. Try different</string>
@@ -245,6 +246,25 @@
     <string name="error_714">Sub goal doesn\'t exist</string>
     <string name="error_715">This note doesn\'t contain such sub goal</string>
     <string name="error_716">You can\'t get details because note is private</string>
+    <string name="error_717">The goal already uncompleted</string>
+    <string name="error_718">Subgoal already uncompleted</string>
+    <string name="error_719">Incorrect author</string>
+
+    <string name="error_600">Can\'t create comment because entity doesn\'t exist</string>
+    <string name="error_601">Incorrect text of comment</string>
+    <string name="error_602">You can\'t create comment because area is inactive</string>
+    <string name="error_603">You can\'t create comment because note is inactive</string>
+    <string name="error_604">You can\'t create comment because area is private</string>
+    <string name="error_605">You can\'t create comment because note is private</string>
+    <string name="error_606">Comment not found</string>
+    <string name="error_607">Invalid entity type for comment</string>
+    <string name="error_608">You can\'t delete comment because you are not an author</string>
+
+    <string name="error_650">Entity for like not found</string>
+    <string name="error_651">You already liked it</string>
+    <string name="error_652">You already disliked it</string>
+    <string name="error_653">You already removed like</string>
+    <string name="error_654">Invalid entity type for like</string>
     <!--  SERVER EXCEPTIONS  -->
 
     <!--  DATE FORMATTER  -->
