@@ -2,6 +2,7 @@ package com.velkonost.getbetter.android.features.profiledetail
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -82,8 +83,8 @@ fun ProfileDetailScreen(
                     LazyColumn(
                         modifier = modifier
                             .fillMaxWidth()
-                            .padding(16.dp)
-                            .padding(bottom = 140.dp),
+                            .padding(horizontal = 16.dp),
+                        contentPadding = PaddingValues(bottom = 140.dp),
                         state = listState
                     ) {
 
@@ -106,7 +107,7 @@ fun ProfileDetailScreen(
 //                            }
                         }
 
-                        if (state.notesData.isLoading) {
+                        if (state.notesData.isLoading && state.notesData.items.isEmpty()) {
                             item {
                                 Box(
                                     modifier = modifier
@@ -133,6 +134,7 @@ fun ProfileDetailScreen(
                                 key = { it.id },
                                 contentType = { it.noteType }) { item ->
                                 FeedNoteItem(
+                                    paddings = PaddingValues(0.dp),
                                     item = item,
                                     onClick = { },
                                     onLikeClick = { }

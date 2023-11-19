@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -45,6 +46,7 @@ import dev.icerock.moko.resources.compose.painterResource
 fun FeedNoteItem(
     modifier: Modifier = Modifier,
     item: Note,
+    paddings: PaddingValues = PaddingValues(horizontal = 20.dp),
     onClick: (Note) -> Unit,
     onLikeClick: (Note) -> Unit
 ) {
@@ -53,7 +55,7 @@ fun FeedNoteItem(
 
     PrimaryBox(
         modifier = modifier
-            .padding(start = 20.dp, end = 20.dp)
+            .padding(paddings)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null
