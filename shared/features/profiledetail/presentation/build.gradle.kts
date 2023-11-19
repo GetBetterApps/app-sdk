@@ -31,6 +31,7 @@ kotlin {
                 implementation(projects.shared.resources)
 
                 implementation(projects.shared.features.notes.api)
+                implementation(projects.shared.features.likes.api)
                 implementation(projects.shared.features.follows.api)
                 implementation(projects.shared.features.userinfo.api)
             }

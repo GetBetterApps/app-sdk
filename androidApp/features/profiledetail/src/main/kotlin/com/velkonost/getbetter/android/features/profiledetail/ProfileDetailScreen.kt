@@ -131,8 +131,12 @@ fun ProfileDetailScreen(
                                 FeedNoteItem(
                                     paddings = PaddingValues(0.dp),
                                     item = item,
-                                    onClick = { },
-                                    onLikeClick = { }
+                                    onClick = {
+                                        viewModel.dispatch(ProfileDetailAction.NoteClick(it))
+                                    },
+                                    onLikeClick = {
+                                        viewModel.dispatch(ProfileDetailAction.NoteLikeClick(it))
+                                    }
                                 )
                             }
 

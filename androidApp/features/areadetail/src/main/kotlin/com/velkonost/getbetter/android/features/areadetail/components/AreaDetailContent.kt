@@ -70,7 +70,7 @@ fun AreaDetailContent(
                 Spacer(modifier = modifier.weight(1f))
             }
 
-            if (areaData.isPrivate) {
+            if (!areaData.isPrivate) {
                 Row {
                     Spacer(modifier.weight(1f))
                     Box {

@@ -1,10 +1,14 @@
 package com.velkonost.getbetter.shared.features.profiledetail.presentation
 
+import com.velkonost.getbetter.shared.core.model.EntityType
+import com.velkonost.getbetter.shared.core.model.likes.LikeType
+import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.follows.api.FollowsRepository
+import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.FollowState.Companion.reverseState
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailAction
@@ -12,10 +16,12 @@ import com.velkonost.getbetter.shared.features.profiledetail.presentation.contra
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailNavigation
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailViewState
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
+import kotlinx.coroutines.Job
 
 class ProfileDetailViewModel
 internal constructor(
     private val notesRepository: NotesRepository,
+    private val likesRepository: LikesRepository,
     private val followsRepository: FollowsRepository,
     private val userInfoRepository: UserInfoRepository,
 ) : BaseViewModel<ProfileDetailViewState, ProfileDetailAction, ProfileDetailNavigation, ProfileDetailEvent>(
@@ -23,12 +29,15 @@ internal constructor(
 ) {
 
     private val _notesPagingConfig = PagingConfig()
+    private val likesJobsMap: HashMap<Int, Job> = hashMapOf()
 
     override fun dispatch(action: ProfileDetailAction) = when (action) {
         is ProfileDetailAction.Load -> fetchUser(action.userId)
         is ProfileDetailAction.FollowClick -> obtainFollow()
         is ProfileDetailAction.UnfollowClick -> obtainUnfollow()
         is ProfileDetailAction.NotesLoadNextPage -> fetchUserNotes()
+        is ProfileDetailAction.NoteClick -> obtainNoteClick(action.value)
+        is ProfileDetailAction.NoteLikeClick -> obtainNoteLikeClick(action.value)
     }
 
     private fun fetchUser(userId: String) {
@@ -121,6 +130,70 @@ internal constructor(
                     emit(viewState.value.copy(followData = followData))
                 }
             }
+        }
+    }
+
+    private fun obtainNoteClick(value: Note) {
+        emit(ProfileDetailNavigation.NavigateToNoteDetail(value))
+    }
+
+    private fun obtainNoteLikeClick(value: Note) {
+        if (likesJobsMap.containsKey(value.id)) return
+
+        launchJob {
+            val likeType = when (value.likesData.userLike) {
+                LikeType.Positive -> LikeType.None
+                else -> LikeType.Positive
+            }
+
+            likesRepository.addLike(
+                entityType = EntityType.Note,
+                entityId = value.id,
+                likeType = likeType
+            ) collectAndProcess {
+                isLoading {
+                    val itemLikesData = value.likesData.copy(isLikesLoading = true)
+
+                    val indexOfChangedItem =
+                        viewState.value.notesData.items.indexOfFirst { item -> item.id == value.id }
+                    val allItems = viewState.value.notesData.items.toMutableList()
+
+                    if (indexOfChangedItem != -1) {
+                        allItems[indexOfChangedItem] = value.copy(
+                            likesData = itemLikesData
+                        )
+                    }
+
+                    val notesData = viewState.value.notesData.copy(items = allItems)
+                    emit(viewState.value.copy(notesData = notesData))
+                }
+                onSuccess { entityLikes ->
+                    entityLikes?.let {
+                        val itemLikesData =
+                            com.velkonost.getbetter.shared.core.model.likes.LikesData(
+                                totalLikes = it.total,
+                                userLike = it.userLikeType
+                            )
+
+                        val indexOfChangedItem =
+                            viewState.value.notesData.items.indexOfFirst { item -> item.id == value.id }
+                        val allItems = viewState.value.notesData.items.toMutableList()
+
+                        if (indexOfChangedItem != -1) {
+                            allItems[indexOfChangedItem] = value.copy(
+                                likesData = itemLikesData
+                            )
+                        }
+
+                        val notesData = viewState.value.notesData.copy(items = allItems)
+                        emit(viewState.value.copy(notesData = notesData))
+                    }
+                }
+            }
+        }.also {
+            likesJobsMap[value.id] = it
+        }.invokeOnCompletion {
+            likesJobsMap.remove(value.id)
         }
     }
 
