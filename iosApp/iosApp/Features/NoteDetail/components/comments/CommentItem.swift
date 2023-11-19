@@ -23,13 +23,22 @@ struct CommentItem: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
-                if item.author.avatar != nil {
-                    Image(uiImage: UIImage(data: item.author.avatar!.toData()!)!)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 28, height: 28)
-                        .clipped()
-                        .cornerRadius(8)
+                if item.author.avatarUrl != nil {
+                    AsyncImage(url: URL(string: item.author.avatarUrl!)) { image in
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 28, height: 28)
+                            .clipped()
+                            .cornerRadius(8)
+                    } placeholder: {
+                        Image(uiImage: SharedR.images().logo.toUIImage()!)
+                            .resizable()
+                            .frame(width: 28, height: 28)
+                            .clipped()
+                            .cornerRadius(8)
+                    }
+                   
                 } else {
                     Image(uiImage: SharedR.images().logo.toUIImage()!)
                         .resizable()

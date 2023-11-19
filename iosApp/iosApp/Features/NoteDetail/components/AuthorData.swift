@@ -34,13 +34,22 @@ struct AuthorData: View {
                     Spacer()
                 } else {
                     
-                    if author?.avatar != nil {
-                        Image(uiImage: UIImage(data: author!.avatar!.toData()!)!)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 32, height: 32)
-                            .clipped()
-                            .cornerRadius(8)
+                    if author?.avatarUrl != nil {
+                        AsyncImage(url: URL(string: author!.avatarUrl!)) { image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 32, height: 32)
+                                .clipped()
+                                .cornerRadius(8)
+                        } placeholder: {
+                            Image(uiImage: SharedR.images().logo.toUIImage()!)
+                                .resizable()
+                                .frame(width: 32, height: 32)
+                                .clipped()
+                                .cornerRadius(8)
+                        }
+                        
                     } else {
                         Image(uiImage: SharedR.images().logo.toUIImage()!)
                             .resizable()

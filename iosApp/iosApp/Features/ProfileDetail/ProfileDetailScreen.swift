@@ -42,7 +42,7 @@ struct ProfileDetailScreen: View {
                     LazyVStack {
                         ProfileHeader(
                             userName: state.profileData.userName,
-                            avatarBytes: state.profileData.avatarBytes,
+                            avatarUrl: state.profileData.avatarUrl,
                             isLoading: state.profileData.isLoading,
                             onAvatarClick: {},
                             onSettingsClick: {},
