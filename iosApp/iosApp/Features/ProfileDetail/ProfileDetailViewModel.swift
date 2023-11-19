@@ -29,7 +29,6 @@ class ProfileDetailVIewModelDelegate: ObservableObject {
     
     func onAppear(userId: String) {
         dispatch(action: ProfileDetailActionLoad(userId: userId))
-        dispatch(action: ProfileDetailActionNotesLoadNextPage())
         resumeViewStateStream()
     }
     
