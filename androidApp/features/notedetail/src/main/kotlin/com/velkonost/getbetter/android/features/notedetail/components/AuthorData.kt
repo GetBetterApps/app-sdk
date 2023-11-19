@@ -59,8 +59,8 @@ fun AuthorData(
                     Spacer(modifier.weight(1f))
                 } else {
 
-                    if (author?.avatarUrl != null) {
-                        author.avatarUrl?.let { avatarUrl ->
+                    if (!author?.avatarUrl.isNullOrEmpty()) {
+                        author?.avatarUrl?.let { avatarUrl ->
                             SubcomposeAsyncImage(
                                 modifier = modifier
                                     .size(32.dp)

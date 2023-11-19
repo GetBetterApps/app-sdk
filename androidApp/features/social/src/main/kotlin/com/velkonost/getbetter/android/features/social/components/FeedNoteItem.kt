@@ -1,6 +1,5 @@
 package com.velkonost.getbetter.android.features.social.components
 
-import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -122,18 +121,14 @@ fun FeedNoteItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
-                if (item.author?.avatar != null) {
-                    item.author?.avatar?.let { avatarBytes ->
+                if (!item.author?.avatarUrl.isNullOrEmpty()) {
+                    item.author?.avatarUrl?.let { avatarUrl ->
                         SubcomposeAsyncImage(
                             modifier = modifier
                                 .size(24.dp)
                                 .clip(MaterialTheme.shapes.small),
                             model = ImageRequest.Builder(LocalContext.current)
-                                .data(
-                                    BitmapFactory.decodeByteArray(
-                                        avatarBytes, 0, avatarBytes.size
-                                    )
-                                )
+                                .data(avatarUrl)
                                 .build(),
                             contentScale = ContentScale.Crop,
                             contentDescription = null,

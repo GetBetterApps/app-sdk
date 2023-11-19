@@ -17,7 +17,7 @@ import kotlinx.serialization.json.Json
 const val KTOR_REQUEST_TIMEOUT_MILLIS = 30_000L
 
 const val URL = "http://62.113.117.236"
-const val AVATAR_URL = "http://62.113.117.236/getAvatar/"
+const val AVATAR_URL = "http://62.113.117.236/userinfo/getAvatar/"
 
 internal val KtorClient: HttpClient
     get() {

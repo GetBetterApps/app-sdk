@@ -1,6 +1,5 @@
 package com.velkonost.getbetter.android.features.notedetail.components.comments
 
-import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -44,18 +43,14 @@ fun CommentItem(
             .padding(top = 16.dp, start = 8.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            if (item.author.avatar != null) {
-                item.author.avatar?.let { avatarBytes ->
+            if (!item.author.avatarUrl.isNullOrEmpty()) {
+                item.author.avatarUrl?.let { avatarUrl ->
                     SubcomposeAsyncImage(
                         modifier = modifier
                             .size(28.dp)
                             .clip(MaterialTheme.shapes.small),
                         model = ImageRequest.Builder(LocalContext.current)
-                            .data(
-                                BitmapFactory.decodeByteArray(
-                                    avatarBytes, 0, avatarBytes.size
-                                )
-                            )
+                            .data(avatarUrl)
                             .build(),
                         contentScale = ContentScale.Crop,
                         contentDescription = null,
