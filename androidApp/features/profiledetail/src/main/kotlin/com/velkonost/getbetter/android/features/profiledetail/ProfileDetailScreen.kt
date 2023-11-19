@@ -184,7 +184,6 @@ fun ProfileDetailScreen(
                         Box(
                             modifier = modifier
                                 .fillMaxWidth()
-//                            .height(140.dp)
                                 .background(
                                     color = colorResource(resource = SharedR.colors.main_background)
                                 )
