@@ -23,7 +23,10 @@ struct NoteDetailScreen : View {
     @State private var isSubNotesBlockVisible = true
     
     @State private var selectedAreaId: Int32? = nil
+    @State private var selectedUserId: String? = nil
+    
     @State private var showingAreaDetailSheet = false
+    @State private var showingProfileDetailSheet = false
     
     var body: some View {
         @State var state = viewModel.viewStateValue as! NoteDetailViewState
@@ -57,7 +60,10 @@ struct NoteDetailScreen : View {
                                     isLoading: state.authorLoading,
                                     author: state.author,
                                     onClick: {
-                                        viewModel.dispatch(action: NoteDetailActionAuthorClick())
+                                        if state.author?.id != nil {
+                                            selectedUserId = state.author?.id
+                                            showingProfileDetailSheet = true
+                                        }
                                     }
                                 )
                             }
@@ -248,6 +254,9 @@ struct NoteDetailScreen : View {
                         viewModel.dispatch(action: NoteDetailActionAreaChanged())
                     }
                 )
+            }
+            .sheet(isPresented: $showingProfileDetailSheet) {
+                ProfileDetailScreen(userId: $selectedUserId)
             }
             .onAppear {
                 observeEvents()

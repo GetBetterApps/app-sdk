@@ -17,13 +17,15 @@ struct ProfileHeader: View {
     let isLoading: Bool
     let onAvatarClick: () -> Void
     let onSettingsClick: () -> Void
+    let showSettings: Bool
     
-    init(userName: String, avatarBytes: KotlinByteArray?, isLoading: Bool, onAvatarClick: @escaping () -> Void, onSettingsClick: @escaping () -> Void) {
+    init(userName: String, avatarBytes: KotlinByteArray?, isLoading: Bool, onAvatarClick: @escaping () -> Void, onSettingsClick: @escaping () -> Void, showSettings: Bool = true) {
         self.userName = userName
         self.avatarBytes = avatarBytes
         self.isLoading = isLoading
         self.onAvatarClick = onAvatarClick
         self.onSettingsClick = onSettingsClick
+        self.showSettings = showSettings
     }
     
     var body: some View {
@@ -33,10 +35,12 @@ struct ProfileHeader: View {
             }
             
             VStack {
-                HStack {
-                    Spacer()
-                    SettingsButton {
-                        onSettingsClick()
+                if showSettings {
+                    HStack {
+                        Spacer()
+                        SettingsButton {
+                            onSettingsClick()
+                        }
                     }
                 }
                 

@@ -14,10 +14,12 @@ struct LevelBlock: View {
     
     private let experienceData: ExperienceData
     private let topPadding: CGFloat
+    private let isOwn: Bool
     
-    init(experienceData: ExperienceData, topPadding: Int = 20) {
+    init(experienceData: ExperienceData, topPadding: Int = 20, isOwn: Bool = true) {
         self.experienceData = experienceData
         self.topPadding = CGFloat(topPadding)
+        self.isOwn = isOwn
     }
     
     var body: some View {
@@ -25,7 +27,9 @@ struct LevelBlock: View {
         PrimaryBox {
             VStack(spacing: 0) {
                 HStack {
-                    Text(SharedR.strings().experience_your_title.desc().localized())
+                    Text(
+                        isOwn ? SharedR.strings().experience_your_title.desc().localized() : SharedR.strings().experience_user_title.desc().localized()
+                    )
                         .style(.labelMedium)
                         .foregroundColor(.textPrimary)
                     Spacer()

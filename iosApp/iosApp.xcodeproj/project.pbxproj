@@ -40,6 +40,8 @@
 		461F7C6C2AA8D71F003791CF /* BaseViewModelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C6B2AA8D71F003791CF /* BaseViewModelExt.swift */; };
 		463049E32AFD0590006F60D2 /* LevelBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463049E22AFD0590006F60D2 /* LevelBlock.swift */; };
 		46445AFA2ACD5484008934B2 /* PrivateSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46445AF92ACD5484008934B2 /* PrivateSwitch.swift */; };
+		464478C72B0A0C5800926899 /* ProfileDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464478C62B0A0C5800926899 /* ProfileDetailScreen.swift */; };
+		464478C92B0A101C00926899 /* ProfileDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464478C82B0A101C00926899 /* ProfileDetailViewModel.swift */; };
 		4646BF9A2AD2AF0B000980DD /* AreaDetailContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4646BF992AD2AF0B000980DD /* AreaDetailContent.swift */; };
 		4646BF9C2AD2BD72000980DD /* AreaDetailBottomButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4646BF9B2AD2BD72000980DD /* AreaDetailBottomButtons.swift */; };
 		464A426B2AEA62880019CB98 /* TagItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464A426A2AEA62880019CB98 /* TagItem.swift */; };
@@ -158,6 +160,8 @@
 		461F7C6B2AA8D71F003791CF /* BaseViewModelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelExt.swift; sourceTree = "<group>"; };
 		463049E22AFD0590006F60D2 /* LevelBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelBlock.swift; sourceTree = "<group>"; };
 		46445AF92ACD5484008934B2 /* PrivateSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateSwitch.swift; sourceTree = "<group>"; };
+		464478C62B0A0C5800926899 /* ProfileDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailScreen.swift; sourceTree = "<group>"; };
+		464478C82B0A101C00926899 /* ProfileDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewModel.swift; sourceTree = "<group>"; };
 		4646BF992AD2AF0B000980DD /* AreaDetailContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaDetailContent.swift; sourceTree = "<group>"; };
 		4646BF9B2AD2BD72000980DD /* AreaDetailBottomButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaDetailBottomButtons.swift; sourceTree = "<group>"; };
 		464A426A2AEA62880019CB98 /* TagItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagItem.swift; sourceTree = "<group>"; };
@@ -413,6 +417,7 @@
 		461F7C6D2AA8D7DE003791CF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				464478C52B0A0C3C00926899 /* ProfileDetail */,
 				46FCD3D02AF530A20025D2C6 /* NoteDetail */,
 				4696B6AC2AD15EDC00DDD405 /* AreaDetail */,
 				466B497B2ACFF06000AD3F6E /* AddArea */,
@@ -425,6 +430,15 @@
 				46CDB56A2AADB45200800096 /* Auth */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		464478C52B0A0C3C00926899 /* ProfileDetail */ = {
+			isa = PBXGroup;
+			children = (
+				464478C62B0A0C5800926899 /* ProfileDetailScreen.swift */,
+				464478C82B0A101C00926899 /* ProfileDetailViewModel.swift */,
+			);
+			path = ProfileDetail;
 			sourceTree = "<group>";
 		};
 		4646BF982AD2AE20000980DD /* components */ = {
@@ -921,6 +935,7 @@
 				460054B72ABB576B00586767 /* WisdomItem.swift in Sources */,
 				467668BA2AEABFCA007C17DE /* SubNoteItem.swift in Sources */,
 				4667C9022AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift in Sources */,
+				464478C72B0A0C5800926899 /* ProfileDetailScreen.swift in Sources */,
 				461F7C652AA88A39003791CF /* NavRoute.swift in Sources */,
 				46E2DD2D2AE9364D00B4B2B5 /* AreaPickerHeader.swift in Sources */,
 				46C6606C2AFCD2D600FA189C /* NewCommentTextField.swift in Sources */,
@@ -930,6 +945,7 @@
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				466B497D2ACFF06C00AD3F6E /* AddAreaScreen.swift in Sources */,
 				460054AB2ABB18FC00586767 /* MenuItem.swift in Sources */,
+				464478C92B0A101C00926899 /* ProfileDetailViewModel.swift in Sources */,
 				468B87722ABC45E1001BBEB1 /* SocialScreen.swift in Sources */,
 				46870C2E2AC092D300BCBDB1 /* SplashRoute.swift in Sources */,
 				46D8577C2AD0560B00BE74DA /* DisabledAppButton.swift in Sources */,
