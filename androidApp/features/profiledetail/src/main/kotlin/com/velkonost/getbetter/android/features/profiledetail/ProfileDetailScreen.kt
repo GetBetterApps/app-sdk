@@ -1,20 +1,22 @@
 package com.velkonost.getbetter.android.features.profiledetail
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -24,12 +26,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.profile.components.ProfileHeader
+import com.velkonost.getbetter.android.features.social.components.FeedNoteItem
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.experience.LevelBlock
+import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.ProfileDetailViewModel
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailAction
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
+import dev.icerock.moko.resources.compose.stringResource
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -48,6 +53,7 @@ fun ProfileDetailScreen(
 
     val scope = rememberCoroutineScope()
     val state by viewModel.viewState.collectAsStateWithLifecycle()
+    val listState = rememberLazyListState()
 
     BackHandler {
         scope.launch {
@@ -73,32 +79,88 @@ fun ProfileDetailScreen(
                         .fillMaxWidth()
                         .fillMaxHeight(0.9f)
                 ) {
-                    Column(
+                    LazyColumn(
                         modifier = modifier
                             .fillMaxWidth()
                             .padding(16.dp)
-                            .verticalScroll(rememberScrollState())
-                            .padding(bottom = 140.dp)
+                            .padding(bottom = 140.dp),
+                        state = listState
                     ) {
-                        ProfileHeader(
-                            userName = state.profileData.userName,
-                            isLoading = state.profileData.isLoading,
-                            showSettings = false,
-                            avatarBytes = state.profileData.avatarBytes,
-                            onAvatarClick = {},
-                            onSettingsClick = {}
-                        )
 
-                        AnimatedVisibility(visible = state.profileData.experienceData != null) {
+                        item {
+                            ProfileHeader(
+                                userName = state.profileData.userName,
+                                isLoading = state.profileData.isLoading,
+                                showSettings = false,
+                                avatarBytes = state.profileData.avatarBytes,
+                                onAvatarClick = {},
+                                onSettingsClick = {}
+                            )
+                        }
+
+                        item {
+//                            AnimatedVisibility(visible = state.profileData.experienceData != null) {
                             state.profileData.experienceData?.let {
                                 LevelBlock(experienceData = it, isOwn = false)
                             }
+//                            }
                         }
+
+                        if (state.notesData.isLoading) {
+                            item {
+                                Box(
+                                    modifier = modifier
+                                        .fillMaxWidth()
+                                        .padding(20.dp)
+                                ) { Loader(modifier = modifier.align(Alignment.Center)) }
+                            }
+                        } else {
+                            item {
+//                                AnimatedVisibility(visible = state.notesData.items.isNotEmpty()) {
+                                Text(
+                                    modifier = modifier
+                                        .padding(top = 24.dp)
+                                        .fillMaxWidth(0.8f),
+                                    text = stringResource(resource = SharedR.strings.diary_notes_title),
+                                    color = colorResource(resource = SharedR.colors.text_primary),
+                                    style = MaterialTheme.typography.headlineSmall
+                                )
+
+//                                }
+                            }
+                            items(
+                                state.notesData.items,
+                                key = { it.id },
+                                contentType = { it.noteType }) { item ->
+                                FeedNoteItem(
+                                    item = item,
+                                    onClick = { },
+                                    onLikeClick = { }
+                                )
+                            }
+
+                            if (state.notesData.isLoading) {
+                                item {
+                                    Box(modifier = modifier.fillMaxSize()) {
+                                        Loader(modifier = modifier.align(Alignment.Center))
+                                    }
+                                }
+                            }
+                        }
+
                     }
                 }
             }
         }
     ) {}
+
+    listState.OnBottomReached(
+        buffer = state.notesData.loadMorePrefetch,
+        isLoading = state.notesData.isLoading,
+        onLoadMore = {
+            viewModel.dispatch(ProfileDetailAction.NotesLoadNextPage)
+        }
+    )
 
     LaunchedEffect(userId) {
         viewModel.dispatch(ProfileDetailAction.Load(userId))

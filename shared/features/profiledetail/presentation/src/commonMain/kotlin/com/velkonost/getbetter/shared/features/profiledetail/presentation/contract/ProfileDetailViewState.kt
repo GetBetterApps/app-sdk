@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.profiledetail.presentation.contr
 
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.user.ExperienceData
+import com.velkonost.getbetter.shared.core.util.PrefetchDistanceValue
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 
 data class ProfileDetailViewState(
@@ -20,6 +21,7 @@ data class ProfileUI(
 
 data class NotesUI(
     val isLoading: Boolean = true,
+    val loadMorePrefetch: Int = PrefetchDistanceValue,
     val items: List<Note> = emptyList()
 )
 
