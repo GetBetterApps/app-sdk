@@ -2,7 +2,7 @@ package com.velkonost.getbetter.shared.features.userinfo.data.remote.model.respo
 
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.core.model.user.asExperienceData
-import io.ktor.util.decodeBase64Bytes
+import com.velkonost.getbetter.shared.core.network.AVATAR_URL
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -28,7 +28,7 @@ fun KtorUserInfoShort.asExternalModel() =
     UserInfoShort(
         id = id,
         displayName = name,
-        avatar = avatar?.decodeBase64Bytes(),
+        avatarUrl = "$AVATAR_URL$id",
         experienceData = experience.asExperienceData,
         isFollows = isFollows
     )

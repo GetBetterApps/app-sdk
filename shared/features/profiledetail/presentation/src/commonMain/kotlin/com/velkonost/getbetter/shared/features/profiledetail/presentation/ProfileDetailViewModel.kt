@@ -52,7 +52,7 @@ internal constructor(
                             userId = it.id,
                             userName = it.displayName ?: "",
                             experienceData = it.experienceData,
-                            avatarBytes = it.avatar
+                            avatarUrl = it.avatarUrl
                         )
                         val followData = viewState.value.followData.copy(
                             state = if (it.isFollows) FollowState.Followed else FollowState.Unfollowed,

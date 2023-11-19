@@ -12,11 +12,11 @@ data class UserInfo(
 
     val displayName: String? = null,
 
-    val avatar: ByteArray? = null,
-
     val email: String? = null,
 
-    val experienceData: ExperienceData? = null
+    val experienceData: ExperienceData? = null,
+
+    val avatarUrl: String? = null
 
 )
 
@@ -26,9 +26,9 @@ data class UserInfoShort(
 
     val displayName: String? = null,
 
-    val avatar: ByteArray? = null,
-
     val experienceData: ExperienceData? = null,
 
-    val isFollows: Boolean = false
+    val isFollows: Boolean = false,
+
+    val avatarUrl: String? = null
 )

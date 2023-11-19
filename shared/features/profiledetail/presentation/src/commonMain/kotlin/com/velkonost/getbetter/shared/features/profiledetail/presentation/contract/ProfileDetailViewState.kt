@@ -15,7 +15,7 @@ data class ProfileUI(
     val isLoading: Boolean = false,
     val userId: String = "",
     val userName: String = "",
-    val avatarBytes: ByteArray? = null,
+    val avatarUrl: String? = null,
     val experienceData: ExperienceData? = null,
 )
 
