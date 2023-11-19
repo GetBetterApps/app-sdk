@@ -100,11 +100,9 @@ fun ProfileDetailScreen(
                         }
 
                         item {
-//                            AnimatedVisibility(visible = state.profileData.experienceData != null) {
                             state.profileData.experienceData?.let {
                                 LevelBlock(experienceData = it, isOwn = false)
                             }
-//                            }
                         }
 
                         if (state.notesData.isLoading && state.notesData.items.isEmpty()) {
@@ -117,7 +115,6 @@ fun ProfileDetailScreen(
                             }
                         } else {
                             item {
-//                                AnimatedVisibility(visible = state.notesData.items.isNotEmpty()) {
                                 Text(
                                     modifier = modifier
                                         .padding(top = 24.dp)
@@ -126,8 +123,6 @@ fun ProfileDetailScreen(
                                     color = colorResource(resource = SharedR.colors.text_primary),
                                     style = MaterialTheme.typography.headlineSmall
                                 )
-
-//                                }
                             }
                             items(
                                 state.notesData.items,
