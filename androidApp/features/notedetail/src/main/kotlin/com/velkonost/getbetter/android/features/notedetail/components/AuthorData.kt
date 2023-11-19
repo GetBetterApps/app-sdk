@@ -1,6 +1,5 @@
 package com.velkonost.getbetter.android.features.notedetail.components
 
-import android.graphics.BitmapFactory
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -60,18 +59,14 @@ fun AuthorData(
                     Spacer(modifier.weight(1f))
                 } else {
 
-                    if (author?.avatar != null) {
-                        author.avatar?.let { avatarBytes ->
+                    if (author?.avatarUrl != null) {
+                        author.avatarUrl?.let { avatarUrl ->
                             SubcomposeAsyncImage(
                                 modifier = modifier
                                     .size(32.dp)
                                     .clip(MaterialTheme.shapes.small),
                                 model = ImageRequest.Builder(LocalContext.current)
-                                    .data(
-                                        BitmapFactory.decodeByteArray(
-                                            avatarBytes, 0, avatarBytes.size
-                                        )
-                                    )
+                                    .data(avatarUrl)
                                     .build(),
                                 contentScale = ContentScale.Crop,
                                 contentDescription = null,

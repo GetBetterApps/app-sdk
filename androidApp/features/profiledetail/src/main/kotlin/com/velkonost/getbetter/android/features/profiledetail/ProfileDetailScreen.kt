@@ -101,7 +101,7 @@ fun ProfileDetailScreen(
                                 userName = state.profileData.userName,
                                 isLoading = state.profileData.isLoading,
                                 showSettings = false,
-                                avatarBytes = state.profileData.avatarBytes,
+                                avatarUrl = state.profileData.avatarUrl,
                                 onAvatarClick = {},
                                 onSettingsClick = {}
                             )
