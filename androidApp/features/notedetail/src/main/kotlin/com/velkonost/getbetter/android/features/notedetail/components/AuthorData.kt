@@ -59,26 +59,25 @@ fun AuthorData(
                     Spacer(modifier.weight(1f))
                 } else {
 
-                    if (!author?.avatarUrl.isNullOrEmpty()) {
-                        author?.avatarUrl?.let { avatarUrl ->
-                            SubcomposeAsyncImage(
-                                modifier = modifier
-                                    .size(32.dp)
-                                    .clip(MaterialTheme.shapes.small),
-                                model = ImageRequest.Builder(LocalContext.current)
-                                    .data(avatarUrl)
-                                    .build(),
-                                contentScale = ContentScale.Crop,
-                                contentDescription = null,
-                            )
-                        }
-                    } else {
-                        Image(
+                    author?.avatarUrl?.let { avatarUrl ->
+                        SubcomposeAsyncImage(
                             modifier = modifier
                                 .size(32.dp)
                                 .clip(MaterialTheme.shapes.small),
-                            painter = painterResource(imageResource = SharedR.images.logo),
-                            contentDescription = null
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(avatarUrl)
+                                .build(),
+                            contentScale = ContentScale.Crop,
+                            contentDescription = null,
+                            error = {
+                                Image(
+                                    modifier = modifier
+                                        .size(32.dp)
+                                        .clip(MaterialTheme.shapes.small),
+                                    painter = painterResource(imageResource = SharedR.images.logo),
+                                    contentDescription = null
+                                )
+                            }
                         )
                     }
 

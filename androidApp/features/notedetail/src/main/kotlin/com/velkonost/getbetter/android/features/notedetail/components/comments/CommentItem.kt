@@ -43,26 +43,25 @@ fun CommentItem(
             .padding(top = 16.dp, start = 8.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            if (!item.author.avatarUrl.isNullOrEmpty()) {
-                item.author.avatarUrl?.let { avatarUrl ->
-                    SubcomposeAsyncImage(
-                        modifier = modifier
-                            .size(28.dp)
-                            .clip(MaterialTheme.shapes.small),
-                        model = ImageRequest.Builder(LocalContext.current)
-                            .data(avatarUrl)
-                            .build(),
-                        contentScale = ContentScale.Crop,
-                        contentDescription = null,
-                    )
-                }
-            } else {
-                Image(
+            item.author.avatarUrl?.let { avatarUrl ->
+                SubcomposeAsyncImage(
                     modifier = modifier
                         .size(28.dp)
                         .clip(MaterialTheme.shapes.small),
-                    painter = painterResource(imageResource = SharedR.images.logo),
-                    contentDescription = null
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(avatarUrl)
+                        .build(),
+                    contentScale = ContentScale.Crop,
+                    contentDescription = null,
+                    error = {
+                        Image(
+                            modifier = modifier
+                                .size(32.dp)
+                                .clip(MaterialTheme.shapes.small),
+                            painter = painterResource(imageResource = SharedR.images.logo),
+                            contentDescription = null
+                        )
+                    }
                 )
             }
 

@@ -12,6 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.ColorFilter
@@ -65,7 +66,7 @@ fun Avatar(
                     .align(Alignment.Center),
                 color = colorResource(resource = SharedR.colors.text_light).copy(alpha = 0.5f)
             )
-        } else if (avatarUrl != null) {
+        } else {
             SubcomposeAsyncImage(
                 modifier = modifier
                     .fillMaxSize()
@@ -85,11 +86,17 @@ fun Avatar(
                             color = colorResource(resource = SharedR.colors.text_light).copy(alpha = 0.5f)
                         )
                     }
+                },
+                error = {
+                    Image(
+                        modifier = modifier
+                            .size(64.dp)
+                            .clip(MaterialTheme.shapes.small),
+                        painter = painterResource(imageResource = SharedR.images.logo),
+                        contentDescription = null
+                    )
                 }
             )
-
-        } else {
-            Placeholder()
         }
     }
 }
