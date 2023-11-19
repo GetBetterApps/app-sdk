@@ -91,8 +91,7 @@ fun ProfileDetailScreen(
                     LazyColumn(
                         modifier = modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                            .padding(bottom = 140.dp),
+                            .padding(horizontal = 16.dp),
                         contentPadding = PaddingValues(bottom = 140.dp),
                         state = listState
                     ) {
@@ -182,22 +181,32 @@ fun ProfileDetailScreen(
                                 )
                         )
 
-                        AppButton(
+                        Box(
                             modifier = modifier
-                                .align(Alignment.CenterHorizontally)
-                                .padding(bottom = 70.dp),
-                            labelText = stringResource(
-                                resource =
-                                if (state.followData.state == FollowState.Followed)
-                                    SharedR.strings.unfollow_title
-                                else SharedR.strings.follow_title
-                            ),
-                            isLoading = state.followData.isLoading,
-                            onClick = {
-                                viewModel.dispatch(ProfileDetailAction.FollowClick)
-                            }
-                        )
+                                .fillMaxWidth()
+//                            .height(140.dp)
+                                .background(
+                                    color = colorResource(resource = SharedR.colors.main_background)
+                                )
+                        ) {
+                            AppButton(
+                                modifier = modifier
+                                    .align(Alignment.Center)
+                                    .padding(bottom = 70.dp),
+                                labelText = stringResource(
+                                    resource =
+                                    if (state.followData.state == FollowState.Followed)
+                                        SharedR.strings.unfollow_title
+                                    else SharedR.strings.follow_title
+                                ),
+                                isLoading = state.followData.isLoading,
+                                onClick = {
+                                    viewModel.dispatch(ProfileDetailAction.FollowClick)
+                                }
+                            )
+                        }
                     }
+
                 }
             }
         }
