@@ -39,7 +39,7 @@ struct ProfileDetailScreen: View {
                 }
             } else {
                 ScrollView(showsIndicators: false) {
-                    LazyVStack(spacing: 0) {
+                    LazyVStack {
                         ProfileHeader(
                             userName: state.profileData.userName,
                             avatarBytes: state.profileData.avatarBytes,
@@ -54,7 +54,7 @@ struct ProfileDetailScreen: View {
                         }
                         
                         if state.notesData.isLoading && state.notesData.items.isEmpty {
-                            Loader()
+                            Loader().padding(.top, 24)
                         } else {
                             HStack {
                                 Text(SharedR.strings().diary_notes_title.desc().localized())
@@ -80,6 +80,8 @@ struct ProfileDetailScreen: View {
                         }
                     }
                     .padding(.horizontal, 16)
+                    
+                    Spacer().frame(height: 140)
                 }
             }
         }

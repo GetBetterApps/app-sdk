@@ -30,7 +30,7 @@ struct AuthorData: View {
                 
                 if isLoading {
                     Spacer()
-                    Loader(size: 32)
+                    Loader(size: 32).scaleEffect(0.6)
                     Spacer()
                 } else {
                     
