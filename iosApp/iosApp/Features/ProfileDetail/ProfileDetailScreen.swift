@@ -83,6 +83,37 @@ struct ProfileDetailScreen: View {
                     
                     Spacer().frame(height: 140)
                 }
+                
+                VStack {
+                    Spacer()
+                    
+                    VStack {
+                        Spacer()
+                            .frame(height: 20)
+                        
+                        AppButton(
+                            labelText: state.followData.state == FollowState.followed ? SharedR.strings().unfollow_title.desc().localized() : SharedR.strings().follow_title.desc().localized(),
+                            isLoading: state.followData.isLoading
+                        ) {
+                            viewModel.dispatch(action: ProfileDetailActionFollowClick())
+                        }
+                        .padding(.bottom, 50)
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .background(
+                        Rectangle()
+                            .fill(LinearGradient(gradient: Gradient(colors: [
+                                .mainBackground,
+                                .mainBackground,
+                                .mainBackground,
+                                .clear
+                            ]), startPoint: .bottom, endPoint: .top)
+                            )
+                        
+                    )
+                    
+                    
+                }.ignoresSafeArea(.keyboard)
             }
         }
         .snackBar(
