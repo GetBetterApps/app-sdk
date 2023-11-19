@@ -80,7 +80,7 @@ internal constructor(
             emit(
                 viewState.value.copy(
                     userName = it.displayName ?: "",
-                    avatarBytes = it.avatar,
+                    avatarUrl = it.avatarUrl,
                     experienceData = it.experienceData
                 )
             )
