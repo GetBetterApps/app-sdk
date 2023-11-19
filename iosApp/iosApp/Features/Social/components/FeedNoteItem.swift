@@ -73,12 +73,20 @@ struct FeedNoteItem: View {
                 
                 HStack(spacing: 0) {
                     if item.author?.avatar != nil {
-                        Image(uiImage: UIImage(data: item.author!.avatar!.toData()!)!)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 24, height: 24)
-                            .clipped()
-                            .cornerRadius(8)
+                        AsyncImage(url: URL(string: "http://62.113.117.236/userinfo/getAvatar/f7e05ae0-1997-4567-9995-c2741515619c")) { image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 24, height: 24)
+                                .clipped()
+                                .cornerRadius(8)
+                        } placeholder: {
+                            Image(uiImage: SharedR.images().logo.toUIImage()!)
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .clipped()
+                                .cornerRadius(8)
+                        }
                     } else {
                         Image(uiImage: SharedR.images().logo.toUIImage()!)
                             .resizable()

@@ -54,7 +54,6 @@ internal constructor(
                             experienceData = it.experienceData,
                             avatarBytes = it.avatar
                         )
-//                        val notesData = viewState.value.notesData.copy(isLoading = false)
                         val followData = viewState.value.followData.copy(
                             state = if (it.isFollows) FollowState.Followed else FollowState.Unfollowed,
                             isLoading = false
@@ -64,7 +63,6 @@ internal constructor(
                             viewState.value.copy(
                                 profileData = profileData,
                                 followData = followData,
-//                                notesData = notesData,
                             )
                         )
 
