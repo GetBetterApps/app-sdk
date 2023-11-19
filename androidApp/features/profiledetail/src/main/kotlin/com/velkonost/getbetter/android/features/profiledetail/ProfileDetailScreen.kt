@@ -127,7 +127,8 @@ fun ProfileDetailScreen(
                             items(
                                 state.notesData.items,
                                 key = { it.id },
-                                contentType = { it.noteType }) { item ->
+                                contentType = { it.noteType }
+                            ) { item ->
                                 FeedNoteItem(
                                     paddings = PaddingValues(0.dp),
                                     item = item,
