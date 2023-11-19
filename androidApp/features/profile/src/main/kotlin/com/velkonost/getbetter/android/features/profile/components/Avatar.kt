@@ -1,6 +1,5 @@
 package com.velkonost.getbetter.android.features.profile.components
 
-import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -31,7 +30,7 @@ import dev.icerock.moko.resources.compose.painterResource
 fun Avatar(
     modifier: Modifier,
     isLoading: Boolean,
-    avatarBytes: ByteArray?,
+    avatarUrl: String?,
     onClick: () -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
@@ -66,13 +65,13 @@ fun Avatar(
                     .align(Alignment.Center),
                 color = colorResource(resource = SharedR.colors.text_light).copy(alpha = 0.5f)
             )
-        } else if (avatarBytes != null) {
+        } else if (avatarUrl != null) {
             SubcomposeAsyncImage(
                 modifier = modifier
                     .fillMaxSize()
                     .align(Alignment.Center),
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(BitmapFactory.decodeByteArray(avatarBytes, 0, avatarBytes.size))
+                    .data(avatarUrl)
                     .crossfade(true)
                     .build(),
                 contentScale = ContentScale.Crop,

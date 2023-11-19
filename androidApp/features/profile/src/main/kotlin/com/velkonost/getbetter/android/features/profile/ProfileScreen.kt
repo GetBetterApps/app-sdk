@@ -66,7 +66,7 @@ fun ProfileScreen(
         ProfileHeader(
             userName = state.userName,
             isLoading = state.isLoading,
-            avatarBytes = state.avatarBytes,
+            avatarUrl = state.avatarUrl,
             onAvatarClick = {
                 launcher.launch("image/*")
             },

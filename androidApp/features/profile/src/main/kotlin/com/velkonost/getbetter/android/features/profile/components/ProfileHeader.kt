@@ -20,7 +20,7 @@ fun ProfileHeader(
     isLoading: Boolean = true,
     showSettings: Boolean = true,
     userName: String,
-    avatarBytes: ByteArray?,
+    avatarUrl: String?,
     onAvatarClick: () -> Unit,
     onSettingsClick: () -> Unit
 ) {
@@ -33,7 +33,7 @@ fun ProfileHeader(
         Avatar(
             modifier = modifier,
             isLoading = isLoading,
-            avatarBytes = avatarBytes
+            avatarUrl = avatarUrl
         ) {
             onAvatarClick.invoke()
         }
