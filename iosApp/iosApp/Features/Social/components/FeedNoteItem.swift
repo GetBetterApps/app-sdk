@@ -72,8 +72,8 @@ struct FeedNoteItem: View {
                 .padding(.top, 12)
                 
                 HStack(spacing: 0) {
-                    if item.author?.avatar != nil {
-                        AsyncImage(url: URL(string: "http://62.113.117.236/userinfo/getAvatar/f7e05ae0-1997-4567-9995-c2741515619c")) { image in
+                    if item.author?.avatarUrl != nil {
+                        AsyncImage(url: URL(string: item.author!.avatarUrl!)) { image in
                             image
                                 .resizable()
                                 .scaledToFill()

@@ -16,7 +16,7 @@ class ProfileDetailVIewModelDelegate: ObservableObject {
     @LazyKoin var delegate: SharedSDK.ProfileDetailViewModel
     
     @Published var state = ProfileDetailViewState(
-        profileData: ProfileUI(isLoading: false, userId: "", userName: "", avatarBytes: nil, experienceData: nil),
+        profileData: ProfileUI(isLoading: false, userId: "", userName: "", avatarUrl: nil, experienceData: nil),
         notesData: NotesUI(isLoading: true, loadMorePrefetch: 0, items: []),
         followData: FollowUI(isLoading: true, state: FollowState.followed)
     )

@@ -13,12 +13,12 @@ import SharedSDK
 struct Avatar: View {
     
     let isLoading: Bool
-    let avatarBytes: KotlinByteArray?
+    let avatarUrl: String?
     let onClick: () -> Void
     
-    init(isLoading: Bool, avatarBytes: KotlinByteArray?, onClick: @escaping () -> Void) {
+    init(isLoading: Bool, avatarUrl: String?, onClick: @escaping () -> Void) {
         self.isLoading = isLoading
-        self.avatarBytes = avatarBytes
+        self.avatarUrl = avatarUrl
         self.onClick = onClick
     }
     
@@ -31,13 +31,23 @@ struct Avatar: View {
                     .opacity(0.5)
                     .frame(width: 64, height: 64, alignment: .center)
                     .scaleEffect(2)
-            } else if (avatarBytes != nil) {
-                Image(uiImage: UIImage(data: avatarBytes!.toData()!)!)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 128, height: 128)
-                    .clipped()
-                    .cornerRadius(12)
+            } else if (avatarUrl != nil) {
+                AsyncImage(url: URL(string: avatarUrl!)) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 128, height: 128)
+                        .clipped()
+                        .cornerRadius(12)
+                } placeholder: {
+                    Image(uiImage: SharedR.images().logo.toUIImage()!)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 128, height: 128)
+                        .clipped()
+                        .cornerRadius(12)
+                }
+               
             } else {
                 Placeholder()
             }

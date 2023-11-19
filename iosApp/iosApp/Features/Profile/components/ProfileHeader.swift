@@ -13,15 +13,15 @@ import SharedSDK
 struct ProfileHeader: View {
     
     let userName: String
-    let avatarBytes: KotlinByteArray?
+    let avatarUrl: String?
     let isLoading: Bool
     let onAvatarClick: () -> Void
     let onSettingsClick: () -> Void
     let showSettings: Bool
     
-    init(userName: String, avatarBytes: KotlinByteArray?, isLoading: Bool, onAvatarClick: @escaping () -> Void, onSettingsClick: @escaping () -> Void, showSettings: Bool = true) {
+    init(userName: String, avatarUrl: String?, isLoading: Bool, onAvatarClick: @escaping () -> Void, onSettingsClick: @escaping () -> Void, showSettings: Bool = true) {
         self.userName = userName
-        self.avatarBytes = avatarBytes
+        self.avatarUrl = avatarUrl
         self.isLoading = isLoading
         self.onAvatarClick = onAvatarClick
         self.onSettingsClick = onSettingsClick
@@ -30,7 +30,7 @@ struct ProfileHeader: View {
     
     var body: some View {
         HStack(alignment: .bottom) {
-            Avatar(isLoading: isLoading, avatarBytes: avatarBytes) {
+            Avatar(isLoading: isLoading, avatarUrl: avatarUrl) {
                 onAvatarClick()
             }
             

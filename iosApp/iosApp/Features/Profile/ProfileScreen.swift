@@ -30,7 +30,7 @@ struct ProfileScreen: View {
             VStack {
                 ProfileHeader(
                     userName: state.userName,
-                    avatarBytes: state.avatarBytes,
+                    avatarUrl: state.avatarUrl,
                     isLoading: state.isLoading
                 ) {
                     self.showImagePicker.toggle()
