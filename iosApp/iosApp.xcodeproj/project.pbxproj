@@ -42,6 +42,7 @@
 		46445AFA2ACD5484008934B2 /* PrivateSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46445AF92ACD5484008934B2 /* PrivateSwitch.swift */; };
 		464478C72B0A0C5800926899 /* ProfileDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464478C62B0A0C5800926899 /* ProfileDetailScreen.swift */; };
 		464478C92B0A101C00926899 /* ProfileDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464478C82B0A101C00926899 /* ProfileDetailViewModel.swift */; };
+		464478CC2B0A393000926899 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 464478CB2B0A393000926899 /* CachedAsyncImage */; };
 		4646BF9A2AD2AF0B000980DD /* AreaDetailContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4646BF992AD2AF0B000980DD /* AreaDetailContent.swift */; };
 		4646BF9C2AD2BD72000980DD /* AreaDetailBottomButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4646BF9B2AD2BD72000980DD /* AreaDetailBottomButtons.swift */; };
 		464A426B2AEA62880019CB98 /* TagItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464A426A2AEA62880019CB98 /* TagItem.swift */; };
@@ -254,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				469629C22AD9306200D41AF1 /* SwiftUIPager in Frameworks */,
+				464478CC2B0A393000926899 /* CachedAsyncImage in Frameworks */,
 				464A42702AEA642C0019CB98 /* SwiftUIFlow in Frameworks */,
 				DD1CD8AC3CDFF9460475C5F4 /* Pods_iosApp.framework in Frameworks */,
 			);
@@ -778,6 +780,7 @@
 			packageProductDependencies = (
 				469629C12AD9306200D41AF1 /* SwiftUIPager */,
 				464A426F2AEA642C0019CB98 /* SwiftUIFlow */,
+				464478CB2B0A393000926899 /* CachedAsyncImage */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* iosApp.app */;
@@ -811,6 +814,7 @@
 			packageReferences = (
 				469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 				464A426E2AEA642C0019CB98 /* XCRemoteSwiftPackageReference "SwiftUIFlow" */,
+				464478CA2B0A393000926899 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -1228,6 +1232,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		464478CA2B0A393000926899 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
 		464A426E2AEA642C0019CB98 /* XCRemoteSwiftPackageReference "SwiftUIFlow" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ciaranrobrien/SwiftUIFlow";
@@ -1247,6 +1259,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		464478CB2B0A393000926899 /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 464478CA2B0A393000926899 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
+			productName = CachedAsyncImage;
+		};
 		464A426F2AEA642C0019CB98 /* SwiftUIFlow */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 464A426E2AEA642C0019CB98 /* XCRemoteSwiftPackageReference "SwiftUIFlow" */;

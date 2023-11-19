@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 import SharedSDK
 import SwiftUIFlow
+import CachedAsyncImage
 
 struct FeedNoteItem: View {
     
@@ -73,7 +74,7 @@ struct FeedNoteItem: View {
                 
                 HStack(spacing: 0) {
                     if item.author?.avatarUrl != nil {
-                        AsyncImage(url: URL(string: item.author!.avatarUrl!)) { image in
+                        CachedAsyncImage(url: URL(string: item.author!.avatarUrl!)) { image in
                             image
                                 .resizable()
                                 .scaledToFill()
@@ -110,7 +111,7 @@ struct FeedNoteItem: View {
                 }
                 .padding(.top, 6)
                 .padding(.horizontal, 4)
-    
+                
                 
             }
         }
