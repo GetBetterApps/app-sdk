@@ -8,8 +8,6 @@ sealed interface ProfileDetailAction : UIContract.Action {
 
     data object FollowClick : ProfileDetailAction
 
-    data object UnfollowClick : ProfileDetailAction
-
     data object NotesLoadNextPage : ProfileDetailAction
 
     data class NoteClick(val value: Note) : ProfileDetailAction

@@ -64,6 +64,12 @@
     <string name="experience_your_title">Your experience</string>
     <string name="experience_user_title">User experience</string>
     <string name="experience_level">Level %s</string>
+    <!--  PROFILE  -->
+
+    <!--  PROFILE DETAIL  -->
+    <string name="follow_title">Follow</string>
+    <string name="unfollow_title">Unfollow</string>
+    <!--  PROFILE DETAIL  -->
 
     <!--  WISDOM  -->
     <string name="wisdom_affirmations_title">Аффирмации и позитивное мышление</string>

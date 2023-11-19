@@ -10,10 +10,10 @@ import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.follows.api.FollowsRepository
 import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
+import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.FollowState
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.FollowState.Companion.reverseState
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailAction
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailEvent
-import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailNavigation
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailViewState
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 import kotlinx.coroutines.Job
@@ -24,7 +24,7 @@ internal constructor(
     private val likesRepository: LikesRepository,
     private val followsRepository: FollowsRepository,
     private val userInfoRepository: UserInfoRepository,
-) : BaseViewModel<ProfileDetailViewState, ProfileDetailAction, ProfileDetailNavigation, ProfileDetailEvent>(
+) : BaseViewModel<ProfileDetailViewState, ProfileDetailAction, Nothing, ProfileDetailEvent>(
     initialState = ProfileDetailViewState()
 ) {
 
@@ -34,7 +34,6 @@ internal constructor(
     override fun dispatch(action: ProfileDetailAction) = when (action) {
         is ProfileDetailAction.Load -> fetchUser(action.userId)
         is ProfileDetailAction.FollowClick -> obtainFollow()
-        is ProfileDetailAction.UnfollowClick -> obtainUnfollow()
         is ProfileDetailAction.NotesLoadNextPage -> fetchUserNotes()
         is ProfileDetailAction.NoteClick -> obtainNoteClick(action.value)
         is ProfileDetailAction.NoteLikeClick -> obtainNoteLikeClick(action.value)
@@ -56,11 +55,16 @@ internal constructor(
                             avatarBytes = it.avatar
                         )
                         val notesData = viewState.value.notesData.copy(isLoading = false)
+                        val followData = viewState.value.followData.copy(
+                            state = if (it.isFollows) FollowState.Followed else FollowState.Unfollowed,
+                            isLoading = false
+                        )
 
                         emit(
                             viewState.value.copy(
                                 profileData = profileData,
-                                notesData = notesData
+                                followData = followData,
+                                notesData = notesData,
                             )
                         )
                     }
@@ -98,32 +102,17 @@ internal constructor(
 
     private fun obtainFollow() {
         launchJob {
-            followsRepository.addFollow(
-                followUserId = viewState.value.profileData.userId
-            ) collectAndProcess {
+            val request =
+                if (viewState.value.followData.state == FollowState.Followed) followsRepository.removeFollow(
+                    followUserId = viewState.value.profileData.userId
+                )
+                else followsRepository.addFollow(followUserId = viewState.value.profileData.userId)
+
+            request collectAndProcess {
                 isLoading {
                     val followData = viewState.value.followData.copy(isLoading = it)
                     emit(viewState.value.copy(followData = followData))
                 }
-                onSuccess {
-                    val newFollowState = viewState.value.followData.state.reverseState()
-                    val followData = viewState.value.followData.copy(state = newFollowState)
-                    emit(viewState.value.copy(followData = followData))
-                }
-            }
-        }
-    }
-
-    private fun obtainUnfollow() {
-        launchJob {
-            followsRepository.removeFollow(
-                followUserId = viewState.value.profileData.userId
-            ) collectAndProcess {
-                isLoading {
-                    val followData = viewState.value.followData.copy(isLoading = it)
-                    emit(viewState.value.copy(followData = followData))
-                }
-
                 onSuccess {
                     val newFollowState = viewState.value.followData.state.reverseState()
                     val followData = viewState.value.followData.copy(state = newFollowState)
@@ -134,7 +123,6 @@ internal constructor(
     }
 
     private fun obtainNoteClick(value: Note) {
-        emit(ProfileDetailNavigation.NavigateToNoteDetail(value))
     }
 
     private fun obtainNoteLikeClick(value: Note) {
