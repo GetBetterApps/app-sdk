@@ -25,6 +25,12 @@ object DatetimeFormatter {
     private const val HOUR_MILLIS = 60 * MINUTE_MILLIS
     const val DAY_MILLIS = 24 * HOUR_MILLIS
 
+    private const val DAY_FORMAT = "dd"
+    private const val DAY_MONTH_FORMAT = "dd.MM"
+    private const val FULL_DATE_FORMAT = "dd.MM.yyyy"
+    private const val DAY_OF_WEEK_FORMAT = "EEE"
+    private const val HOURS_MINUTES_FORMAT = "HH:mm"
+
     val todayMillis: Long
         get() {
             val timeZone = TimeZone.currentSystemDefault()
@@ -86,21 +92,21 @@ object DatetimeFormatter {
             diff < 48 * HOUR_MILLIS -> {
                 StringDesc.ResourceFormatted(
                     SharedR.strings.date_yesterday,
-                    requestedTime.format("HH:mm")
+                    requestedTime.format(HOURS_MINUTES_FORMAT)
                 )
             }
 
             requestedTime.year == nowDatetime.year -> {
                 StringDesc.ResourceFormatted(
                     SharedR.strings.date_same_year,
-                    requestedTime.format("dd.MM")
+                    requestedTime.format(DAY_MONTH_FORMAT)
                 )
             }
 
             else -> {
                 StringDesc.ResourceFormatted(
                     SharedR.strings.date_same_year,
-                    requestedTime.format("dd.MM.yyyy")
+                    requestedTime.format(FULL_DATE_FORMAT)
                 )
             }
         }
@@ -112,7 +118,7 @@ object DatetimeFormatter {
 
         return StringDesc.ResourceFormatted(
             SharedR.strings.date_same_year,
-            requestedTime.format("dd.MM.yyyy")
+            requestedTime.format(FULL_DATE_FORMAT)
         )
     }
 
@@ -122,7 +128,7 @@ object DatetimeFormatter {
 
         return StringDesc.ResourceFormatted(
             SharedR.strings.date_same_year,
-            requestedTime.format("dd")
+            requestedTime.format(DAY_FORMAT)
         )
     }
 
@@ -132,7 +138,7 @@ object DatetimeFormatter {
 
         return StringDesc.ResourceFormatted(
             SharedR.strings.date_same_year,
-            requestedTime.format("EEE")
+            requestedTime.format(DAY_OF_WEEK_FORMAT)
         )
     }
 
@@ -142,7 +148,7 @@ object DatetimeFormatter {
 
         return StringDesc.ResourceFormatted(
             SharedR.strings.date_same_year,
-            requestedTime.format("dd.MM")
+            requestedTime.format(DAY_MONTH_FORMAT)
         )
     }
 
