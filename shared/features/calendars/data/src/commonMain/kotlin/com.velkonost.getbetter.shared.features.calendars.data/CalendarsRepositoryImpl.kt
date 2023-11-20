@@ -23,11 +23,11 @@ class CalendarsRepositoryImpl : CalendarsRepository {
         items
             .expand(
                 direction = DateDirection.Future,
-                amount = 10
+                amount = 100
             )
             .expand(
                 direction = DateDirection.Past,
-                amount = 10
+                amount = 100
             )
     }
 

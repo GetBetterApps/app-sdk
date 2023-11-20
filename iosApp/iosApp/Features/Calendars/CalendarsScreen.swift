@@ -16,6 +16,7 @@ struct CalendarsScreen: View {
     
     @StateViewModel var viewModel: CalendarsViewModel
     @State private var scrollTarget: Int64?
+    @State private var scrollTargetBeforeAppending: Int64?
     
     var body: some View {
         @State var state = viewModel.viewStateValue as! CalendarsViewState
@@ -71,6 +72,13 @@ struct CalendarsScreen: View {
                         }
                     }
                 }
+                .onChange(of: state.datesState.items) { value in
+                    if let target = scrollTargetBeforeAppending {
+                        scrollTargetBeforeAppending = nil
+                        view.scrollTo(target)
+                    }
+                    
+                }
             }
             .onChange(of: state.datesState.selectedDate) { value in
                 if value != nil {
@@ -92,14 +100,23 @@ extension CalendarsScreen {
         let state = viewModel.viewStateValue as! CalendarsViewState
         let data = state.datesState.items
         let thresholdIndexRight = data.index(data.endIndex, offsetBy: -5)
-        let thresholdIndexLeft = data.index(data.startIndex, offsetBy: 0)
+        let thresholdIndexLeft = data.index(data.startIndex, offsetBy: 30)
         
-        if data.firstIndex(where: { $0.id == currentItemId })! >= thresholdIndexRight && !state.datesState.isNextLoading {
-            viewModel.dispatch(action: CalendarsActionLoadMoreNextDates())
-        }
+        let currentIndex = data.firstIndex(where: { $0.id == currentItemId })
         
-        if data.firstIndex(where: { $0.id == currentItemId })! <= thresholdIndexLeft && !state.datesState.isPreviousLoading {
-            viewModel.dispatch(action: CalendarsActionLoadMorePreviousDates())
-        }
+        
+//        if data.firstIndex(where: { $0.id == currentItemId })! >= thresholdIndexRight && !state.datesState.isNextLoading {
+//            viewModel.dispatch(action: CalendarsActionLoadMoreNextDates())
+//        }
+//        
+//        if data.firstIndex(where: { $0.id == currentItemId })! <= thresholdIndexLeft && !state.datesState.isPreviousLoading {
+//            viewModel.dispatch(action: CalendarsActionLoadMorePreviousDates())
+//        }
+//        
+        scrollTargetBeforeAppending = currentItemId
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//            scrollTarget = Int64(currentIndex!)
+//        }
+        
     }
 }
