@@ -30,6 +30,8 @@ object DatetimeFormatter {
     private const val FULL_DATE_FORMAT = "dd.MM.yyyy"
     private const val DAY_OF_WEEK_FORMAT = "EEE"
     private const val HOURS_MINUTES_FORMAT = "HH:mm"
+    private const val YEAR_FORMAT = "yyyy"
+    private const val MONTH_DAY_FORMAT = "LLLL dd"
 
     val todayMillis: Long
         get() {
@@ -139,6 +141,26 @@ object DatetimeFormatter {
         return StringDesc.ResourceFormatted(
             SharedR.strings.date_same_year,
             requestedTime.format(DAY_OF_WEEK_FORMAT)
+        )
+    }
+
+    fun Long.convertToYear(): StringDesc {
+        val requestedTime = Instant.fromEpochMilliseconds(this)
+            .toLocalDateTime(TimeZone.currentSystemDefault())
+
+        return StringDesc.ResourceFormatted(
+            SharedR.strings.date_same_year,
+            requestedTime.format(YEAR_FORMAT)
+        )
+    }
+
+    fun Long.convertToMonthDay(): StringDesc {
+        val requestedTime = Instant.fromEpochMilliseconds(this)
+            .toLocalDateTime(TimeZone.currentSystemDefault())
+
+        return StringDesc.ResourceFormatted(
+            SharedR.strings.date_same_year,
+            requestedTime.format(MONTH_DAY_FORMAT)
         )
     }
 

@@ -11,8 +11,14 @@ data class CalendarsViewState(
 data class DatesState(
     val isPreviousLoading: Boolean = true,
     val isNextLoading: Boolean = true,
-    val selectedDateId: Long? = null,
+    val selectedDate: SelectedDate? = null,
     val items: List<DateUIItem> = emptyList()
+)
+
+data class SelectedDate(
+    val id: Long,
+    val year: StringDesc,
+    val monthDay: StringDesc
 )
 
 data class DateUIItem(

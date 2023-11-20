@@ -2,6 +2,8 @@ package com.velkonost.getbetter.shared.features.calendars.presentation
 
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDay
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDayOfWeek
+import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToMonthDay
+import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToYear
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
@@ -12,6 +14,7 @@ import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsNavigation
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsViewState
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.DateUIItem
+import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.SelectedDate
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class CalendarsViewModel
@@ -38,9 +41,15 @@ internal constructor(
                     }
                 )
 
-                if (datesState.selectedDateId == null) {
+                if (datesState.selectedDate == null) {
+                    val dateMillis = dates.first { it.selectedByDefault }.millis
+                    val selectedDate = SelectedDate(
+                        id = dateMillis,
+                        year = dateMillis.convertToYear(),
+                        monthDay = dateMillis.convertToMonthDay()
+                    )
                     datesState = datesState.copy(
-                        selectedDateId = dates.first { it.selectedByDefault }.millis,
+                        selectedDate = selectedDate,
                         isNextLoading = false,
                         isPreviousLoading = false
                     )
@@ -74,9 +83,12 @@ internal constructor(
 
     private fun obtainDateClick(dateId: Long) {
         viewState.value.datesState.items.firstOrNull { it.id == dateId }?.let {
-            val datesState = viewState.value.datesState.copy(
-                selectedDateId = dateId,
+            val selectedDate = SelectedDate(
+                id = dateId,
+                year = dateId.convertToYear(),
+                monthDay = dateId.convertToMonthDay()
             )
+            val datesState = viewState.value.datesState.copy(selectedDate = selectedDate)
             emit(viewState.value.copy(datesState = datesState))
         }
     }
