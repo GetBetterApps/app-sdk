@@ -4,8 +4,14 @@ import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 
 data class CalendarsViewState(
     val isLoading: Boolean = false,
-    val dates: List<DateUIItem> = emptyList()
+    val datesState: DatesState = DatesState()
 ) : UIContract.State
+
+data class DatesState(
+    val isPreviousLoading: Boolean = false,
+    val isNextLoading: Boolean = true,
+    val dates: List<DateUIItem> = emptyList()
+)
 
 data class DateUIItem(
     val date: String = "",
