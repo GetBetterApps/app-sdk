@@ -1,6 +1,5 @@
 package com.velkonost.getbetter.android.features.calendars
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.animateScrollBy
@@ -17,9 +16,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -30,9 +31,7 @@ import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.DateUIItem
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.time.Duration.Companion.seconds
 
 @Composable
 fun CalendarsScreen(
@@ -64,13 +63,17 @@ fun CalendarsScreen(
 
     LaunchedEffect(state.datesState.selectedDateId) {
         scope.launch {
-            delay(1.seconds)
             val selectedItemIndex = state.datesState.items.indexOfFirst {
                 it.id == state.datesState.selectedDateId
             }
             listState.centerItem(selectedItemIndex)
         }
     }
+
+    listState.OnSideReached(isLoadingRight = state.datesState.isNextLoading,
+        isLoadingLeft = state.datesState.isPreviousLoading,
+        onLoadMoreRight = { viewModel.dispatch(CalendarsAction.LoadMoreNextDates) },
+        onLoadMoreLeft = { viewModel.dispatch(CalendarsAction.LoadMorePreviousDates) })
 
 }
 
@@ -82,46 +85,39 @@ fun CalendarDateItem(
     onClick: (Long) -> Unit
 ) {
 
-    AnimatedContent(targetState = isSelected, label = "") {
-        Column(
-            modifier = modifier
-                .padding(4.dp)
-                .background(
-                    color = colorResource(
-                        resource = if (it) SharedR.colors.button_gradient_start
-                        else SharedR.colors.background_item
-                    ),
-                    shape = MaterialTheme.shapes.medium
-                )
-                .size(64.dp)
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = null
-                ) { onClick.invoke(item.id) },
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "MON",
-                style = MaterialTheme.typography.labelMedium,
+    Column(
+        modifier = modifier
+            .padding(4.dp)
+            .background(
                 color = colorResource(
-                    resource = if (it) SharedR.colors.text_light
-                    else SharedR.colors.text_secondary
-                )
+                    resource = if (isSelected) SharedR.colors.button_gradient_start
+                    else SharedR.colors.background_item
+                ), shape = MaterialTheme.shapes.medium
             )
+            .size(64.dp)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() }, indication = null
+            ) { onClick.invoke(item.id) },
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "MON", style = MaterialTheme.typography.labelMedium, color = colorResource(
+                resource = if (isSelected) SharedR.colors.text_light
+                else SharedR.colors.text_secondary
+            )
+        )
 
-            Text(
-                modifier = modifier.padding(top = 6.dp),
-                text = item.date.toString(LocalContext.current),
-                style = MaterialTheme.typography.labelMedium,
-                color = colorResource(
-                    resource = if (it) SharedR.colors.text_light
-                    else SharedR.colors.text_secondary
-                )
+        Text(
+            modifier = modifier.padding(top = 6.dp),
+            text = item.date.toString(LocalContext.current),
+            style = MaterialTheme.typography.labelMedium,
+            color = colorResource(
+                resource = if (isSelected) SharedR.colors.text_light
+                else SharedR.colors.text_secondary
             )
-        }
+        )
     }
-
 }
 
 suspend fun LazyListState.centerItem(index: Int) {
@@ -148,5 +144,40 @@ suspend fun LazyListState.centerItem(index: Int) {
             }.coerceIn(0, layoutInfo.totalItemsCount)
         )
         locateTarget()
+    }
+}
+
+@Composable
+fun LazyListState.OnSideReached(
+    buffer: Int = 0,
+    isLoadingRight: Boolean,
+    isLoadingLeft: Boolean,
+    onLoadMoreRight: () -> Unit,
+    onLoadMoreLeft: () -> Unit
+) {
+    val shouldLoadMoreRight = remember {
+        derivedStateOf {
+            val lastVisibleItem =
+                layoutInfo.visibleItemsInfo.lastOrNull() ?: return@derivedStateOf true
+
+            lastVisibleItem.index >= layoutInfo.totalItemsCount - 1 - buffer
+        }
+    }
+
+    val shouldLoadMoreLeft = remember {
+        derivedStateOf {
+            val firstVisibleItem =
+                layoutInfo.visibleItemsInfo.firstOrNull() ?: return@derivedStateOf true
+
+            firstVisibleItem.index <= 0 + buffer
+        }
+    }
+
+    LaunchedEffect(shouldLoadMoreRight, isLoadingRight) {
+        snapshotFlow { shouldLoadMoreRight.value && !isLoadingRight }.collect { if (it) onLoadMoreRight() }
+    }
+
+    LaunchedEffect(shouldLoadMoreLeft, isLoadingLeft) {
+        snapshotFlow { shouldLoadMoreLeft.value && !isLoadingLeft }.collect { if (it) onLoadMoreLeft() }
     }
 }
