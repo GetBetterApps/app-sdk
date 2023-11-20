@@ -33,6 +33,7 @@ struct CalendarDateItem: View {
                 .style(.labelMedium)
                 .foregroundColor(isSelected ? .textLight : .textPrimary)
         }
+        
         .frame(width: 52, height: 52)
         .padding(4)
         .background(

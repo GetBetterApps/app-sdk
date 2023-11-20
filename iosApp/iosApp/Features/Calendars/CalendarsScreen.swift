@@ -44,6 +44,7 @@ struct CalendarsScreen: View {
             
             ScrollViewReader { view in
                 ScrollView(.horizontal, showsIndicators: false) {
+                    
                     LazyHStack {
                         ForEach(state.datesState.items, id: \.self.id) { item in
                             CalendarDateItem(
@@ -54,6 +55,9 @@ struct CalendarsScreen: View {
                                 }
                             )
                             .id(item.id)
+                            .onAppear {
+                                checkPaginationThreshold(currentItemId: item.id)
+                            }
                             
                         }
                     }
@@ -73,10 +77,29 @@ struct CalendarsScreen: View {
                     scrollTarget = value!.id
                 }
             }
+            .frame(height: 70)
+            .padding(.top, 12)
             
             Spacer().frame(maxHeight: .infinity)
         }
         .frame(maxHeight: .infinity)
         
+    }
+}
+
+extension CalendarsScreen {
+    func checkPaginationThreshold(currentItemId: Int64) {
+        let state = viewModel.viewStateValue as! CalendarsViewState
+        let data = state.datesState.items
+        let thresholdIndexRight = data.index(data.endIndex, offsetBy: -5)
+        let thresholdIndexLeft = data.index(data.startIndex, offsetBy: 0)
+        
+        if data.firstIndex(where: { $0.id == currentItemId })! >= thresholdIndexRight && !state.datesState.isNextLoading {
+            viewModel.dispatch(action: CalendarsActionLoadMoreNextDates())
+        }
+        
+        if data.firstIndex(where: { $0.id == currentItemId })! <= thresholdIndexLeft && !state.datesState.isPreviousLoading {
+            viewModel.dispatch(action: CalendarsActionLoadMorePreviousDates())
+        }
     }
 }
