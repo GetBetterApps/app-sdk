@@ -23,7 +23,7 @@ struct CalendarsRoute: NavRoute {
     }
     
     var content: some View {
-        return CalendarsScreen() //viewModel: viewModel
+        return CalendarsScreen(viewModel: viewModel)
     }
     
     var viewModel: CalendarsViewModel {

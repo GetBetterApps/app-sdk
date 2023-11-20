@@ -9,9 +9,16 @@
 import Foundation
 import SwiftUI
 import SharedSDK
+import KMMViewModelSwiftUI
+import KMPNativeCoroutinesAsync
 
 struct CalendarsScreen: View {
+    
+    @StateViewModel var viewModel: CalendarsViewModel
+    
     var body: some View {
+        @State var state = viewModel.viewStateValue as! CalendarsViewState
+        
         ZStack {
             
         }
