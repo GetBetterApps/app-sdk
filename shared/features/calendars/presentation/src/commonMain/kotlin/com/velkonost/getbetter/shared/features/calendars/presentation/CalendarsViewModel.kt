@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.calendars.presentation
 
-import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToShortDateWithoutRelation
+import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDay
+import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDayOfWeek
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
@@ -31,7 +32,8 @@ internal constructor(
                     items = dates.map {
                         DateUIItem(
                             id = it.millis,
-                            date = it.millis.convertToShortDateWithoutRelation()
+                            day = it.millis.convertToDay(),
+                            dayOfWeek = it.millis.convertToDayOfWeek()
                         )
                     }
                 )

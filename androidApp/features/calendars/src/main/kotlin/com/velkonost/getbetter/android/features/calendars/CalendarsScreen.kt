@@ -96,23 +96,25 @@ fun CalendarDateItem(
                     else SharedR.colors.background_item
                 ), shape = MaterialTheme.shapes.medium
             )
-            .size(64.dp)
+            .size(52.dp)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() }, indication = null
             ) { onClick.invoke(item.id) },
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "MON", style = MaterialTheme.typography.labelMedium, color = colorResource(
+            text = item.dayOfWeek.toString(LocalContext.current).uppercase(),
+            style = MaterialTheme.typography.labelMedium,
+            color = colorResource(
                 resource = if (isSelected) SharedR.colors.text_light
                 else SharedR.colors.text_secondary
             )
         )
 
         Text(
-            modifier = modifier.padding(top = 6.dp),
-            text = item.date.toString(LocalContext.current),
+
+            text = item.day.toString(LocalContext.current),
             style = MaterialTheme.typography.labelMedium,
             color = colorResource(
                 resource = if (isSelected) SharedR.colors.text_light

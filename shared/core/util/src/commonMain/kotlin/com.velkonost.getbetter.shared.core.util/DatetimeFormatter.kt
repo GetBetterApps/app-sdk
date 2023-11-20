@@ -116,6 +116,26 @@ object DatetimeFormatter {
         )
     }
 
+    fun Long.convertToDay(): StringDesc {
+        val requestedTime = Instant.fromEpochMilliseconds(this)
+            .toLocalDateTime(TimeZone.currentSystemDefault())
+
+        return StringDesc.ResourceFormatted(
+            SharedR.strings.date_same_year,
+            requestedTime.format("dd")
+        )
+    }
+
+    fun Long.convertToDayOfWeek(): StringDesc {
+        val requestedTime = Instant.fromEpochMilliseconds(this)
+            .toLocalDateTime(TimeZone.currentSystemDefault())
+
+        return StringDesc.ResourceFormatted(
+            SharedR.strings.date_same_year,
+            requestedTime.format("EEE")
+        )
+    }
+
     fun Long.convertToShortDateWithoutRelation(): StringDesc {
         val requestedTime = Instant.fromEpochMilliseconds(this)
             .toLocalDateTime(TimeZone.currentSystemDefault())

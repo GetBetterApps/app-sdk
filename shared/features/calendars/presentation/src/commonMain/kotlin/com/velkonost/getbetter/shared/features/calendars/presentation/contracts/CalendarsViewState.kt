@@ -17,6 +17,7 @@ data class DatesState(
 
 data class DateUIItem(
     val id: Long,
-    val date: StringDesc,
+    val day: StringDesc,
+    val dayOfWeek: StringDesc,
     val items: List<String> = emptyList()
 )
