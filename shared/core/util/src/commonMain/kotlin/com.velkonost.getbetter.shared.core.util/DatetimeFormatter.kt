@@ -9,9 +9,11 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.UtcOffset
+import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.offsetIn
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
+import kotlinx.datetime.todayIn
 import kotlin.time.Duration
 
 object DatetimeFormatter {
@@ -22,6 +24,12 @@ object DatetimeFormatter {
     private const val MINUTE_MILLIS = 60 * SECOND_MILLIS
     private const val HOUR_MILLIS = 60 * MINUTE_MILLIS
     const val DAY_MILLIS = 24 * HOUR_MILLIS
+
+    val todayMillis: Long
+        get() {
+            val timeZone = TimeZone.currentSystemDefault()
+            return Clock.System.todayIn(timeZone).atStartOfDayIn(timeZone).toEpochMilliseconds()
+        }
 
     fun Long.convertToServerDatetime(): Long {
         // GMT+0
