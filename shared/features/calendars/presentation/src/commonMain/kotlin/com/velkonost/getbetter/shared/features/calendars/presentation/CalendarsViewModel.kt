@@ -50,6 +50,7 @@ internal constructor(
     override fun dispatch(action: CalendarsAction) = when (action) {
         is CalendarsAction.LoadMoreNextDates -> obtainLoadMore(DateDirection.Future)
         is CalendarsAction.LoadMorePreviousDates -> obtainLoadMore(DateDirection.Past)
+        is CalendarsAction.DateClick -> obtainDateClick(action.id)
     }
 
     private fun initItems() {
@@ -64,6 +65,15 @@ internal constructor(
                     }
                 }
             }
+        }
+    }
+
+    private fun obtainDateClick(dateId: Long) {
+        viewState.value.datesState.items.firstOrNull { it.id == dateId }?.let {
+            val datesState = viewState.value.datesState.copy(
+                selectedDateId = dateId,
+            )
+            emit(viewState.value.copy(datesState = datesState))
         }
     }
 
