@@ -56,8 +56,10 @@ fun CalendarsScreen(
                     modifier = modifier.padding(horizontal = 16.dp)
                 ) {
                     Text(
-                        text = it.monthDay.toString(LocalContext.current)
-                            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
+                        text = it.monthDay.toString(LocalContext.current).replaceFirstChar {
+                                if (it.isLowerCase()) it.titlecase(Locale.getDefault())
+                                else it.toString()
+                            },
                         style = MaterialTheme.typography.headlineSmall,
                         color = colorResource(resource = SharedR.colors.text_secondary)
                     )

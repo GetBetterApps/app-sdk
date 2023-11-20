@@ -19,7 +19,13 @@ struct CalendarsScreen: View {
     var body: some View {
         @State var state = viewModel.viewStateValue as! CalendarsViewState
         
-        ZStack {
+        VStack {
+            if state.datesState.selectedDate != nil {
+                VStack {
+                    Text(state.datesState.selectedDate!.monthDay.localized().capitalized)
+                        
+                }
+            }
             
         }
     }
