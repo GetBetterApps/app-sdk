@@ -23,6 +23,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -90,11 +91,15 @@ fun CalendarDateItem(
     Column(
         modifier = modifier
             .padding(4.dp)
+            .shadow(
+                elevation = 8.dp,
+                shape = MaterialTheme.shapes.small,
+            )
             .background(
                 color = colorResource(
                     resource = if (isSelected) SharedR.colors.button_gradient_start
                     else SharedR.colors.background_item
-                ), shape = MaterialTheme.shapes.medium
+                ), shape = MaterialTheme.shapes.small
             )
             .size(52.dp)
             .clickable(
@@ -108,17 +113,16 @@ fun CalendarDateItem(
             style = MaterialTheme.typography.labelMedium,
             color = colorResource(
                 resource = if (isSelected) SharedR.colors.text_light
-                else SharedR.colors.text_secondary
+                else SharedR.colors.text_primary
             )
         )
 
         Text(
-
             text = item.day.toString(LocalContext.current),
             style = MaterialTheme.typography.labelMedium,
             color = colorResource(
                 resource = if (isSelected) SharedR.colors.text_light
-                else SharedR.colors.text_secondary
+                else SharedR.colors.text_primary
             )
         )
     }
