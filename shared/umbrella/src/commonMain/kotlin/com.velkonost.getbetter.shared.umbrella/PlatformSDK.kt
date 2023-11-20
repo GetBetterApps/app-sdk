@@ -9,10 +9,10 @@ import com.velkonost.getbetter.shared.features.areas.data.di.AreasDataModule
 import com.velkonost.getbetter.shared.features.auth.data.di.AuthDataModule
 import com.velkonost.getbetter.shared.features.auth.domain.di.AuthDomainModule
 import com.velkonost.getbetter.shared.features.auth.presentation.di.AuthPresentationModule
+import com.velkonost.getbetter.shared.features.calendars.data.di.DiaryDataModule
+import com.velkonost.getbetter.shared.features.calendars.di.DiaryPresentationModule
+import com.velkonost.getbetter.shared.features.calendars.presentation.di.CalendarsPresentationModule
 import com.velkonost.getbetter.shared.features.comments.data.di.CommentsDataModule
-import com.velkonost.getbetter.shared.features.diary.data.di.DiaryDataModule
-import com.velkonost.getbetter.shared.features.diary.di.CalendarsPresentationModule
-import com.velkonost.getbetter.shared.features.diary.di.DiaryPresentationModule
 import com.velkonost.getbetter.shared.features.follows.data.di.FollowsDataModule
 import com.velkonost.getbetter.shared.features.likes.data.di.LikesDataModule
 import com.velkonost.getbetter.shared.features.notedetail.presentation.di.NoteDetailPresentationModule

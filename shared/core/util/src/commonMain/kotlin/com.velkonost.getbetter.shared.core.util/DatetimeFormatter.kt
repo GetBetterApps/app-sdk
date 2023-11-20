@@ -12,9 +12,9 @@ import kotlinx.datetime.UtcOffset
 import kotlinx.datetime.offsetIn
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Duration
 
 object DatetimeFormatter {
-
 
     private val SERVER_TIMEZONE = TimeZone.of("GMT+3")
 
@@ -26,6 +26,7 @@ object DatetimeFormatter {
     fun Long.convertToServerDatetime(): Long {
         // GMT+0
         val instant = Instant.fromEpochMilliseconds(this)
+        instant.minus(Duration.ZERO)
 
         // Diff with local time in millis
         val diffMillis = instant.offsetIn(TimeZone.currentSystemDefault()).totalSeconds * 1000

@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.shared.features.diary.data
+package com.velkonost.getbetter.shared.features.calendars.data
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -7,7 +7,7 @@ import com.velkonost.getbetter.shared.core.datastore.NEW_USER_RESET_DIARY_STATE
 import com.velkonost.getbetter.shared.core.datastore.UPDATED_NOTE_ID
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.flowLocalRequest
-import com.velkonost.getbetter.shared.features.diary.api.DiaryRepository
+import com.velkonost.getbetter.shared.features.calendars.api.DiaryRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 

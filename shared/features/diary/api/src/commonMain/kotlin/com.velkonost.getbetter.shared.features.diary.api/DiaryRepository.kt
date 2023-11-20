@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.shared.features.diary.api
+package com.velkonost.getbetter.shared.features.calendars.api
 
 import com.velkonost.getbetter.shared.core.util.ResultState
 import kotlinx.coroutines.flow.Flow
