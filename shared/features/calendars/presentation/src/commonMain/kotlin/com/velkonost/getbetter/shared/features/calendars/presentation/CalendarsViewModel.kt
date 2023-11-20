@@ -11,7 +11,7 @@ import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsNavigation
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsViewState
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.DateUIItem
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class CalendarsViewModel
 internal constructor(
@@ -20,13 +20,13 @@ internal constructor(
     initialState = CalendarsViewState()
 ) {
 
-    private var _dates: List<DateItem> = emptyList()
+    private var _dates: MutableStateFlow<List<DateItem>> = MutableStateFlow(emptyList())
 
     init {
         initItems()
 
         launchJob {
-            flow<List<DateItem>> { _dates }.collect { dates ->
+            _dates.collect { dates ->
                 var datesState = viewState.value.datesState.copy(
                     items = dates.map {
                         DateUIItem(
@@ -60,7 +60,7 @@ internal constructor(
                 }
                 onSuccess { list ->
                     list?.let {
-                        _dates = it
+                        _dates.value = it
                     }
                 }
             }
@@ -70,7 +70,7 @@ internal constructor(
     private fun obtainLoadMore(direction: DateDirection) {
         launchJob {
             calendarsRepository.appendItems(
-                currentItems = _dates,
+                currentItems = _dates.value,
                 direction = direction,
                 amount = 10
             ) collectAndProcess {
@@ -81,7 +81,7 @@ internal constructor(
                     emit(viewState.value.copy(datesState = datesState))
                 }
                 onSuccess { list ->
-                    list?.let { _dates = it }
+                    list?.let { _dates.value = it }
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.shared.features.calendars.di
+package com.velkonost.getbetter.shared.features.calendars.presentation.di
 
 import com.velkonost.getbetter.shared.features.calendars.presentation.CalendarsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf

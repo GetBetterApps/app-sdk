@@ -27,7 +27,7 @@ fun CalendarsScreen(
 
     Column {
         LazyRow {
-            items(state.datesState.items, key = { it.date }) { item ->
+            items(state.datesState.items, key = { it.id }) { item ->
                 CalendarDateItem(
                     item = item,
                     isSelected = item.id == state.datesState.selectedDateId
