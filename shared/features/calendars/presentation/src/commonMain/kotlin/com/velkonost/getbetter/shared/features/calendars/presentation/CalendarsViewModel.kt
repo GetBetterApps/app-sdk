@@ -27,13 +27,21 @@ internal constructor(
 
         launchJob {
             flow<List<DateItem>> { _dates }.collect { dates ->
-                val datesState = viewState.value.datesState.copy(
+                var datesState = viewState.value.datesState.copy(
                     items = dates.map {
                         DateUIItem(
+                            id = it.millis,
                             date = it.millis.convertToShortDateWithoutRelation()
                         )
                     }
                 )
+
+                if (datesState.selectedDateId == null) {
+                    datesState = datesState.copy(
+                        selectedDateId = dates.first { it.selectedByDefault }.millis
+                    )
+                }
+
                 emit(viewState.value.copy(datesState = datesState))
             }
         }
@@ -51,7 +59,9 @@ internal constructor(
                     emit(viewState.value.copy(isLoading = it))
                 }
                 onSuccess { list ->
-                    list?.let { _dates = it }
+                    list?.let {
+                        _dates = it
+                    }
                 }
             }
         }

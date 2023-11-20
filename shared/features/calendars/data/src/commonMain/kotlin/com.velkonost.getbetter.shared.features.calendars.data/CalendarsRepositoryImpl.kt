@@ -14,6 +14,7 @@ class CalendarsRepositoryImpl : CalendarsRepository {
 
     override fun getInitItems(): Flow<ResultState<List<DateItem>>> = flowLocalRequest {
         val todayDate = DateItem(
+            selectedByDefault = true,
             millis = todayMillis
         )
 

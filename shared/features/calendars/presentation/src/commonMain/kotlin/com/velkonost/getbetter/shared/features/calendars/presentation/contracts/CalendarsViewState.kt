@@ -11,10 +11,12 @@ data class CalendarsViewState(
 data class DatesState(
     val isPreviousLoading: Boolean = false,
     val isNextLoading: Boolean = true,
+    val selectedDateId: Long? = null,
     val items: List<DateUIItem> = emptyList()
 )
 
 data class DateUIItem(
+    val id: Long,
     val date: StringDesc,
     val items: List<String> = emptyList()
 )
