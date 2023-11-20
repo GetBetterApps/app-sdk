@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.calendars.presentation
 
+import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToShortDateWithoutRelation
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
@@ -9,6 +10,7 @@ import com.velkonost.getbetter.shared.features.calendars.api.model.DateItem
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsAction
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsNavigation
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsViewState
+import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.DateUIItem
 import kotlinx.coroutines.flow.flow
 
 class CalendarsViewModel
@@ -24,17 +26,22 @@ internal constructor(
         initItems()
 
         launchJob {
-            flow<List<DateItem>> { _dates }.collect {
-
+            flow<List<DateItem>> { _dates }.collect { dates ->
+                val datesState = viewState.value.datesState.copy(
+                    items = dates.map {
+                        DateUIItem(
+                            date = it.millis.convertToShortDateWithoutRelation()
+                        )
+                    }
+                )
+                emit(viewState.value.copy(datesState = datesState))
             }
         }
-
     }
 
     override fun dispatch(action: CalendarsAction) = when (action) {
         is CalendarsAction.LoadMoreNextDates -> obtainLoadMore(DateDirection.Future)
         is CalendarsAction.LoadMorePreviousDates -> obtainLoadMore(DateDirection.Past)
-        else -> {}
     }
 
     private fun initItems() {
