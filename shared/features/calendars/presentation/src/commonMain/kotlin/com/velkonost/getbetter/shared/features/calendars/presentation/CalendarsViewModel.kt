@@ -38,7 +38,9 @@ internal constructor(
 
                 if (datesState.selectedDateId == null) {
                     datesState = datesState.copy(
-                        selectedDateId = dates.first { it.selectedByDefault }.millis
+                        selectedDateId = dates.first { it.selectedByDefault }.millis,
+                        isNextLoading = false,
+                        isPreviousLoading = false
                     )
                 }
 

@@ -9,7 +9,7 @@ data class CalendarsViewState(
 ) : UIContract.State
 
 data class DatesState(
-    val isPreviousLoading: Boolean = false,
+    val isPreviousLoading: Boolean = true,
     val isNextLoading: Boolean = true,
     val selectedDateId: Long? = null,
     val items: List<DateUIItem> = emptyList()
