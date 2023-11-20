@@ -33,15 +33,16 @@ struct CalendarDateItem: View {
                 .style(.labelMedium)
                 .foregroundColor(isSelected ? .textLight : .textPrimary)
         }
+        .frame(width: 52, height: 52)
         .padding(4)
         .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color.backgroundItem)
-                .shadow(radius: 8)
+            RoundedRectangle(cornerRadius: 8)
+                .fill(isSelected ? Color.buttonGradientStart : Color.backgroundItem)
+                .shadow(radius: 4)
         )
-        .frame(width: 52, height: 52)
         .onTapGesture {
             onClick(item.id)
         }
+        .animation(.easeInOut, value: isSelected)
     }
 }

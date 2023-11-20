@@ -15,37 +15,68 @@ import KMPNativeCoroutinesAsync
 struct CalendarsScreen: View {
     
     @StateViewModel var viewModel: CalendarsViewModel
+    @State private var scrollTarget: Int64?
     
     var body: some View {
         @State var state = viewModel.viewStateValue as! CalendarsViewState
         
-        VStack {
+        VStack(spacing: 0) {
             if state.datesState.selectedDate != nil {
                 VStack(spacing: 0) {
-                    Text(state.datesState.selectedDate!.monthDay.localized().capitalized)
-                        .style(.headlineSmall)
-                        .foregroundColor(.textSecondaryTitle)
+                    HStack {
+                        Text(state.datesState.selectedDate!.monthDay.localized().capitalized)
+                            .style(.headlineSmall)
+                            .foregroundColor(.textSecondaryTitle)
+                        Spacer()
+                    }
                     
-                    Text(state.datesState.selectedDate!.year.localized())
-                        .style(.bodyLarge)
-                        .foregroundColor(.textPrimary)
-                        .padding(.top, 6)
-                }.animation(.easeInOut, value: state.datesState.selectedDate)
+                    HStack {
+                        Text(state.datesState.selectedDate!.year.localized())
+                            .style(.bodyLarge)
+                            .foregroundColor(.textPrimary)
+                            .padding(.top, 6)
+                        Spacer()
+                    }
+                }
+                .padding(.horizontal, 16)
+                .animation(.easeInOut, value: state.datesState.selectedDate)
             }
             
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack {
-                    ForEach(state.datesState.items, id: \.self.id) { item in
-                        CalendarDateItem(
-                            item: item,
-                            isSelected: item.id == state.datesState.selectedDate?.id,
-                            onClick: { value in
-                                viewModel.dispatch(action: CalendarsActionDateClick(id: value))
+            ScrollViewReader { view in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack {
+                        ForEach(state.datesState.items, id: \.self.id) { item in
+                            CalendarDateItem(
+                                item: item,
+                                isSelected: item.id == state.datesState.selectedDate?.id,
+                                onClick: { value in
+                                    viewModel.dispatch(action: CalendarsActionDateClick(id: value))
+                                }
+                            )
+                            .id(item.id)
+                            
+                        }
+                    }
+                    .onChange(of: scrollTarget) { target in
+                        if let target = target {
+                            scrollTarget = nil
+                            
+                            withAnimation {
+                                view.scrollTo(target, anchor: .center)
                             }
-                        )
+                        }
                     }
                 }
             }
+            .onChange(of: state.datesState.selectedDate) { value in
+                if value != nil {
+                    scrollTarget = value!.id
+                }
+            }
+            
+            Spacer().frame(maxHeight: .infinity)
         }
+        .frame(maxHeight: .infinity)
+        
     }
 }
