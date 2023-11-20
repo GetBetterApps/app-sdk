@@ -21,12 +21,31 @@ struct CalendarsScreen: View {
         
         VStack {
             if state.datesState.selectedDate != nil {
-                VStack {
+                VStack(spacing: 0) {
                     Text(state.datesState.selectedDate!.monthDay.localized().capitalized)
-                        
-                }
+                        .style(.headlineSmall)
+                        .foregroundColor(.textSecondaryTitle)
+                    
+                    Text(state.datesState.selectedDate!.year.localized())
+                        .style(.bodyLarge)
+                        .foregroundColor(.textPrimary)
+                        .padding(.top, 6)
+                }.animation(.easeInOut, value: state.datesState.selectedDate)
             }
             
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack {
+                    ForEach(state.datesState.items, id: \.self.id) { item in
+                        CalendarDateItem(
+                            item: item,
+                            isSelected: item.id == state.datesState.selectedDate?.id,
+                            onClick: { value in
+                                viewModel.dispatch(action: CalendarsActionDateClick(id: value))
+                            }
+                        )
+                    }
+                }
+            }
         }
     }
 }
