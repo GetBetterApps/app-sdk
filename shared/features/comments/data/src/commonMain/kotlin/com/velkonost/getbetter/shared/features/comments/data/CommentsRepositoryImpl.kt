@@ -11,6 +11,7 @@ import com.velkonost.getbetter.shared.features.comments.api.CommentsRepository
 import com.velkonost.getbetter.shared.features.comments.data.remote.CommentsRemoteDataSource
 import com.velkonost.getbetter.shared.features.comments.data.remote.model.request.CreateCommentRequest
 import com.velkonost.getbetter.shared.features.comments.data.remote.model.request.DeleteCommentRequest
+import com.velkonost.getbetter.shared.features.comments.data.remote.model.response.KtorComment
 import com.velkonost.getbetter.shared.features.comments.data.remote.model.response.KtorCommentsList
 import com.velkonost.getbetter.shared.features.comments.data.remote.model.response.asExternalModel
 import kotlinx.coroutines.flow.Flow
@@ -57,6 +58,14 @@ constructor(
         request = {
             val token = localDataSource.getUserToken()
             remoteDataSource.getComments(token, entityType.responseName, entityId)
+        }
+    )
+
+    override fun getComment(commentId: Int): Flow<ResultState<Comment>> = flowRequest(
+        mapper = KtorComment::asExternalModel,
+        request = {
+            val token = localDataSource.getUserToken()
+            remoteDataSource.getComment(token, commentId)
         }
     )
 }
