@@ -46,6 +46,7 @@ struct CalendarsScreen: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     
                     LazyHStack {
+                        Spacer().frame(width: 16)
                         ForEach(state.datesState.items, id: \.self.id) { item in
                             CalendarDateItem(
                                 item: item,
