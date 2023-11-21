@@ -2,7 +2,6 @@ package com.velkonost.getbetter.shared.features.calendars.presentation
 
 import AreasRepository
 import com.velkonost.getbetter.shared.core.model.area.Area
-import com.velkonost.getbetter.shared.core.model.user.UserAction
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDay
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDayOfWeek
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToMonthDay
@@ -194,76 +193,30 @@ internal constructor(
         launchJob {
             areasRepository.fetchAreaDetails(areaId) collectAndProcess {
                 isLoading {
-                    val items = viewState.value.datesState.selectedDate?.items?.toMutableList()
-                    val currentItem = items?.firstOrNull { item -> item.id == actionId }
-                    val indexOfCurrentItem =
-                        viewState.value.datesState.selectedDate?.items?.indexOfFirst { item ->
-                            item.id == actionId
-                        }
-
-                    if (
-                        items != null && currentItem != null
-                        && indexOfCurrentItem != null && indexOfCurrentItem != -1
-                    ) {
-                        items[indexOfCurrentItem] = currentItem.copy(isLoading = it)
-
-                        if (viewState.value.datesState.selectedDate?.id == dayId) {
-                            val selectedDate = viewState.value.datesState.selectedDate?.copy(
-                                items = items
-                            )
-                            val datesState = viewState.value.datesState.copy(
-                                selectedDate = selectedDate
-                            )
-                            emit(viewState.value.copy(datesState = datesState))
-                        }
-                    }
+                    updateItemLoadingState(dayId, actionId, it)
                 }
                 onSuccess { item ->
-                    item?.let {
-                        val items = _datesData[dayId]?.toMutableList()
-                        val currentItem = items
-                            ?.firstOrNull { item -> item.id == actionId && item.data is Area }
-                            .takeIf { it?.data is Area }
-                        val indexOfCurrentItem =
-                            viewState.value.datesState.selectedDate?.items?.indexOfFirst { item ->
-                                item.id == actionId
-                            }
-
-                        if (
-                            items != null && currentItem != null
-                            && indexOfCurrentItem != null && indexOfCurrentItem != -1
-                        ) {
-                            items[indexOfCurrentItem] = currentItem.copy(data = item)
-
-                            if (viewState.value.datesState.selectedDate?.id == dayId) {
-                                val selectedDate = viewState.value.datesState.selectedDate?.copy(
-                                    items = items
-                                )
-                                val datesState = viewState.value.datesState.copy(
-                                    selectedDate = selectedDate
-                                )
-                                emit(viewState.value.copy(datesState = datesState))
-                            }
-                        }
-                    }
+                    item?.let { updateItemData(dayId, actionId, it) }
                 }
             }
         }
     }
 
-    private fun getUserActionDetails(value: UserAction) {
+    fun getNoteForAction(
+        dayId: Long,
+        actionId: Long,
+        noteId: Int
+    ) {
         launchJob {
-            when (value.type) {
-                is UserActionType.UserRegistered -> {
-
+            notesRepository.getNoteDetails(noteId) collectAndProcess {
+                isLoading {
+                    updateItemLoadingState(dayId, actionId, it)
                 }
-
-                else -> {
-
+                onSuccess { item ->
+                    item?.let { updateItemData(dayId, actionId, it) }
                 }
             }
         }
-
     }
 
     private fun obtainLoadMore(direction: DateDirection) {
@@ -282,6 +235,57 @@ internal constructor(
                 onSuccess { list ->
                     list?.let { _dates.value = it }
                 }
+            }
+        }
+    }
+
+    private fun updateItemLoadingState(dayId: Long, itemId: Long, isLoading: Boolean) {
+        val items = _datesData[dayId]?.toMutableList()
+        val currentItem = items?.firstOrNull { item -> item.id == itemId }
+        val indexOfCurrentItem = items?.indexOfFirst { item ->
+            item.id == itemId
+        }
+
+        if (
+            items != null && currentItem != null
+            && indexOfCurrentItem != null && indexOfCurrentItem != -1
+        ) {
+            items[indexOfCurrentItem] = currentItem.copy(isLoading = isLoading)
+
+            if (viewState.value.datesState.selectedDate?.id == dayId) {
+                val selectedDate = viewState.value.datesState.selectedDate?.copy(
+                    items = items
+                )
+                val datesState = viewState.value.datesState.copy(
+                    selectedDate = selectedDate
+                )
+                emit(viewState.value.copy(datesState = datesState))
+            }
+        }
+    }
+
+    private inline fun <reified T> updateItemData(dayId: Long, actionId: Long, data: T) {
+        val items = _datesData[dayId]?.toMutableList()
+        val currentItem = items
+            ?.firstOrNull { item -> item.id == actionId }
+        val indexOfCurrentItem = items?.indexOfFirst { item ->
+            item.id == actionId
+        }
+
+        if (
+            items != null && currentItem != null
+            && indexOfCurrentItem != null && indexOfCurrentItem != -1
+        ) {
+            items[indexOfCurrentItem] = currentItem.copy(data = data)
+
+            if (viewState.value.datesState.selectedDate?.id == dayId) {
+                val selectedDate = viewState.value.datesState.selectedDate?.copy(
+                    items = items
+                )
+                val datesState = viewState.value.datesState.copy(
+                    selectedDate = selectedDate
+                )
+                emit(viewState.value.copy(datesState = datesState))
             }
         }
     }
