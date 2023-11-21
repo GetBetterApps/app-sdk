@@ -247,7 +247,7 @@ internal constructor(
                     updateItemLoadingState(dayId, actionId, it)
                 }
                 onSuccess { item ->
-                    item?.let { updateItemData(dayId, actionId, it) }
+                    item?.let { updateItemData<Any, Any>(dayId, actionId, it) }
                 }
             }
         }
@@ -298,7 +298,12 @@ internal constructor(
         }
     }
 
-    private inline fun <reified T> updateItemData(dayId: Long, actionId: Long, data: T) {
+    private inline fun <reified T, reified S> updateItemData(
+        dayId: Long,
+        actionId: Long,
+        data: T? = null,
+        parentData: S? = null
+    ) {
         val items = _datesData[dayId]?.toMutableList()
         val currentItem = items
             ?.firstOrNull { item -> item.id == actionId }
@@ -310,7 +315,13 @@ internal constructor(
             items != null && currentItem != null
             && indexOfCurrentItem != null && indexOfCurrentItem != -1
         ) {
-            items[indexOfCurrentItem] = currentItem.copy(data = data)
+            data?.let {
+                items[indexOfCurrentItem] = currentItem.copy(data = data)
+            }
+
+            parentData?.let {
+                items[indexOfCurrentItem] = currentItem.copy(parentData = parentData)
+            }
 
             if (viewState.value.datesState.selectedDate?.id == dayId) {
                 val selectedDate = viewState.value.datesState.selectedDate?.copy(
