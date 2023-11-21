@@ -67,5 +67,4 @@ class AuthRepositoryImpl(
             preferences[TOKEN_KEY] = value
         }
     }
-
 }

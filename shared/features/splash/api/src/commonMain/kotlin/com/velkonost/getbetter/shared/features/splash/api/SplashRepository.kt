@@ -4,4 +4,7 @@ interface SplashRepository {
 
     suspend fun prepareSession()
 
+    suspend fun isUserRegistrationDateSaved(): Boolean
+
+    suspend fun saveUserRegistrationDate(value: Long)
 }

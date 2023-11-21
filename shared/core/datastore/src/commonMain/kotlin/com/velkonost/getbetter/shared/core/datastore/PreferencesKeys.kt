@@ -2,9 +2,12 @@ package com.velkonost.getbetter.shared.core.datastore
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 
 val TOKEN_KEY = stringPreferencesKey("auth_token")
+
+val USER_REGISTRATION_MILLIS = longPreferencesKey("user_registration_millis")
 
 val UPDATED_NOTE_ID = intPreferencesKey("updated_note_id")
 val SOCIAL_UPDATED_NOTE_ID = intPreferencesKey("social_updated_note_id")

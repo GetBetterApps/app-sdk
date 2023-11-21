@@ -4,6 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import com.velkonost.getbetter.shared.core.datastore.TOKEN_KEY
+import com.velkonost.getbetter.shared.core.datastore.USER_REGISTRATION_MILLIS
 import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
 import com.velkonost.getbetter.shared.core.datastore.extension.resetStates
 import com.velkonost.getbetter.shared.core.model.user.UserInfo
@@ -26,13 +27,14 @@ constructor(
     private val localDataSource: DataStore<Preferences>
 ) : UserInfoRepository {
 
-    override suspend fun fetchInfo(): Flow<ResultState<UserInfo>> = flowRequest(
-        mapper = KtorUserInfo::asExternalModel,
-        request = {
-            val token = localDataSource.getUserToken()
-            remoteDataSource.getInfo(token)
-        }
-    )
+    override suspend fun fetchInfo(): Flow<ResultState<UserInfo>> =
+        flowRequest(
+            mapper = KtorUserInfo::asExternalModel,
+            request = {
+                val token = localDataSource.getUserToken()
+                remoteDataSource.getInfo(token)
+            },
+        )
 
     override suspend fun fetchInfoAboutOtherUser(userId: String): Flow<ResultState<UserInfoShort>> =
         flowRequest(
@@ -56,6 +58,9 @@ constructor(
             )
 
             remoteDataSource.initSettings(token, body)
+        },
+        onSuccess = {
+            saveRegistrationDate(it.registrationDate)
         }
     )
 
@@ -116,5 +121,11 @@ constructor(
             }
         }
     )
+
+    private suspend fun saveRegistrationDate(value: Long) {
+        localDataSource.edit { preferences ->
+            preferences[USER_REGISTRATION_MILLIS] = value
+        }
+    }
 
 }

@@ -22,12 +22,14 @@ kotlin {
         commonMain {
             dependencies {
                 api(projects.shared.core.vm)
+                api(projects.shared.core.util)
 
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
 
                 implementation(projects.shared.features.auth.api)
                 implementation(projects.shared.features.splash.api)
+                implementation(projects.shared.features.userinfo.api)
             }
         }
 

@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.splash.presentation
 
+import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.auth.api.AuthRepository
 import com.velkonost.getbetter.shared.features.splash.api.SplashRepository
@@ -8,12 +9,14 @@ import com.velkonost.getbetter.shared.features.splash.presentation.contract.Navi
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.SplashAction
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.SplashNavigation
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.SplashViewState
+import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 import kotlinx.coroutines.delay
 
 class SplashViewModel
 internal constructor(
     private val authRepository: AuthRepository<String>,
-    private val splashRepository: SplashRepository
+    private val splashRepository: SplashRepository,
+    private val userInfoRepository: UserInfoRepository
 ) : BaseViewModel<SplashViewState, SplashAction, SplashNavigation, Nothing>(
     initialState = SplashViewState()
 ) {
@@ -26,6 +29,22 @@ internal constructor(
     private fun startSession() {
         launchJob {
             splashRepository.prepareSession()
+
+            if (!splashRepository.isUserRegistrationDateSaved()) {
+                userInfoRepository.fetchInfo() collectAndProcess {
+                    onSuccess { userInfo ->
+                        userInfo?.let {
+                            updateUserRegistrationDate(it.registrationDate)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun updateUserRegistrationDate(value: Long) {
+        launchJob {
+            splashRepository.saveUserRegistrationDate(value)
         }
     }
 
