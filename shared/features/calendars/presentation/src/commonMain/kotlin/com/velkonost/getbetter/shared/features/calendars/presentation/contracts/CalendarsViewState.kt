@@ -19,18 +19,20 @@ data class DatesState(
 data class SelectedDate(
     val id: Long,
     val year: StringDesc,
-    val monthDay: StringDesc
+    val monthDay: StringDesc,
+    val isLoading: Boolean = false,
+    val items: List<ActionUIItem<*>> = emptyList()
 )
 
 data class DateUIItem(
     val id: Long,
     val day: StringDesc,
     val dayOfWeek: StringDesc,
-    val items: List<ActionUIItem<*>> = emptyList()
 )
 
 data class ActionUIItem<T>(
     val type: EntityType,
     val isLoading: Boolean = true,
-    val data: T
+    val description: StringDesc,
+    var data: T? = null
 )
