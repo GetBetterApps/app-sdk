@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.calendars.presentation
 
+import AreasRepository
 import com.velkonost.getbetter.shared.core.model.user.UserAction
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDay
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDayOfWeek
@@ -17,12 +18,18 @@ import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsViewState
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.DateUIItem
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.SelectedDate
+import com.velkonost.getbetter.shared.features.comments.api.CommentsRepository
+import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class CalendarsViewModel
 internal constructor(
-    private val calendarsRepository: CalendarsRepository
-) : BaseViewModel<CalendarsViewState, CalendarsAction, CalendarsNavigation, Nothing>(
+    private val calendarsRepository: CalendarsRepository,
+    private val notesRepository: NotesRepository,
+    private val areasRepository: AreasRepository,
+    private val commentsRepository: CommentsRepository,
+
+    ) : BaseViewModel<CalendarsViewState, CalendarsAction, CalendarsNavigation, Nothing>(
     initialState = CalendarsViewState()
 ) {
 
@@ -118,7 +125,7 @@ internal constructor(
 
     private fun getUserActionDetails(value: UserAction) {
         launchJob {
-
+            val request =
         }
 
     }
