@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.calendars.presentation
 
 import AreasRepository
 import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDay
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDayOfWeek
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToMonthDay
@@ -129,39 +130,13 @@ internal constructor(
                                     )
                                 }
 
-                                is UserActionType.UserCreatedArea -> {
-                                    selectedDateItems.add(
-                                        ActionUIItem<Area>(
-                                            dayId = value,
-                                            id = item.datetime,
-                                        )
-                                    )
-                                    getAreaForAction(
-                                        dayId = value,
-                                        actionId = item.datetime,
-                                        areaId = item.entityId.toInt()
-                                    )
-                                }
-
-                                is UserActionType.UserJoinedArea -> {
-                                    selectedDateItems.add(
-                                        ActionUIItem<Area>(
-                                            dayId = value,
-                                            id = item.datetime,
-                                        )
-                                    )
-                                    getAreaForAction(
-                                        dayId = value,
-                                        actionId = item.datetime,
-                                        areaId = item.entityId.toInt()
-                                    )
-                                }
-
+                                is UserActionType.UserCreatedArea,
+                                is UserActionType.UserJoinedArea,
                                 is UserActionType.UserLeavedArea -> {
                                     selectedDateItems.add(
                                         ActionUIItem<Area>(
                                             dayId = value,
-                                            id = item.datetime
+                                            id = item.datetime,
                                         )
                                     )
                                     getAreaForAction(
@@ -170,6 +145,22 @@ internal constructor(
                                         areaId = item.entityId.toInt()
                                     )
                                 }
+
+                                is UserActionType.UserCreatedNote,
+                                is UserActionType.UserCompletedGoal -> {
+                                    selectedDateItems.add(
+                                        ActionUIItem<Note>(
+                                            dayId = value,
+                                            id = item.datetime
+                                        )
+                                    )
+                                    getNoteForAction(
+                                        dayId = value,
+                                        actionId = item.datetime,
+                                        noteId = item.entityId.toInt()
+                                    )
+                                }
+
 
                                 else -> {
 
