@@ -7,10 +7,11 @@ import com.velkonost.getbetter.shared.features.calendars.api.CalendarsRepository
 import com.velkonost.getbetter.shared.features.calendars.api.model.DateDirection
 import com.velkonost.getbetter.shared.features.calendars.api.model.DateItem
 import com.velkonost.getbetter.shared.features.calendars.api.model.addDay
-import com.velkonost.getbetter.shared.features.calendars.api.model.removeDay
 import kotlinx.coroutines.flow.Flow
 
-class CalendarsRepositoryImpl : CalendarsRepository {
+class CalendarsRepositoryImpl(
+    private val localDataSource: DataS
+) : CalendarsRepository {
 
     override fun getInitItems(): Flow<ResultState<List<DateItem>>> = flowLocalRequest {
         val todayDate = DateItem(
@@ -27,7 +28,7 @@ class CalendarsRepositoryImpl : CalendarsRepository {
             )
             .expand(
                 direction = DateDirection.Past,
-                amount = 100
+                amount = 10
             )
     }
 
@@ -39,22 +40,40 @@ class CalendarsRepositoryImpl : CalendarsRepository {
         currentItems.expand(direction, amount)
     }
 
-    private fun List<DateItem>.expand(direction: DateDirection, amount: Int): List<DateItem> {
+    private fun List<DateItem>.expand(
+        direction: DateDirection,
+        amount: Int? = null
+    ): List<DateItem> {
         val items = this.toMutableList()
 
-        repeat(amount) {
-            when (direction) {
-                DateDirection.Future -> {
-                    val lastItem = items.last()
-                    items.add(lastItem.addDay())
-                }
-
-                DateDirection.Past -> {
-                    val firstItem = items.first()
-                    items.add(0, firstItem.removeDay())
+        when (direction) {
+            DateDirection.Future -> {
+                amount?.let {
+                    repeat(it) {
+                        val lastItem = items.last()
+                        items.add(lastItem.addDay())
+                    }
                 }
             }
+
+            DateDirection.Past -> {
+
+            }
         }
+
+//        repeat(amount) {
+//            when (direction) {
+//                DateDirection.Future -> {
+//                    val lastItem = items.last()
+//                    items.add(lastItem.addDay())
+//                }
+//
+//                DateDirection.Past -> {
+//                    val firstItem = items.first()
+//                    items.add(0, firstItem.removeDay())
+//                }
+//            }
+//        }
 
         return items.toList()
     }
