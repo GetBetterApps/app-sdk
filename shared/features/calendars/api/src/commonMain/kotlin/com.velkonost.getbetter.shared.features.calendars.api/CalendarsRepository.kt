@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.calendars.api
 
+import com.velkonost.getbetter.shared.core.model.user.UserAction
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.features.calendars.api.model.DateDirection
 import com.velkonost.getbetter.shared.features.calendars.api.model.DateItem
@@ -15,6 +16,6 @@ interface CalendarsRepository {
         amount: Int
     ): Flow<ResultState<List<DateItem>>>
 
-    fun getDateItems(startOfDay: Long): Flow<ResultState<UserA>>
+    fun getDateItems(startOfDay: Long): Flow<ResultState<List<UserAction>>>
 
 }
