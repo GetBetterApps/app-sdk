@@ -4,6 +4,7 @@ import com.velkonost.getbetter.shared.core.network.extensions.makeRequest
 import com.velkonost.getbetter.shared.core.network.model.RemoteResponse
 import com.velkonost.getbetter.shared.features.comments.data.remote.model.request.CreateCommentRequest
 import com.velkonost.getbetter.shared.features.comments.data.remote.model.request.DeleteCommentRequest
+import com.velkonost.getbetter.shared.features.comments.data.remote.model.response.KtorComment
 import com.velkonost.getbetter.shared.features.comments.data.remote.model.response.KtorCommentsList
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -47,6 +48,19 @@ class CommentsRemoteDataSource(
             params = mapOf(
                 "entityType" to entityType,
                 "entityId" to entityId
+            )
+        )
+    }.body()
+
+    suspend fun getComment(
+        token: String?,
+        commentId: Int
+    ): RemoteResponse<KtorComment> = httpClient.get {
+        makeRequest(
+            path = Route.FETCH_COMMENT_DETAILS,
+            token = token,
+            params = mapOf(
+                "commentId" to commentId
             )
         )
     }.body()

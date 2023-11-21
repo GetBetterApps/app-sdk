@@ -18,4 +18,8 @@ interface CommentsRepository {
     fun getComments(
         entityType: EntityType, entityId: Int
     ): Flow<ResultState<List<Comment>>>
+
+    fun getComment(
+        commentId: Int
+    ): Flow<ResultState<Comment>>
 }
