@@ -15,6 +15,6 @@ interface CalendarsRepository {
         amount: Int
     ): Flow<ResultState<List<DateItem>>>
 
-    fun getDateItems(startOfDay: Long): Flow<ResultState<>>
+    fun getDateItems(startOfDay: Long): Flow<ResultState<UserA>>
 
 }
