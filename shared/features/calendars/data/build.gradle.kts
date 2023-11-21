@@ -7,6 +7,7 @@ plugins {
     `kmm-shared-module-plugin`
     alias(libs.plugins.ksp)
     alias(libs.plugins.nativecoroutines)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -24,7 +25,9 @@ kotlin {
                 implementation(libs.koin.core)
 
                 implementation(projects.shared.core.util)
+                implementation(projects.shared.core.network)
                 implementation(projects.shared.core.datastore)
+
                 implementation(projects.shared.features.calendars.api)
             }
         }
