@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.calendars.presentation.contracts
 
+import com.velkonost.getbetter.shared.core.model.EntityType
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import dev.icerock.moko.resources.desc.StringDesc
 
@@ -25,5 +26,11 @@ data class DateUIItem(
     val id: Long,
     val day: StringDesc,
     val dayOfWeek: StringDesc,
-    val items: List<String> = emptyList()
+    val items: List<ActionUIItem<*>> = emptyList()
+)
+
+data class ActionUIItem<T>(
+    val type: EntityType,
+    val isLoading: Boolean = true,
+    val data: T
 )

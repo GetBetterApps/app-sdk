@@ -10,6 +10,7 @@ import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.calendars.api.CalendarsRepository
 import com.velkonost.getbetter.shared.features.calendars.api.model.DateDirection
 import com.velkonost.getbetter.shared.features.calendars.api.model.DateItem
+import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.ActionUIItem
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsAction
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsNavigation
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsViewState
@@ -25,6 +26,7 @@ internal constructor(
 ) {
 
     private var _dates: MutableStateFlow<List<DateItem>> = MutableStateFlow(emptyList())
+    private var _datesData: MutableMap<Long, List<ActionUIItem<*>>> = mutableMapOf()
 
     init {
         initItems()
