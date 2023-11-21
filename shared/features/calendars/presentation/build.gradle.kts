@@ -24,6 +24,8 @@ kotlin {
                 api(projects.shared.core.vm)
                 api(projects.shared.core.util)
 
+                implementation(projects.shared.core.model)
+
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
 
