@@ -62,7 +62,6 @@ internal constructor(
 
     override fun dispatch(action: CalendarsAction) = when (action) {
         is CalendarsAction.LoadMoreNextDates -> obtainLoadMore(DateDirection.Future)
-        is CalendarsAction.LoadMorePreviousDates -> obtainLoadMore(DateDirection.Past)
         is CalendarsAction.DateClick -> obtainDateClick(action.id)
     }
 
@@ -98,7 +97,7 @@ internal constructor(
             calendarsRepository.appendItems(
                 currentItems = _dates.value,
                 direction = direction,
-                amount = 100
+                amount = 10
             ) collectAndProcess {
                 isLoading {
                     val datesState = if (direction == DateDirection.Future) {

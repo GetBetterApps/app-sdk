@@ -101,9 +101,7 @@ fun CalendarsScreen(
 
     listState.OnSideReached(
         isLoadingRight = state.datesState.isNextLoading,
-        isLoadingLeft = state.datesState.isPreviousLoading,
         onLoadMoreRight = { viewModel.dispatch(CalendarsAction.LoadMoreNextDates) },
-        onLoadMoreLeft = { viewModel.dispatch(CalendarsAction.LoadMorePreviousDates) }
     )
 
 }
@@ -187,9 +185,7 @@ suspend fun LazyListState.centerItem(index: Int) {
 fun LazyListState.OnSideReached(
     buffer: Int = 0,
     isLoadingRight: Boolean,
-    isLoadingLeft: Boolean,
     onLoadMoreRight: () -> Unit,
-    onLoadMoreLeft: () -> Unit
 ) {
     val shouldLoadMoreRight = remember {
         derivedStateOf {
@@ -200,24 +196,9 @@ fun LazyListState.OnSideReached(
         }
     }
 
-    val shouldLoadMoreLeft = remember {
-        derivedStateOf {
-            val firstVisibleItem =
-                layoutInfo.visibleItemsInfo.firstOrNull() ?: return@derivedStateOf true
-
-            firstVisibleItem.index <= 0 + buffer
-        }
-    }
-
     LaunchedEffect(shouldLoadMoreRight, isLoadingRight) {
         snapshotFlow { shouldLoadMoreRight.value && !isLoadingRight }.collect {
             if (it) onLoadMoreRight()
-        }
-    }
-
-    LaunchedEffect(shouldLoadMoreLeft, isLoadingLeft) {
-        snapshotFlow { shouldLoadMoreLeft.value && !isLoadingLeft }.collect {
-            if (it) onLoadMoreLeft()
         }
     }
 }

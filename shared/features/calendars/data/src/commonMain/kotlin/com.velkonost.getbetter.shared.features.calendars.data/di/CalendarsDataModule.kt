@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val CalendarsDataModule = module {
     single<CalendarsRepository> {
-        CalendarsRepositoryImpl()
+        CalendarsRepositoryImpl(get())
     }
 }
