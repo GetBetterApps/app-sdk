@@ -1,7 +1,5 @@
 package com.velkonost.getbetter.shared.features.calendars.presentation
 
-import com.velkonost.getbetter.shared.core.model.EntityType
-import com.velkonost.getbetter.shared.core.model.user.ActionType
 import com.velkonost.getbetter.shared.core.model.user.UserAction
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDay
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDayOfWeek
@@ -111,42 +109,6 @@ internal constructor(
                     val selectedDateItems = mutableListOf<ActionUIItem<*>>()
                     list?.let {
                         list.forEach { item ->
-                            if (item.entityType == EntityType.User && item.actionType == ActionType.Add) {
-//                                user registered
-//                                val actionUIItem = ActionUIItem<Long>(
-//                                    type = EntityType.User,
-//                                    isLoading = false,
-//                                    data = null
-//                                )
-//                                selectedDateItems.add(actionUIItem)
-                            } else if (item.entityType == EntityType.Area && item.actionType == ActionType.Add) {
-                                // area created
-//                                val actionUIItem = ActionUIItem<Area>(
-//                                    type = EntityType.Area,
-//                                )
-                            } else if (item.entityType == EntityType.Area && item.actionType == ActionType.Join) {
-
-                            } else if (item.entityType == EntityType.Area && item.actionType == ActionType.Leave) {
-
-                            } else if (item.entityType == EntityType.Note && item.actionType == ActionType.Add) {
-
-                            } else if (item.entityType == EntityType.Note && item.actionType == ActionType.Complete) {
-
-                            } else if (item.entityType == EntityType.SubGoal && item.actionType == ActionType.Complete) {
-
-                            } else if (item.entityType == EntityType.Comment && item.actionType == ActionType.Add) {
-                                // i created comment
-                            } else if (item.entityType == EntityType.Comment && item.actionType == ActionType.AddInbox) {
-                                //smbd created comment for my entity
-                            } else if (item.entityType == EntityType.Like && item.actionType == ActionType.Add) {
-
-                            } else if (item.entityType == EntityType.Like && item.actionType == ActionType.AddInbox) {
-
-                            } else if (item.entityType == EntityType.Follow && item.actionType == ActionType.Add) {
-                                // i followed to smbd
-                            } else if (item.entityType == EntityType.Follower && item.actionType == ActionType.Add) {
-                                //smbd followed to me
-                            }
                         }
                     }
                 }
@@ -155,6 +117,9 @@ internal constructor(
     }
 
     private fun getUserActionDetails(value: UserAction) {
+        launchJob {
+
+        }
 
     }
 

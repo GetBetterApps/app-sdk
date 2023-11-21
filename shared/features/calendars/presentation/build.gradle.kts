@@ -29,6 +29,9 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
 
+                implementation(projects.shared.features.notes.api)
+                implementation(projects.shared.features.areas.api)
+                implementation(projects.shared.features.comments.api)
                 implementation(projects.shared.features.calendars.api)
             }
         }
