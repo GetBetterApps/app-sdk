@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.calendars.presentation
 
 import AreasRepository
+import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.user.UserAction
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDay
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDayOfWeek
@@ -18,6 +19,8 @@ import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsViewState
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.DateUIItem
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.SelectedDate
+import com.velkonost.getbetter.shared.features.calendars.presentation.model.UserActionType
+import com.velkonost.getbetter.shared.features.calendars.presentation.model.type
 import com.velkonost.getbetter.shared.features.comments.api.CommentsRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -116,6 +119,103 @@ internal constructor(
                     val selectedDateItems = mutableListOf<ActionUIItem<*>>()
                     list?.let {
                         list.forEach { item ->
+                            when (item.type) {
+                                is UserActionType.UserRegistered -> {
+                                    selectedDateItems.add(
+                                        ActionUIItem<Long>(
+                                            dayId = value,
+                                            id = item.datetime,
+                                            description = item.datetimeStr
+                                        )
+                                    )
+                                }
+
+                                is UserActionType.UserCreatedArea -> {
+                                    selectedDateItems.add(
+                                        ActionUIItem<Area>(
+                                            dayId = value,
+                                            id = item.datetime,
+                                        )
+                                    )
+                                    getAreaForAction(
+                                        dayId = value,
+                                        actionId = item.datetime,
+                                        areaId = item.entityId.toInt()
+                                    )
+                                }
+
+                                else -> {
+
+                                }
+                            }
+                        }
+
+                        _datesData[value] = selectedDateItems
+
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getAreaForAction(
+        dayId: Long,
+        actionId: Long,
+        areaId: Int
+    ) {
+        launchJob {
+            areasRepository.fetchAreaDetails(areaId) collectAndProcess {
+                isLoading {
+                    val items = viewState.value.datesState.selectedDate?.items?.toMutableList()
+                    val currentItem = items?.firstOrNull { item -> item.id == actionId }
+                    val indexOfCurrentItem =
+                        viewState.value.datesState.selectedDate?.items?.indexOfFirst { item ->
+                            item.id == actionId
+                        }
+
+                    if (
+                        items != null && currentItem != null
+                        && indexOfCurrentItem != null && indexOfCurrentItem != -1
+                    ) {
+                        items[indexOfCurrentItem] = currentItem.copy(isLoading = it)
+
+                        if (viewState.value.datesState.selectedDate?.id == dayId) {
+                            val selectedDate = viewState.value.datesState.selectedDate?.copy(
+                                items = items
+                            )
+                            val datesState = viewState.value.datesState.copy(
+                                selectedDate = selectedDate
+                            )
+                            emit(viewState.value.copy(datesState = datesState))
+                        }
+                    }
+                }
+                onSuccess { item ->
+                    item?.let {
+                        val items = _datesData[dayId]?.toMutableList()
+                        val currentItem = items
+                            ?.firstOrNull { item -> item.id == actionId && item.data is Area }
+                            .takeIf { it?.data is Area }
+                        val indexOfCurrentItem =
+                            viewState.value.datesState.selectedDate?.items?.indexOfFirst { item ->
+                                item.id == actionId
+                            }
+
+                        if (
+                            items != null && currentItem != null
+                            && indexOfCurrentItem != null && indexOfCurrentItem != -1
+                        ) {
+                            items[indexOfCurrentItem] = currentItem.copy(data = item)
+
+                            if (viewState.value.datesState.selectedDate?.id == dayId) {
+                                val selectedDate = viewState.value.datesState.selectedDate?.copy(
+                                    items = items
+                                )
+                                val datesState = viewState.value.datesState.copy(
+                                    selectedDate = selectedDate
+                                )
+                                emit(viewState.value.copy(datesState = datesState))
+                            }
                         }
                     }
                 }
@@ -125,7 +225,15 @@ internal constructor(
 
     private fun getUserActionDetails(value: UserAction) {
         launchJob {
-            val request =
+            when (value.type) {
+                is UserActionType.UserRegistered -> {
+
+                }
+
+                else -> {
+
+                }
+            }
         }
 
     }
