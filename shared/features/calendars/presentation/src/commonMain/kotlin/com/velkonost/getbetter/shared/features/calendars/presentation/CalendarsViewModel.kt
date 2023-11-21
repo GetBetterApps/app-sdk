@@ -144,6 +144,34 @@ internal constructor(
                                     )
                                 }
 
+                                is UserActionType.UserJoinedArea -> {
+                                    selectedDateItems.add(
+                                        ActionUIItem<Area>(
+                                            dayId = value,
+                                            id = item.datetime,
+                                        )
+                                    )
+                                    getAreaForAction(
+                                        dayId = value,
+                                        actionId = item.datetime,
+                                        areaId = item.entityId.toInt()
+                                    )
+                                }
+
+                                is UserActionType.UserLeavedArea -> {
+                                    selectedDateItems.add(
+                                        ActionUIItem<Area>(
+                                            dayId = value,
+                                            id = item.datetime
+                                        )
+                                    )
+                                    getAreaForAction(
+                                        dayId = value,
+                                        actionId = item.datetime,
+                                        areaId = item.entityId.toInt()
+                                    )
+                                }
+
                                 else -> {
 
                                 }
