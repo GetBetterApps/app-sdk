@@ -34,7 +34,7 @@ class CalendarsRepositoryImpl(
         items
             .expand(
                 direction = DateDirection.Future,
-                amount = 10
+                amount = 50
             )
             .expand(
                 direction = DateDirection.Past,

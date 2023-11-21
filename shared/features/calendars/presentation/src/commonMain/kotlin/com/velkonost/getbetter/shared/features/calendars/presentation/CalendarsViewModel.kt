@@ -97,7 +97,7 @@ internal constructor(
             calendarsRepository.appendItems(
                 currentItems = _dates.value,
                 direction = direction,
-                amount = 10
+                amount = 50
             ) collectAndProcess {
                 isLoading {
                     val datesState = if (direction == DateDirection.Future) {
