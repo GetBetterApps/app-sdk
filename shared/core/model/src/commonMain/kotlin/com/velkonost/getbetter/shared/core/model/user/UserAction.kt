@@ -9,5 +9,6 @@ data class UserAction(
     val actionType: ActionType,
     val datetime: Long,
 
-    val parentId: String? = null
+    val parentId: String? = null,
+    val parentEntityType: EntityType?
 )

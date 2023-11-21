@@ -21,7 +21,10 @@ data class KtorUserAction(
     val datetime: Long?,
 
     @SerialName("parentId")
-    val parentId: String? = null
+    val parentId: String? = null,
+
+    @SerialName("parentEntityType")
+    val parentEntityType: String?
 )
 
 fun KtorUserAction.asExternalModel() =
@@ -30,5 +33,6 @@ fun KtorUserAction.asExternalModel() =
         entityId = entityId!!,
         actionType = ActionType.entries.first { it.responseName == actionType },
         datetime = datetime!!,
-        parentId = parentId
+        parentId = parentId,
+        parentEntityType = EntityType.entries.firstOrNull { it.responseName == entityType }
     )
