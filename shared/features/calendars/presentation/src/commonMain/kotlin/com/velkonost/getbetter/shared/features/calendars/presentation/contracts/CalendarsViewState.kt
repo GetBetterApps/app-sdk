@@ -20,7 +20,7 @@ data class SelectedDate(
     val year: StringDesc,
     val monthDay: StringDesc,
     val isLoading: Boolean = false,
-    val items: List<ActionUIItem<*>> = emptyList()
+    val items: List<ActionUIItem<*, *>> = emptyList()
 )
 
 data class DateUIItem(
@@ -29,11 +29,12 @@ data class DateUIItem(
     val dayOfWeek: StringDesc,
 )
 
-data class ActionUIItem<out T>(
+data class ActionUIItem<out T, out S : Any?>(
     val dayId: Long,
     val id: Long,
 //    val type: EntityType,
     val isLoading: Boolean = true,
     val description: StringDesc? = null,
-    val data: T? = null
+    val data: T? = null,
+    val parentData: S? = null
 )

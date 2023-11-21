@@ -1,8 +1,11 @@
 package com.velkonost.getbetter.shared.features.calendars.presentation
 
 import AreasRepository
+import com.velkonost.getbetter.shared.core.model.EntityType
 import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.comments.Comment
 import com.velkonost.getbetter.shared.core.model.note.Note
+import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDay
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDayOfWeek
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToMonthDay
@@ -23,6 +26,7 @@ import com.velkonost.getbetter.shared.features.calendars.presentation.model.User
 import com.velkonost.getbetter.shared.features.calendars.presentation.model.type
 import com.velkonost.getbetter.shared.features.comments.api.CommentsRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
+import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class CalendarsViewModel
@@ -31,13 +35,13 @@ internal constructor(
     private val notesRepository: NotesRepository,
     private val areasRepository: AreasRepository,
     private val commentsRepository: CommentsRepository,
-
-    ) : BaseViewModel<CalendarsViewState, CalendarsAction, CalendarsNavigation, Nothing>(
+    private val userInfoRepository: UserInfoRepository
+) : BaseViewModel<CalendarsViewState, CalendarsAction, CalendarsNavigation, Nothing>(
     initialState = CalendarsViewState()
 ) {
 
     private var _dates: MutableStateFlow<List<DateItem>> = MutableStateFlow(emptyList())
-    private var _datesData: MutableMap<Long, List<ActionUIItem<*>>> = mutableMapOf()
+    private var _datesData: MutableMap<Long, List<ActionUIItem<*, *>>> = mutableMapOf()
 
     init {
         initItems()
@@ -116,13 +120,13 @@ internal constructor(
                     emit(viewState.value.copy(datesState = datesState))
                 }
                 onSuccess { list ->
-                    val selectedDateItems = mutableListOf<ActionUIItem<*>>()
+                    val selectedDateItems = mutableListOf<ActionUIItem<*, *>>()
                     list?.let {
                         list.forEach { item ->
                             when (item.type) {
                                 is UserActionType.UserRegistered -> {
                                     selectedDateItems.add(
-                                        ActionUIItem<Long>(
+                                        ActionUIItem<Long, Nothing>(
                                             dayId = value,
                                             id = item.datetime,
                                             description = item.datetimeStr
@@ -134,33 +138,80 @@ internal constructor(
                                 is UserActionType.UserJoinedArea,
                                 is UserActionType.UserLeavedArea -> {
                                     selectedDateItems.add(
-                                        ActionUIItem<Area>(
+                                        ActionUIItem<Area, Nothing>(
                                             dayId = value,
                                             id = item.datetime,
                                         )
                                     )
-                                    getAreaForAction(
+                                    getActionDetails(
                                         dayId = value,
                                         actionId = item.datetime,
-                                        areaId = item.entityId.toInt()
+                                        entityId = item.entityId,
+                                        entityType = EntityType.Area,
                                     )
                                 }
 
                                 is UserActionType.UserCreatedNote,
                                 is UserActionType.UserCompletedGoal -> {
                                     selectedDateItems.add(
-                                        ActionUIItem<Note>(
+                                        ActionUIItem<Note, Nothing>(
                                             dayId = value,
                                             id = item.datetime
                                         )
                                     )
-                                    getNoteForAction(
+                                    getActionDetails(
                                         dayId = value,
                                         actionId = item.datetime,
-                                        noteId = item.entityId.toInt()
+                                        entityId = item.entityId,
+                                        entityType = EntityType.Note,
                                     )
                                 }
 
+                                is UserActionType.UserCompletedSubGoal -> {
+                                    // ???
+                                }
+
+                                is UserActionType.UserCreatedComment,
+                                is UserActionType.UserGotComment -> {
+                                    selectedDateItems.add(
+                                        ActionUIItem<Comment, Nothing>(
+                                            dayId = value,
+                                            id = item.datetime
+                                        )
+                                    )
+                                    getActionDetails(
+                                        dayId = value,
+                                        actionId = item.datetime,
+                                        entityId = item.entityId,
+                                        entityType = EntityType.Comment,
+                                    )
+
+                                    // user got comment - fetch user info
+                                }
+
+                                is UserActionType.UserCreatedLike,
+                                is UserActionType.UserGotLike -> {
+                                    // fetch entity(area or note)
+                                    // fetch userinfo on gotlike
+                                }
+
+                                is UserActionType.UserFollowed,
+                                is UserActionType.UserGotFollower -> {
+                                    // fetch info about another user
+                                    selectedDateItems.add(
+                                        ActionUIItem<UserInfoShort, Nothing>(
+                                            dayId = value,
+                                            id = item.datetime
+                                        )
+                                    )
+                                    getActionDetails(
+                                        dayId = value,
+                                        actionId = item.datetime,
+                                        entityId = item.entityId,
+                                        entityType = EntityType.User,
+                                    )
+
+                                }
 
                                 else -> {
 
@@ -176,30 +227,22 @@ internal constructor(
         }
     }
 
-    private fun getAreaForAction(
+    private fun getActionDetails(
         dayId: Long,
         actionId: Long,
-        areaId: Int
+        entityId: String,
+        entityType: EntityType
     ) {
         launchJob {
-            areasRepository.fetchAreaDetails(areaId) collectAndProcess {
-                isLoading {
-                    updateItemLoadingState(dayId, actionId, it)
-                }
-                onSuccess { item ->
-                    item?.let { updateItemData(dayId, actionId, it) }
-                }
+            val request = when (entityType) {
+                EntityType.Area -> areasRepository.fetchAreaDetails(entityId.toInt())
+                EntityType.Note -> notesRepository.getNoteDetails(entityId.toInt())
+                EntityType.Comment -> commentsRepository.getComment(entityId.toInt())
+                EntityType.User -> userInfoRepository.fetchInfoAboutOtherUser(entityId)
+                else -> return@launchJob
             }
-        }
-    }
 
-    fun getNoteForAction(
-        dayId: Long,
-        actionId: Long,
-        noteId: Int
-    ) {
-        launchJob {
-            notesRepository.getNoteDetails(noteId) collectAndProcess {
+            request collectAndProcess {
                 isLoading {
                     updateItemLoadingState(dayId, actionId, it)
                 }
