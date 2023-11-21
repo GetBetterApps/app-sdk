@@ -7,6 +7,7 @@ import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyListState
@@ -77,6 +78,7 @@ fun CalendarsScreen(
         LazyRow(
             modifier = modifier.padding(top = 12.dp),
             state = listState,
+            contentPadding = PaddingValues(start = 16.dp)
         ) {
             items(state.datesState.items, key = { it.id }) { item ->
                 CalendarDateItem(
@@ -183,7 +185,7 @@ suspend fun LazyListState.centerItem(index: Int) {
 
 @Composable
 fun LazyListState.OnSideReached(
-    buffer: Int = 0,
+    buffer: Int = 5,
     isLoadingRight: Boolean,
     onLoadMoreRight: () -> Unit,
 ) {
