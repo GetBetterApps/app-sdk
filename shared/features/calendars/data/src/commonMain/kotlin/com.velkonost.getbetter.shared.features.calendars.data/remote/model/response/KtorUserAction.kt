@@ -18,5 +18,5 @@ data class KtorUserAction(
     val datetime: Long?,
 
     @SerialName("parentId")
-    val parentId: String?
+    val parentId: String? = null
 )
