@@ -204,7 +204,8 @@
 
     <!--  SOCIAL  -->
     <string name="social_general_feed_title">All</string>
-    <string name="social_areas_feed_title">For You</string>
+    <string name="social_areas_feed_title">Your areas</string>
+    <string name="social_followers_feed_title">You follows</string>
     <!--  SOCIAL  -->
 
     <!--  CALENDARS  -->

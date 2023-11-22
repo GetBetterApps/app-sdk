@@ -27,6 +27,9 @@ import com.velkonost.getbetter.shared.features.calendars.presentation.model.type
 import com.velkonost.getbetter.shared.features.comments.api.CommentsRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
+import com.velkonost.getbetter.shared.resources.SharedR
+import dev.icerock.moko.resources.desc.Resource
+import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class CalendarsViewModel
@@ -129,7 +132,7 @@ internal constructor(
                                         ActionUIItem<Long, Nothing>(
                                             dayId = value,
                                             id = item.datetime,
-                                            description = item.datetimeStr
+                                            description = StringDesc.Resource(SharedR.strings.action_user_registered)
                                         )
                                     )
                                 }
@@ -141,8 +144,16 @@ internal constructor(
                                         ActionUIItem<Area, Nothing>(
                                             dayId = value,
                                             id = item.datetime,
+                                            description = StringDesc.Resource(
+                                                when (item.type) {
+                                                    is UserActionType.UserCreatedArea -> SharedR.strings.action_user_created_area
+                                                    is UserActionType.UserJoinedArea -> SharedR.strings.action_user_joined_area
+                                                    else -> SharedR.strings.action_user_leaved_area
+                                                }
+                                            )
                                         )
                                     )
+
                                     getActionDetails(
                                         dayId = value,
                                         actionId = item.datetime,
@@ -156,7 +167,13 @@ internal constructor(
                                     selectedDateItems.add(
                                         ActionUIItem<Note, Nothing>(
                                             dayId = value,
-                                            id = item.datetime
+                                            id = item.datetime,
+                                            description = StringDesc.Resource(
+                                                when (item.type) {
+                                                    is UserActionType.UserCreatedNote -> SharedR.strings.action_user_created_note
+                                                    else -> SharedR.strings.action_user_completed_goal
+                                                }
+                                            )
                                         )
                                     )
                                     getActionDetails(
@@ -176,7 +193,14 @@ internal constructor(
                                     selectedDateItems.add(
                                         ActionUIItem<Comment, Nothing>(
                                             dayId = value,
-                                            id = item.datetime
+                                            id = item.datetime,
+                                            description = when (item.type) {
+                                                is UserActionType.UserCreatedComment -> StringDesc.Resource(
+                                                    SharedR.strings.action_user_created_comment
+                                                )
+
+                                                else -> //need user name + entity name
+                                            }
                                         )
                                     )
                                     getActionDetails(
@@ -193,6 +217,26 @@ internal constructor(
                                 is UserActionType.UserGotLike -> {
                                     // fetch entity(area or note)
                                     // fetch userinfo on gotlike
+                                    selectedDateItems.add(
+                                        if (item.parentEntityType == EntityType.Area) {
+                                            ActionUIItem<Area, UserInfoShort>(
+                                                dayId = value,
+                                                id = item.datetime
+                                            )
+
+                                        } else {
+                                            ActionUIItem<Note, UserInfoShort>(
+                                                dayId = value,
+                                                id = item.datetime
+                                            )
+                                        }
+                                    )
+                                    getActionDetails(
+                                        dayId = value,
+                                        actionId = item.datetime,
+                                        entityId = item.entityId,
+                                        entityType = item.parentEntityType!!
+                                    )
                                 }
 
                                 is UserActionType.UserFollowed,
@@ -253,6 +297,7 @@ internal constructor(
         }
     }
 
+
     private fun obtainLoadMore(direction: DateDirection) {
         launchJob {
             calendarsRepository.appendItems(
@@ -302,7 +347,7 @@ internal constructor(
         dayId: Long,
         actionId: Long,
         data: T? = null,
-        parentData: S? = null
+        relatedData: S? = null
     ) {
         val items = _datesData[dayId]?.toMutableList()
         val currentItem = items
@@ -319,8 +364,8 @@ internal constructor(
                 items[indexOfCurrentItem] = currentItem.copy(data = data)
             }
 
-            parentData?.let {
-                items[indexOfCurrentItem] = currentItem.copy(parentData = parentData)
+            relatedData?.let {
+                items[indexOfCurrentItem] = currentItem.copy(relatedData = relatedData)
             }
 
             if (viewState.value.datesState.selectedDate?.id == dayId) {
