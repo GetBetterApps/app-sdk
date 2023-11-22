@@ -13,12 +13,12 @@ import SharedSDK
 struct UserActionItem: View {
     
     let isLoading: Bool
-    let author: UserInfoShort?
+    let item: UserInfoShort?
     let onClick: () -> Void
     
-    init(isLoading: Bool, author: UserInfoShort?, onClick: @escaping () -> Void) {
+    init(isLoading: Bool, item: UserInfoShort?, onClick: @escaping () -> Void) {
         self.isLoading = isLoading
-        self.author = author
+        self.item = item
         self.onClick = onClick
     }
     
@@ -35,8 +35,8 @@ struct UserActionItem: View {
                     Spacer()
                 } else {
                     
-                    if author?.avatarUrl != nil {
-                        AsyncImage(url: URL(string: author!.avatarUrl!)) { image in
+                    if item?.avatarUrl != nil {
+                        AsyncImage(url: URL(string: item!.avatarUrl!)) { image in
                             image
                                 .resizable()
                                 .scaledToFill()
@@ -59,7 +59,7 @@ struct UserActionItem: View {
                             .cornerRadius(8)
                     }
                     
-                    Text(author?.displayName != nil ? author!.displayName! : "")
+                    Text(item?.displayName != nil ? item!.displayName! : "")
                         .style(.titleMedium)
                         .lineLimit(1)
                         .foregroundColor(.textPrimary)

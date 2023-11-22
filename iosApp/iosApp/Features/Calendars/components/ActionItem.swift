@@ -13,11 +13,11 @@ import SharedSDK
 struct ActionItem: View {
     
     let item: ActionUIItem<AnyObject, AnyObject>
-    let onAreaClick: (Int) -> Void
+    let onAreaClick: (Int32) -> Void
     let onNoteClick: (Note) -> Void
     let onUserClick: () -> Void
     
-    init(item: ActionUIItem<AnyObject, AnyObject>, onAreaClick: @escaping (Int) -> Void, onNoteClick: @escaping (Note) -> Void, onUserClick: @escaping () -> Void) {
+    init(item: ActionUIItem<AnyObject, AnyObject>, onAreaClick: @escaping (Int32) -> Void, onNoteClick: @escaping (Note) -> Void, onUserClick: @escaping () -> Void) {
         self.item = item
         self.onAreaClick = onAreaClick
         self.onNoteClick = onNoteClick
@@ -47,16 +47,46 @@ struct ActionItem: View {
                     )
             }
             
-            if item.data!.isInstance(value: UserInfoShort.self) {
-                UserActionItem(isLoading: false, author: <#T##UserInfoShort?#>, onClick: <#T##() -> Void#>)
-            }
             
-//            switch(item) {
-//            case item.data!.isInstance(value: UserInfoShort): do {
-//                
-//            }
-//            default: EmptyView()
-//            }
+            if ((item.data?.isInstance(value: UserInfoShort.self)) != nil) {
+                    UserActionItem(
+                        isLoading: false,
+                        item: (item.data as! UserInfoShort),
+                        onClick: onUserClick
+                    )
+            } else if ((item.relatedData?.isInstance(value: Note.self)) != nil) {
+                NoteActionItem(
+                    item: (item.data as! Note),
+                    onClick: onNoteClick,
+                    onLikeClick: { value in
+                        
+                    }
+                )
+            } else if ((item.data?.isInstance(value: Area.self)) != nil) {
+                AreaActionItem(
+                    item: (item.data as! Area),
+                    onClick: onAreaClick,
+                    onLikeClick: { value in
+                        
+                    }
+                )
+            } else if ((item.data?.isInstance(value: Note.self)) != nil) {
+                NoteActionItem(
+                    item: (item.data as! Note),
+                    onClick: onNoteClick,
+                    onLikeClick: { value in
+                        
+                    }
+                )
+            } else if ((item.relatedData?.isInstance(value: Area.self)) != nil) {
+                AreaActionItem(
+                    item: (item.relatedData as! Area),
+                    onClick: onAreaClick,
+                    onLikeClick: { value in
+                        
+                    }
+                )
+            }
         }
     }
 }
