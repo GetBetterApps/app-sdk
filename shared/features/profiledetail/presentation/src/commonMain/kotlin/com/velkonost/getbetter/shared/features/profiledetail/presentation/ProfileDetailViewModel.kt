@@ -6,12 +6,14 @@ import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
+import com.velkonost.getbetter.shared.core.util.reset
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.follows.api.FollowsRepository
 import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.FollowState
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.FollowState.Companion.reverseState
+import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.NotesUI
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailAction
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailEvent
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailViewState
@@ -63,9 +65,11 @@ internal constructor(
                             viewState.value.copy(
                                 profileData = profileData,
                                 followData = followData,
+                                notesData = NotesUI()
                             )
                         )
 
+                        _notesPagingConfig.reset()
                         fetchUserNotes()
                     }
                 }

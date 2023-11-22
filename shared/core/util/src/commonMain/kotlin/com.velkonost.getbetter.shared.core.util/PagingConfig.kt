@@ -8,3 +8,8 @@ data class PagingConfig(
     val prefetchDistance: Int = PrefetchDistanceValue,
     var lastPageReached: Boolean = false
 )
+
+fun PagingConfig.reset() {
+    page = 0
+    lastPageReached = false
+}

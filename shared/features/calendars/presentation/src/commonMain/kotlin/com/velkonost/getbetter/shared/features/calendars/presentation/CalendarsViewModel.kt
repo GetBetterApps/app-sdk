@@ -104,6 +104,14 @@ internal constructor(
     override fun dispatch(action: CalendarsAction) = when (action) {
         is CalendarsAction.LoadMoreNextDates -> obtainLoadMore(DateDirection.Future)
         is CalendarsAction.DateClick -> obtainDateClick(action.id)
+        is CalendarsAction.NoteClick -> obtainNoteClick(action.value)
+    }
+
+    private fun obtainNoteClick(value: Note) {
+        launchJob {
+//            calendarsRepository.saveUpdatedNoteId(value.id)
+            emit(CalendarsNavigation.NavigateToNoteDetail(value))
+        }
     }
 
     private fun initItems() {
