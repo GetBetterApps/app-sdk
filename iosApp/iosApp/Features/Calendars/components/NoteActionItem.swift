@@ -151,11 +151,11 @@ extension NoteActionItem {
             
             Spacer()
         }
-        .padding(.top, 12)
+        .padding(6)
         .background(
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.buttonGradientStart)
         )
-        .padding(6)
+        .padding(.top, 12)
     }
 }
