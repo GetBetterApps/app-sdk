@@ -8,8 +8,11 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -29,6 +32,11 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.velkonost.getbetter.android.features.calendars.components.AreaActionItem
+import com.velkonost.getbetter.android.features.calendars.components.NoteActionItem
+import com.velkonost.getbetter.core.compose.components.PrimaryBox
+import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.features.calendars.presentation.CalendarsViewModel
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsAction
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.DateUIItem
@@ -58,9 +66,9 @@ fun CalendarsScreen(
                 ) {
                     Text(
                         text = it.monthDay.toString(LocalContext.current).replaceFirstChar {
-                                if (it.isLowerCase()) it.titlecase(Locale.getDefault())
-                                else it.toString()
-                            },
+                            if (it.isLowerCase()) it.titlecase(Locale.getDefault())
+                            else it.toString()
+                        },
                         style = MaterialTheme.typography.headlineSmall,
                         color = colorResource(resource = SharedR.colors.text_secondary)
                     )
@@ -88,6 +96,47 @@ fun CalendarsScreen(
                         viewModel.dispatch(CalendarsAction.DateClick(it))
                     }
                 )
+            }
+        }
+
+        if (state.datesState.selectedDate != null) {
+            LazyColumn {
+                items(state.datesState.selectedDate?.items!!, key = { it.id }) { item ->
+                    PrimaryBox {
+                        Column {
+                            if (item.description != null) {
+                                Text(
+                                    text = item.description!!.toString(LocalContext.current),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = colorResource(resource = SharedR.colors.text_primary)
+                                )
+                            }
+                            Spacer(modifier.height(12.dp))
+
+                            if (item.data is Area) {
+                                AreaActionItem(
+                                    item = item.data as Area,
+                                    onClick = {
+
+                                    },
+                                    onLikeClick = {
+
+                                    }
+                                )
+                            } else if (item.data is Note) {
+                                NoteActionItem(
+                                    item = item.data as Note,
+                                    onClick = {
+
+                                    },
+                                    onLikeClick = {
+
+                                    }
+                                )
+                            }
+                        }
+                    }
+                }
             }
         }
     }
