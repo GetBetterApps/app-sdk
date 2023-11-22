@@ -77,6 +77,7 @@
 		468356F92B0E316C00DC356A /* AreaActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468356F82B0E316C00DC356A /* AreaActionItem.swift */; };
 		468356FB2B0E321200DC356A /* NoteActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468356FA2B0E321200DC356A /* NoteActionItem.swift */; };
 		468356FD2B0E323500DC356A /* UserActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468356FC2B0E323500DC356A /* UserActionItem.swift */; };
+		468356FF2B0E326800DC356A /* ActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468356FE2B0E326800DC356A /* ActionItem.swift */; };
 		46870C2E2AC092D300BCBDB1 /* SplashRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46870C2D2AC092D300BCBDB1 /* SplashRoute.swift */; };
 		46870C302AC092DA00BCBDB1 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46870C2F2AC092DA00BCBDB1 /* SplashScreen.swift */; };
 		468B794F2ACC57F000A8886C /* AddNoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B794E2ACC57F000A8886C /* AddNoteItem.swift */; };
@@ -200,6 +201,7 @@
 		468356F82B0E316C00DC356A /* AreaActionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaActionItem.swift; sourceTree = "<group>"; };
 		468356FA2B0E321200DC356A /* NoteActionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteActionItem.swift; sourceTree = "<group>"; };
 		468356FC2B0E323500DC356A /* UserActionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActionItem.swift; sourceTree = "<group>"; };
+		468356FE2B0E326800DC356A /* ActionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionItem.swift; sourceTree = "<group>"; };
 		46870C2D2AC092D300BCBDB1 /* SplashRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SplashRoute.swift; path = iosApp/Features/Wisdom/SplashRoute.swift; sourceTree = SOURCE_ROOT; };
 		46870C2F2AC092DA00BCBDB1 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		468B794E2ACC57F000A8886C /* AddNoteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteItem.swift; sourceTree = "<group>"; };
@@ -621,6 +623,7 @@
 				468356F82B0E316C00DC356A /* AreaActionItem.swift */,
 				468356FA2B0E321200DC356A /* NoteActionItem.swift */,
 				468356FC2B0E323500DC356A /* UserActionItem.swift */,
+				468356FE2B0E326800DC356A /* ActionItem.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -997,6 +1000,7 @@
 				464B60B62ABAF81B00369EC3 /* Avatar.swift in Sources */,
 				468B794F2ACC57F000A8886C /* AddNoteItem.swift in Sources */,
 				468B876C2ABC45CC001BBEB1 /* CalendarsRoute.swift in Sources */,
+				468356FF2B0E326800DC356A /* ActionItem.swift in Sources */,
 				46C10D232AB4734200E62846 /* AuthAnonymousButton.swift in Sources */,
 				467BECD12AC0350400F74482 /* WisdomViewModel.swift in Sources */,
 				461F7C6A2AA8D6FF003791CF /* UINavigationControllerExt.swift in Sources */,
