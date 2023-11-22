@@ -31,8 +31,8 @@ struct ActionItem: View {
                     Text(item.description_!.localized())
                         .style(.labelMedium)
                         .foregroundColor(.textLight)
-                        .padding(.leading, 32)
-                        .padding(.top, 12)
+                        .padding(.vertical, 4)
+                        .padding(.horizontal, 20)
                         .background(
                             Rectangle()
                                 .fill(Color.buttonGradientStart)
@@ -46,12 +46,11 @@ struct ActionItem: View {
                                 )
                                 .shadow(radius: 8)
                         )
+                        .padding(.leading, 32)
+                        .padding(.top, 12)
                     Spacer()
                 }
             }
-            
-            
-            
             
             if item.data is UserInfoShort {
                     UserActionItem(
@@ -62,8 +61,8 @@ struct ActionItem: View {
             } else if item.relatedData is Note {
                 NoteActionItem(
                     item: (item.relatedData as! Note),
-                    comment: item.data is Comment ? item.data as? Comment : nil,
-                    subGoalText: item.data is SubNote ? (item.data as! SubNote).text : nil,
+//                    comment: item.data is Comment ? item.data as? Comment : nil,
+//                    subGoalText: item.data is SubNote ? (item.data as! SubNote).text : nil,
                     onClick: onNoteClick,
                     onLikeClick: { value in
                         

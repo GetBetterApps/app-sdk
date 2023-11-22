@@ -76,13 +76,13 @@ struct NoteActionItem: View {
                 )
                 .padding(.top, 12)
                 
-                if comment != nil {
-                    CommentItem
-                }
-                
-                if subGoalText != nil {
-                    SubGoalItem
-                }
+//                if comment != nil {
+//                    CommentItem
+//                }
+//                
+//                if subGoalText != nil {
+//                    SubGoalItem
+//                }
             }
         }
         .onTapGesture {

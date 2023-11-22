@@ -88,8 +88,10 @@ struct CalendarsScreen: View {
             if state.datesState.selectedDate != nil {
                 if state.datesState.selectedDate!.isLoading {
                     ZStack {
+                        Spacer()
                         Loader()
-                    }
+                        Spacer()
+                    }.frame(maxHeight: .infinity)
                 } else {
                     ZStack {
                         ScrollView(showsIndicators: false) {
@@ -110,9 +112,10 @@ struct CalendarsScreen: View {
                                         }
                                     )
                                 }
+                                Spacer().frame(height: 160)
                             }
                             .padding(.horizontal, 20)
-                        }
+                        }.fadingEdge()
                     }
                 }
             }
