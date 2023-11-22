@@ -111,12 +111,13 @@ struct CalendarsScreen: View {
                                     )
                                 }
                             }
+                            .padding(.horizontal, 20)
                         }
                     }
                 }
             }
             
-            Spacer().frame(maxHeight: .infinity)
+            
         }
         .frame(maxHeight: .infinity)
         

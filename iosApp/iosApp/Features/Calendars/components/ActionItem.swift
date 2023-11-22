@@ -27,24 +27,27 @@ struct ActionItem: View {
     var body: some View {
         VStack(spacing: 0) {
             if item.description_ != nil {
-                Text(item.description_!.localized())
-                    .style(.labelMedium)
-                    .foregroundColor(.textLight)
-                    .padding(.leading, 32)
-                    .padding(.top, 12)
-                    .background(
-                        Rectangle()
-                            .fill(Color.buttonGradientStart)
-                            .clipShape(
-                                .rect(
-                                    topLeadingRadius: 0,
-                                    bottomLeadingRadius: 20,
-                                    bottomTrailingRadius: 0,
-                                    topTrailingRadius: 20
+                HStack {
+                    Text(item.description_!.localized())
+                        .style(.labelMedium)
+                        .foregroundColor(.textLight)
+                        .padding(.leading, 32)
+                        .padding(.top, 12)
+                        .background(
+                            Rectangle()
+                                .fill(Color.buttonGradientStart)
+                                .clipShape(
+                                    .rect(
+                                        topLeadingRadius: 8,
+                                        bottomLeadingRadius: 0,
+                                        bottomTrailingRadius: 0,
+                                        topTrailingRadius: 8
+                                    )
                                 )
-                            )
-                            .shadow(radius: 8)
-                    )
+                                .shadow(radius: 8)
+                        )
+                    Spacer()
+                }
             }
             
             
