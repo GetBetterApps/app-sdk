@@ -34,11 +34,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.calendars.components.AreaActionItem
 import com.velkonost.getbetter.android.features.calendars.components.NoteActionItem
+import com.velkonost.getbetter.android.features.calendars.components.UserActionItem
 import com.velkonost.getbetter.core.compose.extensions.fadingEdge
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.comments.Comment
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.note.SubNote
+import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.features.calendars.presentation.CalendarsViewModel
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsAction
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.DateUIItem
@@ -108,7 +110,7 @@ fun CalendarsScreen(
                     .fadingEdge(),
                 contentPadding = PaddingValues(bottom = 160.dp)
             ) {
-                items(state.datesState.selectedDate?.items!!, key = { it.id }) { item ->
+                items(state.datesState.selectedDate?.items!!) { item ->
                     Column {
                         if (item.description != null) {
                             Text(
@@ -131,6 +133,16 @@ fun CalendarsScreen(
                         }
 
                         when {
+                            item.data is UserInfoShort -> {
+                                UserActionItem(
+                                    isLoading = false,
+                                    item = item.data as UserInfoShort,
+                                    onClick = {
+
+                                    }
+                                )
+                            }
+
                             item.data is Comment && item.relatedData is Note -> {
                                 NoteActionItem(
                                     item = item.relatedData as Note,
