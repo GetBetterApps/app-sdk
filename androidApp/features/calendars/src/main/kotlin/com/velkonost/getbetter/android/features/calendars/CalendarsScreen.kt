@@ -8,8 +8,6 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.calendars.components.AreaActionItem
 import com.velkonost.getbetter.android.features.calendars.components.NoteActionItem
-import com.velkonost.getbetter.core.compose.components.PrimaryBox
+import com.velkonost.getbetter.core.compose.extensions.fadingEdge
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.features.calendars.presentation.CalendarsViewModel
@@ -100,40 +99,52 @@ fun CalendarsScreen(
         }
 
         if (state.datesState.selectedDate != null) {
-            LazyColumn {
+            LazyColumn(
+                modifier = modifier.fadingEdge(),
+                contentPadding = PaddingValues(bottom = 160.dp)
+            ) {
                 items(state.datesState.selectedDate?.items!!, key = { it.id }) { item ->
-                    PrimaryBox {
-                        Column {
-                            if (item.description != null) {
-                                Text(
-                                    text = item.description!!.toString(LocalContext.current),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = colorResource(resource = SharedR.colors.text_primary)
-                                )
-                            }
-                            Spacer(modifier.height(12.dp))
+                    Column {
+                        if (item.description != null) {
+                            Text(
+                                modifier = modifier
+                                    .padding(start = 32.dp)
+                                    .padding(top = 12.dp)
+                                    .shadow(
+                                        elevation = 8.dp,
+                                        shape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)
+                                    )
+                                    .background(
+                                        color = colorResource(resource = SharedR.colors.button_gradient_start),
+                                        shape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)
+                                    )
+                                    .padding(vertical = 4.dp, horizontal = 8.dp),
+                                text = item.description!!.toString(LocalContext.current),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = colorResource(resource = SharedR.colors.text_light)
+                            )
+                        }
 
-                            if (item.data is Area) {
-                                AreaActionItem(
-                                    item = item.data as Area,
-                                    onClick = {
+                        if (item.data is Area) {
+                            AreaActionItem(
+                                item = item.data as Area,
+                                onClick = {
 
-                                    },
-                                    onLikeClick = {
+                                },
+                                onLikeClick = {
 
-                                    }
-                                )
-                            } else if (item.data is Note) {
-                                NoteActionItem(
-                                    item = item.data as Note,
-                                    onClick = {
+                                }
+                            )
+                        } else if (item.data is Note) {
+                            NoteActionItem(
+                                item = item.data as Note,
+                                onClick = {
 
-                                    },
-                                    onLikeClick = {
+                                },
+                                onLikeClick = {
 
-                                    }
-                                )
-                            }
+                                }
+                            )
                         }
                     }
                 }

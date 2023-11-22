@@ -54,7 +54,8 @@ fun AreaActionItem(
             ) {
                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                 onClick.invoke(item.id)
-            }
+            },
+        topPadding = 0
     ) {
         Row {
             if (item.emojiId != null) {

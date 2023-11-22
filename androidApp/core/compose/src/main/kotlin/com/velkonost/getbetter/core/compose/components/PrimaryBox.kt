@@ -16,11 +16,12 @@ import dev.icerock.moko.resources.compose.colorResource
 fun PrimaryBox(
     modifier: Modifier = Modifier,
     padding: Int = 16,
+    topPadding: Int = 12,
     content: @Composable () -> Unit
 ) {
     Box(
         modifier = modifier
-            .padding(top = 12.dp)
+            .padding(top = topPadding.dp)
             .shadow(
                 elevation = 8.dp,
                 shape = MaterialTheme.shapes.medium,
