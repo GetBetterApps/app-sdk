@@ -8,6 +8,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -35,6 +36,7 @@ import com.velkonost.getbetter.android.features.calendars.components.AreaActionI
 import com.velkonost.getbetter.android.features.calendars.components.NoteActionItem
 import com.velkonost.getbetter.core.compose.extensions.fadingEdge
 import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.comments.Comment
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.features.calendars.presentation.CalendarsViewModel
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsAction
@@ -100,7 +102,9 @@ fun CalendarsScreen(
 
         if (state.datesState.selectedDate != null) {
             LazyColumn(
-                modifier = modifier.fadingEdge(),
+                modifier = modifier
+                    .fillMaxSize()
+                    .fadingEdge(),
                 contentPadding = PaddingValues(bottom = 160.dp)
             ) {
                 items(state.datesState.selectedDate?.items!!, key = { it.id }) { item ->
@@ -125,51 +129,68 @@ fun CalendarsScreen(
                             )
                         }
 
-                        if (item.data is Area) {
-                            AreaActionItem(
-                                item = item.data as Area,
-                                onClick = {
+                        when {
+                            item.data is Comment && item.relatedData is Note -> {
+                                NoteActionItem(
+                                    item = item.relatedData as Note,
+                                    comment = item.data as Comment,
+                                    onClick = {
 
-                                },
-                                onLikeClick = {
+                                    },
+                                    onLikeClick = {
 
-                                }
-                            )
-                        } else if (item.data is Note) {
-                            NoteActionItem(
-                                item = item.data as Note,
-                                onClick = {
+                                    }
+                                )
+                            }
 
-                                },
-                                onLikeClick = {
+                            item.data is Area -> {
+                                AreaActionItem(
+                                    item = item.data as Area,
+                                    onClick = {
 
-                                }
-                            )
+                                    },
+                                    onLikeClick = {
+
+                                    }
+                                )
+                            }
+
+                            item.data is Note -> {
+                                NoteActionItem(
+                                    item = item.data as Note,
+                                    onClick = {
+
+                                    },
+                                    onLikeClick = {
+
+                                    }
+                                )
+                            }
+
+                            item.relatedData is Area -> {
+                                AreaActionItem(
+                                    item = item.relatedData as Area,
+                                    onClick = {
+
+                                    },
+                                    onLikeClick = {
+
+                                    }
+                                )
+                            }
+
+                            item.relatedData is Note -> {
+                                NoteActionItem(
+                                    item = item.relatedData as Note,
+                                    onClick = {
+
+                                    },
+                                    onLikeClick = {
+
+                                    }
+                                )
+                            }
                         }
-
-                        if (item.relatedData is Area) {
-                            AreaActionItem(
-                                item = item.relatedData as Area,
-                                onClick = {
-
-                                },
-                                onLikeClick = {
-
-                                }
-                            )
-                        } else if (item.relatedData is Note) {
-                            NoteActionItem(
-                                item = item.relatedData as Note,
-                                onClick = {
-
-                                },
-                                onLikeClick = {
-
-                                }
-                            )
-                        }
-
-
                     }
                 }
             }

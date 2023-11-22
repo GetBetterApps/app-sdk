@@ -1,6 +1,5 @@
 package com.velkonost.getbetter.android.features.calendars.components
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -113,39 +112,37 @@ fun AreaActionItem(
                 }
             } else {
                 Box {
-                    AnimatedContent(targetState = item.likesData.isLikesLoading, label = "") {
-                        if (!it) {
-                            Column(
-                                modifier = modifier.clickable(
-                                    interactionSource = interactionSource,
-                                    indication = null,
-                                    onClick = {
-                                        onLikeClick.invoke(item)
-                                    }
+                    if (!item.likesData.isLikesLoading) {
+                        Column(
+                            modifier = modifier.clickable(
+                                interactionSource = interactionSource,
+                                indication = null,
+                                onClick = {
+                                    onLikeClick.invoke(item)
+                                }
+                            ),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center,
+                        ) {
+                            Image(
+                                modifier = modifier
+                                    .size(28.dp)
+                                    .padding(2.dp),
+                                painter = painterResource(
+                                    imageResource = if (item.likesData.userLike == LikeType.Positive) SharedR.images.ic_heart
+                                    else SharedR.images.ic_heart_empty
                                 ),
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.Center,
-                            ) {
-                                Image(
-                                    modifier = modifier
-                                        .size(28.dp)
-                                        .padding(2.dp),
-                                    painter = painterResource(
-                                        imageResource = if (item.likesData.userLike == LikeType.Positive) SharedR.images.ic_heart
-                                        else SharedR.images.ic_heart_empty
-                                    ),
-                                    contentDescription = null,
-                                    colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.button_gradient_start))
-                                )
-                                Text(
-                                    text = item.likesData.totalLikes.toString(),
-                                    color = colorResource(resource = SharedR.colors.text_primary),
-                                    style = MaterialTheme.typography.bodySmall
-                                )
-                            }
-                        } else {
-                            Loader(size = 28)
+                                contentDescription = null,
+                                colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.button_gradient_start))
+                            )
+                            Text(
+                                text = item.likesData.totalLikes.toString(),
+                                color = colorResource(resource = SharedR.colors.text_primary),
+                                style = MaterialTheme.typography.bodySmall
+                            )
                         }
+                    } else {
+                        Loader(size = 28)
                     }
                 }
             }

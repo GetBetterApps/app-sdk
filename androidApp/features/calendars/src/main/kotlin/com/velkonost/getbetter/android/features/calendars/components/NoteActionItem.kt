@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.android.features.calendars.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -7,18 +8,25 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil.compose.SubcomposeAsyncImage
+import coil.request.ImageRequest
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.core.compose.components.note.tags.TagItem
 import com.velkonost.getbetter.core.compose.components.notelist.NoteItemData
@@ -29,6 +37,7 @@ import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
+import dev.icerock.moko.resources.compose.painterResource
 
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -109,14 +118,56 @@ fun NoteActionItem(
                 }
             }
 
+            comment?.let {
+                CommentItem(item = comment)
+            }
+
         }
     }
 }
 
 @Composable
 fun CommentItem(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     item: Comment
 ) {
+    Row(
+        modifier = modifier.padding(top = 12.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        item.author.avatarUrl?.let { avatarUrl ->
+            SubcomposeAsyncImage(
+                modifier = modifier
+                    .size(28.dp)
+                    .clip(MaterialTheme.shapes.small),
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(avatarUrl)
+                    .build(),
+                contentScale = ContentScale.Crop,
+                contentDescription = null,
+                error = {
+                    Image(
+                        modifier = modifier
+                            .size(32.dp)
+                            .clip(MaterialTheme.shapes.small),
+                        painter = painterResource(imageResource = SharedR.images.logo),
+                        contentDescription = null
+                    )
+                }
+            )
+        }
 
+        Text(
+            modifier = modifier
+                .padding(start = 6.dp)
+                .background(
+                    color = colorResource(resource = SharedR.colors.button_gradient_start),
+                    shape = MaterialTheme.shapes.small
+                )
+                .padding(6.dp),
+            text = item.text,
+            style = MaterialTheme.typography.bodySmall,
+            color = colorResource(resource = SharedR.colors.text_light)
+        )
+    }
 }
