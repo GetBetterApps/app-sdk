@@ -53,16 +53,17 @@ internal constructor(
         initItems()
 
         launchJob {
-            _dates.collect { dates ->
-                var datesState = viewState.value.datesState.copy(
-                    items = dates.map {
-                        DateUIItem(
-                            id = it.millis,
-                            day = it.millis.convertToDay(),
-                            dayOfWeek = it.millis.convertToDayOfWeek()
-                        )
-                    }
-                )
+            _dates
+                .collect { dates ->
+                    var datesState = viewState.value.datesState.copy(
+                        items = dates.map {
+                            DateUIItem(
+                                id = it.millis,
+                                day = it.millis.convertToDay(),
+                                dayOfWeek = it.millis.convertToDayOfWeek()
+                            )
+                        }
+                    )
 
                 if (datesState.selectedDate == null) {
                     val dateMillis = dates.first { it.selectedByDefault }.millis

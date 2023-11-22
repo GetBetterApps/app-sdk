@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -182,7 +183,7 @@ fun SubGoalItem(
     modifier: Modifier = Modifier,
     text: String
 ) {
-    Text(
+    Row(
         modifier = modifier
             .padding(top = 12.dp)
             .fillMaxWidth()
@@ -191,8 +192,21 @@ fun SubGoalItem(
                 shape = MaterialTheme.shapes.small
             )
             .padding(6.dp),
-        text = text,
-        style = MaterialTheme.typography.bodySmall,
-        color = colorResource(resource = SharedR.colors.text_light)
-    )
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            modifier = modifier.size(16.dp),
+            painter = painterResource(imageResource = SharedR.images.ic_save),
+            contentDescription = null,
+            colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.text_light))
+        )
+
+        Text(
+            modifier = modifier.padding(start = 6.dp),
+            text = text,
+            style = MaterialTheme.typography.bodySmall,
+            color = colorResource(resource = SharedR.colors.text_light)
+        )
+    }
+
 }
