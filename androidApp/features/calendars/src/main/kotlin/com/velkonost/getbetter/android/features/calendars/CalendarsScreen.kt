@@ -173,7 +173,7 @@ fun CalendarsScreen(
                                     item = item.relatedData as Note,
                                     comment = item.data as Comment,
                                     onClick = {
-
+                                              viewModel.dispatch(CalendarsAction.NoteClick(it))
                                     },
                                     onLikeClick = {
 
@@ -186,7 +186,7 @@ fun CalendarsScreen(
                                     item = item.relatedData as Note,
                                     subGoalText = (item.data as SubNote).text,
                                     onClick = {
-
+                                        viewModel.dispatch(CalendarsAction.NoteClick(it))
                                     },
                                     onLikeClick = {
 
@@ -213,7 +213,7 @@ fun CalendarsScreen(
                                 NoteActionItem(
                                     item = item.data as Note,
                                     onClick = {
-
+                                        viewModel.dispatch(CalendarsAction.NoteClick(it))
                                     },
                                     onLikeClick = {
 
@@ -240,7 +240,7 @@ fun CalendarsScreen(
                                 NoteActionItem(
                                     item = item.relatedData as Note,
                                     onClick = {
-
+                                        viewModel.dispatch(CalendarsAction.NoteClick(it))
                                     },
                                     onLikeClick = {
 
