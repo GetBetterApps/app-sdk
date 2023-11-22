@@ -12,6 +12,7 @@ import SwiftUI
 struct PrimaryBox<Content: View>: View {
     
     var padding: EdgeInsets = .init(top: 16, leading: 16, bottom: 16, trailing: 16)
+    var topPadding = 8
     @ViewBuilder let content: Content
     
     var body: some View {
@@ -24,7 +25,7 @@ struct PrimaryBox<Content: View>: View {
                 .fill(Color.backgroundItem)
                 .shadow(radius: 8)
         )
-        .padding(.init(top: 8, leading: .zero, bottom: .zero, trailing: .zero))
+        .padding(.init(top: topPadding, leading: .zero, bottom: .zero, trailing: .zero))
         
     }
 }

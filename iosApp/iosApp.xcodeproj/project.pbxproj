@@ -74,6 +74,9 @@
 		467BECCF2AC017CF00F74482 /* PrimaryTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467BECCE2AC017CF00F74482 /* PrimaryTabs.swift */; };
 		467BECD12AC0350400F74482 /* WisdomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467BECD02AC0350400F74482 /* WisdomViewModel.swift */; };
 		467D996C2AFA1C9C00F4397E /* AuthorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467D996B2AFA1C9C00F4397E /* AuthorData.swift */; };
+		468356F92B0E316C00DC356A /* AreaActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468356F82B0E316C00DC356A /* AreaActionItem.swift */; };
+		468356FB2B0E321200DC356A /* NoteActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468356FA2B0E321200DC356A /* NoteActionItem.swift */; };
+		468356FD2B0E323500DC356A /* UserActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468356FC2B0E323500DC356A /* UserActionItem.swift */; };
 		46870C2E2AC092D300BCBDB1 /* SplashRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46870C2D2AC092D300BCBDB1 /* SplashRoute.swift */; };
 		46870C302AC092DA00BCBDB1 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46870C2F2AC092DA00BCBDB1 /* SplashScreen.swift */; };
 		468B794F2ACC57F000A8886C /* AddNoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468B794E2ACC57F000A8886C /* AddNoteItem.swift */; };
@@ -194,6 +197,9 @@
 		467BECCE2AC017CF00F74482 /* PrimaryTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTabs.swift; sourceTree = "<group>"; };
 		467BECD02AC0350400F74482 /* WisdomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomViewModel.swift; sourceTree = "<group>"; };
 		467D996B2AFA1C9C00F4397E /* AuthorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorData.swift; sourceTree = "<group>"; };
+		468356F82B0E316C00DC356A /* AreaActionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaActionItem.swift; sourceTree = "<group>"; };
+		468356FA2B0E321200DC356A /* NoteActionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteActionItem.swift; sourceTree = "<group>"; };
+		468356FC2B0E323500DC356A /* UserActionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActionItem.swift; sourceTree = "<group>"; };
 		46870C2D2AC092D300BCBDB1 /* SplashRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SplashRoute.swift; path = iosApp/Features/Wisdom/SplashRoute.swift; sourceTree = SOURCE_ROOT; };
 		46870C2F2AC092DA00BCBDB1 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		468B794E2ACC57F000A8886C /* AddNoteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteItem.swift; sourceTree = "<group>"; };
@@ -612,6 +618,9 @@
 			isa = PBXGroup;
 			children = (
 				46AEEF7C2B0BB76B00A9376C /* CalendarDateItem.swift */,
+				468356F82B0E316C00DC356A /* AreaActionItem.swift */,
+				468356FA2B0E321200DC356A /* NoteActionItem.swift */,
+				468356FC2B0E323500DC356A /* UserActionItem.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -981,6 +990,7 @@
 				4646BF9C2AD2BD72000980DD /* AreaDetailBottomButtons.swift in Sources */,
 				4696B6AE2AD15EE600DDD405 /* AreaDetailScreen.swift in Sources */,
 				467668BE2AEABFF4007C17DE /* SubNotesBlock.swift in Sources */,
+				468356F92B0E316C00DC356A /* AreaActionItem.swift in Sources */,
 				464B60B42ABAF7C300369EC3 /* ProfileHeader.swift in Sources */,
 				46059D2D2AC41DB500DC5015 /* ExpandableButtonPanel.swift in Sources */,
 				468B87682ABC45BF001BBEB1 /* DiaryRoute.swift in Sources */,
@@ -1037,6 +1047,7 @@
 				4616B0852AF626F900A4CDDE /* MultilineTextFieldBinding.swift in Sources */,
 				460487952AD83989005E8A54 /* CreateNewNoteBottomSheet.swift in Sources */,
 				4616B0872AF629B100A4CDDE /* DateExt.swift in Sources */,
+				468356FB2B0E321200DC356A /* NoteActionItem.swift in Sources */,
 				461F7C682AA88B80003791CF /* StringExt.swift in Sources */,
 				46D857742ACFF1C500BE74DA /* AddAreaViewModel.swift in Sources */,
 				461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */,
@@ -1045,6 +1056,7 @@
 				46FCD3D32AF530BD0025D2C6 /* NoteDetailScreen.swift in Sources */,
 				46ACAF232AEECA74000A9CD8 /* NoteItemData.swift in Sources */,
 				46C10D1F2AB43FA300E62846 /* SnackBar.swift in Sources */,
+				468356FD2B0E323500DC356A /* UserActionItem.swift in Sources */,
 				4667C90C2AC5A89000BAA9DD /* RequiredLevelRow.swift in Sources */,
 				46CDB56C2AADB45E00800096 /* AuthScreen.swift in Sources */,
 				46B17E0F2AADE0B3008C2BC4 /* Type.swift in Sources */,
