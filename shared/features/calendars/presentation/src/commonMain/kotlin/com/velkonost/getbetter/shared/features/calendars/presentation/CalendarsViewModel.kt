@@ -29,6 +29,7 @@ import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource
+import dev.icerock.moko.resources.desc.ResourceFormatted
 import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -159,6 +160,7 @@ internal constructor(
                                         actionId = item.datetime,
                                         entityId = item.entityId,
                                         entityType = EntityType.Area,
+                                        type = item.type!!
                                     )
                                 }
 
@@ -181,6 +183,7 @@ internal constructor(
                                         actionId = item.datetime,
                                         entityId = item.entityId,
                                         entityType = EntityType.Note,
+                                        type = item.type!!
                                     )
                                 }
 
@@ -208,6 +211,9 @@ internal constructor(
                                         actionId = item.datetime,
                                         entityId = item.entityId,
                                         entityType = EntityType.Comment,
+                                        parentEntityId = item.parentId,
+                                        parentEntityType = item.parentEntityType,
+                                        type = item.type!!
                                     )
 
                                     // user got comment - fetch user info
@@ -235,7 +241,8 @@ internal constructor(
                                         dayId = value,
                                         actionId = item.datetime,
                                         entityId = item.entityId,
-                                        entityType = item.parentEntityType!!
+                                        entityType = item.parentEntityType!!,
+                                        type = item.type!!
                                     )
                                 }
 
@@ -253,6 +260,7 @@ internal constructor(
                                         actionId = item.datetime,
                                         entityId = item.entityId,
                                         entityType = EntityType.User,
+                                        type = item.type!!
                                     )
 
                                 }
@@ -275,7 +283,11 @@ internal constructor(
         dayId: Long,
         actionId: Long,
         entityId: String,
-        entityType: EntityType
+        entityType: EntityType,
+        parentEntityId: String? = null,
+        parentEntityType: EntityType? = null,
+        otherUserId: String? = null,
+        type: UserActionType
     ) {
         launchJob {
             val request = when (entityType) {
@@ -291,9 +303,55 @@ internal constructor(
                     updateItemLoadingState(dayId, actionId, it)
                 }
                 onSuccess { item ->
-                    item?.let { updateItemData<Any, Any>(dayId, actionId, it) }
+                    item?.let {
+                        updateItemData<Any, Any>(dayId, actionId, it, type = type)
+                    }
                 }
             }
+
+            parentEntityId?.let {
+                val parentRequest = when (parentEntityType) {
+                    EntityType.Area -> areasRepository.fetchAreaDetails(entityId.toInt())
+                    EntityType.Note -> notesRepository.getNoteDetails(entityId.toInt())
+                    EntityType.Comment -> commentsRepository.getComment(entityId.toInt())
+                    EntityType.User -> userInfoRepository.fetchInfoAboutOtherUser(entityId)
+                    else -> return@launchJob
+                }
+                parentRequest collectAndProcess {
+                    isLoading {
+                        updateItemLoadingState(dayId, actionId, it)
+                    }
+                    onSuccess { item ->
+                        item?.let {
+                            updateItemData<Any, Any>(
+                                dayId,
+                                actionId,
+                                type = type,
+                                relatedData = it
+                            )
+                        }
+                    }
+                }
+            }
+
+            otherUserId?.let {
+                userInfoRepository.fetchInfoAboutOtherUser(otherUserId) collectAndProcess {
+                    isLoading {
+                        updateItemLoadingState(dayId, actionId, it)
+                    }
+                    onSuccess { item ->
+                        item?.let {
+                            updateItemData<Any, Any>(
+                                dayId,
+                                actionId,
+                                type = type,
+                                userInfo = it
+                            )
+                        }
+                    }
+                }
+            }
+
         }
     }
 
@@ -347,7 +405,9 @@ internal constructor(
         dayId: Long,
         actionId: Long,
         data: T? = null,
-        relatedData: S? = null
+        relatedData: S? = null,
+        userInfo: UserInfoShort? = null,
+        type: UserActionType
     ) {
         val items = _datesData[dayId]?.toMutableList()
         val currentItem = items
@@ -366,6 +426,16 @@ internal constructor(
 
             relatedData?.let {
                 items[indexOfCurrentItem] = currentItem.copy(relatedData = relatedData)
+            }
+
+            userInfo?.let {
+                items[indexOfCurrentItem] = currentItem.copy(otherUserInfo = userInfo)
+            }
+
+            if (type == UserActionType.UserGotComment && data is Comment) {
+                items[indexOfCurrentItem].description = StringDesc.ResourceFormatted(
+                    SharedR.strings.action_user_got_comment, data.author.displayName ?: ""
+                )
             }
 
             if (viewState.value.datesState.selectedDate?.id == dayId) {

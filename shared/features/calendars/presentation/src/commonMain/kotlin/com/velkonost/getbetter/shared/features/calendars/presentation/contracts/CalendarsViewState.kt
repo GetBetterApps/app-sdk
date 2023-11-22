@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.calendars.presentation.contracts
 
+import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import dev.icerock.moko.resources.desc.StringDesc
 
@@ -34,7 +35,8 @@ data class ActionUIItem<out T, out S : Any?>(
     val id: Long,
 //    val type: EntityType,
     val isLoading: Boolean = true,
-    val description: StringDesc? = null,
+    var description: StringDesc? = null,
     val data: T? = null,
-    val relatedData: S? = null
+    val relatedData: S? = null,
+    val otherUserInfo: UserInfoShort? = null
 )

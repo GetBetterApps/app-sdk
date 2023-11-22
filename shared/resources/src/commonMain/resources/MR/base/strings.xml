@@ -221,10 +221,10 @@
     <string name="action_user_completed_subgoal">You completed the subgoal!</string>
 
     <string name="action_user_created_comment">You created comment</string>
-    <string name="action_user_got_comment">%s created comment in %s</string>
+    <string name="action_user_got_comment">%s created comment</string>
 
     <string name="action_user_created_like">You liked</string>
-    <string name="action_user_got_like">%s liked %s</string>
+    <string name="action_user_got_like">%s add like</string>
 
     <string name="action_user_followed">You followed</string>
     <string name="action_user_got_follower">%s follows you</string>
