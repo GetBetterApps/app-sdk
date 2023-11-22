@@ -16,7 +16,6 @@ import com.velkonost.getbetter.shared.features.social.contracts.SocialAction
 import com.velkonost.getbetter.shared.features.social.contracts.SocialNavigation
 import com.velkonost.getbetter.shared.features.social.contracts.SocialViewState
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 
 class SocialViewModel
 internal constructor(
@@ -261,7 +260,6 @@ internal constructor(
 
         generalFeedLoadingJob?.cancel()
         generalFeedLoadingJob = launchJob {
-
             socialRepository.fetchGeneralFeed(
                 page = _generalFeedPagingConfig.page,
                 pageSize = _generalFeedPagingConfig.pageSize
@@ -275,25 +273,19 @@ internal constructor(
                     emit(viewState.value.copy(generalFeed = generalFeedViewState))
                 }
                 onSuccess { items ->
-                    launchJob {
-                        if (_generalFeedPagingConfig.page == 0) {
-                            delay(500)
-                        }
+                    _generalFeedPagingConfig.lastPageReached = items.isNullOrEmpty()
+                    _generalFeedPagingConfig.page++
 
-                        _generalFeedPagingConfig.lastPageReached = items.isNullOrEmpty()
-                        _generalFeedPagingConfig.page++
-
-                        items?.let {
-                            val allItems =
-                                if (refreshList) it
-                                else viewState.value.generalFeed.items.plus(it)
-                            val generalFeedViewState = viewState.value.generalFeed.copy(
-                                isLoading = false,
-                                isRefreshing = false,
-                                items = allItems
-                            )
-                            emit(viewState.value.copy(generalFeed = generalFeedViewState))
-                        }
+                    items?.let {
+                        val allItems =
+                            if (refreshList) it
+                            else viewState.value.generalFeed.items.plus(it)
+                        val generalFeedViewState = viewState.value.generalFeed.copy(
+                            isLoading = false,
+                            isRefreshing = false,
+                            items = allItems
+                        )
+                        emit(viewState.value.copy(generalFeed = generalFeedViewState))
                     }
                 }
             }

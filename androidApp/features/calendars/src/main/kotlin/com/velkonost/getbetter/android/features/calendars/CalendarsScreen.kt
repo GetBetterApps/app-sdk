@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -35,6 +37,8 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -44,7 +48,6 @@ import com.velkonost.getbetter.android.features.calendars.components.NoteActionI
 import com.velkonost.getbetter.android.features.calendars.components.UserActionItem
 import com.velkonost.getbetter.android.features.profiledetail.ProfileDetailScreen
 import com.velkonost.getbetter.core.compose.components.Loader
-import com.velkonost.getbetter.core.compose.extensions.fadingEdge
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.comments.Comment
 import com.velkonost.getbetter.shared.core.model.note.Note
@@ -138,137 +141,155 @@ fun CalendarsScreen(
                 }
             } else {
 
-                LazyColumn(
-                    modifier = modifier
-                        .fillMaxSize()
-                        .fadingEdge(),
-                    contentPadding = PaddingValues(bottom = 160.dp)
-                ) {
-                    items(state.datesState.selectedDate?.items!!) { item ->
-                        Column {
-                            if (item.description != null) {
-                                Text(
-                                    modifier = modifier
-                                        .padding(start = 32.dp)
-                                        .padding(top = 12.dp)
-                                        .shadow(
-                                            elevation = 8.dp,
-                                            shape = RoundedCornerShape(
-                                                topStart = 8.dp,
-                                                topEnd = 8.dp
+                Box {
+                    LazyColumn(
+                        modifier = modifier
+                            .fillMaxSize(),
+                        contentPadding = PaddingValues(bottom = 160.dp)
+                    ) {
+                        items(state.datesState.selectedDate?.items!!) { item ->
+                            Column {
+                                if (item.description != null) {
+                                    Text(
+                                        modifier = modifier
+                                            .padding(start = 32.dp)
+                                            .padding(top = 12.dp)
+                                            .shadow(
+                                                elevation = 8.dp,
+                                                shape = RoundedCornerShape(
+                                                    topStart = 8.dp,
+                                                    topEnd = 8.dp
+                                                )
                                             )
-                                        )
-                                        .background(
-                                            color = colorResource(resource = SharedR.colors.button_gradient_start),
-                                            shape = RoundedCornerShape(
-                                                topStart = 8.dp,
-                                                topEnd = 8.dp
+                                            .background(
+                                                color = colorResource(resource = SharedR.colors.button_gradient_start),
+                                                shape = RoundedCornerShape(
+                                                    topStart = 8.dp,
+                                                    topEnd = 8.dp
+                                                )
                                             )
+                                            .padding(vertical = 4.dp, horizontal = 20.dp),
+                                        text = item.description!!.toString(LocalContext.current),
+                                        style = MaterialTheme.typography.labelMedium,
+                                        color = colorResource(resource = SharedR.colors.text_light)
+                                    )
+                                }
+
+                                when {
+                                    item.data is UserInfoShort -> {
+                                        UserActionItem(
+                                            isLoading = false,
+                                            item = item.data as UserInfoShort,
+                                            onClick = {
+                                                scope.launch {
+                                                    selectedUserId.value =
+                                                        (item.data as UserInfoShort).id
+                                                    profileDetailSheetState.show()
+                                                }
+                                            }
                                         )
-                                        .padding(vertical = 4.dp, horizontal = 20.dp),
-                                    text = item.description!!.toString(LocalContext.current),
-                                    style = MaterialTheme.typography.labelMedium,
-                                    color = colorResource(resource = SharedR.colors.text_light)
-                                )
-                            }
+                                    }
 
-                            when {
-                                item.data is UserInfoShort -> {
-                                    UserActionItem(
-                                        isLoading = false,
-                                        item = item.data as UserInfoShort,
-                                        onClick = {
-                                            scope.launch {
-                                                selectedUserId.value =
-                                                    (item.data as UserInfoShort).id
-                                                profileDetailSheetState.show()
+                                    item.data is Comment && item.relatedData is Note -> {
+                                        NoteActionItem(
+                                            item = item.relatedData as Note,
+                                            comment = item.data as Comment,
+                                            onClick = {
+                                                viewModel.dispatch(CalendarsAction.NoteClick(it))
+                                            },
+                                            onLikeClick = {
+
                                             }
-                                        }
-                                    )
-                                }
+                                        )
+                                    }
 
-                                item.data is Comment && item.relatedData is Note -> {
-                                    NoteActionItem(
-                                        item = item.relatedData as Note,
-                                        comment = item.data as Comment,
-                                        onClick = {
-                                            viewModel.dispatch(CalendarsAction.NoteClick(it))
-                                        },
-                                        onLikeClick = {
+                                    item.data is SubNote && item.relatedData is Note -> {
+                                        NoteActionItem(
+                                            item = item.relatedData as Note,
+                                            subGoalText = (item.data as SubNote).text,
+                                            onClick = {
+                                                viewModel.dispatch(CalendarsAction.NoteClick(it))
+                                            },
+                                            onLikeClick = {
 
-                                        }
-                                    )
-                                }
-
-                                item.data is SubNote && item.relatedData is Note -> {
-                                    NoteActionItem(
-                                        item = item.relatedData as Note,
-                                        subGoalText = (item.data as SubNote).text,
-                                        onClick = {
-                                            viewModel.dispatch(CalendarsAction.NoteClick(it))
-                                        },
-                                        onLikeClick = {
-
-                                        }
-                                    )
-                                }
-
-                                item.data is Area -> {
-                                    AreaActionItem(
-                                        item = item.data as Area,
-                                        onClick = {
-                                            scope.launch {
-                                                selectedAreaId.value = (item.data as Area).id
-                                                areaDetailSheetState.show()
                                             }
-                                        },
-                                        onLikeClick = {
+                                        )
+                                    }
 
-                                        }
-                                    )
-                                }
+                                    item.data is Area -> {
+                                        AreaActionItem(
+                                            item = item.data as Area,
+                                            onClick = {
+                                                scope.launch {
+                                                    selectedAreaId.value = (item.data as Area).id
+                                                    areaDetailSheetState.show()
+                                                }
+                                            },
+                                            onLikeClick = {
 
-                                item.data is Note -> {
-                                    NoteActionItem(
-                                        item = item.data as Note,
-                                        onClick = {
-                                            viewModel.dispatch(CalendarsAction.NoteClick(it))
-                                        },
-                                        onLikeClick = {
-
-                                        }
-                                    )
-                                }
-
-                                item.relatedData is Area -> {
-                                    AreaActionItem(
-                                        item = item.relatedData as Area,
-                                        onClick = {
-                                            scope.launch {
-                                                selectedAreaId.value = (item.relatedData as Area).id
-                                                areaDetailSheetState.show()
                                             }
-                                        },
-                                        onLikeClick = {
+                                        )
+                                    }
 
-                                        }
-                                    )
-                                }
+                                    item.data is Note -> {
+                                        NoteActionItem(
+                                            item = item.data as Note,
+                                            onClick = {
+                                                viewModel.dispatch(CalendarsAction.NoteClick(it))
+                                            },
+                                            onLikeClick = {
 
-                                item.relatedData is Note -> {
-                                    NoteActionItem(
-                                        item = item.relatedData as Note,
-                                        onClick = {
-                                            viewModel.dispatch(CalendarsAction.NoteClick(it))
-                                        },
-                                        onLikeClick = {
+                                            }
+                                        )
+                                    }
 
-                                        }
-                                    )
+                                    item.relatedData is Area -> {
+                                        AreaActionItem(
+                                            item = item.relatedData as Area,
+                                            onClick = {
+                                                scope.launch {
+                                                    selectedAreaId.value =
+                                                        (item.relatedData as Area).id
+                                                    areaDetailSheetState.show()
+                                                }
+                                            },
+                                            onLikeClick = {
+
+                                            }
+                                        )
+                                    }
+
+                                    item.relatedData is Note -> {
+                                        NoteActionItem(
+                                            item = item.relatedData as Note,
+                                            onClick = {
+                                                viewModel.dispatch(CalendarsAction.NoteClick(it))
+                                            },
+                                            onLikeClick = {
+
+                                            }
+                                        )
+                                    }
                                 }
                             }
                         }
                     }
+
+                    Box(
+                        modifier = modifier
+                            .height(30.dp)
+                            .fillMaxWidth()
+                            .background(
+                                brush = Brush.verticalGradient(
+                                    colors = listOf(
+                                        colorResource(resource = SharedR.colors.main_background),
+                                        colorResource(resource = SharedR.colors.main_background)
+                                            .copy(alpha = 0.7f),
+                                        Color.Transparent,
+                                    ),
+                                ),
+                            )
+                    )
                 }
             }
         }
