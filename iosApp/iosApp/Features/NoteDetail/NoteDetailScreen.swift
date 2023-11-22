@@ -244,6 +244,7 @@ struct NoteDetailScreen : View {
             } message: {
                 Text(SharedR.strings().note_detail_confirm_delete_text.desc().localized())
             }
+        
             .sheet(isPresented: $showingAreaDetailSheet) {
                 AreaDetailScreen(
                     areaId: $selectedAreaId,

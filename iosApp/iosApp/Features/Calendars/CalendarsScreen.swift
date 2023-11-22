@@ -22,6 +22,12 @@ struct CalendarsScreen: View {
     @StateViewModel var viewModel: CalendarsViewModel
     @State private var scrollTarget: Int64?
     
+    @State private var selectedAreaId: Int32? = nil
+    @State private var selectedUserId: String? = nil
+    
+    @State private var showingAreaDetailSheet = false
+    @State private var showingProfileDetailSheet = false
+    
     var body: some View {
         @State var state = viewModel.viewStateValue as! CalendarsViewState
         
@@ -102,13 +108,15 @@ struct CalendarsScreen: View {
                                     ActionItem(
                                         item: wrapper.item,
                                         onAreaClick: { value in
-                                            
+                                            selectedAreaId = value
+                                            showingAreaDetailSheet = true
                                         },
                                         onNoteClick: { value in
                                             viewModel.dispatch(action: CalendarsActionNoteClick(value: value))
                                         },
                                         onUserClick: {
-                                            
+                                            selectedUserId = (wrapper.item.data as! UserInfoShort).id
+                                            showingProfileDetailSheet = true
                                         }
                                     )
                                 }
@@ -123,6 +131,20 @@ struct CalendarsScreen: View {
             
         }
         .frame(maxHeight: .infinity)
+        .sheet(isPresented: $showingAreaDetailSheet) {
+            AreaDetailScreen(
+                areaId: $selectedAreaId,
+                onClose: {
+                    showingAreaDetailSheet = false
+                },
+                onAreaChanged: { areaId in
+//                    viewModel.dispatch(action: NoteDetailActionAreaChanged())
+                }
+            )
+        }
+        .sheet(isPresented: $showingProfileDetailSheet) {
+            ProfileDetailScreen(userId: $selectedUserId)
+        }
         
     }
 }
