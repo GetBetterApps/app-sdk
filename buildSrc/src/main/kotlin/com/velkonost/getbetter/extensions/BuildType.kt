@@ -16,7 +16,7 @@ internal object BuildTypeDebug : BuildType {
 }
 
 internal object BuildTypeRelease : BuildType {
-    override val isMinifyEnabled = true
+    override val isMinifyEnabled = false
     override val enableUnitTestCoverage = false
     override val enableAndroidTestCoverage = false
 }
