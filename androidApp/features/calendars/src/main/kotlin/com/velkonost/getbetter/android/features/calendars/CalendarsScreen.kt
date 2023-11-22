@@ -17,12 +17,17 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
@@ -32,9 +37,11 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.velkonost.getbetter.android.features.areadetail.AreaDetailScreen
 import com.velkonost.getbetter.android.features.calendars.components.AreaActionItem
 import com.velkonost.getbetter.android.features.calendars.components.NoteActionItem
 import com.velkonost.getbetter.android.features.calendars.components.UserActionItem
+import com.velkonost.getbetter.android.features.profiledetail.ProfileDetailScreen
 import com.velkonost.getbetter.core.compose.extensions.fadingEdge
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.comments.Comment
@@ -46,18 +53,33 @@ import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.DateUIItem
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import java.util.Locale
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CalendarsScreen(
     modifier: Modifier = Modifier,
-    viewModel: CalendarsViewModel
+    viewModel: CalendarsViewModel,
+    forceHideBottomBar: MutableState<Boolean> = mutableStateOf(false)
 ) {
     val state by viewModel.viewState.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
 
     val listState = rememberLazyListState()
+
+    val areaDetailSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = true
+    )
+    val profileDetailSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = true
+    )
+
+    val selectedAreaId = remember { mutableStateOf<Int?>(null) }
+    val selectedUserId = remember { mutableStateOf<String?>(null) }
 
     Column(
         modifier = modifier.padding(top = 40.dp)
@@ -138,7 +160,10 @@ fun CalendarsScreen(
                                     isLoading = false,
                                     item = item.data as UserInfoShort,
                                     onClick = {
-
+                                        scope.launch {
+                                            selectedUserId.value = (item.data as UserInfoShort).id
+                                            profileDetailSheetState.show()
+                                        }
                                     }
                                 )
                             }
@@ -173,7 +198,10 @@ fun CalendarsScreen(
                                 AreaActionItem(
                                     item = item.data as Area,
                                     onClick = {
-
+                                        scope.launch {
+                                            selectedAreaId.value = (item.data as Area).id
+                                            areaDetailSheetState.show()
+                                        }
                                     },
                                     onLikeClick = {
 
@@ -197,7 +225,10 @@ fun CalendarsScreen(
                                 AreaActionItem(
                                     item = item.relatedData as Area,
                                     onClick = {
-
+                                        scope.launch {
+                                            selectedAreaId.value = (item.relatedData as Area).id
+                                            areaDetailSheetState.show()
+                                        }
                                     },
                                     onLikeClick = {
 
@@ -236,6 +267,33 @@ fun CalendarsScreen(
         isLoadingRight = state.datesState.isNextLoading,
         onLoadMoreRight = { viewModel.dispatch(CalendarsAction.LoadMoreNextDates) },
     )
+
+    AreaDetailScreen(
+        modalSheetState = areaDetailSheetState,
+        areaId = selectedAreaId.value,
+        onAreaChanged = {
+//            viewModel.dispatch(NoteDetailAction.AreaChanged)
+        }
+    )
+
+    ProfileDetailScreen(
+        modalSheetState = profileDetailSheetState,
+        userId = selectedUserId.value
+    )
+
+    LaunchedEffect(Unit) {
+        combine(
+            snapshotFlow { profileDetailSheetState.currentValue },
+            snapshotFlow { areaDetailSheetState.currentValue },
+        ) { profileDetailState, areaDetailState ->
+            val hideBottomBar =
+                profileDetailState != ModalBottomSheetValue.Hidden
+                        || areaDetailState != ModalBottomSheetValue.Hidden
+            hideBottomBar
+        }.collect {
+            forceHideBottomBar.value = it
+        }
+    }
 
 }
 

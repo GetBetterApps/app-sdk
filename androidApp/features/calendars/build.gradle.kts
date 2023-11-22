@@ -19,4 +19,7 @@ dependencies {
     implementation(projects.shared.features.calendars.presentation)
 
     implementation(projects.androidApp.core.compose)
+    implementation(projects.androidApp.features.notedetail)
+    implementation(projects.androidApp.features.areadetail)
+    implementation(projects.androidApp.features.profiledetail)
 }
