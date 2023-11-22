@@ -243,7 +243,6 @@ internal constructor(
                                                 id = item.datetime,
                                                 description = StringDesc.Resource(SharedR.strings.action_user_created_like)
                                             )
-
                                         } else {
                                             ActionUIItem<Note, UserInfoShort>(
                                                 dayId = value,
@@ -257,12 +256,15 @@ internal constructor(
                                             )
                                         }
                                     )
+
                                     getActionDetails(
                                         dayId = value,
                                         actionId = item.datetime,
                                         entityId = item.entityId,
-                                        entityType = item.parentEntityType!!,
-                                        type = item.type!!
+                                        entityType = item.entityType,
+                                        type = item.type!!,
+                                        parentEntityId = item.parentId,
+                                        parentEntityType = item.parentEntityType
                                     )
                                 }
 
@@ -366,7 +368,6 @@ internal constructor(
         }
     }
 
-
     private fun obtainLoadMore(direction: DateDirection) {
         launchJob {
             calendarsRepository.appendItems(
@@ -441,12 +442,6 @@ internal constructor(
             if (type == UserActionType.UserGotComment && data is Comment) {
                 items[indexOfCurrentItem].description = StringDesc.ResourceFormatted(
                     SharedR.strings.action_user_got_comment, data.author.displayName ?: ""
-                )
-            }
-
-            if (type == UserActionType.UserGotLike && data is Note) {
-                items[indexOfCurrentItem].description = StringDesc.ResourceFormatted(
-                    SharedR.strings.action_user_got_like, data.author?.displayName ?: ""
                 )
             }
 
