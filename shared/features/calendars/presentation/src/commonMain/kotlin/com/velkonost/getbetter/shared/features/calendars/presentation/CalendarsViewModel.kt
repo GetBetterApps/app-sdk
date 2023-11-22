@@ -32,6 +32,7 @@ import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.ResourceFormatted
 import dev.icerock.moko.resources.desc.StringDesc
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlin.time.Duration.Companion.seconds
@@ -50,6 +51,8 @@ internal constructor(
     private var _dates: MutableStateFlow<List<DateItem>> = MutableStateFlow(emptyList())
     private var _datesData: MutableStateFlow<MutableMap<Long, List<ActionUIItem<*, *>>>> =
         MutableStateFlow(mutableMapOf())
+
+    private var fetchDateItemsJob: Job? = null
 
     init {
         initItems()
@@ -147,7 +150,8 @@ internal constructor(
     }
 
     private fun getItemsForDay(value: Long) {
-        launchJob {
+        fetchDateItemsJob?.cancel()
+        fetchDateItemsJob = launchJob {
             delay(1.seconds)
 
             calendarsRepository.getDateItems(value) collectAndProcess {
