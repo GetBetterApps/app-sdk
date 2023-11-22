@@ -469,9 +469,12 @@ internal constructor(
             && indexOfCurrentItem != null && indexOfCurrentItem != -1
         ) {
 
+            val itemData = currentItem.data
+            val itemRelatedData = currentItem.relatedData
+
             items[indexOfCurrentItem] = currentItem.copy(
-                data = data,
-                relatedData = relatedData
+                data = data ?: itemData,
+                relatedData = relatedData ?: itemRelatedData
             )
 
             if (type == UserActionType.UserGotComment && data is Comment) {

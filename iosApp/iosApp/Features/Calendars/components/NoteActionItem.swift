@@ -76,13 +76,13 @@ struct NoteActionItem: View {
                 )
                 .padding(.top, 12)
                 
-//                if comment != nil {
-//                    CommentItem
-//                }
-//                
-//                if subGoalText != nil {
-//                    SubGoalItem
-//                }
+                if comment != nil {
+                    CommentItem
+                }
+                
+                if subGoalText != nil {
+                    SubGoalItem
+                }
             }
         }
         .onTapGesture {
@@ -123,12 +123,13 @@ extension NoteActionItem {
             Text(comment!.text)
                 .style(.bodySmall)
                 .foregroundColor(.textLight)
-                .padding(.leading, 6)
+                .padding(6)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
                         .fill(Color.buttonGradientStart)
                 )
-                .padding(6)
+                .padding(.leading, 6)
+                
             
             Spacer()
         }

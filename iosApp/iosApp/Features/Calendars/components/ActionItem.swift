@@ -61,8 +61,8 @@ struct ActionItem: View {
             } else if item.relatedData is Note {
                 NoteActionItem(
                     item: (item.relatedData as! Note),
-//                    comment: item.data is Comment ? item.data as? Comment : nil,
-//                    subGoalText: item.data is SubNote ? (item.data as! SubNote).text : nil,
+                    comment: item.data is Comment ? item.data as? Comment : nil,
+                    subGoalText: item.data is SubNote ? (item.data as! SubNote).text : nil,
                     onClick: onNoteClick,
                     onLikeClick: { value in
                         
