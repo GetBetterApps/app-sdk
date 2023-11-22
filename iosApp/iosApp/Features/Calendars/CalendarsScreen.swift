@@ -103,7 +103,8 @@ struct CalendarsScreen: View {
                         ScrollView(showsIndicators: false) {
                             LazyVStack {
                                 ForEach(
-                                    state.datesState.selectedDate!.items.map { ActionUIItemWrapper(item: $0) }
+                                    state.datesState.selectedDate!.items.map { ActionUIItemWrapper(item: $0) },
+                                    id: \.self.id
                                 ) { wrapper in
                                     ActionItem(
                                         item: wrapper.item,
@@ -122,6 +123,7 @@ struct CalendarsScreen: View {
                                 }
                                 Spacer().frame(height: 160)
                             }
+                            
                             .padding(.horizontal, 20)
                         }.fadingEdge()
                     }
@@ -138,7 +140,7 @@ struct CalendarsScreen: View {
                     showingAreaDetailSheet = false
                 },
                 onAreaChanged: { areaId in
-//                    viewModel.dispatch(action: NoteDetailActionAreaChanged())
+                    //                    viewModel.dispatch(action: NoteDetailActionAreaChanged())
                 }
             )
         }
