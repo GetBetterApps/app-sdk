@@ -442,8 +442,7 @@ internal constructor(
         type: UserActionType
     ) {
         val items = _datesData.value[dayId]?.toMutableList()
-        val currentItem = items
-            ?.firstOrNull { item -> item.id == actionId }
+        val currentItem = items?.firstOrNull { item -> item.id == actionId }
         val indexOfCurrentItem = items?.indexOfFirst { item ->
             item.id == actionId
         }
@@ -452,13 +451,11 @@ internal constructor(
             items != null && currentItem != null
             && indexOfCurrentItem != null && indexOfCurrentItem != -1
         ) {
-            data?.let {
-                items[indexOfCurrentItem] = currentItem.copy(data = data)
-            }
 
-            relatedData?.let {
-                items[indexOfCurrentItem] = currentItem.copy(relatedData = relatedData)
-            }
+            items[indexOfCurrentItem] = currentItem.copy(
+                data = data,
+                relatedData = relatedData
+            )
 
             if (type == UserActionType.UserGotComment && data is Comment) {
                 items[indexOfCurrentItem].description = StringDesc.ResourceFormatted(
@@ -473,6 +470,7 @@ internal constructor(
             }
 
             _datesData.value[dayId] = items
+
             if (viewState.value.datesState.selectedDate?.id == dayId) {
                 val selectedDate = viewState.value.datesState.selectedDate?.copy(
                     items = items

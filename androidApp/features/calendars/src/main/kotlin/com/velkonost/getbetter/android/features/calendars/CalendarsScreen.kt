@@ -38,6 +38,7 @@ import com.velkonost.getbetter.core.compose.extensions.fadingEdge
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.comments.Comment
 import com.velkonost.getbetter.shared.core.model.note.Note
+import com.velkonost.getbetter.shared.core.model.note.SubNote
 import com.velkonost.getbetter.shared.features.calendars.presentation.CalendarsViewModel
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsAction
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.DateUIItem
@@ -134,6 +135,19 @@ fun CalendarsScreen(
                                 NoteActionItem(
                                     item = item.relatedData as Note,
                                     comment = item.data as Comment,
+                                    onClick = {
+
+                                    },
+                                    onLikeClick = {
+
+                                    }
+                                )
+                            }
+
+                            item.data is SubNote && item.relatedData is Note -> {
+                                NoteActionItem(
+                                    item = item.relatedData as Note,
+                                    subGoalText = (item.data as SubNote).text,
                                     onClick = {
 
                                     },

@@ -46,6 +46,7 @@ fun NoteActionItem(
     modifier: Modifier = Modifier,
     item: Note,
     comment: Comment? = null,
+    subGoalText: String? = null,
     onClick: (Note) -> Unit,
     onLikeClick: (Note) -> Unit
 ) {
@@ -122,6 +123,10 @@ fun NoteActionItem(
                 CommentItem(item = comment)
             }
 
+            subGoalText?.let {
+                SubGoalItem(text = subGoalText)
+            }
+
         }
     }
 }
@@ -170,4 +175,24 @@ fun CommentItem(
             color = colorResource(resource = SharedR.colors.text_light)
         )
     }
+}
+
+@Composable
+fun SubGoalItem(
+    modifier: Modifier = Modifier,
+    text: String
+) {
+    Text(
+        modifier = modifier
+            .padding(top = 12.dp)
+            .fillMaxWidth()
+            .background(
+                color = colorResource(resource = SharedR.colors.button_gradient_start),
+                shape = MaterialTheme.shapes.small
+            )
+            .padding(6.dp),
+        text = text,
+        style = MaterialTheme.typography.bodySmall,
+        color = colorResource(resource = SharedR.colors.text_light)
+    )
 }
