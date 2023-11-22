@@ -46,7 +46,8 @@ internal constructor(
 ) {
 
     private var _dates: MutableStateFlow<List<DateItem>> = MutableStateFlow(emptyList())
-    private var _datesData: MutableMap<Long, List<ActionUIItem<*, *>>> = mutableMapOf()
+    private var _datesData: MutableStateFlow<MutableMap<Long, List<ActionUIItem<*, *>>>> =
+        MutableStateFlow(mutableMapOf())
 
     init {
         initItems()
@@ -75,9 +76,26 @@ internal constructor(
                         isNextLoading = false,
                         isPreviousLoading = false
                     )
+
+                    getItemsForDay(dateMillis)
                 }
 
                 emit(viewState.value.copy(datesState = datesState))
+            }
+        }
+
+        launchJob {
+            _datesData.collect { data ->
+                val selectedDate = viewState.value.datesState.selectedDate
+                selectedDate?.let {
+                    if (data.containsKey(selectedDate.id)) {
+                        val items = data[selectedDate.id]!!
+                        selectedDate.items = items
+
+                        val datesState = viewState.value.datesState.copy(selectedDate = it)
+                        emit(viewState.value.copy(datesState = datesState))
+                    }
+                }
             }
         }
     }
@@ -109,6 +127,9 @@ internal constructor(
                 year = dateId.convertToYear(),
                 monthDay = dateId.convertToMonthDay()
             )
+
+            getItemsForDay(dateId)
+
             val datesState = viewState.value.datesState.copy(selectedDate = selectedDate)
             emit(viewState.value.copy(datesState = datesState))
         }
@@ -294,7 +315,7 @@ internal constructor(
                             }
                         }
 
-                        _datesData[value] = selectedDateItems
+                        _datesData.value[value] = selectedDateItems
 
                     }
                 }
@@ -389,7 +410,7 @@ internal constructor(
     }
 
     private fun updateItemLoadingState(dayId: Long, itemId: Long, isLoading: Boolean) {
-        val items = _datesData[dayId]?.toMutableList()
+        val items = _datesData.value[dayId]?.toMutableList()
         val currentItem = items?.firstOrNull { item -> item.id == itemId }
         val indexOfCurrentItem = items?.indexOfFirst { item ->
             item.id == itemId
@@ -420,7 +441,7 @@ internal constructor(
         relatedData: S? = null,
         type: UserActionType
     ) {
-        val items = _datesData[dayId]?.toMutableList()
+        val items = _datesData.value[dayId]?.toMutableList()
         val currentItem = items
             ?.firstOrNull { item -> item.id == actionId }
         val indexOfCurrentItem = items?.indexOfFirst { item ->
@@ -451,6 +472,7 @@ internal constructor(
                 )
             }
 
+            _datesData.value[dayId] = items
             if (viewState.value.datesState.selectedDate?.id == dayId) {
                 val selectedDate = viewState.value.datesState.selectedDate?.copy(
                     items = items

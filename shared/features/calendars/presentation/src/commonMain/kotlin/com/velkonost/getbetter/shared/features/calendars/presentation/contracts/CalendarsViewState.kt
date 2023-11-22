@@ -21,7 +21,7 @@ data class SelectedDate(
     val year: StringDesc,
     val monthDay: StringDesc,
     val isLoading: Boolean = false,
-    val items: List<ActionUIItem<*, *>> = emptyList()
+    var items: List<ActionUIItem<*, *>> = emptyList()
 )
 
 data class DateUIItem(

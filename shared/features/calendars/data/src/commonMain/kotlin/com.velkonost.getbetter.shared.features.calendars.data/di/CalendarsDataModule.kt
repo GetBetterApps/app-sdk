@@ -9,6 +9,6 @@ val CalendarsDataModule = module {
     single { CalendarsRemoteDataSource(get()) }
 
     single<CalendarsRepository> {
-        CalendarsRepositoryImpl(get())
+        CalendarsRepositoryImpl(get(), get())
     }
 }
