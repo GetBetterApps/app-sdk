@@ -225,6 +225,7 @@
 
     <string name="action_user_created_like">You liked</string>
     <string name="action_user_got_like">%s add like</string>
+    <string name="action_user_got_like_anonymous">+1 new like</string>
 
     <string name="action_user_followed">You followed</string>
     <string name="action_user_got_follower">%s follows you</string>

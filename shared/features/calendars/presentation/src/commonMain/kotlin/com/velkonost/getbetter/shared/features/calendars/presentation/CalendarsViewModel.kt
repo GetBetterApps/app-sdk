@@ -5,6 +5,7 @@ import com.velkonost.getbetter.shared.core.model.EntityType
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.comments.Comment
 import com.velkonost.getbetter.shared.core.model.note.Note
+import com.velkonost.getbetter.shared.core.model.note.SubNote
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDay
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDayOfWeek
@@ -188,7 +189,22 @@ internal constructor(
                                 }
 
                                 is UserActionType.UserCompletedSubGoal -> {
-                                    // ???
+                                    selectedDateItems.add(
+                                        ActionUIItem<SubNote, Note>(
+                                            dayId = value,
+                                            id = item.datetime,
+                                            description = StringDesc.Resource(SharedR.strings.action_user_completed_subgoal)
+                                        )
+                                    )
+                                    getActionDetails(
+                                        dayId = value,
+                                        type = item.type!!,
+                                        actionId = item.datetime,
+                                        entityType = EntityType.SubGoal,
+                                        entityId = item.entityId,
+                                        parentEntityId = item.parentId,
+                                        parentEntityType = item.parentEntityType!!
+                                    )
                                 }
 
                                 is UserActionType.UserCreatedComment,
@@ -202,7 +218,7 @@ internal constructor(
                                                     SharedR.strings.action_user_created_comment
                                                 )
 
-                                                else -> //need user name + entity name
+                                                else -> null
                                             }
                                         )
                                     )
@@ -215,25 +231,29 @@ internal constructor(
                                         parentEntityType = item.parentEntityType,
                                         type = item.type!!
                                     )
-
-                                    // user got comment - fetch user info
                                 }
 
                                 is UserActionType.UserCreatedLike,
                                 is UserActionType.UserGotLike -> {
-                                    // fetch entity(area or note)
-                                    // fetch userinfo on gotlike
+
                                     selectedDateItems.add(
                                         if (item.parentEntityType == EntityType.Area) {
                                             ActionUIItem<Area, UserInfoShort>(
                                                 dayId = value,
-                                                id = item.datetime
+                                                id = item.datetime,
+                                                description = StringDesc.Resource(SharedR.strings.action_user_created_like)
                                             )
 
                                         } else {
                                             ActionUIItem<Note, UserInfoShort>(
                                                 dayId = value,
-                                                id = item.datetime
+                                                id = item.datetime,
+                                                description = StringDesc.Resource(
+                                                    when (item.type) {
+                                                        is UserActionType.UserCreatedLike -> SharedR.strings.action_user_created_like
+                                                        else -> SharedR.strings.action_user_got_like_anonymous
+                                                    }
+                                                )
                                             )
                                         }
                                     )
@@ -252,7 +272,8 @@ internal constructor(
                                     selectedDateItems.add(
                                         ActionUIItem<UserInfoShort, Nothing>(
                                             dayId = value,
-                                            id = item.datetime
+                                            id = item.datetime,
+                                            description = StringDesc.Resource(SharedR.strings.action_user_followed)
                                         )
                                     )
                                     getActionDetails(
@@ -286,10 +307,44 @@ internal constructor(
         entityType: EntityType,
         parentEntityId: String? = null,
         parentEntityType: EntityType? = null,
-        otherUserId: String? = null,
         type: UserActionType
     ) {
         launchJob {
+            parentEntityId?.let {
+                val parentRequest = when (parentEntityType) {
+                    EntityType.Area -> areasRepository.fetchAreaDetails(entityId.toInt())
+                    EntityType.Note -> notesRepository.getNoteDetails(entityId.toInt())
+                    EntityType.Comment -> commentsRepository.getComment(entityId.toInt())
+                    EntityType.User -> userInfoRepository.fetchInfoAboutOtherUser(entityId)
+                    else -> return@launchJob
+                }
+                parentRequest collectAndProcess {
+                    isLoading {
+                        updateItemLoadingState(dayId, actionId, it)
+                    }
+                    onSuccess { item ->
+                        item?.let {
+                            if (type == UserActionType.UserCompletedSubGoal && item is Note) {
+                                updateItemData(
+                                    dayId,
+                                    actionId,
+                                    type = type,
+                                    data = item.subNotes.first { it.id == entityId.toInt() },
+                                    relatedData = item
+                                )
+                            } else {
+                                updateItemData<Any, Any>(
+                                    dayId,
+                                    actionId,
+                                    type = type,
+                                    relatedData = it
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
             val request = when (entityType) {
                 EntityType.Area -> areasRepository.fetchAreaDetails(entityId.toInt())
                 EntityType.Note -> notesRepository.getNoteDetails(entityId.toInt())
@@ -308,50 +363,6 @@ internal constructor(
                     }
                 }
             }
-
-            parentEntityId?.let {
-                val parentRequest = when (parentEntityType) {
-                    EntityType.Area -> areasRepository.fetchAreaDetails(entityId.toInt())
-                    EntityType.Note -> notesRepository.getNoteDetails(entityId.toInt())
-                    EntityType.Comment -> commentsRepository.getComment(entityId.toInt())
-                    EntityType.User -> userInfoRepository.fetchInfoAboutOtherUser(entityId)
-                    else -> return@launchJob
-                }
-                parentRequest collectAndProcess {
-                    isLoading {
-                        updateItemLoadingState(dayId, actionId, it)
-                    }
-                    onSuccess { item ->
-                        item?.let {
-                            updateItemData<Any, Any>(
-                                dayId,
-                                actionId,
-                                type = type,
-                                relatedData = it
-                            )
-                        }
-                    }
-                }
-            }
-
-            otherUserId?.let {
-                userInfoRepository.fetchInfoAboutOtherUser(otherUserId) collectAndProcess {
-                    isLoading {
-                        updateItemLoadingState(dayId, actionId, it)
-                    }
-                    onSuccess { item ->
-                        item?.let {
-                            updateItemData<Any, Any>(
-                                dayId,
-                                actionId,
-                                type = type,
-                                userInfo = it
-                            )
-                        }
-                    }
-                }
-            }
-
         }
     }
 
@@ -406,7 +417,6 @@ internal constructor(
         actionId: Long,
         data: T? = null,
         relatedData: S? = null,
-        userInfo: UserInfoShort? = null,
         type: UserActionType
     ) {
         val items = _datesData[dayId]?.toMutableList()
@@ -428,13 +438,21 @@ internal constructor(
                 items[indexOfCurrentItem] = currentItem.copy(relatedData = relatedData)
             }
 
-            userInfo?.let {
-                items[indexOfCurrentItem] = currentItem.copy(otherUserInfo = userInfo)
-            }
-
             if (type == UserActionType.UserGotComment && data is Comment) {
                 items[indexOfCurrentItem].description = StringDesc.ResourceFormatted(
                     SharedR.strings.action_user_got_comment, data.author.displayName ?: ""
+                )
+            }
+
+            if (type == UserActionType.UserGotLike && data is Note) {
+                items[indexOfCurrentItem].description = StringDesc.ResourceFormatted(
+                    SharedR.strings.action_user_got_like, data.author?.displayName ?: ""
+                )
+            }
+
+            if (type == UserActionType.UserGotFollower && data is UserInfoShort) {
+                items[indexOfCurrentItem].description = StringDesc.ResourceFormatted(
+                    SharedR.strings.action_user_got_follower, data.displayName ?: ""
                 )
             }
 
