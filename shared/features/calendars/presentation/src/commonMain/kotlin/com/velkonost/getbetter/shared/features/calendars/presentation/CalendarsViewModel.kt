@@ -129,7 +129,7 @@ internal constructor(
                 monthDay = dateId.convertToMonthDay()
             )
 
-            getItemsForDay(dateId)
+            launchJob { getItemsForDay(dateId) }
 
             val datesState = viewState.value.datesState.copy(selectedDate = selectedDate)
             emit(viewState.value.copy(datesState = datesState))

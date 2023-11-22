@@ -39,7 +39,12 @@ fun UserActionItem(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
-    PrimaryBox(padding = 0) {
+    PrimaryBox(
+        modifier = modifier
+            .padding(start = 20.dp, end = 20.dp),
+        padding = 0,
+        topPadding = 0
+    ) {
         AnimatedContent(targetState = isLoading, label = "") {
             Row(
                 modifier = modifier
