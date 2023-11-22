@@ -36,5 +36,5 @@ data class ActionUIItem<out T, out S : Any?>(
     val isLoading: Boolean = true,
     val description: StringDesc? = null,
     val data: T? = null,
-    val parentData: S? = null
+    val relatedData: S? = null
 )

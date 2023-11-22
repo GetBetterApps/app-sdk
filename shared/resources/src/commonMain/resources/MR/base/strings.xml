@@ -207,6 +207,28 @@
     <string name="social_areas_feed_title">For You</string>
     <!--  SOCIAL  -->
 
+    <!--  CALENDARS  -->
+    <string name="action_user_registered">You joined to GetBetter!</string>
+    <string name="action_user_created_area">You created an area!</string>
+    <string name="action_user_joined_area">You joined an area!</string>
+    <string name="action_user_leaved_area">You leaved an area!</string>
+
+    <string name="action_user_created_note">You created note!</string>
+    <string name="action_user_create_goal">You crated goal!</string>
+
+    <string name="action_user_completed_goal">You completed the goal!</string>
+    <string name="action_user_completed_subgoal">You completed the subgoal!</string>
+
+    <string name="action_user_created_comment">You created comment</string>
+    <string name="action_user_got_comment">%s created comment in %s</string>
+
+    <string name="action_user_created_like">You liked</string>
+    <string name="action_user_got_like">%s liked %s</string>
+
+    <string name="action_user_followed">You followed</string>
+    <string name="action_user_got_follower">%s follows you</string>
+    <!--  CALENDARS  -->
+
     <!--  SERVER EXCEPTIONS  -->
     <string name="error_default">Something went wrong. Try again</string>
 
