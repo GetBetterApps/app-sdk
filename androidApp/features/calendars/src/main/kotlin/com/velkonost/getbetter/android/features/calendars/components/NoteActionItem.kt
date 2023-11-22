@@ -154,7 +154,7 @@ fun CommentItem(
                 error = {
                     Image(
                         modifier = modifier
-                            .size(32.dp)
+                            .size(28.dp)
                             .clip(MaterialTheme.shapes.small),
                         painter = painterResource(imageResource = SharedR.images.logo),
                         contentDescription = null

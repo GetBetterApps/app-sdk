@@ -14,11 +14,15 @@ import SwiftUIFlow
 struct NoteActionItem: View {
     
     let item: Note
+    let comment: Comment?
+    let subGoalText: String?
     let onClick: (Note) -> Void
     let onLikeClick: (Note) -> Void
     
-    init(item: Note, onClick: @escaping (Note) -> Void, onLikeClick: @escaping (Note) -> Void) {
+    init(item: Note, comment: Comment? = nil, subGoalText: String? = nil, onClick: @escaping (Note) -> Void, onLikeClick: @escaping (Note) -> Void) {
         self.item = item
+        self.comment = comment
+        self.subGoalText = subGoalText
         self.onClick = onClick
         self.onLikeClick = onLikeClick
     }
@@ -72,6 +76,13 @@ struct NoteActionItem: View {
                 )
                 .padding(.top, 12)
                 
+                if comment != nil {
+                    CommentItem
+                }
+                
+                if subGoalText != nil {
+                    SubGoalItem
+                }
             }
         }
         .onTapGesture {
@@ -79,5 +90,71 @@ struct NoteActionItem: View {
             let impactMed = UIImpactFeedbackGenerator(style: .medium)
             impactMed.impactOccurred()
         }
+    }
+}
+
+extension NoteActionItem {
+    var CommentItem: some View {
+        HStack(spacing: 0) {
+            if comment!.author.avatarUrl != nil {
+                AsyncImage(url: URL(string: comment!.author.avatarUrl!)) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 28, height: 28)
+                        .clipped()
+                        .cornerRadius(8)
+                } placeholder: {
+                    Image(uiImage: SharedR.images().logo.toUIImage()!)
+                        .resizable()
+                        .frame(width: 28, height: 28)
+                        .clipped()
+                        .cornerRadius(8)
+                }
+               
+            } else {
+                Image(uiImage: SharedR.images().logo.toUIImage()!)
+                    .resizable()
+                    .frame(width: 28, height: 28)
+                    .clipped()
+                    .cornerRadius(8)
+            }
+            
+            Text(comment!.text)
+                .style(.bodySmall)
+                .foregroundColor(.textLight)
+                .padding(.leading, 6)
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.buttonGradientStart)
+                )
+                .padding(6)
+            
+            Spacer()
+        }
+        .padding(.top, 12)
+    }
+    
+    var SubGoalItem: some View {
+        HStack(spacing: 0) {
+            Image(uiImage: SharedR.images().ic_save.toUIImage()!)
+                .resizable()
+                .renderingMode(.template)
+                .foregroundColor(.textLight)
+                .frame(width: 16, height: 16)
+            
+            Text(subGoalText!)
+                .style(.bodySmall)
+                .foregroundColor(.textLight)
+                .padding(.leading, 6)
+            
+            Spacer()
+        }
+        .padding(.top, 12)
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .fill(Color.buttonGradientStart)
+        )
+        .padding(6)
     }
 }
