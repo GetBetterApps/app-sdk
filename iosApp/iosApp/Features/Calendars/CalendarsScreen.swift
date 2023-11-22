@@ -12,6 +12,11 @@ import SharedSDK
 import KMMViewModelSwiftUI
 import KMPNativeCoroutinesAsync
 
+struct ActionUIItemWrapper : Identifiable, Equatable, Hashable {
+    var id: String = UUID().uuidString
+    var item: ActionUIItem<AnyObject, AnyObject>
+}
+
 struct CalendarsScreen: View {
     
     @StateViewModel var viewModel: CalendarsViewModel
@@ -44,7 +49,6 @@ struct CalendarsScreen: View {
             
             ScrollViewReader { view in
                 ScrollView(.horizontal, showsIndicators: false) {
-                    
                     LazyHStack {
                         Spacer().frame(width: 16)
                         ForEach(state.datesState.items, id: \.self.id) { item in
@@ -80,6 +84,37 @@ struct CalendarsScreen: View {
             }
             .frame(height: 70)
             .padding(.top, 12)
+            
+            if state.datesState.selectedDate != nil {
+                if state.datesState.selectedDate!.isLoading {
+                    ZStack {
+                        Loader()
+                    }
+                } else {
+                    ZStack {
+                        ScrollView(showsIndicators: false) {
+                            LazyVStack {
+                                ForEach(
+                                    state.datesState.selectedDate!.items.map { ActionUIItemWrapper(item: $0) }
+                                ) { wrapper in
+                                    ActionItem(
+                                        item: wrapper.item,
+                                        onAreaClick: { value in
+                                            
+                                        },
+                                        onNoteClick: { value in
+                                            viewModel.dispatch(action: CalendarsActionNoteClick(value: value))
+                                        },
+                                        onUserClick: {
+                                            
+                                        }
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             
             Spacer().frame(maxHeight: .infinity)
         }

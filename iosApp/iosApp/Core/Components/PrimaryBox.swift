@@ -25,7 +25,7 @@ struct PrimaryBox<Content: View>: View {
                 .fill(Color.backgroundItem)
                 .shadow(radius: 8)
         )
-        .padding(.init(top: topPadding, leading: .zero, bottom: .zero, trailing: .zero))
+        .padding(.init(top: CGFloat(topPadding), leading: .zero, bottom: .zero, trailing: .zero))
         
     }
 }

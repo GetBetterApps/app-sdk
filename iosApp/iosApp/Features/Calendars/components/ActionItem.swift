@@ -48,21 +48,25 @@ struct ActionItem: View {
             }
             
             
-            if ((item.data?.isInstance(value: UserInfoShort.self)) != nil) {
+            
+            
+            if item.data is UserInfoShort {
                     UserActionItem(
                         isLoading: false,
                         item: (item.data as! UserInfoShort),
                         onClick: onUserClick
                     )
-            } else if ((item.relatedData?.isInstance(value: Note.self)) != nil) {
+            } else if item.relatedData is Note {
                 NoteActionItem(
-                    item: (item.data as! Note),
+                    item: (item.relatedData as! Note),
+                    comment: item.data is Comment ? item.data as? Comment : nil,
+                    subGoalText: item.data is SubNote ? (item.data as! SubNote).text : nil,
                     onClick: onNoteClick,
                     onLikeClick: { value in
                         
                     }
                 )
-            } else if ((item.data?.isInstance(value: Area.self)) != nil) {
+            } else if item.data is Area {
                 AreaActionItem(
                     item: (item.data as! Area),
                     onClick: onAreaClick,
@@ -70,7 +74,7 @@ struct ActionItem: View {
                         
                     }
                 )
-            } else if ((item.data?.isInstance(value: Note.self)) != nil) {
+            } else if item.data is Note {
                 NoteActionItem(
                     item: (item.data as! Note),
                     onClick: onNoteClick,
@@ -78,7 +82,7 @@ struct ActionItem: View {
                         
                     }
                 )
-            } else if ((item.relatedData?.isInstance(value: Area.self)) != nil) {
+            } else if item.relatedData is Area {
                 AreaActionItem(
                     item: (item.relatedData as! Area),
                     onClick: onAreaClick,
