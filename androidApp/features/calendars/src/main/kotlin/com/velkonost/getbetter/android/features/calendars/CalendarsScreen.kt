@@ -85,13 +85,16 @@ fun CalendarsScreen(
         modifier = modifier.padding(top = 40.dp)
     ) {
 
-        AnimatedContent(targetState = state.datesState.selectedDate, label = "") { selectedDate ->
+        AnimatedContent(
+            targetState = state.datesState.selectedDate?.monthDay,
+            label = ""
+        ) { selectedDate ->
             selectedDate?.let {
                 Column(
                     modifier = modifier.padding(horizontal = 16.dp)
                 ) {
                     Text(
-                        text = it.monthDay.toString(LocalContext.current).replaceFirstChar {
+                        text = it.toString(LocalContext.current).replaceFirstChar {
                             if (it.isLowerCase()) it.titlecase(Locale.getDefault())
                             else it.toString()
                         },
@@ -101,7 +104,8 @@ fun CalendarsScreen(
 
                     Text(
                         modifier = modifier.padding(top = 6.dp),
-                        text = it.year.toString(LocalContext.current),
+                        text = state.datesState.selectedDate?.year?.toString(LocalContext.current)
+                            ?: "",
                         style = MaterialTheme.typography.bodyLarge,
                         color = colorResource(resource = SharedR.colors.text_primary)
                     )

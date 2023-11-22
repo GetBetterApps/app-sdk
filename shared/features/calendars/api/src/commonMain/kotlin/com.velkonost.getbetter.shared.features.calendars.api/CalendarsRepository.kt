@@ -18,4 +18,8 @@ interface CalendarsRepository {
 
     fun getDateItems(startOfDay: Long): Flow<ResultState<List<UserAction>>>
 
+    suspend fun saveUpdatedNoteId(noteId: Int)
+
+    suspend fun getUpdatedNoteId(): Flow<ResultState<Int>>
+
 }

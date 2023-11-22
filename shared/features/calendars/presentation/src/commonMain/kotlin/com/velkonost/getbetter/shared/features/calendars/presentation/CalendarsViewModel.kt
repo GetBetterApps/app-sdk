@@ -32,7 +32,9 @@ import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.ResourceFormatted
 import dev.icerock.moko.resources.desc.StringDesc
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlin.time.Duration.Companion.seconds
 
 class CalendarsViewModel
 internal constructor(
@@ -109,7 +111,7 @@ internal constructor(
 
     private fun obtainNoteClick(value: Note) {
         launchJob {
-//            calendarsRepository.saveUpdatedNoteId(value.id)
+            calendarsRepository.saveUpdatedNoteId(value.id)
             emit(CalendarsNavigation.NavigateToNoteDetail(value))
         }
     }
@@ -146,6 +148,8 @@ internal constructor(
 
     private fun getItemsForDay(value: Long) {
         launchJob {
+            delay(1.seconds)
+
             calendarsRepository.getDateItems(value) collectAndProcess {
                 isLoading {
                     val selectedDate = viewState.value.datesState.selectedDate?.copy(

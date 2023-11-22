@@ -11,6 +11,7 @@ val USER_REGISTRATION_MILLIS = longPreferencesKey("user_registration_millis")
 
 val UPDATED_NOTE_ID = intPreferencesKey("updated_note_id")
 val SOCIAL_UPDATED_NOTE_ID = intPreferencesKey("social_updated_note_id")
+val CALENDARS_UPDATED_NOTE_ID = intPreferencesKey("calendars_updated_note_id")
 
 val NEW_USER_RESET_AUTH_STATE = booleanPreferencesKey("new_user_reset_auth_state")
 val NEW_USER_RESET_SOCIAL_STATE = booleanPreferencesKey("new_user_reset_social_state")

@@ -2,6 +2,8 @@ package com.velkonost.getbetter.shared.features.calendars.data
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import com.velkonost.getbetter.shared.core.datastore.CALENDARS_UPDATED_NOTE_ID
 import com.velkonost.getbetter.shared.core.datastore.USER_REGISTRATION_MILLIS
 import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
 import com.velkonost.getbetter.shared.core.model.user.UserAction
@@ -85,5 +87,20 @@ class CalendarsRepositoryImpl(
         }
 
         return items.toList()
+    }
+
+    override suspend fun saveUpdatedNoteId(noteId: Int) {
+        localDataSource.edit { preferences ->
+            preferences[CALENDARS_UPDATED_NOTE_ID] = noteId
+        }
+    }
+
+    override suspend fun getUpdatedNoteId(): Flow<ResultState<Int>> = flowLocalRequest {
+        val noteId = localDataSource.data.first()[CALENDARS_UPDATED_NOTE_ID]
+        localDataSource.edit { preferences ->
+            preferences.remove(CALENDARS_UPDATED_NOTE_ID)
+        }
+
+        noteId!!
     }
 }
