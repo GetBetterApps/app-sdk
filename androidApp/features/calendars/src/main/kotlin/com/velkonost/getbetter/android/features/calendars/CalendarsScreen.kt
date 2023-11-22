@@ -118,9 +118,9 @@ fun CalendarsScreen(
                                         color = colorResource(resource = SharedR.colors.button_gradient_start),
                                         shape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)
                                     )
-                                    .padding(vertical = 4.dp, horizontal = 8.dp),
+                                    .padding(vertical = 4.dp, horizontal = 20.dp),
                                 text = item.description!!.toString(LocalContext.current),
-                                style = MaterialTheme.typography.bodyMedium,
+                                style = MaterialTheme.typography.labelMedium,
                                 color = colorResource(resource = SharedR.colors.text_light)
                             )
                         }
@@ -146,6 +146,30 @@ fun CalendarsScreen(
                                 }
                             )
                         }
+
+                        if (item.relatedData is Area) {
+                            AreaActionItem(
+                                item = item.relatedData as Area,
+                                onClick = {
+
+                                },
+                                onLikeClick = {
+
+                                }
+                            )
+                        } else if (item.relatedData is Note) {
+                            NoteActionItem(
+                                item = item.relatedData as Note,
+                                onClick = {
+
+                                },
+                                onLikeClick = {
+
+                                }
+                            )
+                        }
+
+
                     }
                 }
             }

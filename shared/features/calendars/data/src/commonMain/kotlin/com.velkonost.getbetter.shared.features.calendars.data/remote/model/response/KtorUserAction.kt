@@ -34,5 +34,5 @@ fun KtorUserAction.asExternalModel() =
         actionType = ActionType.entries.first { it.responseName == actionType },
         datetime = datetime!!,
         parentId = parentId,
-        parentEntityType = EntityType.entries.firstOrNull { it.responseName == entityType }
+        parentEntityType = EntityType.entries.firstOrNull { it.responseName == parentEntityType }
     )

@@ -335,10 +335,10 @@ internal constructor(
         launchJob {
             parentEntityId?.let {
                 val parentRequest = when (parentEntityType) {
-                    EntityType.Area -> areasRepository.fetchAreaDetails(entityId.toInt())
-                    EntityType.Note -> notesRepository.getNoteDetails(entityId.toInt())
-                    EntityType.Comment -> commentsRepository.getComment(entityId.toInt())
-                    EntityType.User -> userInfoRepository.fetchInfoAboutOtherUser(entityId)
+                    EntityType.Area -> areasRepository.fetchAreaDetails(parentEntityId.toInt())
+                    EntityType.Note -> notesRepository.getNoteDetails(parentEntityId.toInt())
+                    EntityType.Comment -> commentsRepository.getComment(parentEntityId.toInt())
+                    EntityType.User -> userInfoRepository.fetchInfoAboutOtherUser(parentEntityId)
                     else -> return@launchJob
                 }
                 parentRequest collectAndProcess {

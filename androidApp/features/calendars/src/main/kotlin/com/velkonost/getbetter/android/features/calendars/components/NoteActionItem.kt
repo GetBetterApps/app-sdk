@@ -24,6 +24,7 @@ import com.velkonost.getbetter.core.compose.components.note.tags.TagItem
 import com.velkonost.getbetter.core.compose.components.notelist.NoteItemData
 import com.velkonost.getbetter.core.compose.components.notelist.NoteItemHeader
 import com.velkonost.getbetter.shared.core.model.Emoji
+import com.velkonost.getbetter.shared.core.model.comments.Comment
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -35,6 +36,7 @@ import dev.icerock.moko.resources.compose.colorResource
 fun NoteActionItem(
     modifier: Modifier = Modifier,
     item: Note,
+    comment: Comment? = null,
     onClick: (Note) -> Unit,
     onLikeClick: (Note) -> Unit
 ) {
@@ -50,7 +52,8 @@ fun NoteActionItem(
             ) {
                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                 onClick.invoke(item)
-            }
+            },
+        topPadding = 0
     ) {
         Column {
             NoteItemHeader(
@@ -108,4 +111,12 @@ fun NoteActionItem(
 
         }
     }
+}
+
+@Composable
+fun CommentItem(
+    modifier: Modifier,
+    item: Comment
+) {
+
 }
