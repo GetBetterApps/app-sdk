@@ -27,7 +27,7 @@ struct BottomBar: View {
             BottomBarItem(pilot: pilot, screen: ProfileRoute(), currentRoute: currentRoute)
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 95, alignment: .top)
+        .frame(height: 85, alignment: .top)
         .background(
             RoundedRectangle(cornerRadius: 40)
                 .fill(Color.backgroundItem)

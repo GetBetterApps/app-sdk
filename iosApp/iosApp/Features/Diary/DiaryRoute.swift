@@ -19,7 +19,7 @@ struct DiaryRoute: NavRoute {
     }
     
     var menuIcon: UIImage? {
-        return SharedR.images.shared.ic_menu_profile.toUIImage()
+        return SharedR.images.shared.ic_menu_diary.toUIImage()
     }
     
     var content: some View {
