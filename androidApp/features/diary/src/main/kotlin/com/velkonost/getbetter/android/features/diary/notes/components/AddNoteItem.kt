@@ -24,12 +24,12 @@ fun BoxScope.AddNoteItem(
         ),
         items = listOf(
             ExpandableButtonItem(
-                title = stringResource(resource = SharedR.strings.diary_areas_add_existing_title),
+                title = stringResource(resource = SharedR.strings.create_goal_button),
                 icon = painterResource(imageResource = SharedR.images.ic_goal)
             ) { createGoalClick.invoke() },
 
             ExpandableButtonItem(
-                title = stringResource(resource = SharedR.strings.diary_areas_create_new_title),
+                title = stringResource(resource = SharedR.strings.create_note_button),
                 icon = painterResource(imageResource = SharedR.images.ic_note)
             ) { createNoteClick.invoke() }
         ),
