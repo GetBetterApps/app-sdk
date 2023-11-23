@@ -52,12 +52,14 @@ struct ActionItem: View {
                 }
             }
             
-            if item.data is UserInfoShort {
-                    UserActionItem(
-                        isLoading: false,
-                        item: (item.data as! UserInfoShort),
-                        onClick: onUserClick
-                    )
+            if item.data is Int64 {
+                UserRegisteredActionItem()
+            } else if item.data is UserInfoShort {
+                UserActionItem(
+                    isLoading: false,
+                    item: (item.data as! UserInfoShort),
+                    onClick: onUserClick
+                )
             } else if item.relatedData is Note {
                 NoteActionItem(
                     item: (item.relatedData as! Note),

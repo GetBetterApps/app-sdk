@@ -51,6 +51,7 @@
 		464A42722AEA67020019CB98 /* NewTagField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464A42712AEA67020019CB98 /* NewTagField.swift */; };
 		464B60B42ABAF7C300369EC3 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B60B32ABAF7C300369EC3 /* ProfileHeader.swift */; };
 		464B60B62ABAF81B00369EC3 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B60B52ABAF81B00369EC3 /* Avatar.swift */; };
+		4658EC7A2B0F5F2100D508FF /* UserRegisteredActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4658EC792B0F5F2100D508FF /* UserRegisteredActionItem.swift */; };
 		465C1FCA2AC157C300B7AE18 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465C1FC92AC157C300B7AE18 /* ImagePicker.swift */; };
 		4667C9022AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C9012AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift */; };
 		4667C9042AC589EC00BAA9DD /* SingleLineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C9032AC589EC00BAA9DD /* SingleLineTextField.swift */; };
@@ -175,6 +176,7 @@
 		464A42712AEA67020019CB98 /* NewTagField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTagField.swift; sourceTree = "<group>"; };
 		464B60B32ABAF7C300369EC3 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		464B60B52ABAF81B00369EC3 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
+		4658EC792B0F5F2100D508FF /* UserRegisteredActionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisteredActionItem.swift; sourceTree = "<group>"; };
 		465C1FC92AC157C300B7AE18 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		4667C9012AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewAreaBottomSheet.swift; sourceTree = "<group>"; };
 		4667C9032AC589EC00BAA9DD /* SingleLineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLineTextField.swift; sourceTree = "<group>"; };
@@ -624,6 +626,7 @@
 				468356FA2B0E321200DC356A /* NoteActionItem.swift */,
 				468356FC2B0E323500DC356A /* UserActionItem.swift */,
 				468356FE2B0E326800DC356A /* ActionItem.swift */,
+				4658EC792B0F5F2100D508FF /* UserRegisteredActionItem.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -1056,6 +1059,7 @@
 				46D857742ACFF1C500BE74DA /* AddAreaViewModel.swift in Sources */,
 				461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */,
 				46FCD3D52AF530D40025D2C6 /* NoteDetailRoute.swift in Sources */,
+				4658EC7A2B0F5F2100D508FF /* UserRegisteredActionItem.swift in Sources */,
 				460054A52ABB17BD00586767 /* SectionTitle.swift in Sources */,
 				46FCD3D32AF530BD0025D2C6 /* NoteDetailScreen.swift in Sources */,
 				46ACAF232AEECA74000A9CD8 /* NoteItemData.swift in Sources */,
