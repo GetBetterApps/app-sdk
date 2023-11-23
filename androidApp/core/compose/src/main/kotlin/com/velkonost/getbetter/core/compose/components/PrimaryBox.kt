@@ -2,6 +2,7 @@ package com.velkonost.getbetter.core.compose.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -17,7 +18,7 @@ fun PrimaryBox(
     modifier: Modifier = Modifier,
     padding: Int = 16,
     topPadding: Int = 12,
-    content: @Composable () -> Unit
+    content: @Composable BoxScope.() -> Unit
 ) {
     Box(
         modifier = modifier

@@ -33,6 +33,7 @@ struct BottomBar: View {
                 .fill(Color.backgroundItem)
                 .shadow(radius: 8, y: -5)
         )
+        
      
     }
 }

@@ -1,5 +1,6 @@
 import com.velkonost.getbetter.ANDROID_PACKAGE
 import com.velkonost.getbetter.join
+import com.velkonost.getbetter.util.libs
 
 plugins {
     `android-ui-plugin`
@@ -13,6 +14,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.android.compose.lootie)
+
     implementation(projects.shared.core.util)
     implementation(projects.shared.core.model)
     implementation(projects.shared.resources)

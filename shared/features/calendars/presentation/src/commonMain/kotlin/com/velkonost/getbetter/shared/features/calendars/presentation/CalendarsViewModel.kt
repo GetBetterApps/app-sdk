@@ -172,7 +172,8 @@ internal constructor(
                                         ActionUIItem<Long, Nothing>(
                                             dayId = value,
                                             id = item.datetime,
-                                            description = StringDesc.Resource(SharedR.strings.action_user_registered)
+                                            description = StringDesc.Resource(SharedR.strings.action_user_registered),
+                                            data = item.datetime
                                         )
                                     )
                                 }

@@ -56,6 +56,10 @@ fun ActionItem(
         }
 
         when {
+            item.data is Long -> {
+                UserRegisteredActionItem()
+            }
+
             item.data is UserInfoShort -> {
                 UserActionItem(
                     isLoading = false,
