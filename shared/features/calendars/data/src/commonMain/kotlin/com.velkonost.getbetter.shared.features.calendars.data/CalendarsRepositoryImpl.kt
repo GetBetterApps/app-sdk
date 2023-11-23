@@ -46,7 +46,7 @@ class CalendarsRepositoryImpl(
             )
             .expand(
                 direction = DateDirection.Past,
-                amount = pastAmount.toInt()
+                amount = pastAmount.toInt() + 1
             )
     }
 
