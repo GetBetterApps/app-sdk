@@ -13,7 +13,7 @@ object SocialNavRoute : NavRoute<SocialViewModel> {
     override val route: String
         get() = NavigationScreen.SocialNavScreen.route
 
-    override val menuIcon: ImageResource = SharedR.images.ic_menu_profile
+    override val menuIcon: ImageResource = SharedR.images.ic_menu_social
 
     @Composable
     override fun Content(viewModel: SocialViewModel) = SocialScreen(viewModel = viewModel)

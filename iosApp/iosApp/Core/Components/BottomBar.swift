@@ -50,6 +50,8 @@ struct BottomBarItem: View {
         Image(uiImage: screen.menuIcon!)
             .resizable()
             .renderingMode(.template)
+            .scaledToFill()
+            .padding(12)
             .frame(width: 48, height: 48, alignment: .top)
             .foregroundColor(isSelected ? .iconActive : .iconInactive)
             .padding()
@@ -58,17 +60,8 @@ struct BottomBarItem: View {
                     let impactMed = UIImpactFeedbackGenerator(style: .medium)
                     impactMed.impactOccurred()
                     
-//                    if !pilot.popTo(screen.route, inclusive: false, animated: false) {
-                        pilot.setRoot(screen.route)
-//                    }
+                    pilot.setRoot(screen.route)
                 }
-//                pilot.push(currentRoute)
-                
-//                if pilot.routes.contains(screen.route) {
-//                    pilot.popTo(screen.route, inclusive: true)
-//                } else {
-//                    pilot.setRoot(screen.route)
-//                }
             }
     }
 }

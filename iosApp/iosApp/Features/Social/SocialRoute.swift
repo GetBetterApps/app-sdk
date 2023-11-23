@@ -19,7 +19,7 @@ struct SocialRoute: NavRoute {
     }
     
     var menuIcon: UIImage? {
-        return SharedR.images.shared.ic_menu_profile.toUIImage()
+        return SharedR.images.shared.ic_menu_social.toUIImage()
     }
     
     var content: some View {

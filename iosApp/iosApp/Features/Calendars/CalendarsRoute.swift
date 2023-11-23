@@ -19,7 +19,7 @@ struct CalendarsRoute: NavRoute {
     }
     
     var menuIcon: UIImage? {
-        return SharedR.images.shared.ic_menu_profile.toUIImage()
+        return SharedR.images.shared.ic_menu_calendars.toUIImage()
     }
     
     var content: some View {
