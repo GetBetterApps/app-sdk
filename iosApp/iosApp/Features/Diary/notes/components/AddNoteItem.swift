@@ -34,16 +34,16 @@ struct AddNoteItem: View {
                     ),
                     secondaryItems: [
                         ExpandableButtonItem(
-                            icon: SharedR.images().ic_grid.toUIImage()!,
+                            icon: SharedR.images().ic_goal.toUIImage()!,
                             iconExpanded: nil,
-                            label: SharedR.strings().diary_areas_add_existing_title.desc().localized()
+                            label: SharedR.strings().create_goal_button.desc().localized()
                         ) {
                             createGoalClick()
                         },
                         ExpandableButtonItem(
-                            icon: SharedR.images().ic_edit.toUIImage()!,
+                            icon: SharedR.images().ic_note.toUIImage()!,
                             iconExpanded: nil,
-                            label: SharedR.strings().diary_areas_create_new_title.desc().localized()
+                            label: SharedR.strings().create_note_button.desc().localized()
                         ) {
                             createNoteClick()
                         }
