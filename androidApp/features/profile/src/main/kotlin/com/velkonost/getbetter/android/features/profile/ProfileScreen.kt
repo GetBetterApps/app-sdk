@@ -88,7 +88,10 @@ fun ProfileScreen(
 
         }
 
-        AppSettings()
+        AppSettings(
+            themeState = state.themeState
+        )
+
         HelpAndSupport()
         AppButton(
             modifier = modifier

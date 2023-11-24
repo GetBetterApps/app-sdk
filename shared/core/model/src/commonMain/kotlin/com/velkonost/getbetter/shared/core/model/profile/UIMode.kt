@@ -6,7 +6,7 @@ import dev.icerock.moko.resources.desc.StringDesc
 
 enum class UIMode(val text: StringDesc) {
     Dark(StringDesc.Resource(SharedR.strings.uimode_dark_title)),
+    System(StringDesc.Resource(SharedR.strings.uimode_system_title)),
     Light(StringDesc.Resource(SharedR.strings.uimode_light_title)),
-    System(StringDesc.Resource(SharedR.strings.uimode_system_title))
 }
 

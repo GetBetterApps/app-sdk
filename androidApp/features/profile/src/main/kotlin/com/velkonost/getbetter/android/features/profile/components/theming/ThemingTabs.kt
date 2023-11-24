@@ -2,6 +2,8 @@ package com.velkonost.getbetter.android.features.profile.components.theming
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,9 +18,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -36,17 +37,93 @@ fun ThemingTabs(
     onClick: (UIMode) -> Unit
 ) {
 
-
-    val scope = rememberCoroutineScope()
-
     CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                modifier = modifier
+                    .background(
+                        color = colorResource(
+                            resource = if (selected == UIMode.Light) SharedR.colors.button_gradient_start
+                            else SharedR.colors.background_item
+                        ),
+                        shape = MaterialTheme.shapes.small
+                    )
+                    .weight(1f),
+                text = UIMode.Light.text.toString(LocalContext.current),
+                color = colorResource(
+                    resource =
+                    if (selected == UIMode.Light) SharedR.colors.text_light
+                    else SharedR.colors.icon_inactive
+                ),
+                style = MaterialTheme.typography.labelSmall
+            )
+            Spacer(modifier.weight(1f))
+            Box(
+                modifier = modifier
+                    .height(16.dp)
+                    .background(
+                        color = colorResource(resource = SharedR.colors.button_gradient_start),
+                        shape = MaterialTheme.shapes.extraLarge
+                    )
+            )
+            Spacer(modifier.weight(1f))
+            Text(
+                modifier = modifier
+                    .background(
+                        color = colorResource(
+                            resource = if (selected == UIMode.System) SharedR.colors.button_gradient_start
+                            else SharedR.colors.background_item
+                        ),
+                        shape = MaterialTheme.shapes.small
+                    )
+                    .weight(1f),
+                text = UIMode.System.text.toString(LocalContext.current),
+                color = colorResource(
+                    resource =
+                    if (selected == UIMode.System) SharedR.colors.text_light
+                    else SharedR.colors.icon_inactive
+                ),
+                style = MaterialTheme.typography.labelSmall
+            )
+            Spacer(modifier.weight(1f))
+            Box(
+                modifier = modifier
+                    .height(6.dp)
+                    .background(
+                        color = colorResource(resource = SharedR.colors.main_background),
+                        shape = MaterialTheme.shapes.extraLarge
+                    )
+            )
+            Spacer(modifier.weight(1f))
+            Text(
+                modifier = modifier
+                    .background(
+                        color = colorResource(
+                            resource = if (selected == UIMode.Dark) SharedR.colors.button_gradient_start
+                            else SharedR.colors.background_item
+                        ),
+                        shape = MaterialTheme.shapes.small
+                    )
+                    .weight(1f),
+                text = UIMode.Dark.text.toString(LocalContext.current),
+                color = colorResource(
+                    resource =
+                    if (selected == UIMode.Dark) SharedR.colors.text_light
+                    else SharedR.colors.icon_inactive
+                ),
+                style = MaterialTheme.typography.labelSmall
+            )
+        }
+
         TabRow(
             modifier = modifier
-                .padding(top = 40.dp, start = 20.dp, end = 20.dp)
-                .shadow(
-                    elevation = 8.dp,
-                    shape = MaterialTheme.shapes.medium,
-                )
+                .padding(top = 12.dp)
+//                .shadow(
+//                    elevation = 1.dp,
+//                    shape = MaterialTheme.shapes.medium,
+//                )
                 .fillMaxWidth()
                 .background(
                     color = colorResource(resource = SharedR.colors.background_item),
@@ -54,7 +131,11 @@ fun ThemingTabs(
                 ),
             selectedTabIndex = tabs.indexOfFirst { it == selected },
             divider = {
-                Spacer(modifier = modifier.height(1.dp))
+//                Box(
+//                    modifier = modifier
+//                        .height(10.dp)
+//                    .background(color = colorResource(resource = SharedR.colors.main_background))
+//                )
             },
             containerColor = Color.Transparent,
             indicator = { tabPositions ->
@@ -78,7 +159,7 @@ fun ThemingTabs(
                                 if (isTabSelected) SharedR.colors.button_gradient_start
                                 else SharedR.colors.background_item
                             ),
-                            shape = MaterialTheme.shapes.medium
+                            shape = MaterialTheme.shapes.small
                         ),
                     interactionSource = remember { MutableInteractionSource() },
                     selectedContentColor = Color.Transparent,

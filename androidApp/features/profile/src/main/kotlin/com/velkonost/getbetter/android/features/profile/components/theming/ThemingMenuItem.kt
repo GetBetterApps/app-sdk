@@ -17,20 +17,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.dp
-import com.velkonost.getbetter.core.compose.components.PrimaryTabs
+import com.velkonost.getbetter.shared.core.model.profile.UIMode
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
+import dev.icerock.moko.resources.compose.painterResource
+import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
 fun ThemingMenuItem(
     modifier: Modifier = Modifier,
-    title: String,
-    icon: Painter,
-    onClick: () -> Unit
+    tabs: List<UIMode>,
+    selected: UIMode,
+    onClick: (UIMode) -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
     val interactionSource = remember { MutableInteractionSource() }
@@ -42,10 +43,7 @@ fun ThemingMenuItem(
                 .clickable(
                     interactionSource = interactionSource,
                     indication = null
-                ) {
-                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                    onClick.invoke()
-                },
+                ) { haptic.performHapticFeedback(HapticFeedbackType.LongPress) },
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Image(
@@ -56,7 +54,7 @@ fun ThemingMenuItem(
                         shape = MaterialTheme.shapes.medium
                     )
                     .padding(8.dp),
-                painter = icon,
+                painter = painterResource(imageResource = SharedR.images.ic_theming),
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(
                     color = colorResource(resource = SharedR.colors.icon_inactive)
@@ -65,24 +63,18 @@ fun ThemingMenuItem(
 
             Text(
                 modifier = modifier.padding(start = 12.dp),
-                text = title,
+                text = stringResource(resource = SharedR.strings.profile_app_settings_theming),
                 color = colorResource(resource = SharedR.colors.text_primary),
                 style = MaterialTheme.typography.labelLarge
             )
 
             Spacer(modifier = modifier.weight(1f))
-
-
-            PrimaryTabs(tabs =, pagerState =)
-//        Image(
-//            modifier = modifier
-//                .size(24.dp),
-//            painter = painterResource(imageResource = SharedR.images.ic_arrow_right),
-//            contentDescription = null,
-//            colorFilter = ColorFilter.tint(
-//                color = colorResource(resource = SharedR.colors.icon_inactive)
-//            )
-//        )
         }
+
+        ThemingTabs(
+            selected = selected,
+            tabs = tabs,
+            onClick = onClick
+        )
     }
 }
