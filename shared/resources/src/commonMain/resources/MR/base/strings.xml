@@ -308,6 +308,12 @@
     <string name="error_500">User to follow not found</string>
     <string name="error_501">You already followed on this user</string>
     <string name="error_502">You already unfollowed from this user</string>
+
+    <string name="error_550">Incorrect feedback\'s message</string>
+    <string name="error_551">Feedback not found</string>
+    <string name="error_552">Incorrect feedback\'s type</string>
+    <string name="error_553">Incorrect feedback\'s status</string>
+    <string name="error_554">You don\'t have permission to add answer</string>
     <!--  SERVER EXCEPTIONS  -->
 
     <!--  DATE FORMATTER  -->
