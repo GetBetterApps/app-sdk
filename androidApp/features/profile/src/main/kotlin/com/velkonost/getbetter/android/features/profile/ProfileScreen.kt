@@ -1,7 +1,10 @@
 package com.velkonost.getbetter.android.features.profile
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
@@ -17,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.profile.components.AppSettings
@@ -55,6 +59,27 @@ fun ProfileScreen(
                 ?.let {
                     viewModel.dispatch(AvatarSelected(it))
                 }
+        }
+    }
+
+    val launcherPermissions = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            // Permission Accepted: Do something
+        } else {
+            // Permission Denied: Do something
+        }
+    }
+
+    if (
+        ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.POST_NOTIFICATIONS
+        ) != PackageManager.PERMISSION_GRANTED
+    ) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            launcherPermissions.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
     }
 
