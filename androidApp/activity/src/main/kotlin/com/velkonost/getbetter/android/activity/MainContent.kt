@@ -40,13 +40,6 @@ internal fun MainContent() {
 
     val forceHideBottomBar = remember { mutableStateOf(false) }
 
-//    val configs = context.resources.configuration
-//    configs.uiMode = Configuration.UI_MODE_NIGHT_UNDEFINED
-//    context.resources.updateConfiguration(configs, context.resources.displayMetrics)
-
-
-//    addActiveDelegate(context)
-
     ApplicationTheme {
         Scaffold(
             snackbarHost = { MainSnackBarHost(snackBarHostState) },

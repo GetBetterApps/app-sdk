@@ -5,14 +5,13 @@ import androidx.compose.ui.Modifier
 import com.velkonost.getbetter.android.features.profile.components.theming.ThemingMenuItem
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.shared.core.model.profile.UIMode
-import com.velkonost.getbetter.shared.features.profile.contracts.ThemeState
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
 fun AppSettings(
     modifier: Modifier = Modifier,
-    themeState: ThemeState,
+    selectedTheme: UIMode,
     onThemeChanged: (UIMode) -> Unit
 ) {
     SectionTitle(text = stringResource(resource = SharedR.strings.profile_app_settings_title))
@@ -20,9 +19,9 @@ fun AppSettings(
     PrimaryBox {
 //        Column {
         ThemingMenuItem(
-            selected = themeState.selected,
+            selected = selectedTheme,
             onClick = {
-                if (it != themeState.selected) {
+                if (it != selectedTheme) {
                     onThemeChanged.invoke(it)
                 }
             }

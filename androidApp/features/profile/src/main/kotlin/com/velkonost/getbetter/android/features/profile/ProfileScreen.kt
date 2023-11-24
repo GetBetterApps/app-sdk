@@ -31,6 +31,7 @@ import com.velkonost.getbetter.shared.core.model.profile.UIMode
 import com.velkonost.getbetter.shared.features.profile.ProfileViewModel
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelected
 import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
+import com.velkonost.getbetter.shared.features.profile.contracts.ThemeChange
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.stringResource
 
@@ -91,8 +92,9 @@ fun ProfileScreen(
         }
 
         AppSettings(
-            themeState = state.themeState,
+            selectedTheme = state.selectedTheme,
             onThemeChanged = {
+                viewModel.dispatch(ThemeChange(it))
                 AppCompatDelegate.setDefaultNightMode(
                     when (it) {
                         UIMode.Light -> AppCompatDelegate.MODE_NIGHT_NO
@@ -100,6 +102,15 @@ fun ProfileScreen(
                         else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
                     }
                 )
+//                val configs = context.resources.configuration
+//                configs.uiMode = when(it) {
+//                    UIMode.Light -> Configuration.UI_MODE_NIGHT_NO
+//                    UIMode.Dark -> Configuration.UI_MODE_NIGHT_YES
+//                    else -> UI_MODE_NIGHT_MASK
+//                }
+//
+////                    Configuration.UI_MODE_NIGHT_UNDEFINED
+//                context.resources.updateConfiguration(configs, context.resources.displayMetrics)
             }
         )
 
