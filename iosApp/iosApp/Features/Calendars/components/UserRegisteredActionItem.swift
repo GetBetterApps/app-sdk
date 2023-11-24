@@ -13,31 +13,37 @@ import Lottie
 
 struct UserRegisteredActionItem: View {
     var body: some View {
-        PrimaryBox(
-            padding: .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero),
-            topPadding: 0
-        ) {
-            
-            ZStack {
-                Image(uiImage: SharedR.images().logo.toUIImage()!)
-                    .resizable()
-                    .frame(width: 128, height: 128)
-                    .clipped()
-                    .cornerRadius(8)
-                LottieView(isDark: false)
-//                    .frame(width: size, height: size)
-//                    .scaleEffect(0.2)
+        ZStack {
+            PrimaryBox(
+                padding: .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero),
+                topPadding: 0
+            ) {
+                HStack {
+                    Spacer()
+                    ZStack {
+                        Image(uiImage: SharedR.images().logo.toUIImage()!)
+                            .resizable()
+                            .frame(width: 128, height: 128)
+                            .clipped()
+                            .cornerRadius(8)
+                        
+                    }
+                    .frame(height: 180, alignment: .center)
+                    Spacer()
+                }
+                
             }
-            .frame(height: 180, alignment: .center)
             
+            ConfettiLottieView()
+                .frame(width: 180, height: 180, alignment: .center)
+//                    .frame(width: size, height: size)
+                .scaleEffect(0.3)
         }
     }
 }
 
 
 struct ConfettiLottieView: UIViewRepresentable {
-    
-    var isDark: Bool
 
     func updateUIView(_ uiView: UIViewType, context: Context) {
         
