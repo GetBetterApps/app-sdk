@@ -20,21 +20,23 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.extensions.NoRippleTheme
+import com.velkonost.getbetter.shared.core.model.profile.UIMode
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
-import kotlinx.coroutines.launch
 
 @Composable
 fun ThemingTabs(
     modifier: Modifier = Modifier,
-    selectedIndex: Int,
-    onClick: (Int) -> Unit
+    selected: UIMode,
+    tabs: List<UIMode>,
+    onClick: (UIMode) -> Unit
 ) {
 
-    val tabs = listOf()
+
     val scope = rememberCoroutineScope()
 
     CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
@@ -50,7 +52,7 @@ fun ThemingTabs(
                     color = colorResource(resource = SharedR.colors.background_item),
                     shape = MaterialTheme.shapes.medium
                 ),
-            selectedTabIndex = selectedIndex,
+            selectedTabIndex = tabs.indexOfFirst { it == selected },
             divider = {
                 Spacer(modifier = modifier.height(1.dp))
             },
@@ -58,14 +60,14 @@ fun ThemingTabs(
             indicator = { tabPositions ->
                 TabRowDefaults.Indicator(
                     modifier = modifier
-                        .tabIndicatorOffset(tabPositions[selectedIndex]),
+                        .tabIndicatorOffset(tabPositions[tabs.indexOfFirst { it == selected }]),
                     height = 0.dp,
                     color = Color.Transparent
                 )
             }
         ) {
-            tabs.forEachIndexed { index, tabTitle ->
-                val isTabSelected = pagerState.currentPage == index
+            tabs.forEachIndexed { _, tab ->
+                val isTabSelected = tab == selected
                 Tab(
                     modifier = modifier
                         .padding(4.dp)
@@ -73,26 +75,22 @@ fun ThemingTabs(
                         .background(
                             color = colorResource(
                                 resource =
-                                if (isTabSelected) SharedR.colors.main_background
+                                if (isTabSelected) SharedR.colors.button_gradient_start
                                 else SharedR.colors.background_item
                             ),
                             shape = MaterialTheme.shapes.medium
                         ),
                     interactionSource = remember { MutableInteractionSource() },
                     selectedContentColor = Color.Transparent,
-                    selected = pagerState.currentPage == index,
-                    onClick = {
-                        scope.launch {
-                            pagerState.animateScrollToPage(index)
-                        }
-                    },
+                    selected = isTabSelected,
+                    onClick = { onClick(tab) },
                     text = {
                         Text(
-                            text = tabTitle,
+                            text = tab.text.toString(LocalContext.current),
                             textAlign = TextAlign.Center,
                             color = colorResource(
                                 resource =
-                                if (pagerState.currentPage == index) SharedR.colors.icon_active
+                                if (isTabSelected) SharedR.colors.text_light
                                 else SharedR.colors.icon_inactive
                             ),
                             style = MaterialTheme.typography.labelSmall
