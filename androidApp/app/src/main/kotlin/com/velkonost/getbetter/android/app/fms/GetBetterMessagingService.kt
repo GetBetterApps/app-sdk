@@ -34,7 +34,6 @@ class GetBetterMessagingService : FirebaseMessagingService() {
         )
 
         val channelId = this.getString(R.string.default_notification_channel_id)
-
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setContentTitle(message.title)
             .setContentText(message.body)
