@@ -48,7 +48,13 @@ struct ProfileScreen: View {
                     
                 }
                 
-                AppSettings()
+                AppSettings(
+                    selectedTheme: state.selectedTheme,
+                    onThemeChanged: { value in
+                        viewModel.dispatch(action: ThemeChange(value: value))
+                    }
+                )
+                
                 HelpAndSupport()
                 
                 AppButton(

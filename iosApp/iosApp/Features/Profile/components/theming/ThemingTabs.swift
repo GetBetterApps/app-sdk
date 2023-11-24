@@ -78,6 +78,7 @@ struct ThemingButton: View {
                 .foregroundColor(selected ? .textLight : .iconInactive)
             Spacer()
         }
+        .padding(.vertical, 6)
         .background(
             RoundedRectangle(cornerRadius: 8)
                 .fill(selected ? Color.buttonGradientStart : Color.backgroundItem)
