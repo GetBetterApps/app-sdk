@@ -47,6 +47,7 @@ struct ThemingMenuItem: View {
                 selected: selected,
                 onClick: onClick
             )
+            .animation(.easeInOut, value: selected)
         }
         .onTapGesture {
             let impactMed = UIImpactFeedbackGenerator(style: .medium)

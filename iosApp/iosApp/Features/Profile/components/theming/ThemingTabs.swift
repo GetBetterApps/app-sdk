@@ -54,7 +54,7 @@ struct ThemingTabs: View {
                 }
             )
         }
-        .animation(.easeInOut, value: selected)
+        
         .padding(.top, 12)
     }
 }
