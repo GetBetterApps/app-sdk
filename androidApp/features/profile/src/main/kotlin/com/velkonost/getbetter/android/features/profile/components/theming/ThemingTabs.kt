@@ -60,7 +60,7 @@ fun ThemingTabs(
                 Spacer(modifier.weight(0.1f))
                 ThemingButton(
                     text = UIMode.System.text.toString(LocalContext.current),
-                    selected = selected == UIMode.System,
+                    selected = it == UIMode.System,
                     onClick = {
                         onClick.invoke(UIMode.System)
                     }
@@ -78,7 +78,7 @@ fun ThemingTabs(
                 Spacer(modifier.weight(0.1f))
                 ThemingButton(
                     text = UIMode.Dark.text.toString(LocalContext.current),
-                    selected = selected == UIMode.Dark,
+                    selected = it == UIMode.Dark,
                     onClick = {
                         onClick.invoke(UIMode.Dark)
                     }
