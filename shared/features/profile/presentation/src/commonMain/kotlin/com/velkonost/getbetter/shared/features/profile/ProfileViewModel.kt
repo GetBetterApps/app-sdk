@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.profile
 
+import com.velkonost.getbetter.shared.core.model.profile.UIMode
 import com.velkonost.getbetter.shared.core.model.user.UserInfo
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
@@ -11,12 +12,14 @@ import com.velkonost.getbetter.shared.features.profile.contracts.NavigateToAuth
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileAction
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileNavigation
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileViewState
+import com.velkonost.getbetter.shared.features.profile.contracts.ThemeChange
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 import io.ktor.util.decodeBase64Bytes
 
 class ProfileViewModel
 internal constructor(
-    private val userInfoRepository: UserInfoRepository
+    private val userInfoRepository: UserInfoRepository,
+    private val profi
 ) : BaseViewModel<ProfileViewState, ProfileAction, ProfileNavigation, Nothing>(
     initialState = ProfileViewState()
 ) {
@@ -32,6 +35,7 @@ internal constructor(
 
     override fun dispatch(action: ProfileAction) = when (action) {
         is LogoutClick -> obtainLogout()
+        is ThemeChange ->
         is AvatarSelected -> obtainAvatarSelected(action.avatarContent)
         is AvatarSelectedBase64 -> obtainAvatarSelected(action.avatarContent.decodeBase64Bytes())
     }
@@ -73,6 +77,10 @@ internal constructor(
                 }
             }
         }
+    }
+
+    private fun obtainThemeChange(value: UIMode) {
+
     }
 
     private fun UserInfo?.toUI() {
