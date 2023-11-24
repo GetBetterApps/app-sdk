@@ -64,6 +64,10 @@
     <string name="experience_your_title">Your experience</string>
     <string name="experience_user_title">User experience</string>
     <string name="experience_level">Level %s</string>
+
+    <string name="uimode_dark_title">Dark</string>
+    <string name="uimode_light_title">Light</string>
+    <string name="uimode_system_title">System</string>
     <!--  PROFILE  -->
 
     <!--  PROFILE DETAIL  -->

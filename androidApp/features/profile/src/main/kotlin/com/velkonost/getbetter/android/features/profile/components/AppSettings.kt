@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.android.features.profile.components.theming.ThemingMenuItem
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.painterResource
@@ -18,7 +19,7 @@ fun AppSettings(
 
     PrimaryBox {
         Column {
-            MenuItem(
+            ThemingMenuItem(
                 title = stringResource(resource = SharedR.strings.profile_app_settings_theming),
                 icon = painterResource(imageResource = SharedR.images.ic_theming),
             ) {

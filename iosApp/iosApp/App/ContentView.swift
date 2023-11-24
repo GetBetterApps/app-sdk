@@ -1,6 +1,7 @@
 import SwiftUI
 import SharedSDK
 import KMPNativeCoroutinesAsync
+import Combine
 
 struct ContentView: View {
     
@@ -89,6 +90,8 @@ struct ContentView: View {
             snackBar: snackBar
         )
         .onAppear {
+            (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = .unspecified
+            
             if messageDequeObserver == nil {
                 messageDequeObserver = Task {
                     for try await message in asyncSequence(for: MessageDeque.shared.invoke()) {
