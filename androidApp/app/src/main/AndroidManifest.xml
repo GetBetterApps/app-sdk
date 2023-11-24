@@ -22,23 +22,36 @@
         android:smallScreens="true"
         android:xlargeScreens="true" />
 
-    <!--
-    android:icon="@drawable/logo_200x200"
-    android:roundIcon="@drawable/logo_200x200"-->
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher"
         android:fullBackupContent="false"
         android:fullBackupOnly="false"
         android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
         android:label="GetBetter"
         android:requestLegacyExternalStorage="true"
         android:resizeableActivity="false"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/MainTheme"
         android:usesCleartextTraffic="true"
-        tools:ignore="AllowBackup,DataExtractionRules,GoogleAppIndexingWarning,MissingApplicationIcon"
-        tools:targetApi="o" />
+        tools:ignore="AllowBackup,DataExtractionRules,GoogleAppIndexingWarning,MissingApplicationIcon">
+
+        <service
+            android:name="com.velkonost.getbetter.android.app.fms.GetBetterMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher" />
+
+    </application>
 </manifest>

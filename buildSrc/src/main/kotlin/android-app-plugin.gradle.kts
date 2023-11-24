@@ -102,6 +102,8 @@ android {
 
         implementation(platform(libs.firebase.android.core))
         implementation(libs.firebase.android.crashlytics)
+        implementation(libs.firebase.android.messaging)
+
     }
 }
 
