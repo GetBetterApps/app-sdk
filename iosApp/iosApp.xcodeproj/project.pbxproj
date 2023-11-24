@@ -53,6 +53,8 @@
 		464B60B62ABAF81B00369EC3 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B60B52ABAF81B00369EC3 /* Avatar.swift */; };
 		4658EC7A2B0F5F2100D508FF /* UserRegisteredActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4658EC792B0F5F2100D508FF /* UserRegisteredActionItem.swift */; };
 		465C1FCA2AC157C300B7AE18 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465C1FC92AC157C300B7AE18 /* ImagePicker.swift */; };
+		465EC4422B10899100444C9C /* ThemingMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465EC4412B10899100444C9C /* ThemingMenuItem.swift */; };
+		465EC4452B108A0E00444C9C /* ThemingTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465EC4442B108A0E00444C9C /* ThemingTabs.swift */; };
 		4667C9022AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C9012AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift */; };
 		4667C9042AC589EC00BAA9DD /* SingleLineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C9032AC589EC00BAA9DD /* SingleLineTextField.swift */; };
 		4667C9062AC58B0700BAA9DD /* SelectedEmojiImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C9052AC58B0700BAA9DD /* SelectedEmojiImage.swift */; };
@@ -178,6 +180,8 @@
 		464B60B52ABAF81B00369EC3 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		4658EC792B0F5F2100D508FF /* UserRegisteredActionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisteredActionItem.swift; sourceTree = "<group>"; };
 		465C1FC92AC157C300B7AE18 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		465EC4412B10899100444C9C /* ThemingMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemingMenuItem.swift; sourceTree = "<group>"; };
+		465EC4442B108A0E00444C9C /* ThemingTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemingTabs.swift; sourceTree = "<group>"; };
 		4667C9012AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewAreaBottomSheet.swift; sourceTree = "<group>"; };
 		4667C9032AC589EC00BAA9DD /* SingleLineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLineTextField.swift; sourceTree = "<group>"; };
 		4667C9052AC58B0700BAA9DD /* SelectedEmojiImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedEmojiImage.swift; sourceTree = "<group>"; };
@@ -477,6 +481,7 @@
 		464B60B22ABAF6D400369EC3 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				465EC4432B108A0500444C9C /* theming */,
 				464B60B32ABAF7C300369EC3 /* ProfileHeader.swift */,
 				464B60B52ABAF81B00369EC3 /* Avatar.swift */,
 				460054A02ABB0D0100586767 /* SettingsButton.swift */,
@@ -488,6 +493,15 @@
 				463049E22AFD0590006F60D2 /* LevelBlock.swift */,
 			);
 			path = components;
+			sourceTree = "<group>";
+		};
+		465EC4432B108A0500444C9C /* theming */ = {
+			isa = PBXGroup;
+			children = (
+				465EC4412B10899100444C9C /* ThemingMenuItem.swift */,
+				465EC4442B108A0E00444C9C /* ThemingTabs.swift */,
+			);
+			path = theming;
 			sourceTree = "<group>";
 		};
 		4667C9002AC585A300BAA9DD /* createnewarea */ = {
@@ -955,9 +969,11 @@
 				461F7C612AA878EB003791CF /* Koin.swift in Sources */,
 				4646BF9A2AD2AF0B000980DD /* AreaDetailContent.swift in Sources */,
 				464A426B2AEA62880019CB98 /* TagItem.swift in Sources */,
+				465EC4422B10899100444C9C /* ThemingMenuItem.swift in Sources */,
 				46445AFA2ACD5484008934B2 /* PrivateSwitch.swift in Sources */,
 				460054A72ABB17FF00586767 /* PrimaryBox.swift in Sources */,
 				463049E32AFD0590006F60D2 /* LevelBlock.swift in Sources */,
+				465EC4452B108A0E00444C9C /* ThemingTabs.swift in Sources */,
 				465C1FCA2AC157C300B7AE18 /* ImagePicker.swift in Sources */,
 				46AEEF7D2B0BB76B00A9376C /* CalendarDateItem.swift in Sources */,
 				467D996C2AFA1C9C00F4397E /* AuthorData.swift in Sources */,
