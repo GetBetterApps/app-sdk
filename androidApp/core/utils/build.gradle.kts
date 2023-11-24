@@ -17,6 +17,4 @@ android {
 }
 
 dependencies {
-    implementation(libs.firebase.auth)
-    api(libs.firebase.android.storage)
 }

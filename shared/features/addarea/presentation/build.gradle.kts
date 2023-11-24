@@ -26,8 +26,6 @@ kotlin {
 
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.firebase.auth)
-                implementation(libs.firebase.firestore)
 
                 api(projects.shared.core.model)
                 implementation(projects.shared.resources)

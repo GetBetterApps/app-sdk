@@ -55,8 +55,6 @@ kotlin {
 
             export(libs.kermit.log)
             export(libs.moko.resources)
-            export(libs.firebase.auth)
-            export(libs.firebase.firestore)
 
             transitiveExport = true
             embedBitcode(BitcodeEmbeddingMode.BITCODE)
@@ -105,8 +103,6 @@ kotlin {
 
                 implementation(libs.koin.core)
                 implementation(libs.moko.resources)
-                implementation(libs.firebase.auth)
-                implementation(libs.firebase.firestore)
             }
         }
 
@@ -146,8 +142,6 @@ kotlin {
 
                 api(libs.kermit.log)
                 api(libs.moko.resources)
-                api(libs.firebase.auth)
-                api(libs.firebase.firestore)
             }
         }
 
