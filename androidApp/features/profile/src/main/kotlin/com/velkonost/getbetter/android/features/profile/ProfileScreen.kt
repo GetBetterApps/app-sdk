@@ -102,15 +102,6 @@ fun ProfileScreen(
                         else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
                     }
                 )
-//                val configs = context.resources.configuration
-//                configs.uiMode = when(it) {
-//                    UIMode.Light -> Configuration.UI_MODE_NIGHT_NO
-//                    UIMode.Dark -> Configuration.UI_MODE_NIGHT_YES
-//                    else -> UI_MODE_NIGHT_MASK
-//                }
-//
-////                    Configuration.UI_MODE_NIGHT_UNDEFINED
-//                context.resources.updateConfiguration(configs, context.resources.displayMetrics)
             }
         )
 

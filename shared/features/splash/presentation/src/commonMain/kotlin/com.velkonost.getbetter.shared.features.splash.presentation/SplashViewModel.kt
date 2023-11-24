@@ -28,6 +28,8 @@ internal constructor(
 
     private fun startSession() {
         launchJob {
+            emit(viewState.value.copy(selectedTheme = splashRepository.getTheme()))
+
             splashRepository.prepareSession()
 
             if (!splashRepository.isUserRegistrationDateSaved()) {
