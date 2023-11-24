@@ -10,10 +10,5 @@ data class ProfileViewState(
     val userName: String = "",
     val avatarUrl: String? = null,
     val experienceData: ExperienceData? = null,
-    val themeState: ThemeState = ThemeState()
+    val selectedTheme: UIMode = UIMode.Light
 ) : UIContract.State
-
-data class ThemeState(
-    val variants: List<UIMode> = UIMode.entries.toList(),
-    val selected: UIMode = UIMode.Light
-)

@@ -29,7 +29,6 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun ThemingMenuItem(
     modifier: Modifier = Modifier,
-    tabs: List<UIMode>,
     selected: UIMode,
     onClick: (UIMode) -> Unit
 ) {
@@ -73,7 +72,6 @@ fun ThemingMenuItem(
 
         ThemingTabs(
             selected = selected,
-            tabs = tabs,
             onClick = onClick
         )
     }

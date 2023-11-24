@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,6 +27,7 @@ import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.VersionName
 import com.velkonost.getbetter.core.compose.components.experience.LevelBlock
 import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
+import com.velkonost.getbetter.shared.core.model.profile.UIMode
 import com.velkonost.getbetter.shared.features.profile.ProfileViewModel
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelected
 import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
@@ -89,7 +91,16 @@ fun ProfileScreen(
         }
 
         AppSettings(
-            themeState = state.themeState
+            themeState = state.themeState,
+            onThemeChanged = {
+                AppCompatDelegate.setDefaultNightMode(
+                    when (it) {
+                        UIMode.Light -> AppCompatDelegate.MODE_NIGHT_NO
+                        UIMode.Dark -> AppCompatDelegate.MODE_NIGHT_YES
+                        else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                    }
+                )
+            }
         )
 
         HelpAndSupport()

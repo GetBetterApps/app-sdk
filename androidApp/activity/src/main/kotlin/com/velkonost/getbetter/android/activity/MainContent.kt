@@ -1,7 +1,6 @@
 package com.velkonost.getbetter.android.activity
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -44,7 +43,7 @@ internal fun MainContent() {
 //    val configs = context.resources.configuration
 //    configs.uiMode = Configuration.UI_MODE_NIGHT_UNDEFINED
 //    context.resources.updateConfiguration(configs, context.resources.displayMetrics)
-    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
 
 //    addActiveDelegate(context)
 
