@@ -14,6 +14,7 @@ android {
 
 dependencies {
     implementation(projects.shared.core.util)
+    implementation(projects.shared.core.model)
     implementation(projects.shared.features.splash.presentation)
 
     implementation(projects.shared.resources)

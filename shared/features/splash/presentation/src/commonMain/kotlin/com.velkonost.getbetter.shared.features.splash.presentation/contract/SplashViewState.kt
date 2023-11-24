@@ -5,5 +5,5 @@ import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 
 data class SplashViewState(
     val startDestination: String? = null,
-    val selectedTheme: UIMode = UIMode.System
+    val selectedTheme: UIMode? = null
 ) : UIContract.State
