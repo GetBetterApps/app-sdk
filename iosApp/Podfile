@@ -5,10 +5,8 @@ target 'iosApp' do
   pod 'KMPNativeCoroutinesAsync', '1.0.0-ALPHA-18'
   pod 'KMMViewModelSwiftUI', '1.0.0-ALPHA-14'
   pod 'Firebase/Core'
-  pod 'Firebase/Auth'
   pod 'FirebaseCrashlytics'
-  pod 'FirebaseFirestore'
-  pod 'Firebase/Storage'
+  pod 'FirebaseMessaging'
   pod 'lottie-ios'
 
 end
