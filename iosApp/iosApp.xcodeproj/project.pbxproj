@@ -32,6 +32,7 @@
 		4616B08B2AF62B9500A4CDDE /* CompletionDateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B08A2AF62B9500A4CDDE /* CompletionDateButton.swift */; };
 		4616B08D2AF62C7200A4CDDE /* CompletedOnBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B08C2AF62C7200A4CDDE /* CompletedOnBlock.swift */; };
 		46182DC12AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */; };
+		461A28CF2B10B20A00075C4A /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461A28CE2B10B20A00075C4A /* NotificationManager.swift */; };
 		461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */; };
 		461F7C612AA878EB003791CF /* Koin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C602AA878EB003791CF /* Koin.swift */; };
 		461F7C652AA88A39003791CF /* NavRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C642AA88A39003791CF /* NavRoute.swift */; };
@@ -161,6 +162,7 @@
 		4616B08A2AF62B9500A4CDDE /* CompletionDateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionDateButton.swift; sourceTree = "<group>"; };
 		4616B08C2AF62C7200A4CDDE /* CompletedOnBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedOnBlock.swift; sourceTree = "<group>"; };
 		46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinByteArrayExt.swift; sourceTree = "<group>"; };
+		461A28CE2B10B20A00075C4A /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifecycleAwareObservableObject.swift; sourceTree = "<group>"; };
 		461F7C602AA878EB003791CF /* Koin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Koin.swift; sourceTree = "<group>"; };
 		461F7C642AA88A39003791CF /* NavRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavRoute.swift; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 				7555FF82242A565900829871 /* ContentView.swift */,
 				461F7C602AA878EB003791CF /* Koin.swift */,
 				4678E4472AAC6A67000B88E8 /* AppDelegate.swift */,
+				461A28CE2B10B20A00075C4A /* NotificationManager.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1067,6 +1070,7 @@
 				46FCD3D72AF532450025D2C6 /* NoteDetailHeader.swift in Sources */,
 				469D0FBE2AB1DE330060CE95 /* WhiteButton.swift in Sources */,
 				46059D262AC4037E00DC5015 /* TasksView.swift in Sources */,
+				461A28CF2B10B20A00075C4A /* NotificationManager.swift in Sources */,
 				4616B0852AF626F900A4CDDE /* MultilineTextFieldBinding.swift in Sources */,
 				460487952AD83989005E8A54 /* CreateNewNoteBottomSheet.swift in Sources */,
 				4616B0872AF629B100A4CDDE /* DateExt.swift in Sources */,
