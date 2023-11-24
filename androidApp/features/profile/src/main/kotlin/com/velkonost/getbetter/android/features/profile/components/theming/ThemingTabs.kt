@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.android.features.profile.components.theming
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -34,54 +35,57 @@ fun ThemingTabs(
 ) {
 
     CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
-        Row(
-            modifier = modifier.padding(top = 12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            ThemingButton(
-                text = UIMode.Light.text.toString(LocalContext.current),
-                selected = selected == UIMode.Light,
-                onClick = {
-                    onClick.invoke(UIMode.Light)
-                }
-            )
-            Spacer(modifier.weight(0.1f))
-            Box(
-                modifier = modifier
-                    .height(16.dp)
-                    .width(1.dp)
-                    .background(
-                        color = colorResource(resource = SharedR.colors.text_primary),
-                        shape = MaterialTheme.shapes.extraLarge
-                    )
-            )
-            Spacer(modifier.weight(0.1f))
-            ThemingButton(
-                text = UIMode.System.text.toString(LocalContext.current),
-                selected = selected == UIMode.System,
-                onClick = {
-                    onClick.invoke(UIMode.System)
-                }
-            )
-            Spacer(modifier.weight(0.1f))
-            Box(
-                modifier = modifier
-                    .height(16.dp)
-                    .width(1.dp)
-                    .background(
-                        color = colorResource(resource = SharedR.colors.text_primary),
-                        shape = MaterialTheme.shapes.extraLarge
-                    )
-            )
-            Spacer(modifier.weight(0.1f))
-            ThemingButton(
-                text = UIMode.Dark.text.toString(LocalContext.current),
-                selected = selected == UIMode.Dark,
-                onClick = {
-                    onClick.invoke(UIMode.Dark)
-                }
-            )
+        AnimatedContent(targetState = selected, label = "") {
+            Row(
+                modifier = modifier.padding(top = 12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                ThemingButton(
+                    text = UIMode.Light.text.toString(LocalContext.current),
+                    selected = it == UIMode.Light,
+                    onClick = {
+                        onClick.invoke(UIMode.Light)
+                    }
+                )
+                Spacer(modifier.weight(0.1f))
+                Box(
+                    modifier = modifier
+                        .height(16.dp)
+                        .width(1.dp)
+                        .background(
+                            color = colorResource(resource = SharedR.colors.text_primary),
+                            shape = MaterialTheme.shapes.extraLarge
+                        )
+                )
+                Spacer(modifier.weight(0.1f))
+                ThemingButton(
+                    text = UIMode.System.text.toString(LocalContext.current),
+                    selected = selected == UIMode.System,
+                    onClick = {
+                        onClick.invoke(UIMode.System)
+                    }
+                )
+                Spacer(modifier.weight(0.1f))
+                Box(
+                    modifier = modifier
+                        .height(16.dp)
+                        .width(1.dp)
+                        .background(
+                            color = colorResource(resource = SharedR.colors.text_primary),
+                            shape = MaterialTheme.shapes.extraLarge
+                        )
+                )
+                Spacer(modifier.weight(0.1f))
+                ThemingButton(
+                    text = UIMode.Dark.text.toString(LocalContext.current),
+                    selected = selected == UIMode.Dark,
+                    onClick = {
+                        onClick.invoke(UIMode.Dark)
+                    }
+                )
+            }
         }
+
     }
 }
 

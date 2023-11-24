@@ -7,6 +7,7 @@ import com.velkonost.getbetter.shared.features.splash.api.SplashRepository
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.NavigateToAuth
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.NavigateToMainFlow
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.SplashAction
+import com.velkonost.getbetter.shared.features.splash.presentation.contract.SplashEvent
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.SplashNavigation
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.SplashViewState
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
@@ -17,7 +18,7 @@ internal constructor(
     private val authRepository: AuthRepository<String>,
     private val splashRepository: SplashRepository,
     private val userInfoRepository: UserInfoRepository
-) : BaseViewModel<SplashViewState, SplashAction, SplashNavigation, Nothing>(
+) : BaseViewModel<SplashViewState, SplashAction, SplashNavigation, SplashEvent>(
     initialState = SplashViewState()
 ) {
 
@@ -29,6 +30,7 @@ internal constructor(
     private fun startSession() {
         launchJob {
             emit(viewState.value.copy(selectedTheme = splashRepository.getTheme()))
+            emit(SplashEvent.ChangeTheme(splashRepository.getTheme()))
 
             splashRepository.prepareSession()
 
