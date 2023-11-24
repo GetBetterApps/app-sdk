@@ -18,7 +18,7 @@ object WisdomNavRoute : NavRoute<WisdomViewModel> {
     override val route: String
         get() = NavigationScreen.WisdomNavScreen.route
 
-    override val menuIcon: ImageResource = SharedR.images.ic_menu_profile
+    override val menuIcon: ImageResource = SharedR.images.ic_menu_wisdom
 
     @Composable
     override fun Content(viewModel: WisdomViewModel) = WisdomScreen(viewModel = viewModel)
