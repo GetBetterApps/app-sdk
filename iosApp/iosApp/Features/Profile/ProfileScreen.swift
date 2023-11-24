@@ -52,10 +52,11 @@ struct ProfileScreen: View {
                     selectedTheme: state.selectedTheme,
                     onThemeChanged: { value in
                         viewModel.dispatch(action: ThemeChange(value: value))
+
                         (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = switch(value) {
-                        case UIMode.light: UIUserInterfaceStyle.light
-                        case UIMode.dark: UIUserInterfaceStyle.dark
-                        default : UIUserInterfaceStyle.unspecified
+                        case UIMode.light: .light
+                        case UIMode.dark: .dark
+                        default : .unspecified
                         }
                     }
                 )

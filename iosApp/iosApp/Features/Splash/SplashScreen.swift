@@ -15,8 +15,9 @@ struct SplashScreen: View {
     @StateViewModel var viewModel: SplashViewModel
     
     var body: some View {
+        @State var state = viewModel.viewStateValue as! SplashViewState
+        
         ZStack(alignment: .topLeading) {
-            
             LinearGradient(
                 colors: [.onboardingBackgroundGradientStart, .onboardingBackgroundGradientEnd],
                 startPoint: .top, endPoint: .bottom
@@ -30,6 +31,17 @@ struct SplashScreen: View {
                     .opacity(0.4)
                 Spacer()
             }
-        }.edgesIgnoringSafeArea(.all)
+        }
+        .onAppear {
+            (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = switch(state.selectedTheme) {
+            case UIMode.light: .light
+            case UIMode.dark: .dark
+            default : .unspecified
+            }
+        }
+        .edgesIgnoringSafeArea(.all)
     }
+    
+    
+    
 }
