@@ -4,10 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Tab
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material3.MaterialTheme
@@ -41,79 +43,39 @@ fun ThemingTabs(
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                modifier = modifier
-                    .background(
-                        color = colorResource(
-                            resource = if (selected == UIMode.Light) SharedR.colors.button_gradient_start
-                            else SharedR.colors.background_item
-                        ),
-                        shape = MaterialTheme.shapes.small
-                    )
-                    .weight(1f),
+            ThemingButton(
                 text = UIMode.Light.text.toString(LocalContext.current),
-                color = colorResource(
-                    resource =
-                    if (selected == UIMode.Light) SharedR.colors.text_light
-                    else SharedR.colors.icon_inactive
-                ),
-                style = MaterialTheme.typography.labelSmall
+                selected = selected == UIMode.Light
             )
-            Spacer(modifier.weight(1f))
+            Spacer(modifier.weight(0.5f))
             Box(
                 modifier = modifier
                     .height(16.dp)
+                    .width(1.dp)
                     .background(
                         color = colorResource(resource = SharedR.colors.button_gradient_start),
                         shape = MaterialTheme.shapes.extraLarge
                     )
             )
-            Spacer(modifier.weight(1f))
-            Text(
-                modifier = modifier
-                    .background(
-                        color = colorResource(
-                            resource = if (selected == UIMode.System) SharedR.colors.button_gradient_start
-                            else SharedR.colors.background_item
-                        ),
-                        shape = MaterialTheme.shapes.small
-                    )
-                    .weight(1f),
+            Spacer(modifier.weight(0.5f))
+            ThemingButton(
                 text = UIMode.System.text.toString(LocalContext.current),
-                color = colorResource(
-                    resource =
-                    if (selected == UIMode.System) SharedR.colors.text_light
-                    else SharedR.colors.icon_inactive
-                ),
-                style = MaterialTheme.typography.labelSmall
+                selected = selected == UIMode.System
             )
-            Spacer(modifier.weight(1f))
+            Spacer(modifier.weight(0.5f))
             Box(
                 modifier = modifier
                     .height(6.dp)
+                    .width(1.dp)
                     .background(
                         color = colorResource(resource = SharedR.colors.main_background),
                         shape = MaterialTheme.shapes.extraLarge
                     )
             )
-            Spacer(modifier.weight(1f))
-            Text(
-                modifier = modifier
-                    .background(
-                        color = colorResource(
-                            resource = if (selected == UIMode.Dark) SharedR.colors.button_gradient_start
-                            else SharedR.colors.background_item
-                        ),
-                        shape = MaterialTheme.shapes.small
-                    )
-                    .weight(1f),
+            Spacer(modifier.weight(0.5f))
+            ThemingButton(
                 text = UIMode.Dark.text.toString(LocalContext.current),
-                color = colorResource(
-                    resource =
-                    if (selected == UIMode.Dark) SharedR.colors.text_light
-                    else SharedR.colors.icon_inactive
-                ),
-                style = MaterialTheme.typography.labelSmall
+                selected = selected == UIMode.Dark
             )
         }
 
@@ -181,4 +143,31 @@ fun ThemingTabs(
             }
         }
     }
+}
+
+@Composable
+fun RowScope.ThemingButton(
+    modifier: Modifier = Modifier,
+    text: String,
+    selected: Boolean
+) {
+    Text(
+        modifier = modifier
+            .background(
+                color = colorResource(
+                    resource = if (selected) SharedR.colors.button_gradient_start
+                    else SharedR.colors.background_item
+                ),
+                shape = MaterialTheme.shapes.small
+            )
+            .weight(1f),
+        text = text,
+        color = colorResource(
+            resource =
+            if (selected) SharedR.colors.text_light
+            else SharedR.colors.icon_inactive
+        ),
+        style = MaterialTheme.typography.labelSmall,
+        textAlign = TextAlign.Center
+    )
 }
