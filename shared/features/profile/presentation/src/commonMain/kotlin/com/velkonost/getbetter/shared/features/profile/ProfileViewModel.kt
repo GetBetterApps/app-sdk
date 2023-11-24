@@ -5,6 +5,7 @@ import com.velkonost.getbetter.shared.core.model.user.UserInfo
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.features.profile.api.ProfileRepository
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelected
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelectedBase64
 import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
@@ -19,7 +20,7 @@ import io.ktor.util.decodeBase64Bytes
 class ProfileViewModel
 internal constructor(
     private val userInfoRepository: UserInfoRepository,
-    private val profi
+    private val profileRepository: ProfileRepository
 ) : BaseViewModel<ProfileViewState, ProfileAction, ProfileNavigation, Nothing>(
     initialState = ProfileViewState()
 ) {
@@ -35,13 +36,15 @@ internal constructor(
 
     override fun dispatch(action: ProfileAction) = when (action) {
         is LogoutClick -> obtainLogout()
-        is ThemeChange ->
+        is ThemeChange -> obtainThemeChange(action.value)
         is AvatarSelected -> obtainAvatarSelected(action.avatarContent)
         is AvatarSelectedBase64 -> obtainAvatarSelected(action.avatarContent.decodeBase64Bytes())
     }
 
     private fun fetchUserInfo() {
         launchJob {
+            emit(viewState.value.copy(selectedTheme = profileRepository.getTheme()))
+
             userInfoRepository.fetchInfo() collectAndProcess {
                 isLoading {
                     emit(viewState.value.copy(isLoading = it))
@@ -80,7 +83,10 @@ internal constructor(
     }
 
     private fun obtainThemeChange(value: UIMode) {
-
+        launchJob {
+            profileRepository.changeTheme(value)
+            emit(viewState.value.copy(selectedTheme = value))
+        }
     }
 
     private fun UserInfo?.toUI() {
