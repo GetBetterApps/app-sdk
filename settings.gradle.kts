@@ -42,8 +42,6 @@ include(
     ":shared:features:likes:data",
     ":shared:features:comments:api",
     ":shared:features:comments:data",
-    ":shared:features:feedback:api",
-    ":shared:features:feedback:data",
     ":shared:features:follows:api",
     ":shared:features:follows:data",
 
@@ -73,6 +71,10 @@ include(
     ":shared:features:areadetail:presentation",
     ":shared:features:notedetail:presentation",
     ":shared:features:profiledetail:presentation",
+
+    ":shared:features:feedback:api",
+    ":shared:features:feedback:data",
+    ":shared:features:feedback:presentation",
 
     ":androidApp:app",
     ":androidApp:activity",
