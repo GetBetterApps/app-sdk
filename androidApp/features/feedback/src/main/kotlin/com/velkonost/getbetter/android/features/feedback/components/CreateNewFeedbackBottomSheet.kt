@@ -51,7 +51,6 @@ fun CreateNewFeedbackBottomSheet(
 ) {
     val scrollState = rememberScrollState()
 
-
     ModalBottomSheetLayout(
         sheetState = modalSheetState,
         sheetShape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
