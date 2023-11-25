@@ -6,6 +6,7 @@ import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.feedback.api.FeedbackRepository
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackAction
+import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackEvent
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackNavigation
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackViewState
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.NavigateBack
@@ -13,7 +14,7 @@ import com.velkonost.getbetter.shared.features.feedback.presentation.contract.Ne
 
 class FeedbackViewModel internal constructor(
     private val feedbackRepository: FeedbackRepository
-) : BaseViewModel<FeedbackViewState, FeedbackAction, FeedbackNavigation, Nothing>(
+) : BaseViewModel<FeedbackViewState, FeedbackAction, FeedbackNavigation, FeedbackEvent>(
     initialState = FeedbackViewState()
 ) {
 
@@ -25,9 +26,7 @@ class FeedbackViewModel internal constructor(
         is NavigateBack -> emit(action)
         is NewFeedbackAction.TypeChanged -> obtainNewFeedbackTypeChanged(action.value)
         is NewFeedbackAction.TextChanged -> obtainNewFeedbackTextChanged(action.value)
-        else -> {
-
-        }
+        is NewFeedbackAction.CreateClick -> obtainNewFeedbackCreate()
     }
 
     private fun getFeedbacks() {
@@ -53,6 +52,29 @@ class FeedbackViewModel internal constructor(
     private fun obtainNewFeedbackTextChanged(value: String) {
         val newFeedbackState = viewState.value.newFeedback.copy(text = value)
         emit(viewState.value.copy(newFeedback = newFeedbackState))
+    }
+
+    private fun obtainNewFeedbackCreate() {
+        launchJob {
+            val state = viewState.value.newFeedback
+            feedbackRepository.createFeedback(
+                type = state.type,
+                text = state.text
+            ) collectAndProcess {
+                isLoading {
+                    val newFeedbackState = viewState.value.newFeedback.copy(isLoading = it)
+                    emit(viewState.value.copy(newFeedback = newFeedbackState))
+                }
+                onSuccess {
+                    val newFeedbackState = viewState.value.newFeedback.copy(
+                        text = "",
+                        type = FeedbackType.Feature
+                    )
+                    emit(viewState.value.copy(newFeedback = newFeedbackState))
+                    emit(FeedbackEvent.NewFeedbackCreated)
+                }
+            }
+        }
     }
 
 

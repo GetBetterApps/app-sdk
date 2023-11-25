@@ -10,6 +10,8 @@ sealed interface NewFeedbackAction : FeedbackAction {
     data class TypeChanged(val value: FeedbackType) : NewFeedbackAction
 
     data class TextChanged(val value: String) : NewFeedbackAction
+
+    data object CreateClick : NewFeedbackAction
 }
 
 data object NavigateBack : FeedbackAction, FeedbackNavigation {

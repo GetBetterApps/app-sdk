@@ -6,8 +6,10 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -58,8 +60,9 @@ fun CreateNewFeedbackBottomSheet(
                         .padding(horizontal = 16.dp)
                         .verticalScroll(scrollState)
                 ) {
-                    Row {
+                    Spacer(modifier.height(32.dp))
 
+                    Row {
                         Text(
                             modifier = modifier
                                 .weight(1f)
@@ -70,7 +73,7 @@ fun CreateNewFeedbackBottomSheet(
                                         if (newFeedbackState.type == FeedbackType.Feature) SharedR.colors.button_gradient_start
                                         else SharedR.colors.background_item
                                     ),
-                                    shape = MaterialTheme.shapes.medium
+                                    shape = MaterialTheme.shapes.small
                                 )
                                 .padding(vertical = 6.dp)
                                 .clickable(
@@ -97,7 +100,7 @@ fun CreateNewFeedbackBottomSheet(
                                         if (newFeedbackState.type == FeedbackType.Report) SharedR.colors.button_gradient_start
                                         else SharedR.colors.background_item
                                     ),
-                                    shape = MaterialTheme.shapes.medium
+                                    shape = MaterialTheme.shapes.small
                                 )
                                 .padding(vertical = 6.dp)
                                 .clickable(

@@ -11,6 +11,7 @@ data class FeedbackViewState(
 ) : UIContract.State
 
 data class NewFeedbackState(
+    val isLoading: Boolean = false,
     val text: String = "",
     val type: FeedbackType = FeedbackType.Feature
 )
