@@ -5,7 +5,7 @@ data class Feedback(
     val type: FeedbackType,
     val status: FeedbackStatus,
     val datetime: Long?,
-    val message: List<FeedbackMessage>
+    val messages: List<FeedbackMessage>
 
 )
 
