@@ -5,7 +5,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.AppButton
@@ -47,7 +50,7 @@ fun CreateNewFeedbackBottomSheet(
     onCreateClick: () -> Unit
 ) {
     val scrollState = rememberScrollState()
-    val interactionSource = remember { MutableInteractionSource() }
+
 
     ModalBottomSheetLayout(
         sheetState = modalSheetState,
@@ -74,72 +77,38 @@ fun CreateNewFeedbackBottomSheet(
                             .fillMaxWidth()
                             .fillMaxHeight(0.9f)
                             .padding(bottom = 40.dp)
-                            .padding(horizontal = 16.dp)
+                            .padding(horizontal = 4.dp)
                             .verticalScroll(scrollState)
                     ) {
                         Spacer(modifier.height(32.dp))
 
                         Row {
-                            Text(
-                                modifier = modifier
-                                    .weight(1f)
-                                    .padding(end = 6.dp)
-                                    .background(
-                                        color = colorResource(
-                                            resource =
-                                            if (newFeedbackState.type == FeedbackType.Feature) SharedR.colors.button_gradient_start
-                                            else SharedR.colors.background_item
-                                        ),
-                                        shape = MaterialTheme.shapes.small
-                                    )
-                                    .padding(vertical = 10.dp)
-                                    .clickable(
-                                        interactionSource = interactionSource,
-                                        indication = null
-                                    ) { onTypeChanged.invoke(FeedbackType.Feature) },
-                                text = "Feature",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = colorResource(
-                                    resource =
-                                    if (newFeedbackState.type == FeedbackType.Feature) SharedR.colors.text_light
-                                    else SharedR.colors.text_primary
-                                ),
-                                textAlign = TextAlign.Center
+                            FeedbackTypeView(
+                                feedbackType = FeedbackType.Feature,
+                                selected = newFeedbackState.type == FeedbackType.Feature,
+                                onClick = {
+                                    onTypeChanged.invoke(FeedbackType.Feature)
+                                }
                             )
 
-                            Text(
-                                modifier = modifier
-                                    .weight(1f)
-                                    .padding(start = 6.dp)
-                                    .background(
-                                        color = colorResource(
-                                            resource =
-                                            if (newFeedbackState.type == FeedbackType.Report) SharedR.colors.button_gradient_start
-                                            else SharedR.colors.background_item
-                                        ),
-                                        shape = MaterialTheme.shapes.small
-                                    )
-                                    .padding(vertical = 10.dp)
-                                    .clickable(
-                                        interactionSource = interactionSource,
-                                        indication = null
-                                    ) { onTypeChanged.invoke(FeedbackType.Report) },
-                                text = "Report",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = colorResource(
-                                    resource =
-                                    if (newFeedbackState.type == FeedbackType.Report) SharedR.colors.text_light
-                                    else SharedR.colors.text_primary
-                                ),
-                                textAlign =
-                                TextAlign.Center
+                            FeedbackTypeView(
+                                feedbackType = FeedbackType.Report,
+                                selected = newFeedbackState.type == FeedbackType.Report,
+                                onClick = {
+                                    onTypeChanged.invoke(FeedbackType.Report)
+                                }
                             )
                         }
 
                         MultilineTextField(
                             value = newFeedbackState.text,
-                            placeholderText = "123",
-                            onValueChanged = onTextChanged
+                            placeholderText = stringResource(
+                                resource =
+                                if (newFeedbackState.type == FeedbackType.Feature) SharedR.strings.support_feature_hint
+                                else SharedR.strings.support_report_hint
+                            ),
+                            onValueChanged = onTextChanged,
+                            paddingValues = PaddingValues(top = 12.dp, start = 6.dp, end = 6.dp)
                         )
                     }
 
@@ -182,5 +151,42 @@ fun CreateNewFeedbackBottomSheet(
     ) {
 
     }
+}
 
+@Composable
+fun RowScope.FeedbackTypeView(
+    modifier: Modifier = Modifier,
+    feedbackType: FeedbackType,
+    selected: Boolean,
+    onClick: () -> Unit
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+
+    Text(
+        modifier = modifier
+            .weight(1f)
+            .padding(horizontal = 6.dp)
+            .background(
+                color = colorResource(
+                    resource =
+                    if (selected) SharedR.colors.button_gradient_start
+                    else SharedR.colors.background_item
+                ),
+                shape = MaterialTheme.shapes.small
+            )
+            .padding(vertical = 10.dp)
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null,
+                onClick = onClick
+            ),
+        text = feedbackType.uiContent.toString(LocalContext.current),
+        style = MaterialTheme.typography.labelMedium,
+        color = colorResource(
+            resource =
+            if (selected) SharedR.colors.text_light
+            else SharedR.colors.text_primary
+        ),
+        textAlign = TextAlign.Center
+    )
 }

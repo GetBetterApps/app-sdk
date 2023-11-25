@@ -68,6 +68,12 @@
     <string name="uimode_dark_title">Dark</string>
     <string name="uimode_light_title">Light</string>
     <string name="uimode_system_title">System</string>
+
+    <string name="support_feature_title">FEATURE</string>
+    <string name="support_report_title">REPORT</string>
+
+    <string name="support_feature_hint">I want...</string>
+    <string name="support_report_hint">I found bug...</string>
     <!--  PROFILE  -->
 
     <!--  PROFILE DETAIL  -->

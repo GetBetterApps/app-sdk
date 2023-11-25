@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
@@ -49,7 +50,7 @@ fun FeedbackItem(
                             shape = MaterialTheme.shapes.small
                         )
                         .padding(vertical = 4.dp, horizontal = 6.dp),
-                    text = item.type.responseName,
+                    text = item.type.uiContent.toString(LocalContext.current),
                     style = MaterialTheme.typography.bodySmall,
                     color = colorResource(resource = SharedR.colors.text_primary)
                 )
