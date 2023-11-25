@@ -8,6 +8,7 @@ import com.velkonost.getbetter.android.features.addarea.AddAreaNavRoute
 import com.velkonost.getbetter.android.features.auth.AuthNavRoute
 import com.velkonost.getbetter.android.features.calendars.CalendarsNavRoute
 import com.velkonost.getbetter.android.features.diary.DiaryNavRoute
+import com.velkonost.getbetter.android.features.feedback.FeedbackNavRoute
 import com.velkonost.getbetter.android.features.home.WisdomNavRoute
 import com.velkonost.getbetter.android.features.notedetail.NoteDetailNavRoute
 import com.velkonost.getbetter.android.features.profile.ProfileNavRoute
@@ -100,5 +101,6 @@ fun NavGraphBuilder.addProfileRoute(
         startDestination = NavigationScreen.ProfileNavScreen.route
     ) {
         ProfileNavRoute.provide(this, navController, forceHideBottomBar)
+        FeedbackNavRoute.provide(this, navController, forceHideBottomBar)
     }
 }
