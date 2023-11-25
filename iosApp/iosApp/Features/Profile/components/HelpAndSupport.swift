@@ -11,6 +11,13 @@ import SwiftUI
 import SharedSDK
 
 struct HelpAndSupport: View {
+    
+    let onContactUsClick: () -> Void
+    
+    init(onContactUsClick: @escaping () -> Void) {
+        self.onContactUsClick = onContactUsClick
+    }
+    
     var body: some View {
         SectionTitle(text: SharedR.strings().profile_help_title.desc().localized())
         
@@ -25,10 +32,9 @@ struct HelpAndSupport: View {
                 
                 MenuItem(
                     title: SharedR.strings().profile_help_contact_support.desc().localized(),
-                    icon: SharedR.images().ic_chat_cloud.toUIImage()!
-                ) {
-                        
-                }
+                    icon: SharedR.images().ic_chat_cloud.toUIImage()!,
+                    onClick: onContactUsClick
+                )
             }
         }
     }

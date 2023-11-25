@@ -69,6 +69,8 @@
 		466C5CCB2AB73240002C089C /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C5CCA2AB73240002C089C /* BottomBar.swift */; };
 		466E51962B12326700088425 /* FeedbackScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466E51952B12326700088425 /* FeedbackScreen.swift */; };
 		466E51982B12328A00088425 /* FeedbackRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466E51972B12328A00088425 /* FeedbackRoute.swift */; };
+		466E519B2B1232DB00088425 /* FeedbackItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466E519A2B1232DB00088425 /* FeedbackItem.swift */; };
+		466E519D2B1233A200088425 /* FeedbackListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466E519C2B1233A200088425 /* FeedbackListHeader.swift */; };
 		4675C2A72AF76CAA00B90AC3 /* SocialFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4675C2A62AF76CAA00B90AC3 /* SocialFeedView.swift */; };
 		4675C2AA2AF76D9000B90AC3 /* FeedNoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4675C2A92AF76D9000B90AC3 /* FeedNoteItem.swift */; };
 		467668BA2AEABFCA007C17DE /* SubNoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467668B92AEABFCA007C17DE /* SubNoteItem.swift */; };
@@ -199,6 +201,8 @@
 		466C5CCA2AB73240002C089C /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		466E51952B12326700088425 /* FeedbackScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackScreen.swift; sourceTree = "<group>"; };
 		466E51972B12328A00088425 /* FeedbackRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackRoute.swift; sourceTree = "<group>"; };
+		466E519A2B1232DB00088425 /* FeedbackItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackItem.swift; sourceTree = "<group>"; };
+		466E519C2B1233A200088425 /* FeedbackListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackListHeader.swift; sourceTree = "<group>"; };
 		4675C2A62AF76CAA00B90AC3 /* SocialFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFeedView.swift; sourceTree = "<group>"; };
 		4675C2A92AF76D9000B90AC3 /* FeedNoteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedNoteItem.swift; sourceTree = "<group>"; };
 		467668B92AEABFCA007C17DE /* SubNoteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubNoteItem.swift; sourceTree = "<group>"; };
@@ -538,10 +542,20 @@
 		466E51942B12324800088425 /* Feedback */ = {
 			isa = PBXGroup;
 			children = (
+				466E51992B1232D200088425 /* components */,
 				466E51952B12326700088425 /* FeedbackScreen.swift */,
 				466E51972B12328A00088425 /* FeedbackRoute.swift */,
 			);
 			path = Feedback;
+			sourceTree = "<group>";
+		};
+		466E51992B1232D200088425 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				466E519A2B1232DB00088425 /* FeedbackItem.swift */,
+				466E519C2B1233A200088425 /* FeedbackListHeader.swift */,
+			);
+			path = components;
 			sourceTree = "<group>";
 		};
 		4675C2A52AF76C2200B90AC3 /* notelist */ = {
@@ -1021,6 +1035,7 @@
 				468B876E2ABC45D2001BBEB1 /* CalendarsScreen.swift in Sources */,
 				46059D222AC4037000DC5015 /* AreasView.swift in Sources */,
 				460054A32ABB101600586767 /* SubscriptionBox.swift in Sources */,
+				466E519B2B1232DB00088425 /* FeedbackItem.swift in Sources */,
 				4667C90A2AC59A9B00BAA9DD /* MultilineTextField.swift in Sources */,
 				46C6606A2AFCCCD900FA189C /* CommentItem.swift in Sources */,
 				46B17E162AADF05D008C2BC4 /* ViewExt.swift in Sources */,
@@ -1086,6 +1101,7 @@
 				46FCD3D72AF532450025D2C6 /* NoteDetailHeader.swift in Sources */,
 				469D0FBE2AB1DE330060CE95 /* WhiteButton.swift in Sources */,
 				46059D262AC4037E00DC5015 /* TasksView.swift in Sources */,
+				466E519D2B1233A200088425 /* FeedbackListHeader.swift in Sources */,
 				461A28CF2B10B20A00075C4A /* NotificationManager.swift in Sources */,
 				4616B0852AF626F900A4CDDE /* MultilineTextFieldBinding.swift in Sources */,
 				460487952AD83989005E8A54 /* CreateNewNoteBottomSheet.swift in Sources */,

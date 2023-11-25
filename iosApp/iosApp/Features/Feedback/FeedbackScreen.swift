@@ -17,6 +17,30 @@ struct FeedbackScreen: View {
     @StateViewModel var viewModel: FeedbackViewModel
     
     var body: some View {
-        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Hello, world!@*/Text("Hello, world!")/*@END_MENU_TOKEN@*/
+        @State var state = viewModel.viewStateValue as! FeedbackViewState
+        
+        ZStack {
+            if state.isLoading && state.items.isEmpty {
+                Loader().frame(alignment: .center)
+            } else {
+                VStack {
+                    FeedbackListHeader()
+                    
+                    ScrollView(showsIndicators: false) {
+                        LazyVStack(spacing: 0) {
+                            ForEach(state.items, id: \.self) { item in
+                                FeedbackItem(
+                                    item: item,
+                                    onClick: {
+                                        
+                                    }
+                                )
+                            }
+                        }
+                        .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
+                    }
+                }
+            }
+        }
     }
 }

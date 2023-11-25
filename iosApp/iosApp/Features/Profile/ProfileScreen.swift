@@ -62,7 +62,11 @@ struct ProfileScreen: View {
                     }
                 )
                 
-                HelpAndSupport()
+                HelpAndSupport(
+                    onContactUsClick: {
+                        viewModel.dispatch(action: ContactUsClick())
+                    }
+                )
                 
                 AppButton(
                     labelText: SharedR.strings().profile_logout.desc().localized(),
