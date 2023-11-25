@@ -67,6 +67,8 @@
 		466B497D2ACFF06C00AD3F6E /* AddAreaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B497C2ACFF06C00AD3F6E /* AddAreaScreen.swift */; };
 		466B497F2ACFF07300AD3F6E /* AddAreaRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B497E2ACFF07300AD3F6E /* AddAreaRoute.swift */; };
 		466C5CCB2AB73240002C089C /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C5CCA2AB73240002C089C /* BottomBar.swift */; };
+		466E51962B12326700088425 /* FeedbackScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466E51952B12326700088425 /* FeedbackScreen.swift */; };
+		466E51982B12328A00088425 /* FeedbackRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466E51972B12328A00088425 /* FeedbackRoute.swift */; };
 		4675C2A72AF76CAA00B90AC3 /* SocialFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4675C2A62AF76CAA00B90AC3 /* SocialFeedView.swift */; };
 		4675C2AA2AF76D9000B90AC3 /* FeedNoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4675C2A92AF76D9000B90AC3 /* FeedNoteItem.swift */; };
 		467668BA2AEABFCA007C17DE /* SubNoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467668B92AEABFCA007C17DE /* SubNoteItem.swift */; };
@@ -195,6 +197,8 @@
 		466B497C2ACFF06C00AD3F6E /* AddAreaScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaScreen.swift; sourceTree = "<group>"; };
 		466B497E2ACFF07300AD3F6E /* AddAreaRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaRoute.swift; sourceTree = "<group>"; };
 		466C5CCA2AB73240002C089C /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
+		466E51952B12326700088425 /* FeedbackScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackScreen.swift; sourceTree = "<group>"; };
+		466E51972B12328A00088425 /* FeedbackRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackRoute.swift; sourceTree = "<group>"; };
 		4675C2A62AF76CAA00B90AC3 /* SocialFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFeedView.swift; sourceTree = "<group>"; };
 		4675C2A92AF76D9000B90AC3 /* FeedNoteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedNoteItem.swift; sourceTree = "<group>"; };
 		467668B92AEABFCA007C17DE /* SubNoteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubNoteItem.swift; sourceTree = "<group>"; };
@@ -438,6 +442,7 @@
 		461F7C6D2AA8D7DE003791CF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				466E51942B12324800088425 /* Feedback */,
 				464478C52B0A0C3C00926899 /* ProfileDetail */,
 				46FCD3D02AF530A20025D2C6 /* NoteDetail */,
 				4696B6AC2AD15EDC00DDD405 /* AreaDetail */,
@@ -528,6 +533,15 @@
 				46D857732ACFF1C500BE74DA /* AddAreaViewModel.swift */,
 			);
 			path = AddArea;
+			sourceTree = "<group>";
+		};
+		466E51942B12324800088425 /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				466E51952B12326700088425 /* FeedbackScreen.swift */,
+				466E51972B12328A00088425 /* FeedbackRoute.swift */,
+			);
+			path = Feedback;
 			sourceTree = "<group>";
 		};
 		4675C2A52AF76C2200B90AC3 /* notelist */ = {
@@ -985,6 +999,7 @@
 				460054B72ABB576B00586767 /* WisdomItem.swift in Sources */,
 				467668BA2AEABFCA007C17DE /* SubNoteItem.swift in Sources */,
 				4667C9022AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift in Sources */,
+				466E51962B12326700088425 /* FeedbackScreen.swift in Sources */,
 				464478C72B0A0C5800926899 /* ProfileDetailScreen.swift in Sources */,
 				461F7C652AA88A39003791CF /* NavRoute.swift in Sources */,
 				46E2DD2D2AE9364D00B4B2B5 /* AreaPickerHeader.swift in Sources */,
@@ -1011,6 +1026,7 @@
 				46B17E162AADF05D008C2BC4 /* ViewExt.swift in Sources */,
 				46FCD3D92AF537590025D2C6 /* AreaData.swift in Sources */,
 				460054A12ABB0D0100586767 /* SettingsButton.swift in Sources */,
+				466E51982B12328A00088425 /* FeedbackRoute.swift in Sources */,
 				46D857762ACFF23100BE74DA /* PaginationState.swift in Sources */,
 				4646BF9C2AD2BD72000980DD /* AreaDetailBottomButtons.swift in Sources */,
 				4696B6AE2AD15EE600DDD405 /* AreaDetailScreen.swift in Sources */,

@@ -30,8 +30,8 @@ import com.velkonost.getbetter.android.features.feedback.components.FeedbackList
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.shared.features.feedback.presentation.FeedbackViewModel
+import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackAction
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackEvent
-import com.velkonost.getbetter.shared.features.feedback.presentation.contract.NavigateBack
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.NewFeedbackAction
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -58,7 +58,7 @@ fun FeedbackScreen(
         } else {
             Column {
                 FeedbackListHeader {
-                    viewModel.dispatch(NavigateBack)
+                    viewModel.dispatch(FeedbackAction.NavigateBack)
                 }
 
                 LazyColumn(
@@ -90,8 +90,9 @@ fun FeedbackScreen(
                             brush = Brush.verticalGradient(
                                 colors = listOf(
                                     Color.Transparent,
-                                    colorResource(resource = SharedR.colors.main_background)
-                                        .copy(alpha = 0.7f),
+                                    colorResource(resource = SharedR.colors.main_background).copy(
+                                        alpha = 0.7f
+                                    ),
                                     colorResource(resource = SharedR.colors.main_background),
                                 ),
                             ),
