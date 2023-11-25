@@ -9,12 +9,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -29,11 +30,13 @@ import com.velkonost.getbetter.android.features.feedback.components.FeedbackList
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.shared.features.feedback.presentation.FeedbackViewModel
+import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackEvent
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.NavigateBack
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.NewFeedbackAction
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -58,7 +61,8 @@ fun FeedbackScreen(
                     viewModel.dispatch(NavigateBack)
                 }
 
-                LazyRow(
+                LazyColumn(
+                    modifier = modifier.padding(horizontal = 16.dp),
                     contentPadding = PaddingValues(bottom = 140.dp)
                 ) {
                     items(state.items, key = { it.id!! }) { item ->
@@ -126,4 +130,16 @@ fun FeedbackScreen(
             viewModel.dispatch(NewFeedbackAction.CreateClick)
         }
     )
+
+    LaunchedEffect(Unit) {
+        viewModel.events.collectLatest {
+            when (it) {
+                is FeedbackEvent.NewFeedbackCreated -> {
+                    scope.launch {
+                        createNewFeedbackSheetState.hide()
+                    }
+                }
+            }
+        }
+    }
 }

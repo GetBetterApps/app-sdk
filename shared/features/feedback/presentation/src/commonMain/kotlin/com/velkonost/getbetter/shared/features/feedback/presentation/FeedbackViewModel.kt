@@ -72,6 +72,8 @@ class FeedbackViewModel internal constructor(
                     )
                     emit(viewState.value.copy(newFeedback = newFeedbackState))
                     emit(FeedbackEvent.NewFeedbackCreated)
+
+                    getFeedbacks()
                 }
             }
         }
