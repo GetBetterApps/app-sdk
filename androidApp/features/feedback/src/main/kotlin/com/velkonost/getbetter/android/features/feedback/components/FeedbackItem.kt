@@ -51,7 +51,7 @@ fun FeedbackItem(
                         )
                         .padding(vertical = 4.dp, horizontal = 6.dp),
                     text = item.type.uiContent.toString(LocalContext.current),
-                    style = MaterialTheme.typography.bodySmall,
+                    style = MaterialTheme.typography.labelMedium,
                     color = colorResource(resource = SharedR.colors.text_primary)
                 )
                 Spacer(modifier.weight(1f))
