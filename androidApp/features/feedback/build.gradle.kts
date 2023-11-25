@@ -16,6 +16,7 @@ dependencies {
     implementation(libs.androidx.compose.paging)
 
     implementation(projects.shared.core.util)
+    implementation(projects.shared.core.model)
     api(projects.shared.features.feedback.presentation)
 
     implementation(projects.shared.resources)
