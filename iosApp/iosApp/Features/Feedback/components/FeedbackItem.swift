@@ -27,12 +27,13 @@ struct FeedbackItem: View {
                     Text(item.type.uiContent.localized())
                         .style(.labelMedium)
                         .foregroundColor(.textPrimary)
+                        .padding(.vertical, 4)
+                        .padding(.horizontal, 6)
                         .background(
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color.backgroundIcon)
                         )
-                        .padding(.vertical, 4)
-                        .padding(.horizontal, 6)
+                        
                     
                     Spacer()
                     
@@ -42,12 +43,15 @@ struct FeedbackItem: View {
                         
                 }
                 
-                Text(item.messages.first!.text)
-                    .style(.bodyMedium)
-                    .foregroundColor(.textPrimary)
-                    .lineLimit(3)
-                    .multilineTextAlignment(.leading)
-                    .padding(.top, 12)
+                HStack {
+                    Text(item.messages.first!.text)
+                        .style(.bodyMedium)
+                        .foregroundColor(.textPrimary)
+                        .lineLimit(3)
+                        .multilineTextAlignment(.leading)
+                        .padding(.top, 12)
+                    Spacer()
+                }
             }
             .onTapGesture {
                 onClick()
