@@ -17,8 +17,10 @@ import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
+import com.velkonost.getbetter.shared.core.model.feedback.FeedbackType
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.NewFeedbackState
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -47,6 +49,7 @@ fun CreateNewFeedbackBottomSheet(
                         .fillMaxWidth()
                         .fillMaxHeight(0.9f)
                         .padding(bottom = 40.dp)
+                        .padding(horizontal = 16.dp)
                         .verticalScroll(scrollState)
                 ) {
                     Row {
@@ -54,37 +57,58 @@ fun CreateNewFeedbackBottomSheet(
                         Text(
                             modifier = modifier
                                 .weight(1f)
+                                .padding(end = 6.dp)
                                 .background(
-                                    color = colorResource(resource = SharedR.colors.background_item),
+                                    color = colorResource(
+                                        resource =
+                                        if (newFeedbackState.type == FeedbackType.Feature) SharedR.colors.button_gradient_start
+                                        else SharedR.colors.background_item
+                                    ),
                                     shape = MaterialTheme.shapes.medium
                                 )
-                                .padding(end = 6.dp),
+                                .padding(vertical = 6.dp),
                             text = "Feature",
                             style = MaterialTheme.typography.labelMedium,
-                            color = colorResource(resource = SharedR.colors.text_primary)
+                            color = colorResource(
+                                resource =
+                                if (newFeedbackState.type == FeedbackType.Feature) SharedR.colors.text_light
+                                else SharedR.colors.text_primary
+                            ),
+                            textAlign = TextAlign.Center
                         )
 
                         Text(
                             modifier = modifier
                                 .weight(1f)
+                                .padding(start = 6.dp)
                                 .background(
-                                    color = colorResource(resource = SharedR.colors.background_item),
+                                    color = colorResource(
+                                        resource =
+                                        if (newFeedbackState.type == FeedbackType.Report) SharedR.colors.button_gradient_start
+                                        else SharedR.colors.background_item
+                                    ),
                                     shape = MaterialTheme.shapes.medium
                                 )
-                                .padding(start = 6.dp),
+                                .padding(vertical = 6.dp),
                             text = "Report",
                             style = MaterialTheme.typography.labelMedium,
-                            color = colorResource(resource = SharedR.colors.text_primary)
-                        )
-
-                        MultilineTextField(
-                            value = newFeedbackState.text,
-                            placeholderText = "123",
-                            onValueChanged = {
-
-                            }
+                            color = colorResource(
+                                resource =
+                                if (newFeedbackState.type == FeedbackType.Report) SharedR.colors.text_light
+                                else SharedR.colors.text_primary
+                            ),
+                            textAlign =
+                            TextAlign.Center
                         )
                     }
+
+                    MultilineTextField(
+                        value = newFeedbackState.text,
+                        placeholderText = "123",
+                        onValueChanged = {
+
+                        }
+                    )
                 }
             }
         }

@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.velkonost.getbetter.android.features.feedback.components.CreateNewFeedbackBottomSheet
 import com.velkonost.getbetter.android.features.feedback.components.FeedbackItem
 import com.velkonost.getbetter.android.features.feedback.components.FeedbackListHeader
 import com.velkonost.getbetter.core.compose.components.AppButton
@@ -110,4 +111,9 @@ fun FeedbackScreen(
         }
 
     }
+
+    CreateNewFeedbackBottomSheet(
+        newFeedbackState = state.newFeedback,
+        modalSheetState = createNewFeedbackSheetState
+    )
 }
