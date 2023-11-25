@@ -121,6 +121,9 @@ fun FeedbackScreen(
         },
         onTextChanged = {
             viewModel.dispatch(NewFeedbackAction.TextChanged(it))
+        },
+        onCreateClick = {
+            viewModel.dispatch(NewFeedbackAction.CreateClick)
         }
     )
 }

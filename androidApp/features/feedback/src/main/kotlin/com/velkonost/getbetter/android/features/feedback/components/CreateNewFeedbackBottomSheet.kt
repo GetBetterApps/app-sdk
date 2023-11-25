@@ -21,14 +21,19 @@ import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
 import com.velkonost.getbetter.shared.core.model.feedback.FeedbackType
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.NewFeedbackState
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
+import dev.icerock.moko.resources.compose.stringResource
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -37,7 +42,8 @@ fun CreateNewFeedbackBottomSheet(
     newFeedbackState: NewFeedbackState,
     modalSheetState: ModalBottomSheetState,
     onTypeChanged: (FeedbackType) -> Unit,
-    onTextChanged: (String) -> Unit
+    onTextChanged: (String) -> Unit,
+    onCreateClick: () -> Unit
 ) {
     val scrollState = rememberScrollState()
     val interactionSource = remember { MutableInteractionSource() }
@@ -123,6 +129,40 @@ fun CreateNewFeedbackBottomSheet(
                         value = newFeedbackState.text,
                         placeholderText = "123",
                         onValueChanged = onTextChanged
+                    )
+                }
+
+                Column(
+                    modifier = modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Spacer(modifier = modifier.weight(1f))
+
+                    Box(
+                        modifier = modifier
+                            .height(30.dp)
+                            .fillMaxWidth()
+                            .background(
+                                brush = Brush.verticalGradient(
+                                    colors = listOf(
+                                        Color.Transparent,
+                                        colorResource(resource = SharedR.colors.main_background)
+                                            .copy(alpha = 0.7f),
+                                        colorResource(resource = SharedR.colors.main_background),
+                                    ),
+                                ),
+                            )
+                    )
+
+                    AppButton(
+                        modifier = modifier
+                            .align(Alignment.CenterHorizontally)
+                            .padding(bottom = 70.dp),
+                        labelText = stringResource(
+                            resource = SharedR.strings.diary_areas_create_button
+                        ),
+                        isLoading = false,
+                        onClick = onCreateClick
                     )
                 }
             }
