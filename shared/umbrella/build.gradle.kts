@@ -77,6 +77,7 @@ kotlin {
                 implementation(projects.shared.features.comments.data)
                 implementation(projects.shared.features.follows.data)
                 implementation(projects.shared.features.calendars.data)
+                implementation(projects.shared.features.feedback.data)
 
                 implementation(projects.shared.features.auth.data)
                 implementation(projects.shared.features.auth.domain)
