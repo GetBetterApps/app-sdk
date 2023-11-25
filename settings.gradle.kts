@@ -93,6 +93,7 @@ include(
     ":androidApp:features:calendars",
     ":androidApp:features:wisdom",
     ":androidApp:features:profile",
+    ":androidApp:features:feedback",
 
     ":shared:resources",
     ":shared:umbrella"

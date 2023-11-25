@@ -15,11 +15,10 @@ sealed class NavigationScreen(val route: String) {
 
     data object CalendarsNavScreen : NavigationScreen(CALENDARS_DESTINATION)
     data object WisdomNavScreen : NavigationScreen(WISDOM_DESTINATION)
+
     data object ProfileNavScreen : NavigationScreen(PROFILE_DESTINATION)
 
-    data object HomeNavScreen : NavigationScreen(HOME_DESTINATION)
-
-    data object DetailNavScreen : NavigationScreen(DETAIL_DESTINATION)
+    data object FeedbackNavScreen : NavigationScreen(FEEDBACK_DESTINATION)
 }
 
 const val NAV_PREFIX: String = "com.velkonost.getbetter"
@@ -28,15 +27,16 @@ const val SPLASH_DESTINATION: String = "$NAV_PREFIX.splash/SplashScreen"
 const val AUTH_DESTINATION: String = "$NAV_PREFIX.auth/AuthScreen"
 
 const val SOCIAL_DESTINATION: String = "$NAV_PREFIX.social/SocialScreen"
+
 const val DIARY_DESTINATION: String = "$NAV_PREFIX.diary/DiaryScreen"
 const val ADD_AREA_DESTINATION: String = "$NAV_PREFIX.diary/AddAreaScreen"
 const val AREA_DETAIL_DESTINATION: String = "$NAV_PREFIX.diary/AreaDetailScreen"
 const val NOTE_DETAIL_DESTINATION: String = "$NAV_PREFIX.diary/NoteDetailScreen"
+
 const val CALENDARS_DESTINATION: String = "$NAV_PREFIX.calendars/CalendarsScreen"
 const val WISDOM_DESTINATION: String = "$NAV_PREFIX.wisdom/WisdomScreen"
-const val PROFILE_DESTINATION: String = "$NAV_PREFIX.profile/ProfileScreen"
 
-const val HOME_DESTINATION: String = "$NAV_PREFIX.home/HomeScreen"
-const val DETAIL_DESTINATION: String = "$NAV_PREFIX.detail/DetailScreen"
+const val PROFILE_DESTINATION: String = "$NAV_PREFIX.profile/ProfileScreen"
+const val FEEDBACK_DESTINATION: String = "$NAV_PREFIX.profile/FeedbackScreen"
 
 const val ARG_NOTE: String = "arg_note"
