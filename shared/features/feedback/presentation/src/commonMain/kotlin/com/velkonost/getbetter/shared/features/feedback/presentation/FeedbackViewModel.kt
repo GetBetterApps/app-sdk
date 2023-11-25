@@ -9,7 +9,6 @@ import com.velkonost.getbetter.shared.features.feedback.presentation.contract.Fe
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackEvent
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackNavigation
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackViewState
-import com.velkonost.getbetter.shared.features.feedback.presentation.contract.NavigateBack
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.NewFeedbackAction
 
 class FeedbackViewModel internal constructor(
@@ -23,7 +22,7 @@ class FeedbackViewModel internal constructor(
     }
 
     override fun dispatch(action: FeedbackAction) = when (action) {
-        is NavigateBack -> emit(action)
+        is FeedbackAction.NavigateBack -> emit(action)
         is NewFeedbackAction.TypeChanged -> obtainNewFeedbackTypeChanged(action.value)
         is NewFeedbackAction.TextChanged -> obtainNewFeedbackTextChanged(action.value)
         is NewFeedbackAction.CreateClick -> obtainNewFeedbackCreate()
