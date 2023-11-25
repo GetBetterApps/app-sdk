@@ -12,7 +12,8 @@ import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
 fun HelpAndSupport(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onContactUsClick: () -> Unit
 ) {
     SectionTitle(text = stringResource(resource = SharedR.strings.profile_help_title))
 
@@ -27,10 +28,9 @@ fun HelpAndSupport(
             MenuItem(
                 modifier = modifier.padding(top = 4.dp),
                 title = stringResource(resource = SharedR.strings.profile_help_contact_support),
-                icon = painterResource(imageResource = SharedR.images.ic_chat_cloud)
-            ) {
-
-            }
+                icon = painterResource(imageResource = SharedR.images.ic_chat_cloud),
+                onClick = onContactUsClick
+            )
         }
     }
 }

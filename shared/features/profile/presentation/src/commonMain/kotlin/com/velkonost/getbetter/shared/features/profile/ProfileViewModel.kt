@@ -8,8 +8,10 @@ import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.profile.api.ProfileRepository
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelected
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelectedBase64
+import com.velkonost.getbetter.shared.features.profile.contracts.ContactUsClick
 import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
 import com.velkonost.getbetter.shared.features.profile.contracts.NavigateToAuth
+import com.velkonost.getbetter.shared.features.profile.contracts.NavigateToFeedback
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileAction
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileNavigation
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileViewState
@@ -39,6 +41,7 @@ internal constructor(
         is ThemeChange -> obtainThemeChange(action.value)
         is AvatarSelected -> obtainAvatarSelected(action.avatarContent)
         is AvatarSelectedBase64 -> obtainAvatarSelected(action.avatarContent.decodeBase64Bytes())
+        is ContactUsClick -> emit(NavigateToFeedback)
     }
 
     private fun fetchUserInfo() {

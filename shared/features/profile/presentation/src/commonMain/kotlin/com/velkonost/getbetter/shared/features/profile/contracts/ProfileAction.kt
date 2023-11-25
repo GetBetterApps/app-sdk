@@ -7,6 +7,8 @@ sealed interface ProfileAction : UIContract.Action
 
 data object LogoutClick : ProfileAction
 
+data object ContactUsClick : ProfileAction
+
 data class ThemeChange(val value: UIMode) : ProfileAction
 
 data class AvatarSelected(val avatarContent: ByteArray) : ProfileAction

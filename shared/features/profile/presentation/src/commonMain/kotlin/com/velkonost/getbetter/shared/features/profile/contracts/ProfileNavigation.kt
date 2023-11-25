@@ -13,3 +13,9 @@ data object NavigateToAuth : ProfileNavigation {
         popUpTo = NavigationScreen.SplashNavScreen.route,
     )
 }
+
+data object NavigateToFeedback : ProfileNavigation {
+    override val event: NavigationEvent = NavigationEvent.NavigateToRoute(
+        route = NavigationScreen.FeedbackNavScreen.route
+    )
+}
