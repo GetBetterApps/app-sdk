@@ -8,6 +8,7 @@ import com.velkonost.getbetter.shared.features.feedback.data.remote.model.reques
 import com.velkonost.getbetter.shared.features.feedback.data.remote.model.response.KtorFeedback
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.request.get
 import io.ktor.client.request.post
 
 class FeedbackRemoteDataSource(
@@ -32,6 +33,15 @@ class FeedbackRemoteDataSource(
         makeRequest(
             path = Route.ADD_ANSWER,
             body = body,
+            token = token
+        )
+    }.body()
+
+    suspend fun fetchFeedbacks(
+        token: String?
+    ): RemoteResponse<List<KtorFeedback>> = httpClient.get {
+        makeRequest(
+            path = Route.GET_USER_FEEDBACKS,
             token = token
         )
     }.body()

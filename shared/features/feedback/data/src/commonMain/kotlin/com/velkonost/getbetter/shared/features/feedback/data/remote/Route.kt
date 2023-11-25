@@ -5,4 +5,5 @@ object Route {
 
     const val CREATE = "$PREFIX/create"
     const val ADD_ANSWER = "$PREFIX/addAnswer"
+    const val GET_USER_FEEDBACKS = "$PREFIX/list"
 }
