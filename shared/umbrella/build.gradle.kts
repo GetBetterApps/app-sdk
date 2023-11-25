@@ -52,6 +52,7 @@ kotlin {
             export(projects.shared.features.calendars.presentation)
             export(projects.shared.features.wisdom.presentation)
             export(projects.shared.features.profile.presentation)
+            export(projects.shared.features.feedback.presentation)
 
             export(libs.kermit.log)
             export(libs.moko.resources)
@@ -98,6 +99,7 @@ kotlin {
                 implementation(projects.shared.features.notedetail.presentation)
                 implementation(projects.shared.features.calendars.presentation)
                 implementation(projects.shared.features.wisdom.presentation)
+                implementation(projects.shared.features.feedback.presentation)
 
                 implementation(projects.shared.features.profile.data)
                 implementation(projects.shared.features.profile.presentation)
@@ -140,6 +142,7 @@ kotlin {
                 api(projects.shared.features.calendars.presentation)
                 api(projects.shared.features.wisdom.presentation)
                 api(projects.shared.features.profile.presentation)
+                api(projects.shared.features.feedback.presentation)
 
                 api(libs.kermit.log)
                 api(libs.moko.resources)
