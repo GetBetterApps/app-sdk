@@ -37,6 +37,8 @@ data class KtorFeedbackMessage(
     val datetime: Long?
 )
 
+fun List<KtorFeedback>.asExternalModel() = map { it.asExternalModel() }
+
 fun KtorFeedback.asExternalModel() =
     Feedback(
         id = id,
