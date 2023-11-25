@@ -7,6 +7,7 @@ import com.velkonost.getbetter.shared.features.feedback.api.FeedbackRepository
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackAction
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackNavigation
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackViewState
+import com.velkonost.getbetter.shared.features.feedback.presentation.contract.NavigateBack
 
 class FeedbackViewModel internal constructor(
     private val feedbackRepository: FeedbackRepository
@@ -19,6 +20,7 @@ class FeedbackViewModel internal constructor(
     }
 
     override fun dispatch(action: FeedbackAction) = when (action) {
+        is NavigateBack -> emit(action)
         else -> {
 
         }

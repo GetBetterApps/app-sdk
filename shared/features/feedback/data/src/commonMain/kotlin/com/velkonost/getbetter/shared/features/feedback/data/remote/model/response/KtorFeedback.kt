@@ -45,7 +45,7 @@ fun KtorFeedback.asExternalModel() =
         type = FeedbackType.entries.first { it.responseName == type },
         status = FeedbackStatus.entries.first { it.responseName == status },
         datetime = datetime,
-        messages = messages.asExternalModel()
+        messages = messages.map { it.asExternalModel() }
     )
 
 fun KtorFeedbackMessage.asExternalModel() =
@@ -54,5 +54,3 @@ fun KtorFeedbackMessage.asExternalModel() =
         text = text!!,
         datetime = datetime!!
     )
-
-fun List<KtorFeedbackMessage>.asExternalModel() = map { it.asExternalModel() }
