@@ -15,6 +15,7 @@ import KMPNativeCoroutinesAsync
 struct FeedbackScreen: View {
     
     @StateViewModel var viewModel: FeedbackViewModel
+    @State private var eventsObserver: Task<(), Error>? = nil
     @State private var showingCreateNewFeedbackSheet = false
     
     var body: some View {
@@ -88,7 +89,31 @@ struct FeedbackScreen: View {
                 }
             )
         }
+        .onAppear {
+            observeEvents()
+        }
+        .onDisappear {
+            eventsObserver?.cancel()
+            eventsObserver = nil
+        }
     }
 }
 
-
+extension FeedbackScreen {
+    func observeEvents() {
+        if eventsObserver == nil {
+            eventsObserver = Task {
+                for try await event in asyncSequence(for: viewModel.events) {
+                    switch(event) {
+                    case _ as FeedbackEventNewFeedbackCreated: do {
+                        showingCreateNewFeedbackSheet = false
+                    }
+                    
+                    default:
+                        break
+                    }
+                }
+            }
+        }
+    }
+}

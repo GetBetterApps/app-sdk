@@ -65,9 +65,7 @@ struct CreateNewFeedbackBottomSheet: View {
                         )
                     }
                     .padding(.horizontal, 16)
-                    .onTapGesture {
-                        endTextEditing()
-                    }
+                    
                 }
                 
                 VStack {
@@ -97,6 +95,9 @@ struct CreateNewFeedbackBottomSheet: View {
                     )
                 }.ignoresSafeArea(.all)
             }
+        }
+        .onTapGesture {
+            endTextEditing()
         }
     }
 }
