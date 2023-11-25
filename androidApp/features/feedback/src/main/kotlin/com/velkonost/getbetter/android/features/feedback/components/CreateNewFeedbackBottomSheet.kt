@@ -1,6 +1,8 @@
 package com.velkonost.getbetter.android.features.feedback.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +18,7 @@ import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -30,9 +33,12 @@ import dev.icerock.moko.resources.compose.colorResource
 fun CreateNewFeedbackBottomSheet(
     modifier: Modifier = Modifier,
     newFeedbackState: NewFeedbackState,
-    modalSheetState: ModalBottomSheetState
+    modalSheetState: ModalBottomSheetState,
+    onTypeChanged: (FeedbackType) -> Unit,
+    onTextChanged: (String) -> Unit
 ) {
     val scrollState = rememberScrollState()
+    val interactionSource = remember { MutableInteractionSource() }
 
     ModalBottomSheetLayout(
         sheetState = modalSheetState,
@@ -66,7 +72,11 @@ fun CreateNewFeedbackBottomSheet(
                                     ),
                                     shape = MaterialTheme.shapes.medium
                                 )
-                                .padding(vertical = 6.dp),
+                                .padding(vertical = 6.dp)
+                                .clickable(
+                                    interactionSource = interactionSource,
+                                    indication = null
+                                ) { onTypeChanged.invoke(FeedbackType.Feature) },
                             text = "Feature",
                             style = MaterialTheme.typography.labelMedium,
                             color = colorResource(
@@ -89,7 +99,11 @@ fun CreateNewFeedbackBottomSheet(
                                     ),
                                     shape = MaterialTheme.shapes.medium
                                 )
-                                .padding(vertical = 6.dp),
+                                .padding(vertical = 6.dp)
+                                .clickable(
+                                    interactionSource = interactionSource,
+                                    indication = null
+                                ) { onTypeChanged.invoke(FeedbackType.Report) },
                             text = "Report",
                             style = MaterialTheme.typography.labelMedium,
                             color = colorResource(
@@ -105,9 +119,7 @@ fun CreateNewFeedbackBottomSheet(
                     MultilineTextField(
                         value = newFeedbackState.text,
                         placeholderText = "123",
-                        onValueChanged = {
-
-                        }
+                        onValueChanged = onTextChanged
                     )
                 }
             }

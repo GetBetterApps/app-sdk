@@ -30,6 +30,7 @@ import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.shared.features.feedback.presentation.FeedbackViewModel
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.NavigateBack
+import com.velkonost.getbetter.shared.features.feedback.presentation.contract.NewFeedbackAction
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
@@ -114,6 +115,12 @@ fun FeedbackScreen(
 
     CreateNewFeedbackBottomSheet(
         newFeedbackState = state.newFeedback,
-        modalSheetState = createNewFeedbackSheetState
+        modalSheetState = createNewFeedbackSheetState,
+        onTypeChanged = {
+            viewModel.dispatch(NewFeedbackAction.TypeChanged(it))
+        },
+        onTextChanged = {
+            viewModel.dispatch(NewFeedbackAction.TextChanged(it))
+        }
     )
 }
