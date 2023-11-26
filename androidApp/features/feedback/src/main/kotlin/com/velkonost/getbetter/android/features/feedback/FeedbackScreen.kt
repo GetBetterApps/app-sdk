@@ -32,7 +32,6 @@ import com.velkonost.getbetter.android.features.feedback.components.FeedbackItem
 import com.velkonost.getbetter.android.features.feedback.components.FeedbackListHeader
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.Loader
-import com.velkonost.getbetter.shared.core.model.feedback.Feedback
 import com.velkonost.getbetter.shared.features.feedback.presentation.FeedbackViewModel
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackAction
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackEvent
@@ -59,7 +58,7 @@ fun FeedbackScreen(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true,
     )
-    val selectedItem = remember { mutableStateOf<Feedback?>(null) }
+    val selectedItemId = remember { mutableStateOf<Int?>(null) }
 
     Box(modifier = modifier.fillMaxSize()) {
         if (state.isLoading && state.items.isEmpty()) {
@@ -78,7 +77,7 @@ fun FeedbackScreen(
                         FeedbackItem(
                             item = item,
                             onClick = {
-                                selectedItem.value = item
+                                selectedItemId.value = item.id
                                 scope.launch {
                                     feedbackDetailsSheetState.show()
                                 }
@@ -144,10 +143,10 @@ fun FeedbackScreen(
         }
     )
 
-    selectedItem.value?.let {
+    selectedItemId.value?.let { selectedId ->
         FeedbackDetailBottomSheet(
             modalSheetState = feedbackDetailsSheetState,
-            item = it,
+            item = state.items.first { it.id == selectedId },
             feedbackDetailsState = state.feedbackDetailsState
         )
     }
