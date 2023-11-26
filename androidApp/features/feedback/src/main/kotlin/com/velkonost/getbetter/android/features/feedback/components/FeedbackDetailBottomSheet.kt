@@ -19,6 +19,7 @@ import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.LocalContext
@@ -88,6 +89,7 @@ fun FeedbackMessageView(
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .padding(top = 12.dp)
             .padding(horizontal = 16.dp)
     ) {
         if (!message.fromUser) {
@@ -108,7 +110,8 @@ fun FeedbackMessageView(
                     ),
                     shape = MaterialTheme.shapes.medium
                 )
-                .padding(6.dp)
+                .padding(6.dp),
+            horizontalAlignment = if (message.fromUser) Alignment.Start else Alignment.End
         ) {
             Text(
                 text = message.text,
