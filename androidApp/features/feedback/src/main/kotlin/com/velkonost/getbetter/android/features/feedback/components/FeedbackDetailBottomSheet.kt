@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -62,6 +63,19 @@ fun FeedbackDetailBottomSheet(
                     item?.messages?.forEach { message ->
                         FeedbackMessageView(message = message)
                     }
+                }
+
+                Column(modifier = modifier.fillMaxSize()) {
+                    Spacer(modifier.weight(1f))
+                    FeedbackAnswerTextField(
+                        value = feedbackDetailsState.answerText,
+                        onValueChanged = {
+//                            viewModel.dispatch(NoteDetailAction.CommentTextChanged(it))
+                        },
+                        onSendClick = {
+//                            viewModel.dispatch(NoteDetailAction.CommentAddClick)
+                        }
+                    )
                 }
             }
         }
