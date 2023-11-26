@@ -12,10 +12,10 @@ import SwiftUI
 
 struct ThemingTabs: View {
     
-    let selected: UIMode
-    let onClick: (UIMode) -> Void
+    let selected: UIThemeMode
+    let onClick: (UIThemeMode) -> Void
     
-    init(selected: UIMode, onClick: @escaping (UIMode) -> Void) {
+    init(selected: UIThemeMode, onClick: @escaping (UIThemeMode) -> Void) {
         self.selected = selected
         self.onClick = onClick
     }
@@ -23,10 +23,10 @@ struct ThemingTabs: View {
     var body: some View {
         HStack {
             ThemingButton(
-                text: UIMode.light.text.localized(),
-                selected: selected == UIMode.light,
+                text: UIThemeMode.lighttheme.text.localized(),
+                selected: selected == UIThemeMode.lighttheme,
                 onClick: {
-                    onClick(UIMode.light)
+                    onClick(UIThemeMode.lighttheme)
                 }
             )
             Spacer()
@@ -35,10 +35,10 @@ struct ThemingTabs: View {
                 .frame(width: 1, height: 16)
             Spacer()
             ThemingButton(
-                text: UIMode.system.text.localized(),
-                selected: selected == UIMode.system,
+                text: UIThemeMode.systemtheme.text.localized(),
+                selected: selected == UIThemeMode.systemtheme,
                 onClick: {
-                    onClick(UIMode.system)
+                    onClick(UIThemeMode.systemtheme)
                 }
             )
             Spacer()
@@ -47,10 +47,10 @@ struct ThemingTabs: View {
                 .frame(width: 1, height: 16)
             Spacer()
             ThemingButton(
-                text: UIMode.dark.text.localized(),
-                selected: selected == UIMode.dark,
+                text: UIThemeMode.darktheme.text.localized(),
+                selected: selected == UIThemeMode.darktheme,
                 onClick: {
-                    onClick(UIMode.dark)
+                    onClick(UIThemeMode.darktheme)
                 }
             )
         }

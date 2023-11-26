@@ -12,10 +12,10 @@ import SharedSDK
 
 struct AppSettings : View {
     
-    let selectedTheme: UIMode
-    let onThemeChanged: (UIMode) -> Void
+    let selectedTheme: UIThemeMode
+    let onThemeChanged: (UIThemeMode) -> Void
     
-    init(selectedTheme: UIMode, onThemeChanged: @escaping (UIMode) -> Void) {
+    init(selectedTheme: UIThemeMode, onThemeChanged: @escaping (UIThemeMode) -> Void) {
         self.selectedTheme = selectedTheme
         self.onThemeChanged = onThemeChanged
     }

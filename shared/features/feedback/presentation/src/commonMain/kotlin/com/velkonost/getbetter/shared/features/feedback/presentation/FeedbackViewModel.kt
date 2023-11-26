@@ -24,14 +24,14 @@ class FeedbackViewModel internal constructor(
 
     override fun dispatch(action: FeedbackAction) = when (action) {
         is FeedbackAction.NavigateBack -> emit(action)
-        is FeedbackAction.FeedbackClick -> obtainFeedbackClick(action.value)
+        is FeedbackAction.DetailsClick -> obtainFeedbackClick(action.feedbackId)
 
         is NewFeedbackAction.TypeChanged -> obtainNewFeedbackTypeChanged(action.value)
         is NewFeedbackAction.TextChanged -> obtainNewFeedbackTextChanged(action.value)
         is NewFeedbackAction.CreateClick -> obtainNewFeedbackCreate()
 
-        is FeedbackAnswerAction.TextChanged -> obtainAnswerFeedbackTextChanged(action.value)
-        is FeedbackAnswerAction.SendClick -> obtainSendAnswer()
+        is FeedbackAnswerAction.AnswerTextChanged -> obtainAnswerFeedbackTextChanged(action.value)
+        is FeedbackAnswerAction.SendAnswerClick -> obtainSendAnswer()
     }
 
     private fun getFeedbacks() {

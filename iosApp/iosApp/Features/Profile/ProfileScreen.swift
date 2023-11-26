@@ -11,10 +11,12 @@ import SharedSDK
 import SwiftUI
 import PhotosUI
 import KMMViewModelSwiftUI
+import KMPNativeCoroutinesAsync
 
 struct ProfileScreen: View {
     
     @StateViewModel var viewModel: ProfileViewModel
+    @State private var eventsObserver: Task<(), Error>? = nil
     
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     
@@ -53,11 +55,11 @@ struct ProfileScreen: View {
                     onThemeChanged: { value in
                         viewModel.dispatch(action: ThemeChange(value: value))
                         
-                        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = switch(value) {
-                        case UIMode.light: .light
-                        case UIMode.dark: .dark
-                        default : .unspecified
-                        }
+//                        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = switch(value) {
+//                        case UIThemeMode.lighttheme: UIUserInterfaceStyle.light
+//                        case UIThemeMode.darktheme: UIUserInterfaceStyle.dark
+//                        default : UIUserInterfaceStyle.unspecified
+//                        }
                         
                     }
                 )
@@ -103,7 +105,7 @@ struct ProfileScreen: View {
 
 extension ProfileScreen {
     func uploadAvatar(selectedImage: UIImage?) async {
-        let task = Task.detached {
+        _ = Task.detached {
             if selectedImage != nil {
                 let data = KotlinByteArray.from(data: selectedImage!.jpegData(compressionQuality: 0.3)!)
                 await viewModel.dispatch(action: AvatarSelected(avatarContent: data))
@@ -111,4 +113,27 @@ extension ProfileScreen {
         }
         
     }
+    
+    func observeEvents() {
+        if eventsObserver == nil {
+            eventsObserver = Task {
+                for try await event in asyncSequence(for: viewModel.events) {
+                    switch(event) {
+                    case _ as ProfileEventThemeChanged: do {
+                        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = switch((event as! SplashEventChangeTheme).value) {
+                        case UIThemeMode.lighttheme: .light
+                        case UIThemeMode.darktheme: .dark
+                        default : .unspecified
+                        }
+                    }
+                   
+                    default:
+                        break
+                    }
+                }
+            }
+        }
+    }
 }
+
+

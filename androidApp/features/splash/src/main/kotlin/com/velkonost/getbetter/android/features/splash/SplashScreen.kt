@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.velkonost.getbetter.shared.core.model.profile.UIMode
+import com.velkonost.getbetter.shared.core.model.profile.UIThemeMode
 import com.velkonost.getbetter.shared.features.splash.presentation.SplashViewModel
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -32,8 +32,8 @@ fun SplashScreen(
     state.selectedTheme?.let {
         LaunchedEffect(state.selectedTheme) {
             val mode = when (state.selectedTheme) {
-                UIMode.Light -> AppCompatDelegate.MODE_NIGHT_NO
-                UIMode.Dark -> AppCompatDelegate.MODE_NIGHT_YES
+                UIThemeMode.LightTheme -> AppCompatDelegate.MODE_NIGHT_NO
+                UIThemeMode.DarkTheme -> AppCompatDelegate.MODE_NIGHT_YES
                 else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
             }
             if (AppCompatDelegate.getDefaultNightMode() != mode) {

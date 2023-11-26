@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.dp
-import com.velkonost.getbetter.shared.core.model.profile.UIMode
+import com.velkonost.getbetter.shared.core.model.profile.UIThemeMode
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
@@ -29,8 +29,8 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun ThemingMenuItem(
     modifier: Modifier = Modifier,
-    selected: UIMode,
-    onClick: (UIMode) -> Unit
+    selected: UIThemeMode,
+    onClick: (UIThemeMode) -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
     val interactionSource = remember { MutableInteractionSource() }

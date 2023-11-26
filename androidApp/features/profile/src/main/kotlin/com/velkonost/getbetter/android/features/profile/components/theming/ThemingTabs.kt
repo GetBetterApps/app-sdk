@@ -23,15 +23,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.extensions.NoRippleTheme
-import com.velkonost.getbetter.shared.core.model.profile.UIMode
+import com.velkonost.getbetter.shared.core.model.profile.UIThemeMode
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 
 @Composable
 fun ThemingTabs(
     modifier: Modifier = Modifier,
-    selected: UIMode,
-    onClick: (UIMode) -> Unit
+    selected: UIThemeMode,
+    onClick: (UIThemeMode) -> Unit
 ) {
 
     CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
@@ -41,10 +41,10 @@ fun ThemingTabs(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 ThemingButton(
-                    text = UIMode.Light.text.toString(LocalContext.current),
-                    selected = it == UIMode.Light,
+                    text = UIThemeMode.LightTheme.text.toString(LocalContext.current),
+                    selected = it == UIThemeMode.LightTheme,
                     onClick = {
-                        onClick.invoke(UIMode.Light)
+                        onClick.invoke(UIThemeMode.LightTheme)
                     }
                 )
                 Spacer(modifier.weight(0.1f))
@@ -59,10 +59,10 @@ fun ThemingTabs(
                 )
                 Spacer(modifier.weight(0.1f))
                 ThemingButton(
-                    text = UIMode.System.text.toString(LocalContext.current),
-                    selected = it == UIMode.System,
+                    text = UIThemeMode.SystemTheme.text.toString(LocalContext.current),
+                    selected = it == UIThemeMode.SystemTheme,
                     onClick = {
-                        onClick.invoke(UIMode.System)
+                        onClick.invoke(UIThemeMode.SystemTheme)
                     }
                 )
                 Spacer(modifier.weight(0.1f))
@@ -77,10 +77,10 @@ fun ThemingTabs(
                 )
                 Spacer(modifier.weight(0.1f))
                 ThemingButton(
-                    text = UIMode.Dark.text.toString(LocalContext.current),
-                    selected = it == UIMode.Dark,
+                    text = UIThemeMode.DarkTheme.text.toString(LocalContext.current),
+                    selected = it == UIThemeMode.DarkTheme,
                     onClick = {
-                        onClick.invoke(UIMode.Dark)
+                        onClick.invoke(UIThemeMode.DarkTheme)
                     }
                 )
             }

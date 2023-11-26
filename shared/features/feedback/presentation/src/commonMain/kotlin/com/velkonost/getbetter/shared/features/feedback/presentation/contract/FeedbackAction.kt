@@ -9,7 +9,7 @@ sealed interface FeedbackAction : UIContract.Action {
         override val event: NavigationEvent = NavigationEvent.NavigateUp()
     }
 
-    data class FeedbackClick(val value: Int) : FeedbackAction
+    data class DetailsClick(val feedbackId: Int) : FeedbackAction
 }
 
 sealed interface NewFeedbackAction : FeedbackAction {
@@ -21,7 +21,7 @@ sealed interface NewFeedbackAction : FeedbackAction {
 }
 
 sealed interface FeedbackAnswerAction : FeedbackAction {
-    data class TextChanged(val value: String) : FeedbackAnswerAction
+    data class AnswerTextChanged(val value: String) : FeedbackAction
 
-    data object SendClick : FeedbackAnswerAction
+    data object SendAnswerClick : FeedbackAction
 }

@@ -1,6 +1,6 @@
 package com.velkonost.getbetter.shared.features.profile
 
-import com.velkonost.getbetter.shared.core.model.profile.UIMode
+import com.velkonost.getbetter.shared.core.model.profile.UIThemeMode
 import com.velkonost.getbetter.shared.core.model.user.UserInfo
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
@@ -13,6 +13,7 @@ import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
 import com.velkonost.getbetter.shared.features.profile.contracts.NavigateToAuth
 import com.velkonost.getbetter.shared.features.profile.contracts.NavigateToFeedback
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileAction
+import com.velkonost.getbetter.shared.features.profile.contracts.ProfileEvent
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileNavigation
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileViewState
 import com.velkonost.getbetter.shared.features.profile.contracts.ThemeChange
@@ -23,7 +24,7 @@ class ProfileViewModel
 internal constructor(
     private val userInfoRepository: UserInfoRepository,
     private val profileRepository: ProfileRepository
-) : BaseViewModel<ProfileViewState, ProfileAction, ProfileNavigation, Nothing>(
+) : BaseViewModel<ProfileViewState, ProfileAction, ProfileNavigation, ProfileEvent>(
     initialState = ProfileViewState()
 ) {
 
@@ -85,10 +86,11 @@ internal constructor(
         }
     }
 
-    private fun obtainThemeChange(value: UIMode) {
+    private fun obtainThemeChange(value: UIThemeMode) {
         launchJob {
             profileRepository.changeTheme(value)
             emit(viewState.value.copy(selectedTheme = value))
+            emit(ProfileEvent.ThemeChanged(value))
         }
     }
 

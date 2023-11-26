@@ -150,10 +150,10 @@ fun FeedbackScreen(
         item = state.items.firstOrNull { it.id == selectedItemId.value },
         feedbackDetailsState = state.feedbackDetailsState,
         onAnswerTextChanged = {
-            viewModel.dispatch(FeedbackAnswerAction.TextChanged(it))
+            viewModel.dispatch(FeedbackAnswerAction.AnswerTextChanged(it))
         },
         onAnswerSendClick = {
-            viewModel.dispatch(FeedbackAnswerAction.SendClick)
+            viewModel.dispatch(FeedbackAnswerAction.SendAnswerClick)
         }
     )
 

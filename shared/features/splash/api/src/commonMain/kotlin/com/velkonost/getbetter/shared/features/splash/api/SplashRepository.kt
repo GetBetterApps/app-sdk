@@ -1,6 +1,6 @@
 package com.velkonost.getbetter.shared.features.splash.api
 
-import com.velkonost.getbetter.shared.core.model.profile.UIMode
+import com.velkonost.getbetter.shared.core.model.profile.UIThemeMode
 
 interface SplashRepository {
 
@@ -10,5 +10,5 @@ interface SplashRepository {
 
     suspend fun saveUserRegistrationDate(value: Long)
 
-    suspend fun getTheme(): UIMode
+    suspend fun getTheme(): UIThemeMode
 }

@@ -54,8 +54,8 @@ extension SplashScreen {
                     switch(event) {
                     case _ as SplashEventChangeTheme: do {
                         (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = switch((event as! SplashEventChangeTheme).value) {
-                        case UIMode.light: .light
-                        case UIMode.dark: .dark
+                        case UIThemeMode.lighttheme: .light
+                        case UIThemeMode.darktheme: .dark
                         default : .unspecified
                         }
                     }

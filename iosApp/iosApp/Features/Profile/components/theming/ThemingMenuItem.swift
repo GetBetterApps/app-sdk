@@ -11,10 +11,10 @@ import SwiftUI
 import SharedSDK
 
 struct ThemingMenuItem: View {
-    let selected: UIMode
-    let onClick: (UIMode) -> Void
+    let selected: UIThemeMode
+    let onClick: (UIThemeMode) -> Void
     
-    init(selected: UIMode, onClick: @escaping (UIMode) -> Void) {
+    init(selected: UIThemeMode, onClick: @escaping (UIThemeMode) -> Void) {
         self.selected = selected
         self.onClick = onClick
     }
