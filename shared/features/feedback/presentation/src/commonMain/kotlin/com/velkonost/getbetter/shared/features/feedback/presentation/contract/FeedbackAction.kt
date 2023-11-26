@@ -8,6 +8,8 @@ sealed interface FeedbackAction : UIContract.Action {
     data object NavigateBack : FeedbackAction, FeedbackNavigation {
         override val event: NavigationEvent = NavigationEvent.NavigateUp()
     }
+
+    data class FeedbackClick(val value: Int) : FeedbackAction
 }
 
 sealed interface NewFeedbackAction : FeedbackAction {
@@ -18,4 +20,8 @@ sealed interface NewFeedbackAction : FeedbackAction {
     data object CreateClick : NewFeedbackAction
 }
 
+sealed interface FeedbackAnswerAction : FeedbackAction {
+    data class TextChanged(val value: String) : FeedbackAnswerAction
 
+    data object SendClick : FeedbackAnswerAction
+}

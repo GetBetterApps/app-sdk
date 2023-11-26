@@ -34,6 +34,7 @@ import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.shared.features.feedback.presentation.FeedbackViewModel
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackAction
+import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackAnswerAction
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackEvent
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.NewFeedbackAction
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -78,6 +79,7 @@ fun FeedbackScreen(
                             item = item,
                             onClick = {
                                 selectedItemId.value = item.id
+                                viewModel.dispatch(FeedbackAction.FeedbackClick(item.id!!))
                                 scope.launch {
                                     feedbackDetailsSheetState.show()
                                 }
@@ -146,7 +148,13 @@ fun FeedbackScreen(
     FeedbackDetailBottomSheet(
         modalSheetState = feedbackDetailsSheetState,
         item = state.items.firstOrNull { it.id == selectedItemId.value },
-        feedbackDetailsState = state.feedbackDetailsState
+        feedbackDetailsState = state.feedbackDetailsState,
+        onAnswerTextChanged = {
+            viewModel.dispatch(FeedbackAnswerAction.TextChanged(it))
+        },
+        onAnswerSendClick = {
+            viewModel.dispatch(FeedbackAnswerAction.SendClick)
+        }
     )
 
     LaunchedEffect(Unit) {

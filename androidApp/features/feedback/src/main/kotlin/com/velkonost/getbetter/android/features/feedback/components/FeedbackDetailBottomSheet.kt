@@ -36,7 +36,9 @@ fun FeedbackDetailBottomSheet(
     modifier: Modifier = Modifier,
     modalSheetState: ModalBottomSheetState,
     item: Feedback?,
-    feedbackDetailsState: FeedbackDetailsState
+    feedbackDetailsState: FeedbackDetailsState,
+    onAnswerTextChanged: (String) -> Unit,
+    onAnswerSendClick: () -> Unit
 ) {
     val scrollState = rememberScrollState()
 
@@ -69,12 +71,8 @@ fun FeedbackDetailBottomSheet(
                     Spacer(modifier.weight(1f))
                     FeedbackAnswerTextField(
                         value = feedbackDetailsState.answerText,
-                        onValueChanged = {
-//                            viewModel.dispatch(NoteDetailAction.CommentTextChanged(it))
-                        },
-                        onSendClick = {
-//                            viewModel.dispatch(NoteDetailAction.CommentAddClick)
-                        }
+                        onValueChanged = onAnswerTextChanged,
+                        onSendClick = onAnswerSendClick
                     )
                 }
             }

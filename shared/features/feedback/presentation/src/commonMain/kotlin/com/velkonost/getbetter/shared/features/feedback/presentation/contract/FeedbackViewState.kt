@@ -18,5 +18,6 @@ data class NewFeedbackState(
 )
 
 data class FeedbackDetailsState(
+    val selectedFeedbackId: Int? = null,
     val answerText: String = "",
 )
