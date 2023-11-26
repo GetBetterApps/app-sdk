@@ -143,13 +143,11 @@ fun FeedbackScreen(
         }
     )
 
-    selectedItemId.value?.let { selectedId ->
-        FeedbackDetailBottomSheet(
-            modalSheetState = feedbackDetailsSheetState,
-            item = state.items.first { it.id == selectedId },
-            feedbackDetailsState = state.feedbackDetailsState
-        )
-    }
+    FeedbackDetailBottomSheet(
+        modalSheetState = feedbackDetailsSheetState,
+        item = state.items.firstOrNull { it.id == selectedItemId.value },
+        feedbackDetailsState = state.feedbackDetailsState
+    )
 
     LaunchedEffect(Unit) {
         viewModel.events.collectLatest {
