@@ -17,6 +17,8 @@ import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,10 +27,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.feedback.components.CreateNewFeedbackBottomSheet
+import com.velkonost.getbetter.android.features.feedback.components.FeedbackDetailBottomSheet
 import com.velkonost.getbetter.android.features.feedback.components.FeedbackItem
 import com.velkonost.getbetter.android.features.feedback.components.FeedbackListHeader
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.Loader
+import com.velkonost.getbetter.shared.core.model.feedback.Feedback
 import com.velkonost.getbetter.shared.features.feedback.presentation.FeedbackViewModel
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackAction
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackEvent
@@ -51,6 +55,11 @@ fun FeedbackScreen(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true,
     )
+    val feedbackDetailsSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = true,
+    )
+    val selectedItem = remember { mutableStateOf<Feedback?>(null) }
 
     Box(modifier = modifier.fillMaxSize()) {
         if (state.isLoading && state.items.isEmpty()) {
@@ -69,7 +78,10 @@ fun FeedbackScreen(
                         FeedbackItem(
                             item = item,
                             onClick = {
-
+                                selectedItem.value = item
+                                scope.launch {
+                                    feedbackDetailsSheetState.show()
+                                }
                             }
                         )
                     }
@@ -131,6 +143,14 @@ fun FeedbackScreen(
             viewModel.dispatch(NewFeedbackAction.CreateClick)
         }
     )
+
+    selectedItem.value?.let {
+        FeedbackDetailBottomSheet(
+            modalSheetState = feedbackDetailsSheetState,
+            item = it,
+            feedbackDetailsState = state.feedbackDetailsState
+        )
+    }
 
     LaunchedEffect(Unit) {
         viewModel.events.collectLatest {
