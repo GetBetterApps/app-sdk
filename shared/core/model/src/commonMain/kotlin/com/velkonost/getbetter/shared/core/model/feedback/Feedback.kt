@@ -10,5 +10,7 @@ data class Feedback(
 )
 
 data class FeedbackMessage(
-    val fromUser: Boolean, val text: String, val datetime: Long
+    val fromUser: Boolean,
+    val text: String,
+    val datetime: Long
 )
