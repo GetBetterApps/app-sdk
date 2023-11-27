@@ -3,6 +3,7 @@ package com.velkonost.getbetter.shared.features.auth.presentation
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.core.vm.SavedStateHandle
 import com.velkonost.getbetter.shared.features.auth.api.AuthRepository
 import com.velkonost.getbetter.shared.features.auth.domain.LoginAnonymousUseCase
 import com.velkonost.getbetter.shared.features.auth.domain.LoginEmailUseCase
@@ -11,16 +12,31 @@ import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthA
 import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthNavigation
 import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthViewState
 import com.velkonost.getbetter.shared.features.auth.presentation.contracts.NavigateToMainFlow
+import kotlinx.coroutines.flow.collectLatest
 
 class AuthViewModel
 internal constructor(
+    savedStateHandle: SavedStateHandle,
     private val authRepository: AuthRepository<String>,
     private val registerEmailUseCase: RegisterEmailUseCase,
     private val loginEmailUseCase: LoginEmailUseCase,
     private val loginAnonymousUseCase: LoginAnonymousUseCase
 ) : BaseViewModel<AuthViewState, AuthAction, AuthNavigation, Nothing>(
-    initialState = AuthViewState()
+    initialState = AuthViewState(),
+    savedStateHandle = savedStateHandle
 ) {
+
+    private val identifyAnonymous = savedStateHandle
+        .identifyAnonymous
+        .stateInWhileSubscribed(initialValue = false)
+
+    init {
+        launchJob {
+            identifyAnonymous.collectLatest {
+                emit(viewState.value.copy(forceSignUp = it))
+            }
+        }
+    }
 
     @Suppress("unused")
     fun onAppear() {

@@ -6,5 +6,6 @@ data class AuthViewState(
     val email: String = "",
     val password: String = "",
     val isRegistering: Boolean = true,
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val forceSignUp: Boolean = false,
 ) : UIContract.State
