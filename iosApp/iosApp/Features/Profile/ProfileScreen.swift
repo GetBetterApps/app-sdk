@@ -41,7 +41,7 @@ struct ProfileScreen: View {
                         self.showImagePicker.toggle()
                     },
                     onSettingsClick: {
-                        
+                        viewModel.dispatch(action: SettingsClick())
                     },
                     onSignUpClick: {
                         viewModel.dispatch(action: SignUpClick())

@@ -19,7 +19,7 @@ struct SettingsScreen: View {
         @State var state = viewModel.viewStateValue as! SettingsViewState
         
         ZStack {
-            if state.isLoading && state.items.isEmpty {
+            if state.isLoading {
                 Loader().frame(alignment: .center)
             } else {
                 VStack {

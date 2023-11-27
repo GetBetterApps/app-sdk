@@ -31,7 +31,7 @@ extension KoinApplication {
          \.WisdomViewModel,
          \.ProfileViewModel,
          \.ProfileDetailViewModel,
-         \.FeedbackViewModel
+         \.FeedbackViewModel,
          \.SettingsViewModel
     ]
     
