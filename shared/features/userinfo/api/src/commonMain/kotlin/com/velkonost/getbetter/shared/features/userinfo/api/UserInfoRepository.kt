@@ -27,4 +27,10 @@ interface UserInfoRepository {
 
     suspend fun logout(): Flow<ResultState<UserInfo>>
 
+    suspend fun changePassword(
+        oldPassword: String,
+        newPassword: String,
+        newRepeatedPassword: String
+    ): Flow<ResultState<UserInfo>>
+
 }

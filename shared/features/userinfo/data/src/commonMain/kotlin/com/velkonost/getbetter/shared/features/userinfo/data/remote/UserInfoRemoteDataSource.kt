@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.userinfo.data.remote
 
 import com.velkonost.getbetter.shared.core.network.extensions.makeRequest
 import com.velkonost.getbetter.shared.core.network.model.RemoteResponse
+import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.ChangePasswordRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.InitSettingsRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.UpdateValueRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response.KtorUserInfo
@@ -100,6 +101,17 @@ class UserInfoRemoteDataSource(
                 token = token
             )
         }.body()
+
+    suspend fun changePassword(
+        token: String?,
+        body: ChangePasswordRequest
+    ): RemoteResponse<KtorUserInfo> = httpClient.post {
+        makeRequest(
+            path = Route.CHANGE_PASSWORD,
+            token = token,
+            body = body
+        )
+    }.body()
 
     suspend fun updateAvatar(
         token: String,

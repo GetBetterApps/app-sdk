@@ -14,6 +14,7 @@ import com.velkonost.getbetter.shared.core.util.flowRequest
 import com.velkonost.getbetter.shared.core.util.locale
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.UserInfoRemoteDataSource
+import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.ChangePasswordRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.InitSettingsRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.UpdateValueRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response.KtorUserInfo
@@ -119,6 +120,19 @@ constructor(
             localDataSource.edit { preferences ->
                 preferences.remove(TOKEN_KEY)
             }
+        }
+    )
+
+    override suspend fun changePassword(
+        oldPassword: String,
+        newPassword: String,
+        newRepeatedPassword: String
+    ): Flow<ResultState<UserInfo>> = flowRequest(
+        mapper = KtorUserInfo::asExternalModel,
+        request = {
+            val token = localDataSource.getUserToken()
+            val body = ChangePasswordRequest(oldPassword, newPassword, newRepeatedPassword)
+            remoteDataSource.changePassword(token, body)
         }
     )
 
