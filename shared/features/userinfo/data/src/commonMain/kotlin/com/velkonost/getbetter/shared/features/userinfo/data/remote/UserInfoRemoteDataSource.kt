@@ -113,6 +113,15 @@ class UserInfoRemoteDataSource(
         )
     }.body()
 
+    suspend fun deleteAccount(
+        token: String?
+    ): RemoteResponse<Unit> = httpClient.post {
+        makeRequest(
+            path = Route.DELETE_ACCOUNT,
+            token = token
+        )
+    }.body()
+
     suspend fun updateAvatar(
         token: String,
         fileContent: ByteArray

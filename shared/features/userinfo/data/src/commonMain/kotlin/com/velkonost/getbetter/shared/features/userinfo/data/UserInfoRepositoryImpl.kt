@@ -136,6 +136,14 @@ constructor(
         }
     )
 
+    override suspend fun deleteAccount(): Flow<ResultState<Unit>> = flowRequest(
+        mapper = { },
+        request = {
+            val token = localDataSource.getUserToken()
+            remoteDataSource.deleteAccount(token)
+        }
+    )
+
     private suspend fun saveRegistrationDate(value: Long) {
         localDataSource.edit { preferences ->
             preferences[USER_REGISTRATION_MILLIS] = value

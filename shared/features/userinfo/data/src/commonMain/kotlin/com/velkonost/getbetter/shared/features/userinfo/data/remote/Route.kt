@@ -14,4 +14,5 @@ object Route {
 
     const val UPLOAD_AVATAR = "$PREFIX/uploadAvatar"
     const val CHANGE_PASSWORD = "$PREFIX/changePassword"
+    const val DELETE_ACCOUNT = "$PREFIX/deleteAccount"
 }
