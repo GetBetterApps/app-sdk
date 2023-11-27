@@ -85,6 +85,9 @@
 		467BECD12AC0350400F74482 /* WisdomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467BECD02AC0350400F74482 /* WisdomViewModel.swift */; };
 		467D996C2AFA1C9C00F4397E /* AuthorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467D996B2AFA1C9C00F4397E /* AuthorData.swift */; };
 		467DAFD32B145FB500BB9CB3 /* FeedbackMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467DAFD22B145FB500BB9CB3 /* FeedbackMessageView.swift */; };
+		467DB0152B14C8A000BB9CB3 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467DB0142B14C8A000BB9CB3 /* SettingsScreen.swift */; };
+		467DB0172B14C8DB00BB9CB3 /* SettingsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467DB0162B14C8DB00BB9CB3 /* SettingsRoute.swift */; };
+		467DB01A2B14C92E00BB9CB3 /* SettingsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467DB0192B14C92E00BB9CB3 /* SettingsHeader.swift */; };
 		468356F92B0E316C00DC356A /* AreaActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468356F82B0E316C00DC356A /* AreaActionItem.swift */; };
 		468356FB2B0E321200DC356A /* NoteActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468356FA2B0E321200DC356A /* NoteActionItem.swift */; };
 		468356FD2B0E323500DC356A /* UserActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468356FC2B0E323500DC356A /* UserActionItem.swift */; };
@@ -220,6 +223,9 @@
 		467BECD02AC0350400F74482 /* WisdomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomViewModel.swift; sourceTree = "<group>"; };
 		467D996B2AFA1C9C00F4397E /* AuthorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorData.swift; sourceTree = "<group>"; };
 		467DAFD22B145FB500BB9CB3 /* FeedbackMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackMessageView.swift; sourceTree = "<group>"; };
+		467DB0142B14C8A000BB9CB3 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		467DB0162B14C8DB00BB9CB3 /* SettingsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRoute.swift; sourceTree = "<group>"; };
+		467DB0192B14C92E00BB9CB3 /* SettingsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeader.swift; sourceTree = "<group>"; };
 		468356F82B0E316C00DC356A /* AreaActionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaActionItem.swift; sourceTree = "<group>"; };
 		468356FA2B0E321200DC356A /* NoteActionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteActionItem.swift; sourceTree = "<group>"; };
 		468356FC2B0E323500DC356A /* UserActionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActionItem.swift; sourceTree = "<group>"; };
@@ -452,6 +458,7 @@
 		461F7C6D2AA8D7DE003791CF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				467DB0132B14C89200BB9CB3 /* Settings */,
 				466E51942B12324800088425 /* Feedback */,
 				464478C52B0A0C3C00926899 /* ProfileDetail */,
 				46FCD3D02AF530A20025D2C6 /* NoteDetail */,
@@ -593,6 +600,24 @@
 				467668BF2AEAC007007C17DE /* SubNotesHeader.swift */,
 			);
 			path = subnotes;
+			sourceTree = "<group>";
+		};
+		467DB0132B14C89200BB9CB3 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				467DB0182B14C92200BB9CB3 /* components */,
+				467DB0142B14C8A000BB9CB3 /* SettingsScreen.swift */,
+				467DB0162B14C8DB00BB9CB3 /* SettingsRoute.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		467DB0182B14C92200BB9CB3 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				467DB0192B14C92E00BB9CB3 /* SettingsHeader.swift */,
+			);
+			path = components;
 			sourceTree = "<group>";
 		};
 		46870C2C2AC092CB00BCBDB1 /* Splash */ = {
@@ -1010,6 +1035,7 @@
 				4646BF9A2AD2AF0B000980DD /* AreaDetailContent.swift in Sources */,
 				464A426B2AEA62880019CB98 /* TagItem.swift in Sources */,
 				465EC4422B10899100444C9C /* ThemingMenuItem.swift in Sources */,
+				467DB0172B14C8DB00BB9CB3 /* SettingsRoute.swift in Sources */,
 				46445AFA2ACD5484008934B2 /* PrivateSwitch.swift in Sources */,
 				460054A72ABB17FF00586767 /* PrimaryBox.swift in Sources */,
 				463049E32AFD0590006F60D2 /* LevelBlock.swift in Sources */,
@@ -1029,6 +1055,7 @@
 				46C6606C2AFCD2D600FA189C /* NewCommentTextField.swift in Sources */,
 				468B87702ABC45DB001BBEB1 /* SocialRoute.swift in Sources */,
 				46D8577A2ACFFC7C00BE74DA /* ScrollViewExt.swift in Sources */,
+				467DB01A2B14C92E00BB9CB3 /* SettingsHeader.swift in Sources */,
 				4616B08B2AF62B9500A4CDDE /* CompletionDateButton.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				466B497D2ACFF06C00AD3F6E /* AddAreaScreen.swift in Sources */,
@@ -1037,6 +1064,7 @@
 				468B87722ABC45E1001BBEB1 /* SocialScreen.swift in Sources */,
 				46870C2E2AC092D300BCBDB1 /* SplashRoute.swift in Sources */,
 				46D8577C2AD0560B00BE74DA /* DisabledAppButton.swift in Sources */,
+				467DB0152B14C8A000BB9CB3 /* SettingsScreen.swift in Sources */,
 				46D9381E2ABAECBE0096A221 /* ProfileScreen.swift in Sources */,
 				46059D292AC405BA00DC5015 /* AreaItem.swift in Sources */,
 				460054AD2ABB1B5E00586767 /* HelpAndSupport.swift in Sources */,

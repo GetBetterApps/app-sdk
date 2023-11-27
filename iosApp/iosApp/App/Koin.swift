@@ -32,6 +32,7 @@ extension KoinApplication {
          \.ProfileViewModel,
          \.ProfileDetailViewModel,
          \.FeedbackViewModel
+         \.SettingsViewModel
     ]
     
     static func inject<T>() -> T { shared.inject() }
