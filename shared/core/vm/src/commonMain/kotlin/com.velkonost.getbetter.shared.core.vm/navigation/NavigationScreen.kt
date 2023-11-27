@@ -20,6 +20,10 @@ sealed class NavigationScreen(val route: String) {
 
     data object ProfileNavScreen : NavigationScreen(PROFILE_DESTINATION)
 
+    data object SettingsNavScreen : NavigationScreen(
+        "$SETTINGS_DESTINATION/?$ARG_USER_ID={$ARG_USER_ID}"
+    )
+
     data object FeedbackNavScreen : NavigationScreen(FEEDBACK_DESTINATION)
 }
 
@@ -39,7 +43,9 @@ const val CALENDARS_DESTINATION: String = "$NAV_PREFIX.calendars/CalendarsScreen
 const val WISDOM_DESTINATION: String = "$NAV_PREFIX.wisdom/WisdomScreen"
 
 const val PROFILE_DESTINATION: String = "$NAV_PREFIX.profile/ProfileScreen"
+const val SETTINGS_DESTINATION: String = "$NAV_PREFIX.profile/SettingsScreen"
 const val FEEDBACK_DESTINATION: String = "$NAV_PREFIX.profile/FeedbackScreen"
 
 const val ARG_NOTE: String = "arg_note"
+const val ARG_USER_ID: String = "arg_user_id"
 const val ARG_IDENTIFY_ANONYMOUS: String = "arg_identify_anonymous"

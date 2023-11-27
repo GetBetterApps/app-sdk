@@ -23,6 +23,7 @@ dependencies {
     implementation(projects.androidApp.features.profile)
     implementation(projects.androidApp.features.notedetail)
     implementation(projects.androidApp.features.feedback)
+    implementation(projects.androidApp.features.settings)
 
     implementation(projects.shared.core.util)
     implementation(projects.shared.core.vm)
