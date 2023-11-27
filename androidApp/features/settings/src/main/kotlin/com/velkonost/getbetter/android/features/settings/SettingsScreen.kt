@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.velkonost.getbetter.android.features.settings.components.NameTextField
 import com.velkonost.getbetter.android.features.settings.components.SettingsHeader
 import com.velkonost.getbetter.core.compose.components.AppAlertDialog
 import com.velkonost.getbetter.core.compose.components.AppButton
@@ -51,12 +52,14 @@ fun SettingsScreen(
                     paddingValues = PaddingValues(start = 16.dp, end = 16.dp, top = 16.dp)
                 )
 
-                SingleLineTextField(
+                NameTextField(
                     value = state.name,
                     placeholderText = "name",
-                    paddingValues = PaddingValues(start = 16.dp, end = 16.dp, top = 12.dp),
                     onValueChanged = {
                         viewModel.dispatch(SettingsAction.NameChanged(it))
+                    },
+                    onSaveClick = {
+                        viewModel.dispatch(SettingsAction.SaveNameClick)
                     }
                 )
 

@@ -22,6 +22,8 @@ class SettingsViewModel internal constructor(
 
     override fun dispatch(action: SettingsAction) = when (action) {
         is SettingsAction.NavigateBack -> emit(action)
+        is SettingsAction.NameChanged -> obtainNameChanged(action.value)
+        is SettingsAction.SaveNameClick -> obtainSaveName()
         is SettingsAction.DeleteAccountConfirm -> obtainDeleteAccount()
         else -> {
 
@@ -49,6 +51,25 @@ class SettingsViewModel internal constructor(
                 }
                 onSuccess {
                     emit(SettingsNavigation.NavigateToAuth)
+                }
+            }
+        }
+    }
+
+    private fun obtainNameChanged(value: String) {
+        emit(viewState.value.copy(name = value))
+    }
+
+    private fun obtainSaveName() {
+        launchJob {
+            userInfoRepository.updateName(
+                newName = viewState.value.name
+            ) collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
+                }
+                onSuccess { userInfo ->
+                    userInfo?.toUI()
                 }
             }
         }
