@@ -67,7 +67,9 @@ fun ProfileHeader(
                     AppButton(
                         labelText = stringResource(resource = SharedR.strings.auth_signup_button),
                         isLoading = isLoading,
-                        onClick = onSignUpClick
+                        onClick = {
+                            onSignUpClick?.invoke()
+                        }
                     )
                 }
             }

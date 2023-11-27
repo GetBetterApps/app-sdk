@@ -84,9 +84,7 @@ fun AuthScreen(
                     modifier = modifier,
                     targetState = state.isRegistering,
                     haptic
-                ) {
-                    viewModel.dispatch(AuthAction.SwitchAuthClick)
-                }
+                ) { viewModel.dispatch(AuthAction.SwitchAuthClick) }
             }
 
             Spacer(modifier = modifier.weight(1f))

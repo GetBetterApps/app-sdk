@@ -3,7 +3,9 @@ package com.velkonost.getbetter.shared.core.vm.navigation
 sealed class NavigationScreen(val route: String) {
     data object SplashNavScreen : NavigationScreen(SPLASH_DESTINATION)
 
-    data object AuthNavScreen : NavigationScreen(AUTH_DESTINATION)
+    data object AuthNavScreen : NavigationScreen(
+        "$AUTH_DESTINATION/?$ARG_IDENTIFY_ANONYMOUS={$ARG_IDENTIFY_ANONYMOUS}"
+    )
 
     data object SocialNavScreen : NavigationScreen(SOCIAL_DESTINATION)
     data object DiaryNavScreen : NavigationScreen(DIARY_DESTINATION)
