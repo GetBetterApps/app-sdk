@@ -33,7 +33,7 @@ class SettingsViewModel internal constructor(
         )
 
         is ChangePasswordAction.ChangeClick -> obtainChangePassword()
-        SettingsAction.ChangePasswordClick -> TODO()
+        SettingsAction.ChangePasswordClick -> obtainStartChangePassword()
     }
 
     private fun fetchUserInfo() {
@@ -47,6 +47,15 @@ class SettingsViewModel internal constructor(
                 }
             }
         }
+    }
+
+    private fun obtainStartChangePassword() {
+        val changePasswordState = viewState.value.changePasswordState.copy(
+            oldPassword = "",
+            newPassword = "",
+            repeatedNewPassword = ""
+        )
+        emit(viewState.value.copy(changePasswordState = changePasswordState))
     }
 
     private fun obtainDeleteAccount() {
@@ -110,7 +119,7 @@ class SettingsViewModel internal constructor(
                     emit(viewState.value.copy(isLoading = it))
                 }
                 onSuccess {
-
+                    emit(SettingsEvent.PasswordChanged)
                 }
             }
         }

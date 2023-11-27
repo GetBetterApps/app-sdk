@@ -7,14 +7,20 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.velkonost.getbetter.android.features.settings.components.ChangePasswordBottomSheet
 import com.velkonost.getbetter.android.features.settings.components.NameTextField
 import com.velkonost.getbetter.android.features.settings.components.SettingsHeader
 import com.velkonost.getbetter.core.compose.components.AppAlertDialog
@@ -23,17 +29,27 @@ import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.SingleLineTextField
 import com.velkonost.getbetter.core.compose.components.WhiteButton
 import com.velkonost.getbetter.shared.features.settings.presentation.SettingsViewModel
+import com.velkonost.getbetter.shared.features.settings.presentation.contract.ChangePasswordAction
 import com.velkonost.getbetter.shared.features.settings.presentation.contract.SettingsAction
+import com.velkonost.getbetter.shared.features.settings.presentation.contract.SettingsEvent
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.stringResource
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SettingsScreen(
     modifier: Modifier = Modifier,
     viewModel: SettingsViewModel
 ) {
     val state by viewModel.viewState.collectAsStateWithLifecycle()
+    val scope = rememberCoroutineScope()
     val confirmDeleteAccountDialog = remember { mutableStateOf(false) }
+    val changePasswordSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = true,
+    )
 
     Box(modifier = modifier.fillMaxSize()) {
         if (state.isLoading) {
@@ -70,6 +86,9 @@ fun SettingsScreen(
                     isLoading = state.isLoading,
                     onClick = {
                         viewModel.dispatch(SettingsAction.ChangePasswordClick)
+                        scope.launch {
+                            changePasswordSheetState.show()
+                        }
                     }
                 )
 
@@ -100,5 +119,34 @@ fun SettingsScreen(
                 confirmDeleteAccountDialog.value = false
             }
         )
+    }
+
+    ChangePasswordBottomSheet(
+        changePasswordState = state.changePasswordState,
+        modalSheetState = changePasswordSheetState,
+        onOldPasswordChanged = {
+            viewModel.dispatch(ChangePasswordAction.OldPasswordChanged(it))
+        },
+        onNewPasswordChanged = {
+            viewModel.dispatch(ChangePasswordAction.NewPasswordChanged(it))
+        },
+        onRepeatedNewPasswordChanged = {
+            viewModel.dispatch(ChangePasswordAction.RepeatedNewPasswordChanged(it))
+        },
+        onChangedClick = {
+            viewModel.dispatch(ChangePasswordAction.ChangeClick)
+        }
+    )
+
+    LaunchedEffect(Unit) {
+        viewModel.events.collectLatest {
+            when (it) {
+                is SettingsEvent.PasswordChanged -> {
+                    scope.launch {
+                        changePasswordSheetState.hide()
+                    }
+                }
+            }
+        }
     }
 }
