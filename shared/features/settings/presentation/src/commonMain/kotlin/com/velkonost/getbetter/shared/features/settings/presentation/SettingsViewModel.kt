@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.settings.presentation
 
 import com.velkonost.getbetter.shared.core.model.user.UserInfo
 import com.velkonost.getbetter.shared.core.util.isLoading
+import com.velkonost.getbetter.shared.core.util.onFailure
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.settings.presentation.contract.ChangePasswordAction
@@ -65,6 +66,9 @@ class SettingsViewModel internal constructor(
                     emit(viewState.value.copy(isLoading = it))
                 }
                 onSuccess {
+                    emit(SettingsNavigation.NavigateToAuth)
+                }
+                onFailure {
                     emit(SettingsNavigation.NavigateToAuth)
                 }
             }

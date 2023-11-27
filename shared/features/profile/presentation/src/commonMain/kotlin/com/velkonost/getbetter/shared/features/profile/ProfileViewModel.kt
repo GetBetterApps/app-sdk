@@ -3,6 +3,7 @@ package com.velkonost.getbetter.shared.features.profile
 import com.velkonost.getbetter.shared.core.model.profile.UIThemeMode
 import com.velkonost.getbetter.shared.core.model.user.UserInfo
 import com.velkonost.getbetter.shared.core.util.isLoading
+import com.velkonost.getbetter.shared.core.util.onFailure
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.profile.api.ProfileRepository
@@ -92,6 +93,9 @@ internal constructor(
                     emit(viewState.value.copy(isLogoutLoading = it))
                 }
                 onSuccess {
+                    emit(NavigateToAuth(identifyAnonymous = false))
+                }
+                onFailure {
                     emit(NavigateToAuth(identifyAnonymous = false))
                 }
             }
