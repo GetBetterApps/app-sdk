@@ -20,8 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -29,12 +29,13 @@ import dev.icerock.moko.resources.compose.colorResource
 
 @Composable
 fun ColumnScope.WhiteButton(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     labelText: String,
     isLoading: Boolean,
-    haptic: HapticFeedback,
     onClick: () -> Unit
 ) {
+    val haptic = LocalHapticFeedback.current
+
     Button(
         modifier = modifier
             .shadow(

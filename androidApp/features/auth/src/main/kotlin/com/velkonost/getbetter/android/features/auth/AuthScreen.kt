@@ -96,7 +96,7 @@ fun AuthScreen(
                     if (state.isRegistering) SharedR.strings.auth_signup_button
                     else SharedR.strings.auth_login_button
                 ),
-                isLoading = state.isLoading, haptic
+                isLoading = state.isLoading
             ) {
                 viewModel.dispatch(AuthAction.LoginClick)
             }
