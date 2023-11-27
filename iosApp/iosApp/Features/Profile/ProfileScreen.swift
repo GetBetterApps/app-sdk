@@ -56,13 +56,6 @@ struct ProfileScreen: View {
                     selectedTheme: state.selectedTheme,
                     onThemeChanged: { value in
                         viewModel.dispatch(action: ThemeChange(value: value))
-                        
-//                        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = switch(value) {
-//                        case UIThemeMode.lighttheme: UIUserInterfaceStyle.light
-//                        case UIThemeMode.darktheme: UIUserInterfaceStyle.dark
-//                        default : UIUserInterfaceStyle.unspecified
-//                        }
-                        
                     }
                 )
                 
@@ -71,7 +64,7 @@ struct ProfileScreen: View {
                         viewModel.dispatch(action: ContactUsClick())
                     },
                     onTelegramClick: {
-                        let link = SharedR.strings().tg_link.description()
+                        let link = SharedR.strings().tg_link.desc().localized()
                         openURL(URL(string: link)!)
                     }
                 )
