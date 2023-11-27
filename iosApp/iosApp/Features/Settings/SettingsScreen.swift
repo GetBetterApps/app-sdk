@@ -15,7 +15,9 @@ import KMPNativeCoroutinesAsync
 struct SettingsScreen: View {
     @StateViewModel var viewModel: SettingsViewModel
     
+    @State private var eventsObserver: Task<(), Error>? = nil
     @State private var confirmDeleteAccountDialog = false
+    @State private var changePasswordSheetVisible = false
     
     var body: some View {
         @State var state = viewModel.viewStateValue as! SettingsViewState
@@ -53,8 +55,10 @@ struct SettingsScreen: View {
                         isLoading: state.isLoading,
                         onClick: {
                             viewModel.dispatch(action: SettingsActionChangePasswordClick())
+                            changePasswordSheetVisible = true
                         }
                     )
+                    .ignoresSafeArea(.keyboard)
                     
                     WhiteButton(
                         labelText: SharedR.strings().settings_delete_account_button.desc().localized(),
@@ -64,11 +68,12 @@ struct SettingsScreen: View {
                         },
                         height: 42
                     ).padding(.top, 16)
+                        .ignoresSafeArea(.keyboard)
                     
                     Spacer().frame(height: 64)
                 }.frame(alignment: .center)
                     .alert(
-                         SharedR.strings().settings_delete_account_title.desc().localized(), isPresented: $confirmDeleteAccountDialog) {
+                        SharedR.strings().settings_delete_account_title.desc().localized(), isPresented: $confirmDeleteAccountDialog) {
                             Button(SharedR.strings().confirm.desc().localized()) {
                                 viewModel.dispatch(action: SettingsActionDeleteAccountConfirm())
                             }
@@ -76,6 +81,53 @@ struct SettingsScreen: View {
                         } message: {
                             Text(SharedR.strings().settings_delete_account_text.desc().localized())
                         }
+                        .sheet(isPresented: $changePasswordSheetVisible) {
+                            ChangePasswordBottomSheet(
+                                changePasswordState: state.changePasswordState,
+                                onOldPasswordChanged: { value in
+                                    viewModel.dispatch(action: ChangePasswordActionOldPasswordChanged(value: value))
+                                },
+                                onNewPasswordChanged: { value in
+                                    viewModel.dispatch(action: ChangePasswordActionNewPasswordChanged(value: value))
+                                },
+                                onRepeatedNewPasswordChanged: { value in
+                                    viewModel.dispatch(action: ChangePasswordActionRepeatedNewPasswordChanged(value: value))
+                                },
+                                onChangedClick: {
+                                    viewModel.dispatch(action: ChangePasswordActionChangeClick())
+                                }
+                            )
+                        }
+            }
+        }
+        .onTapGesture {
+            endTextEditing()
+        }
+        .onAppear {
+            observeEvents()
+        }
+        .onDisappear {
+            eventsObserver?.cancel()
+            eventsObserver = nil
+        }
+        .ignoresSafeArea(.keyboard)
+    }
+}
+
+extension SettingsScreen {
+    func observeEvents() {
+        if eventsObserver == nil {
+            eventsObserver = Task {
+                for try await event in asyncSequence(for: viewModel.events) {
+                    switch(event) {
+                    case _ as SettingsEventPasswordChanged: do {
+                        changePasswordSheetVisible = false
+                    }
+                        
+                    default:
+                        break
+                    }
+                }
             }
         }
     }

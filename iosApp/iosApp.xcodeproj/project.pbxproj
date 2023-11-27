@@ -117,6 +117,7 @@
 		46B17E162AADF05D008C2BC4 /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B17E152AADF05D008C2BC4 /* ViewExt.swift */; };
 		46B17E1A2AADF523008C2BC4 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B17E192AADF523008C2BC4 /* AppButton.swift */; };
 		46B91B502B150489003ACC58 /* NameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B91B4F2B150489003ACC58 /* NameTextField.swift */; };
+		46B91B522B150901003ACC58 /* ChangePasswordBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B91B512B150901003ACC58 /* ChangePasswordBottomSheet.swift */; };
 		46C10D1F2AB43FA300E62846 /* SnackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C10D1E2AB43FA300E62846 /* SnackBar.swift */; };
 		46C10D212AB46BF400E62846 /* UIPilotExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C10D202AB46BF400E62846 /* UIPilotExt.swift */; };
 		46C10D232AB4734200E62846 /* AuthAnonymousButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C10D222AB4734200E62846 /* AuthAnonymousButton.swift */; };
@@ -255,6 +256,7 @@
 		46B17E152AADF05D008C2BC4 /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
 		46B17E192AADF523008C2BC4 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		46B91B4F2B150489003ACC58 /* NameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTextField.swift; sourceTree = "<group>"; };
+		46B91B512B150901003ACC58 /* ChangePasswordBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordBottomSheet.swift; sourceTree = "<group>"; };
 		46C10D1E2AB43FA300E62846 /* SnackBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBar.swift; sourceTree = "<group>"; };
 		46C10D202AB46BF400E62846 /* UIPilotExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPilotExt.swift; sourceTree = "<group>"; };
 		46C10D222AB4734200E62846 /* AuthAnonymousButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAnonymousButton.swift; sourceTree = "<group>"; };
@@ -619,6 +621,7 @@
 			children = (
 				467DB0192B14C92E00BB9CB3 /* SettingsHeader.swift */,
 				46B91B4F2B150489003ACC58 /* NameTextField.swift */,
+				46B91B512B150901003ACC58 /* ChangePasswordBottomSheet.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -1066,6 +1069,7 @@
 				460054AB2ABB18FC00586767 /* MenuItem.swift in Sources */,
 				464478C92B0A101C00926899 /* ProfileDetailViewModel.swift in Sources */,
 				468B87722ABC45E1001BBEB1 /* SocialScreen.swift in Sources */,
+				46B91B522B150901003ACC58 /* ChangePasswordBottomSheet.swift in Sources */,
 				46870C2E2AC092D300BCBDB1 /* SplashRoute.swift in Sources */,
 				46D8577C2AD0560B00BE74DA /* DisabledAppButton.swift in Sources */,
 				467DB0152B14C8A000BB9CB3 /* SettingsScreen.swift in Sources */,

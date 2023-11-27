@@ -80,11 +80,11 @@ struct NameTextField: View {
             )
             .padding(.trailing, 12)
         }
-        .padding(.horizontal, 16)
         .frame(height: 64)
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color.textFieldBackground)
         )
+        .padding(.horizontal, 16)
     }
 }
