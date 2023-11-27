@@ -25,6 +25,7 @@ fun ProfileHeader(
     avatarUrl: String?,
     onAvatarClick: () -> Unit,
     onSettingsClick: () -> Unit,
+    isAnonymous: Boolean = false,
     onSignUpClick: (() -> Unit)? = null
 ) {
     Row(
@@ -41,7 +42,7 @@ fun ProfileHeader(
         )
 
         Column {
-            if (showSettings) {
+            if (showSettings && !isAnonymous) {
                 Row {
                     Spacer(modifier = modifier.weight(1f))
 
@@ -54,7 +55,7 @@ fun ProfileHeader(
             Spacer(modifier = modifier.weight(1f))
 
             Row(modifier = modifier.padding(start = 16.dp)) {
-                if (showSettings) {
+                if (!isAnonymous) {
                     Text(
                         text = userName,
                         color = colorResource(resource = SharedR.colors.text_title),

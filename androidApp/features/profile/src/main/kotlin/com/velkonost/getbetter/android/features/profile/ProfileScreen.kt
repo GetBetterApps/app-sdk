@@ -103,7 +103,7 @@ fun ProfileScreen(
             userName = state.userName,
             isLoading = state.isLoading,
             avatarUrl = state.avatarUrl,
-            showSettings = !state.isUserAnonymous,
+            isAnonymous = state.isUserAnonymous,
             onAvatarClick = {
                 launcher.launch("image/*")
             },
