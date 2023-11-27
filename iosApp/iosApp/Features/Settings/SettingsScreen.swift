@@ -15,6 +15,8 @@ import KMPNativeCoroutinesAsync
 struct SettingsScreen: View {
     @StateViewModel var viewModel: SettingsViewModel
     
+    @State private var confirmDeleteAccountDialog = false
+    
     var body: some View {
         @State var state = viewModel.viewStateValue as! SettingsViewState
         
@@ -58,10 +60,10 @@ struct SettingsScreen: View {
                         labelText: SharedR.strings().settings_delete_account_button.desc().localized(),
                         isLoading: state.isLoading,
                         onClick: {
-                            
+                            confirmDeleteAccountDialog = true
                         },
                         height: 42
-                    )
+                    ).padding(.top, 16)
                     
                     Spacer().frame(height: 64)
                 }.frame(alignment: .center)

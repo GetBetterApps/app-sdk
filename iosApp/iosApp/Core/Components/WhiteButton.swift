@@ -51,7 +51,7 @@ struct WhiteButton: View {
                     .style(.titleMedium)
                     .frame(
                         width: UIScreen.screenWidth * 0.8,
-                        height: 64,
+                        height: CGFloat(height),
                         alignment: .center
                     )
                     .background(
