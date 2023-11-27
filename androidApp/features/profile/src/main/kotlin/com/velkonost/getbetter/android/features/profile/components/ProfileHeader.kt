@@ -11,8 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
+import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
 fun ProfileHeader(
@@ -54,11 +56,21 @@ fun ProfileHeader(
             Row(
                 modifier = modifier.padding(start = 16.dp)
             ) {
-                Text(
-                    text = userName,
-                    color = colorResource(resource = SharedR.colors.text_title),
-                    style = MaterialTheme.typography.titleLarge
-                )
+
+                if (showSettings) {
+                    Text(
+                        text = userName,
+                        color = colorResource(resource = SharedR.colors.text_title),
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                } else {
+                    AppButton(
+                        labelText = stringResource(resource = SharedR.strings.auth_signup_button),
+                        isLoading = false
+                    ) {
+
+                    }
+                }
             }
         }
     }

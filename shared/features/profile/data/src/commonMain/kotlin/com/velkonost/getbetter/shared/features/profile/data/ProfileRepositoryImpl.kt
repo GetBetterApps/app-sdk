@@ -20,7 +20,7 @@ class ProfileRepositoryImpl(
 
     override suspend fun getTheme(): UIThemeMode {
         localDataSource.data.first()[SELECTED_UI_MODE]?.let { name ->
-            return UIThemeMode.entries.first { it.name == name }
+            return UIThemeMode.entries.firstOrNull { it.name == name } ?: UIThemeMode.SystemTheme
         }
 
         return UIThemeMode.SystemTheme
