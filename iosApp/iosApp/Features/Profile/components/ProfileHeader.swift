@@ -61,7 +61,8 @@ struct ProfileHeader: View {
                                 if onSignUpClick != nil {
                                     onSignUpClick!()
                                 }
-                            }
+                            },
+                            widthPercent: 0.4
                         )
                     }
                     Spacer()

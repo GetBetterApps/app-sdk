@@ -15,11 +15,13 @@ struct AppButton: View {
     private let labelText: String
     private let isLoading: Bool
     private let onClick: () -> Void
+    private let widthPercent: CGFloat
     
-    init(labelText: String, isLoading: Bool, onClick: @escaping () -> Void) {
+    init(labelText: String, isLoading: Bool, onClick: @escaping () -> Void, widthPercent: CGFloat = 0.8) {
         self.labelText = labelText
         self.isLoading = isLoading
         self.onClick = onClick
+        self.widthPercent = widthPercent
     }
     
     var body: some View {
@@ -32,7 +34,7 @@ struct AppButton: View {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle(tint: Color.textLight))
                     .frame(
-                        width: UIScreen.screenWidth * 0.8,
+                        width: UIScreen.screenWidth * widthPercent,
                         height: 42,
                         alignment: .center
                     )
@@ -51,7 +53,7 @@ struct AppButton: View {
                     .foregroundColor(.textLight)
                     .style(.titleMedium)
                     .frame(
-                        width: UIScreen.screenWidth * 0.8,
+                        width: UIScreen.screenWidth * widthPercent,
                         height: 42,
                         alignment: .center
                     )
