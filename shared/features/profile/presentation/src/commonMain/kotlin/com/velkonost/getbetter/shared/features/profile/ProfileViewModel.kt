@@ -36,7 +36,6 @@ internal constructor(
 
     init {
         fetchUserInfo()
-        checkLoggingState()
     }
 
     fun onAppear() {
@@ -54,7 +53,7 @@ internal constructor(
     }
 
     // ios fix
-    fun checkLoggingState() {
+    private fun checkLoggingState() {
         launchJob {
             val isLoggedIn = authRepository.isUserLoggedIn()
             if (!isLoggedIn) {
@@ -73,6 +72,9 @@ internal constructor(
                 }
                 onSuccess { userInfo ->
                     userInfo?.toUI()
+                }
+                onFailure {
+                    checkLoggingState()
                 }
             }
         }

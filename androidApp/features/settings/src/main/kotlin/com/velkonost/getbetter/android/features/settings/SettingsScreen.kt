@@ -146,6 +146,10 @@ fun SettingsScreen(
                         changePasswordSheetState.hide()
                     }
                 }
+
+                else -> {
+
+                }
             }
         }
     }
