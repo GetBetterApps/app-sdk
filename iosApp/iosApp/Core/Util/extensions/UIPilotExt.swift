@@ -232,6 +232,7 @@ class PopAwareUINavigationController<E: Equatable>: UINavigationController, UINa
         let availableRoutes = [
             AddAreaRoute().route,
             FeedbackRoute().route,
+            SettingsRoute().route,
             String(NoteDetailRoute().route.prefix(while: { value in
                 value != "?"
             }))
