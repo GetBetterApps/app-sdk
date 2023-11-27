@@ -71,6 +71,7 @@ include(
     ":shared:features:areadetail:presentation",
     ":shared:features:notedetail:presentation",
     ":shared:features:profiledetail:presentation",
+    ":shared:features:settings:presentation",
 
     ":shared:features:feedback:api",
     ":shared:features:feedback:data",
