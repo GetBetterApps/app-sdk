@@ -38,6 +38,7 @@ import com.velkonost.getbetter.shared.features.profile.ProfileViewModel
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelected
 import com.velkonost.getbetter.shared.features.profile.contracts.ContactUsClick
 import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
+import com.velkonost.getbetter.shared.features.profile.contracts.SignUpClick
 import com.velkonost.getbetter.shared.features.profile.contracts.ThemeChange
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.stringResource
@@ -108,6 +109,9 @@ fun ProfileScreen(
             },
             onSettingsClick = {
 
+            },
+            onSignUpClick = {
+                viewModel.dispatch(SignUpClick)
             }
         )
 

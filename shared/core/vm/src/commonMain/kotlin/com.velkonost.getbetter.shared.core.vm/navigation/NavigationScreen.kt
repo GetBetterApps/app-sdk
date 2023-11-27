@@ -40,3 +40,4 @@ const val PROFILE_DESTINATION: String = "$NAV_PREFIX.profile/ProfileScreen"
 const val FEEDBACK_DESTINATION: String = "$NAV_PREFIX.profile/FeedbackScreen"
 
 const val ARG_NOTE: String = "arg_note"
+const val ARG_IDENTIFY_ANONYMOUS: String = "arg_identify_anonymous"

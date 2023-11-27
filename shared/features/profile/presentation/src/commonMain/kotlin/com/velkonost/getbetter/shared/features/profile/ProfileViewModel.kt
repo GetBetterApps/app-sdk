@@ -16,6 +16,7 @@ import com.velkonost.getbetter.shared.features.profile.contracts.ProfileAction
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileEvent
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileNavigation
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileViewState
+import com.velkonost.getbetter.shared.features.profile.contracts.SignUpClick
 import com.velkonost.getbetter.shared.features.profile.contracts.ThemeChange
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 import io.ktor.util.decodeBase64Bytes
@@ -36,9 +37,9 @@ internal constructor(
         fetchUserInfo()
     }
 
-
     override fun dispatch(action: ProfileAction) = when (action) {
         is LogoutClick -> obtainLogout()
+        is SignUpClick -> obtainSignUpClick()
         is ThemeChange -> obtainThemeChange(action.value)
         is AvatarSelected -> obtainAvatarSelected(action.avatarContent)
         is AvatarSelectedBase64 -> obtainAvatarSelected(action.avatarContent.decodeBase64Bytes())
@@ -73,6 +74,10 @@ internal constructor(
         }
     }
 
+    private fun obtainSignUpClick() {
+        emit(NavigateToAuth(identifyAnonymous = true))
+    }
+
     private fun obtainLogout() {
         launchJob {
             userInfoRepository.logout() collectAndProcess {
@@ -80,7 +85,7 @@ internal constructor(
                     emit(viewState.value.copy(isLogoutLoading = it))
                 }
                 onSuccess {
-                    emit(NavigateToAuth)
+                    emit(NavigateToAuth(identifyAnonymous = false))
                 }
             }
         }

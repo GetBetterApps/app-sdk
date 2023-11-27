@@ -24,7 +24,8 @@ fun ProfileHeader(
     userName: String,
     avatarUrl: String?,
     onAvatarClick: () -> Unit,
-    onSettingsClick: () -> Unit
+    onSettingsClick: () -> Unit,
+    onSignUpClick: (() -> Unit)? = null
 ) {
     Row(
         modifier = modifier
@@ -35,10 +36,9 @@ fun ProfileHeader(
         Avatar(
             modifier = modifier,
             isLoading = isLoading,
-            avatarUrl = avatarUrl
-        ) {
-            onAvatarClick.invoke()
-        }
+            avatarUrl = avatarUrl,
+            onClick = onAvatarClick
+        )
 
         Column {
             if (showSettings) {
@@ -66,10 +66,9 @@ fun ProfileHeader(
                 } else {
                     AppButton(
                         labelText = stringResource(resource = SharedR.strings.auth_signup_button),
-                        isLoading = false
-                    ) {
-
-                    }
+                        isLoading = isLoading,
+                        onClick = onSignUpClick
+                    )
                 }
             }
         }

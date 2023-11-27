@@ -7,6 +7,8 @@ sealed interface ProfileAction : UIContract.Action
 
 data object LogoutClick : ProfileAction
 
+data object SignUpClick : ProfileAction
+
 data object ContactUsClick : ProfileAction
 
 data class ThemeChange(val value: UIThemeMode) : ProfileAction
