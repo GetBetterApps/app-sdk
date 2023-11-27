@@ -52,8 +52,9 @@ struct NameTextField: View {
                         alignment: .leading
                     )
             }
-            .padding(.horizontal, 16)
-            .frame(height: 64)
+            .padding(.leading, 12)
+            .padding(.trailing, 6)
+            .frame(height: 56)
             .background(Color.textFieldBackground)
             .cornerRadius(8)
             .onChange(of: textFieldValue) { newValue in
@@ -79,7 +80,8 @@ struct NameTextField: View {
             )
             .padding(.trailing, 12)
         }
-        .frame(height: 56)
+        .padding(.horizontal, 16)
+        .frame(height: 64)
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color.textFieldBackground)

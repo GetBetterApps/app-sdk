@@ -67,6 +67,15 @@ struct SettingsScreen: View {
                     
                     Spacer().frame(height: 64)
                 }.frame(alignment: .center)
+                    .alert(
+                         SharedR.strings().settings_delete_account_title.desc().localized(), isPresented: $confirmDeleteAccountDialog) {
+                            Button(SharedR.strings().confirm.desc().localized()) {
+                                viewModel.dispatch(action: SettingsActionDeleteAccountConfirm())
+                            }
+                            Button(SharedR.strings().cancel.desc().localized(), role: .cancel) {}
+                        } message: {
+                            Text(SharedR.strings().settings_delete_account_text.desc().localized())
+                        }
             }
         }
     }
