@@ -17,3 +17,13 @@ sealed interface SettingsAction: UIContract.Action {
         override val event: NavigationEvent = NavigationEvent.NavigateUp()
     }
 }
+
+sealed interface ChangePasswordAction : SettingsAction {
+    data class OldPasswordChanged(val value: String) : SettingsAction
+
+    data class NewPasswordChanged(val value: String) : SettingsAction
+
+    data class RepeatedNewPasswordChanged(val value: String) : SettingsAction
+
+    data object ChangeClick : SettingsAction
+}
