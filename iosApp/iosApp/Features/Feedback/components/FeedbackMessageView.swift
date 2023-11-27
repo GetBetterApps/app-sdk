@@ -19,30 +19,50 @@ struct FeedbackMessageView: View {
     
     var body: some View {
         HStack(spacing: 0) {
-            if message.fromUser {
+            if !message.fromUser {
                 Spacer()
             }
             
             VStack(spacing: 0) {
-                Text(message.text)
-                    .style(.bodyMedium)
-                    .foregroundColor(.textSecondaryTitle)
-                    .multilineTextAlignment(message.fromUser ? .leading : .trailing)
+                HStack {
+                    if !message.fromUser {
+                        Spacer()
+                    }
+                    Text(message.text)
+                        .style(.bodyMedium)
+                        .foregroundColor(.textSecondaryTitle)
+                        .multilineTextAlignment(message.fromUser ? .leading : .trailing)
+                    
+                    if message.fromUser {
+                        Spacer()
+                    }
+                }
                 
-                Text(message.datetimeStr.localized())
-                    .style(.labelSmall)
-                    .foregroundColor(.textPrimary)
-                    .multilineTextAlignment(message.fromUser ? .leading : .trailing)
-                    .padding(.top, 8)
+                HStack {
+                    if !message.fromUser {
+                        Spacer()
+                    }
+                    
+                    Text(message.datetimeStr.localized())
+                        .style(.labelSmall)
+                        .foregroundColor(.textPrimary)
+                        .multilineTextAlignment(message.fromUser ? .leading : .trailing)
+                        .padding(.top, 8)
+                    
+                    if message.fromUser {
+                        Spacer()
+                    }
+                    
+                }
             }
             .padding(6)
             .background(
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(message.fromUser ? Color.buttonGradientStart : Color.backgroundItem)
+                    .fill(!message.fromUser ? Color.buttonGradientStart : Color.backgroundItem)
                     .shadow(radius: 8)
             )
             
-            if !message.fromUser {
+            if message.fromUser {
                 Spacer()
             }
             

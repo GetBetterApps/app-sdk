@@ -52,10 +52,10 @@ struct FeedbackItem: View {
                         .padding(.top, 12)
                     Spacer()
                 }
-            }
-            .onTapGesture {
-                onClick()
-            }
+            }  
+        }
+        .onTapGesture {
+            onClick()
         }
         
     }
