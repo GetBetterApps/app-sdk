@@ -70,6 +70,7 @@ class SettingsViewModel internal constructor(
                 }
                 onFailure {
                     emit(SettingsNavigation.NavigateToAuth)
+                    emit(SettingsEvent.AccountDeleted)
                 }
             }
         }

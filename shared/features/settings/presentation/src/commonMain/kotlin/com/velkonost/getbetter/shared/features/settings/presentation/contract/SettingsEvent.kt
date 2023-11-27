@@ -6,4 +6,6 @@ sealed interface SettingsEvent: UIContract.Event {
 
     data object PasswordChanged : SettingsEvent
 
+    data object AccountDeleted : SettingsEvent
+
 }

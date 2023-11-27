@@ -6,6 +6,7 @@ import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onFailure
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.features.auth.api.AuthRepository
 import com.velkonost.getbetter.shared.features.profile.api.ProfileRepository
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelected
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelectedBase64
@@ -26,6 +27,7 @@ import io.ktor.util.decodeBase64Bytes
 
 class ProfileViewModel
 internal constructor(
+    private val authRepository: AuthRepository<String>,
     private val userInfoRepository: UserInfoRepository,
     private val profileRepository: ProfileRepository
 ) : BaseViewModel<ProfileViewState, ProfileAction, ProfileNavigation, ProfileEvent>(
@@ -34,6 +36,7 @@ internal constructor(
 
     init {
         fetchUserInfo()
+        checkLoggingState()
     }
 
     fun onAppear() {
@@ -48,6 +51,16 @@ internal constructor(
         is AvatarSelected -> obtainAvatarSelected(action.avatarContent)
         is AvatarSelectedBase64 -> obtainAvatarSelected(action.avatarContent.decodeBase64Bytes())
         is ContactUsClick -> emit(NavigateToFeedback)
+    }
+
+    // ios fix
+    fun checkLoggingState() {
+        launchJob {
+            val isLoggedIn = authRepository.isUserLoggedIn()
+            if (!isLoggedIn) {
+                emit(NavigateToAuth(identifyAnonymous = false))
+            }
+        }
     }
 
     private fun fetchUserInfo() {

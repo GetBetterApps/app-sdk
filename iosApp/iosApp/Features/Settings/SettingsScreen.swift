@@ -13,6 +13,8 @@ import KMMViewModelSwiftUI
 import KMPNativeCoroutinesAsync
 
 struct SettingsScreen: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @StateViewModel var viewModel: SettingsViewModel
     
     @State private var eventsObserver: Task<(), Error>? = nil
@@ -123,6 +125,10 @@ extension SettingsScreen {
                     switch(event) {
                     case _ as SettingsEventPasswordChanged: do {
                         changePasswordSheetVisible = false
+                    }
+                        
+                    case _ as SettingsEventAccountDeleted: do {
+                        presentationMode.wrappedValue.dismiss()
                     }
                         
                     default:
