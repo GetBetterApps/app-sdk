@@ -62,7 +62,7 @@ fun SettingsScreen(
 
                 SingleLineTextField(
                     value = state.email,
-                    placeholderText = "email",
+                    placeholderText = stringResource(resource = SharedR.strings.auth_email_label),
                     onValueChanged = {},
                     isEnabled = false,
                     paddingValues = PaddingValues(start = 16.dp, end = 16.dp, top = 16.dp)

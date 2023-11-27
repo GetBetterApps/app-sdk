@@ -86,6 +86,14 @@
     <string name="settings_title">Settings</string>
     <string name="settings_delete_account_title">Delete account</string>
     <string name="settings_delete_account_text">It can\'t be undone</string>
+
+    <string name="settings_name_hint">Your visible name</string>
+    <string name="settings_change_password_button">Change password</string>
+    <string name="settings_delete_account_button">Delete account</string>
+
+    <string name="settings_old_password_hint">Your current password</string>
+    <string name="settings_new_password_hint">Enter new password</string>
+    <string name="settings_repeat_new_password_hint">Repeat new password</string>
     <!--  SETTINGS  -->
 
     <!--  PROFILE DETAIL  -->
