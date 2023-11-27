@@ -16,7 +16,11 @@ struct FeedbackScreen: View {
     
     @StateViewModel var viewModel: FeedbackViewModel
     @State private var eventsObserver: Task<(), Error>? = nil
+    
     @State private var showingCreateNewFeedbackSheet = false
+    @State private var showingFeedbackDetailsSheet = false
+    
+    @State private var selectedFeedbackId: KotlinInt? = nil
     
     var body: some View {
         @State var state = viewModel.viewStateValue as! FeedbackViewState
@@ -34,7 +38,9 @@ struct FeedbackScreen: View {
                                 FeedbackItem(
                                     item: item,
                                     onClick: {
-                                        
+                                        selectedFeedbackId = item.id
+                                        viewModel.dispatch(action: FeedbackActionDetailsClick(feedbackId: item.id as! Int32))
+                                        showingFeedbackDetailsSheet = true
                                     }
                                 )
                             }
@@ -89,6 +95,18 @@ struct FeedbackScreen: View {
                 }
             )
         }
+        .sheet(isPresented: $showingFeedbackDetailsSheet) {
+            FeedbackDetailBottomSheet(
+                item: state.items.filter { $0.id == selectedFeedbackId }.first,
+                feedbackDetailsState: state.feedbackDetailsState,
+                onAnswerTextChanged: { value in
+                    viewModel.dispatch(action: FeedbackAnswerActionAnswerTextChanged(value: value))
+                },
+                onAnswerSendClick: {
+                    viewModel.dispatch(action: FeedbackAnswerActionSendAnswerClick())
+                }
+            )
+        }
         .onAppear {
             observeEvents()
         }
@@ -108,7 +126,7 @@ extension FeedbackScreen {
                     case _ as FeedbackEventNewFeedbackCreated: do {
                         showingCreateNewFeedbackSheet = false
                     }
-                    
+                        
                     default:
                         break
                     }

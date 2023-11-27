@@ -12,17 +12,17 @@ import SharedSDK
 
 struct FeedbackDetailBottomSheet: View {
     
-//    let item: Feedback
-//    let feedbackDetailsState: FeedbackDetailsState
-//    let onAnswerTextChanged: (String) -> Void
-//    let onAnswerSendClick: () -> Void
-//    
-//    init(item: Feedback, feedbackDetailsState: FeedbackDetailsState, onAnswerTextChanged: @escaping (String) -> Void, onAnswerSendClick: @escaping () -> Void) {
-//        self.item = item
-//        self.feedbackDetailsState = feedbackDetailsState
-//        self.onAnswerTextChanged = onAnswerTextChanged
-//        self.onAnswerSendClick = onAnswerSendClick
-//    }
+    let item: Feedback?
+    let feedbackDetailsState: FeedbackDetailsState
+    let onAnswerTextChanged: (String) -> Void
+    let onAnswerSendClick: () -> Void
+    
+    init(item: Feedback?, feedbackDetailsState: FeedbackDetailsState, onAnswerTextChanged: @escaping (String) -> Void, onAnswerSendClick: @escaping () -> Void) {
+        self.item = item
+        self.feedbackDetailsState = feedbackDetailsState
+        self.onAnswerTextChanged = onAnswerTextChanged
+        self.onAnswerSendClick = onAnswerSendClick
+    }
     
     var body: some View {
         ZStack {
@@ -31,10 +31,21 @@ struct FeedbackDetailBottomSheet: View {
                 VStack {
                     Spacer().frame(height: 32)
                     
-                    HStack {
+                    ForEach(item?.messages ?? [], id: \.self.datetime) { message in
+                        FeedbackMessageView(message: message)
                     }
                 }
             }
+            
+            VStack(spacing: 0) {
+                Spacer()
+                NewCommentTextField(
+                    value: Binding(get: { feedbackDetailsState.answerText }, set: { value in }),
+                    onValueChanged: onAnswerTextChanged,
+                    onSendClick: onAnswerSendClick
+                )
+            }
+            .ignoresSafeArea(.container, edges: .bottom)
         }
     }
 }

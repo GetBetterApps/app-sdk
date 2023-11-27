@@ -120,7 +120,7 @@ extension ProfileScreen {
                 for try await event in asyncSequence(for: viewModel.events) {
                     switch(event) {
                     case _ as ProfileEventThemeChanged: do {
-                        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = switch((event as! SplashEventChangeTheme).value) {
+                        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = switch((event as! ProfileEventThemeChanged).value) {
                         case UIThemeMode.lighttheme: .light
                         case UIThemeMode.darktheme: .dark
                         default : .unspecified

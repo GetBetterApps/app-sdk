@@ -79,7 +79,7 @@ fun FeedbackScreen(
                             item = item,
                             onClick = {
                                 selectedItemId.value = item.id
-                                viewModel.dispatch(FeedbackAction.FeedbackClick(item.id!!))
+                                viewModel.dispatch(FeedbackAction.DetailsClick(item.id!!))
                                 scope.launch {
                                     feedbackDetailsSheetState.show()
                                 }
