@@ -51,7 +51,8 @@ internal constructor(
         is AuthAction.EmailChanged -> obtainEmailChanged(action.value)
         is AuthAction.PasswordChanged -> obtainPasswordChanged(action.value)
         is AuthAction.LoginClick -> {
-            if (viewState.value.isRegistering) registerEmail()
+            if (viewState.value.forceSignUp) obtainIdentifyAnonymous()
+            else if (viewState.value.isRegistering) registerEmail()
             else loginEmail()
         }
 
@@ -62,6 +63,22 @@ internal constructor(
     private fun switchAuth() {
         val prevValue = viewState.value.isRegistering
         emit(viewState.value.copy(isRegistering = !prevValue))
+    }
+
+    private fun obtainIdentifyAnonymous() {
+        launchJob {
+            authRepository.identifyAnonymous(
+                email = viewState.value.email,
+                password = viewState.value.password
+            ) collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
+                }
+                onSuccess {
+                    emit(NavigateToMainFlow)
+                }
+            }
+        }
     }
 
     private fun loginAnonymous() {

@@ -79,8 +79,14 @@ fun AuthScreen(
                 viewModel.dispatch(AuthAction.PasswordChanged(it))
             }
 
-            SwitchRegisteringText(modifier = modifier, targetState = state.isRegistering, haptic) {
-                viewModel.dispatch(AuthAction.SwitchAuthClick)
+            if (!state.forceSignUp) {
+                SwitchRegisteringText(
+                    modifier = modifier,
+                    targetState = state.isRegistering,
+                    haptic
+                ) {
+                    viewModel.dispatch(AuthAction.SwitchAuthClick)
+                }
             }
 
             Spacer(modifier = modifier.weight(1f))
