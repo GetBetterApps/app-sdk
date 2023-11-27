@@ -84,6 +84,8 @@
 
     <!--  SETTINGS  -->
     <string name="settings_title">Settings</string>
+    <string name="settings_delete_account_title">Delete account</string>
+    <string name="settings_delete_account_text">It can\'t be undone</string>
     <!--  SETTINGS  -->
 
     <!--  PROFILE DETAIL  -->

@@ -22,6 +22,7 @@ class SettingsViewModel internal constructor(
 
     override fun dispatch(action: SettingsAction) = when (action) {
         is SettingsAction.NavigateBack -> emit(action)
+        is SettingsAction.DeleteAccountConfirm -> obtainDeleteAccount()
         else -> {
 
         }
@@ -35,6 +36,19 @@ class SettingsViewModel internal constructor(
                 }
                 onSuccess { userInfo ->
                     userInfo?.toUI()
+                }
+            }
+        }
+    }
+
+    private fun obtainDeleteAccount() {
+        launchJob {
+            userInfoRepository.deleteAccount() collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
+                }
+                onSuccess {
+                    emit(SettingsNavigation.NavigateToAuth)
                 }
             }
         }
