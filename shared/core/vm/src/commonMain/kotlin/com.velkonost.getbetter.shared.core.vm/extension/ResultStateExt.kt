@@ -30,6 +30,7 @@ inline fun <T : Any?> ResultState<T>.onFailureWithMsg(
 val Int.asText: ResourceStringDesc
     get() {
         val resId = when (this) {
+            900 -> SharedR.strings.error_900
             901 -> SharedR.strings.error_901
             902 -> SharedR.strings.error_902
             903 -> SharedR.strings.error_903
@@ -37,6 +38,8 @@ val Int.asText: ResourceStringDesc
             905 -> SharedR.strings.error_905
             906 -> SharedR.strings.error_906
             907 -> SharedR.strings.error_907
+            908 -> SharedR.strings.error_908
+            909 -> SharedR.strings.error_909
             1001 -> SharedR.strings.error_1001
 
             801 -> SharedR.strings.error_801

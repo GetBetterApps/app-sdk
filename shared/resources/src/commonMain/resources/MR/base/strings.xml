@@ -264,7 +264,10 @@
     <string name="error_905">Incorrect user\'s name</string>
     <string name="error_906">Incorrect user\'s locale</string>
     <string name="error_907">User not found</string>
+    <string name="error_908">Old password incorrect</string>
+    <string name="error_909">New passwords not match</string>
 
+    <string name="error_900">This account is not anonymous</string>
     <string name="error_901">This email already exist. Try different</string>
     <string name="error_902">Incorrect email. Try different</string>
     <string name="error_903">Weak password. Try different</string>
