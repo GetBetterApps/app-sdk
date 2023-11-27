@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
+    <!-- NOT TRANSLATABLE   -->
+    <string name="tg_link">https://t.me/getbetterapp</string>
+    <!-- NOT TRANSLATABLE   -->
+
     <!--  GENERAL  -->
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
@@ -74,6 +78,8 @@
 
     <string name="support_feature_hint">I want...</string>
     <string name="support_report_hint">I found bug...</string>
+
+    <string name="tg_group_title">Telegram community</string>
     <!--  PROFILE  -->
 
     <!--  PROFILE DETAIL  -->

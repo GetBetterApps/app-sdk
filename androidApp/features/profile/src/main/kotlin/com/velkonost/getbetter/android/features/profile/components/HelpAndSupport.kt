@@ -13,23 +13,31 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun HelpAndSupport(
     modifier: Modifier = Modifier,
-    onContactUsClick: () -> Unit
+    onContactUsClick: () -> Unit,
+    onTelegramClick: () -> Unit
 ) {
     SectionTitle(text = stringResource(resource = SharedR.strings.profile_help_title))
 
     PrimaryBox {
         Column {
+//            MenuItem(
+//                title = stringResource(resource = SharedR.strings.profile_help_rate),
+//                icon = painterResource(imageResource = SharedR.images.ic_empty_star),
+//            ) {
+//
+//            }
             MenuItem(
-                title = stringResource(resource = SharedR.strings.profile_help_rate),
-                icon = painterResource(imageResource = SharedR.images.ic_empty_star),
-            ) {
-
-            }
-            MenuItem(
-                modifier = modifier.padding(top = 4.dp),
+//                modifier = modifier.padding(top = 4.dp),
                 title = stringResource(resource = SharedR.strings.profile_help_contact_support),
                 icon = painterResource(imageResource = SharedR.images.ic_chat_cloud),
                 onClick = onContactUsClick
+            )
+
+            MenuItem(
+                modifier = modifier.padding(top = 4.dp),
+                title = stringResource(resource = SharedR.strings.tg_group_title),
+                icon = painterResource(imageResource = SharedR.images.ic_telegram),
+                onClick = onTelegramClick
             )
         }
     }

@@ -2,6 +2,7 @@ package com.velkonost.getbetter.android.features.profile
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -139,6 +140,11 @@ fun ProfileScreen(
         HelpAndSupport(
             onContactUsClick = {
                 viewModel.dispatch(ContactUsClick)
+            },
+            onTelegramClick = {
+                val link = SharedR.strings.tg_link.getString(context)
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+                context.startActivity(intent)
             }
         )
         AppButton(
