@@ -98,6 +98,11 @@ struct ProfileScreen: View {
         }
         .onAppear {
             viewModel.onAppear()
+            observeEvents()
+        }
+        .onDisappear {
+            eventsObserver?.cancel()
+            eventsObserver = nil
         }
     }
     
