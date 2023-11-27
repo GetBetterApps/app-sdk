@@ -26,6 +26,8 @@ fun SettingsScreen(
         } else {
             Column {
                 SettingsHeader { viewModel.dispatch(SettingsAction.NavigateBack) }
+
+
             }
         }
     }
