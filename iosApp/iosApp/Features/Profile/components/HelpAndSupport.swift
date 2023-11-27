@@ -13,9 +13,11 @@ import SharedSDK
 struct HelpAndSupport: View {
     
     let onContactUsClick: () -> Void
+    let onTelegramClick: () -> Void
     
-    init(onContactUsClick: @escaping () -> Void) {
+    init(onContactUsClick: @escaping () -> Void, onTelegramClick: @escaping () -> Void) {
         self.onContactUsClick = onContactUsClick
+        self.onTelegramClick = onTelegramClick
     }
     
     var body: some View {
@@ -23,17 +25,23 @@ struct HelpAndSupport: View {
         
         PrimaryBox {
             VStack {
-                MenuItem(
-                    title: SharedR.strings().profile_help_rate.desc().localized(),
-                    icon: SharedR.images().ic_empty_star.toUIImage()!
-                ) {
-                        
-                }
+//                MenuItem(
+//                    title: SharedR.strings().profile_help_rate.desc().localized(),
+//                    icon: SharedR.images().ic_empty_star.toUIImage()!
+//                ) {
+//                        
+//                }
                 
                 MenuItem(
                     title: SharedR.strings().profile_help_contact_support.desc().localized(),
                     icon: SharedR.images().ic_chat_cloud.toUIImage()!,
                     onClick: onContactUsClick
+                )
+                
+                MenuItem(
+                    title: SharedR.strings().tg_group_title.desc().localized(),
+                    icon: SharedR.images().ic_telegram.toUIImage()!,
+                    onClick: onTelegramClick
                 )
             }
         }

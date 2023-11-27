@@ -15,6 +15,8 @@ import KMPNativeCoroutinesAsync
 
 struct ProfileScreen: View {
     
+    @Environment(\.openURL) var openURL
+
     @StateViewModel var viewModel: ProfileViewModel
     @State private var eventsObserver: Task<(), Error>? = nil
     
@@ -67,6 +69,10 @@ struct ProfileScreen: View {
                 HelpAndSupport(
                     onContactUsClick: {
                         viewModel.dispatch(action: ContactUsClick())
+                    },
+                    onTelegramClick: {
+                        let link = SharedR.strings().tg_link.description()
+                        openURL(URL(string: link)!)
                     }
                 )
                 
