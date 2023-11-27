@@ -36,13 +36,13 @@ struct ProfileScreen: View {
                     userName: state.userName,
                     avatarUrl: state.avatarUrl,
                     isLoading: state.isLoading,
+                    isAnonymous: state.isUserAnonymous,
                     onAvatarClick: {
                         self.showImagePicker.toggle()
                     },
                     onSettingsClick: {
                         
                     },
-                    showSettings: !state.isUserAnonymous,
                     onSignUpClick: {
                         viewModel.dispatch(action: SignUpClick())
                     }

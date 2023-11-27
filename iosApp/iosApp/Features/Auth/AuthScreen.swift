@@ -66,8 +66,10 @@ struct AuthScreen: View {
                     viewModel.dispatch(action: AuthActionPasswordChanged(value: newValue))
                 }
                 
-                SwitchRegisteringText(switchRegisteringText) {
-                    viewModel.dispatch(action: AuthActionSwitchAuthClick())
+                if !state.forceSignUp {
+                    SwitchRegisteringText(switchRegisteringText) {
+                        viewModel.dispatch(action: AuthActionSwitchAuthClick())
+                    }
                 }
                
                 Spacer()

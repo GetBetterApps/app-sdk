@@ -18,15 +18,26 @@ struct ProfileHeader: View {
     let onAvatarClick: () -> Void
     let onSettingsClick: () -> Void
     let showSettings: Bool
+    let isAnonymous: Bool
     let onSignUpClick: (() -> Void)?
     
-    init(userName: String, avatarUrl: String?, isLoading: Bool, onAvatarClick: @escaping () -> Void, onSettingsClick: @escaping () -> Void, showSettings: Bool = true, onSignUpClick: (() -> Void)? = nil) {
+    init(
+        userName: String, avatarUrl: String?,
+        isLoading: Bool,
+        showSettings: Bool = true,
+        isAnonymous: Bool = false,
+        onAvatarClick: @escaping () -> Void,
+        onSettingsClick: @escaping () -> Void,
+        onSignUpClick: (() -> Void)? = nil
+    ) {
         self.userName = userName
         self.avatarUrl = avatarUrl
         self.isLoading = isLoading
+        self.showSettings = showSettings
+        self.isAnonymous = isAnonymous
+        
         self.onAvatarClick = onAvatarClick
         self.onSettingsClick = onSettingsClick
-        self.showSettings = showSettings
         self.onSignUpClick = onSignUpClick
     }
     
@@ -37,7 +48,7 @@ struct ProfileHeader: View {
             }
             
             VStack {
-                if showSettings {
+                if showSettings && !isAnonymous {
                     HStack {
                         Spacer()
                         SettingsButton {
@@ -49,7 +60,7 @@ struct ProfileHeader: View {
                 Spacer()
                 
                 HStack {
-                    if showSettings {
+                    if !isAnonymous {
                         Text(userName)
                             .foregroundColor(.textTitle)
                             .style(.titleLarge)

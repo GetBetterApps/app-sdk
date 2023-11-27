@@ -30,6 +30,6 @@ struct AuthRoute: NavRoute {
     }
     
     func getArguments() -> Array<String> {
-        return [String]()
+        return [NavigationScreenKt.ARG_IDENTIFY_ANONYMOUS]
     }
 }
