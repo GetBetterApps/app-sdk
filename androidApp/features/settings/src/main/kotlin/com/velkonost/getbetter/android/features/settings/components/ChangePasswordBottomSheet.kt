@@ -2,6 +2,7 @@ package com.velkonost.getbetter.android.features.settings.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +13,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.AppButton
@@ -46,29 +48,36 @@ fun ChangePasswordBottomSheet(
                         .fillMaxWidth()
                         .fillMaxHeight(0.9f)
                         .padding(bottom = 40.dp)
-                        .padding(horizontal = 16.dp)
+                        .padding(horizontal = 16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Spacer(modifier.height(32.dp))
 
                     SingleLineTextField(
+                        paddingValues = PaddingValues(top = 12.dp),
                         value = changePasswordState.oldPassword,
                         placeholderText = "old pass",
                         onValueChanged = onOldPasswordChanged,
                     )
 
                     SingleLineTextField(
+                        paddingValues = PaddingValues(top = 12.dp),
                         value = changePasswordState.newPassword,
                         placeholderText = "new pass",
                         onValueChanged = onNewPasswordChanged,
                     )
 
                     SingleLineTextField(
+                        paddingValues = PaddingValues(top = 12.dp),
                         value = changePasswordState.repeatedNewPassword,
                         placeholderText = "repeat new pass",
                         onValueChanged = onRepeatedNewPasswordChanged,
                     )
 
+                    Spacer(modifier.weight(1f))
+
                     AppButton(
+//                        modifier = modifier.padding(bottom = 64.dp),
                         labelText = "change",
                         isLoading = false,
                         onClick = onChangedClick
