@@ -59,7 +59,14 @@ struct ChangePasswordBottomSheet: View {
                     onClick: onChangedClick
                 )
                 
+                Spacer().frame(height: 64)
+                
             }
+            .onTapGesture {
+                endTextEditing()
+            }
+            .padding(.horizontal, 16)
         }
+        .ignoresSafeArea(.all)
     }
 }

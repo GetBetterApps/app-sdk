@@ -94,6 +94,7 @@ struct SettingsScreen: View {
                                     viewModel.dispatch(action: ChangePasswordActionRepeatedNewPasswordChanged(value: value))
                                 },
                                 onChangedClick: {
+                                    changePasswordSheetVisible = false
                                     viewModel.dispatch(action: ChangePasswordActionChangeClick())
                                 }
                             )
