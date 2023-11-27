@@ -70,7 +70,7 @@ fun SettingsScreen(
 
                 NameTextField(
                     value = state.name,
-                    placeholderText = "name",
+                    placeholderText = stringResource(resource = SharedR.strings.settings_name_hint),
                     onValueChanged = {
                         viewModel.dispatch(SettingsAction.NameChanged(it))
                     },
@@ -82,7 +82,7 @@ fun SettingsScreen(
                 Spacer(modifier.weight(1f))
 
                 AppButton(
-                    labelText = "change password",
+                    labelText = stringResource(resource = SharedR.strings.settings_change_password_button),
                     isLoading = state.isLoading,
                     onClick = {
                         viewModel.dispatch(SettingsAction.ChangePasswordClick)
@@ -94,7 +94,7 @@ fun SettingsScreen(
 
                 WhiteButton(
                     modifier = modifier.padding(top = 16.dp),
-                    labelText = "delete",
+                    labelText = stringResource(resource = SharedR.strings.settings_delete_account_button),
                     height = 42,
                     isLoading = state.isLoading,
                     onClick = {

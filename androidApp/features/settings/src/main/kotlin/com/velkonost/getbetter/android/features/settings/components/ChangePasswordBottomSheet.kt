@@ -21,6 +21,7 @@ import com.velkonost.getbetter.core.compose.components.SingleLineTextField
 import com.velkonost.getbetter.shared.features.settings.presentation.contract.ChangePasswordState
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
+import dev.icerock.moko.resources.compose.stringResource
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -56,29 +57,28 @@ fun ChangePasswordBottomSheet(
                     SingleLineTextField(
                         paddingValues = PaddingValues(top = 12.dp),
                         value = changePasswordState.oldPassword,
-                        placeholderText = "old pass",
+                        placeholderText = stringResource(resource = SharedR.strings.settings_old_password_hint),
                         onValueChanged = onOldPasswordChanged,
                     )
 
                     SingleLineTextField(
                         paddingValues = PaddingValues(top = 12.dp),
                         value = changePasswordState.newPassword,
-                        placeholderText = "new pass",
+                        placeholderText = stringResource(resource = SharedR.strings.settings_new_password_hint),
                         onValueChanged = onNewPasswordChanged,
                     )
 
                     SingleLineTextField(
                         paddingValues = PaddingValues(top = 12.dp),
                         value = changePasswordState.repeatedNewPassword,
-                        placeholderText = "repeat new pass",
+                        placeholderText = stringResource(resource = SharedR.strings.settings_repeat_new_password_hint),
                         onValueChanged = onRepeatedNewPasswordChanged,
                     )
 
                     Spacer(modifier.weight(1f))
 
                     AppButton(
-//                        modifier = modifier.padding(bottom = 64.dp),
-                        labelText = "change",
+                        labelText = stringResource(resource = SharedR.strings.settings_change_password_button),
                         isLoading = false,
                         onClick = onChangedClick
                     )
