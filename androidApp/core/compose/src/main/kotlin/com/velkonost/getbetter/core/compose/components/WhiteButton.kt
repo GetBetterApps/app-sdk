@@ -32,6 +32,7 @@ fun ColumnScope.WhiteButton(
     modifier: Modifier = Modifier,
     labelText: String,
     isLoading: Boolean,
+    height: Int = 64,
     onClick: () -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
@@ -48,7 +49,7 @@ fun ColumnScope.WhiteButton(
                 shape = MaterialTheme.shapes.extraLarge
             )
             .align(Alignment.CenterHorizontally)
-            .height(64.dp),
+            .height(height.dp),
         enabled = !isLoading,
         colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
         onClick = {
