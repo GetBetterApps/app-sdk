@@ -100,7 +100,8 @@ internal constructor(
                 viewState.value.copy(
                     userName = it.displayName ?: "",
                     avatarUrl = it.avatarUrl,
-                    experienceData = it.experienceData
+                    experienceData = it.experienceData,
+                    isUserAnonymous = it.email.isNullOrEmpty()
                 )
             )
         }

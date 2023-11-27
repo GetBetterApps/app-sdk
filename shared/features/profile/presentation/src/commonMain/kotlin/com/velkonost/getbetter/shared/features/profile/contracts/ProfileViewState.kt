@@ -10,5 +10,6 @@ data class ProfileViewState(
     val userName: String = "",
     val avatarUrl: String? = null,
     val experienceData: ExperienceData? = null,
-    val selectedTheme: UIThemeMode = UIThemeMode.SystemTheme
+    val selectedTheme: UIThemeMode = UIThemeMode.SystemTheme,
+    val isUserAnonymous: Boolean = true
 ) : UIContract.State
