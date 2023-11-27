@@ -53,10 +53,7 @@ fun ProfileHeader(
 
             Spacer(modifier = modifier.weight(1f))
 
-            Row(
-                modifier = modifier.padding(start = 16.dp)
-            ) {
-
+            Row(modifier = modifier.padding(start = 16.dp)) {
                 if (showSettings) {
                     Text(
                         text = userName,

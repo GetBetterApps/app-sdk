@@ -35,12 +35,19 @@ struct ProfileScreen: View {
                 ProfileHeader(
                     userName: state.userName,
                     avatarUrl: state.avatarUrl,
-                    isLoading: state.isLoading
-                ) {
-                    self.showImagePicker.toggle()
-                } onSettingsClick: {
-                    
-                }
+                    isLoading: state.isLoading,
+                    onAvatarClick: {
+                        self.showImagePicker.toggle()
+                    },
+                    onSettingsClick: {
+                        
+                    },
+                    showSettings: !state.isUserAnonymous,
+                    onSignUpClick: {
+                        viewModel.dispatch(action: SignUpClick())
+                    }
+                )
+        
                 
                 Spacer().frame(height: 20)
                 

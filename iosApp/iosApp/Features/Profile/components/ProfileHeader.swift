@@ -18,14 +18,16 @@ struct ProfileHeader: View {
     let onAvatarClick: () -> Void
     let onSettingsClick: () -> Void
     let showSettings: Bool
+    let onSignUpClick: (() -> Void)?
     
-    init(userName: String, avatarUrl: String?, isLoading: Bool, onAvatarClick: @escaping () -> Void, onSettingsClick: @escaping () -> Void, showSettings: Bool = true) {
+    init(userName: String, avatarUrl: String?, isLoading: Bool, onAvatarClick: @escaping () -> Void, onSettingsClick: @escaping () -> Void, showSettings: Bool = true, onSignUpClick: (() -> Void)? = nil) {
         self.userName = userName
         self.avatarUrl = avatarUrl
         self.isLoading = isLoading
         self.onAvatarClick = onAvatarClick
         self.onSettingsClick = onSettingsClick
         self.showSettings = showSettings
+        self.onSignUpClick = onSignUpClick
     }
     
     var body: some View {
@@ -47,9 +49,21 @@ struct ProfileHeader: View {
                 Spacer()
                 
                 HStack {
-                    Text(userName)
-                        .foregroundColor(.textTitle)
-                        .style(.titleLarge)
+                    if showSettings {
+                        Text(userName)
+                            .foregroundColor(.textTitle)
+                            .style(.titleLarge)
+                    } else {
+                        AppButton(
+                            labelText: SharedR.strings().auth_signup_button.desc().localized(),
+                            isLoading: isLoading,
+                            onClick: {
+                                if onSignUpClick != nil {
+                                    onSignUpClick!()
+                                }
+                            }
+                        )
+                    }
                     Spacer()
                 }.padding(.init(top: .zero, leading: 16, bottom: .zero, trailing: .zero))
             }.frame(height: 128)
