@@ -28,12 +28,15 @@ struct FeedbackDetailBottomSheet: View {
         ZStack {
             Color.mainBackground
             ScrollView(.vertical, showsIndicators: false) {
-                VStack {
+                VStack(spacing: 0) {
                     Spacer().frame(height: 32)
                     
                     ForEach(item?.messages ?? [], id: \.self.datetime) { message in
                         FeedbackMessageView(message: message)
                     }
+                }
+                .onTapGesture {
+                    endTextEditing()
                 }
             }
             

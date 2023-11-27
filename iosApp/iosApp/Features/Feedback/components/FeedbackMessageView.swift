@@ -55,12 +55,13 @@ struct FeedbackMessageView: View {
                     
                 }
             }
-            .padding(6)
+            .padding(8)
             .background(
                 RoundedRectangle(cornerRadius: 12)
                     .fill(!message.fromUser ? Color.buttonGradientStart : Color.backgroundItem)
                     .shadow(radius: 8)
             )
+            
             
             if message.fromUser {
                 Spacer()
