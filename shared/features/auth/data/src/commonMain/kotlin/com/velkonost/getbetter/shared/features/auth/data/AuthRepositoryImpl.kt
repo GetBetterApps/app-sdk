@@ -65,6 +65,7 @@ class AuthRepositoryImpl(
 
     override suspend fun isUserLoggedIn(): Boolean =
         localDataSource.data.first().contains(TOKEN_KEY)
+                && localDataSource.data.first()[TOKEN_KEY]!!.isNotEmpty()
 
     override suspend fun checkNeedsResetState(): Boolean {
         val value = localDataSource.data.first()[NEW_USER_RESET_AUTH_STATE] == true

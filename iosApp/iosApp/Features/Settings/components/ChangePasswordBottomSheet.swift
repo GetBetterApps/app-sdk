@@ -62,6 +62,7 @@ struct ChangePasswordBottomSheet: View {
                 Spacer().frame(height: 64)
                 
             }
+            .contentShape(Rectangle())
             .onTapGesture {
                 endTextEditing()
             }

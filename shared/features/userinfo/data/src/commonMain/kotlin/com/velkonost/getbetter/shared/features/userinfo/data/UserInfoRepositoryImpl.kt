@@ -140,13 +140,13 @@ constructor(
         mapper = { },
         request = {
             val token = localDataSource.getUserToken()
-            remoteDataSource.deleteAccount(token)
-        },
-        onSuccess = {
+
             localDataSource.resetStates()
             localDataSource.edit { preferences ->
                 preferences.remove(TOKEN_KEY)
             }
+
+            remoteDataSource.deleteAccount(token)
         }
     )
 
