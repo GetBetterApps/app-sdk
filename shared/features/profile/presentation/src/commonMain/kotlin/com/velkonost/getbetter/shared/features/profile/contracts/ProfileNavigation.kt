@@ -24,3 +24,9 @@ data object NavigateToFeedback : ProfileNavigation {
         route = NavigationScreen.FeedbackNavScreen.route
     )
 }
+
+data object NavigateToSettings : ProfileNavigation {
+    override val event: NavigationEvent = NavigationEvent.NavigateToRoute(
+        route = NavigationScreen.SettingsNavScreen.route,
+    )
+}

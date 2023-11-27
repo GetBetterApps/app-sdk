@@ -13,6 +13,7 @@ class SettingsViewModel internal constructor(
     initialState = SettingsViewState()
 ) {
     override fun dispatch(action: SettingsAction) = when(action) {
+        is SettingsAction.NavigateBack -> emit(action)
         else -> {
 
         }

@@ -82,6 +82,10 @@
     <string name="tg_group_title">Telegram community</string>
     <!--  PROFILE  -->
 
+    <!--  SETTINGS  -->
+    <string name="settings_title">Settings</string>
+    <!--  SETTINGS  -->
+
     <!--  PROFILE DETAIL  -->
     <string name="follow_title">Follow</string>
     <string name="unfollow_title">Unfollow</string>

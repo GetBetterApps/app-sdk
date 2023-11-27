@@ -9,6 +9,8 @@ data object LogoutClick : ProfileAction
 
 data object SignUpClick : ProfileAction
 
+data object SettingsClick : ProfileAction
+
 data object ContactUsClick : ProfileAction
 
 data class ThemeChange(val value: UIThemeMode) : ProfileAction

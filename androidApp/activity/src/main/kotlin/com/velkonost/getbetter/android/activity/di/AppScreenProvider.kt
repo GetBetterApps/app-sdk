@@ -12,6 +12,7 @@ import com.velkonost.getbetter.android.features.feedback.FeedbackNavRoute
 import com.velkonost.getbetter.android.features.home.WisdomNavRoute
 import com.velkonost.getbetter.android.features.notedetail.NoteDetailNavRoute
 import com.velkonost.getbetter.android.features.profile.ProfileNavRoute
+import com.velkonost.getbetter.android.features.settings.SettingsNavRoute
 import com.velkonost.getbetter.android.features.social.SocialNavRoute
 import com.velkonost.getbetter.android.features.splash.SplashNavRoute
 import com.velkonost.getbetter.core.compose.provide
@@ -102,5 +103,6 @@ fun NavGraphBuilder.addProfileRoute(
     ) {
         ProfileNavRoute.provide(this, navController, forceHideBottomBar)
         FeedbackNavRoute.provide(this, navController, forceHideBottomBar)
+        SettingsNavRoute.provide(this, navController, forceHideBottomBar)
     }
 }

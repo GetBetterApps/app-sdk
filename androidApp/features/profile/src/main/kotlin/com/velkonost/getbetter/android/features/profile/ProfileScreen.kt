@@ -38,6 +38,7 @@ import com.velkonost.getbetter.shared.features.profile.ProfileViewModel
 import com.velkonost.getbetter.shared.features.profile.contracts.AvatarSelected
 import com.velkonost.getbetter.shared.features.profile.contracts.ContactUsClick
 import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
+import com.velkonost.getbetter.shared.features.profile.contracts.SettingsClick
 import com.velkonost.getbetter.shared.features.profile.contracts.SignUpClick
 import com.velkonost.getbetter.shared.features.profile.contracts.ThemeChange
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -108,7 +109,7 @@ fun ProfileScreen(
                 launcher.launch("image/*")
             },
             onSettingsClick = {
-
+                viewModel.dispatch(SettingsClick)
             },
             onSignUpClick = {
                 viewModel.dispatch(SignUpClick)

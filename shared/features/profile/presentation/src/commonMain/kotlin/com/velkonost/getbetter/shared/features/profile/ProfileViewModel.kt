@@ -12,10 +12,12 @@ import com.velkonost.getbetter.shared.features.profile.contracts.ContactUsClick
 import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
 import com.velkonost.getbetter.shared.features.profile.contracts.NavigateToAuth
 import com.velkonost.getbetter.shared.features.profile.contracts.NavigateToFeedback
+import com.velkonost.getbetter.shared.features.profile.contracts.NavigateToSettings
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileAction
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileEvent
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileNavigation
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileViewState
+import com.velkonost.getbetter.shared.features.profile.contracts.SettingsClick
 import com.velkonost.getbetter.shared.features.profile.contracts.SignUpClick
 import com.velkonost.getbetter.shared.features.profile.contracts.ThemeChange
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
@@ -40,6 +42,7 @@ internal constructor(
     override fun dispatch(action: ProfileAction) = when (action) {
         is LogoutClick -> obtainLogout()
         is SignUpClick -> obtainSignUpClick()
+        is SettingsClick -> obtainSettingsClick()
         is ThemeChange -> obtainThemeChange(action.value)
         is AvatarSelected -> obtainAvatarSelected(action.avatarContent)
         is AvatarSelectedBase64 -> obtainAvatarSelected(action.avatarContent.decodeBase64Bytes())
@@ -72,6 +75,10 @@ internal constructor(
                 }
             }
         }
+    }
+
+    private fun obtainSettingsClick() {
+        emit(NavigateToSettings)
     }
 
     private fun obtainSignUpClick() {
