@@ -11,6 +11,8 @@ interface AuthRepository<T> {
 
     suspend fun registerAnonymously(): Flow<ResultState<T>>
 
+    suspend fun identifyAnonymous(email: String, password: String): Flow<ResultState<T>>
+
     suspend fun isUserLoggedIn(): Boolean
 
     suspend fun checkNeedsResetState(): Boolean

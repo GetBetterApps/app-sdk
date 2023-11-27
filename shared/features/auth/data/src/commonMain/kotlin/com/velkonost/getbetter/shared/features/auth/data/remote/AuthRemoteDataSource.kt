@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.auth.data.remote
 
+import com.velkonost.getbetter.shared.core.network.extensions.makeRequest
 import com.velkonost.getbetter.shared.core.network.model.RemoteResponse
 import com.velkonost.getbetter.shared.features.auth.data.remote.model.request.RegisterEmailRequest
 import com.velkonost.getbetter.shared.features.auth.data.remote.model.response.KtorLoginInfo
@@ -35,5 +36,17 @@ class AuthRemoteDataSource(
                 path(Route.REGISTER_ANONYMOUSLY)
             }
         }.body()
+
+    suspend fun identifyAnonymous(
+        token: String?,
+        body: RegisterEmailRequest
+    ): RemoteResponse<KtorLoginInfo> = httpClient.post {
+        makeRequest(
+            path = Route.IDENTIFY_ANONYMOUS,
+            body = body,
+            token = token
+        )
+    }.body()
+
 
 }

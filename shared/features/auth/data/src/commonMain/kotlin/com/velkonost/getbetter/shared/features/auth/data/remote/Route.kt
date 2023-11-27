@@ -6,4 +6,5 @@ object Route {
     const val REGISTER_EMAIL = "$PREFIX/registerEmail"
     const val REGISTER_ANONYMOUSLY = "$PREFIX/registerAnonymously"
     const val LOGIN_EMAIL = "$PREFIX/loginEmail"
+    const val IDENTIFY_ANONYMOUS = "$PREFIX/identifyAnonymous"
 }

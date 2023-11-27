@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import com.velkonost.getbetter.shared.core.datastore.NEW_USER_RESET_AUTH_STATE
 import com.velkonost.getbetter.shared.core.datastore.TOKEN_KEY
+import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.flowRequest
 import com.velkonost.getbetter.shared.features.auth.api.AuthRepository
@@ -48,6 +49,18 @@ class AuthRepositoryImpl(
         mapper = KtorLoginInfo::asExternalModel,
         request = remoteDataSource::registerAnonymously,
         onSuccess = ::saveAuthToken
+    )
+
+    override suspend fun identifyAnonymous(
+        email: String,
+        password: String
+    ): Flow<ResultState<String>> = flowRequest(
+        mapper = KtorLoginInfo::asExternalModel,
+        request = {
+            val token = localDataSource.getUserToken()
+            val body = RegisterEmailRequest(email, password)
+            remoteDataSource.identifyAnonymous(token, body)
+        }
     )
 
     override suspend fun isUserLoggedIn(): Boolean =
