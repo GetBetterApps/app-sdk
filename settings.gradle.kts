@@ -95,6 +95,7 @@ include(
     ":androidApp:features:wisdom",
     ":androidApp:features:profile",
     ":androidApp:features:feedback",
+    ":androidApp:features:settings",
 
     ":shared:resources",
     ":shared:umbrella"
