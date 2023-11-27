@@ -24,7 +24,47 @@ struct SettingsScreen: View {
             } else {
                 VStack {
                     SettingsHeader()
-                }
+                    
+                    SingleLineTextField(
+                        value: state.email,
+                        placeholderText: SharedR.strings().auth_email_label.desc().localized(),
+                        isEnabled: false,
+                        paddings: .init(top: 16, leading: 16, bottom: 0, trailing: 16),
+                        onValueChanged: { _ in }
+                    )
+                    
+                    NameTextField(
+                        value: Binding(get: { state.name }, set: { _ in }),
+                        placeholderText: SharedR.strings().settings_name_hint.desc().localized(),
+                        onValueChanged: { value in
+                            viewModel.dispatch(action: SettingsActionNameChanged(value: value))
+                        },
+                        onSaveClick: {
+                            viewModel.dispatch(action: SettingsActionSaveNameClick())
+                        }
+                    )
+                    
+                    Spacer()
+                    
+                    AppButton(
+                        labelText: SharedR.strings().settings_change_password_button.desc().localized(),
+                        isLoading: state.isLoading,
+                        onClick: {
+                            viewModel.dispatch(action: SettingsActionChangePasswordClick())
+                        }
+                    )
+                    
+                    WhiteButton(
+                        labelText: SharedR.strings().settings_delete_account_button.desc().localized(),
+                        isLoading: state.isLoading,
+                        onClick: {
+                            
+                        },
+                        height: 42
+                    )
+                    
+                    Spacer().frame(height: 64)
+                }.frame(alignment: .center)
             }
         }
     }

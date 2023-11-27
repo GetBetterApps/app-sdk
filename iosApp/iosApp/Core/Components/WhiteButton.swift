@@ -15,11 +15,13 @@ struct WhiteButton: View {
     private let labelText: String
     private let isLoading: Bool
     private let onClick: () -> Void
+    private let height: Int
     
-    init(labelText: String, isLoading: Bool, onClick: @escaping () -> Void) {
+    init(labelText: String, isLoading: Bool, onClick: @escaping () -> Void, height: Int = 64) {
         self.labelText = labelText
         self.isLoading = isLoading
         self.onClick = onClick
+        self.height = height
     }
     
     var body: some View {
@@ -34,7 +36,7 @@ struct WhiteButton: View {
                     .progressViewStyle(CircularProgressViewStyle(tint: Color.textButtonEnabled))
                     .frame(
                         width: UIScreen.screenWidth * 0.8,
-                        height: 64,
+                        height: CGFloat(height),
                         alignment: .center
                     )
                     .background(

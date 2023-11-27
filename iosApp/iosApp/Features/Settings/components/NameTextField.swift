@@ -19,6 +19,14 @@ struct NameTextField: View {
     let onValueChanged: (String) -> Void
     let onSaveClick: () -> Void
     
+    init(value: Binding<String>, placeholderText: String, onValueChanged: @escaping (String) -> Void, onSaveClick: @escaping () -> Void) {
+        self._value = value
+        self.textFieldValue = value.wrappedValue
+        self.placeholderText = placeholderText
+        self.onValueChanged = onValueChanged
+        self.onSaveClick = onSaveClick
+    }
+    
     @FocusState private var isFocused: Bool
     
     var body: some View {
@@ -33,7 +41,7 @@ struct NameTextField: View {
             .foregroundColor(.textSecondaryTitle)
             .lineLimit(1)
             .focused($isFocused)
-            .placeholder(when: value.text.isEmpty) {
+            .placeholder(when: value.isEmpty) {
                 Text(placeholderText)
                     .style(.titleSmall)
                     .lineLimit(1)
