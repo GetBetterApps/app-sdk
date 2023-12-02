@@ -35,6 +35,9 @@ include(
     ":shared:features:areas:data",
     ":shared:features:notes:api",
     ":shared:features:notes:data",
+
+    ":shared:features:abilities:api",
+    ":shared:features:abilities:data",
     ":shared:features:tasks:api",
     ":shared:features:tasks:data",
 

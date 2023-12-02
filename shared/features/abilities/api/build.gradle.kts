@@ -6,15 +6,15 @@ import com.velkonost.getbetter.join
 plugins {
     `kmm-shared-module-plugin`
     alias(libs.plugins.ksp)
-    alias(libs.plugins.nativecoroutines)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.nativecoroutines)
 }
 
 android {
     namespace = SHARED_PACKAGE.join(
         projects.shared.features,
-        projects.shared.features.tasks,
-        projects.shared.features.tasks.data
+        projects.shared.features.abilities,
+        projects.shared.features.abilities.api
     )
 }
 
@@ -23,14 +23,11 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.koin.core)
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlinx.serialization)
 
                 implementation(projects.shared.core.util)
                 implementation(projects.shared.core.model)
-                implementation(projects.shared.core.network)
-                implementation(projects.shared.core.datastore)
-
-                implementation(projects.shared.features.areas.api)
-                implementation(projects.shared.features.tasks.api)
             }
         }
     }

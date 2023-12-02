@@ -13,8 +13,8 @@ plugins {
 android {
     namespace = SHARED_PACKAGE.join(
         projects.shared.features,
-        projects.shared.features.tasks,
-        projects.shared.features.tasks.data
+        projects.shared.features.abilities,
+        projects.shared.features.abilities.data
     )
 }
 
@@ -29,8 +29,7 @@ kotlin {
                 implementation(projects.shared.core.network)
                 implementation(projects.shared.core.datastore)
 
-                implementation(projects.shared.features.areas.api)
-                implementation(projects.shared.features.tasks.api)
+                implementation(projects.shared.features.abilities.api)
             }
         }
     }
