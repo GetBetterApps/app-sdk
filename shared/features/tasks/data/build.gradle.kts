@@ -24,6 +24,9 @@ kotlin {
                 implementation(libs.koin.core)
 
                 implementation(projects.shared.core.util)
+                implementation(projects.shared.core.model)
+                implementation(projects.shared.core.network)
+                implementation(projects.shared.core.datastore)
                 implementation(projects.shared.features.tasks.api)
             }
         }
