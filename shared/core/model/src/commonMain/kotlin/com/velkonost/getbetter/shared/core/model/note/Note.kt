@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.core.model.note
 
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.likes.LikesData
+import com.velkonost.getbetter.shared.core.model.task.Task
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToLocalDatetime
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToLocalDatetimeWithoutRelation
@@ -29,7 +30,9 @@ data class Note(
     val isPrivate: Boolean,
 
     val subNotes: List<SubNote>,
+
     var area: Area,
+    val task: Task? = null,
 
     val allowEdit: Boolean,
 
