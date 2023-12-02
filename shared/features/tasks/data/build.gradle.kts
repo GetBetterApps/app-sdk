@@ -7,6 +7,7 @@ plugins {
     `kmm-shared-module-plugin`
     alias(libs.plugins.ksp)
     alias(libs.plugins.nativecoroutines)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
