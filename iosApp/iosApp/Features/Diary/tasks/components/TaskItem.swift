@@ -36,7 +36,8 @@ struct TaskItem: View {
                     Text(item.why)
                         .style(.bodyMedium)
                         .foregroundColor(.textTitle)
-                        .lineLimit(4)
+                        .multilineTextAlignment(.leading)
+//                        .lineLimit(5)
                         .padding(.top, 12)
                     
                     VFlow(alignment: .leading, spacing: 3) {

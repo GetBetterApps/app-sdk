@@ -33,7 +33,7 @@ struct TaskItemHeader : View {
                 .scaledToFit()
                 .frame(width: 32, height: 32)
             
-            VStack {
+            VStack(spacing: 0) {
                 Spacer()
                 
                 HStack {

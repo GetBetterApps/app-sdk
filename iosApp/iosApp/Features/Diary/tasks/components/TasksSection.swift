@@ -29,11 +29,13 @@ struct TasksSection : View {
             default: SharedR.strings().tasks_completed_title.desc().localized()
             }
             
-            Text(title)
-                .style(.headlineSmall)
-                .foregroundColor(.textPrimary)
-                .padding(.top, 24)
-                .padding(.horizontal, 20)
+            HStack {
+                Text(title)
+                    .style(.headlineSmall)
+                    .foregroundColor(.textPrimary)
+                    .padding(.top, 24)
+                Spacer()
+            }
             
             ForEach(items, id: \.self.id) { item in
                 TaskItem(item: item)

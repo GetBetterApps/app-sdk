@@ -27,7 +27,7 @@ struct TagItem : View {
             Text(tag.text)
                 .style(.bodySmall)
                 .foregroundColor(.textLight)
-                .frame(height: 30, alignment: .center)
+                .frame(height: 26, alignment: .center)
             
             if onTagDelete != nil && !onlyView {
                 Image(uiImage: SharedR.images().ic_close.toUIImage()!)
@@ -44,7 +44,7 @@ struct TagItem : View {
         }
         .animation(.easeInOut, value: onlyView)
         .padding(.init(top: 3, leading: 6, bottom: 3, trailing: 6))
-        .frame(height: 30)
+        .frame(height: 26)
         .background(
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.buttonGradientStart)
