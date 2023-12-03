@@ -73,6 +73,7 @@ include(
     ":shared:features:addarea:presentation",
     ":shared:features:areadetail:presentation",
     ":shared:features:notedetail:presentation",
+    ":shared:features:taskdetail:presentation",
     ":shared:features:profiledetail:presentation",
     ":shared:features:settings:presentation",
 
