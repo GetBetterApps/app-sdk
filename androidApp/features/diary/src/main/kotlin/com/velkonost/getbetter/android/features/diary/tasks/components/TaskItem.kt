@@ -67,6 +67,7 @@ fun TaskItem(
                     areaIcon = Emoji.getIconById(item.area.emojiId!!),
                     isFavorite = item.isFavorite,
                     onFavoriteClick = onFavoriteClick,
+                    isFavoriteLoading = item.isFavoriteLoading
                 )
 
                 Text(

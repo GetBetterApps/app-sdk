@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.android.features.diary.tasks.components
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -20,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.compose.colorResource
@@ -32,6 +34,7 @@ fun TaskItemHeader(
     taskName: String,
     areaIcon: ImageResource,
     isFavorite: Boolean,
+    isFavoriteLoading: Boolean,
     onFavoriteClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -72,26 +75,32 @@ fun TaskItemHeader(
         Spacer(modifier = modifier.weight(1f))
 
         Box {
-            Column(
-                modifier = modifier.clickable(
-                    interactionSource = interactionSource,
-                    indication = null,
-                    onClick = onFavoriteClick
-                ),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-            ) {
-                Image(
-                    modifier = modifier
-                        .size(32.dp)
-                        .padding(2.dp),
-                    painter = painterResource(
-                        imageResource = if (isFavorite) SharedR.images.ic_star
-                        else SharedR.images.ic_empty_star
-                    ),
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.button_gradient_start))
-                )
+            AnimatedContent(targetState = isFavoriteLoading, label = "") {
+                if (!it) {
+                    Column(
+                        modifier = modifier.clickable(
+                            interactionSource = interactionSource,
+                            indication = null,
+                            onClick = onFavoriteClick
+                        ),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center,
+                    ) {
+                        Image(
+                            modifier = modifier
+                                .size(32.dp)
+                                .padding(2.dp),
+                            painter = painterResource(
+                                imageResource = if (isFavorite) SharedR.images.ic_star
+                                else SharedR.images.ic_empty_star
+                            ),
+                            contentDescription = null,
+                            colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.button_gradient_start))
+                        )
+                    }
+                } else {
+                    Loader(size = 32)
+                }
             }
         }
     }
