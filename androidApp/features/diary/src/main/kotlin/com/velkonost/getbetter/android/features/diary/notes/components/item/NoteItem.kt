@@ -54,6 +54,7 @@ fun NoteItem(
         Column {
             NoteItemHeader(
                 areaName = item.area.name,
+                taskName = item.task?.name,
                 areaIcon = Emoji.getIconById(item.area.emojiId!!),
                 likesData = item.likesData,
                 showLikes = !item.isPrivate,
