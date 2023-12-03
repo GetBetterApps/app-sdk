@@ -105,6 +105,17 @@ val Int.asText: ResourceStringDesc
             553 -> SharedR.strings.error_553
             554 -> SharedR.strings.error_554
 
+            400 -> SharedR.strings.error_400
+            401 -> SharedR.strings.error_401
+            402 -> SharedR.strings.error_402
+            403 -> SharedR.strings.error_403
+            404 -> SharedR.strings.error_404
+            405 -> SharedR.strings.error_405
+            406 -> SharedR.strings.error_406
+            407 -> SharedR.strings.error_407
+            408 -> SharedR.strings.error_408
+            409 -> SharedR.strings.error_409
+
             else -> SharedR.strings.error_default
         }
 

@@ -343,6 +343,17 @@
     <string name="error_552">Incorrect feedback\'s type</string>
     <string name="error_553">Incorrect feedback\'s status</string>
     <string name="error_554">You don\'t have permission to add answer</string>
+
+    <string name="error_400">Task not found</string>
+    <string name="error_401">Task already in favorite</string>
+    <string name="error_402">Task is not in favorite</string>
+    <string name="error_403">Task already marked as not interesting</string>
+    <string name="error_404">Task already removed from not interesting</string>
+    <string name="error_405">Task already marked as completed</string>
+    <string name="error_406">Task already removed from completed</string>
+    <string name="error_407">You reached limit of favorite tasks</string>
+    <string name="error_408">You don\'t have permissions to update current list</string>
+    <string name="error_409">This task is not in your current list</string>
     <!--  SERVER EXCEPTIONS  -->
 
     <!--  DATE FORMATTER  -->
