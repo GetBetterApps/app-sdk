@@ -51,6 +51,7 @@ fun TaskItem(
         Column {
             TaskItemHeader(
                 areaName = item.area.name,
+                taskName = item.name,
                 areaIcon = Emoji.getIconById(item.area.emojiId!!),
                 onLikeClick = { },
                 likesData = LikesData(totalLikes = 0, userLike = LikeType.None)

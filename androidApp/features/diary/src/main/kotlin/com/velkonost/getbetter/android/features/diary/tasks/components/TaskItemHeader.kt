@@ -33,6 +33,7 @@ import dev.icerock.moko.resources.compose.painterResource
 fun TaskItemHeader(
     modifier: Modifier = Modifier,
     areaName: String,
+    taskName: String,
     areaIcon: ImageResource,
     showLikes: Boolean = true,
     onLikeClick: () -> Unit,
@@ -59,8 +60,17 @@ fun TaskItemHeader(
                 text = areaName,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.titleSmall,
                 color = colorResource(resource = SharedR.colors.text_primary)
+            )
+
+            Text(
+                modifier = modifier.padding(bottom = 2.dp),
+                text = taskName,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.titleMedium,
+                color = colorResource(resource = SharedR.colors.text_title)
             )
         }
 

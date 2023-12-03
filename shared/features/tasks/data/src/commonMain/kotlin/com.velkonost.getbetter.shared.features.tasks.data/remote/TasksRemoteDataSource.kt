@@ -23,11 +23,15 @@ class TasksRemoteDataSource(
     }.body()
 
     suspend fun fetchCurrentList(
-        token: String?
+        token: String?,
+        forceUpdate: Boolean = false
     ): RemoteResponse<List<KtorTask>> = httpClient.get {
         makeRequest(
             path = Route.GET_CURRENT_LIST,
-            token = token
+            token = token,
+            params = hashMapOf(
+                "forceUpdate" to forceUpdate
+            )
         )
     }.body()
 
