@@ -40,7 +40,7 @@ import dev.icerock.moko.resources.compose.painterResource
 @Composable
 fun TaskItem(
     modifier: Modifier = Modifier,
-    item: Task
+    item: Task,
 ) {
 
     val haptic = LocalHapticFeedback.current
@@ -58,7 +58,9 @@ fun TaskItem(
     ) {
         Box {
             Column(
-                modifier = modifier.alpha(0.2f)
+                modifier = modifier.alpha(
+                    if (item.isCompleted) 0.2f else 1f
+                )
             ) {
                 TaskItemHeader(
                     areaName = item.area.name,
@@ -90,22 +92,24 @@ fun TaskItem(
                 }
             }
 
-            Box(
-                modifier = modifier
-                    .fillMaxSize()
-            ) {
-                Image(
+            if (item.isCompleted) {
+                Box(
                     modifier = modifier
-                        .size(128.dp)
-                        .align(Alignment.Center),
-                    painter = painterResource(imageResource = SharedR.images.ic_save),
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(
-                        color = colorResource(
-                            resource = SharedR.colors.green
-                        ).copy(alpha = 0.5f)
+                        .fillMaxSize()
+                ) {
+                    Image(
+                        modifier = modifier
+                            .size(128.dp)
+                            .align(Alignment.Center),
+                        painter = painterResource(imageResource = SharedR.images.ic_save),
+                        contentDescription = null,
+                        colorFilter = ColorFilter.tint(
+                            color = colorResource(
+                                resource = SharedR.colors.green
+                            ).copy(alpha = 0.5f)
+                        )
                     )
-                )
+                }
             }
         }
     }
