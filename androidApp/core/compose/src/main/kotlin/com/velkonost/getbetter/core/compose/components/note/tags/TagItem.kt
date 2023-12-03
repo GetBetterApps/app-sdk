@@ -43,9 +43,10 @@ fun RowScope.TagItem(
             .padding(
                 start = 6.dp,
                 end = 6.dp,
-                top = 3.dp,
-                bottom = 3.dp
+                top = 4.dp,
+                bottom = 4.dp
             ),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             modifier = modifier
@@ -54,7 +55,7 @@ fun RowScope.TagItem(
             text = tag.text,
             textAlign = TextAlign.Center,
             color = colorResource(resource = SharedR.colors.text_light),
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodySmall,
         )
 
         if (onTagDelete != null && !onlyView) {

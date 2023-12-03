@@ -73,7 +73,7 @@ fun TaskItem(
                 Text(
                     modifier = modifier.padding(top = 12.dp),
                     text = item.why,
-                    maxLines = 2,
+                    maxLines = 4,
                     overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.bodyMedium,
                     color = colorResource(resource = SharedR.colors.text_title)
