@@ -51,15 +51,15 @@ struct TaskItem: View {
                 }
                 .opacity(item.isCompleted ? 0.2 : 1)
                 
-//                if item.isCompleted {
-//                    ZStack {
-//                        Image(uiImage: SharedR.images().ic_save.toUIImage()!)
-//                            .resizable()
-//                            .renderingMode(.template)
-//                            .foregroundColor(.green.opacity(0.5))
-//                            .frame(width: 128, height: 128, alignment: .center)
-//                    }
-//                }
+                if item.isCompleted {
+                    ZStack {
+                        Image(uiImage: SharedR.images().ic_save.toUIImage()!)
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.green.opacity(0.5))
+                            .frame(width: 64, height: 64, alignment: .center)
+                    }
+                }
             }
         }
         .onTapGesture {

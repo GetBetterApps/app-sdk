@@ -25,7 +25,7 @@ struct TaskItemHeader : View {
         self.isFavorite = isFavorite
         self.onFavoriteClick = onFavoriteClick
     }
-
+    
     var body: some View {
         HStack {
             Image(uiImage: areaIcon)
@@ -34,8 +34,6 @@ struct TaskItemHeader : View {
                 .frame(width: 32, height: 32)
             
             VStack {
-//                Spacer()
-                
                 HStack {
                     Text(areaName)
                         .style(.titleSmall)
@@ -53,46 +51,30 @@ struct TaskItemHeader : View {
                         Spacer()
                     }
                 }
-                
-//                Spacer()
             }
             .frame(alignment: .center)
             .padding(.leading, 6)
             
             Spacer()
             
-//            if showLikes {
-//                ZStack(alignment: .center) {
-//                    if (!likesData.isLikesLoading) {
-//                        VStack {
-//                            Image(
-//                                uiImage: likesData.userLike == LikeType.positive ? SharedR.images().ic_heart.toUIImage()! : SharedR.images().ic_heart_empty.toUIImage()!
-//                            )
-//                            .resizable()
-//                            .renderingMode(.template)
-//                            .foregroundColor(.buttonGradientStart)
-//                            .scaledToFill()
-//                            .frame(width: 24, height: 24)
-//                            
-//                            Text(String(likesData.totalLikes))
-//                                .style(.bodySmall)
-//                                .foregroundColor(.textPrimary)
-//                        }
-//                        .onTapGesture {
-//                            onLikeClick()
-//                        }
-//                    } else {
-//                        HStack {
-//                            Spacer()
-//                            Loader()
-//                                .scaleEffect(0.5)
-//                            Spacer()
-//                        }
-//                    }
-//                }
-//                .frame(width: 32, height: 32)
-//                .animation(.easeInOut, value: likesData.isLikesLoading)
-//            }
+            ZStack(alignment: .center) {
+                VStack {
+                    Image(
+                        uiImage: isFavorite ? SharedR.images().ic_star.toUIImage()! : SharedR.images().ic_empty_star.toUIImage()!
+                    )
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(.buttonGradientStart)
+                    .scaledToFill()
+                    .frame(width: 24, height: 24)
+                    
+                }
+                .onTapGesture {
+                    onFavoriteClick()
+                }
+            }
+            .frame(width: 32, height: 32)
+            
         }
     }
 }
