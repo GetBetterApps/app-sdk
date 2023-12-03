@@ -6,9 +6,9 @@ import kotlinx.serialization.Serializable
 data class Ability(
     val id: Int?,
 
-    val name: String?,
+    val name: String,
 
-    val description: String?,
+    val description: String,
 
     var experience: Long?
 )

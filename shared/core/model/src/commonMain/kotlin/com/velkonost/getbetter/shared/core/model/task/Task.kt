@@ -7,13 +7,13 @@ import kotlinx.serialization.Serializable
 data class Task(
     val id: Int?,
 
-    var area: Area?,
+    var area: Area,
 
-    val name: String?,
+    val name: String,
 
-    val whatToDo: String?,
+    val whatToDo: String,
 
-    val why: String?,
+    val why: String,
 
     val recommendedTime: Int?,
 

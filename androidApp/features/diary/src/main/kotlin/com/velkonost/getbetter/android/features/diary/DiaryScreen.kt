@@ -310,7 +310,10 @@ fun DiaryScreenContent(
             )
 
             else -> TasksView(
-                isLoading = tasksState.isLoading
+                isLoading = tasksState.isLoading,
+                favoriteItems = tasksState.favoriteItems,
+                currentItems = tasksState.currentItems,
+                completedItems = tasksState.completedItems
             )
         }
     }
