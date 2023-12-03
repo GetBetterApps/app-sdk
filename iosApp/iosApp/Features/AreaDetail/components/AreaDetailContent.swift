@@ -156,7 +156,7 @@ extension AreaDetailContent {
                         .fill(Color.backgroundIcon)
                 )
             Spacer()
-            Text("20200\ntasks")
+            Text(areaData.statsData.tasksAmountStr.localized())
                 .style(.titleSmall)
                 .foregroundColor(.textSecondaryTitle)
                 .multilineTextAlignment(.center)

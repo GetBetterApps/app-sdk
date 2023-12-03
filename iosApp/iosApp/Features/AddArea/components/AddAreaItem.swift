@@ -82,7 +82,7 @@ struct AddAreaItem: View {
                                 .fill(Color.backgroundIcon)
                         )
                     Spacer()
-                    Text("20200\ntasks")
+                    Text(item.statsData.tasksAmountStr.localized())
                         .style(.labelSmall)
                         .foregroundColor(.textSecondaryTitle)
                         .multilineTextAlignment(.center)
