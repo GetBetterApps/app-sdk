@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.Text
 import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,6 +25,8 @@ import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.details.AreaData
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.TaskDetailViewModel
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailAction
+import com.velkonost.getbetter.shared.resources.SharedR
+import dev.icerock.moko.resources.compose.colorResource
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -73,6 +77,15 @@ fun TaskDetailScreen(
                             }
                         }
                     }
+                }
+
+                item {
+                    Text(
+                        modifier = modifier.padding(top = 12.dp),
+                        text = state.task!!.name,
+                        style = MaterialTheme.typography.labelLarge,
+                        color = colorResource(resource = SharedR.colors.text_primary),
+                    )
                 }
             }
         }
