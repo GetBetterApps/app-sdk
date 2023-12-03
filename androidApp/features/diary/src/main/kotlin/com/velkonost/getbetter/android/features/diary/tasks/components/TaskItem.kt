@@ -30,7 +30,7 @@ import com.velkonost.getbetter.core.compose.components.note.tags.TagItem
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import com.velkonost.getbetter.shared.core.model.likes.LikesData
-import com.velkonost.getbetter.shared.core.model.task.Task
+import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -40,7 +40,7 @@ import dev.icerock.moko.resources.compose.painterResource
 @Composable
 fun TaskItem(
     modifier: Modifier = Modifier,
-    item: Task,
+    item: TaskUI,
 ) {
 
     val haptic = LocalHapticFeedback.current

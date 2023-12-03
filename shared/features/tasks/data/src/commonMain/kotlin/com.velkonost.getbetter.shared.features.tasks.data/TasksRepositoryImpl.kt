@@ -3,7 +3,7 @@ package com.velkonost.getbetter.shared.features.tasks.data
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
-import com.velkonost.getbetter.shared.core.model.task.Task
+import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.flowRequest
 import com.velkonost.getbetter.shared.features.tasks.api.TasksRepository
@@ -19,7 +19,7 @@ constructor(
     private val localDataSource: DataStore<Preferences>
 ) : TasksRepository {
 
-    override fun getCompletedTasks(): Flow<ResultState<List<Task>>> = flowRequest(
+    override fun getCompletedTasks(): Flow<ResultState<List<TaskUI>>> = flowRequest(
         mapper = { map { it.asExternalModel() } },
         request = {
             val token = localDataSource.getUserToken()
@@ -27,15 +27,16 @@ constructor(
         }
     )
 
-    override fun getCurrentList(forceUpdate: Boolean): Flow<ResultState<List<Task>>> = flowRequest(
-        mapper = { map { it.asExternalModel() } },
-        request = {
-            val token = localDataSource.getUserToken()
-            remoteDataSource.fetchCurrentList(token)
-        }
-    )
+    override fun getCurrentList(forceUpdate: Boolean): Flow<ResultState<List<TaskUI>>> =
+        flowRequest(
+            mapper = { map { it.asExternalModel() } },
+            request = {
+                val token = localDataSource.getUserToken()
+                remoteDataSource.fetchCurrentList(token)
+            }
+        )
 
-    override fun addToFavorite(taskId: Int): Flow<ResultState<Task>> = flowRequest(
+    override fun addToFavorite(taskId: Int): Flow<ResultState<TaskUI>> = flowRequest(
         mapper = KtorTask::asExternalModel,
         request = {
             val token = localDataSource.getUserToken()
@@ -44,7 +45,7 @@ constructor(
         }
     )
 
-    override fun removeFromFavorite(taskId: Int): Flow<ResultState<Task>> = flowRequest(
+    override fun removeFromFavorite(taskId: Int): Flow<ResultState<TaskUI>> = flowRequest(
         mapper = KtorTask::asExternalModel,
         request = {
             val token = localDataSource.getUserToken()
@@ -53,7 +54,7 @@ constructor(
         }
     )
 
-    override fun addToNotInteresting(taskId: Int): Flow<ResultState<Task>> = flowRequest(
+    override fun addToNotInteresting(taskId: Int): Flow<ResultState<TaskUI>> = flowRequest(
         mapper = KtorTask::asExternalModel,
         request = {
             val token = localDataSource.getUserToken()
@@ -62,7 +63,7 @@ constructor(
         }
     )
 
-    override fun removeFromNotInteresting(taskId: Int): Flow<ResultState<Task>> = flowRequest(
+    override fun removeFromNotInteresting(taskId: Int): Flow<ResultState<TaskUI>> = flowRequest(
         mapper = KtorTask::asExternalModel,
         request = {
             val token = localDataSource.getUserToken()
@@ -71,7 +72,7 @@ constructor(
         }
     )
 
-    override fun addToCompleted(taskId: Int): Flow<ResultState<Task>> = flowRequest(
+    override fun addToCompleted(taskId: Int): Flow<ResultState<TaskUI>> = flowRequest(
         mapper = KtorTask::asExternalModel,
         request = {
             val token = localDataSource.getUserToken()
@@ -80,7 +81,7 @@ constructor(
         }
     )
 
-    override fun removeFromCompleted(taskId: Int): Flow<ResultState<Task>> = flowRequest(
+    override fun removeFromCompleted(taskId: Int): Flow<ResultState<TaskUI>> = flowRequest(
         mapper = KtorTask::asExternalModel,
         request = {
             val token = localDataSource.getUserToken()

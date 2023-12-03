@@ -1,6 +1,6 @@
 package com.velkonost.getbetter.shared.features.tasks.data.remote.model.response
 
-import com.velkonost.getbetter.shared.core.model.task.Task
+import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.features.abilities.data.remote.model.response.KtorAbility
 import com.velkonost.getbetter.shared.features.abilities.data.remote.model.response.asExternalModel
 import com.velkonost.getbetter.shared.features.areas.data.remote.model.response.KtorArea
@@ -33,7 +33,7 @@ data class KtorTask(
     @SerialName("isCompleted") var isCompleted: Boolean
 )
 
-fun KtorTask.asExternalModel() = Task(
+fun KtorTask.asExternalModel() = TaskUI(
     id = id,
     area = area.asExternalModel(),
     name = name,

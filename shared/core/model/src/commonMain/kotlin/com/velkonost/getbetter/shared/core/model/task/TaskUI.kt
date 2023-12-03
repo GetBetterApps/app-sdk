@@ -4,7 +4,7 @@ import com.velkonost.getbetter.shared.core.model.area.Area
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Task(
+data class TaskUI(
     val id: Int?,
 
     var area: Area,

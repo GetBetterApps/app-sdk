@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.android.features.diary.tasks.components.TaskItem
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.extensions.fadingEdge
-import com.velkonost.getbetter.shared.core.model.task.Task
+import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.features.calendars.model.TasksUISection
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -27,9 +27,9 @@ import dev.icerock.moko.resources.compose.stringResource
 fun TasksView(
     modifier: Modifier = Modifier,
     isLoading: Boolean,
-    favoriteItems: List<Task>,
-    currentItems: List<Task>,
-    completedItems: List<Task>
+    favoriteItems: List<TaskUI>,
+    currentItems: List<TaskUI>,
+    completedItems: List<TaskUI>
 ) {
     Box(modifier = modifier.fillMaxSize()) {
         if (isLoading) {
@@ -41,7 +41,6 @@ fun TasksView(
                     .fadingEdge(),
                 contentPadding = PaddingValues(bottom = 140.dp),
             ) {
-
                 tasksSection(
                     section = TasksUISection.Favorite,
                     items = favoriteItems
@@ -64,7 +63,7 @@ fun TasksView(
 fun LazyListScope.tasksSection(
     modifier: Modifier = Modifier,
     section: TasksUISection,
-    items: List<Task>
+    items: List<TaskUI>
 ) {
     if (items.isNotEmpty()) {
         item {
