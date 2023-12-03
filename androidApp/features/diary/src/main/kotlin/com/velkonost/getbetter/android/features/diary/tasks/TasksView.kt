@@ -7,11 +7,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.velkonost.getbetter.core.compose.components.Loader
+import com.velkonost.getbetter.shared.core.model.task.Task
 
 @Composable
 fun TasksView(
     modifier: Modifier = Modifier,
-    isLoading: Boolean
+    isLoading: Boolean,
+    favoriteItems: List<Task>,
+    currentItems: List<Task>,
+    completedItems: List<Task>
 ) {
     Box(modifier = modifier.fillMaxSize()) {
         if (isLoading) {
