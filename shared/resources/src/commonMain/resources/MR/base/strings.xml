@@ -55,6 +55,10 @@
     <string name="tasks_completed_title">Completed</string>
     <!--  TASKS  -->
 
+    <!--  TASK DETAIL  -->
+    <string name="task_detail_title">Task Info</string>
+    <!--  TASK DETAIL  -->
+
     <!--  PROFILE  -->
     <string name="profile_title">Profile</string>
 
