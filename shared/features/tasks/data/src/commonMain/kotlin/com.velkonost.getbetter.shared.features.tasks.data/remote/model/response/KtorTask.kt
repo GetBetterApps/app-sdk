@@ -12,13 +12,13 @@ import kotlinx.serialization.Serializable
 data class KtorTask(
     @SerialName("id") val id: Int?,
 
-    @SerialName("area") var area: KtorArea?,
+    @SerialName("area") var area: KtorArea,
 
-    @SerialName("name") val name: String?,
+    @SerialName("name") val name: String,
 
-    @SerialName("whatToDo") val whatToDo: String?,
+    @SerialName("whatToDo") val whatToDo: String,
 
-    @SerialName("why") val why: String?,
+    @SerialName("why") val why: String,
 
     @SerialName("recommendedTime") val recommendedTime: Int?,
 
@@ -35,7 +35,7 @@ data class KtorTask(
 
 fun KtorTask.asExternalModel() = Task(
     id = id,
-    area = area?.asExternalModel(),
+    area = area.asExternalModel(),
     name = name,
     whatToDo = whatToDo,
     why = why,
