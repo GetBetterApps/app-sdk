@@ -177,6 +177,31 @@ internal constructor(
             } else tasksRepository.addToFavorite(taskId = value.id!!)
 
             request collectAndProcess {
+                isLoading {
+                    val indexOfChangedItemInFavorite =
+                        viewState.value.tasksViewState.favoriteItems.indexOfFirst { item -> item.id == value.id }
+                    val indexOfChangedItemInCurrent =
+                        viewState.value.tasksViewState.currentItems.indexOfFirst { item -> item.id == value.id }
+
+                    val favoriteItems = viewState.value.tasksViewState.favoriteItems.toMutableList()
+                    val currentItems = viewState.value.tasksViewState.currentItems.toMutableList()
+
+                    if (indexOfChangedItemInFavorite != -1) {
+                        favoriteItems[indexOfChangedItemInFavorite] =
+                            value.copy(isFavoriteLoading = it)
+                    }
+
+                    if (indexOfChangedItemInCurrent != -1) {
+                        currentItems[indexOfChangedItemInCurrent] =
+                            value.copy(isFavoriteLoading = it)
+                    }
+
+                    val tasksViewState = viewState.value.tasksViewState.copy(
+                        favoriteItems = favoriteItems,
+                        currentItems = currentItems
+                    )
+                    emit(viewState.value.copy(tasksViewState = tasksViewState))
+                }
                 onSuccess {
                     fetchTasks()
                 }
