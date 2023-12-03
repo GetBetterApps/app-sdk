@@ -53,7 +53,7 @@ struct TaskItem: View {
                         Image(uiImage: SharedR.images().ic_save.toUIImage()!)
                             .resizable()
                             .renderingMode(.template)
-                            .foregroundColor(.green)
+                            .foregroundColor(.green.opacity(0.5))
                             .frame(width: 128, height: 128, alignment: .center)
                     }
                 }

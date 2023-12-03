@@ -92,7 +92,10 @@ struct DiaryScreen: View {
                 
             default:
                 TasksView(
-                    isLoading: state.tasksViewState.isLoading
+                    isLoading: state.tasksViewState.isLoading,
+                    favoriteItems: state.tasksViewState.favoriteItems,
+                    currentItems: state.tasksViewState.currentItems,
+                    completedItems: state.tasksViewState.completedItems
                 )
             }
             Spacer()
