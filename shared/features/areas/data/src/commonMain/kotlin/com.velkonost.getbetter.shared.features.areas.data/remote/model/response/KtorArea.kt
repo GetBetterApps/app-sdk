@@ -35,7 +35,7 @@ data class KtorArea(
     val emojiId: Int? = null,
 
     @SerialName("requiredLevel")
-    val requiredLevel: Int = 0,
+    val requiredLevel: Int? = 0,
 
     @SerialName("userTermsOfMembership")
     val userTermsOfMembership: String = TermsOfMembership.Allow.responseName,
@@ -64,6 +64,9 @@ data class KtorArea(
     @SerialName("notesAmount")
     val notesAmount: Int,
 
+    @SerialName("tasksAmount")
+    val tasksAmount: Int,
+
     @SerialName("membersAmount")
     val membersAmount: Int
 )
@@ -78,7 +81,7 @@ fun KtorArea.asExternalModel() =
         createdDate = createdDate,
         imageUrl = imageUrl,
         emojiId = emojiId,
-        requiredLevel = requiredLevel,
+        requiredLevel = requiredLevel ?: 0,
         userTermsOfMembership = TermsOfMembership.values()
             .first { it.responseName == userTermsOfMembership },
         isAllowJoin = isAllowJoin,
@@ -92,6 +95,7 @@ fun KtorArea.asExternalModel() =
         ),
         statsData = StatsData(
             notesAmount = notesAmount,
-            membersAmount = membersAmount
+            membersAmount = membersAmount,
+            tasksAmount = tasksAmount
         )
     )

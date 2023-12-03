@@ -142,7 +142,7 @@ fun AddAreaItem(
                     Text(
                         modifier = modifier
                             .align(Alignment.Center),
-                        text = "20200\ntasks",
+                        text = item.statsData.tasksAmountStr.toString(LocalContext.current),
                         color = colorResource(resource = SharedR.colors.text_secondary),
                         style = MaterialTheme.typography.labelSmall,
                         textAlign = TextAlign.Center

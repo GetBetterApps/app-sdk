@@ -78,7 +78,7 @@ internal fun AreaDataContent(
             Text(
                 modifier = modifier
                     .align(Alignment.Center),
-                text = "20200\ntasks",
+                text = statsData.tasksAmountStr.toString(LocalContext.current),
                 color = colorResource(resource = SharedR.colors.text_secondary),
                 style = MaterialTheme.typography.titleSmall,
                 textAlign = TextAlign.Center
