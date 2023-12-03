@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.areadetail.AreaDetailScreen
 import com.velkonost.getbetter.android.features.notedetail.components.ActionButtons
-import com.velkonost.getbetter.android.features.notedetail.components.AreaData
 import com.velkonost.getbetter.android.features.notedetail.components.AuthorData
 import com.velkonost.getbetter.android.features.notedetail.components.NoteDetailHeader
 import com.velkonost.getbetter.android.features.notedetail.components.comments.CommentItem
@@ -36,6 +35,7 @@ import com.velkonost.getbetter.android.features.profiledetail.ProfileDetailScree
 import com.velkonost.getbetter.core.compose.components.AppAlertDialog
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
+import com.velkonost.getbetter.core.compose.components.details.AreaData
 import com.velkonost.getbetter.core.compose.components.note.completiondate.CompletionDateBlock
 import com.velkonost.getbetter.core.compose.components.note.subnotes.SubNotesBlock
 import com.velkonost.getbetter.core.compose.components.note.tags.TagsBlock

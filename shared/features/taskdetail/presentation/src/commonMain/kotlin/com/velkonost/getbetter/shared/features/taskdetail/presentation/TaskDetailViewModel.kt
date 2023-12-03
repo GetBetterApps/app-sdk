@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.taskdetail.presentation
 
+import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.SavedStateHandle
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
@@ -37,7 +38,19 @@ internal constructor(
 
     override fun dispatch(action: TaskDetailAction) = when (action) {
         is TaskDetailAction.NavigateBack -> emit(action)
+        is TaskDetailAction.AreaChanged -> obtainAreaChanged()
     }
 
+    private fun obtainAreaChanged() {
+        launchJob {
+            viewState.value.area?.let { area ->
+                areasRepository.fetchAreaDetails(area.id) collectAndProcess {
+                    onSuccess {
+                        emit(viewState.value.copy(area = it))
+                    }
+                }
+            }
+        }
+    }
 
 }

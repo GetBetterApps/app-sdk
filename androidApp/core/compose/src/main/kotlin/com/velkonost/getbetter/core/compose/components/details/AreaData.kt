@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.notedetail.components
+package com.velkonost.getbetter.core.compose.components.details
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
