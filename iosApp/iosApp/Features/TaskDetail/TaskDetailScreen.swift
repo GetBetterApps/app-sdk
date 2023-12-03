@@ -20,8 +20,27 @@ struct TaskDetailScreen : View {
     
     
     var body: some View {
+        @State var state = viewModel.viewStateValue as! NoteDetailViewState
+        
         ZStack {
-            
+            if state.isLoading || state.task == nil {
+                VStack {
+                    Loader()
+                }
+            } else {
+                ScrollView(.vertical, showsIndicators: false) {
+                    ScrollViewReader { value in
+                        
+                        LazyVStack {
+                            //                            TaskDetailHeader(
+                            //                                isFavorite: state.task.isFavorite,
+                            //                                isFavoriteLoading: state.task.,
+                            //                                onFavoriteClick: <#T##() -> Void#>
+                            //                            )
+                        }
+                    }
+                }
+            }
         }
     }
 }

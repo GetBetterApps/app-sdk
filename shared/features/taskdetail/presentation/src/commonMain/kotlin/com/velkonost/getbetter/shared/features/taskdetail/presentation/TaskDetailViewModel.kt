@@ -8,6 +8,7 @@ import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailNavigation
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailViewState
 import com.velkonost.getbetter.shared.features.tasks.api.TasksRepository
+import kotlinx.coroutines.flow.collectLatest
 
 class TaskDetailViewModel
 internal constructor(
@@ -21,6 +22,18 @@ internal constructor(
 
     private val task = savedStateHandle.task.stateInWhileSubscribed(initialValue = null)
 
+    init {
+        launchJob {
+            task.collectLatest { task ->
+                emit(
+                    viewState.value.copy(
+                        isLoading = false,
+                        task = task
+                    )
+                )
+            }
+        }
+    }
 
     override fun dispatch(action: TaskDetailAction) = when (action) {
         is TaskDetailAction.NavigateBack -> emit(action)
