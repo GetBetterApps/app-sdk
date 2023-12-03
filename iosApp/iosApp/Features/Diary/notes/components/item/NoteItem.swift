@@ -29,7 +29,7 @@ struct NoteItem: View {
                 
                 NoteItemHeader(
                     areaName: item.area.name,
-                    taskName: nil,
+                    taskName: item.task?.name,
                     areaIcon: Emoji.companion.getIconById(id: Int32(truncating: item.area.emojiId!)).toUIImage()!,
                     showLikes: !item.isPrivate,
                     likesData: item.likesData,
