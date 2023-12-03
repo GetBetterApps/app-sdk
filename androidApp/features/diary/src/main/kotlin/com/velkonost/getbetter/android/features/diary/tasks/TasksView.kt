@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -17,6 +18,7 @@ import com.velkonost.getbetter.android.features.diary.tasks.components.TaskItem
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.extensions.fadingEdge
 import com.velkonost.getbetter.shared.core.model.task.Task
+import com.velkonost.getbetter.shared.features.calendars.model.TasksUISection
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
@@ -37,66 +39,55 @@ fun TasksView(
                 modifier = modifier
                     .fillMaxSize()
                     .fadingEdge(),
-                contentPadding = PaddingValues(bottom = 140.dp)
+                contentPadding = PaddingValues(bottom = 140.dp),
             ) {
 
-                if (favoriteItems.isNotEmpty()) {
-                    item {
-                        Text(
-                            modifier = modifier
-                                .padding(top = 24.dp, start = 20.dp)
-                                .fillMaxWidth(0.8f),
-                            text = stringResource(resource = SharedR.strings.tasks_favorite_title),
-                            color = colorResource(resource = SharedR.colors.text_primary),
-                            style = MaterialTheme.typography.headlineSmall
-                        )
-                    }
+                tasksSection(
+                    section = TasksUISection.Favorite,
+                    items = favoriteItems
+                )
 
-                    items(favoriteItems, key = { it.id!! }) { item ->
-                        TaskItem(
-                            item = item,
-                        )
-                    }
-                }
+                tasksSection(
+                    section = TasksUISection.Current,
+                    items = currentItems
+                )
 
-                if (currentItems.isNotEmpty()) {
-                    item {
-                        Text(
-                            modifier = modifier
-                                .padding(top = 24.dp, start = 20.dp)
-                                .fillMaxWidth(0.8f),
-                            text = stringResource(resource = SharedR.strings.tasks_current_list_title),
-                            color = colorResource(resource = SharedR.colors.text_primary),
-                            style = MaterialTheme.typography.headlineSmall
-                        )
-                    }
-
-                    items(currentItems, key = { it.id!! }) { item ->
-                        TaskItem(
-                            item = item,
-                        )
-                    }
-                }
-
-                if (completedItems.isNotEmpty()) {
-                    item {
-                        Text(
-                            modifier = modifier
-                                .padding(top = 24.dp, start = 20.dp)
-                                .fillMaxWidth(0.8f),
-                            text = stringResource(resource = SharedR.strings.tasks_completed_title),
-                            color = colorResource(resource = SharedR.colors.text_primary),
-                            style = MaterialTheme.typography.headlineSmall
-                        )
-                    }
-
-                    items(completedItems, key = { it.id!! }) { item ->
-                        TaskItem(
-                            item = item,
-                        )
-                    }
-                }
+                tasksSection(
+                    section = TasksUISection.Completed,
+                    items = completedItems
+                )
             }
+        }
+    }
+}
+
+fun LazyListScope.tasksSection(
+    modifier: Modifier = Modifier,
+    section: TasksUISection,
+    items: List<Task>
+) {
+    if (items.isNotEmpty()) {
+        item {
+            val title = when (section) {
+                TasksUISection.Favorite -> stringResource(resource = SharedR.strings.tasks_favorite_title)
+                TasksUISection.Current -> stringResource(resource = SharedR.strings.tasks_current_list_title)
+                TasksUISection.Completed -> stringResource(resource = SharedR.strings.tasks_completed_title)
+            }
+
+            Text(
+                modifier = modifier
+                    .padding(top = 24.dp, start = 20.dp)
+                    .fillMaxWidth(0.8f),
+                text = title,
+                color = colorResource(resource = SharedR.colors.text_primary),
+                style = MaterialTheme.typography.headlineSmall
+            )
+        }
+
+        items(items, key = { it.id!! }) { item ->
+            TaskItem(
+                item = item,
+            )
         }
     }
 }
