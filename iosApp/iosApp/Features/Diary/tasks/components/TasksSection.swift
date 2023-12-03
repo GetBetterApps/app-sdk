@@ -39,7 +39,7 @@ struct TasksSection : View {
                 Spacer()
             }
             
-            ForEach(items, id: \.self.id) { item in
+            ForEach(items, id: \.self) { item in
                 TaskItem(
                     item: item,
                     onFavoriteClick: {

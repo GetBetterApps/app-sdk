@@ -97,7 +97,7 @@ struct DiaryScreen: View {
                     currentItems: state.tasksViewState.currentItems,
                     completedItems: state.tasksViewState.completedItems,
                     onTaskFavoriteClick: { value in
-//                        viewModel.dispatch(action: TAsk)
+                        viewModel.dispatch(action: DiaryActionTaskFavoriteClick(value: value))
                     }
                 )
             }

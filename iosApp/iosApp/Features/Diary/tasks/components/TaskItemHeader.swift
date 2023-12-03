@@ -86,6 +86,7 @@ struct TaskItemHeader : View {
                 
             }
             .frame(width: 32, height: 32)
+            .animation(.easeInOut, value: isFavorite)
             .animation(.easeInOut, value: isFavoriteLoading)
             
         }
