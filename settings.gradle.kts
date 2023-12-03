@@ -95,6 +95,7 @@ include(
     ":androidApp:features:areadetail",
     ":androidApp:features:notedetail",
     ":androidApp:features:profiledetail",
+    ":androidApp:features:taskdetail",
     ":androidApp:features:calendars",
     ":androidApp:features:wisdom",
     ":androidApp:features:profile",

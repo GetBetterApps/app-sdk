@@ -154,7 +154,6 @@ kotlin {
                 api(libs.moko.resources)
             }
         }
-
     }
 }
 
