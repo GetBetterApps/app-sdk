@@ -30,6 +30,7 @@ fun TasksView(
     favoriteItems: List<TaskUI>,
     currentItems: List<TaskUI>,
     completedItems: List<TaskUI>,
+    onTaskClick: (TaskUI) -> Unit,
     onTaskFavoriteClick: (TaskUI) -> Unit
 ) {
     Box(modifier = modifier.fillMaxSize()) {
@@ -45,18 +46,21 @@ fun TasksView(
                 tasksSection(
                     section = TasksUISection.Favorite,
                     items = favoriteItems,
+                    onItemClick = onTaskClick,
                     onFavoriteClick = onTaskFavoriteClick
                 )
 
                 tasksSection(
                     section = TasksUISection.Current,
                     items = currentItems,
+                    onItemClick = onTaskClick,
                     onFavoriteClick = onTaskFavoriteClick
                 )
 
                 tasksSection(
                     section = TasksUISection.Completed,
                     items = completedItems,
+                    onItemClick = onTaskClick,
                     onFavoriteClick = onTaskFavoriteClick
                 )
             }
@@ -68,6 +72,7 @@ fun LazyListScope.tasksSection(
     modifier: Modifier = Modifier,
     section: TasksUISection,
     items: List<TaskUI>,
+    onItemClick: (TaskUI) -> Unit,
     onFavoriteClick: (TaskUI) -> Unit
 ) {
     if (items.isNotEmpty()) {
@@ -91,6 +96,9 @@ fun LazyListScope.tasksSection(
         items(items, key = { it.id!! }) { item ->
             TaskItem(
                 item = item,
+                onClick = {
+                    onItemClick(item)
+                },
                 onFavoriteClick = {
                     onFavoriteClick(item)
                 }

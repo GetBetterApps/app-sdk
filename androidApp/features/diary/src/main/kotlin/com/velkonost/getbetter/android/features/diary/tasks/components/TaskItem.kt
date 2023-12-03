@@ -39,6 +39,7 @@ import dev.icerock.moko.resources.compose.painterResource
 fun TaskItem(
     modifier: Modifier = Modifier,
     item: TaskUI,
+    onClick: () -> Unit,
     onFavoriteClick: () -> Unit
 ) {
 
@@ -52,6 +53,7 @@ fun TaskItem(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null
             ) {
+                onClick()
                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
             }
     ) {

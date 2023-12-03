@@ -14,6 +14,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.taskdetail.components.TaskDetailHeader
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.TaskDetailViewModel
+import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailAction
 
 @Composable
 fun TaskDetailScreen(
@@ -38,7 +39,7 @@ fun TaskDetailScreen(
                         isFavorite = state.task!!.isFavorite,
                         isFavoriteLoading = state.task!!.isFavoriteLoading,
                         onBackClick = {
-//                            viewModel.dispatch(NavigateBack)
+                            viewModel.dispatch(TaskDetailAction.NavigateBack)
                         },
                         onFavoriteClick = {
 

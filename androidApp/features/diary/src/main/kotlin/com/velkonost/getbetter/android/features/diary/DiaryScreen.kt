@@ -44,6 +44,7 @@ import com.velkonost.getbetter.shared.features.calendars.contracts.DiaryAction
 import com.velkonost.getbetter.shared.features.calendars.contracts.NoteClick
 import com.velkonost.getbetter.shared.features.calendars.contracts.NoteLikeClick
 import com.velkonost.getbetter.shared.features.calendars.contracts.NotesViewState
+import com.velkonost.getbetter.shared.features.calendars.contracts.TaskClick
 import com.velkonost.getbetter.shared.features.calendars.contracts.TasksViewState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
@@ -147,6 +148,9 @@ fun DiaryScreen(
                 },
                 notesLoadNextPage = {
                     viewModel.dispatch(DiaryAction.NotesLoadNextPage)
+                },
+                taskClick = {
+                    viewModel.dispatch(TaskClick(it))
                 },
                 taskFavoriteClick = {
                     viewModel.dispatch(DiaryAction.TaskFavoriteClick(it))
@@ -286,6 +290,7 @@ fun DiaryScreenContent(
     createGoalClick: () -> Unit,
     createNoteClick: () -> Unit,
     notesLoadNextPage: () -> Unit,
+    taskClick: (TaskUI) -> Unit,
     taskFavoriteClick: (TaskUI) -> Unit
 ) {
     HorizontalPager(
@@ -319,6 +324,7 @@ fun DiaryScreenContent(
                 favoriteItems = tasksState.favoriteItems,
                 currentItems = tasksState.currentItems,
                 completedItems = tasksState.completedItems,
+                onTaskClick = taskClick,
                 onTaskFavoriteClick = taskFavoriteClick
             )
         }
