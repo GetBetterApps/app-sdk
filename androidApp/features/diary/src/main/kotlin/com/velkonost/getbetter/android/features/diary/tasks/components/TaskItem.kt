@@ -28,8 +28,6 @@ import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.core.compose.components.note.tags.TagItem
 import com.velkonost.getbetter.shared.core.model.Emoji
-import com.velkonost.getbetter.shared.core.model.likes.LikeType
-import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -66,8 +64,8 @@ fun TaskItem(
                     areaName = item.area.name,
                     taskName = item.name,
                     areaIcon = Emoji.getIconById(item.area.emojiId!!),
-                    onLikeClick = { },
-                    likesData = LikesData(totalLikes = 0, userLike = LikeType.None)
+                    isFavorite = item.isFavorite,
+                    onFavoriteClick = { },
                 )
 
                 Text(

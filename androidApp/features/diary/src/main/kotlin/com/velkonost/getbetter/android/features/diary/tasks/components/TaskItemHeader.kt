@@ -1,11 +1,7 @@
 package com.velkonost.getbetter.android.features.diary.tasks.components
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,12 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.velkonost.getbetter.core.compose.components.Loader
-import com.velkonost.getbetter.shared.core.model.likes.LikeType
-import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.compose.colorResource
@@ -35,9 +27,8 @@ fun TaskItemHeader(
     areaName: String,
     taskName: String,
     areaIcon: ImageResource,
-    showLikes: Boolean = true,
-    onLikeClick: () -> Unit,
-    likesData: LikesData,
+    isFavorite: Boolean,
+    onFavoriteClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -75,41 +66,41 @@ fun TaskItemHeader(
         }
 
         Spacer(modifier = modifier.weight(1f))
-        if (showLikes) {
-            Box {
-                AnimatedContent(targetState = likesData.isLikesLoading, label = "") {
-                    if (!it) {
-                        Column(
-                            modifier = modifier.clickable(
-                                interactionSource = interactionSource,
-                                indication = null,
-                                onClick = onLikeClick
-                            ),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center,
-                        ) {
-                            Image(
-                                modifier = modifier
-                                    .size(32.dp)
-                                    .padding(2.dp),
-                                painter = painterResource(
-                                    imageResource = if (likesData.userLike == LikeType.Positive) SharedR.images.ic_heart
-                                    else SharedR.images.ic_heart_empty
-                                ),
-                                contentDescription = null,
-                                colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.button_gradient_start))
-                            )
-                            Text(
-                                text = likesData.totalLikes.toString(),
-                                color = colorResource(resource = SharedR.colors.text_primary),
-                                style = MaterialTheme.typography.bodySmall
-                            )
-                        }
-                    } else {
-                        Loader(size = 32)
-                    }
-                }
-            }
-        }
+//        if (showLikes) {
+//            Box {
+//                AnimatedContent(targetState = likesData.isLikesLoading, label = "") {
+//                    if (!it) {
+//                        Column(
+//                            modifier = modifier.clickable(
+//                                interactionSource = interactionSource,
+//                                indication = null,
+//                                onClick = onLikeClick
+//                            ),
+//                            horizontalAlignment = Alignment.CenterHorizontally,
+//                            verticalArrangement = Arrangement.Center,
+//                        ) {
+//                            Image(
+//                                modifier = modifier
+//                                    .size(32.dp)
+//                                    .padding(2.dp),
+//                                painter = painterResource(
+//                                    imageResource = if (likesData.userLike == LikeType.Positive) SharedR.images.ic_heart
+//                                    else SharedR.images.ic_heart_empty
+//                                ),
+//                                contentDescription = null,
+//                                colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.button_gradient_start))
+//                            )
+//                            Text(
+//                                text = likesData.totalLikes.toString(),
+//                                color = colorResource(resource = SharedR.colors.text_primary),
+//                                style = MaterialTheme.typography.bodySmall
+//                            )
+//                        }
+//                    } else {
+//                        Loader(size = 32)
+//                    }
+//                }
+//            }
+//        }
     }
 }

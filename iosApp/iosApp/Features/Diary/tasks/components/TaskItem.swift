@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import SharedSDK
+import SwiftUIFlow
 
 struct TaskItem: View {
     
@@ -20,7 +21,42 @@ struct TaskItem: View {
     
     var body: some View {
         PrimaryBox {
-            VStack(spacing: 0) {
+            ZStack {
+                VStack(spacing: 0) {
+                    TaskItemHeader(
+                        areaName: item.area.name,
+                        taskName: item.name,
+                        areaIcon: Emoji.companion.getIconById(id: item.area.emojiId as! Int32).toUIImage()!,
+                        isFavorite: item.isFavorite,
+                        onFavoriteClick: {
+                            
+                        }
+                    )
+                    
+                    Text(item.why)
+                        .style(.bodyMedium)
+                        .foregroundColor(.textTitle)
+                        .lineLimit(4)
+                        .padding(.top, 12)
+                    
+                    VFlow(alignment: .leading, spacing: 3) {
+                        ForEach(item.abilities, id: \.self) { ability in
+                            TagItem(tag: TagUI(id: ability.id!.stringValue, text: ability.name))
+                        }
+                    }
+                    .padding(.top, 12)
+                }
+                .opacity(item.isCompleted ? 0.2 : 1)
+                
+                if item.isCompleted {
+                    ZStack {
+                        Image(uiImage: SharedR.images().ic_save.toUIImage()!)
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.green)
+                            .frame(width: 128, height: 128, alignment: .center)
+                    }
+                }
             }
         }
         .onTapGesture {

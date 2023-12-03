@@ -25,7 +25,7 @@ struct TagItem : View {
     var body: some View {
         HStack(spacing: 0) {
             Text(tag.text)
-                .style(.bodyMedium)
+                .style(.bodySmall)
                 .foregroundColor(.textLight)
                 .frame(height: 30, alignment: .center)
             
