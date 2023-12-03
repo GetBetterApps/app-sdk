@@ -7,6 +7,7 @@ import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.model.note.Note
+import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
@@ -47,6 +48,7 @@ internal constructor(
 
     private val notesLikesJobsMap: HashMap<Int, Job> = hashMapOf()
     private val areasLikesJobsMap: HashMap<Int, Job> = hashMapOf()
+    private val tasksFavoriteJobsMap: HashMap<Int, Job> = hashMapOf()
 
     fun refreshData() {
         fetchAreas()
@@ -105,6 +107,7 @@ internal constructor(
         is NoteLikeClick -> obtainNoteLikeClick(action.value)
         is AreaLikeClick -> obtainAreaLikeClick(action.value)
         is DiaryAction.NotesLoadNextPage -> fetchNotes()
+        is DiaryAction.TaskFavoriteClick -> obtainTaskFavorite(action.value)
     }
 
     private fun obtainNoteLikeClick(value: Note) {
@@ -166,6 +169,21 @@ internal constructor(
         }
     }
 
+    private fun obtainTaskFavorite(value: TaskUI) {
+        launchJob {
+            val tasksViewState = viewState.value.tasksViewState
+            val request = if (tasksViewState.favoriteItems.any { it.id == value.id }) {
+                tasksRepository.removeFromFavorite(taskId = value.id!!)
+            } else tasksRepository.addToFavorite(taskId = value.id!!)
+
+            request collectAndProcess {
+                onSuccess {
+                    fetchTasks()
+                }
+            }
+        }
+    }
+
     private fun obtainAreaLikeClick(value: Area) {
         if (areasLikesJobsMap.containsKey(value.id)) return
 
@@ -218,6 +236,10 @@ internal constructor(
                     }
                 }
             }
+        }.also {
+            areasLikesJobsMap[value.id] = it
+        }.invokeOnCompletion {
+            areasLikesJobsMap.remove(value.id)
         }
     }
 

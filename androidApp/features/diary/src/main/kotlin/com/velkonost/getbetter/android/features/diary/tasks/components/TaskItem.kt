@@ -39,6 +39,7 @@ import dev.icerock.moko.resources.compose.painterResource
 fun TaskItem(
     modifier: Modifier = Modifier,
     item: TaskUI,
+    onFavoriteClick: () -> Unit
 ) {
 
     val haptic = LocalHapticFeedback.current
@@ -65,7 +66,7 @@ fun TaskItem(
                     taskName = item.name,
                     areaIcon = Emoji.getIconById(item.area.emojiId!!),
                     isFavorite = item.isFavorite,
-                    onFavoriteClick = { },
+                    onFavoriteClick = onFavoriteClick,
                 )
 
                 Text(

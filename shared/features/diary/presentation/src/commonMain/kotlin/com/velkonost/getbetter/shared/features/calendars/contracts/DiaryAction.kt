@@ -3,11 +3,14 @@ package com.velkonost.getbetter.shared.features.calendars.contracts
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.note.Note
+import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 
 sealed interface DiaryAction : UIContract.Action {
     data object NotesLoadNextPage : DiaryAction
+
+    data class TaskFavoriteClick(val value: TaskUI) : DiaryAction
 }
 
 data object AddAreaClick : DiaryAction

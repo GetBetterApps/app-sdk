@@ -31,6 +31,7 @@ import com.velkonost.getbetter.core.compose.components.PrimaryTabs
 import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.note.Note
+import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.features.calendars.DiaryViewModel
 import com.velkonost.getbetter.shared.features.calendars.contracts.AddAreaClick
 import com.velkonost.getbetter.shared.features.calendars.contracts.AreaLikeClick
@@ -146,6 +147,9 @@ fun DiaryScreen(
                 },
                 notesLoadNextPage = {
                     viewModel.dispatch(DiaryAction.NotesLoadNextPage)
+                },
+                taskFavoriteClick = {
+                    viewModel.dispatch(DiaryAction.TaskFavoriteClick(it))
                 }
             )
         }
@@ -281,7 +285,8 @@ fun DiaryScreenContent(
     addExistingAreaClick: () -> Unit,
     createGoalClick: () -> Unit,
     createNoteClick: () -> Unit,
-    notesLoadNextPage: () -> Unit
+    notesLoadNextPage: () -> Unit,
+    taskFavoriteClick: (TaskUI) -> Unit
 ) {
     HorizontalPager(
         state = pagerState,
@@ -313,7 +318,8 @@ fun DiaryScreenContent(
                 isLoading = tasksState.isLoading,
                 favoriteItems = tasksState.favoriteItems,
                 currentItems = tasksState.currentItems,
-                completedItems = tasksState.completedItems
+                completedItems = tasksState.completedItems,
+                onTaskFavoriteClick = taskFavoriteClick
             )
         }
     }

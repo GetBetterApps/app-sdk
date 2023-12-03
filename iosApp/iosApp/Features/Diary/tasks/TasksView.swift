@@ -26,7 +26,7 @@ struct TasksView: View {
     
     var body: some View {
         ZStack {
-            if isLoading {
+            if isLoading && currentItems.isEmpty {
                 Loader()
             } else {
                 ScrollView(showsIndicators: false) {
