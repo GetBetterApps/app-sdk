@@ -65,10 +65,10 @@ fun TaskDetailScreen(
                 }
 
                 item {
-                    state.task?.area?.let {
+                    state.area?.let {
                         AreaData(area = it) {
                             scope.launch {
-                                selectedAreaId.value = state.task!!.area.id
+                                selectedAreaId.value = it.id
                                 areaDetailSheetState.show()
                             }
                         }
@@ -82,7 +82,7 @@ fun TaskDetailScreen(
         modalSheetState = areaDetailSheetState,
         areaId = selectedAreaId.value,
         onAreaChanged = {
-            viewModel.dispatch(NoteDetailAction.AreaChanged)
+            viewModel.dispatch(TaskDetailAction.AreaChanged)
         }
     )
 

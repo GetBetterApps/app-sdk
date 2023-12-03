@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.taskdetail.presentation
 
+import AreasRepository
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.SavedStateHandle
@@ -16,6 +17,7 @@ internal constructor(
     savedStateHandle: SavedStateHandle,
     private val notesRepository: NotesRepository,
     private val tasksRepository: TasksRepository,
+    private val areasRepository: AreasRepository
 ) : BaseViewModel<TaskDetailViewState, TaskDetailAction, TaskDetailNavigation, TaskDetailEvent>(
     initialState = TaskDetailViewState(),
     savedStateHandle = savedStateHandle
