@@ -33,12 +33,14 @@ struct TaskItem: View {
                         }
                     )
                     
-                    Text(item.why)
-                        .style(.bodyMedium)
-                        .foregroundColor(.textTitle)
-                        .multilineTextAlignment(.leading)
-//                        .lineLimit(5)
-                        .padding(.top, 12)
+                    HStack {
+                        Text(item.why)
+                            .style(.bodyMedium)
+                            .foregroundColor(.textTitle)
+                            .multilineTextAlignment(.leading)
+                            .padding(.top, 12)
+                        Spacer()
+                    }
                     
                     VFlow(alignment: .leading, spacing: 3) {
                         ForEach(item.abilities, id: \.self) { ability in
@@ -49,15 +51,15 @@ struct TaskItem: View {
                 }
                 .opacity(item.isCompleted ? 0.2 : 1)
                 
-                if item.isCompleted {
-                    ZStack {
-                        Image(uiImage: SharedR.images().ic_save.toUIImage()!)
-                            .resizable()
-                            .renderingMode(.template)
-                            .foregroundColor(.green.opacity(0.5))
-                            .frame(width: 128, height: 128, alignment: .center)
-                    }
-                }
+//                if item.isCompleted {
+//                    ZStack {
+//                        Image(uiImage: SharedR.images().ic_save.toUIImage()!)
+//                            .resizable()
+//                            .renderingMode(.template)
+//                            .foregroundColor(.green.opacity(0.5))
+//                            .frame(width: 128, height: 128, alignment: .center)
+//                    }
+//                }
             }
         }
         .onTapGesture {

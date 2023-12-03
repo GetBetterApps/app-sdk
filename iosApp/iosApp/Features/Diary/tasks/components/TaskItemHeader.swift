@@ -33,8 +33,8 @@ struct TaskItemHeader : View {
                 .scaledToFit()
                 .frame(width: 32, height: 32)
             
-            VStack(spacing: 0) {
-                Spacer()
+            VStack {
+//                Spacer()
                 
                 HStack {
                     Text(areaName)
@@ -54,8 +54,9 @@ struct TaskItemHeader : View {
                     }
                 }
                 
-                Spacer()
+//                Spacer()
             }
+            .frame(alignment: .center)
             .padding(.leading, 6)
             
             Spacer()
