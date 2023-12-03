@@ -49,6 +49,12 @@
     <string name="diary_area_notes">%s\nnotes</string>
     <string name="diary_area_tasks">%s\ntasks</string>
 
+    <!--  TASKS  -->
+    <string name="tasks_favorite_title">Favorite</string>
+    <string name="tasks_current_list_title">For Today</string>
+    <string name="tasks_completed_title">Completed</string>
+    <!--  TASKS  -->
+
     <!--  PROFILE  -->
     <string name="profile_title">Profile</string>
 

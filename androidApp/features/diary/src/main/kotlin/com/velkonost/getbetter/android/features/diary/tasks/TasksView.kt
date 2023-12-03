@@ -46,7 +46,7 @@ fun TasksView(
                             modifier = modifier
                                 .padding(top = 24.dp, start = 20.dp)
                                 .fillMaxWidth(0.8f),
-                            text = stringResource(resource = SharedR.strings.note_detail_comments_title),
+                            text = stringResource(resource = SharedR.strings.tasks_favorite_title),
                             color = colorResource(resource = SharedR.colors.text_primary),
                             style = MaterialTheme.typography.headlineSmall
                         )
@@ -65,7 +65,7 @@ fun TasksView(
                             modifier = modifier
                                 .padding(top = 24.dp, start = 20.dp)
                                 .fillMaxWidth(0.8f),
-                            text = stringResource(resource = SharedR.strings.note_detail_comments_title),
+                            text = stringResource(resource = SharedR.strings.tasks_current_list_title),
                             color = colorResource(resource = SharedR.colors.text_primary),
                             style = MaterialTheme.typography.headlineSmall
                         )
@@ -84,7 +84,7 @@ fun TasksView(
                             modifier = modifier
                                 .padding(top = 24.dp, start = 20.dp)
                                 .fillMaxWidth(0.8f),
-                            text = stringResource(resource = SharedR.strings.note_detail_comments_title),
+                            text = stringResource(resource = SharedR.strings.tasks_completed_title),
                             color = colorResource(resource = SharedR.colors.text_primary),
                             style = MaterialTheme.typography.headlineSmall
                         )
