@@ -14,11 +14,13 @@ struct TasksSection : View {
     
     private let section: TasksUISection
     private let items: [TaskUI]
+    private let onItemClick: (TaskUI) -> Void
     private let onFavoriteClick: (TaskUI) -> Void
     
-    init(section: TasksUISection, items: [TaskUI], onFavoriteClick: @escaping (TaskUI) -> Void) {
+    init(section: TasksUISection, items: [TaskUI], onItemClick: @escaping (TaskUI) -> Void, onFavoriteClick: @escaping (TaskUI) -> Void) {
         self.section = section
         self.items = items
+        self.onItemClick = onItemClick
         self.onFavoriteClick = onFavoriteClick
     }
     
@@ -42,6 +44,9 @@ struct TasksSection : View {
             ForEach(items, id: \.self) { item in
                 TaskItem(
                     item: item,
+                    onClick: {
+                        onItemClick(item)
+                    },
                     onFavoriteClick: {
                         onFavoriteClick(item)
                     }
