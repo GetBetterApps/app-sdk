@@ -14,10 +14,12 @@ struct TasksSection : View {
     
     private let section: TasksUISection
     private let items: [TaskUI]
+    private let onFavoriteClick: (TaskUI) -> Void
     
-    init(section: TasksUISection, items: [TaskUI]) {
+    init(section: TasksUISection, items: [TaskUI], onFavoriteClick: @escaping (TaskUI) -> Void) {
         self.section = section
         self.items = items
+        self.onFavoriteClick = onFavoriteClick
     }
     
     var body: some View {
@@ -38,7 +40,12 @@ struct TasksSection : View {
             }
             
             ForEach(items, id: \.self.id) { item in
-                TaskItem(item: item)
+                TaskItem(
+                    item: item,
+                    onFavoriteClick: {
+                        onFavoriteClick(item)
+                    }
+                )
             }
         }
     }

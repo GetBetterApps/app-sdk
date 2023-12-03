@@ -95,7 +95,10 @@ struct DiaryScreen: View {
                     isLoading: state.tasksViewState.isLoading,
                     favoriteItems: state.tasksViewState.favoriteItems,
                     currentItems: state.tasksViewState.currentItems,
-                    completedItems: state.tasksViewState.completedItems
+                    completedItems: state.tasksViewState.completedItems,
+                    onTaskFavoriteClick: { value in
+//                        viewModel.dispatch(action: TAsk)
+                    }
                 )
             }
             Spacer()

@@ -14,9 +14,11 @@ import SwiftUIFlow
 struct TaskItem: View {
     
     private let item: TaskUI
+    private let onFavoriteClick: () -> Void
     
-    init(item: TaskUI) {
+    init(item: TaskUI, onFavoriteClick: @escaping () -> Void) {
         self.item = item
+        self.onFavoriteClick = onFavoriteClick
     }
     
     var body: some View {
@@ -28,9 +30,8 @@ struct TaskItem: View {
                         taskName: item.name,
                         areaIcon: Emoji.companion.getIconById(id: item.area.emojiId as! Int32).toUIImage()!,
                         isFavorite: item.isFavorite,
-                        onFavoriteClick: {
-                            
-                        }
+                        isFavoriteLoading: item.isFavoriteLoading,
+                        onFavoriteClick: onFavoriteClick
                     )
                     
                     HStack {

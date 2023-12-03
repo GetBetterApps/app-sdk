@@ -16,13 +16,15 @@ struct TaskItemHeader : View {
     let taskName: String?
     let areaIcon: UIImage
     let isFavorite: Bool
+    let isFavoriteLoading: Bool
     let onFavoriteClick: () -> Void
     
-    init(areaName: String, taskName: String? = nil, areaIcon: UIImage, isFavorite: Bool, onFavoriteClick: @escaping () -> Void) {
+    init(areaName: String, taskName: String? = nil, areaIcon: UIImage, isFavorite: Bool,  isFavoriteLoading: Bool, onFavoriteClick: @escaping () -> Void) {
         self.areaName = areaName
         self.taskName = taskName
         self.areaIcon = areaIcon
         self.isFavorite = isFavorite
+        self.isFavoriteLoading = isFavoriteLoading
         self.onFavoriteClick = onFavoriteClick
     }
     
@@ -58,22 +60,33 @@ struct TaskItemHeader : View {
             Spacer()
             
             ZStack(alignment: .center) {
-                VStack {
-                    Image(
-                        uiImage: isFavorite ? SharedR.images().ic_star.toUIImage()! : SharedR.images().ic_empty_star.toUIImage()!
-                    )
-                    .resizable()
-                    .renderingMode(.template)
-                    .foregroundColor(.buttonGradientStart)
-                    .scaledToFill()
-                    .frame(width: 24, height: 24)
-                    
+                if !isFavoriteLoading {
+                    VStack {
+                        Image(
+                            uiImage: isFavorite ? SharedR.images().ic_star.toUIImage()! : SharedR.images().ic_empty_star.toUIImage()!
+                        )
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(.buttonGradientStart)
+                        .scaledToFill()
+                        .frame(width: 24, height: 24)
+                        
+                    }
+                    .onTapGesture {
+                        onFavoriteClick()
+                    }
+                } else {
+                    HStack {
+                        Spacer()
+                        Loader()
+                            .scaleEffect(0.5)
+                        Spacer()
+                    }
                 }
-                .onTapGesture {
-                    onFavoriteClick()
-                }
+                
             }
             .frame(width: 32, height: 32)
+            .animation(.easeInOut, value: isFavoriteLoading)
             
         }
     }

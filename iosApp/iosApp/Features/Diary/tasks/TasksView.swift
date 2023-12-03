@@ -16,12 +16,14 @@ struct TasksView: View {
     private let favoriteItems: [TaskUI]
     private let currentItems: [TaskUI]
     private let completedItems: [TaskUI]
+    private let onTaskFavoriteClick: (TaskUI) -> Void
     
-    init(isLoading: Bool, favoriteItems: [TaskUI], currentItems: [TaskUI], completedItems: [TaskUI]) {
+    init(isLoading: Bool, favoriteItems: [TaskUI], currentItems: [TaskUI], completedItems: [TaskUI], onTaskFavoriteClick: @escaping (TaskUI) -> Void) {
         self.isLoading = isLoading
         self.favoriteItems = favoriteItems
         self.currentItems = currentItems
         self.completedItems = completedItems
+        self.onTaskFavoriteClick = onTaskFavoriteClick
     }
     
     var body: some View {
@@ -33,17 +35,20 @@ struct TasksView: View {
                     LazyVStack(spacing: 0) {
                         TasksSection(
                             section: TasksUISection.favorite,
-                            items: favoriteItems
+                            items: favoriteItems,
+                            onFavoriteClick: onTaskFavoriteClick
                         )
                         
                         TasksSection(
                             section: TasksUISection.current,
-                            items: currentItems
+                            items: currentItems,
+                            onFavoriteClick: onTaskFavoriteClick
                         )
                         
                         TasksSection(
                             section: TasksUISection.completed,
-                            items: completedItems
+                            items: completedItems,
+                            onFavoriteClick: onTaskFavoriteClick
                         )
                     }
                     .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
