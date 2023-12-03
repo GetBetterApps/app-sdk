@@ -31,7 +31,8 @@ internal constructor(
                 emit(
                     viewState.value.copy(
                         isLoading = false,
-                        task = task
+                        task = task,
+                        area = task?.area
                     )
                 )
             }
