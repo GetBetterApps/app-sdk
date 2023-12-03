@@ -23,9 +23,7 @@ internal constructor(
 
 
     override fun dispatch(action: TaskDetailAction) = when (action) {
-        else -> {
-
-        }
+        is TaskDetailAction.NavigateBack -> emit(action)
     }
 
 

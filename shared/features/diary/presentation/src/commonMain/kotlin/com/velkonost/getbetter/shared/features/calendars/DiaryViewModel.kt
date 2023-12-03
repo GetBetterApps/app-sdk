@@ -12,7 +12,6 @@ import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
-import com.velkonost.getbetter.shared.features.calendars.api.DiaryRepository
 import com.velkonost.getbetter.shared.features.calendars.contracts.AddAreaClick
 import com.velkonost.getbetter.shared.features.calendars.contracts.AreaLikeClick
 import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewAreaAction
@@ -23,8 +22,11 @@ import com.velkonost.getbetter.shared.features.calendars.contracts.DiaryNavigati
 import com.velkonost.getbetter.shared.features.calendars.contracts.DiaryViewState
 import com.velkonost.getbetter.shared.features.calendars.contracts.NavigateToAddArea
 import com.velkonost.getbetter.shared.features.calendars.contracts.NavigateToNoteDetail
+import com.velkonost.getbetter.shared.features.calendars.contracts.NavigateToTaskDetail
 import com.velkonost.getbetter.shared.features.calendars.contracts.NoteClick
 import com.velkonost.getbetter.shared.features.calendars.contracts.NoteLikeClick
+import com.velkonost.getbetter.shared.features.calendars.contracts.TaskClick
+import com.velkonost.getbetter.shared.features.diary.api.DiaryRepository
 import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.tasks.api.TasksRepository
@@ -104,6 +106,7 @@ internal constructor(
         is CreateNewNoteAction -> dispatchCreateNewNoteAction(action)
         is AddAreaClick -> emit(NavigateToAddArea)
         is NoteClick -> obtainNoteClick(action.value)
+        is TaskClick -> obtainTaskClick(action.value)
         is NoteLikeClick -> obtainNoteLikeClick(action.value)
         is AreaLikeClick -> obtainAreaLikeClick(action.value)
         is DiaryAction.NotesLoadNextPage -> fetchNotes()
@@ -290,6 +293,12 @@ internal constructor(
         launchJob {
             diaryRepository.saveUpdatedNoteId(value.id)
             emit(NavigateToNoteDetail(value))
+        }
+    }
+
+    private fun obtainTaskClick(value: TaskUI) {
+        launchJob {
+            emit(NavigateToTaskDetail(value))
         }
     }
 

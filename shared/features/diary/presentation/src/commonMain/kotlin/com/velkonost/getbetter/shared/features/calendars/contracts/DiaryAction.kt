@@ -17,6 +17,8 @@ data object AddAreaClick : DiaryAction
 
 data class NoteClick(val value: Note) : DiaryAction
 
+data class TaskClick(val value: TaskUI) : DiaryAction
+
 data class NoteLikeClick(val value: Note) : DiaryAction
 
 data class AreaLikeClick(val value: Area) : DiaryAction
