@@ -4,6 +4,7 @@ import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.note.NoteType
+import com.velkonost.getbetter.shared.core.model.task.Task
 import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
 import com.velkonost.getbetter.shared.core.util.PrefetchDistanceValue
@@ -35,6 +36,9 @@ data class AreasViewState(
 
 data class TasksViewState(
     val isLoading: Boolean = true,
+    val favoriteItems: List<Task> = emptyList(),
+    val currentItems: List<Task> = emptyList(),
+    val completedItems: List<Task> = emptyList()
 ) : UIContract.State
 
 data class CreateNewAreaViewState(

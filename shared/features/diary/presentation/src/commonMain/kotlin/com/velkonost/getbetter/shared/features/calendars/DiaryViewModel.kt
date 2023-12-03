@@ -26,6 +26,7 @@ import com.velkonost.getbetter.shared.features.calendars.contracts.NoteClick
 import com.velkonost.getbetter.shared.features.calendars.contracts.NoteLikeClick
 import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
+import com.velkonost.getbetter.shared.features.tasks.api.TasksRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,6 +35,7 @@ class DiaryViewModel
 internal constructor(
     private val areasRepository: AreasRepository,
     private val notesRepository: NotesRepository,
+    private val tasksRepository: TasksRepository,
     private val diaryRepository: DiaryRepository,
     private val likesRepository: LikesRepository
 ) : BaseViewModel<DiaryViewState, DiaryAction, DiaryNavigation, DiaryEvent>(
@@ -48,6 +50,7 @@ internal constructor(
 
     fun refreshData() {
         fetchAreas()
+        fetchTasks()
 
         launchJob {
             if (diaryRepository.checkNeedsResetState()) {
@@ -308,6 +311,39 @@ internal constructor(
                         )
                     }
 
+                }
+            }
+        }
+    }
+
+    private fun fetchTasks() {
+        launchJob {
+            tasksRepository.getCurrentList() collectAndProcess {
+                isLoading {
+                    val tasksViewState = viewState.value.tasksViewState.copy(isLoading = it)
+                    emit(viewState.value.copy(tasksViewState = tasksViewState))
+                }
+                onSuccess { list ->
+                    list?.let {
+                        val tasksViewState = viewState.value.tasksViewState.copy(
+                            favoriteItems = list.filter { it.isFavorite },
+                            currentItems = list.filter { !it.isFavorite }
+                        )
+                        emit(viewState.value.copy(tasksViewState = tasksViewState))
+                    }
+                }
+            }
+        }
+
+        launchJob {
+            tasksRepository.getCompletedTasks() collectAndProcess {
+                onSuccess { list ->
+                    list?.let {
+                        val tasksViewState = viewState.value.tasksViewState.copy(
+                            completedItems = list
+                        )
+                        emit(viewState.value.copy(tasksViewState = tasksViewState))
+                    }
                 }
             }
         }
