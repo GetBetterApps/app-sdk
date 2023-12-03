@@ -18,6 +18,8 @@ struct TaskDetailScreen : View {
     
     @StateViewModel var viewModel: TaskDetailViewModel
     
+    @State private var selectedAreaId: Int32? = nil
+    @State private var showingAreaDetailSheet = false
     
     var body: some View {
         @State var state = viewModel.viewStateValue as! TaskDetailViewState
@@ -38,11 +40,33 @@ struct TaskDetailScreen : View {
                                     
                                 }
                             )
+                            
+                            if state.area != nil {
+                                AreaData(
+                                    area: state.area!,
+                                    onClick: {
+                                        selectedAreaId = state.area!.id
+                                        showingAreaDetailSheet = true
+                                    }
+                                )
+                            }
                         }
                         .padding(.horizontal, 20)
                     }
                 }
             }
         }
+        .sheet(isPresented: $showingAreaDetailSheet) {
+            AreaDetailScreen(
+                areaId: $selectedAreaId,
+                onClose: {
+                    showingAreaDetailSheet = false
+                },
+                onAreaChanged: { areaId in
+                    viewModel.dispatch(action: TaskDetailActionAreaChanged())
+                }
+            )
+        }
+        
     }
 }
