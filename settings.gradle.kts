@@ -87,7 +87,6 @@ include(
     ":androidApp:core:utils",
 
     ":androidApp:features:auth",
-
     ":androidApp:features:splash",
     ":androidApp:features:social",
     ":androidApp:features:diary",

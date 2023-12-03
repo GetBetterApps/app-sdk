@@ -15,6 +15,10 @@ sealed class NavigationScreen(val route: String) {
         "$NOTE_DETAIL_DESTINATION/?$ARG_NOTE={$ARG_NOTE}"
     )
 
+    data object TaskDetailNavScreen : NavigationScreen(
+        "$TASK_DETAIL_DESTINATION/?$ARG_TASK={$ARG_TASK}"
+    )
+
     data object CalendarsNavScreen : NavigationScreen(CALENDARS_DESTINATION)
     data object WisdomNavScreen : NavigationScreen(WISDOM_DESTINATION)
 
@@ -36,6 +40,7 @@ const val DIARY_DESTINATION: String = "$NAV_PREFIX.diary/DiaryScreen"
 const val ADD_AREA_DESTINATION: String = "$NAV_PREFIX.diary/AddAreaScreen"
 const val AREA_DETAIL_DESTINATION: String = "$NAV_PREFIX.diary/AreaDetailScreen"
 const val NOTE_DETAIL_DESTINATION: String = "$NAV_PREFIX.diary/NoteDetailScreen"
+const val TASK_DETAIL_DESTINATION: String = "$NAV_PREFIX.diary/TaskDetailScreen"
 
 const val CALENDARS_DESTINATION: String = "$NAV_PREFIX.calendars/CalendarsScreen"
 const val WISDOM_DESTINATION: String = "$NAV_PREFIX.wisdom/WisdomScreen"
@@ -45,4 +50,10 @@ const val SETTINGS_DESTINATION: String = "$NAV_PREFIX.profile/SettingsScreen"
 const val FEEDBACK_DESTINATION: String = "$NAV_PREFIX.profile/FeedbackScreen"
 
 const val ARG_NOTE: String = "arg_note"
+const val ARG_TASK: String = "arg_note"
 const val ARG_IDENTIFY_ANONYMOUS: String = "arg_identify_anonymous"
+
+
+
+
+
