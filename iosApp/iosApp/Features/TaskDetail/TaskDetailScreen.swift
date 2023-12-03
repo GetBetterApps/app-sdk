@@ -39,6 +39,7 @@ struct TaskDetailScreen : View {
                                 }
                             )
                         }
+                        .padding(.horizontal, 20)
                     }
                 }
             }
