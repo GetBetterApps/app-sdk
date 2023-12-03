@@ -67,6 +67,9 @@ struct ContentView: View {
                 case _ where route.starts(with: NavigationScreenKt.SETTINGS_DESTINATION) :
                     SettingsRoute().view(pilot: pilot, route: route)
                     
+                case _ where route.starts(with: NavigationScreenKt.TASK_DETAIL_DESTINATION) :
+                    TaskDetailRoute().view(pilot: pilot, route: route)
+                    
                 default : EmptyView()
                 }
                 
