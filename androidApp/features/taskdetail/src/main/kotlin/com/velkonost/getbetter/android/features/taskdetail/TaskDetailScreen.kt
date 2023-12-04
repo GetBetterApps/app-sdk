@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Text
@@ -21,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.areadetail.AreaDetailScreen
+import com.velkonost.getbetter.android.features.taskdetail.components.AbilityData
 import com.velkonost.getbetter.android.features.taskdetail.components.TaskDetailHeader
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.details.AreaData
@@ -123,6 +125,15 @@ fun TaskDetailScreen(
                         text = state.task!!.why,
                         style = MaterialTheme.typography.labelMedium,
                         color = colorResource(resource = SharedR.colors.text_primary)
+                    )
+                }
+
+                items(state.task!!.abilities, key = { it.id!! }) { ability ->
+                    AbilityData(
+                        item = ability,
+                        onClick = {
+
+                        }
                     )
                 }
             }

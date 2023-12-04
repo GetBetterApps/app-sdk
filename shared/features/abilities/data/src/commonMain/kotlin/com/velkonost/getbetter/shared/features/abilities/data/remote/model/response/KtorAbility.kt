@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.abilities.data.remote.model.response
 
 import com.velkonost.getbetter.shared.core.model.task.Ability
+import com.velkonost.getbetter.shared.core.model.user.asExperienceData
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,7 +17,7 @@ data class KtorAbility(
     val description: String,
 
     @SerialName("experience")
-    var experience: Long?
+    var experience: Long
 )
 
 fun KtorAbility.asExternalModel() =
@@ -24,5 +25,5 @@ fun KtorAbility.asExternalModel() =
         id = id,
         name = name,
         description = description,
-        experience = experience
+        experienceData = experience.toInt().asExperienceData
     )
