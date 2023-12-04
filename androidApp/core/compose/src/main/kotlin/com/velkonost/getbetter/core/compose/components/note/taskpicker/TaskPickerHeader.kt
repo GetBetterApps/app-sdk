@@ -66,7 +66,7 @@ fun TaskPickerHeader(
         horizontalArrangement = Arrangement.Center
     ) {
         AnimatedContent(targetState = selectedTask, label = "") { task ->
-            if (task == null && availableTasksAmount == 0) {
+            if (task == null && availableTasksAmount <= 1) {
                 Text(
                     modifier = modifier.fillMaxWidth(),
                     text = stringResource(

@@ -63,8 +63,14 @@ internal constructor(
     private fun obtainOpenDefault() {
         val selectedArea = viewState.value.availableAreas.firstOrNull()
         val availableTasks =
-            if (selectedArea != null) _tasksList.filter { it.area.id == selectedArea.id }
-            else emptyList()
+            if (selectedArea != null) {
+                val items: MutableList<TaskUI?> = _tasksList.filter {
+                    it.area.id == selectedArea.id
+                }.toMutableList()
+                items.add(0, null)
+
+                items
+            } else emptyList()
 
         emit(
             viewState.value.copy(
@@ -79,8 +85,14 @@ internal constructor(
     private fun obtainOpenGoal() {
         val selectedArea = viewState.value.availableAreas.firstOrNull()
         val availableTasks =
-            if (selectedArea != null) _tasksList.filter { it.area.id == selectedArea.id }
-            else emptyList()
+            if (selectedArea != null) {
+                val items: MutableList<TaskUI?> = _tasksList.filter {
+                    it.area.id == selectedArea.id
+                }.toMutableList()
+                items.add(0, null)
+
+                items
+            } else emptyList()
 
         emit(
             viewState.value.copy(
@@ -93,7 +105,11 @@ internal constructor(
     }
 
     private fun obtainAreaSelect(value: Area) {
-        val availableTasks = _tasksList.filter { it.area.id == value.id }
+        val availableTasks: MutableList<TaskUI?> = _tasksList.filter {
+            it.area.id == value.id
+        }.toMutableList()
+        availableTasks.add(0, null)
+
         val currentSelectedTask = viewState.value.selectedTask
         val newSelectedTask =
             if (currentSelectedTask?.area?.id == value.id) currentSelectedTask

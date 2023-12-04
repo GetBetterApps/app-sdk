@@ -28,14 +28,14 @@ import kotlinx.coroutines.launch
 @Composable
 fun TaskPicker(
     modifier: Modifier = Modifier,
-    tasks: List<TaskUI>,
+    tasks: List<TaskUI?>,
     selectedTask: TaskUI?,
     isTaskPickerVisible: MutableState<Boolean>,
     modalSheetState: ModalBottomSheetState,
     onTaskSelect: (TaskUI?) -> Unit
 ) {
 
-    val tasksPagerState = rememberPagerState(initialPage = 0, pageCount = { tasks.size + 1 })
+    val tasksPagerState = rememberPagerState(initialPage = 0, pageCount = { tasks.size })
     val scope = rememberCoroutineScope()
 
     PrimaryBox(padding = 0) {
@@ -59,18 +59,18 @@ fun TaskPicker(
                         if (tasks.isNotEmpty()) {
                             if (it == 0) {
                                 "empty"
-                            } else tasks[it - 1].id.toString()
+                            } else tasks[it]!!.id.toString()
                         } else randomUUID()
                     }
                 ) {
-                    if (tasks.isEmpty()) {
+                    if (tasks.size <= 1) {
                         return@HorizontalPager
                     }
 
                     if (it == 0) {
                         TaskPickerEmptyItem()
                     } else {
-                        TaskPickerItem(task = tasks[it - 1])
+                        TaskPickerItem(task = tasks[it]!!)
                     }
                 }
             }
@@ -87,11 +87,11 @@ fun TaskPicker(
     LaunchedEffect(tasks) {
         snapshotFlow { tasksPagerState.currentPage }
             .collect { page ->
-                if (tasks.isNotEmpty()) {
+                if (tasks.size > 1) {
                     onTaskSelect.invoke(
                         if (page == 0) {
                             null
-                        } else tasks[page - 1]
+                        } else tasks[page]
                     )
                 } else {
                     isTaskPickerVisible.value = false

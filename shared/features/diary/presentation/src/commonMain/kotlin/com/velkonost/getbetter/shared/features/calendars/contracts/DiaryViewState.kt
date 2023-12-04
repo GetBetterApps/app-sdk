@@ -52,7 +52,7 @@ data class CreateNewAreaViewState(
 
 data class CreateNewNoteViewState(
     val availableAreas: List<Area> = emptyList(),
-    val availableTasks: List<TaskUI> = emptyList(),
+    val availableTasks: List<TaskUI?> = emptyList(),
 
     val isLoading: Boolean = false,
     val type: NoteType = NoteType.Default,
@@ -72,3 +72,4 @@ data class CreateNewNoteViewState(
     val isPrivate: Boolean = true,
     val completionDate: Long? = null
 ) : UIContract.State
+
