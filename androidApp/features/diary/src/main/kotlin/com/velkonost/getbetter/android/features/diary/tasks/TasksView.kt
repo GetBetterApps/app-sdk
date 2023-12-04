@@ -137,7 +137,7 @@ fun LazyListScope.tasksSection(
             }
         }
 
-        items(items, key = { it.id!! }) { item ->
+        items(items, key = { "${section.name}${it.id!!}" }) { item ->
             TaskItem(
                 item = item,
                 onClick = {

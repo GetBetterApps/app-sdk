@@ -107,6 +107,44 @@ struct TaskDetailScreen : View {
                                     }
                                 )
                             }
+                            
+                            Text(SharedR.strings().task_mask_as.desc().localized().uppercased())
+                                .style(.labelMedium)
+                                .foregroundColor(.textPrimary)
+                                .padding(.top, 24)
+                            
+                            HStack(spacing: 0) {
+                                Text(SharedR.strings().task_not_interesting_title.desc().localized())
+                                    .style(.labelLarge)
+                                    .foregroundColor(state.task!.isNotInteresting ? .textLight : .textPrimary)
+                                    .padding(.trailing, 6)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .fill(state.task!.isNotInteresting ? Color.buttonGradientStart : Color.backgroundItem)
+                                            .shadow(radius: state.task!.isNotInteresting ? 8 : 0)
+                                    )
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 8)
+                                    .onTapGesture {
+                                        viewModel.dispatch(action: TaskDetailActionNotInterestingClick())
+                                    }
+                                
+                                Text(SharedR.strings().task_completed_title.desc().localized())
+                                    .style(.labelLarge)
+                                    .foregroundColor(state.task!.isCompleted ? .textLight : .textPrimary)
+                                    .padding(.leading, 6)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .fill(state.task!.isCompleted ? Color.buttonGradientStart : Color.backgroundItem)
+                                            .shadow(radius: state.task!.isCompleted ? 8 : 0)
+                                    )
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 8)
+                                    .onTapGesture {
+                                        viewModel.dispatch(action: TaskDetailActionCompletedClick())
+                                    }
+                            }
+                            
                         }
                         .frame(alignment: .leading)
                         .padding(.horizontal, 20)
