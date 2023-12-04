@@ -9,6 +9,10 @@ sealed interface TaskDetailAction : UIContract.Action {
 
     data object FavoriteClick : TaskDetailAction
 
+    data object NotInterestingClick : TaskDetailAction
+
+    data object CompletedClick : TaskDetailAction
+
     data object NavigateBack : TaskDetailAction, TaskDetailNavigation {
         override val event: NavigationEvent = NavigationEvent.NavigateUp()
     }

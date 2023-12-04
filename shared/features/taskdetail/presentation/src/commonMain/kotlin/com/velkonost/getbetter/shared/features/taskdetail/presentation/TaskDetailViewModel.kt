@@ -11,6 +11,7 @@ import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailNavigation
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailViewState
 import com.velkonost.getbetter.shared.features.tasks.api.TasksRepository
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 
 class TaskDetailViewModel
@@ -25,6 +26,9 @@ internal constructor(
 ) {
 
     private val task = savedStateHandle.task.stateInWhileSubscribed(initialValue = null)
+
+    private var _changeNotInterestingJob: Job? = null
+    private var _changeCompletedJob: Job? = null
 
     init {
         launchJob {
@@ -44,6 +48,8 @@ internal constructor(
         is TaskDetailAction.NavigateBack -> emit(action)
         is TaskDetailAction.AreaChanged -> obtainAreaChanged()
         is TaskDetailAction.FavoriteClick -> obtainFavoriteClick()
+        is TaskDetailAction.NotInterestingClick -> obtainChangeNotInteresting()
+        is TaskDetailAction.CompletedClick -> obtainChangeCompleted()
     }
 
     private fun obtainAreaChanged() {
@@ -74,6 +80,42 @@ internal constructor(
                     val updatedFavorite = !viewState.value.task!!.isFavorite
                     val task = viewState.value.task?.copy(isFavorite = updatedFavorite)
                     emit(viewState.value.copy(task = task))
+                }
+            }
+        }
+    }
+
+    private fun obtainChangeNotInteresting() {
+        if (_changeNotInterestingJob?.isActive == true) return
+
+        _changeNotInterestingJob = launchJob {
+            val state = viewState.value.task!!.isNotInteresting
+            val taskId = viewState.value.task!!.id!!
+            val request = if (state) tasksRepository.removeFromNotInteresting(taskId)
+            else tasksRepository.addToNotInteresting(taskId)
+
+            request collectAndProcess {
+                onSuccess {
+                    _changeNotInterestingJob = null
+                    emit(viewState.value.copy(task = it))
+                }
+            }
+        }
+    }
+
+    private fun obtainChangeCompleted() {
+        if (_changeCompletedJob?.isActive == true) return
+
+        _changeCompletedJob = launchJob {
+            val state = viewState.value.task!!.isCompleted
+            val taskId = viewState.value.task!!.id!!
+            val request = if (state) tasksRepository.removeFromCompleted(taskId)
+            else tasksRepository.addToCompleted(taskId)
+
+            request collectAndProcess {
+                onSuccess {
+                    _changeCompletedJob = null
+                    emit(viewState.value.copy(task = it))
                 }
             }
         }

@@ -1,6 +1,8 @@
 package com.velkonost.getbetter.android.features.taskdetail
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -21,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -45,6 +48,8 @@ fun TaskDetailScreen(
 
     val state by viewModel.viewState.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
+
+    val interactionSource = remember { MutableInteractionSource() }
 
     val selectedAreaId = remember { mutableStateOf<Int?>(null) }
     val areaDetailSheetState = rememberModalBottomSheetState(
@@ -163,12 +168,17 @@ fun TaskDetailScreen(
                 }
 
                 item {
-                    Row {
+                    Row(modifier = modifier.padding(top = 12.dp)) {
                         Spacer(modifier.weight(1f))
                         Spacer(modifier.weight(1f))
 
                         Text(
                             modifier = modifier
+                                .padding(end = 6.dp)
+                                .shadow(
+                                    elevation = (if (state.task!!.isNotInteresting) 8 else 0).dp,
+                                    shape = MaterialTheme.shapes.medium,
+                                )
                                 .background(
                                     color = colorResource(
                                         resource = if (state.task!!.isNotInteresting) SharedR.colors.button_gradient_start
@@ -176,27 +186,39 @@ fun TaskDetailScreen(
                                     ),
                                     shape = MaterialTheme.shapes.medium
                                 )
-                                .padding(horizontal = 8.dp, vertical = 6.dp),
+                                .padding(horizontal = 16.dp, vertical = 6.dp)
+                                .clickable(
+                                    interactionSource = interactionSource,
+                                    indication = null
+                                ) { viewModel.dispatch(TaskDetailAction.NotInterestingClick) },
                             text = stringResource(resource = SharedR.strings.task_not_interesting_title),
-                            style = MaterialTheme.typography.labelSmall,
+                            style = MaterialTheme.typography.labelLarge,
                             color = colorResource(
                                 resource = if (state.task!!.isNotInteresting) SharedR.colors.text_light
                                 else SharedR.colors.text_primary
                             )
                         )
-                        Spacer(modifier.weight(1f))
                         Text(
                             modifier = modifier
+                                .padding(start = 6.dp)
+                                .shadow(
+                                    elevation = (if (state.task!!.isCompleted) 8 else 0).dp,
+                                    shape = MaterialTheme.shapes.medium,
+                                )
                                 .background(
                                     color = colorResource(
-                                        resource = if (state.task!!.isNotInteresting) SharedR.colors.button_gradient_start
+                                        resource = if (state.task!!.isCompleted) SharedR.colors.button_gradient_start
                                         else SharedR.colors.background_item
                                     ),
                                     shape = MaterialTheme.shapes.medium
                                 )
-                                .padding(horizontal = 8.dp, vertical = 6.dp),
+                                .padding(horizontal = 16.dp, vertical = 6.dp)
+                                .clickable(
+                                    interactionSource = interactionSource,
+                                    indication = null
+                                ) { viewModel.dispatch(TaskDetailAction.CompletedClick) },
                             text = stringResource(resource = SharedR.strings.task_completed_title),
-                            style = MaterialTheme.typography.labelSmall,
+                            style = MaterialTheme.typography.labelLarge,
                             color = colorResource(
                                 resource = if (state.task!!.isCompleted) SharedR.colors.text_light
                                 else SharedR.colors.text_primary
