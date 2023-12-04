@@ -22,9 +22,9 @@ import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
 fun ColumnScope.TaskPickerEmptyItem(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
+) {
 
-    ) {
     Box(
         modifier = modifier
             .fillMaxWidth()

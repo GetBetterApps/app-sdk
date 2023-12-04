@@ -112,6 +112,8 @@
 		46AD39D02B1DCD9500EB60F8 /* AbilityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AD39CF2B1DCD9500EB60F8 /* AbilityData.swift */; };
 		46AD39D32B1DFF9200EB60F8 /* TaskPickerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AD39D22B1DFF9200EB60F8 /* TaskPickerHeader.swift */; };
 		46AD39D52B1E00AD00EB60F8 /* TaskPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AD39D42B1E00AD00EB60F8 /* TaskPicker.swift */; };
+		46AD39D72B1E16AD00EB60F8 /* TaskPickerEmptyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AD39D62B1E16AD00EB60F8 /* TaskPickerEmptyItem.swift */; };
+		46AD39D92B1E16F500EB60F8 /* TaskPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AD39D82B1E16F500EB60F8 /* TaskPickerItem.swift */; };
 		46AEEF7D2B0BB76B00A9376C /* CalendarDateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AEEF7C2B0BB76B00A9376C /* CalendarDateItem.swift */; };
 		46B17E0C2AADE081008C2BC4 /* TextExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B17E0B2AADE081008C2BC4 /* TextExt.swift */; };
 		46B17E0F2AADE0B3008C2BC4 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B17E0E2AADE0B2008C2BC4 /* Type.swift */; };
@@ -260,6 +262,8 @@
 		46AD39CF2B1DCD9500EB60F8 /* AbilityData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityData.swift; sourceTree = "<group>"; };
 		46AD39D22B1DFF9200EB60F8 /* TaskPickerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPickerHeader.swift; sourceTree = "<group>"; };
 		46AD39D42B1E00AD00EB60F8 /* TaskPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPicker.swift; sourceTree = "<group>"; };
+		46AD39D62B1E16AD00EB60F8 /* TaskPickerEmptyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPickerEmptyItem.swift; sourceTree = "<group>"; };
+		46AD39D82B1E16F500EB60F8 /* TaskPickerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPickerItem.swift; sourceTree = "<group>"; };
 		46AEEF7C2B0BB76B00A9376C /* CalendarDateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDateItem.swift; sourceTree = "<group>"; };
 		46B17E0B2AADE081008C2BC4 /* TextExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExt.swift; sourceTree = "<group>"; };
 		46B17E0E2AADE0B2008C2BC4 /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
@@ -731,6 +735,8 @@
 			children = (
 				46AD39D22B1DFF9200EB60F8 /* TaskPickerHeader.swift */,
 				46AD39D42B1E00AD00EB60F8 /* TaskPicker.swift */,
+				46AD39D62B1E16AD00EB60F8 /* TaskPickerEmptyItem.swift */,
+				46AD39D82B1E16F500EB60F8 /* TaskPickerItem.swift */,
 			);
 			path = taskpicker;
 			sourceTree = "<group>";
@@ -1116,6 +1122,7 @@
 				46D8577A2ACFFC7C00BE74DA /* ScrollViewExt.swift in Sources */,
 				467DB01A2B14C92E00BB9CB3 /* SettingsHeader.swift in Sources */,
 				4616B08B2AF62B9500A4CDDE /* CompletionDateButton.swift in Sources */,
+				46AD39D72B1E16AD00EB60F8 /* TaskPickerEmptyItem.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				466B497D2ACFF06C00AD3F6E /* AddAreaScreen.swift in Sources */,
 				460054AB2ABB18FC00586767 /* MenuItem.swift in Sources */,
@@ -1189,6 +1196,7 @@
 				460054B42ABB56FF00586767 /* WisdomRoute.swift in Sources */,
 				46ACAF1E2AEE7A02000A9CD8 /* NoteItem.swift in Sources */,
 				46AD39D52B1E00AD00EB60F8 /* TaskPicker.swift in Sources */,
+				46AD39D92B1E16F500EB60F8 /* TaskPickerItem.swift in Sources */,
 				46870C302AC092DA00BCBDB1 /* SplashScreen.swift in Sources */,
 				466B497F2ACFF07300AD3F6E /* AddAreaRoute.swift in Sources */,
 				46FCD3DF2AF541190025D2C6 /* ActionButtons.swift in Sources */,
