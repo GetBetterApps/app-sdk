@@ -29,7 +29,7 @@ struct TaskPickerHeader : View {
         @State var arrowRotationAngle: Double = isTaskPickerVisible ? -90 : 90
         
         HStack {
-            if selectedTask == nil && availableTasksAmount == 0 {
+            if selectedTask == nil && availableTasksAmount <= 1 {
                 Text(SharedR.strings().create_note_no_tasks_title.desc().localized())
                 .style(.titleMedium)
                 .foregroundColor(.textPrimary)
@@ -41,17 +41,18 @@ struct TaskPickerHeader : View {
                     .foregroundColor(.textPrimary)
                     .padding(.leading, 6)
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                
+                Spacer()
+                
+                Image(uiImage: SharedR.images().ic_arrow_right.toUIImage()!)
+                    .resizable()
+                    .renderingMode(.template)
+                    .scaledToFit()
+                    .foregroundColor(.iconInactive)
+                    .frame(width: 24, height: 24)
+                    .rotationEffect(Angle(degrees: arrowRotationAngle))
             }
-            
-            Spacer()
-            
-            Image(uiImage: SharedR.images().ic_arrow_right.toUIImage()!)
-                .resizable()
-                .renderingMode(.template)
-                .scaledToFit()
-                .foregroundColor(.iconInactive)
-                .frame(width: 24, height: 24)
-                .rotationEffect(Angle(degrees: arrowRotationAngle))
+           
         }
         .animation(.easeInOut, value: selectedTask)
         .padding(16)
@@ -60,7 +61,10 @@ struct TaskPickerHeader : View {
         .onTapGesture {
             let impactMed = UIImpactFeedbackGenerator(style: .medium)
             impactMed.impactOccurred()
-            onClick()
+            
+            if availableTasksAmount > 1 {
+                onClick()
+            }
         }
     }
 }

@@ -1453,7 +1453,7 @@
 			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
 			requirement = {
 				kind = exactVersion;
-				version = 2.4.0;
+				version = 2.5.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

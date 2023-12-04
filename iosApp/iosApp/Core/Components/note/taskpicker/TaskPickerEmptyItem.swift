@@ -20,6 +20,7 @@ struct TaskPickerEmptyItem : View {
                     .padding(.top, 12)
             }
         }
+        .frame(height: 120)
         .frame(minWidth: 0, maxWidth: .infinity)
         .padding(16)
         .background(

@@ -35,7 +35,7 @@ struct TaskPicker: View {
     }
     
     var body: some View {
-        PrimaryBox( padding: .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)) {
+        PrimaryBox(padding: .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)) {
             VStack {
                 TaskPickerHeader(
                     selectedTask: selectedTask,
@@ -48,11 +48,10 @@ struct TaskPicker: View {
                 }
                 
                 if isTaskPickerVisible {
-                    
                     Pager(
                         page: taskPage,
                         data: tasks.map({ task in TaskWrapper(task: task) }),
-                        id: \.self.id
+                        id: \.self.task?.id
                     ) { taskWrapper in
                         if taskWrapper.task == nil {
                             TaskPickerEmptyItem()
@@ -69,6 +68,16 @@ struct TaskPicker: View {
                     .preferredItemSize(CGSize(width: 300, height: 150))
                     .frame(height: 150)
                     .padding(.bottom, 16)
+                    .onChange(of: tasks) { value in
+                        taskPage.update(.moveToFirst)
+                    }
+                }
+            }
+        }
+        .onChange(of: tasks) { value in
+            if tasks.count <= 1 {
+                withAnimation {
+                    isTaskPickerVisible = false
                 }
             }
         }
