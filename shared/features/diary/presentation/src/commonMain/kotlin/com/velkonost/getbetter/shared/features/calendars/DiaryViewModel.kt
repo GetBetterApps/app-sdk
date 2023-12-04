@@ -387,6 +387,10 @@ internal constructor(
                             currentItems = list.filter { !it.isFavorite }
                         )
                         emit(viewState.value.copy(tasksViewState = tasksViewState))
+
+                        createNewNoteViewModel.value.dispatch(
+                            CreateNewNoteAction.InitTasksList(list)
+                        )
                     }
                 }
             }

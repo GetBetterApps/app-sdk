@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.calendars
 
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.note.NoteType
+import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
 import com.velkonost.getbetter.shared.core.model.ui.asExternalModels
@@ -15,7 +16,6 @@ import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewNote
 import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewNoteViewState
 import com.velkonost.getbetter.shared.features.diary.api.DiaryRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
-import com.velkonost.getbetter.shared.features.tasks.api.TasksRepository
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
@@ -24,12 +24,15 @@ class CreateNewNoteViewModel
 internal constructor(
     private val notesRepository: NotesRepository,
     private val diaryRepository: DiaryRepository,
-    private val tasksRepository: TasksRepository
 ) : BaseViewModel<CreateNewNoteViewState, CreateNewNoteAction, Nothing, CreateNewNoteEvent>(
     initialState = CreateNewNoteViewState()
 ) {
+
+    private var _tasksList: List<TaskUI> = emptyList()
+
     override fun dispatch(action: CreateNewNoteAction) = when (action) {
         is CreateNewNoteAction.InitAvailableAreas -> initAvailableAreas(action.value)
+        is CreateNewNoteAction.InitTasksList -> initTasksList(action.value)
         is CreateNewNoteAction.OpenDefault -> obtainOpenDefault()
         is CreateNewNoteAction.OpenGoal -> obtainOpenGoal()
         is CreateNewNoteAction.AreaSelect -> obtainAreaSelect(action.value)
@@ -52,26 +55,51 @@ internal constructor(
         emit(viewState.value.copy(availableAreas = value))
     }
 
+    private fun initTasksList(value: List<TaskUI>) {
+        _tasksList = value
+    }
+
     private fun obtainOpenDefault() {
+        val selectedArea = viewState.value.availableAreas.firstOrNull()
+        val availableTasks =
+            if (selectedArea != null) _tasksList.filter { it.area.id == selectedArea.id }
+            else emptyList()
+
         emit(
             viewState.value.copy(
                 type = NoteType.Default,
-                selectedArea = viewState.value.availableAreas.firstOrNull()
+                selectedArea = selectedArea,
+                availableTasks = availableTasks,
+                selectedTask = null
             )
         )
     }
 
     private fun obtainOpenGoal() {
+        val selectedArea = viewState.value.availableAreas.firstOrNull()
+        val availableTasks =
+            if (selectedArea != null) _tasksList.filter { it.area.id == selectedArea.id }
+            else emptyList()
+
         emit(
             viewState.value.copy(
                 type = NoteType.Goal,
-                selectedArea = viewState.value.availableAreas.firstOrNull()
+                selectedArea = selectedArea,
+                availableTasks = availableTasks,
+                selectedTask = null
             )
         )
     }
 
     private fun obtainAreaSelect(value: Area) {
-        emit(viewState.value.copy(selectedArea = value))
+        val availableTasks = _tasksList.filter { it.area.id == value.id }
+        emit(
+            viewState.value.copy(
+                selectedArea = value,
+                selectedTask = null,
+                availableTasks = availableTasks,
+            )
+        )
 
         val forceSetPrivate = value.isPrivate
         if (forceSetPrivate) {
@@ -212,5 +240,4 @@ internal constructor(
             }
         }
     }
-
 }
