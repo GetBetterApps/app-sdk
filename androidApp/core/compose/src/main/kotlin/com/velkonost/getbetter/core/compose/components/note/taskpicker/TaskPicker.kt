@@ -19,7 +19,6 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
-import com.velkonost.getbetter.core.compose.components.note.areapicker.AreaPickerItem
 import com.velkonost.getbetter.core.compose.extensions.horizontalFadingEdge
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.util.randomUUID
@@ -65,7 +64,7 @@ fun TaskPicker(
                         return@HorizontalPager
                     }
 
-                    AreaPickerItem(area = tasks[it])
+                    TaskPickerItem(task = tasks[it])
                 }
             }
 
