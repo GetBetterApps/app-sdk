@@ -57,7 +57,9 @@ fun TaskPicker(
                     contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
                     key = {
                         if (tasks.isNotEmpty()) {
-                            tasks[it].id.toString()
+                            if (it == 0) {
+                                "empty"
+                            } else tasks[it - 1].id.toString()
                         } else randomUUID()
                     }
                 ) {

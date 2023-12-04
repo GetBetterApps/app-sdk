@@ -66,13 +66,11 @@ fun TaskPickerHeader(
         horizontalArrangement = Arrangement.Center
     ) {
         AnimatedContent(targetState = selectedTask, label = "") { task ->
-            if (task == null) {
+            if (task == null && availableTasksAmount == 0) {
                 Text(
                     modifier = modifier.fillMaxWidth(),
                     text = stringResource(
-                        resource =
-                        if (availableTasksAmount == 0) SharedR.strings.create_note_no_tasks_title
-                        else SharedR.strings.create_note_without_task
+                        resource = SharedR.strings.create_note_no_tasks_title
                     ),
                     maxLines = 1,
                     textAlign = TextAlign.Center,
@@ -87,7 +85,8 @@ fun TaskPickerHeader(
                 ) {
                     Text(
                         modifier = modifier.fillMaxWidth(0.8f),
-                        text = task.name,
+                        text = task?.name
+                            ?: stringResource(resource = SharedR.strings.create_note_without_task),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         color = colorResource(resource = SharedR.colors.text_primary),
