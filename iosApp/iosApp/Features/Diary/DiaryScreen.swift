@@ -101,6 +101,9 @@ struct DiaryScreen: View {
                     },
                     onTaskFavoriteClick: { value in
                         viewModel.dispatch(action: DiaryActionTaskFavoriteClick(value: value))
+                    },
+                    onTaskListUpdateClick: {
+                        viewModel.dispatch(action: DiaryActionTasksListUpdateClick())
                     }
                 )
             }

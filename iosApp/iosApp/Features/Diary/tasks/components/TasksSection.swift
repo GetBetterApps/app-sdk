@@ -16,12 +16,14 @@ struct TasksSection : View {
     private let items: [TaskUI]
     private let onItemClick: (TaskUI) -> Void
     private let onFavoriteClick: (TaskUI) -> Void
+    private let onUpdateClick: (() -> Void)?
     
-    init(section: TasksUISection, items: [TaskUI], onItemClick: @escaping (TaskUI) -> Void, onFavoriteClick: @escaping (TaskUI) -> Void) {
+    init(section: TasksUISection, items: [TaskUI], onItemClick: @escaping (TaskUI) -> Void, onFavoriteClick: @escaping (TaskUI) -> Void, onUpdateClick: (() -> Void)? = nil) {
         self.section = section
         self.items = items
         self.onItemClick = onItemClick
         self.onFavoriteClick = onFavoriteClick
+        self.onUpdateClick = onUpdateClick
     }
     
     var body: some View {
@@ -37,9 +39,27 @@ struct TasksSection : View {
                 Text(title)
                     .style(.headlineSmall)
                     .foregroundColor(.textPrimary)
-                    .padding(.top, 24)
                 Spacer()
+                
+                if onUpdateClick != nil {
+                    Text(SharedR.strings().tasks_update_list_title.desc().localized().uppercased())
+                        .style(.labelSmall)
+                        .foregroundColor(.textLight)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 6)
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color.buttonGradientStart)
+                                .shadow(radius: 8)
+                        )
+                        
+                        .onTapGesture {
+                            onUpdateClick!()
+                        }
+                }
             }
+            .padding(.top, 24)
+            .frame(alignment: .center)
             
             ForEach(items, id: \.self) { item in
                 TaskItem(

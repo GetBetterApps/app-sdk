@@ -18,15 +18,22 @@ struct TasksView: View {
     private let completedItems: [TaskUI]
     
     private let onTaskClick: (TaskUI) -> Void
+    private let onTaskListUpdateClick: () -> Void
     private let onTaskFavoriteClick: (TaskUI) -> Void
     
-    init(isLoading: Bool, favoriteItems: [TaskUI], currentItems: [TaskUI], completedItems: [TaskUI], onTaskClick: @escaping (TaskUI) -> Void, onTaskFavoriteClick: @escaping (TaskUI) -> Void) {
+    init(
+        isLoading: Bool, favoriteItems: [TaskUI], currentItems: [TaskUI], completedItems: [TaskUI],
+        onTaskClick: @escaping (TaskUI) -> Void,
+        onTaskFavoriteClick: @escaping (TaskUI) -> Void,
+        onTaskListUpdateClick: @escaping () -> Void
+    ) {
         self.isLoading = isLoading
         self.favoriteItems = favoriteItems
         self.currentItems = currentItems
         self.completedItems = completedItems
         self.onTaskClick = onTaskClick
         self.onTaskFavoriteClick = onTaskFavoriteClick
+        self.onTaskListUpdateClick = onTaskListUpdateClick
     }
     
     var body: some View {
@@ -47,7 +54,8 @@ struct TasksView: View {
                             section: TasksUISection.current,
                             items: currentItems,
                             onItemClick: onTaskClick,
-                            onFavoriteClick: onTaskFavoriteClick
+                            onFavoriteClick: onTaskFavoriteClick,
+                            onUpdateClick: onTaskListUpdateClick
                         )
                         
                         TasksSection(
