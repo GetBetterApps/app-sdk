@@ -32,7 +32,7 @@ struct TaskDetailScreen : View {
             } else {
                 ScrollView(.vertical, showsIndicators: false) {
                     ScrollViewReader { value in
-                        LazyVStack {
+                        LazyVStack(spacing: 0) {
                             TaskDetailHeader(
                                 isFavorite: state.task!.isFavorite,
                                 isFavoriteLoading: state.task!.isFavoriteLoading,
@@ -50,7 +50,56 @@ struct TaskDetailScreen : View {
                                     }
                                 )
                             }
+                            
+                            HStack {
+                                Text(state.task!.name)
+                                    .style(.labelLarge, withSize: 18)
+                                    .foregroundColor(.textLight)
+                                    .padding(.top, 24)
+                                Spacer()
+                            }
+                            
+                            HStack {
+                                Text(SharedR.strings().task_what_to_do_title.desc().localized())
+                                    .style(.labelMedium)
+                                    .foregroundColor(.textTitle)
+                                    .padding(.top, 16)
+                                Spacer()
+                            }
+                            
+                            HStack {
+                                Text(state.task!.whatToDo)
+                                    .style(.labelMedium)
+                                    .foregroundColor(.textPrimary)
+                                    .padding(.top, 6)
+                                Spacer()
+                            }
+                            
+                            HStack {
+                                Text(SharedR.strings().task_why_title.desc().localized())
+                                    .style(.labelMedium)
+                                    .foregroundColor(.textTitle)
+                                    .padding(.top, 16)
+                                Spacer()
+                            }
+                            
+                            HStack {
+                                Text(state.task!.why)
+                                    .style(.labelMedium)
+                                    .foregroundColor(.textPrimary)
+                                    .padding(.top, 6)
+                                Spacer()
+                            }
+                            
+                            HStack {
+                                Text(SharedR.strings().task_abilities_title.desc().localized())
+                                    .style(.labelMedium)
+                                    .foregroundColor(.textTitle)
+                                    .padding(.top, 16)
+                                Spacer()
+                            }
                         }
+                        .frame(alignment: .leading)
                         .padding(.horizontal, 20)
                     }
                 }
