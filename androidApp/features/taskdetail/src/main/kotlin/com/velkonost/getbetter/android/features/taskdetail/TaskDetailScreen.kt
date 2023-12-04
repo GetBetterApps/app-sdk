@@ -18,6 +18,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.areadetail.AreaDetailScreen
 import com.velkonost.getbetter.android.features.taskdetail.components.TaskDetailHeader
@@ -27,6 +28,7 @@ import com.velkonost.getbetter.shared.features.taskdetail.presentation.TaskDetai
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailAction
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
+import dev.icerock.moko.resources.compose.stringResource
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -81,10 +83,46 @@ fun TaskDetailScreen(
 
                 item {
                     Text(
-                        modifier = modifier.padding(top = 12.dp),
+                        modifier = modifier.padding(top = 24.dp),
                         text = state.task!!.name,
-                        style = MaterialTheme.typography.labelLarge,
-                        color = colorResource(resource = SharedR.colors.text_primary),
+                        style = MaterialTheme.typography.labelLarge.copy(fontSize = 18.sp),
+                        color = colorResource(resource = SharedR.colors.text_light),
+                    )
+                }
+
+                item {
+                    Text(
+                        modifier = modifier.padding(top = 16.dp),
+                        text = stringResource(resource = SharedR.strings.task_what_to_do_title),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = colorResource(resource = SharedR.colors.text_title)
+                    )
+                }
+
+                item {
+                    Text(
+                        modifier = modifier.padding(top = 6.dp),
+                        text = state.task!!.whatToDo,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = colorResource(resource = SharedR.colors.text_primary)
+                    )
+                }
+
+                item {
+                    Text(
+                        modifier = modifier.padding(top = 16.dp),
+                        text = stringResource(resource = SharedR.strings.task_why_title),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = colorResource(resource = SharedR.colors.text_title)
+                    )
+                }
+
+                item {
+                    Text(
+                        modifier = modifier.padding(top = 6.dp),
+                        text = state.task!!.why,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = colorResource(resource = SharedR.colors.text_primary)
                     )
                 }
             }

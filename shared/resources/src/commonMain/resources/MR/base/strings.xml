@@ -57,6 +57,8 @@
 
     <!--  TASK DETAIL  -->
     <string name="task_detail_title">Task Info</string>
+    <string name="task_what_to_do_title">What to do?</string>
+    <string name="task_why_title">Why?</string>
     <!--  TASK DETAIL  -->
 
     <!--  PROFILE  -->
