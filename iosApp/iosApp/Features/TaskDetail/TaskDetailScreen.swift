@@ -37,7 +37,7 @@ struct TaskDetailScreen : View {
                                 isFavorite: state.task!.isFavorite,
                                 isFavoriteLoading: state.task!.isFavoriteLoading,
                                 onFavoriteClick: {
-                                    
+                                    viewModel.dispatch(action: TaskDetailActionFavoriteClick())
                                 }
                             )
                             
