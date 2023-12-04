@@ -111,6 +111,7 @@ internal constructor(
         is AreaLikeClick -> obtainAreaLikeClick(action.value)
         is DiaryAction.NotesLoadNextPage -> fetchNotes()
         is DiaryAction.TaskFavoriteClick -> obtainTaskFavorite(action.value)
+        is DiaryAction.TasksListUpdateClick -> fetchTasks(forceUpdate = true)
     }
 
     private fun obtainNoteLikeClick(value: Note) {
@@ -372,9 +373,9 @@ internal constructor(
         }
     }
 
-    private fun fetchTasks() {
+    private fun fetchTasks(forceUpdate: Boolean = false) {
         launchJob {
-            tasksRepository.getCurrentList() collectAndProcess {
+            tasksRepository.getCurrentList(forceUpdate) collectAndProcess {
                 isLoading {
                     val tasksViewState = viewState.value.tasksViewState.copy(isLoading = it)
                     emit(viewState.value.copy(tasksViewState = tasksViewState))

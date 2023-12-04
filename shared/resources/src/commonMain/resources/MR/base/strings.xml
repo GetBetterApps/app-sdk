@@ -53,6 +53,7 @@
     <string name="tasks_favorite_title">Favorite</string>
     <string name="tasks_current_list_title">For Today</string>
     <string name="tasks_completed_title">Completed</string>
+    <string name="tasks_update_list_title">Update</string>
     <!--  TASKS  -->
 
     <!--  TASK DETAIL  -->

@@ -1,7 +1,12 @@
 package com.velkonost.getbetter.android.features.diary.tasks
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,8 +16,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.android.features.diary.tasks.components.TaskItem
 import com.velkonost.getbetter.core.compose.components.Loader
@@ -31,6 +38,7 @@ fun TasksView(
     currentItems: List<TaskUI>,
     completedItems: List<TaskUI>,
     onTaskClick: (TaskUI) -> Unit,
+    onTaskListUpdateClick: () -> Unit,
     onTaskFavoriteClick: (TaskUI) -> Unit
 ) {
     Box(modifier = modifier.fillMaxSize()) {
@@ -54,7 +62,8 @@ fun TasksView(
                     section = TasksUISection.Current,
                     items = currentItems,
                     onItemClick = onTaskClick,
-                    onFavoriteClick = onTaskFavoriteClick
+                    onFavoriteClick = onTaskFavoriteClick,
+                    onUpdateClick = onTaskListUpdateClick
                 )
 
                 tasksSection(
@@ -73,7 +82,8 @@ fun LazyListScope.tasksSection(
     section: TasksUISection,
     items: List<TaskUI>,
     onItemClick: (TaskUI) -> Unit,
-    onFavoriteClick: (TaskUI) -> Unit
+    onFavoriteClick: (TaskUI) -> Unit,
+    onUpdateClick: (() -> Unit)? = null
 ) {
     if (items.isNotEmpty()) {
         item {
@@ -83,14 +93,48 @@ fun LazyListScope.tasksSection(
                 TasksUISection.Completed -> stringResource(resource = SharedR.strings.tasks_completed_title)
             }
 
-            Text(
-                modifier = modifier
-                    .padding(top = 24.dp, start = 20.dp)
-                    .fillMaxWidth(0.8f),
-                text = title,
-                color = colorResource(resource = SharedR.colors.text_primary),
-                style = MaterialTheme.typography.headlineSmall
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    modifier = modifier
+                        .padding(top = 24.dp, start = 20.dp)
+                        .fillMaxWidth(0.8f),
+                    text = title,
+                    color = colorResource(resource = SharedR.colors.text_primary),
+                    style = MaterialTheme.typography.headlineSmall
+                )
+                Spacer(modifier.weight(1f))
+
+                if (onUpdateClick != null) {
+                    Text(
+                        modifier = modifier
+                            .padding(end = 20.dp)
+                            .shadow(
+                                elevation = 8.dp,
+                                shape = MaterialTheme.shapes.small,
+                            )
+                            .background(
+                                color = colorResource(resource = SharedR.colors.button_gradient_start),
+                                shape = MaterialTheme.shapes.small
+                            )
+                            .padding(
+                                start = 6.dp,
+                                end = 6.dp,
+                                top = 4.dp,
+                                bottom = 4.dp
+                            )
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = null,
+                                onClick = onUpdateClick
+                            ),
+                        text = stringResource(resource = SharedR.strings.tasks_update_list_title).uppercase(),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = colorResource(resource = SharedR.colors.text_light)
+                    )
+                }
+            }
         }
 
         items(items, key = { it.id!! }) { item ->

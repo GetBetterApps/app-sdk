@@ -152,6 +152,9 @@ fun DiaryScreen(
                 taskClick = {
                     viewModel.dispatch(TaskClick(it))
                 },
+                tasksListUpdateClick = {
+                    viewModel.dispatch(DiaryAction.TasksListUpdateClick)
+                },
                 taskFavoriteClick = {
                     viewModel.dispatch(DiaryAction.TaskFavoriteClick(it))
                 }
@@ -291,6 +294,7 @@ fun DiaryScreenContent(
     createNoteClick: () -> Unit,
     notesLoadNextPage: () -> Unit,
     taskClick: (TaskUI) -> Unit,
+    tasksListUpdateClick: () -> Unit,
     taskFavoriteClick: (TaskUI) -> Unit
 ) {
     HorizontalPager(
@@ -325,6 +329,7 @@ fun DiaryScreenContent(
                 currentItems = tasksState.currentItems,
                 completedItems = tasksState.completedItems,
                 onTaskClick = taskClick,
+                onTaskListUpdateClick = tasksListUpdateClick,
                 onTaskFavoriteClick = taskFavoriteClick
             )
         }

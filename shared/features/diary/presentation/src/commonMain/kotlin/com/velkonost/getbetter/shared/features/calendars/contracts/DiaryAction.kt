@@ -11,6 +11,8 @@ sealed interface DiaryAction : UIContract.Action {
     data object NotesLoadNextPage : DiaryAction
 
     data class TaskFavoriteClick(val value: TaskUI) : DiaryAction
+
+    data object TasksListUpdateClick : DiaryAction
 }
 
 data object AddAreaClick : DiaryAction
