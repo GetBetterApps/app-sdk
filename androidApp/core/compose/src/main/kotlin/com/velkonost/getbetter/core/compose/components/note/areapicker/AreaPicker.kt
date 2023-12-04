@@ -55,7 +55,7 @@ fun AreaPicker(
                         .horizontalFadingEdge()
                         .padding(bottom = 16.dp),
                     state = areasPagerState,
-                    contentPadding = PaddingValues(start = 18.dp, end = 18.dp),
+                    contentPadding = PaddingValues(start = 38.dp, end = 38.dp),
                     key = {
                         if (areas.isNotEmpty()) {
                             areas[it].id

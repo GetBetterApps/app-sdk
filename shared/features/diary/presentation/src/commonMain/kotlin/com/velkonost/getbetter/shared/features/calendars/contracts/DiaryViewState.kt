@@ -52,9 +52,14 @@ data class CreateNewAreaViewState(
 
 data class CreateNewNoteViewState(
     val availableAreas: List<Area> = emptyList(),
+    val availableTasks: List<TaskUI> = emptyList(),
+
     val isLoading: Boolean = false,
     val type: NoteType = NoteType.Default,
+
     val selectedArea: Area? = availableAreas.firstOrNull(),
+    val selectedTask: TaskUI? = null,
+
     val text: String = "",
     val mediaUrls: List<String> = emptyList(),
 

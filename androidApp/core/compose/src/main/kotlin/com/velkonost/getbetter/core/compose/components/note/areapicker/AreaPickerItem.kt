@@ -15,6 +15,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.area.Area
@@ -45,11 +47,7 @@ fun ColumnScope.AreaPickerItem(
         ) {
             Image(
                 modifier = modifier.size(64.dp),
-                painter = painterResource(
-                    imageResource = Emoji.getIconById(
-                        area.emojiId!!
-                    )
-                ),
+                painter = painterResource(imageResource = Emoji.getIconById(area.emojiId!!)),
                 contentDescription = null
             )
 
@@ -57,7 +55,9 @@ fun ColumnScope.AreaPickerItem(
                 modifier = modifier.padding(top = 12.dp),
                 text = area.name,
                 color = colorResource(resource = SharedR.colors.text_primary),
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center,
+                overflow = TextOverflow.Ellipsis
             )
         }
     }
