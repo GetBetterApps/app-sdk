@@ -1,7 +1,10 @@
 package com.velkonost.getbetter.android.features.taskdetail
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -144,6 +147,65 @@ fun TaskDetailScreen(
 
                         }
                     )
+                }
+
+                item {
+                    Row {
+                        Spacer(modifier.weight(1f))
+                        Text(
+                            modifier = modifier.padding(top = 24.dp),
+                            text = stringResource(resource = SharedR.strings.task_mask_as).uppercase(),
+                            style = MaterialTheme.typography.labelMedium,
+                            color = colorResource(resource = SharedR.colors.text_primary)
+                        )
+                        Spacer(modifier.weight(1f))
+                    }
+                }
+
+                item {
+                    Row {
+                        Spacer(modifier.weight(1f))
+                        Spacer(modifier.weight(1f))
+
+                        Text(
+                            modifier = modifier
+                                .background(
+                                    color = colorResource(
+                                        resource = if (state.task!!.isNotInteresting) SharedR.colors.button_gradient_start
+                                        else SharedR.colors.background_item
+                                    ),
+                                    shape = MaterialTheme.shapes.medium
+                                )
+                                .padding(horizontal = 8.dp, vertical = 6.dp),
+                            text = stringResource(resource = SharedR.strings.task_not_interesting_title),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = colorResource(
+                                resource = if (state.task!!.isNotInteresting) SharedR.colors.text_light
+                                else SharedR.colors.text_primary
+                            )
+                        )
+                        Spacer(modifier.weight(1f))
+                        Text(
+                            modifier = modifier
+                                .background(
+                                    color = colorResource(
+                                        resource = if (state.task!!.isNotInteresting) SharedR.colors.button_gradient_start
+                                        else SharedR.colors.background_item
+                                    ),
+                                    shape = MaterialTheme.shapes.medium
+                                )
+                                .padding(horizontal = 8.dp, vertical = 6.dp),
+                            text = stringResource(resource = SharedR.strings.task_completed_title),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = colorResource(
+                                resource = if (state.task!!.isCompleted) SharedR.colors.text_light
+                                else SharedR.colors.text_primary
+                            )
+                        )
+
+                        Spacer(modifier.weight(1f))
+                        Spacer(modifier.weight(1f))
+                    }
                 }
             }
         }

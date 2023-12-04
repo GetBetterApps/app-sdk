@@ -61,6 +61,10 @@
     <string name="task_what_to_do_title">What to do?</string>
     <string name="task_why_title">Why?</string>
     <string name="task_abilities_title">Abilities</string>
+
+    <string name="task_mask_as">Mark task as</string>
+    <string name="task_not_interesting_title">Not interesting</string>
+    <string name="task_completed_title">Completed</string>
     <!--  TASK DETAIL  -->
 
     <!--  PROFILE  -->
