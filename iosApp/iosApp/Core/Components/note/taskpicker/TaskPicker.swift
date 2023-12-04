@@ -75,7 +75,7 @@ struct TaskPicker: View {
             }
         }
         .onChange(of: tasks) { value in
-            if tasks.count <= 1 {
+            if value.count <= 1 {
                 withAnimation {
                     isTaskPickerVisible = false
                 }
