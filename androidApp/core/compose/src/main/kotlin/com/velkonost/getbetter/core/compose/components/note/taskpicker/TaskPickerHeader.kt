@@ -83,9 +83,7 @@ fun TaskPickerHeader(
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Text(
-                        modifier = modifier
-                            .padding(start = 12.dp)
-                            .fillMaxWidth(0.8f),
+                        modifier = modifier.fillMaxWidth(0.8f),
                         text = task.name,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,

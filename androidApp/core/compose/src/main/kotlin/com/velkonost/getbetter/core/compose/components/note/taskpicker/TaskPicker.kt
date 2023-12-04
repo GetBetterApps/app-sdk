@@ -53,7 +53,7 @@ fun TaskPicker(
                         .horizontalFadingEdge()
                         .padding(bottom = 16.dp),
                     state = tasksPagerState,
-                    contentPadding = PaddingValues(start = 38.dp, end = 38.dp),
+                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
                     key = {
                         if (tasks.isNotEmpty()) {
                             tasks[it].id.toString()
@@ -82,6 +82,8 @@ fun TaskPicker(
             .collect { page ->
                 if (tasks.isNotEmpty()) {
                     onTaskSelect.invoke(tasks[page])
+                } else {
+                    isTaskPickerVisible.value = false
                 }
             }
     }

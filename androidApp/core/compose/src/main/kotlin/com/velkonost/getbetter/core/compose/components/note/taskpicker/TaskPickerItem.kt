@@ -39,7 +39,7 @@ fun ColumnScope.TaskPickerItem(
         Column(
             modifier = modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Top
         ) {
 
             Text(
@@ -51,6 +51,7 @@ fun ColumnScope.TaskPickerItem(
                 maxLines = 1
             )
             Text(
+                modifier = modifier.padding(top = 6.dp),
                 text = task.why,
                 color = colorResource(resource = SharedR.colors.text_primary),
                 style = MaterialTheme.typography.bodyMedium,

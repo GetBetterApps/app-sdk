@@ -94,10 +94,15 @@ internal constructor(
 
     private fun obtainAreaSelect(value: Area) {
         val availableTasks = _tasksList.filter { it.area.id == value.id }
+        val currentSelectedTask = viewState.value.selectedTask
+        val newSelectedTask =
+            if (currentSelectedTask?.area?.id == value.id) currentSelectedTask
+            else null
+
         emit(
             viewState.value.copy(
                 selectedArea = value,
-                selectedTask = null,
+                selectedTask = newSelectedTask,
                 availableTasks = availableTasks,
             )
         )
