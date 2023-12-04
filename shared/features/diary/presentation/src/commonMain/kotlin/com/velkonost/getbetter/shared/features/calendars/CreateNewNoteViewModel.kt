@@ -15,6 +15,7 @@ import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewNote
 import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewNoteViewState
 import com.velkonost.getbetter.shared.features.diary.api.DiaryRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
+import com.velkonost.getbetter.shared.features.tasks.api.TasksRepository
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
@@ -22,7 +23,8 @@ import dev.icerock.moko.resources.desc.StringDesc
 class CreateNewNoteViewModel
 internal constructor(
     private val notesRepository: NotesRepository,
-    private val diaryRepository: DiaryRepository
+    private val diaryRepository: DiaryRepository,
+    private val tasksRepository: TasksRepository
 ) : BaseViewModel<CreateNewNoteViewState, CreateNewNoteAction, Nothing, CreateNewNoteEvent>(
     initialState = CreateNewNoteViewState()
 ) {
@@ -173,6 +175,7 @@ internal constructor(
                 tags = data.tags.map { it.text },
                 isPrivate = data.isPrivate,
                 areaId = data.selectedArea!!.id,
+                taskId = data.selectedTask?.id,
                 subNotes = data.subNotes.asExternalModels,
                 expectedCompletionDate = data.completionDate
             ) collectAndProcess {

@@ -33,6 +33,7 @@ constructor(
         isPrivate: Boolean,
         expectedCompletionDate: Long?,
         areaId: Int,
+        taskId: Int?,
         subNotes: List<SubNote>
     ): Flow<ResultState<Note>> = flowRequest(
         mapper = KtorNote::asExternalModel,
@@ -45,6 +46,7 @@ constructor(
                 isNotePrivate = isPrivate,
                 noteExpectedCompletionDate = expectedCompletionDate,
                 areaId = areaId,
+                taskId = taskId,
                 subNotes = subNotes.map {
                     SubNoteRequestData(
                         subNoteText = it.text,

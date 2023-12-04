@@ -26,6 +26,9 @@ data class CreateNewNoteRequest(
     @SerialName("areaId")
     val areaId: Int,
 
+    @SerialName("taskId")
+    val taskId: Int?,
+
     @SerialName("subNotes")
     val subNotes: List<SubNoteRequestData> = emptyList()
 )

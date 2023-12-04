@@ -15,6 +15,7 @@ interface NotesRepository {
         isPrivate: Boolean,
         expectedCompletionDate: Long?,
         areaId: Int,
+        taskId: Int?,
         subNotes: List<SubNote>
     ): Flow<ResultState<Note>>
 
