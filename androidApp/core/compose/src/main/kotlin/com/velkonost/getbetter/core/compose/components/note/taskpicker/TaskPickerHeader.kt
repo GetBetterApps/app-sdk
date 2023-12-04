@@ -38,6 +38,7 @@ import dev.icerock.moko.resources.compose.stringResource
 fun TaskPickerHeader(
     modifier: Modifier = Modifier,
     selectedTask: TaskUI?,
+    availableTasksAmount: Int,
     isTaskPickerVisible: MutableState<Boolean>
 ) {
 
@@ -69,7 +70,9 @@ fun TaskPickerHeader(
                 Text(
                     modifier = modifier.fillMaxWidth(),
                     text = stringResource(
-                        resource = SharedR.strings.create_note_no_tasks_title
+                        resource =
+                        if (availableTasksAmount == 0) SharedR.strings.create_note_no_tasks_title
+                        else SharedR.strings.create_note_without_task
                     ),
                     maxLines = 1,
                     textAlign = TextAlign.Center,

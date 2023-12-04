@@ -113,7 +113,7 @@ internal constructor(
         }
     }
 
-    private fun obtainTaskSelect(value: TaskUI) {
+    private fun obtainTaskSelect(value: TaskUI?) {
         emit(viewState.value.copy(selectedTask = value))
     }
 

@@ -51,7 +51,7 @@ fun CreateNewNoteBottomSheet(
     state: CreateNewNoteViewState,
     modalSheetState: ModalBottomSheetState,
     onAreaSelect: (Area) -> Unit,
-    onTaskSelect: (TaskUI) -> Unit,
+    onTaskSelect: (TaskUI?) -> Unit,
     onTextChanged: (String) -> Unit,
     onPrivateChanged: (Boolean) -> Unit,
     onNewTagChanged: (String) -> Unit,

@@ -32,16 +32,17 @@ fun TaskPicker(
     selectedTask: TaskUI?,
     isTaskPickerVisible: MutableState<Boolean>,
     modalSheetState: ModalBottomSheetState,
-    onTaskSelect: (TaskUI) -> Unit
+    onTaskSelect: (TaskUI?) -> Unit
 ) {
 
-    val tasksPagerState = rememberPagerState(initialPage = 0, pageCount = { tasks.size })
+    val tasksPagerState = rememberPagerState(initialPage = 0, pageCount = { tasks.size + 1 })
     val scope = rememberCoroutineScope()
 
     PrimaryBox(padding = 0) {
         Column {
             TaskPickerHeader(
                 selectedTask = selectedTask,
+                availableTasksAmount = tasks.size,
                 isTaskPickerVisible = isTaskPickerVisible,
             )
 
@@ -64,7 +65,11 @@ fun TaskPicker(
                         return@HorizontalPager
                     }
 
-                    TaskPickerItem(task = tasks[it])
+                    if (it == 0) {
+                        TaskPickerEmptyItem()
+                    } else {
+                        TaskPickerItem(task = tasks[it - 1])
+                    }
                 }
             }
 
@@ -81,7 +86,11 @@ fun TaskPicker(
         snapshotFlow { tasksPagerState.currentPage }
             .collect { page ->
                 if (tasks.isNotEmpty()) {
-                    onTaskSelect.invoke(tasks[page])
+                    onTaskSelect.invoke(
+                        if (page == 0) {
+                            null
+                        } else tasks[page - 1]
+                    )
                 } else {
                     isTaskPickerVisible.value = false
                 }
