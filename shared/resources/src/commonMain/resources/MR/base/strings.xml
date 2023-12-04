@@ -233,6 +233,8 @@
 
     <string name="create_note_completion_date_title">Deadline</string>
     <string name="create_note_completion_date_hint">Not set</string>
+
+    <string name="create_note_no_tasks_title">No available tasks</string>
     <!--  CREATE NOTE  -->
 
     <!--  NOTE DETAIL  -->
