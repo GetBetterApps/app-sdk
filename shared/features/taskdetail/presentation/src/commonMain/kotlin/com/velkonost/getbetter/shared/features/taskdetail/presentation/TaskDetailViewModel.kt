@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.taskdetail.presentation
 
 import AreasRepository
+import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.SavedStateHandle
@@ -42,6 +43,7 @@ internal constructor(
     override fun dispatch(action: TaskDetailAction) = when (action) {
         is TaskDetailAction.NavigateBack -> emit(action)
         is TaskDetailAction.AreaChanged -> obtainAreaChanged()
+        is TaskDetailAction.FavoriteClick -> obtainFavoriteClick()
     }
 
     private fun obtainAreaChanged() {
@@ -51,6 +53,27 @@ internal constructor(
                     onSuccess {
                         emit(viewState.value.copy(area = it))
                     }
+                }
+            }
+        }
+    }
+
+    private fun obtainFavoriteClick() {
+        launchJob {
+            val taskId = viewState.value.task!!.id!!
+            val request =
+                if (viewState.value.task!!.isFavorite) tasksRepository.removeFromFavorite(taskId)
+                else tasksRepository.addToFavorite(taskId)
+
+            request collectAndProcess {
+                isLoading {
+                    val task = viewState.value.task?.copy(isFavoriteLoading = it)
+                    emit(viewState.value.copy(task = task))
+                }
+                onSuccess {
+                    val updatedFavorite = !viewState.value.task!!.isFavorite
+                    val task = viewState.value.task?.copy(isFavorite = updatedFavorite)
+                    emit(viewState.value.copy(task = task))
                 }
             }
         }
