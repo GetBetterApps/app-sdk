@@ -30,7 +30,7 @@ fun AbilityData(
     val context = LocalContext.current
 
     PrimaryBox(
-        modifier = modifier.padding(top = 6.dp)
+//        modifier = modifier.padding(top = 6.dp)
     ) {
         Column(
             modifier = modifier.clickable(
