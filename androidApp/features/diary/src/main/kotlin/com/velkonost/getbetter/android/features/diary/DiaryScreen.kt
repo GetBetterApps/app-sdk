@@ -192,6 +192,9 @@ fun DiaryScreen(
             onAreaSelect = {
                 viewModel.dispatch(CreateNewNoteAction.AreaSelect(it))
             },
+            onTaskSelect = {
+                viewModel.dispatch(CreateNewNoteAction.TaskSelect(it))
+            },
             onTextChanged = {
                 viewModel.dispatch(CreateNewNoteAction.TextChanged(it))
             },

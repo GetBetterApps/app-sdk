@@ -34,8 +34,10 @@ import com.velkonost.getbetter.core.compose.components.note.areapicker.AreaPicke
 import com.velkonost.getbetter.core.compose.components.note.completiondate.CompletionDateBlock
 import com.velkonost.getbetter.core.compose.components.note.subnotes.SubNotesBlock
 import com.velkonost.getbetter.core.compose.components.note.tags.TagsBlock
+import com.velkonost.getbetter.core.compose.components.note.taskpicker.TaskPicker
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.note.NoteType
+import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewNoteViewState
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -49,6 +51,7 @@ fun CreateNewNoteBottomSheet(
     state: CreateNewNoteViewState,
     modalSheetState: ModalBottomSheetState,
     onAreaSelect: (Area) -> Unit,
+    onTaskSelect: (TaskUI) -> Unit,
     onTextChanged: (String) -> Unit,
     onPrivateChanged: (Boolean) -> Unit,
     onNewTagChanged: (String) -> Unit,
@@ -62,6 +65,7 @@ fun CreateNewNoteBottomSheet(
 ) {
 
     val isAreaPickerVisible = remember { mutableStateOf(false) }
+    val isTaskPickerVisible = remember { mutableStateOf(false) }
     val isSubNotesBlockVisible = remember { mutableStateOf(false) }
 
     val scrollState = rememberScrollState()
@@ -116,6 +120,14 @@ fun CreateNewNoteBottomSheet(
                                 onAreaSelect = onAreaSelect,
                                 modalSheetState = modalSheetState,
                                 noteType = state.type
+                            )
+
+                            TaskPicker(
+                                tasks = state.availableTasks,
+                                selectedTask = state.selectedTask,
+                                isTaskPickerVisible = isTaskPickerVisible,
+                                modalSheetState = modalSheetState,
+                                onTaskSelect = onTaskSelect
                             )
 
                             MultilineTextField(

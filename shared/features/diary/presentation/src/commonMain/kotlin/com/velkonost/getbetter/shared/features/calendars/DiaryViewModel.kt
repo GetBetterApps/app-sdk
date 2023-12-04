@@ -99,7 +99,7 @@ internal constructor(
 
     @NativeCoroutinesState
     val createNewNoteViewModel: StateFlow<CreateNewNoteViewModel> =
-        MutableStateFlow(CreateNewNoteViewModel(notesRepository, diaryRepository, tasksRepository))
+        MutableStateFlow(CreateNewNoteViewModel(notesRepository, diaryRepository))
 
     override fun dispatch(action: DiaryAction) = when (action) {
         is CreateNewAreaAction -> dispatchCreateNewAreaAction(action)

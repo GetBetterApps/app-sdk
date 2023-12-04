@@ -47,6 +47,8 @@ sealed interface CreateNewNoteAction : DiaryAction {
 
     data class AreaSelect(val value: Area) : CreateNewNoteAction
 
+    data class TaskSelect(val value: TaskUI) : CreateNewNoteAction
+
     data class TextChanged(val value: String) : CreateNewNoteAction
 
     data class NewTagTextChanged(val value: String) : CreateNewNoteAction

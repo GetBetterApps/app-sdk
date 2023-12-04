@@ -36,6 +36,7 @@ internal constructor(
         is CreateNewNoteAction.OpenDefault -> obtainOpenDefault()
         is CreateNewNoteAction.OpenGoal -> obtainOpenGoal()
         is CreateNewNoteAction.AreaSelect -> obtainAreaSelect(action.value)
+        is CreateNewNoteAction.TaskSelect -> obtainTaskSelect(action.value)
         is CreateNewNoteAction.TextChanged -> obtainTextChanged(action.value)
         is CreateNewNoteAction.PrivateChanged -> obtainPrivateChanged()
         is CreateNewNoteAction.NewTagTextChanged -> obtainNewTagTextChanged(action.value)
@@ -105,6 +106,10 @@ internal constructor(
         if (forceSetPrivate) {
             emit(viewState.value.copy(isPrivate = true))
         }
+    }
+
+    private fun obtainTaskSelect(value: TaskUI) {
+        emit(viewState.value.copy(selectedTask = value))
     }
 
     private fun obtainTextChanged(value: String) {
