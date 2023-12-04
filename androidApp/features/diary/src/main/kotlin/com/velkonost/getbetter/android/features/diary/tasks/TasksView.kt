@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
@@ -94,12 +93,12 @@ fun LazyListScope.tasksSection(
             }
 
             Row(
+                modifier = modifier
+                    .padding(horizontal = 20.dp)
+                    .padding(top = 24.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    modifier = modifier
-                        .padding(top = 24.dp, start = 20.dp)
-                        .fillMaxWidth(0.8f),
                     text = title,
                     color = colorResource(resource = SharedR.colors.text_primary),
                     style = MaterialTheme.typography.headlineSmall
@@ -109,7 +108,7 @@ fun LazyListScope.tasksSection(
                 if (onUpdateClick != null) {
                     Text(
                         modifier = modifier
-                            .padding(end = 20.dp)
+                            .align(Alignment.CenterVertically)
                             .shadow(
                                 elevation = 8.dp,
                                 shape = MaterialTheme.shapes.small,
@@ -119,10 +118,10 @@ fun LazyListScope.tasksSection(
                                 shape = MaterialTheme.shapes.small
                             )
                             .padding(
-                                start = 6.dp,
-                                end = 6.dp,
-                                top = 4.dp,
-                                bottom = 4.dp
+                                start = 8.dp,
+                                end = 8.dp,
+                                top = 6.dp,
+                                bottom = 6.dp
                             )
                             .clickable(
                                 interactionSource = remember { MutableInteractionSource() },
@@ -130,8 +129,9 @@ fun LazyListScope.tasksSection(
                                 onClick = onUpdateClick
                             ),
                         text = stringResource(resource = SharedR.strings.tasks_update_list_title).uppercase(),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = colorResource(resource = SharedR.colors.text_light)
+                        style = MaterialTheme.typography.labelSmall,
+                        color = colorResource(resource = SharedR.colors.text_light),
+                        maxLines = 1
                     )
                 }
             }

@@ -32,7 +32,7 @@ constructor(
             mapper = { map { it.asExternalModel() } },
             request = {
                 val token = localDataSource.getUserToken()
-                remoteDataSource.fetchCurrentList(token)
+                remoteDataSource.fetchCurrentList(token, forceUpdate)
             }
         )
 
