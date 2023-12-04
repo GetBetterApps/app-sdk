@@ -19,7 +19,6 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
-import com.velkonost.getbetter.core.compose.components.note.areapicker.AreaPickerHeader
 import com.velkonost.getbetter.core.compose.components.note.areapicker.AreaPickerItem
 import com.velkonost.getbetter.core.compose.extensions.horizontalFadingEdge
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
@@ -31,7 +30,7 @@ import kotlinx.coroutines.launch
 fun TaskPicker(
     modifier: Modifier = Modifier,
     tasks: List<TaskUI>,
-    selectedTask: TaskUI?
+    selectedTask: TaskUI?,
     isTaskPickerVisible: MutableState<Boolean>,
     modalSheetState: ModalBottomSheetState,
     onTaskSelect: (TaskUI) -> Unit
@@ -42,10 +41,9 @@ fun TaskPicker(
 
     PrimaryBox(padding = 0) {
         Column {
-            AreaPickerHeader(
-                selectedArea = selectedArea,
-                isAreaPickerVisible = isAreaPickerVisible,
-                noteType = noteType
+            TaskPickerHeader(
+                selectedTask = selectedTask,
+                isTaskPickerVisible = isTaskPickerVisible,
             )
 
             AnimatedVisibility(visible = isTaskPickerVisible.value) {
