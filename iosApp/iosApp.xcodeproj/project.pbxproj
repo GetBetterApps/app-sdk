@@ -110,6 +110,7 @@
 		46ACAF212AEEC9B8000A9CD8 /* NoteItemHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46ACAF202AEEC9B8000A9CD8 /* NoteItemHeader.swift */; };
 		46ACAF232AEECA74000A9CD8 /* NoteItemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46ACAF222AEECA74000A9CD8 /* NoteItemData.swift */; };
 		46AD39D02B1DCD9500EB60F8 /* AbilityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AD39CF2B1DCD9500EB60F8 /* AbilityData.swift */; };
+		46AD39D32B1DFF9200EB60F8 /* TaskPickerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AD39D22B1DFF9200EB60F8 /* TaskPickerHeader.swift */; };
 		46AEEF7D2B0BB76B00A9376C /* CalendarDateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AEEF7C2B0BB76B00A9376C /* CalendarDateItem.swift */; };
 		46B17E0C2AADE081008C2BC4 /* TextExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B17E0B2AADE081008C2BC4 /* TextExt.swift */; };
 		46B17E0F2AADE0B3008C2BC4 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B17E0E2AADE0B2008C2BC4 /* Type.swift */; };
@@ -256,6 +257,7 @@
 		46ACAF202AEEC9B8000A9CD8 /* NoteItemHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteItemHeader.swift; sourceTree = "<group>"; };
 		46ACAF222AEECA74000A9CD8 /* NoteItemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteItemData.swift; sourceTree = "<group>"; };
 		46AD39CF2B1DCD9500EB60F8 /* AbilityData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityData.swift; sourceTree = "<group>"; };
+		46AD39D22B1DFF9200EB60F8 /* TaskPickerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPickerHeader.swift; sourceTree = "<group>"; };
 		46AEEF7C2B0BB76B00A9376C /* CalendarDateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDateItem.swift; sourceTree = "<group>"; };
 		46B17E0B2AADE081008C2BC4 /* TextExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExt.swift; sourceTree = "<group>"; };
 		46B17E0E2AADE0B2008C2BC4 /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 		4616B0882AF62B4200A4CDDE /* note */ = {
 			isa = PBXGroup;
 			children = (
+				46AD39D12B1DFF7F00EB60F8 /* taskpicker */,
 				4616B0892AF62B6800A4CDDE /* completiondate */,
 				467668B82AEABF91007C17DE /* subnotes */,
 				464A42692AEA62780019CB98 /* tags */,
@@ -719,6 +722,14 @@
 				46ACAF1D2AEE7A02000A9CD8 /* NoteItem.swift */,
 			);
 			path = item;
+			sourceTree = "<group>";
+		};
+		46AD39D12B1DFF7F00EB60F8 /* taskpicker */ = {
+			isa = PBXGroup;
+			children = (
+				46AD39D22B1DFF9200EB60F8 /* TaskPickerHeader.swift */,
+			);
+			path = taskpicker;
 			sourceTree = "<group>";
 		};
 		46AEEF7B2B0BB76100A9376C /* components */ = {
@@ -1188,6 +1199,7 @@
 				464A426D2AEA63D00019CB98 /* TagsBlock.swift in Sources */,
 				467668C02AEAC007007C17DE /* SubNotesHeader.swift in Sources */,
 				468B876A2ABC45C6001BBEB1 /* DiaryScreen.swift in Sources */,
+				46AD39D32B1DFF9200EB60F8 /* TaskPickerHeader.swift in Sources */,
 				46182DC12AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift in Sources */,
 				46D8577E2AD0787E00BE74DA /* AddAreaHeader.swift in Sources */,
 				46FCD3D72AF532450025D2C6 /* NoteDetailHeader.swift in Sources */,
