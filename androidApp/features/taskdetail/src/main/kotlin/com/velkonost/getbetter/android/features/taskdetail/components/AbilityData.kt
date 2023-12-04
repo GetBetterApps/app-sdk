@@ -29,9 +29,7 @@ fun AbilityData(
 ) {
     val context = LocalContext.current
 
-    PrimaryBox(
-//        modifier = modifier.padding(top = 6.dp)
-    ) {
+    PrimaryBox {
         Column(
             modifier = modifier.clickable(
                 interactionSource = remember { MutableInteractionSource() },

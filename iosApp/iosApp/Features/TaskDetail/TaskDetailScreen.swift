@@ -98,6 +98,15 @@ struct TaskDetailScreen : View {
                                     .padding(.top, 16)
                                 Spacer()
                             }
+                            
+                            ForEach(state.task!.abilities, id: \.self.id ) { ability in
+                                AbilityData(
+                                    item: ability,
+                                    onClick: { value in
+                                        
+                                    }
+                                )
+                            }
                         }
                         .frame(alignment: .leading)
                         .padding(.horizontal, 20)
