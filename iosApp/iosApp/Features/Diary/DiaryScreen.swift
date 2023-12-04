@@ -143,6 +143,9 @@ struct DiaryScreen: View {
                 onAreaSelect: { area in
                     viewModel.dispatch(action: CreateNewNoteActionAreaSelect(value: area))
                 },
+                onTaskSelect: { task in
+                    viewModel.dispatch(action: CreateNewNoteActionTaskSelect(value: task))
+                },
                 onTextChanged: { value in
                     viewModel.dispatch(action: CreateNewNoteActionTextChanged(value: value))
                 },

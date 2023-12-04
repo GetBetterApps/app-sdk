@@ -23,10 +23,12 @@ struct CreateNewNoteBottomSheet: View {
     @Binding private var state: CreateNewNoteViewState
     
     @State private var isAreaPickerVisible = false
+    @State private var isTaskPickerVisible = false
     @State private var isSubNoteBlockVisible = false
     @State var currentAreaIndex: Int = 0
     
     let onAreaSelect: (Area) -> Void
+    let onTaskSelect: (TaskUI?) -> Void
     let onTextChanged: (String) -> Void
     let onPrivateChanged: () -> Void
     
@@ -50,6 +52,7 @@ struct CreateNewNoteBottomSheet: View {
     init(
         state: Binding<CreateNewNoteViewState>,
         onAreaSelect: @escaping (Area) -> Void,
+        onTaskSelect: @escaping (TaskUI?) -> Void,
         onTextChanged: @escaping (String) -> Void,
         onPrivateChanged: @escaping () -> Void,
         onNewTagChanged: @escaping (String) -> Void,
@@ -63,6 +66,7 @@ struct CreateNewNoteBottomSheet: View {
     ) {
         self._state = state
         self.onAreaSelect = onAreaSelect
+        self.onTaskSelect = onTaskSelect
         self.onTextChanged = onTextChanged
         self.onPrivateChanged = onPrivateChanged
         
@@ -108,6 +112,13 @@ struct CreateNewNoteBottomSheet: View {
                                 noteType: state.type,
                                 onAreaSelect: onAreaSelect,
                                 isAreaPickerVisible: $isAreaPickerVisible
+                            )
+                            
+                            TaskPicker(
+                                tasks: state.availableTasks as! [TaskUI?],
+                                selectedTask: state.selectedTask,
+                                onTaskSelect: onTaskSelect,
+                                isTaskPickerVisible: $isTaskPickerVisible
                             )
                             
                             MultilineTextField(

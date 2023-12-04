@@ -19,15 +19,15 @@ struct TaskWrapper : Identifiable, Equatable, Hashable {
 
 struct TaskPicker: View {
     
-    let tasks: [TaskUI]
+    let tasks: [TaskUI?]
     private var selectedTask: TaskUI?
     
-    let onTaskSelect: (TaskUI) -> Void
+    let onTaskSelect: (TaskUI?) -> Void
     @Binding private var isTaskPickerVisible: Bool
     
     @StateObject var taskPage: Page = .first()
     
-    init(tasks: [TaskUI], selectedTask: TaskUI?, onTaskSelect: @escaping (TaskUI) -> Void, isTaskPickerVisible: Binding<Bool>) {
+    init(tasks: [TaskUI?], selectedTask: TaskUI?, onTaskSelect: @escaping (TaskUI?) -> Void, isTaskPickerVisible: Binding<Bool>) {
         self.tasks = tasks
         self.selectedTask = selectedTask
         self.onTaskSelect = onTaskSelect
@@ -51,12 +51,14 @@ struct TaskPicker: View {
                     
                     Pager(
                         page: taskPage,
-                        data: tasks.map(
-                            { task in TaskWrapper(task: task) }
-                        ),
+                        data: tasks.map({ task in TaskWrapper(task: task) }),
                         id: \.self.id
                     ) { taskWrapper in
-//                        AreaPickerItem(area: areaWrapper.area)
+                        if taskWrapper.task == nil {
+                            TaskPickerEmptyItem()
+                        } else {
+                            TaskPickerItem(task: taskWrapper.task!)
+                        }
                     }
                     .interactive(rotation: true)
                     .interactive(scale: 0.8)
