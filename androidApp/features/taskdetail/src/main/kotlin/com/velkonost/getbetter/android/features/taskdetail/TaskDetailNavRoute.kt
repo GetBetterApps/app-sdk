@@ -16,7 +16,10 @@ object TaskDetailNavRoute : NavRoute<TaskDetailViewModel> {
         get() = NavigationScreen.TaskDetailNavScreen.route
 
     @Composable
-    override fun Content(viewModel: TaskDetailViewModel) = TaskDetailScreen(viewModel = viewModel)
+    override fun Content(viewModel: TaskDetailViewModel) {
+        viewModel.init()
+        TaskDetailScreen(viewModel = viewModel)
+    }
 
     override val viewModel: TaskDetailViewModel
         @Composable get() = koinViewModel()

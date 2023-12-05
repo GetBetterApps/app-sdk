@@ -37,6 +37,9 @@ internal constructor(
     private var _changeCompletedJob: Job? = null
 
     init {
+        fetchTasks()
+        fetchAreas()
+
         launchJob {
             task.collectLatest { task ->
                 emit(
@@ -48,7 +51,9 @@ internal constructor(
                 )
             }
         }
+    }
 
+    override fun init() {
         launchJob {
             createNewNoteViewModel.value.viewState.collect {
                 emit(viewState.value.copy(createNewNoteViewState = it))
@@ -80,6 +85,34 @@ internal constructor(
 
     private fun dispatchCreateNewNoteAction(action: CreateNewNoteAction) {
         createNewNoteViewModel.value.dispatch(action)
+    }
+
+    private fun fetchAreas() {
+        launchJob {
+            areasRepository.fetchUserAreas() collectAndProcess {
+                onSuccess { list ->
+                    list?.let {
+                        createNewNoteViewModel.value.dispatch(
+                            CreateNewNoteAction.InitAvailableAreas(it)
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun fetchTasks() {
+        launchJob {
+            tasksRepository.getCurrentList(forceUpdate = false) collectAndProcess {
+                onSuccess { list ->
+                    list?.let {
+                        createNewNoteViewModel.value.dispatch(
+                            CreateNewNoteAction.InitTasksList(list)
+                        )
+                    }
+                }
+            }
+        }
     }
 
     private fun obtainAreaChanged() {
