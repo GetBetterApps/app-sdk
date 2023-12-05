@@ -29,6 +29,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun TaskPicker(
     modifier: Modifier = Modifier,
+    forceSelectedTask: TaskUI?,
     tasks: List<TaskUI?>,
     tasksPagerState: PagerState = rememberPagerState(initialPage = 0, pageCount = { tasks.size }),
     selectedTask: TaskUI?,
@@ -87,14 +88,16 @@ fun TaskPicker(
     LaunchedEffect(tasks) {
         snapshotFlow { tasksPagerState.currentPage }
             .collect { page ->
-                if (tasks.size > 1) {
-                    onTaskSelect.invoke(
-                        if (page == 0) {
-                            null
-                        } else tasks[page]
-                    )
-                } else {
-                    isTaskPickerVisible.value = false
+                if (isTaskPickerVisible.value) {
+                    if (tasks.size > 1) {
+                        onTaskSelect.invoke(
+                            if (page == 0) {
+                                null
+                            } else tasks[page]
+                        )
+                    } else {
+                        isTaskPickerVisible.value = false
+                    }
                 }
             }
     }

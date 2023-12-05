@@ -138,6 +138,7 @@ fun CreateNewNoteBottomSheet(
 
                             TaskPicker(
                                 tasks = state.availableTasks,
+                                forceSelectedTask = state.forceSelectedTask,
                                 selectedTask = state.selectedTask,
                                 tasksPagerState = tasksPagerState,
                                 isTaskPickerVisible = isTaskPickerVisible,
@@ -226,8 +227,7 @@ fun CreateNewNoteBottomSheet(
                 }
             }
         }
-    ) {
-    }
+    ) {}
 
     LaunchedEffect(modalSheetState.currentValue) {
         isAreaPickerVisible.value = false
@@ -243,11 +243,12 @@ fun CreateNewNoteBottomSheet(
         }
     }
 
-    LaunchedEffect(key1 = state.forceSelectedTask, key2 = state.availableTasks) {
+    LaunchedEffect(key1 = state.forceSelectedTask) {
         state.forceSelectedTask?.let { task ->
             val taskIndex = state.availableTasks.indexOfFirst { it?.id == task.id }
             if (taskIndex != -1) {
                 tasksPagerState.scrollToPage(taskIndex)
+                isTaskPickerVisible.value = true
             }
         }
     }
