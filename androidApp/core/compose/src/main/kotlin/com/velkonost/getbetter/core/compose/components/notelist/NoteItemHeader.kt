@@ -67,7 +67,6 @@ fun NoteItemHeader(
 
             AnimatedVisibility(visible = taskName != null) {
                 Text(
-                    modifier = modifier.padding(top = 2.dp),
                     text = taskName!!,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,

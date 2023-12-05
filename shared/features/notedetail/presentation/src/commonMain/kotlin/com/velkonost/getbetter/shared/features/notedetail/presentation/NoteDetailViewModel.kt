@@ -61,6 +61,7 @@ internal constructor(
 
     override fun dispatch(action: NoteDetailAction) = when (action) {
         is NavigateBack -> emit(action)
+        is NoteDetailAction.TaskClick -> obtainTaskClick()
         is NoteDetailAction.AreaChanged -> obtainAreaChanged()
         is NoteDetailAction.TextChanged -> obtainTextChanged(action.value)
         is NoteDetailAction.SetCompletionDate -> obtainSetCompletionDate(action.value)
@@ -83,6 +84,12 @@ internal constructor(
         is NoteDetailAction.CommentTextChanged -> obtainCommentTextChanged(action.value)
         is NoteDetailAction.CommentAddClick -> obtainCommentAdd()
         is NoteDetailAction.CommentRemoveClick -> obtainCommentRemove(action.value)
+    }
+
+    private fun obtainTaskClick() {
+        viewState.value.task?.let {
+            emit(NoteDetailNavigation.NavigateToTaskDetail(it))
+        }
     }
 
     private fun obtainCommentRemove(value: Comment) {
@@ -398,6 +405,7 @@ internal constructor(
                 isNotePrivate = isPrivate,
                 noteType = noteType,
                 area = area,
+                task = task,
                 noteText = text,
                 tags = tags.asTags,
                 newTag = TagUI(),

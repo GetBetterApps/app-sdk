@@ -49,11 +49,12 @@ sealed interface NoteDetailAction : UIContract.Action {
     data object CommentAddClick : NoteDetailAction
 
     data class CommentRemoveClick(val value: Comment) : NoteDetailAction
+
+    data object TaskClick : NoteDetailAction
 }
 
 data object NavigateBack : NoteDetailAction, NoteDetailNavigation {
     override val event: NavigationEvent = NavigationEvent.NavigateUp()
 }
-
 
 

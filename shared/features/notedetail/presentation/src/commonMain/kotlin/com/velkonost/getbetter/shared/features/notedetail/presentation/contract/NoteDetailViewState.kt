@@ -6,6 +6,7 @@ import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.note.NoteType
+import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
@@ -38,6 +39,7 @@ data class NoteDetailViewState(
     val completionDateStr: StringDesc? = completionDate?.convertToLocalDatetime(),
 
     val area: Area? = null,
+    val task: TaskUI? = null,
     val authorLoading: Boolean = true,
     val author: UserInfoShort? = null,
 
