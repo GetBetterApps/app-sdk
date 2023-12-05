@@ -17,6 +17,7 @@ import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.SavedStateHandle
 import com.velkonost.getbetter.shared.features.comments.api.CommentsRepository
 import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
+import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.CommentsData
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NavigateBack
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailAction
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailEvent
@@ -48,6 +49,8 @@ internal constructor(
     init {
         launchJob {
             note.collectLatest { note ->
+                emit(viewState.value.copy(commentsData = CommentsData()))
+
                 note?.updateUI()
                 note?.authorId?.let {
                     getNoteAuthor(it) {

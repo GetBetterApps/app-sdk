@@ -20,6 +20,7 @@ struct AbilityDataHidden: View {
                         .foregroundColor(.textPrimary)
                 }
             }
+            .frame(maxWidth: .infinity)
         }
     }
 }
