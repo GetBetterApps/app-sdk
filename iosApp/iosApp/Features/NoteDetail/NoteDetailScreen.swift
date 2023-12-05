@@ -272,36 +272,9 @@ struct NoteDetailScreen : View {
             }
             .onAppear {
                 observeEvents()
-                
-//                if let viewModel = self.viewModel as? BaseViewModel<AnyObject, AnyObject, AnyObject, AnyObject> {
-//                    
-//                    if navEventStream == nil {
-//                        if !getArguments().isEmpty {
-//                            var args: [String: String] = [:]
-//                            
-//                            getArguments().forEach { argName in
-//                                if let arg = route.valueOf(param: argName) {
-//                                    args[argName] = arg
-//                                }
-//                            }
-//                            
-//                            viewModel.put(args: args)
-//                        }
-//                        
-//                        navEventStream = Task {
-//                            let eventStream = asyncSequence(for: viewModel.navigationEvent)
-//                            for try await event in eventStream {
-//                                onNavEvent(pilot: pilot, event: event)
-//                            }
-//                        }
-//                    }
-//                    
-//                }
             }
             .onDisappear {
-                viewModel.onCleared()
-//                navEventStream?.cancel()
-//                navEventStream = nil
+//                viewModel.onCleared()
             }
     }
 }

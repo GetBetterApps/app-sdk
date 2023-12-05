@@ -57,7 +57,6 @@ internal constructor(
                         getNoteComments(note.id)
                     }
                 }
-
             }
         }
     }
