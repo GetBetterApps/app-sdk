@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.diary.notes.components.createnewnote
+package com.velkonost.getbetter.core.compose.components.createnewnote
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer

@@ -32,6 +32,7 @@ import com.velkonost.getbetter.android.features.taskdetail.components.AbilityDat
 import com.velkonost.getbetter.android.features.taskdetail.components.AbilityDataHidden
 import com.velkonost.getbetter.android.features.taskdetail.components.TaskDetailHeader
 import com.velkonost.getbetter.core.compose.components.Loader
+import com.velkonost.getbetter.core.compose.components.createnewnote.CreateNewNoteBottomSheet
 import com.velkonost.getbetter.core.compose.components.details.AreaData
 import com.velkonost.getbetter.core.compose.components.notelist.AddNoteItem
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.TaskDetailViewModel
@@ -256,6 +257,47 @@ fun TaskDetailScreen(
         areaId = selectedAreaId.value,
         onAreaChanged = {
             viewModel.dispatch(TaskDetailAction.AreaChanged)
+        }
+    )
+
+    CreateNewNoteBottomSheet(
+        state = state.createNewNoteViewState,
+        modalSheetState = createNewNoteSheetState,
+        onAreaSelect = {
+            viewModel.dispatch(CreateNewNoteAction.AreaSelect(it))
+        },
+        onTaskSelect = {
+            viewModel.dispatch(CreateNewNoteAction.TaskSelect(it))
+        },
+        onTextChanged = {
+            viewModel.dispatch(CreateNewNoteAction.TextChanged(it))
+        },
+        onPrivateChanged = {
+            viewModel.dispatch(CreateNewNoteAction.PrivateChanged)
+        },
+        onNewTagChanged = {
+            viewModel.dispatch(CreateNewNoteAction.NewTagTextChanged(it))
+        },
+        onAddNewTag = {
+            viewModel.dispatch(CreateNewNoteAction.AddNewTag)
+        },
+        onTagDelete = {
+            viewModel.dispatch(CreateNewNoteAction.RemoveTag(it))
+        },
+        onNewSubNoteChanged = {
+            viewModel.dispatch(CreateNewNoteAction.NewSubNoteTextChanged(it))
+        },
+        onAddNewSubNote = {
+            viewModel.dispatch(CreateNewNoteAction.AddSubNote)
+        },
+        onSubNoteDelete = {
+            viewModel.dispatch(CreateNewNoteAction.RemoveSubNote(it))
+        },
+        onSetCompletionDate = {
+            viewModel.dispatch(CreateNewNoteAction.SetCompletionDate(it))
+        },
+        onCreateClick = {
+            viewModel.dispatch(CreateNewNoteAction.CreateClick)
         }
     )
 

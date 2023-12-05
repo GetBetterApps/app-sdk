@@ -25,9 +25,9 @@ import com.velkonost.getbetter.android.features.areadetail.AreaDetailScreen
 import com.velkonost.getbetter.android.features.diary.areas.AreasView
 import com.velkonost.getbetter.android.features.diary.areas.components.createnewarea.CreateNewAreaBottomSheet
 import com.velkonost.getbetter.android.features.diary.notes.NotesView
-import com.velkonost.getbetter.android.features.diary.notes.components.createnewnote.CreateNewNoteBottomSheet
 import com.velkonost.getbetter.android.features.diary.tasks.TasksView
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
+import com.velkonost.getbetter.core.compose.components.createnewnote.CreateNewNoteBottomSheet
 import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.note.Note

@@ -16,10 +16,11 @@ dependencies {
     implementation(libs.androidx.compose.paging)
 
     implementation(projects.shared.core.util)
+    implementation(projects.shared.features.createnote.presentation)
     api(projects.shared.features.taskdetail.presentation)
 
     implementation(projects.shared.resources)
     implementation(projects.androidApp.core.compose)
-
+    
     implementation(projects.androidApp.features.areadetail)
 }
