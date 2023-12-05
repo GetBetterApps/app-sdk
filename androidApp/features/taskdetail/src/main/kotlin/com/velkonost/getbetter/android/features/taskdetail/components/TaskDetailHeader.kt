@@ -29,6 +29,7 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun TaskDetailHeader(
     modifier: Modifier = Modifier,
+    isShortInfo: Boolean,
     isFavorite: Boolean,
     isFavoriteLoading: Boolean,
     onBackClick: () -> Unit,
@@ -69,32 +70,34 @@ fun TaskDetailHeader(
         )
         Spacer(modifier.weight(1f))
 
-        Box {
-            AnimatedContent(targetState = isFavoriteLoading, label = "") {
-                if (!it) {
-                    Column(
-                        modifier = modifier.clickable(
-                            interactionSource = interactionSource,
-                            indication = null,
-                            onClick = onFavoriteClick
-                        ),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center,
-                    ) {
-                        Image(
-                            modifier = modifier
-                                .size(32.dp)
-                                .padding(2.dp),
-                            painter = painterResource(
-                                imageResource = if (isFavorite) SharedR.images.ic_star
-                                else SharedR.images.ic_empty_star
+        if (!isShortInfo) {
+            Box {
+                AnimatedContent(targetState = isFavoriteLoading, label = "") {
+                    if (!it) {
+                        Column(
+                            modifier = modifier.clickable(
+                                interactionSource = interactionSource,
+                                indication = null,
+                                onClick = onFavoriteClick
                             ),
-                            contentDescription = null,
-                            colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.button_gradient_start))
-                        )
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center,
+                        ) {
+                            Image(
+                                modifier = modifier
+                                    .size(32.dp)
+                                    .padding(2.dp),
+                                painter = painterResource(
+                                    imageResource = if (isFavorite) SharedR.images.ic_star
+                                    else SharedR.images.ic_empty_star
+                                ),
+                                contentDescription = null,
+                                colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.button_gradient_start))
+                            )
+                        }
+                    } else {
+                        Loader(size = 32)
                     }
-                } else {
-                    Loader(size = 32)
                 }
             }
         }

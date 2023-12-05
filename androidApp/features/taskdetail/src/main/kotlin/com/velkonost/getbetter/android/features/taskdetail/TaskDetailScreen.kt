@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.areadetail.AreaDetailScreen
 import com.velkonost.getbetter.android.features.taskdetail.components.AbilityData
+import com.velkonost.getbetter.android.features.taskdetail.components.AbilityDataHidden
 import com.velkonost.getbetter.android.features.taskdetail.components.TaskDetailHeader
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.details.AreaData
@@ -69,6 +70,7 @@ fun TaskDetailScreen(
             ) {
                 item {
                     TaskDetailHeader(
+                        isShortInfo = state.task!!.isShortInfo,
                         isFavorite = state.task!!.isFavorite,
                         isFavoriteLoading = state.task!!.isFavoriteLoading,
                         onBackClick = {
@@ -145,88 +147,94 @@ fun TaskDetailScreen(
                     )
                 }
 
-                items(state.task!!.abilities, key = { it.id!! }) { ability ->
-                    AbilityData(
-                        item = ability,
-                        onClick = {
+                if (!state.task!!.isShortInfo) {
+                    items(state.task!!.abilities, key = { it.id!! }) { ability ->
+                        AbilityData(
+                            item = ability,
+                            onClick = {
 
-                        }
-                    )
-                }
-
-                item {
-                    Row {
-                        Spacer(modifier.weight(1f))
-                        Text(
-                            modifier = modifier.padding(top = 24.dp),
-                            text = stringResource(resource = SharedR.strings.task_mask_as).uppercase(),
-                            style = MaterialTheme.typography.labelMedium,
-                            color = colorResource(resource = SharedR.colors.text_primary)
+                            }
                         )
-                        Spacer(modifier.weight(1f))
                     }
-                }
 
-                item {
-                    Row(modifier = modifier.padding(top = 12.dp)) {
-                        Spacer(modifier.weight(1f))
-                        Spacer(modifier.weight(1f))
-
-                        Text(
-                            modifier = modifier
-                                .padding(end = 6.dp)
-                                .shadow(
-                                    elevation = (if (state.task!!.isNotInteresting) 8 else 0).dp,
-                                    shape = MaterialTheme.shapes.medium,
-                                )
-                                .background(
-                                    color = colorResource(
-                                        resource = if (state.task!!.isNotInteresting) SharedR.colors.button_gradient_start
-                                        else SharedR.colors.background_item
-                                    ),
-                                    shape = MaterialTheme.shapes.medium
-                                )
-                                .padding(horizontal = 16.dp, vertical = 6.dp)
-                                .clickable(
-                                    interactionSource = interactionSource,
-                                    indication = null
-                                ) { viewModel.dispatch(TaskDetailAction.NotInterestingClick) },
-                            text = stringResource(resource = SharedR.strings.task_not_interesting_title),
-                            style = MaterialTheme.typography.labelLarge,
-                            color = colorResource(
-                                resource = if (state.task!!.isNotInteresting) SharedR.colors.text_light
-                                else SharedR.colors.text_primary
+                    item {
+                        Row {
+                            Spacer(modifier.weight(1f))
+                            Text(
+                                modifier = modifier.padding(top = 24.dp),
+                                text = stringResource(resource = SharedR.strings.task_mask_as).uppercase(),
+                                style = MaterialTheme.typography.labelMedium,
+                                color = colorResource(resource = SharedR.colors.text_primary)
                             )
-                        )
-                        Text(
-                            modifier = modifier
-                                .padding(start = 6.dp)
-                                .shadow(
-                                    elevation = (if (state.task!!.isCompleted) 8 else 0).dp,
-                                    shape = MaterialTheme.shapes.medium,
-                                )
-                                .background(
-                                    color = colorResource(
-                                        resource = if (state.task!!.isCompleted) SharedR.colors.button_gradient_start
-                                        else SharedR.colors.background_item
-                                    ),
-                                    shape = MaterialTheme.shapes.medium
-                                )
-                                .padding(horizontal = 16.dp, vertical = 6.dp)
-                                .clickable(
-                                    interactionSource = interactionSource,
-                                    indication = null
-                                ) { viewModel.dispatch(TaskDetailAction.CompletedClick) },
-                            text = stringResource(resource = SharedR.strings.task_completed_title),
-                            style = MaterialTheme.typography.labelLarge,
-                            color = colorResource(
-                                resource = if (state.task!!.isCompleted) SharedR.colors.text_light
-                                else SharedR.colors.text_primary
-                            )
-                        )
+                            Spacer(modifier.weight(1f))
+                        }
+                    }
 
-                        Spacer(modifier.weight(1f))
-                        Spacer(modifier.weight(1f))
+                    item {
+                        Row(modifier = modifier.padding(top = 12.dp)) {
+                            Spacer(modifier.weight(1f))
+                            Spacer(modifier.weight(1f))
+
+                            Text(
+                                modifier = modifier
+                                    .padding(end = 6.dp)
+                                    .shadow(
+                                        elevation = (if (state.task!!.isNotInteresting) 8 else 0).dp,
+                                        shape = MaterialTheme.shapes.medium,
+                                    )
+                                    .background(
+                                        color = colorResource(
+                                            resource = if (state.task!!.isNotInteresting) SharedR.colors.button_gradient_start
+                                            else SharedR.colors.background_item
+                                        ),
+                                        shape = MaterialTheme.shapes.medium
+                                    )
+                                    .padding(horizontal = 16.dp, vertical = 6.dp)
+                                    .clickable(
+                                        interactionSource = interactionSource,
+                                        indication = null
+                                    ) { viewModel.dispatch(TaskDetailAction.NotInterestingClick) },
+                                text = stringResource(resource = SharedR.strings.task_not_interesting_title),
+                                style = MaterialTheme.typography.labelLarge,
+                                color = colorResource(
+                                    resource = if (state.task!!.isNotInteresting) SharedR.colors.text_light
+                                    else SharedR.colors.text_primary
+                                )
+                            )
+                            Text(
+                                modifier = modifier
+                                    .padding(start = 6.dp)
+                                    .shadow(
+                                        elevation = (if (state.task!!.isCompleted) 8 else 0).dp,
+                                        shape = MaterialTheme.shapes.medium,
+                                    )
+                                    .background(
+                                        color = colorResource(
+                                            resource = if (state.task!!.isCompleted) SharedR.colors.button_gradient_start
+                                            else SharedR.colors.background_item
+                                        ),
+                                        shape = MaterialTheme.shapes.medium
+                                    )
+                                    .padding(horizontal = 16.dp, vertical = 6.dp)
+                                    .clickable(
+                                        interactionSource = interactionSource,
+                                        indication = null
+                                    ) { viewModel.dispatch(TaskDetailAction.CompletedClick) },
+                                text = stringResource(resource = SharedR.strings.task_completed_title),
+                                style = MaterialTheme.typography.labelLarge,
+                                color = colorResource(
+                                    resource = if (state.task!!.isCompleted) SharedR.colors.text_light
+                                    else SharedR.colors.text_primary
+                                )
+                            )
+
+                            Spacer(modifier.weight(1f))
+                            Spacer(modifier.weight(1f))
+                        }
+                    }
+                } else {
+                    item {
+                        AbilityDataHidden()
                     }
                 }
             }

@@ -65,6 +65,8 @@
     <string name="task_mask_as">Mark task as</string>
     <string name="task_not_interesting_title">Not interesting</string>
     <string name="task_completed_title">Completed</string>
+
+    <string name="task_ability_hidden">Hidden</string>
     <!--  TASK DETAIL  -->
 
     <!--  PROFILE  -->
