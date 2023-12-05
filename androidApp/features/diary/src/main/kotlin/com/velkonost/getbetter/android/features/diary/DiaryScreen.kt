@@ -38,14 +38,14 @@ import com.velkonost.getbetter.shared.features.calendars.contracts.AreaLikeClick
 import com.velkonost.getbetter.shared.features.calendars.contracts.AreasViewState
 import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewAreaAction
 import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewAreaEvent
-import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewNoteAction
-import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewNoteEvent
 import com.velkonost.getbetter.shared.features.calendars.contracts.DiaryAction
+import com.velkonost.getbetter.shared.features.calendars.contracts.DiaryEvent
 import com.velkonost.getbetter.shared.features.calendars.contracts.NoteClick
 import com.velkonost.getbetter.shared.features.calendars.contracts.NoteLikeClick
 import com.velkonost.getbetter.shared.features.calendars.contracts.NotesViewState
 import com.velkonost.getbetter.shared.features.calendars.contracts.TaskClick
 import com.velkonost.getbetter.shared.features.calendars.contracts.TasksViewState
+import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteAction
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
@@ -259,7 +259,7 @@ fun DiaryScreen(
                     viewModel.refreshData()
                 }
 
-                is CreateNewNoteEvent.CreatedSuccess -> {
+                is DiaryEvent.NewNoteCreatedSuccess -> {
                     createNewNoteSheetState.hide()
                     viewModel.refreshData()
                 }

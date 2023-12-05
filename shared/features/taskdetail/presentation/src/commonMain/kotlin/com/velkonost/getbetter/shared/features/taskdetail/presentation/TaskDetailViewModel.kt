@@ -50,6 +50,9 @@ internal constructor(
         is TaskDetailAction.FavoriteClick -> obtainFavoriteClick()
         is TaskDetailAction.NotInterestingClick -> obtainChangeNotInteresting()
         is TaskDetailAction.CompletedClick -> obtainChangeCompleted()
+        is TaskDetailAction.CreateGoalClick -> TODO()
+        is TaskDetailAction.CreateNoteClick -> TODO()
+
     }
 
     private fun obtainAreaChanged() {

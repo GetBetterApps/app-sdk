@@ -19,6 +19,7 @@ dependencies {
     implementation(projects.shared.features.areas.api)
     implementation(projects.shared.features.notes.api)
     implementation(projects.shared.features.diary.presentation)
+    implementation(projects.shared.features.createnote.presentation)
 
     implementation(projects.androidApp.core.compose)
     implementation(projects.androidApp.features.areadetail)

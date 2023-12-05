@@ -39,7 +39,7 @@ import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.note.NoteType
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
-import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewNoteViewState
+import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteViewState
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource

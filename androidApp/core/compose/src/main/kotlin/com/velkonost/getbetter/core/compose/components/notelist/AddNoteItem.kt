@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.diary.notes.components
+package com.velkonost.getbetter.core.compose.components.notelist
 
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable

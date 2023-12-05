@@ -15,7 +15,6 @@ import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.calendars.contracts.AddAreaClick
 import com.velkonost.getbetter.shared.features.calendars.contracts.AreaLikeClick
 import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewAreaAction
-import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.calendars.contracts.DiaryAction
 import com.velkonost.getbetter.shared.features.calendars.contracts.DiaryEvent
 import com.velkonost.getbetter.shared.features.calendars.contracts.DiaryNavigation
@@ -26,6 +25,9 @@ import com.velkonost.getbetter.shared.features.calendars.contracts.NavigateToTas
 import com.velkonost.getbetter.shared.features.calendars.contracts.NoteClick
 import com.velkonost.getbetter.shared.features.calendars.contracts.NoteLikeClick
 import com.velkonost.getbetter.shared.features.calendars.contracts.TaskClick
+import com.velkonost.getbetter.shared.features.createnote.presentation.CreateNewNoteViewModel
+import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteAction
+import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteEvent
 import com.velkonost.getbetter.shared.features.diary.api.DiaryRepository
 import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
@@ -88,7 +90,9 @@ internal constructor(
 
         launchJob {
             createNewNoteViewModel.value.events.collect {
-                emit(it)
+                when (it) {
+                    is CreateNewNoteEvent.CreatedSuccess -> emit(DiaryEvent.NewNoteCreatedSuccess)
+                }
             }
         }
     }
@@ -103,7 +107,6 @@ internal constructor(
 
     override fun dispatch(action: DiaryAction) = when (action) {
         is CreateNewAreaAction -> dispatchCreateNewAreaAction(action)
-        is CreateNewNoteAction -> dispatchCreateNewNoteAction(action)
         is AddAreaClick -> emit(NavigateToAddArea)
         is NoteClick -> obtainNoteClick(action.value)
         is TaskClick -> obtainTaskClick(action.value)
@@ -113,6 +116,8 @@ internal constructor(
         is DiaryAction.TaskFavoriteClick -> obtainTaskFavorite(action.value)
         is DiaryAction.TasksListUpdateClick -> fetchTasks(forceUpdate = true)
     }
+
+    fun dispatch(action: CreateNewNoteAction) = dispatchCreateNewNoteAction(action)
 
     private fun obtainNoteLikeClick(value: Note) {
         if (notesLikesJobsMap.containsKey(value.id)) return

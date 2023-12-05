@@ -12,8 +12,8 @@ plugins {
 android {
     namespace = SHARED_PACKAGE.join(
         projects.shared.features,
-        projects.shared.features.diary,
-        projects.shared.features.diary.presentation
+        projects.shared.features.createnote,
+        projects.shared.features.createnote.presentation
     )
 }
 
@@ -35,7 +35,6 @@ kotlin {
                 implementation(projects.shared.features.notes.api)
                 implementation(projects.shared.features.diary.api)
                 implementation(projects.shared.features.likes.api)
-                implementation(projects.shared.features.createnote.presentation)
             }
         }
 

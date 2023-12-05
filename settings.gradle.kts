@@ -70,6 +70,7 @@ include(
     ":shared:features:diary:api",
     ":shared:features:diary:data",
     ":shared:features:diary:presentation",
+    ":shared:features:createnote:presentation",
     ":shared:features:addarea:presentation",
     ":shared:features:areadetail:presentation",
     ":shared:features:notedetail:presentation",

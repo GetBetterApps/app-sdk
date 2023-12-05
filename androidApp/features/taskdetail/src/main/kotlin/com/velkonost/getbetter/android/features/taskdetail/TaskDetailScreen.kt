@@ -33,6 +33,7 @@ import com.velkonost.getbetter.android.features.taskdetail.components.AbilityDat
 import com.velkonost.getbetter.android.features.taskdetail.components.TaskDetailHeader
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.details.AreaData
+import com.velkonost.getbetter.core.compose.components.notelist.AddNoteItem
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.TaskDetailViewModel
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailAction
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -238,6 +239,15 @@ fun TaskDetailScreen(
                     }
                 }
             }
+
+            AddNoteItem(
+                createGoalClick = {
+                    viewModel.dispatch(TaskDetailAction.CreateGoalClick)
+                },
+                createNoteClick = {
+                    viewModel.dispatch(TaskDetailAction.CreateNoteClick)
+                }
+            )
         }
     }
 
