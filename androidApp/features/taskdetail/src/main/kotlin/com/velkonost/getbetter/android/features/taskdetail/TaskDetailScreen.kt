@@ -252,6 +252,7 @@ fun TaskDetailScreen(
 
             if (!state.task!!.isShortInfo) {
                 AddNoteItem(
+                    paddingBottom = 70,
                     createGoalClick = {
                         scope.launch {
                             if (state.createNewNoteViewState.availableAreas.isEmpty()) {

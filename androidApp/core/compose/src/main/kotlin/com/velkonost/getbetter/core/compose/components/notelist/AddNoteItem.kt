@@ -12,11 +12,13 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun BoxScope.AddNoteItem(
     modifier: Modifier = Modifier,
+    paddingBottom: Int = 140,
     createGoalClick: () -> Unit,
     createNoteClick: () -> Unit
 ) {
     ExpandableButtonPanel(
         modifier = modifier,
+        paddingBottom = paddingBottom,
         primaryItem = ExpandableButtonItem(
             title = stringResource(resource = SharedR.strings.cancel),
             icon = painterResource(imageResource = SharedR.images.ic_plus),

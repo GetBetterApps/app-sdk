@@ -40,6 +40,7 @@ fun BoxScope.ExpandableButtonPanel(
     expandable: Boolean = true,
     primaryItem: ExpandableButtonItem,
     items: List<ExpandableButtonItem>,
+    paddingBottom: Int = 140
 ) {
     val haptic = LocalHapticFeedback.current
     val interactionSource = remember { MutableInteractionSource() }
@@ -70,7 +71,7 @@ fun BoxScope.ExpandableButtonPanel(
         },
         modifier = modifier
             .align(Alignment.BottomEnd)
-            .padding(bottom = 140.dp, end = 12.dp)
+            .padding(bottom = paddingBottom.dp, end = 12.dp)
             .shadow(
                 elevation = 8.dp,
                 shape = RoundedCornerShape(cornerRadius.value),
