@@ -118,5 +118,6 @@ fun AreaPickerHeader(
                 color = colorResource(resource = SharedR.colors.icon_inactive)
             )
         )
+
     }
 }

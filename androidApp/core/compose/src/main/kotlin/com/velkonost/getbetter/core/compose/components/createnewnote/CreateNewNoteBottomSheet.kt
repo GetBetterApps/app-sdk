@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.core.compose.components.createnewnote
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -22,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -44,7 +47,10 @@ import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalLayoutApi::class)
+@OptIn(
+    ExperimentalMaterialApi::class, ExperimentalLayoutApi::class,
+    ExperimentalFoundationApi::class
+)
 @Composable
 fun CreateNewNoteBottomSheet(
     modifier: Modifier = Modifier,
@@ -69,6 +75,13 @@ fun CreateNewNoteBottomSheet(
     val isSubNotesBlockVisible = remember { mutableStateOf(false) }
 
     val scrollState = rememberScrollState()
+
+    val areasPagerState =
+        rememberPagerState(initialPage = 0, pageCount = { state.availableAreas.size })
+    val tasksPagerState =
+        rememberPagerState(initialPage = 0, pageCount = { state.availableTasks.size })
+
+    val scope = rememberCoroutineScope()
 
     ModalBottomSheetLayout(
         sheetState = modalSheetState,
@@ -115,6 +128,7 @@ fun CreateNewNoteBottomSheet(
 
                             AreaPicker(
                                 areas = state.availableAreas,
+                                areasPagerState = areasPagerState,
                                 selectedArea = state.selectedArea,
                                 isAreaPickerVisible = isAreaPickerVisible,
                                 onAreaSelect = onAreaSelect,
@@ -125,6 +139,7 @@ fun CreateNewNoteBottomSheet(
                             TaskPicker(
                                 tasks = state.availableTasks,
                                 selectedTask = state.selectedTask,
+                                tasksPagerState = tasksPagerState,
                                 isTaskPickerVisible = isTaskPickerVisible,
                                 modalSheetState = modalSheetState,
                                 onTaskSelect = onTaskSelect
@@ -212,11 +227,29 @@ fun CreateNewNoteBottomSheet(
             }
         }
     ) {
-
     }
 
     LaunchedEffect(modalSheetState.currentValue) {
         isAreaPickerVisible.value = false
         isSubNotesBlockVisible.value = false
     }
+
+    LaunchedEffect(state.forceSelectedArea) {
+        state.forceSelectedArea?.let { area ->
+            val index = state.availableAreas.indexOfFirst { it.id == area.id }
+            if (index != -1) {
+                areasPagerState.scrollToPage(index)
+            }
+        }
+    }
+
+    LaunchedEffect(key1 = state.forceSelectedTask, key2 = state.availableTasks) {
+        state.forceSelectedTask?.let { task ->
+            val taskIndex = state.availableTasks.indexOfFirst { it?.id == task.id }
+            if (taskIndex != -1) {
+                tasksPagerState.scrollToPage(taskIndex)
+            }
+        }
+    }
+
 }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetState
@@ -30,13 +31,13 @@ import kotlinx.coroutines.launch
 fun AreaPicker(
     modifier: Modifier = Modifier,
     areas: List<Area>,
+    areasPagerState: PagerState = rememberPagerState(initialPage = 0, pageCount = { areas.size }),
     selectedArea: Area?,
     noteType: NoteType,
     isAreaPickerVisible: MutableState<Boolean>,
     modalSheetState: ModalBottomSheetState,
     onAreaSelect: (Area) -> Unit
 ) {
-    val areasPagerState = rememberPagerState(initialPage = 0, pageCount = { areas.size })
     val scope = rememberCoroutineScope()
 
     PrimaryBox(padding = 0) {

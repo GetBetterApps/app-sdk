@@ -256,7 +256,7 @@ fun TaskDetailScreen(
                         if (state.createNewNoteViewState.availableAreas.isEmpty()) {
                             viewModel.dispatch(CreateNewNoteAction.CloseBecauseZeroAreas)
                         } else {
-                            viewModel.dispatch(CreateNewNoteAction.OpenGoal)
+                            viewModel.dispatch(TaskDetailAction.CreateGoalClick)
                             createNewNoteSheetState.show()
                         }
                     }
@@ -266,7 +266,7 @@ fun TaskDetailScreen(
                         if (state.createNewNoteViewState.availableAreas.isEmpty()) {
                             viewModel.dispatch(CreateNewNoteAction.CloseBecauseZeroAreas)
                         } else {
-                            viewModel.dispatch(CreateNewNoteAction.OpenDefault)
+                            viewModel.dispatch(TaskDetailAction.CreateNoteClick)
                             createNewNoteSheetState.show()
                         }
                     }

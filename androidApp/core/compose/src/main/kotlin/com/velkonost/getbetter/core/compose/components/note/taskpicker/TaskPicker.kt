@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetState
@@ -29,13 +30,13 @@ import kotlinx.coroutines.launch
 fun TaskPicker(
     modifier: Modifier = Modifier,
     tasks: List<TaskUI?>,
+    tasksPagerState: PagerState = rememberPagerState(initialPage = 0, pageCount = { tasks.size }),
     selectedTask: TaskUI?,
     isTaskPickerVisible: MutableState<Boolean>,
     modalSheetState: ModalBottomSheetState,
     onTaskSelect: (TaskUI?) -> Unit
 ) {
 
-    val tasksPagerState = rememberPagerState(initialPage = 0, pageCount = { tasks.size })
     val scope = rememberCoroutineScope()
 
     PrimaryBox(padding = 0) {
