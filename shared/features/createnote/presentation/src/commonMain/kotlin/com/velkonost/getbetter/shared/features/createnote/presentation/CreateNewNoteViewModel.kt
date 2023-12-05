@@ -35,6 +35,8 @@ constructor(
         is CreateNewNoteAction.InitTasksList -> initTasksList(action.value)
         is CreateNewNoteAction.OpenDefault -> obtainOpenDefault()
         is CreateNewNoteAction.OpenGoal -> obtainOpenGoal()
+        is CreateNewNoteAction.OpenDefaultWithTask -> obtainOpenDefaultWithTask(action.value)
+        is CreateNewNoteAction.OpenGoalWithTask -> obtainOpenGoalWithTask(action.value)
         is CreateNewNoteAction.AreaSelect -> obtainAreaSelect(action.value)
         is CreateNewNoteAction.TaskSelect -> obtainTaskSelect(action.value)
         is CreateNewNoteAction.TextChanged -> obtainTextChanged(action.value)
@@ -82,6 +84,32 @@ constructor(
         )
     }
 
+    private fun obtainOpenDefaultWithTask(value: TaskUI) {
+        val selectedArea = viewState.value.availableAreas.firstOrNull {
+            it.id == value.area.id
+        }
+        val availableTasks =
+            if (selectedArea != null) {
+                val items: MutableList<TaskUI?> = _tasksList.filter {
+                    it.area.id == selectedArea.id
+                }.toMutableList()
+                items.add(0, null)
+
+                items
+            } else emptyList()
+
+        emit(
+            viewState.value.copy(
+                type = NoteType.Default,
+                selectedArea = selectedArea,
+                forceSelectedArea = selectedArea,
+                availableTasks = availableTasks,
+                selectedTask = value,
+                forceSelectedTask = value
+            )
+        )
+    }
+
     private fun obtainOpenGoal() {
         val selectedArea = viewState.value.availableAreas.firstOrNull()
         val availableTasks =
@@ -103,6 +131,33 @@ constructor(
             )
         )
     }
+
+    private fun obtainOpenGoalWithTask(value: TaskUI) {
+        val selectedArea = viewState.value.availableAreas.firstOrNull {
+            it.id == value.area.id
+        }
+        val availableTasks =
+            if (selectedArea != null) {
+                val items: MutableList<TaskUI?> = _tasksList.filter {
+                    it.area.id == selectedArea.id
+                }.toMutableList()
+                items.add(0, null)
+
+                items
+            } else emptyList()
+
+        emit(
+            viewState.value.copy(
+                type = NoteType.Goal,
+                selectedArea = selectedArea,
+                forceSelectedArea = selectedArea,
+                availableTasks = availableTasks,
+                selectedTask = value,
+                forceSelectedTask = value
+            )
+        )
+    }
+
 
     private fun obtainAreaSelect(value: Area) {
         val availableTasks: MutableList<TaskUI?> = _tasksList.filter {

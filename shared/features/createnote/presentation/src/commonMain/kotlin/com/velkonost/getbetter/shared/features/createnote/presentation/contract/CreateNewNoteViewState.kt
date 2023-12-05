@@ -18,6 +18,9 @@ data class CreateNewNoteViewState(
     val selectedArea: Area? = availableAreas.firstOrNull(),
     val selectedTask: TaskUI? = null,
 
+    val forceSelectedArea: Area? = null,
+    val forceSelectedTask: TaskUI? = null,
+
     val text: String = "",
     val mediaUrls: List<String> = emptyList(),
 

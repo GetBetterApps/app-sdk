@@ -16,6 +16,10 @@ sealed interface CreateNewNoteAction : UIContract.Action {
 
     data object OpenGoal : CreateNewNoteAction
 
+    data class OpenDefaultWithTask(val value: TaskUI) : CreateNewNoteAction
+
+    data class OpenGoalWithTask(val value: TaskUI) : CreateNewNoteAction
+
     data class AreaSelect(val value: Area) : CreateNewNoteAction
 
     data class TaskSelect(val value: TaskUI?) : CreateNewNoteAction

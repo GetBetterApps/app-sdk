@@ -81,6 +81,8 @@ internal constructor(
         is TaskDetailAction.FavoriteClick -> obtainFavoriteClick()
         is TaskDetailAction.NotInterestingClick -> obtainChangeNotInteresting()
         is TaskDetailAction.CompletedClick -> obtainChangeCompleted()
+        is TaskDetailAction.CreateGoalClick -> obtainCreateGoal()
+        is TaskDetailAction.CreateNoteClick -> obtainCreateDefaultNote()
     }
 
     fun dispatch(action: CreateNewNoteAction) = dispatchCreateNewNoteAction(action)
@@ -115,6 +117,14 @@ internal constructor(
                 }
             }
         }
+    }
+
+    private fun obtainCreateGoal() {
+        dispatchCreateNewNoteAction(CreateNewNoteAction.OpenGoalWithTask(viewState.value.task!!))
+    }
+
+    private fun obtainCreateDefaultNote() {
+        dispatchCreateNewNoteAction(CreateNewNoteAction.OpenDefaultWithTask(viewState.value.task!!))
     }
 
     private fun obtainAreaChanged() {
