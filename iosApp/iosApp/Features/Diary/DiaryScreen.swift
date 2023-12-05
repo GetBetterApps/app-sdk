@@ -46,18 +46,18 @@ struct DiaryScreen: View {
                 items: state.notesViewState.items,
                 createGoalClick: {
                     if state.createNewNoteViewState.availableAreas.isEmpty {
-                        viewModel.dispatch(action: CreateNewNoteActionCloseBecauseZeroAreas())
+                        viewModel.dispatch(action_: CreateNewNoteActionCloseBecauseZeroAreas())
                     } else {
-                        viewModel.dispatch(action: CreateNewNoteActionOpenGoal())
+                        viewModel.dispatch(action_: CreateNewNoteActionOpenGoal())
                         showingCreateNewNoteSheet = true
                     }
                     
                 },
                 createNoteClick: {
                     if state.createNewNoteViewState.availableAreas.isEmpty {
-                        viewModel.dispatch(action: CreateNewNoteActionCloseBecauseZeroAreas())
+                        viewModel.dispatch(action_: CreateNewNoteActionCloseBecauseZeroAreas())
                     } else {
-                        viewModel.dispatch(action: CreateNewNoteActionOpenDefault())
+                        viewModel.dispatch(action_: CreateNewNoteActionOpenDefault())
                         showingCreateNewNoteSheet = true
                     }
                 },
@@ -141,40 +141,40 @@ struct DiaryScreen: View {
             CreateNewNoteBottomSheet(
                 state: $createNewNoteState,
                 onAreaSelect: { area in
-                    viewModel.dispatch(action: CreateNewNoteActionAreaSelect(value: area))
+                    viewModel.dispatch(action_: CreateNewNoteActionAreaSelect(value: area))
                 },
                 onTaskSelect: { task in
-                    viewModel.dispatch(action: CreateNewNoteActionTaskSelect(value: task))
+                    viewModel.dispatch(action_: CreateNewNoteActionTaskSelect(value: task))
                 },
                 onTextChanged: { value in
-                    viewModel.dispatch(action: CreateNewNoteActionTextChanged(value: value))
+                    viewModel.dispatch(action_: CreateNewNoteActionTextChanged(value: value))
                 },
                 onPrivateChanged: {
-                    viewModel.dispatch(action: CreateNewNoteActionPrivateChanged())
+                    viewModel.dispatch(action_: CreateNewNoteActionPrivateChanged())
                 },
                 onNewTagChanged: { value in
-                    viewModel.dispatch(action: CreateNewNoteActionNewTagTextChanged(value: value))
+                    viewModel.dispatch(action_: CreateNewNoteActionNewTagTextChanged(value: value))
                 },
                 onAddNewTag: {
-                    viewModel.dispatch(action: CreateNewNoteActionAddNewTag())
+                    viewModel.dispatch(action_: CreateNewNoteActionAddNewTag())
                 },
                 onTagDelete: { value in
-                    viewModel.dispatch(action: CreateNewNoteActionRemoveTag(value: value))
+                    viewModel.dispatch(action_: CreateNewNoteActionRemoveTag(value: value))
                 },
                 onNewSubNoteChanged: { value in
-                    viewModel.dispatch(action: CreateNewNoteActionNewSubNoteTextChanged(value: value))
+                    viewModel.dispatch(action_: CreateNewNoteActionNewSubNoteTextChanged(value: value))
                 },
                 onAddNewSubNote: {
-                    viewModel.dispatch(action: CreateNewNoteActionAddSubNote())
+                    viewModel.dispatch(action_: CreateNewNoteActionAddSubNote())
                 },
                 onSubNoteDelete: { value in
-                    viewModel.dispatch(action: CreateNewNoteActionRemoveSubNote(value: value))
+                    viewModel.dispatch(action_: CreateNewNoteActionRemoveSubNote(value: value))
                 },
                 onSetCompletionDate: { value in
-                    viewModel.dispatch(action: CreateNewNoteActionSetCompletionDate(value: value != nil ? KotlinLong(value: value!) : nil))
+                    viewModel.dispatch(action_: CreateNewNoteActionSetCompletionDate(value: value != nil ? KotlinLong(value: value!) : nil))
                 },
                 onCreateClick: {
-                    viewModel.dispatch(action: CreateNewNoteActionCreateClick())
+                    viewModel.dispatch(action_: CreateNewNoteActionCreateClick())
                 }
             )
         }
@@ -199,7 +199,7 @@ extension DiaryScreen {
                         showingCreateNewAreaSheet = false
                         viewModel.refreshData()
                     }
-                    case _ as CreateNewNoteEventCreatedSuccess: do {
+                    case _ as DiaryEventNewNoteCreatedSuccess: do {
                         showingCreateNewNoteSheet = false
                         viewModel.refreshData()
                     }
