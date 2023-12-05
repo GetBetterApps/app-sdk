@@ -6,6 +6,8 @@ import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.note.NoteType
 import com.velkonost.getbetter.shared.features.areas.data.remote.model.response.KtorArea
 import com.velkonost.getbetter.shared.features.areas.data.remote.model.response.asExternalModel
+import com.velkonost.getbetter.shared.features.tasks.data.remote.model.response.KtorTask
+import com.velkonost.getbetter.shared.features.tasks.data.remote.model.response.asExternalModel
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response.KtorUserInfoShort
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response.asExternalModel
 import kotlinx.serialization.SerialName
@@ -55,6 +57,9 @@ data class KtorNote(
     @SerialName("area")
     val ktorArea: KtorArea,
 
+    @SerialName("task")
+    val ktorTask: KtorTask?,
+
     @SerialName("subNotes")
     val subNotes: List<KtorSubNote> = emptyList(),
 
@@ -85,6 +90,7 @@ fun KtorNote.asExternalModel() =
         isPrivate = isPrivate,
         subNotes = subNotes.asExternalModel(),
         area = ktorArea.asExternalModel(),
+        task = ktorTask?.asExternalModel(),
         allowEdit = allowEdit,
         likesData = LikesData(
             totalLikes = totalLikes,
