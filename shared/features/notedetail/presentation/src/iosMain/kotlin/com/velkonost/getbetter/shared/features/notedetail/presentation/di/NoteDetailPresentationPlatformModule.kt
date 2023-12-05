@@ -13,7 +13,7 @@ internal actual val NoteDetailPresentationPlatformModule = module {
         SavedStateHandle()
     }
 
-    factory {
+    single {
         NoteDetailViewModel(
             notesRepository = get(),
             areasRepository = get(),

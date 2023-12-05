@@ -34,6 +34,7 @@ struct TaskDetailScreen : View {
                     ScrollViewReader { value in
                         LazyVStack(spacing: 0) {
                             TaskDetailHeader(
+                                isShortInfo: state.task!.isShortInfo,
                                 isFavorite: state.task!.isFavorite,
                                 isFavoriteLoading: state.task!.isFavoriteLoading,
                                 onFavoriteClick: {
@@ -99,51 +100,55 @@ struct TaskDetailScreen : View {
                                 Spacer()
                             }
                             
-                            ForEach(state.task!.abilities, id: \.self.id ) { ability in
-                                AbilityData(
-                                    item: ability,
-                                    onClick: { value in
-                                        
-                                    }
-                                )
-                            }
-                            
-                            Text(SharedR.strings().task_mask_as.desc().localized().uppercased())
-                                .style(.labelMedium)
-                                .foregroundColor(.textPrimary)
-                                .padding(.top, 24)
-                            
-                            HStack(spacing: 0) {
-                                Text(SharedR.strings().task_not_interesting_title.desc().localized())
-                                    .style(.labelLarge)
-                                    .foregroundColor(state.task!.isNotInteresting ? .textLight : .textPrimary)
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 8)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .fill(state.task!.isNotInteresting ? Color.buttonGradientStart : Color.backgroundItem)
-                                            .shadow(radius: state.task!.isNotInteresting ? 8 : 0)
+                            if !state.task!.isShortInfo {
+                                ForEach(state.task!.abilities, id: \.self.id ) { ability in
+                                    AbilityData(
+                                        item: ability,
+                                        onClick: { value in
+                                            
+                                        }
                                     )
-                                    .padding(.trailing, 6)
-                                    .onTapGesture {
-                                        viewModel.dispatch(action: TaskDetailActionNotInterestingClick())
-                                    }
+                                }
                                 
-                                Text(SharedR.strings().task_completed_title.desc().localized())
-                                    .style(.labelLarge)
-                                    .foregroundColor(state.task!.isCompleted ? .textLight : .textPrimary)
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 8)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .fill(state.task!.isCompleted ? Color.buttonGradientStart : Color.backgroundItem)
-                                            .shadow(radius: state.task!.isCompleted ? 8 : 0)
-                                    )
-                                    .padding(.leading, 6)
-                                    .onTapGesture {
-                                        viewModel.dispatch(action: TaskDetailActionCompletedClick())
-                                    }
-                            }.padding(.top, 12)
+                                Text(SharedR.strings().task_mask_as.desc().localized().uppercased())
+                                    .style(.labelMedium)
+                                    .foregroundColor(.textPrimary)
+                                    .padding(.top, 24)
+                                
+                                HStack(spacing: 0) {
+                                    Text(SharedR.strings().task_not_interesting_title.desc().localized())
+                                        .style(.labelLarge)
+                                        .foregroundColor(state.task!.isNotInteresting ? .textLight : .textPrimary)
+                                        .padding(.horizontal, 16)
+                                        .padding(.vertical, 8)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 12)
+                                                .fill(state.task!.isNotInteresting ? Color.buttonGradientStart : Color.backgroundItem)
+                                                .shadow(radius: state.task!.isNotInteresting ? 8 : 0)
+                                        )
+                                        .padding(.trailing, 6)
+                                        .onTapGesture {
+                                            viewModel.dispatch(action: TaskDetailActionNotInterestingClick())
+                                        }
+                                    
+                                    Text(SharedR.strings().task_completed_title.desc().localized())
+                                        .style(.labelLarge)
+                                        .foregroundColor(state.task!.isCompleted ? .textLight : .textPrimary)
+                                        .padding(.horizontal, 16)
+                                        .padding(.vertical, 8)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 12)
+                                                .fill(state.task!.isCompleted ? Color.buttonGradientStart : Color.backgroundItem)
+                                                .shadow(radius: state.task!.isCompleted ? 8 : 0)
+                                        )
+                                        .padding(.leading, 6)
+                                        .onTapGesture {
+                                            viewModel.dispatch(action: TaskDetailActionCompletedClick())
+                                        }
+                                }.padding(.top, 12)
+                            } else {
+                                AbilityDataHidden()
+                            }
                             
                             
                             Spacer().frame(height: 140)

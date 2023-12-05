@@ -28,6 +28,8 @@ struct NoteDetailScreen : View {
     @State private var showingAreaDetailSheet = false
     @State private var showingProfileDetailSheet = false
     
+    var navEventStream: Task<(), Error>? = nil
+    
     var body: some View {
         @State var state = viewModel.viewStateValue as! NoteDetailViewState
         @State var newTag = state.newTag
@@ -98,10 +100,10 @@ struct NoteDetailScreen : View {
                                 }
                                 .onTapGesture {
                                     withAnimation {
-                                        value.scrollTo(1, anchor: .bottom)
+                                        value.scrollTo(-5, anchor: .bottom)
                                     }
                                 }
-                                .id(1)
+                                .id(-5)
                             }
                             
                             if state.noteType == NoteType.goal && (state.allowEdit || state.expectedCompletionDate != nil || state.completionDate != nil) {
@@ -142,10 +144,10 @@ struct NoteDetailScreen : View {
                                 )
                                 .onTapGesture {
                                     withAnimation {
-                                        value.scrollTo(2, anchor: .bottom)
+                                        value.scrollTo(-7, anchor: .bottom)
                                     }
                                 }
-                                .id(2)
+                                .id(-7)
                             }
                             
                             if state.noteType == NoteType.goal && (!state.subNotes.isEmpty || state.noteState == NoteState.editing) {
@@ -174,10 +176,10 @@ struct NoteDetailScreen : View {
                                 )
                                 .onTapGesture {
                                     withAnimation {
-                                        value.scrollTo(3, anchor: .bottom)
+                                        value.scrollTo(-6, anchor: .bottom)
                                     }
                                 }
-                                .id(3)
+                                .id(-6)
                             }
                             
                             if state.allowEdit {
@@ -270,6 +272,36 @@ struct NoteDetailScreen : View {
             }
             .onAppear {
                 observeEvents()
+                
+//                if let viewModel = self.viewModel as? BaseViewModel<AnyObject, AnyObject, AnyObject, AnyObject> {
+//                    
+//                    if navEventStream == nil {
+//                        if !getArguments().isEmpty {
+//                            var args: [String: String] = [:]
+//                            
+//                            getArguments().forEach { argName in
+//                                if let arg = route.valueOf(param: argName) {
+//                                    args[argName] = arg
+//                                }
+//                            }
+//                            
+//                            viewModel.put(args: args)
+//                        }
+//                        
+//                        navEventStream = Task {
+//                            let eventStream = asyncSequence(for: viewModel.navigationEvent)
+//                            for try await event in eventStream {
+//                                onNavEvent(pilot: pilot, event: event)
+//                            }
+//                        }
+//                    }
+//                    
+//                }
+            }
+            .onDisappear {
+                viewModel.onCleared()
+//                navEventStream?.cancel()
+//                navEventStream = nil
             }
     }
 }

@@ -13,11 +13,13 @@ import SharedSDK
 struct TaskDetailHeader : View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    private let isShortInfo: Bool
     private let isFavorite: Bool
     private let isFavoriteLoading: Bool
     private let onFavoriteClick: () -> Void
     
-    init(isFavorite: Bool, isFavoriteLoading: Bool, onFavoriteClick: @escaping () -> Void) {
+    init(isShortInfo: Bool, isFavorite: Bool, isFavoriteLoading: Bool, onFavoriteClick: @escaping () -> Void) {
+        self.isShortInfo = isShortInfo
         self.isFavorite = isFavorite
         self.isFavoriteLoading = isFavoriteLoading
         self.onFavoriteClick = onFavoriteClick
@@ -48,34 +50,34 @@ struct TaskDetailHeader : View {
                 .padding(.leading, 12)
             Spacer()
             
-            
-            ZStack(alignment: .center) {
-                if (!isFavoriteLoading) {
-                    VStack {
-                        Image(
-                            uiImage: isFavorite ? SharedR.images().ic_star.toUIImage()! : SharedR.images().ic_empty_star.toUIImage()!
-                        )
-                        .resizable()
-                        .renderingMode(.template)
-                        .foregroundColor(.buttonGradientStart)
-                        .scaledToFill()
-                        .frame(width: 28, height: 28)
-                    }
-                    .onTapGesture {
-                        onFavoriteClick()
-                    }
-                } else {
-                    HStack {
-                        Spacer()
-                        Loader()
-                            .scaleEffect(0.5)
-                        Spacer()
+            if !isShortInfo {
+                ZStack(alignment: .center) {
+                    if (!isFavoriteLoading) {
+                        VStack {
+                            Image(
+                                uiImage: isFavorite ? SharedR.images().ic_star.toUIImage()! : SharedR.images().ic_empty_star.toUIImage()!
+                            )
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.buttonGradientStart)
+                            .scaledToFill()
+                            .frame(width: 28, height: 28)
+                        }
+                        .onTapGesture {
+                            onFavoriteClick()
+                        }
+                    } else {
+                        HStack {
+                            Spacer()
+                            Loader()
+                                .scaleEffect(0.5)
+                            Spacer()
+                        }
                     }
                 }
+                .frame(width: 32, height: 32)
+                .animation(.easeInOut, value: isFavoriteLoading)
             }
-            .frame(width: 32, height: 32)
-            .animation(.easeInOut, value: isFavoriteLoading)
-            
         }
     }
 }
