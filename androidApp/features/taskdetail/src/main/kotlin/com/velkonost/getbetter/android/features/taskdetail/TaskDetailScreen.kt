@@ -250,28 +250,30 @@ fun TaskDetailScreen(
                 }
             }
 
-            AddNoteItem(
-                createGoalClick = {
-                    scope.launch {
-                        if (state.createNewNoteViewState.availableAreas.isEmpty()) {
-                            viewModel.dispatch(CreateNewNoteAction.CloseBecauseZeroAreas)
-                        } else {
-                            viewModel.dispatch(TaskDetailAction.CreateGoalClick)
-                            createNewNoteSheetState.show()
+            if (!state.task!!.isShortInfo) {
+                AddNoteItem(
+                    createGoalClick = {
+                        scope.launch {
+                            if (state.createNewNoteViewState.availableAreas.isEmpty()) {
+                                viewModel.dispatch(CreateNewNoteAction.CloseBecauseZeroAreas)
+                            } else {
+                                viewModel.dispatch(TaskDetailAction.CreateGoalClick)
+                                createNewNoteSheetState.show()
+                            }
+                        }
+                    },
+                    createNoteClick = {
+                        scope.launch {
+                            if (state.createNewNoteViewState.availableAreas.isEmpty()) {
+                                viewModel.dispatch(CreateNewNoteAction.CloseBecauseZeroAreas)
+                            } else {
+                                viewModel.dispatch(TaskDetailAction.CreateNoteClick)
+                                createNewNoteSheetState.show()
+                            }
                         }
                     }
-                },
-                createNoteClick = {
-                    scope.launch {
-                        if (state.createNewNoteViewState.availableAreas.isEmpty()) {
-                            viewModel.dispatch(CreateNewNoteAction.CloseBecauseZeroAreas)
-                        } else {
-                            viewModel.dispatch(TaskDetailAction.CreateNoteClick)
-                            createNewNoteSheetState.show()
-                        }
-                    }
-                }
-            )
+                )
+            }
         }
     }
 

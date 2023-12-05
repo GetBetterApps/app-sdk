@@ -17,6 +17,7 @@ struct TaskDetailScreen : View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @StateViewModel var viewModel: TaskDetailViewModel
+    @State private var eventsObserver: Task<(), Error>? = nil
     
     @State private var selectedAreaId: Int32? = nil
     @State private var showingAreaDetailSheet = false
@@ -160,21 +161,23 @@ struct TaskDetailScreen : View {
                     }
                 }
                 
-                VStack(alignment: .trailing) {
-                    Spacer()
-                    AddNoteItem {
-                        if state.createNewNoteViewState.availableAreas.isEmpty {
-                            viewModel.dispatch(action_: CreateNewNoteActionCloseBecauseZeroAreas())
-                        } else {
-                            viewModel.dispatch(action: TaskDetailActionCreateGoalClick())
-                            showingCreateNewNoteSheet = true
-                        }
-                    } createNoteClick: {
-                        if state.createNewNoteViewState.availableAreas.isEmpty {
-                            viewModel.dispatch(action_: CreateNewNoteActionCloseBecauseZeroAreas())
-                        } else {
-                            viewModel.dispatch(action: TaskDetailActionCreateNoteClick())
-                            showingCreateNewNoteSheet = true
+                if !state.task!.isShortInfo {
+                    VStack(alignment: .trailing) {
+                        Spacer()
+                        AddNoteItem {
+                            if state.createNewNoteViewState.availableAreas.isEmpty {
+                                viewModel.dispatch(action_: CreateNewNoteActionCloseBecauseZeroAreas())
+                            } else {
+                                viewModel.dispatch(action: TaskDetailActionCreateGoalClick())
+                                showingCreateNewNoteSheet = true
+                            }
+                        } createNoteClick: {
+                            if state.createNewNoteViewState.availableAreas.isEmpty {
+                                viewModel.dispatch(action_: CreateNewNoteActionCloseBecauseZeroAreas())
+                            } else {
+                                viewModel.dispatch(action: TaskDetailActionCreateNoteClick())
+                                showingCreateNewNoteSheet = true
+                            }
                         }
                     }
                 }
@@ -232,6 +235,31 @@ struct TaskDetailScreen : View {
                 }
             )
         }
+        .onAppear {
+            observeEvents()
+        }
+        .onDisappear {
+            eventsObserver?.cancel()
+            eventsObserver = nil
+        }
         
+    }
+}
+
+extension TaskDetailScreen {
+    func observeEvents() {
+        if eventsObserver == nil {
+            eventsObserver = Task {
+                for try await event in asyncSequence(for: viewModel.events) {
+                    switch(event) {
+                    case _ as TaskDetailEventNewNoteCreatedSuccess: do {
+                        showingCreateNewNoteSheet = false
+                    }
+                    default:
+                        break
+                    }
+                }
+            }
+        }
     }
 }
