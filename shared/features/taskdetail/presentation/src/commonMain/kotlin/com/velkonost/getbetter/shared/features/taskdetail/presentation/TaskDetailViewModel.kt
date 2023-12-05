@@ -1,10 +1,14 @@
 package com.velkonost.getbetter.shared.features.taskdetail.presentation
 
 import AreasRepository
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.SavedStateHandle
+import com.velkonost.getbetter.shared.features.createnote.presentation.CreateNewNoteViewModel
+import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteAction
+import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteEvent
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailAction
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailEvent
@@ -12,6 +16,8 @@ import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailViewState
 import com.velkonost.getbetter.shared.features.tasks.api.TasksRepository
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 
 class TaskDetailViewModel
@@ -42,7 +48,25 @@ internal constructor(
                 )
             }
         }
+
+        launchJob {
+            createNewNoteViewModel.value.viewState.collect {
+                emit(viewState.value.copy(createNewNoteViewState = it))
+            }
+        }
+
+        launchJob {
+            createNewNoteViewModel.value.events.collect {
+                when (it) {
+                    is CreateNewNoteEvent.CreatedSuccess -> emit(TaskDetailEvent.NewNoteCreatedSuccess)
+                }
+            }
+        }
     }
+
+    @NativeCoroutinesState
+    val createNewNoteViewModel: StateFlow<CreateNewNoteViewModel> =
+        MutableStateFlow(CreateNewNoteViewModel(notesRepository, null))
 
     override fun dispatch(action: TaskDetailAction) = when (action) {
         is TaskDetailAction.NavigateBack -> emit(action)
@@ -52,7 +76,12 @@ internal constructor(
         is TaskDetailAction.CompletedClick -> obtainChangeCompleted()
         is TaskDetailAction.CreateGoalClick -> TODO()
         is TaskDetailAction.CreateNoteClick -> TODO()
+    }
 
+    fun dispatch(action: CreateNewNoteAction) = dispatchCreateNewNoteAction(action)
+
+    private fun dispatchCreateNewNoteAction(action: CreateNewNoteAction) {
+        createNewNoteViewModel.value.dispatch(action)
     }
 
     private fun obtainAreaChanged() {

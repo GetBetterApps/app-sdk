@@ -21,6 +21,6 @@ dependencies {
 
     implementation(projects.shared.resources)
     implementation(projects.androidApp.core.compose)
-    
+
     implementation(projects.androidApp.features.areadetail)
 }

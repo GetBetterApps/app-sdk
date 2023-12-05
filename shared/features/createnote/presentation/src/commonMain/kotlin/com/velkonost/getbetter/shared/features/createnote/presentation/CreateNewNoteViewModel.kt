@@ -23,7 +23,7 @@ import dev.icerock.moko.resources.desc.StringDesc
 class CreateNewNoteViewModel
 constructor(
     private val notesRepository: NotesRepository,
-    private val diaryRepository: DiaryRepository,
+    private val diaryRepository: DiaryRepository?,
 ) : BaseViewModel<CreateNewNoteViewState, CreateNewNoteAction, Nothing, CreateNewNoteEvent>(
     initialState = CreateNewNoteViewState()
 ) {
@@ -262,7 +262,7 @@ constructor(
     private fun saveCreatedNoteId(noteId: Int?) {
         noteId?.let {
             launchJob {
-                diaryRepository.saveUpdatedNoteId(noteId)
+                diaryRepository?.saveUpdatedNoteId(noteId)
             }
         }
     }

@@ -17,6 +17,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,11 +36,14 @@ import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.createnewnote.CreateNewNoteBottomSheet
 import com.velkonost.getbetter.core.compose.components.details.AreaData
 import com.velkonost.getbetter.core.compose.components.notelist.AddNoteItem
+import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.TaskDetailViewModel
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailAction
+import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailEvent
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -58,6 +62,11 @@ fun TaskDetailScreen(
     val areaDetailSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true
+    )
+
+    val createNewNoteSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = true,
     )
 
     Box(modifier = modifier.fillMaxSize()) {
@@ -300,5 +309,15 @@ fun TaskDetailScreen(
             viewModel.dispatch(CreateNewNoteAction.CreateClick)
         }
     )
+
+    LaunchedEffect(Unit) {
+        viewModel.events.collectLatest {
+            when (it) {
+                is TaskDetailEvent.NewNoteCreatedSuccess -> {
+                    createNewNoteSheetState.hide()
+                }
+            }
+        }
+    }
 
 }
