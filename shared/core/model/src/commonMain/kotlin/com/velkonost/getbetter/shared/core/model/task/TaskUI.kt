@@ -27,5 +27,8 @@ data class TaskUI(
 
     var isCompleted: Boolean,
 
-    var isFavoriteLoading: Boolean = false
-)
+    var isShortInfo: Boolean,
+
+    var isFavoriteLoading: Boolean = false,
+
+    )

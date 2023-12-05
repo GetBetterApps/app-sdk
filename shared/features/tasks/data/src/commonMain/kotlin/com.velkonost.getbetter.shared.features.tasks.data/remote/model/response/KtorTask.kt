@@ -10,28 +10,43 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class KtorTask(
-    @SerialName("id") val id: Int?,
+    @SerialName("id")
+    val id: Int?,
 
-    @SerialName("area") var area: KtorArea,
+    @SerialName("area")
+    var area: KtorArea,
 
-    @SerialName("name") val name: String,
+    @SerialName("name")
+    val name: String,
 
-    @SerialName("whatToDo") val whatToDo: String,
+    @SerialName("whatToDo")
+    val whatToDo: String,
 
-    @SerialName("why") val why: String,
+    @SerialName("why")
+    val why: String,
 
-    @SerialName("recommendedTime") val recommendedTime: Int?,
+    @SerialName("recommendedTime")
+    val recommendedTime: Int?,
 
-    @SerialName("requiredLevel") val requiredLevel: Int?,
+    @SerialName("requiredLevel")
+    val requiredLevel: Int?,
 
-    @SerialName("abilities") var abilities: List<KtorAbility>,
+    @SerialName("abilities")
+    var abilities: List<KtorAbility>,
 
-    @SerialName("isFavorite") var isFavorite: Boolean,
+    @SerialName("isFavorite")
+    var isFavorite: Boolean,
 
-    @SerialName("isNotInteresting") var isNotInteresting: Boolean,
+    @SerialName("isNotInteresting")
+    var isNotInteresting: Boolean,
 
-    @SerialName("isCompleted") var isCompleted: Boolean
-)
+    @SerialName("isCompleted")
+    var isCompleted: Boolean,
+
+    @SerialName("isShortInfo")
+    var isShortInfo: Boolean,
+
+    )
 
 fun KtorTask.asExternalModel() = TaskUI(
     id = id,
@@ -44,5 +59,6 @@ fun KtorTask.asExternalModel() = TaskUI(
     abilities = abilities.map { it.asExternalModel() },
     isFavorite = isFavorite,
     isNotInteresting = isNotInteresting,
-    isCompleted = isCompleted
+    isCompleted = isCompleted,
+    isShortInfo = isShortInfo
 )

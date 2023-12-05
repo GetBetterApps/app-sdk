@@ -36,6 +36,7 @@ import com.velkonost.getbetter.core.compose.components.AppAlertDialog
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
 import com.velkonost.getbetter.core.compose.components.details.AreaData
+import com.velkonost.getbetter.core.compose.components.details.TaskData
 import com.velkonost.getbetter.core.compose.components.note.completiondate.CompletionDateBlock
 import com.velkonost.getbetter.core.compose.components.note.subnotes.SubNotesBlock
 import com.velkonost.getbetter.core.compose.components.note.tags.TagsBlock
@@ -122,6 +123,14 @@ fun NoteDetailScreen(
                                 selectedAreaId.value = state.area!!.id
                                 areaDetailSheetState.show()
                             }
+                        }
+                    }
+                }
+
+                state.task?.let {
+                    item {
+                        TaskData(task = it) {
+                            viewModel.dispatch(NoteDetailAction.TaskClick)
                         }
                     }
                 }
