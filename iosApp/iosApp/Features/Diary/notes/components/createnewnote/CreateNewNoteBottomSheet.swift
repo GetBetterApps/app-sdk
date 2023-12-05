@@ -117,6 +117,7 @@ struct CreateNewNoteBottomSheet: View {
                             
                             TaskPicker(
                                 tasks: state.availableTasks as! [TaskUI?],
+                                forceSelectedTask: state.forceSelectedTask,
                                 selectedTask: state.selectedTask,
                                 onTaskSelect: onTaskSelect,
                                 isTaskPickerVisible: $isTaskPickerVisible

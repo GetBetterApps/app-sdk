@@ -21,15 +21,17 @@ struct TaskPicker: View {
     
     let tasks: [TaskUI?]
     private var selectedTask: TaskUI?
+    private var forceSelectedTask: TaskUI?
     
     let onTaskSelect: (TaskUI?) -> Void
     @Binding private var isTaskPickerVisible: Bool
     
     @StateObject var taskPage: Page = .first()
     
-    init(tasks: [TaskUI?], selectedTask: TaskUI?, onTaskSelect: @escaping (TaskUI?) -> Void, isTaskPickerVisible: Binding<Bool>) {
+    init(tasks: [TaskUI?], forceSelectedTask: TaskUI?, selectedTask: TaskUI?, onTaskSelect: @escaping (TaskUI?) -> Void, isTaskPickerVisible: Binding<Bool>) {
         self.tasks = tasks
         self.selectedTask = selectedTask
+        self.forceSelectedTask = forceSelectedTask
         self.onTaskSelect = onTaskSelect
         self._isTaskPickerVisible = isTaskPickerVisible
     }
@@ -74,12 +76,25 @@ struct TaskPicker: View {
                 }
             }
         }
+        .onAppear {
+            if forceSelectedTask != nil {
+                let index = tasks.firstIndex(where: { task in
+                    task?.id == forceSelectedTask!.id
+                })
+                
+                if index != nil {
+                    taskPage.update(.new(index: index!))
+                }
+            }
+        }
         .onChange(of: tasks) { value in
             if value.count <= 1 {
                 withAnimation {
                     isTaskPickerVisible = false
                 }
             }
+            
+            
         }
     }
 }
