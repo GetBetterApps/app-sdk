@@ -21,6 +21,7 @@ struct ExpandableButtonItem: Identifiable {
 
 struct ExpandableButtonPanel: View {
     
+    var paddingBottom: Int = 90
     let primaryItem: ExpandableButtonItem
     let secondaryItems: [ExpandableButtonItem]
     
@@ -94,7 +95,7 @@ struct ExpandableButtonPanel: View {
             x: shadowPosition.x,
             y: shadowPosition.y
         )
-        .padding(.bottom, 90)
+        .padding(.bottom, CGFloat(paddingBottom))
         .padding(.trailing, 12)
     }
 }

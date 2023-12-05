@@ -164,21 +164,25 @@ struct TaskDetailScreen : View {
                 if !state.task!.isShortInfo {
                     VStack(alignment: .trailing) {
                         Spacer()
-                        AddNoteItem {
-                            if state.createNewNoteViewState.availableAreas.isEmpty {
-                                viewModel.dispatch(action_: CreateNewNoteActionCloseBecauseZeroAreas())
-                            } else {
-                                viewModel.dispatch(action: TaskDetailActionCreateGoalClick())
-                                showingCreateNewNoteSheet = true
+                        AddNoteItem(
+                            paddingBottom: 45,
+                            createGoalClick: {
+                                if state.createNewNoteViewState.availableAreas.isEmpty {
+                                    viewModel.dispatch(action_: CreateNewNoteActionCloseBecauseZeroAreas())
+                                } else {
+                                    viewModel.dispatch(action: TaskDetailActionCreateGoalClick())
+                                    showingCreateNewNoteSheet = true
+                                }
+                            },
+                            createNoteClick: {
+                                if state.createNewNoteViewState.availableAreas.isEmpty {
+                                    viewModel.dispatch(action_: CreateNewNoteActionCloseBecauseZeroAreas())
+                                } else {
+                                    viewModel.dispatch(action: TaskDetailActionCreateNoteClick())
+                                    showingCreateNewNoteSheet = true
+                                }
                             }
-                        } createNoteClick: {
-                            if state.createNewNoteViewState.availableAreas.isEmpty {
-                                viewModel.dispatch(action_: CreateNewNoteActionCloseBecauseZeroAreas())
-                            } else {
-                                viewModel.dispatch(action: TaskDetailActionCreateNoteClick())
-                                showingCreateNewNoteSheet = true
-                            }
-                        }
+                        )
                     }
                 }
             }

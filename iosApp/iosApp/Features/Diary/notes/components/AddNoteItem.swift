@@ -12,10 +12,12 @@ import SharedSDK
 
 struct AddNoteItem: View {
     
+    let paddingBottom: Int
     let createGoalClick: () -> Void
     let createNoteClick: () -> Void
     
-    init(createGoalClick: @escaping () -> Void, createNoteClick: @escaping () -> Void) {
+    init(paddingBottom: Int = 90, createGoalClick: @escaping () -> Void, createNoteClick: @escaping () -> Void) {
+        self.paddingBottom = paddingBottom
         self.createGoalClick = createGoalClick
         self.createNoteClick = createNoteClick
     }
@@ -27,6 +29,7 @@ struct AddNoteItem: View {
             HStack {
                 Spacer()
                 ExpandableButtonPanel(
+                    paddingBottom: paddingBottom,
                     primaryItem: ExpandableButtonItem(
                         icon: SharedR.images().ic_plus.toUIImage()!,
                         iconExpanded: SharedR.images().ic_arrow_back.toUIImage()!,
