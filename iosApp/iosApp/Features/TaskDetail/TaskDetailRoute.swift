@@ -27,6 +27,7 @@ struct TaskDetailRoute: NavRoute {
     
     var viewModel: TaskDetailViewModel {
         @LazyKoin var delegate: TaskDetailViewModel
+        delegate.doInit()
         return delegate
     }
     

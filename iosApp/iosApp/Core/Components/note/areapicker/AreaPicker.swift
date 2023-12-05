@@ -15,6 +15,7 @@ struct AreaPicker: View {
     
     let areas: [Area]
     private var selectedArea: Area?
+    private var forceSelectedArea: Area?
     
     let noteType: NoteType
     let onAreaSelect: (Area) -> Void
@@ -22,12 +23,14 @@ struct AreaPicker: View {
     
     @StateObject var areaPage: Page = .first()
     
-    init(areas: [Area], selectedArea: Area?, noteType: NoteType, onAreaSelect: @escaping (Area) -> Void, isAreaPickerVisible: Binding<Bool>) {
+    init(areas: [Area], forceSelectedArea: Area?, selectedArea: Area?, noteType: NoteType, onAreaSelect: @escaping (Area) -> Void, isAreaPickerVisible: Binding<Bool>) {
         self.areas = areas
         self.selectedArea = selectedArea
+        self.forceSelectedArea = forceSelectedArea
         self.noteType = noteType
         self.onAreaSelect = onAreaSelect
         self._isAreaPickerVisible = isAreaPickerVisible
+        
     }
     
     var body: some View {
@@ -64,6 +67,17 @@ struct AreaPicker: View {
                     .preferredItemSize(CGSize(width: 300, height: 150))
                     .frame(height: 150)
                     .padding(.bottom, 16)
+                }
+            }
+            .onAppear {
+                if forceSelectedArea != nil {
+                    let index = areas.firstIndex(where: { area in
+                        area.id == forceSelectedArea!.id
+                    })
+                    
+                    if index != nil {
+                        areaPage.update(.new(index: index!))
+                    }
                 }
             }
         }

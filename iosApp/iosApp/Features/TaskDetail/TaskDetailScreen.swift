@@ -20,9 +20,11 @@ struct TaskDetailScreen : View {
     
     @State private var selectedAreaId: Int32? = nil
     @State private var showingAreaDetailSheet = false
+    @State private var showingCreateNewNoteSheet = false
     
     var body: some View {
         @State var state = viewModel.viewStateValue as! TaskDetailViewState
+        @State var createNewNoteState = state.createNewNoteViewState
         
         ZStack {
             if state.isLoading || state.task == nil {
@@ -157,6 +159,25 @@ struct TaskDetailScreen : View {
                         .padding(.horizontal, 20)
                     }
                 }
+                
+                VStack(alignment: .trailing) {
+                    Spacer()
+                    AddNoteItem {
+                        if state.createNewNoteViewState.availableAreas.isEmpty {
+                            viewModel.dispatch(action_: CreateNewNoteActionCloseBecauseZeroAreas())
+                        } else {
+                            viewModel.dispatch(action: TaskDetailActionCreateGoalClick())
+                            showingCreateNewNoteSheet = true
+                        }
+                    } createNoteClick: {
+                        if state.createNewNoteViewState.availableAreas.isEmpty {
+                            viewModel.dispatch(action_: CreateNewNoteActionCloseBecauseZeroAreas())
+                        } else {
+                            viewModel.dispatch(action: TaskDetailActionCreateNoteClick())
+                            showingCreateNewNoteSheet = true
+                        }
+                    }
+                }
             }
         }
         .sheet(isPresented: $showingAreaDetailSheet) {
@@ -167,6 +188,47 @@ struct TaskDetailScreen : View {
                 },
                 onAreaChanged: { areaId in
                     viewModel.dispatch(action: TaskDetailActionAreaChanged())
+                }
+            )
+        }
+        .sheet(isPresented: $showingCreateNewNoteSheet) {
+            CreateNewNoteBottomSheet(
+                state: $createNewNoteState,
+                onAreaSelect: { area in
+                    viewModel.dispatch(action_: CreateNewNoteActionAreaSelect(value: area))
+                },
+                onTaskSelect: { task in
+                    viewModel.dispatch(action_: CreateNewNoteActionTaskSelect(value: task))
+                },
+                onTextChanged: { value in
+                    viewModel.dispatch(action_: CreateNewNoteActionTextChanged(value: value))
+                },
+                onPrivateChanged: {
+                    viewModel.dispatch(action_: CreateNewNoteActionPrivateChanged())
+                },
+                onNewTagChanged: { value in
+                    viewModel.dispatch(action_: CreateNewNoteActionNewTagTextChanged(value: value))
+                },
+                onAddNewTag: {
+                    viewModel.dispatch(action_: CreateNewNoteActionAddNewTag())
+                },
+                onTagDelete: { value in
+                    viewModel.dispatch(action_: CreateNewNoteActionRemoveTag(value: value))
+                },
+                onNewSubNoteChanged: { value in
+                    viewModel.dispatch(action_: CreateNewNoteActionNewSubNoteTextChanged(value: value))
+                },
+                onAddNewSubNote: {
+                    viewModel.dispatch(action_: CreateNewNoteActionAddSubNote())
+                },
+                onSubNoteDelete: { value in
+                    viewModel.dispatch(action_: CreateNewNoteActionRemoveSubNote(value: value))
+                },
+                onSetCompletionDate: { value in
+                    viewModel.dispatch(action_: CreateNewNoteActionSetCompletionDate(value: value != nil ? KotlinLong(value: value!) : nil))
+                },
+                onCreateClick: {
+                    viewModel.dispatch(action_: CreateNewNoteActionCreateClick())
                 }
             )
         }

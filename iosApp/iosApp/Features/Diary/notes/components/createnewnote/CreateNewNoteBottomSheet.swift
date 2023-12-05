@@ -108,6 +108,7 @@ struct CreateNewNoteBottomSheet: View {
                             
                             AreaPicker(
                                 areas: state.availableAreas,
+                                forceSelectedArea: state.forceSelectedArea,
                                 selectedArea: state.selectedArea,
                                 noteType: state.type,
                                 onAreaSelect: onAreaSelect,
@@ -187,42 +188,39 @@ struct CreateNewNoteBottomSheet: View {
                     }
                     Spacer()
                 }
-            
-            
-            VStack {
-                Spacer()
+                
                 
                 VStack {
                     Spacer()
-                        .frame(height: 20)
                     
-                    AppButton(
-                        labelText: SharedR.strings().diary_areas_create_button.desc().localized(),
-                        isLoading: false
-                    ) {
-                        onCreateClick()
+                    VStack {
+                        Spacer()
+                            .frame(height: 20)
+                        
+                        AppButton(
+                            labelText: SharedR.strings().diary_areas_create_button.desc().localized(),
+                            isLoading: false
+                        ) {
+                            onCreateClick()
+                        }
+                        .padding(.bottom, 70)
                     }
-                    .padding(.bottom, 70)
-                }
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .background(
-                    Rectangle()
-                        .fill(LinearGradient(gradient: Gradient(colors: [
-                            .mainBackground,
-                            .mainBackground,
-                            .mainBackground,
-                            .clear
-                        ]), startPoint: .bottom, endPoint: .top)
-                        )
-                    
-                )
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .background(
+                        Rectangle()
+                            .fill(LinearGradient(gradient: Gradient(colors: [
+                                .mainBackground,
+                                .mainBackground,
+                                .mainBackground,
+                                .clear
+                            ]), startPoint: .bottom, endPoint: .top)
+                            )
+                    )
+                }.ignoresSafeArea(.keyboard)
                 
-                
-            }.ignoresSafeArea(.keyboard)
-            
-            Spacer()
+                Spacer()
+            }
         }
-    }
         .ignoresSafeArea(.container)
         .onTapGesture {
             endTextEditing()
@@ -245,7 +243,7 @@ struct CreateNewNoteBottomSheet: View {
             messageDequeObserver?.cancel()
             messageDequeObserver = nil
         }
-}
+    }
 }
 
 extension CreateNewNoteBottomSheet {
