@@ -252,10 +252,24 @@ fun TaskDetailScreen(
 
             AddNoteItem(
                 createGoalClick = {
-                    viewModel.dispatch(TaskDetailAction.CreateGoalClick)
+                    scope.launch {
+                        if (state.createNewNoteViewState.availableAreas.isEmpty()) {
+                            viewModel.dispatch(CreateNewNoteAction.CloseBecauseZeroAreas)
+                        } else {
+                            viewModel.dispatch(CreateNewNoteAction.OpenGoal)
+                            createNewNoteSheetState.show()
+                        }
+                    }
                 },
                 createNoteClick = {
-                    viewModel.dispatch(TaskDetailAction.CreateNoteClick)
+                    scope.launch {
+                        if (state.createNewNoteViewState.availableAreas.isEmpty()) {
+                            viewModel.dispatch(CreateNewNoteAction.CloseBecauseZeroAreas)
+                        } else {
+                            viewModel.dispatch(CreateNewNoteAction.OpenDefault)
+                            createNewNoteSheetState.show()
+                        }
+                    }
                 }
             )
         }
