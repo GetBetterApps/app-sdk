@@ -40,8 +40,7 @@ fun TaskData(
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                modifier = modifier
-                    .fillMaxWidth(0.8f),
+                modifier = modifier.fillMaxWidth(),
                 text = task.name,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,

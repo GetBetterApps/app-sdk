@@ -65,6 +65,7 @@
 		4667C90C2AC5A89000BAA9DD /* RequiredLevelRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C90B2AC5A89000BAA9DD /* RequiredLevelRow.swift */; };
 		4667C90E2AC5BA5900BAA9DD /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C90D2AC5BA5900BAA9DD /* Loader.swift */; };
 		466887302AECF8980002ABB6 /* CompletionDateBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4668872F2AECF8980002ABB6 /* CompletionDateBlock.swift */; };
+		4669DDB82B1F49BF00C1EF4E /* TaskData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4669DDB72B1F49BF00C1EF4E /* TaskData.swift */; };
 		466B497D2ACFF06C00AD3F6E /* AddAreaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B497C2ACFF06C00AD3F6E /* AddAreaScreen.swift */; };
 		466B497F2ACFF07300AD3F6E /* AddAreaRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B497E2ACFF07300AD3F6E /* AddAreaRoute.swift */; };
 		466C5CCB2AB73240002C089C /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C5CCA2AB73240002C089C /* BottomBar.swift */; };
@@ -216,6 +217,7 @@
 		4667C90B2AC5A89000BAA9DD /* RequiredLevelRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequiredLevelRow.swift; sourceTree = "<group>"; };
 		4667C90D2AC5BA5900BAA9DD /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		4668872F2AECF8980002ABB6 /* CompletionDateBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionDateBlock.swift; sourceTree = "<group>"; };
+		4669DDB72B1F49BF00C1EF4E /* TaskData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskData.swift; sourceTree = "<group>"; };
 		466B497C2ACFF06C00AD3F6E /* AddAreaScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaScreen.swift; sourceTree = "<group>"; };
 		466B497E2ACFF07300AD3F6E /* AddAreaRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaRoute.swift; sourceTree = "<group>"; };
 		466C5CCA2AB73240002C089C /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
@@ -881,6 +883,7 @@
 				46FCD3D82AF537590025D2C6 /* AreaData.swift */,
 				46FCD3DE2AF541190025D2C6 /* ActionButtons.swift */,
 				467D996B2AFA1C9C00F4397E /* AuthorData.swift */,
+				4669DDB72B1F49BF00C1EF4E /* TaskData.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -1179,6 +1182,7 @@
 				46D857782ACFF2D200BE74DA /* ArrayExt.swift in Sources */,
 				46059D242AC4037500DC5015 /* NotesView.swift in Sources */,
 				466887302AECF8980002ABB6 /* CompletionDateBlock.swift in Sources */,
+				4669DDB82B1F49BF00C1EF4E /* TaskData.swift in Sources */,
 				460054A92ABB18A800586767 /* AppSettings.swift in Sources */,
 				462922D82B13351F00DF080D /* FeedbackDetailBottomSheet.swift in Sources */,
 				4667C9042AC589EC00BAA9DD /* SingleLineTextField.swift in Sources */,
