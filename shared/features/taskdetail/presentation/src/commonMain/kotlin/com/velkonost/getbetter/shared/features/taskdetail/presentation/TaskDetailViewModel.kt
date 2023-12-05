@@ -9,6 +9,7 @@ import com.velkonost.getbetter.shared.core.vm.SavedStateHandle
 import com.velkonost.getbetter.shared.features.createnote.presentation.CreateNewNoteViewModel
 import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteEvent
+import com.velkonost.getbetter.shared.features.diary.api.DiaryRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailAction
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailEvent
@@ -25,7 +26,8 @@ internal constructor(
     savedStateHandle: SavedStateHandle,
     private val notesRepository: NotesRepository,
     private val tasksRepository: TasksRepository,
-    private val areasRepository: AreasRepository
+    private val areasRepository: AreasRepository,
+    private val diaryRepository: DiaryRepository
 ) : BaseViewModel<TaskDetailViewState, TaskDetailAction, TaskDetailNavigation, TaskDetailEvent>(
     initialState = TaskDetailViewState(),
     savedStateHandle = savedStateHandle
@@ -71,7 +73,7 @@ internal constructor(
 
     @NativeCoroutinesState
     val createNewNoteViewModel: StateFlow<CreateNewNoteViewModel> =
-        MutableStateFlow(CreateNewNoteViewModel(notesRepository, null))
+        MutableStateFlow(CreateNewNoteViewModel(notesRepository, diaryRepository))
 
     override fun dispatch(action: TaskDetailAction) = when (action) {
         is TaskDetailAction.NavigateBack -> emit(action)
