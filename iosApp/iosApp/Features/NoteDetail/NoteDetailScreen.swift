@@ -78,6 +78,15 @@ struct NoteDetailScreen : View {
                                 )
                             }
                             
+                            if state.task != nil {
+                                TaskData(
+                                    task: state.task!,
+                                    onClick: {
+                                        viewModel.dispatch(action: NoteDetailActionTaskClick())
+                                    }
+                                )
+                            }
+                            
                             if !noteText.isEmpty {
                                 MultilineTextFieldBinding(
                                     value: $noteText,
