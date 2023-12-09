@@ -198,6 +198,30 @@ constructor(
             }
         )
 
+    override fun fetchNotesByTask(
+        taskId: Int,
+        page: Int,
+        perPage: Int
+    ): Flow<ResultState<List<Note>>> = flowRequest(
+        mapper = { this.map { it.asExternalModel() } },
+        request = {
+            val token = localDataSource.getUserToken()
+            remoteDataSource.getNotesByTask(token, taskId, page, perPage)
+        }
+    )
+
+    override fun fetchNotesByAbility(
+        abilityId: Int,
+        page: Int,
+        perPage: Int
+    ): Flow<ResultState<List<Note>>> = flowRequest(
+        mapper = { this.map { it.asExternalModel() } },
+        request = {
+            val token = localDataSource.getUserToken()
+            remoteDataSource.getNotesByAbility(token, abilityId, page, perPage)
+        }
+    )
+
     override fun fetchOtherUserNotes(
         userId: String,
         page: Int,
