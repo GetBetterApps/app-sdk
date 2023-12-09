@@ -36,6 +36,7 @@ include(
     ":shared:features:notes:api",
     ":shared:features:notes:data",
 
+    ":shared:features:affirmations:data",
     ":shared:features:abilities:api",
     ":shared:features:abilities:data",
     ":shared:features:tasks:api",
