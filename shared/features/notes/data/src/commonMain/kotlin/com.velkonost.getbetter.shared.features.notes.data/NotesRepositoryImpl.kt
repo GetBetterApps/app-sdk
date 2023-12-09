@@ -213,12 +213,12 @@ constructor(
     override fun fetchNotesByAbility(
         abilityId: Int,
         page: Int,
-        perPage: Int
+        pageSize: Int
     ): Flow<ResultState<List<Note>>> = flowRequest(
         mapper = { this.map { it.asExternalModel() } },
         request = {
             val token = localDataSource.getUserToken()
-            remoteDataSource.getNotesByAbility(token, abilityId, page, perPage)
+            remoteDataSource.getNotesByAbility(token, abilityId, page, pageSize)
         }
     )
 
