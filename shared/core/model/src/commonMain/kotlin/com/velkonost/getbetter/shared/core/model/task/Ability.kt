@@ -11,5 +11,7 @@ data class Ability(
 
     val description: String,
 
-    var experienceData: ExperienceData
+    var experienceData: ExperienceData,
+
+    var affirmations: List<Affirmation> = emptyList()
 )
