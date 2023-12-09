@@ -24,9 +24,12 @@ struct AbilityItem: View {
         PrimaryBox {
             VStack(spacing: 0) {
                 
-                Text(item.name)
-                    .style(.titleMedium)
-                    .foregroundColor(.textLight)
+                HStack {
+                    Text(item.name)
+                        .style(.titleMedium)
+                        .foregroundColor(.textLight)
+                    Spacer()
+                }
                 
                 Text(item.description_)
                     .style(.labelMedium)
@@ -42,6 +45,7 @@ struct AbilityItem: View {
                         .style(.bodyMedium)
                         .foregroundColor(.textPrimary)
                 }
+                .padding(.top, 12)
                 
                 ProgressView(value: Double(item.experienceData.remainExperiencePercent))
                     .padding(.top, 6)

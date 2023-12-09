@@ -26,17 +26,41 @@ struct AbilitiesScreen: View {
                 ScrollView(showsIndicators: false) {
                     LazyVStack(spacing: 0) {
                         ForEach(state.items, id: \.self) { item in
-                            AbilityData(
+                            AbilityItem(
                                 item: item,
                                 onClick: { value in
                                     
                                 }
                             )
+                            .onAppear {
+                                checkPaginationThreshold(
+                                    items: state.items,
+                                    currentItemId: item.id!,
+                                    loadMorePrefetch: Int(state.loadMorePrefetch),
+                                    isLoading: state.isLoading,
+                                    onBottomReach: {
+                                        viewModel.dispatch(action: AbilitiesActionLoadNextPage())
+                                    }
+                                )
+                            }
                         }
                     }
+                    .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
                 }
+                .fadingEdge()
             }
             
+        }
+    }
+}
+
+extension AbilitiesScreen {
+    func checkPaginationThreshold(items: [Ability], currentItemId: KotlinInt, loadMorePrefetch: Int, isLoading: Bool, onBottomReach: () -> Void) {
+        let data = items
+        let thresholdIndex = data.index(data.endIndex, offsetBy: -loadMorePrefetch)
+        
+        if data.firstIndex(where: { $0.id == currentItemId })! >= thresholdIndex && !isLoading {
+            onBottomReach()
         }
     }
 }
