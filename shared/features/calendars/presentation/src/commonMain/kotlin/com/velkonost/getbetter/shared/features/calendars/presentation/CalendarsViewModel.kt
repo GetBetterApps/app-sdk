@@ -44,7 +44,8 @@ internal constructor(
     private val notesRepository: NotesRepository,
     private val areasRepository: AreasRepository,
     private val commentsRepository: CommentsRepository,
-    private val userInfoRepository: UserInfoRepository
+    private val userInfoRepository: UserInfoRepository,
+    private val tasksRepository
 ) : BaseViewModel<CalendarsViewState, CalendarsAction, CalendarsNavigation, Nothing>(
     initialState = CalendarsViewState()
 ) {
@@ -233,8 +234,18 @@ internal constructor(
                                         ActionUIItem<TaskUI, Nothing>(
                                             dayId = value,
                                             id = item.datetime,
-                                            description =
+                                            description = StringDesc.Resource(
+                                                SharedR.strings.action_user_completed_task
+                                            )
                                         )
+                                    )
+
+                                    getActionDetails(
+                                        dayId = value,
+                                        actionId = item.datetime,
+                                        entityId = item.entityId,
+                                        entityType = EntityType.Task,
+                                        type = item.type!!
                                     )
                                 }
 
@@ -368,6 +379,7 @@ internal constructor(
                     EntityType.Note -> notesRepository.getNoteDetails(parentEntityId.toInt())
                     EntityType.Comment -> commentsRepository.getComment(parentEntityId.toInt())
                     EntityType.User -> userInfoRepository.fetchInfoAboutOtherUser(parentEntityId)
+                    EntityType.Task -> tasks
                     else -> return@launchJob
                 }
                 parentRequest collectAndProcess {
