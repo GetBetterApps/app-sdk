@@ -859,10 +859,18 @@
 		46E380492B24D86500056C0D /* Abilities */ = {
 			isa = PBXGroup;
 			children = (
+				46E3804E2B24D93600056C0D /* components */,
 				46E3804A2B24D86E00056C0D /* AbilitiesScreen.swift */,
 				46E3804C2B24D87600056C0D /* AbilitiesRoute.swift */,
 			);
 			path = Abilities;
+			sourceTree = "<group>";
+		};
+		46E3804E2B24D93600056C0D /* components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = components;
 			sourceTree = "<group>";
 		};
 		46F0B3BB2B1CD5D700D6BCC1 /* TaskDetail */ = {

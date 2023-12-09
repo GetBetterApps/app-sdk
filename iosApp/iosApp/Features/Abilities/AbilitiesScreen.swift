@@ -9,9 +9,28 @@
 import Foundation
 import SwiftUI
 import SharedSDK
+import KMMViewModelSwiftUI
+import KMPNativeCoroutinesAsync
 
 struct AbilitiesScreen: View {
+    
+    @StateViewModel var viewModel: AbilitiesViewModel
+    
     var body: some View {
-        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Hello, world!@*/Text("Hello, world!")/*@END_MENU_TOKEN@*/
+        @State var state = viewModel.viewStateValue as! AbilitiesViewState
+        
+        ZStack {
+            if state.isLoading && state.items.isEmpty {
+                Loader().frame(alignment: .center)
+            } else {
+                ScrollView(showsIndicators: false) {
+                    LazyVStack(spacing: 0) {
+                        ForEach(state.items, id: \.self) { item in
+                        }
+                    }
+                }
+            }
+            
+        }
     }
 }
