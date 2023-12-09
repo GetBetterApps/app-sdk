@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.diary.tasks.components
+package com.velkonost.getbetter.core.compose.components.task
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.Image
