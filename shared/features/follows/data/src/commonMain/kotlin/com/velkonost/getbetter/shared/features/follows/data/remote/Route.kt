@@ -5,6 +5,6 @@ object Route {
 
     const val ADD_FOLLOW = "$PREFIX/add"
     const val REMOVE_FOLLOW = "$PREFIX/remove"
-    const val GET_USER_FOLLOWS = "$PREFIX/getUserFollows"
-    const val GET_USER_FOLLOWERS = "$PREFIX/getUserFollowers"
+    const val GET_USER_FOLLOWS = "$PREFIX/userFollows"
+    const val GET_USER_FOLLOWERS = "$PREFIX/userFollowers"
 }
