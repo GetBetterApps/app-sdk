@@ -41,7 +41,7 @@ fun AbilityItem(
 
             Text(
                 text = item.name,
-                style = MaterialTheme.typography.labelLarge,
+                style = MaterialTheme.typography.titleMedium,
                 color = colorResource(resource = SharedR.colors.text_light)
             )
 
@@ -57,13 +57,13 @@ fun AbilityItem(
             ) {
                 Text(
                     text = stringResource(resource = SharedR.strings.experience_your_title),
-                    style = MaterialTheme.typography.labelMedium,
+                    style = MaterialTheme.typography.bodyMedium,
                     color = colorResource(resource = SharedR.colors.text_primary)
                 )
                 Spacer(modifier.weight(1f))
                 Text(
                     text = item.experienceData.currentLevelStr.toString(context),
-                    style = MaterialTheme.typography.labelMedium,
+                    style = MaterialTheme.typography.bodyMedium,
                     color = colorResource(resource = SharedR.colors.text_primary)
                 )
             }
