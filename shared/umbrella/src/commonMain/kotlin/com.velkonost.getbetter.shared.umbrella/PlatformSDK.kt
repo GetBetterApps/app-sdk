@@ -5,6 +5,7 @@ import com.velkonost.getbetter.shared.core.network.di.CoreNetworkModule
 import com.velkonost.getbetter.shared.core.util.di.CoreUtilModule
 import com.velkonost.getbetter.shared.features.abilities.data.di.AbilitiesDataModule
 import com.velkonost.getbetter.shared.features.addarea.presentation.di.AddAreaPresentationModule
+import com.velkonost.getbetter.shared.features.affirmations.data.di.AffirmationsDataModule
 import com.velkonost.getbetter.shared.features.areadetail.presentation.di.AreaDetailPresentationModule
 import com.velkonost.getbetter.shared.features.areas.data.di.AreasDataModule
 import com.velkonost.getbetter.shared.features.auth.data.di.AuthDataModule
@@ -60,6 +61,7 @@ object PlatformSDK {
             CalendarsDataModule,
             FeedbackDataModule,
             AbilitiesDataModule,
+            AffirmationsDataModule,
 
             AuthDataModule,
             AuthDomainModule,
