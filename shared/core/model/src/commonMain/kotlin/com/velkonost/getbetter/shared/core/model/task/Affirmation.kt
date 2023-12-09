@@ -6,5 +6,7 @@ import kotlinx.serialization.Serializable
 data class Affirmation(
     val id: Int,
 
-    val text: String
+    val text: String,
+
+    val isFavorite: Boolean
 )
