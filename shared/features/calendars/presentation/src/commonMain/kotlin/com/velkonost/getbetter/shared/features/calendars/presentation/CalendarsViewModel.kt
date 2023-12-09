@@ -414,7 +414,7 @@ internal constructor(
                 EntityType.Note -> notesRepository.getNoteDetails(entityId.toInt())
                 EntityType.Comment -> commentsRepository.getComment(entityId.toInt())
                 EntityType.User -> userInfoRepository.fetchInfoAboutOtherUser(entityId)
-                EntityType.Task -> tasksRepository.getCompletedTasks()
+                EntityType.Task -> tasksRepository.getTaskDetails(entityId.toInt())
                 else -> return@launchJob
             }
 
