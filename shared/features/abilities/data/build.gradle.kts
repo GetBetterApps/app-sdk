@@ -30,6 +30,7 @@ kotlin {
                 implementation(projects.shared.core.datastore)
 
                 implementation(projects.shared.features.abilities.api)
+                implementation(projects.shared.features.affirmations.data)
             }
         }
     }

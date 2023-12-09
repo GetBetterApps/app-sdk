@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.abilities.data.remote.model.response
 
+import com.velkonost.getbetter.shared.features.affirmations.data.remote.model.response.KtorAffirmation
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -17,5 +18,5 @@ data class KtorAbilityDetail(
     @SerialName("experience")
     var experience: Long,
 
-    var affirmations: List<>
+    var affirmations: List<KtorAffirmation>
 )
