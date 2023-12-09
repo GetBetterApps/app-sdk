@@ -14,4 +14,6 @@ object Route {
 
     const val ADD_TO_COMPLETED = "$PREFIX/addToCompleted"
     const val REMOTE_FROM_COMPLETED = "$PREFIX/removeFromCompleted"
+
+    const val GET_DETAILS = "$PREFIX/details"
 }

@@ -35,6 +35,19 @@ class TasksRemoteDataSource(
         )
     }.body()
 
+    suspend fun fetchTaskDetails(
+        token: String?,
+        taskId: Int
+    ): RemoteResponse<KtorTask> = httpClient.get {
+        makeRequest(
+            path = Route.GET_DETAILS,
+            token = token,
+            params = hashMapOf(
+                "taskId" to taskId
+            )
+        )
+    }.body()
+
     suspend fun addToFavorite(
         token: String?,
         body: UpdateTaskStateRequest

@@ -36,6 +36,14 @@ constructor(
             }
         )
 
+    override fun getTaskDetails(taskId: Int): Flow<ResultState<TaskUI>> = flowRequest(
+        mapper = KtorTask::asExternalModel,
+        request = {
+            val token = localDataSource.getUserToken()
+            remoteDataSource.fetchTaskDetails(token, taskId)
+        }
+    )
+
     override fun addToFavorite(taskId: Int): Flow<ResultState<TaskUI>> = flowRequest(
         mapper = KtorTask::asExternalModel,
         request = {

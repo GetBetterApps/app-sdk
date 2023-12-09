@@ -28,6 +28,7 @@ import com.velkonost.getbetter.shared.features.calendars.presentation.model.User
 import com.velkonost.getbetter.shared.features.calendars.presentation.model.type
 import com.velkonost.getbetter.shared.features.comments.api.CommentsRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
+import com.velkonost.getbetter.shared.features.tasks.api.TasksRepository
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource
@@ -45,7 +46,7 @@ internal constructor(
     private val areasRepository: AreasRepository,
     private val commentsRepository: CommentsRepository,
     private val userInfoRepository: UserInfoRepository,
-    private val tasksRepository
+    private val tasksRepository: TasksRepository
 ) : BaseViewModel<CalendarsViewState, CalendarsAction, CalendarsNavigation, Nothing>(
     initialState = CalendarsViewState()
 ) {
@@ -379,7 +380,6 @@ internal constructor(
                     EntityType.Note -> notesRepository.getNoteDetails(parentEntityId.toInt())
                     EntityType.Comment -> commentsRepository.getComment(parentEntityId.toInt())
                     EntityType.User -> userInfoRepository.fetchInfoAboutOtherUser(parentEntityId)
-                    EntityType.Task -> tasks
                     else -> return@launchJob
                 }
                 parentRequest collectAndProcess {
@@ -414,6 +414,7 @@ internal constructor(
                 EntityType.Note -> notesRepository.getNoteDetails(entityId.toInt())
                 EntityType.Comment -> commentsRepository.getComment(entityId.toInt())
                 EntityType.User -> userInfoRepository.fetchInfoAboutOtherUser(entityId)
+                EntityType.Task -> tasksRepository.getCompletedTasks()
                 else -> return@launchJob
             }
 
@@ -464,12 +465,8 @@ internal constructor(
             items[indexOfCurrentItem] = currentItem.copy(isLoading = isLoading)
 
             if (viewState.value.datesState.selectedDate?.id == dayId) {
-                val selectedDate = viewState.value.datesState.selectedDate?.copy(
-                    items = items
-                )
-                val datesState = viewState.value.datesState.copy(
-                    selectedDate = selectedDate
-                )
+                val selectedDate = viewState.value.datesState.selectedDate?.copy(items = items)
+                val datesState = viewState.value.datesState.copy(selectedDate = selectedDate)
                 emit(viewState.value.copy(datesState = datesState))
             }
         }
@@ -516,12 +513,8 @@ internal constructor(
             _datesData.value[dayId] = items
 
             if (viewState.value.datesState.selectedDate?.id == dayId) {
-                val selectedDate = viewState.value.datesState.selectedDate?.copy(
-                    items = items
-                )
-                val datesState = viewState.value.datesState.copy(
-                    selectedDate = selectedDate
-                )
+                val selectedDate = viewState.value.datesState.selectedDate?.copy(items = items)
+                val datesState = viewState.value.datesState.copy(selectedDate = selectedDate)
                 emit(viewState.value.copy(datesState = datesState))
             }
         }

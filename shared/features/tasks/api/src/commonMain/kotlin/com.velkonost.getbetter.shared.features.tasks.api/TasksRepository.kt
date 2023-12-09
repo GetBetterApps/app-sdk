@@ -12,6 +12,10 @@ interface TasksRepository {
         forceUpdate: Boolean = false
     ): Flow<ResultState<List<TaskUI>>>
 
+    fun getTaskDetails(
+        taskId: Int
+    ): Flow<ResultState<TaskUI>>
+
     fun addToFavorite(
         taskId: Int
     ): Flow<ResultState<TaskUI>>
