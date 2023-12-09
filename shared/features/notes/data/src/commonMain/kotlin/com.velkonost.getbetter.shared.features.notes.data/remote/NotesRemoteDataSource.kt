@@ -142,6 +142,40 @@ class NotesRemoteDataSource(
         )
     }.body()
 
+    suspend fun getNotesByTask(
+        token: String?,
+        taskId: Int,
+        page: Int,
+        pageSize: Int
+    ): RemoteResponse<List<KtorNote>> = httpClient.get {
+        makeRequest(
+            path = Route.GET_NOTES_BY_TASK,
+            token = token,
+            params = hashMapOf(
+                "taskId" to taskId,
+                "page" to page,
+                "pageSize" to pageSize
+            )
+        )
+    }.body()
+
+    suspend fun getNotesByAbility(
+        token: String?,
+        abilityId: Int,
+        page: Int,
+        pageSize: Int
+    ): RemoteResponse<List<KtorNote>> = httpClient.get {
+        makeRequest(
+            path = Route.GET_NOTES_BY_ABILITY,
+            token = token,
+            params = hashMapOf(
+                "abilityId" to abilityId,
+                "page" to page,
+                "pageSize" to pageSize
+            )
+        )
+    }.body()
+
     suspend fun getOtherUserNotes(
         token: String?,
         userId: String,
