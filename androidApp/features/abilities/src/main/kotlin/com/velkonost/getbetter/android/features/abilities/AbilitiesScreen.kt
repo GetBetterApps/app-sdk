@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -34,11 +33,14 @@ fun AbilitiesScreen(
             Loader(modifier = Modifier.align(Alignment.Center))
         } else {
             LazyColumn(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
+                modifier = modifier.fillMaxWidth(),
                 state = listState,
-                contentPadding = PaddingValues(bottom = 140.dp, top = 28.dp)
+                contentPadding = PaddingValues(
+                    bottom = 140.dp,
+                    top = 28.dp,
+                    start = 16.dp,
+                    end = 16.dp
+                )
             ) {
 
                 items(state.items, key = { it.name }) { item ->
