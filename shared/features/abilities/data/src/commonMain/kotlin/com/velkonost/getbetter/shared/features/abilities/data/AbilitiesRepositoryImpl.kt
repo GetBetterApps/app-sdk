@@ -8,6 +8,7 @@ import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.flowRequest
 import com.velkonost.getbetter.shared.features.abilities.api.AbilitiesRepository
 import com.velkonost.getbetter.shared.features.abilities.data.remote.AbilitiesRemoteDataSource
+import com.velkonost.getbetter.shared.features.abilities.data.remote.model.response.KtorAbilityDetail
 import com.velkonost.getbetter.shared.features.abilities.data.remote.model.response.asExternalModel
 import kotlinx.coroutines.flow.Flow
 
@@ -26,7 +27,11 @@ constructor(
     )
 
     override fun getDetails(abilityId: Int): Flow<ResultState<Ability>> = flowRequest(
-        mappe
+        mapper = KtorAbilityDetail::asExternalModel,
+        request = {
+            val token = localDataSource.getUserToken()
+            remoteDataSource.getDetails(token, abilityId)
+        }
     )
 
 }

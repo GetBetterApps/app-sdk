@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.affirmations.data.remote.model.response
 
+import com.velkonost.getbetter.shared.core.model.task.Affirmation
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,3 +12,9 @@ data class KtorAffirmation(
     @SerialName("text")
     val text: String
 )
+
+fun KtorAffirmation.asExternalModel() =
+    Affirmation(
+        id = id,
+        text = text
+    )
