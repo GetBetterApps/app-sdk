@@ -14,7 +14,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
@@ -34,9 +33,8 @@ import dev.icerock.moko.resources.compose.colorResource
 fun TaskActionItem(
     modifier: Modifier = Modifier,
     item: TaskUI,
-    onClick: () -> Unit,
-
-    ) {
+    onClick: () -> Unit
+) {
 
     val haptic = LocalHapticFeedback.current
     val context = LocalContext.current
@@ -50,14 +48,11 @@ fun TaskActionItem(
             ) {
                 onClick()
                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-            }
+            },
+        topPadding = 0
     ) {
         Box {
-            Column(
-                modifier = modifier.alpha(
-                    if (item.isCompleted) 0.2f else 1f
-                )
-            ) {
+            Column {
                 TaskItemHeader(
                     areaName = item.area.name,
                     taskName = item.name,
