@@ -118,6 +118,9 @@ struct CalendarsScreen: View {
                                         onUserClick: {
                                             selectedUserId = (wrapper.item.data as! UserInfoShort).id
                                             showingProfileDetailSheet = true
+                                        },
+                                        onTaskClick: { value in
+                                            viewModel.dispatch(action: CalendarsActionTaskClick(value: value))
                                         }
                                     )
                                 }

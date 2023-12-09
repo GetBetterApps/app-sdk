@@ -17,9 +17,9 @@ struct TaskItemHeader : View {
     let areaIcon: UIImage
     let isFavorite: Bool
     let isFavoriteLoading: Bool
-    let onFavoriteClick: () -> Void
+    let onFavoriteClick: (() -> Void)?
     
-    init(areaName: String, taskName: String? = nil, areaIcon: UIImage, isFavorite: Bool,  isFavoriteLoading: Bool, onFavoriteClick: @escaping () -> Void) {
+    init(areaName: String, taskName: String? = nil, areaIcon: UIImage, isFavorite: Bool,  isFavoriteLoading: Bool, onFavoriteClick: (() -> Void)? = nil) {
         self.areaName = areaName
         self.taskName = taskName
         self.areaIcon = areaIcon
@@ -59,35 +59,37 @@ struct TaskItemHeader : View {
             
             Spacer()
             
-            ZStack(alignment: .center) {
-                if !isFavoriteLoading {
-                    VStack {
-                        Image(
-                            uiImage: isFavorite ? SharedR.images().ic_star.toUIImage()! : SharedR.images().ic_empty_star.toUIImage()!
-                        )
-                        .resizable()
-                        .renderingMode(.template)
-                        .foregroundColor(.buttonGradientStart)
-                        .scaledToFill()
-                        .frame(width: 24, height: 24)
-                        
+            if onFavoriteClick != nil {
+                ZStack(alignment: .center) {
+                    if !isFavoriteLoading {
+                        VStack {
+                            Image(
+                                uiImage: isFavorite ? SharedR.images().ic_star.toUIImage()! : SharedR.images().ic_empty_star.toUIImage()!
+                            )
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.buttonGradientStart)
+                            .scaledToFill()
+                            .frame(width: 24, height: 24)
+                            
+                        }
+                        .onTapGesture {
+                            onFavoriteClick!()
+                        }
+                    } else {
+                        HStack {
+                            Spacer()
+                            Loader()
+                                .scaleEffect(0.5)
+                            Spacer()
+                        }
                     }
-                    .onTapGesture {
-                        onFavoriteClick()
-                    }
-                } else {
-                    HStack {
-                        Spacer()
-                        Loader()
-                            .scaleEffect(0.5)
-                        Spacer()
-                    }
+                    
                 }
-                
+                .frame(width: 32, height: 32)
+                .animation(.easeInOut, value: isFavorite)
+                .animation(.easeInOut, value: isFavoriteLoading)
             }
-            .frame(width: 32, height: 32)
-            .animation(.easeInOut, value: isFavorite)
-            .animation(.easeInOut, value: isFavoriteLoading)
             
         }
     }

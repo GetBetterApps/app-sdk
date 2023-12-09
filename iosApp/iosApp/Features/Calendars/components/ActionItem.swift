@@ -15,13 +15,21 @@ struct ActionItem: View {
     let item: ActionUIItem<AnyObject, AnyObject>
     let onAreaClick: (Int32) -> Void
     let onNoteClick: (Note) -> Void
+    let onTaskClick: (TaskUI) -> Void
     let onUserClick: () -> Void
     
-    init(item: ActionUIItem<AnyObject, AnyObject>, onAreaClick: @escaping (Int32) -> Void, onNoteClick: @escaping (Note) -> Void, onUserClick: @escaping () -> Void) {
+    init(
+        item: ActionUIItem<AnyObject, AnyObject>,
+        onAreaClick: @escaping (Int32) -> Void,
+        onNoteClick: @escaping (Note) -> Void,
+        onUserClick: @escaping () -> Void,
+        onTaskClick: @escaping (TaskUI) -> Void
+    ) {
         self.item = item
         self.onAreaClick = onAreaClick
         self.onNoteClick = onNoteClick
         self.onUserClick = onUserClick
+        self.onTaskClick = onTaskClick
     }
     
     var body: some View {
@@ -54,6 +62,13 @@ struct ActionItem: View {
             
             if item.data is Int64 {
                 UserRegisteredActionItem()
+            } else if item.data is TaskUI {
+              TaskActionItem(
+                item: (item.data as! TaskUI),
+                onClick: {
+                    onTaskClick((item.data as! TaskUI))
+                }
+              )
             } else if item.data is UserInfoShort {
                 UserActionItem(
                     isLoading: false,
