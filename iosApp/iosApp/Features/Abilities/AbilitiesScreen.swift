@@ -26,6 +26,12 @@ struct AbilitiesScreen: View {
                 ScrollView(showsIndicators: false) {
                     LazyVStack(spacing: 0) {
                         ForEach(state.items, id: \.self) { item in
+                            AbilityData(
+                                item: item,
+                                onClick: { value in
+                                    
+                                }
+                            )
                         }
                     }
                 }

@@ -148,6 +148,7 @@
 		46E2DD312AE9420600B4B2B5 /* AreaPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E2DD302AE9420600B4B2B5 /* AreaPickerItem.swift */; };
 		46E3804B2B24D86E00056C0D /* AbilitiesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E3804A2B24D86E00056C0D /* AbilitiesScreen.swift */; };
 		46E3804D2B24D87600056C0D /* AbilitiesRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E3804C2B24D87600056C0D /* AbilitiesRoute.swift */; };
+		46E380502B24D94A00056C0D /* AbilityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E3804F2B24D94A00056C0D /* AbilityItem.swift */; };
 		46F0B3BD2B1CD5F100D6BCC1 /* TaskDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F0B3BC2B1CD5F100D6BCC1 /* TaskDetailScreen.swift */; };
 		46F0B3BF2B1CD62800D6BCC1 /* TaskDetailRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F0B3BE2B1CD62800D6BCC1 /* TaskDetailRoute.swift */; };
 		46F0B3C12B1CDE7400D6BCC1 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F0B3C02B1CDE7400D6BCC1 /* TaskItem.swift */; };
@@ -303,6 +304,7 @@
 		46E2DD302AE9420600B4B2B5 /* AreaPickerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPickerItem.swift; sourceTree = "<group>"; };
 		46E3804A2B24D86E00056C0D /* AbilitiesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilitiesScreen.swift; sourceTree = "<group>"; };
 		46E3804C2B24D87600056C0D /* AbilitiesRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilitiesRoute.swift; sourceTree = "<group>"; };
+		46E3804F2B24D94A00056C0D /* AbilityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityItem.swift; sourceTree = "<group>"; };
 		46F0B3BC2B1CD5F100D6BCC1 /* TaskDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailScreen.swift; sourceTree = "<group>"; };
 		46F0B3BE2B1CD62800D6BCC1 /* TaskDetailRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailRoute.swift; sourceTree = "<group>"; };
 		46F0B3C02B1CDE7400D6BCC1 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
@@ -869,6 +871,7 @@
 		46E3804E2B24D93600056C0D /* components */ = {
 			isa = PBXGroup;
 			children = (
+				46E3804F2B24D94A00056C0D /* AbilityItem.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -1201,6 +1204,7 @@
 				461F7C6A2AA8D6FF003791CF /* UINavigationControllerExt.swift in Sources */,
 				4608C3992B247EF200A37E84 /* TaskActionItem.swift in Sources */,
 				466E519F2B1235B200088425 /* CreateNewFeedbackBottomSheet.swift in Sources */,
+				46E380502B24D94A00056C0D /* AbilityItem.swift in Sources */,
 				467668BC2AEABFDE007C17DE /* AddSubNoteItem.swift in Sources */,
 				46ACAF212AEEC9B8000A9CD8 /* NoteItemHeader.swift in Sources */,
 				4678E4482AAC6A67000B88E8 /* AppDelegate.swift in Sources */,
