@@ -25,6 +25,7 @@ dependencies {
     implementation(projects.androidApp.features.taskdetail)
     implementation(projects.androidApp.features.feedback)
     implementation(projects.androidApp.features.settings)
+    implementation(projects.androidApp.features.abilities)
 
     implementation(projects.shared.core.util)
     implementation(projects.shared.core.vm)
