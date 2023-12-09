@@ -32,5 +32,5 @@ val Int.asExperienceData: ExperienceData
         currentLevel = this.asLevel,
         remainExperience = this - (this.asLevel * ExperienceData.LEVEL_LIMIT),
         currentLevelExperienceLimit = ExperienceData.LEVEL_LIMIT,
-        remainExperiencePercent = this / ExperienceData.LEVEL_LIMIT.toFloat()
+        remainExperiencePercent = (this - (this.asLevel * ExperienceData.LEVEL_LIMIT)) / ExperienceData.LEVEL_LIMIT.toFloat()
     )
