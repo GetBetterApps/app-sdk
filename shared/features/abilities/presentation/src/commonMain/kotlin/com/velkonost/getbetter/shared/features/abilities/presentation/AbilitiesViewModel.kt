@@ -8,6 +8,7 @@ import com.velkonost.getbetter.shared.features.abilities.api.AbilitiesRepository
 import com.velkonost.getbetter.shared.features.abilities.presentation.contract.AbilitiesAction
 import com.velkonost.getbetter.shared.features.abilities.presentation.contract.AbilitiesNavigation
 import com.velkonost.getbetter.shared.features.abilities.presentation.contract.AbilitiesViewState
+import kotlinx.coroutines.Job
 
 class AbilitiesViewModel
 internal constructor(
@@ -17,7 +18,7 @@ internal constructor(
 ) {
 
     private val _abilitiesPagingConfig = PagingConfig()
-
+    private var abilitiesLoadingJob: Job? = null
     init {
         fetchAbilities()
     }
@@ -30,9 +31,10 @@ internal constructor(
     }
 
     private fun fetchAbilities() {
-        if (_abilitiesPagingConfig.lastPageReached) return
+        if (_abilitiesPagingConfig.lastPageReached || abilitiesLoadingJob?.isActive == true) return
 
-        launchJob {
+        abilitiesLoadingJob?.cancel()
+        abilitiesLoadingJob = launchJob {
             abilitiesRepository.getAll(
                 page = _abilitiesPagingConfig.page,
                 pageSize = _abilitiesPagingConfig.pageSize,

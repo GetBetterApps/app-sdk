@@ -25,7 +25,7 @@ struct AbilitiesScreen: View {
             } else {
                 ScrollView(showsIndicators: false) {
                     LazyVStack(spacing: 0) {
-                        ForEach(state.items, id: \.self) { item in
+                        ForEach(state.items, id: \.self.id) { item in
                             AbilityItem(
                                 item: item,
                                 onClick: { value in
@@ -44,20 +44,17 @@ struct AbilitiesScreen: View {
                                 )
                             }
                         }
-                    }
-                    .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
-                }
-                .fadingEdge()
+                    }.padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
+                }.fadingEdge()
             }
-            
         }
     }
 }
 
 extension AbilitiesScreen {
     func checkPaginationThreshold(items: [Ability], currentItemId: KotlinInt, loadMorePrefetch: Int, isLoading: Bool, onBottomReach: () -> Void) {
-        let data = items
-        let thresholdIndex = data.index(data.endIndex, offsetBy: -loadMorePrefetch)
+        let data = (viewModel.viewStateValue as! AbilitiesViewState).items
+        let thresholdIndex = data.index(data.endIndex, offsetBy: -5)
         
         if data.firstIndex(where: { $0.id == currentItemId })! >= thresholdIndex && !isLoading {
             onBottomReach()
