@@ -10,7 +10,7 @@ struct ContentView: View {
         DiaryRoute(),
         CalendarsRoute(),
         ProfileRoute(),
-        WisdomRoute(),
+        AbilitiesRoute(),
     ]
     
     
@@ -48,6 +48,9 @@ struct ContentView: View {
                     
                 case _ where route.starts(with: NavigationScreenKt.CALENDARS_DESTINATION) :
                     CalendarsRoute().view(pilot: pilot, route: route)
+                    
+                case _ where route.starts(with: NavigationScreenKt.ABILITIES_DESTINATION) :
+                    AbilitiesRoute().view(pilot: pilot, route: route)
                     
                 case _ where route.starts(with: NavigationScreenKt.WISDOM_DESTINATION) :
                     WisdomRoute().view(pilot: pilot, route: route)

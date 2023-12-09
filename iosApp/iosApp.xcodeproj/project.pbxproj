@@ -146,6 +146,8 @@
 		46E2DD2D2AE9364D00B4B2B5 /* AreaPickerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E2DD2C2AE9364D00B4B2B5 /* AreaPickerHeader.swift */; };
 		46E2DD2F2AE93A3B00B4B2B5 /* AreaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E2DD2E2AE93A3B00B4B2B5 /* AreaPicker.swift */; };
 		46E2DD312AE9420600B4B2B5 /* AreaPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E2DD302AE9420600B4B2B5 /* AreaPickerItem.swift */; };
+		46E3804B2B24D86E00056C0D /* AbilitiesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E3804A2B24D86E00056C0D /* AbilitiesScreen.swift */; };
+		46E3804D2B24D87600056C0D /* AbilitiesRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E3804C2B24D87600056C0D /* AbilitiesRoute.swift */; };
 		46F0B3BD2B1CD5F100D6BCC1 /* TaskDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F0B3BC2B1CD5F100D6BCC1 /* TaskDetailScreen.swift */; };
 		46F0B3BF2B1CD62800D6BCC1 /* TaskDetailRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F0B3BE2B1CD62800D6BCC1 /* TaskDetailRoute.swift */; };
 		46F0B3C12B1CDE7400D6BCC1 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F0B3C02B1CDE7400D6BCC1 /* TaskItem.swift */; };
@@ -299,6 +301,8 @@
 		46E2DD2C2AE9364D00B4B2B5 /* AreaPickerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPickerHeader.swift; sourceTree = "<group>"; };
 		46E2DD2E2AE93A3B00B4B2B5 /* AreaPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPicker.swift; sourceTree = "<group>"; };
 		46E2DD302AE9420600B4B2B5 /* AreaPickerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPickerItem.swift; sourceTree = "<group>"; };
+		46E3804A2B24D86E00056C0D /* AbilitiesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilitiesScreen.swift; sourceTree = "<group>"; };
+		46E3804C2B24D87600056C0D /* AbilitiesRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilitiesRoute.swift; sourceTree = "<group>"; };
 		46F0B3BC2B1CD5F100D6BCC1 /* TaskDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailScreen.swift; sourceTree = "<group>"; };
 		46F0B3BE2B1CD62800D6BCC1 /* TaskDetailRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailRoute.swift; sourceTree = "<group>"; };
 		46F0B3C02B1CDE7400D6BCC1 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
@@ -491,6 +495,7 @@
 		461F7C6D2AA8D7DE003791CF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				46E380492B24D86500056C0D /* Abilities */,
 				46F0B3BB2B1CD5D700D6BCC1 /* TaskDetail */,
 				467DB0132B14C89200BB9CB3 /* Settings */,
 				466E51942B12324800088425 /* Feedback */,
@@ -849,6 +854,15 @@
 				46E2DD302AE9420600B4B2B5 /* AreaPickerItem.swift */,
 			);
 			path = areapicker;
+			sourceTree = "<group>";
+		};
+		46E380492B24D86500056C0D /* Abilities */ = {
+			isa = PBXGroup;
+			children = (
+				46E3804A2B24D86E00056C0D /* AbilitiesScreen.swift */,
+				46E3804C2B24D87600056C0D /* AbilitiesRoute.swift */,
+			);
+			path = Abilities;
 			sourceTree = "<group>";
 		};
 		46F0B3BB2B1CD5D700D6BCC1 /* TaskDetail */ = {
@@ -1236,11 +1250,13 @@
 				4616B0872AF629B100A4CDDE /* DateExt.swift in Sources */,
 				468356FB2B0E321200DC356A /* NoteActionItem.swift in Sources */,
 				461F7C682AA88B80003791CF /* StringExt.swift in Sources */,
+				46E3804B2B24D86E00056C0D /* AbilitiesScreen.swift in Sources */,
 				46D857742ACFF1C500BE74DA /* AddAreaViewModel.swift in Sources */,
 				461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */,
 				46FCD3D52AF530D40025D2C6 /* NoteDetailRoute.swift in Sources */,
 				4658EC7A2B0F5F2100D508FF /* UserRegisteredActionItem.swift in Sources */,
 				460054A52ABB17BD00586767 /* SectionTitle.swift in Sources */,
+				46E3804D2B24D87600056C0D /* AbilitiesRoute.swift in Sources */,
 				46FCD3D32AF530BD0025D2C6 /* NoteDetailScreen.swift in Sources */,
 				46ACAF232AEECA74000A9CD8 /* NoteItemData.swift in Sources */,
 				46C10D1F2AB43FA300E62846 /* SnackBar.swift in Sources */,

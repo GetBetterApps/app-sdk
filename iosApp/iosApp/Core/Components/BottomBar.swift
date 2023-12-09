@@ -23,7 +23,7 @@ struct BottomBar: View {
             BottomBarItem(pilot: pilot, screen: SocialRoute(), currentRoute: currentRoute)
             BottomBarItem(pilot: pilot, screen: DiaryRoute(), currentRoute: currentRoute)
             BottomBarItem(pilot: pilot, screen: CalendarsRoute(), currentRoute: currentRoute)
-            BottomBarItem(pilot: pilot, screen: WisdomRoute(), currentRoute: currentRoute)
+            BottomBarItem(pilot: pilot, screen: AbilitiesRoute(), currentRoute: currentRoute)
             BottomBarItem(pilot: pilot, screen: ProfileRoute(), currentRoute: currentRoute)
         }
         .frame(maxWidth: .infinity)
