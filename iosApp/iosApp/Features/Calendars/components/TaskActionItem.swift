@@ -17,7 +17,7 @@ struct TaskActionItem: View {
     let onClick: () -> Void
     
     var body: some View {
-        PrimaryBox {
+        PrimaryBox(topPadding: 0) {
             ZStack {
                 VStack(spacing: 0) {
                     TaskItemHeader(
