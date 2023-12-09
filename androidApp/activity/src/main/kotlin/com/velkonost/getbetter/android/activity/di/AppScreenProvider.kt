@@ -4,6 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.navigation
+import com.velkonost.getbetter.android.features.abilities.AbilitiesNavRoute
 import com.velkonost.getbetter.android.features.addarea.AddAreaNavRoute
 import com.velkonost.getbetter.android.features.auth.AuthNavRoute
 import com.velkonost.getbetter.android.features.calendars.CalendarsNavRoute
@@ -30,7 +31,7 @@ val NavigationScreens = setOf(
     SocialNavRoute,
     DiaryNavRoute,
     CalendarsNavRoute,
-    WisdomNavRoute,
+    AbilitiesNavRoute,
     ProfileNavRoute
 )
 
@@ -92,6 +93,18 @@ fun NavGraphBuilder.addWisdomRoute(
         startDestination = NavigationScreen.WisdomNavScreen.route
     ) {
         WisdomNavRoute.provide(this, navController, forceHideBottomBar)
+    }
+}
+
+fun NavGraphBuilder.addAbilitiesRoute(
+    navController: NavHostController,
+    forceHideBottomBar: MutableState<Boolean>
+) {
+    navigation(
+        route = "${NavigationScreen.AbilitiesNavScreen.route}_root",
+        startDestination = NavigationScreen.AbilitiesNavScreen.route
+    ) {
+        AbilitiesNavRoute.provide(this, navController, forceHideBottomBar)
     }
 }
 
