@@ -124,7 +124,9 @@ internal constructor(
     }
 
     private fun obtainTaskClick(value: TaskUI) {
-
+        launchJob {
+            emit(CalendarsNavigation.NavigateToTaskDetail(value))
+        }
     }
 
     private fun initItems() {
