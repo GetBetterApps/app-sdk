@@ -113,6 +113,7 @@ internal constructor(
         is CalendarsAction.LoadMoreNextDates -> obtainLoadMore(DateDirection.Future)
         is CalendarsAction.DateClick -> obtainDateClick(action.id)
         is CalendarsAction.NoteClick -> obtainNoteClick(action.value)
+        is CalendarsAction.TaskClick -> obtainTaskClick(action.value)
     }
 
     private fun obtainNoteClick(value: Note) {
@@ -120,6 +121,10 @@ internal constructor(
             calendarsRepository.saveUpdatedNoteId(value.id)
             emit(CalendarsNavigation.NavigateToNoteDetail(value))
         }
+    }
+
+    private fun obtainTaskClick(value: TaskUI) {
+
     }
 
     private fun initItems() {

@@ -153,6 +153,9 @@ fun CalendarsScreen(
                                             (item.data as UserInfoShort).id
                                         profileDetailSheetState.show()
                                     }
+                                },
+                                onTaskClick = {
+                                    viewModel.dispatch(CalendarsAction.TaskClick(it))
                                 }
                             )
                         }

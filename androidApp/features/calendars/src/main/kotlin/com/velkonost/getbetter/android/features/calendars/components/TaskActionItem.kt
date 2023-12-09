@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.core.compose.components.note.tags.TagItem
+import com.velkonost.getbetter.core.compose.components.task.TaskItemHeader
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
@@ -62,7 +63,6 @@ fun TaskActionItem(
                     taskName = item.name,
                     areaIcon = Emoji.getIconById(item.area.emojiId!!),
                     isFavorite = item.isFavorite,
-                    onFavoriteClick = onFavoriteClick,
                     isFavoriteLoading = item.isFavoriteLoading
                 )
 

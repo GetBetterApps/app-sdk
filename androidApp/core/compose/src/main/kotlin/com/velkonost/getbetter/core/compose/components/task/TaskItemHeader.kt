@@ -35,7 +35,7 @@ fun TaskItemHeader(
     areaIcon: ImageResource,
     isFavorite: Boolean,
     isFavoriteLoading: Boolean,
-    onFavoriteClick: () -> Unit
+    onFavoriteClick: (() -> Unit)? = null
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -74,32 +74,34 @@ fun TaskItemHeader(
 
         Spacer(modifier = modifier.weight(1f))
 
-        Box {
-            AnimatedContent(targetState = isFavoriteLoading, label = "") {
-                if (!it) {
-                    Column(
-                        modifier = modifier.clickable(
-                            interactionSource = interactionSource,
-                            indication = null,
-                            onClick = onFavoriteClick
-                        ),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center,
-                    ) {
-                        Image(
-                            modifier = modifier
-                                .size(32.dp)
-                                .padding(2.dp),
-                            painter = painterResource(
-                                imageResource = if (isFavorite) SharedR.images.ic_star
-                                else SharedR.images.ic_empty_star
+        if (onFavoriteClick != null) {
+            Box {
+                AnimatedContent(targetState = isFavoriteLoading, label = "") {
+                    if (!it) {
+                        Column(
+                            modifier = modifier.clickable(
+                                interactionSource = interactionSource,
+                                indication = null,
+                                onClick = onFavoriteClick
                             ),
-                            contentDescription = null,
-                            colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.button_gradient_start))
-                        )
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center,
+                        ) {
+                            Image(
+                                modifier = modifier
+                                    .size(32.dp)
+                                    .padding(2.dp),
+                                painter = painterResource(
+                                    imageResource = if (isFavorite) SharedR.images.ic_star
+                                    else SharedR.images.ic_empty_star
+                                ),
+                                contentDescription = null,
+                                colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.button_gradient_start))
+                            )
+                        }
+                    } else {
+                        Loader(size = 32)
                     }
-                } else {
-                    Loader(size = 32)
                 }
             }
         }

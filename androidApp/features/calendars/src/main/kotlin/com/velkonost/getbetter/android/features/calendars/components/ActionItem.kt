@@ -15,6 +15,7 @@ import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.comments.Comment
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.note.SubNote
+import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.ActionUIItem
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -26,6 +27,7 @@ fun ActionItem(
     item: ActionUIItem<*, *>,
     onAreaClick: (Int) -> Unit,
     onNoteClick: (Note) -> Unit,
+    onTaskClick: (TaskUI) -> Unit,
     onUserClick: () -> Unit
 ) {
     Column {
@@ -58,6 +60,15 @@ fun ActionItem(
         when {
             item.data is Long -> {
                 UserRegisteredActionItem()
+            }
+
+            item.data is TaskUI -> {
+                TaskActionItem(
+                    item = item.data as TaskUI,
+                    onClick = {
+                        onTaskClick(item.data as TaskUI)
+                    }
+                )
             }
 
             item.data is UserInfoShort -> {
