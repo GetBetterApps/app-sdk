@@ -33,19 +33,25 @@ include(
 
     ":shared:features:areas:api",
     ":shared:features:areas:data",
+
     ":shared:features:notes:api",
     ":shared:features:notes:data",
 
+    ":shared:features:affirmations:api",
     ":shared:features:affirmations:data",
+
     ":shared:features:abilities:api",
     ":shared:features:abilities:data",
+
     ":shared:features:tasks:api",
     ":shared:features:tasks:data",
 
     ":shared:features:likes:api",
     ":shared:features:likes:data",
+
     ":shared:features:comments:api",
     ":shared:features:comments:data",
+
     ":shared:features:follows:api",
     ":shared:features:follows:data",
 
@@ -71,12 +77,16 @@ include(
     ":shared:features:diary:api",
     ":shared:features:diary:data",
     ":shared:features:diary:presentation",
+
     ":shared:features:createnote:presentation",
+
     ":shared:features:addarea:presentation",
+    
     ":shared:features:areadetail:presentation",
     ":shared:features:notedetail:presentation",
     ":shared:features:taskdetail:presentation",
     ":shared:features:profiledetail:presentation",
+
     ":shared:features:settings:presentation",
 
     ":shared:features:feedback:api",
