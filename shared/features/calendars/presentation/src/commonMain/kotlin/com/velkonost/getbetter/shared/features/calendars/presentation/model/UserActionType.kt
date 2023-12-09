@@ -30,6 +30,8 @@ sealed interface UserActionType {
     data object UserFollowed : UserActionType
 
     data object UserGotFollower : UserActionType
+
+    data object UserCompletedTask : UserActionType
 }
 
 val UserAction.type: UserActionType?
@@ -52,6 +54,8 @@ val UserAction.type: UserActionType?
 
         entityType == EntityType.Follow && actionType == ActionType.Add -> UserActionType.UserFollowed
         entityType == EntityType.Follower && actionType == ActionType.Add -> UserActionType.UserGotFollower
+
+        entityType == EntityType.Task && actionType == ActionType.Complete -> UserActionType.UserCompletedTask
 
         else -> null
     }

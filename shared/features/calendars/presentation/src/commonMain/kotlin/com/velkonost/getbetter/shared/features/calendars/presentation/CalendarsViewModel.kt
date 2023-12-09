@@ -6,6 +6,7 @@ import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.comments.Comment
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.note.SubNote
+import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDay
 import com.velkonost.getbetter.shared.core.util.DatetimeFormatter.convertToDayOfWeek
@@ -224,6 +225,16 @@ internal constructor(
                                         entityId = item.entityId,
                                         entityType = EntityType.Note,
                                         type = item.type!!
+                                    )
+                                }
+
+                                is UserActionType.UserCompletedTask -> {
+                                    selectedDateItems.add(
+                                        ActionUIItem<TaskUI, Nothing>(
+                                            dayId = value,
+                                            id = item.datetime,
+                                            description =
+                                        )
                                     )
                                 }
 

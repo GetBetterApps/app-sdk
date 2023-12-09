@@ -274,6 +274,8 @@
     <string name="action_user_created_note">You created note!</string>
     <string name="action_user_create_goal">You crated goal!</string>
 
+    <string name="action_user_completed_task">You completed task!</string>
+
     <string name="action_user_completed_goal">You completed the goal!</string>
     <string name="action_user_completed_subgoal">You completed the subgoal!</string>
 
