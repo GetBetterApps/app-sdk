@@ -15,7 +15,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.abilities.components.AbilityItem
 import com.velkonost.getbetter.core.compose.components.Loader
+import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
 import com.velkonost.getbetter.shared.features.abilities.presentation.AbilitiesViewModel
+import com.velkonost.getbetter.shared.features.abilities.presentation.contract.AbilitiesAction
 
 @Composable
 fun AbilitiesScreen(
@@ -34,6 +36,7 @@ fun AbilitiesScreen(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(16.dp),
+                state = listState,
                 contentPadding = PaddingValues(bottom = 140.dp, top = 28.dp)
             ) {
 
@@ -48,4 +51,12 @@ fun AbilitiesScreen(
             }
         }
     }
+
+    listState.OnBottomReached(
+        buffer = state.loadMorePrefetch,
+        isLoading = state.isLoading,
+        onLoadMore = {
+            viewModel.dispatch(AbilitiesAction.LoadNextPage)
+        }
+    )
 }
