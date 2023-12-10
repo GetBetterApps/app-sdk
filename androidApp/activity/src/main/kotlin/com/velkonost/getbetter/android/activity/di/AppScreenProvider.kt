@@ -5,6 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.navigation
 import com.velkonost.getbetter.android.features.abilities.AbilitiesNavRoute
+import com.velkonost.getbetter.android.features.abilitydetails.AbilityDetailsNavRoute
 import com.velkonost.getbetter.android.features.addarea.AddAreaNavRoute
 import com.velkonost.getbetter.android.features.auth.AuthNavRoute
 import com.velkonost.getbetter.android.features.calendars.CalendarsNavRoute
@@ -24,7 +25,8 @@ val AppScreens = setOf(
     AuthNavRoute,
     AddAreaNavRoute,
     NoteDetailNavRoute,
-    TaskDetailNavRoute
+    TaskDetailNavRoute,
+    AbilityDetailsNavRoute
 )
 
 val NavigationScreens = setOf(

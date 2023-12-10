@@ -13,7 +13,6 @@ dependencies {
     implementation(projects.androidApp.core.compose)
 
     implementation(projects.androidApp.features.auth)
-
     implementation(projects.androidApp.features.splash)
     implementation(projects.androidApp.features.social)
     implementation(projects.androidApp.features.diary)
@@ -26,8 +25,9 @@ dependencies {
     implementation(projects.androidApp.features.feedback)
     implementation(projects.androidApp.features.settings)
     implementation(projects.androidApp.features.abilities)
+    implementation(projects.androidApp.features.abilitydetails)
 
-    implementation(projects.shared.core.util)
     implementation(projects.shared.core.vm)
+    implementation(projects.shared.core.util)
     implementation(projects.shared.resources)
 }
