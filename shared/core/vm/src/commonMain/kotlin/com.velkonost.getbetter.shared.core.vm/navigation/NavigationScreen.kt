@@ -29,6 +29,10 @@ sealed class NavigationScreen(val route: String) {
     data object FeedbackNavScreen : NavigationScreen(FEEDBACK_DESTINATION)
 
     data object AbilitiesNavScreen : NavigationScreen(ABILITIES_DESTINATION)
+
+    data object AbilityDetailsNavScreen : NavigationScreen(
+        "$ABILITIES_DESTINATION/?$ARG_ABILITY={$ARG_ABILITY}"
+    )
 }
 
 const val NAV_PREFIX: String = "com.velkonost.getbetter"
@@ -52,9 +56,12 @@ const val SETTINGS_DESTINATION: String = "$NAV_PREFIX.profile/SettingsScreen"
 const val FEEDBACK_DESTINATION: String = "$NAV_PREFIX.profile/FeedbackScreen"
 
 const val ABILITIES_DESTINATION: String = "$NAV_PREFIX.abilities/AbilitiesScreen"
+const val ABILITY_DETAIL_DESTINATION: String = "$NAV_PREFIX.abilities/AbilityDetailsScreen"
+
 
 const val ARG_NOTE: String = "arg_note"
 const val ARG_TASK: String = "arg_note"
+const val ARG_ABILITY: String = "arg_ability"
 const val ARG_IDENTIFY_ANONYMOUS: String = "arg_identify_anonymous"
 
 
