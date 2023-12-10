@@ -116,6 +116,7 @@ include(
     ":androidApp:features:feedback",
     ":androidApp:features:settings",
     ":androidApp:features:abilities",
+    ":androidApp:features:abilitydetails",
 
     ":shared:resources",
     ":shared:umbrella"
