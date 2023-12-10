@@ -44,6 +44,8 @@ include(
     ":shared:features:abilities:data",
     ":shared:features:abilities:presentation",
 
+    ":shared:features:abilitydetails:presentation",
+
     ":shared:features:tasks:api",
     ":shared:features:tasks:data",
 
