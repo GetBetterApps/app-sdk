@@ -20,7 +20,7 @@ internal constructor(
     private val _abilitiesPagingConfig = PagingConfig()
     private var abilitiesLoadingJob: Job? = null
     init {
-        fetchAbilities()
+//        fetchAbilities()
     }
 
     override fun dispatch(action: AbilitiesAction) = when (action) {
@@ -40,7 +40,7 @@ internal constructor(
                 pageSize = _abilitiesPagingConfig.pageSize,
             ) collectAndProcess {
                 isLoading {
-                    emit(viewState.value.copy(isLoading = it))
+                    emit(viewState.value.copy(isLoading = true))
                 }
 
                 onSuccess { items ->
@@ -49,7 +49,7 @@ internal constructor(
 
                     items?.let {
                         val uiItems = viewState.value.items.plus(items)
-                        emit(viewState.value.copy(items = uiItems))
+                        emit(viewState.value.copy(items = uiItems, isLoading = false))
                     }
                 }
             }

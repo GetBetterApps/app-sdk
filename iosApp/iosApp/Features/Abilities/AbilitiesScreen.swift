@@ -48,6 +48,11 @@ struct AbilitiesScreen: View {
                 }.fadingEdge()
             }
         }
+        .onAppear {
+            if state.items.isEmpty {
+                viewModel.dispatch(action: AbilitiesActionLoadNextPage())
+            }
+        }
     }
 }
 
