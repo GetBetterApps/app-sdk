@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.shared.features.calendars.model
+package com.velkonost.getbetter.shared.features.diary.presentation.model
 
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource

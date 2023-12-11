@@ -24,7 +24,7 @@ import com.velkonost.getbetter.android.features.diary.tasks.components.TaskItem
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.extensions.fadingEdge
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
-import com.velkonost.getbetter.shared.features.calendars.model.TasksUISection
+import com.velkonost.getbetter.shared.features.diary.presentation.model.TasksUISection
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource

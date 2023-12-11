@@ -1,13 +1,13 @@
-package com.velkonost.getbetter.shared.features.calendars
+package com.velkonost.getbetter.shared.features.diary.presentation
 
 import AreasRepository
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
-import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewAreaAction
-import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewAreaEvent
-import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewAreaViewState
+import com.velkonost.getbetter.shared.features.diary.presentation.contracts.CreateNewAreaAction
+import com.velkonost.getbetter.shared.features.diary.presentation.contracts.CreateNewAreaEvent
+import com.velkonost.getbetter.shared.features.diary.presentation.contracts.CreateNewAreaViewState
 
 class CreateNewAreaViewModel
 internal constructor(

@@ -26,7 +26,7 @@ import com.velkonost.getbetter.core.compose.components.SingleLineTextField
 import com.velkonost.getbetter.core.compose.components.area.EmojiPicker
 import com.velkonost.getbetter.core.compose.components.area.SelectedEmojiImage
 import com.velkonost.getbetter.shared.core.model.Emoji
-import com.velkonost.getbetter.shared.features.calendars.contracts.CreateNewAreaViewState
+import com.velkonost.getbetter.shared.features.diary.presentation.contracts.CreateNewAreaViewState
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource

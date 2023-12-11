@@ -15,7 +15,7 @@ import com.velkonost.getbetter.shared.features.auth.domain.di.AuthDomainModule
 import com.velkonost.getbetter.shared.features.auth.presentation.di.AuthPresentationModule
 import com.velkonost.getbetter.shared.features.calendars.data.di.CalendarsDataModule
 import com.velkonost.getbetter.shared.features.calendars.data.di.DiaryDataModule
-import com.velkonost.getbetter.shared.features.calendars.presentation.DiaryPresentationModule
+import com.velkonost.getbetter.shared.features.diary.presentation.di.DiaryPresentationModule
 import com.velkonost.getbetter.shared.features.calendars.presentation.di.CalendarsPresentationModule
 import com.velkonost.getbetter.shared.features.comments.data.di.CommentsDataModule
 import com.velkonost.getbetter.shared.features.feedback.data.di.FeedbackDataModule

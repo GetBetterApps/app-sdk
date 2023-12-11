@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.shared.features.calendars.contracts
+package com.velkonost.getbetter.shared.features.diary.presentation.contracts
 
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.area.Area
@@ -6,7 +6,7 @@ import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.util.PrefetchDistanceValue
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
-import com.velkonost.getbetter.shared.features.calendars.model.DiaryTab
+import com.velkonost.getbetter.shared.features.diary.presentation.model.DiaryTab
 import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteViewState
 
 data class DiaryViewState(

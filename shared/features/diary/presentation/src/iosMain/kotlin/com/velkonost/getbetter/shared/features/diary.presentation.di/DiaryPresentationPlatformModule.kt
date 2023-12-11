@@ -1,6 +1,6 @@
-package com.velkonost.getbetter.shared.features.calendars.presentation
+package com.velkonost.getbetter.shared.features.diary.presentation.di
 
-import com.velkonost.getbetter.shared.features.calendars.DiaryViewModel
+import com.velkonost.getbetter.shared.features.diary.presentation.DiaryViewModel
 import org.koin.core.Koin
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module

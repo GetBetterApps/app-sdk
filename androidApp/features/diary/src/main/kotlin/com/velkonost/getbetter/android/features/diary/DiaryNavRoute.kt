@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import com.velkonost.getbetter.core.compose.NavRoute
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationScreen
-import com.velkonost.getbetter.shared.features.calendars.DiaryViewModel
+import com.velkonost.getbetter.shared.features.diary.presentation.DiaryViewModel
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.ImageResource
 import org.koin.androidx.compose.koinViewModel

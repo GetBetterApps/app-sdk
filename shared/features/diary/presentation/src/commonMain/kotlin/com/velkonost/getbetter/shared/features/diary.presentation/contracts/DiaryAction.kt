@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.shared.features.calendars.contracts
+package com.velkonost.getbetter.shared.features.diary.presentation.contracts
 
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.area.Area
