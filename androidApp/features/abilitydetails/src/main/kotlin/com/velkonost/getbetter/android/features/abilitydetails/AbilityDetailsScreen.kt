@@ -61,7 +61,8 @@ fun AbilityDetailsScreen(
                     )
 
                     1 -> AbilityMotivationContent(
-                        items = state.affirmations
+                        items = state.affirmations,
+                        isActive = pagerState.currentPage == 1
                     )
                 }
             }

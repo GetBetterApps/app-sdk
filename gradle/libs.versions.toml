@@ -124,6 +124,7 @@ coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
 coil-landscapist = { module = "com.github.skydoves:landscapist-coil", version.ref = "coil-landscapist" }
 coil-landscapist-placeholder = { module = "com.github.skydoves:landscapist-placeholder", version.ref = "coil-landscapist" }
+coil-landscapist-transformation = { module = "com.github.skydoves:landscapist-transformation", version.ref = "coil-landscapist" }
 
 google-services = { module = "com.google.gms:google-services", version.ref = "google-services" }
 gradle-plugin-android-build-tools = { module = "com.android.tools.build:gradle", version.ref = "gradle-plugin-android-build-tools" }
@@ -227,7 +228,8 @@ app-ui = [
     "coil-compose",
     "coil-svg",
     "coil-landscapist",
-    "coil-landscapist-placeholder"
+    "coil-landscapist-placeholder",
+    "coil-landscapist-transformation"
 ]
 ktor-common = [
     "ktor-client-auth",
