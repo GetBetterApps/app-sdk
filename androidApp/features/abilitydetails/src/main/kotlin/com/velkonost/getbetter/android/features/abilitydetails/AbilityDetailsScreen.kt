@@ -31,13 +31,12 @@ fun AbilityDetailsScreen(
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { state.tabs.size })
 
     val tabsTopPadding: Float by animateFloatAsState(
-        targetValue = if (pagerState.currentPage == 0) 110F else 40F,
+        targetValue = if (pagerState.currentPage == 0) 100F else 40F,
         animationSpec = tween(durationMillis = 300, easing = FastOutLinearInEasing),
         label = ""
     )
 
     Box(modifier = modifier.fillMaxSize()) {
-
         HorizontalPager(
             state = pagerState,
             userScrollEnabled = true,

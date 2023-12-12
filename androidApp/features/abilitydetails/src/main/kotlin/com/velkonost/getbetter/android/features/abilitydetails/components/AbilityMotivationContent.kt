@@ -56,7 +56,7 @@ fun AbilityMotivationContent(
         LazyColumn(
             state = listState,
             flingBehavior = rememberFlingBehaviorMultiplier(
-                multiplier = 0.1f,
+                multiplier = 0.2f,
                 baseFlingBehavior = flingBehavior
             ),
         ) {
@@ -77,8 +77,7 @@ fun AbilityMotivationContent(
 
                 val isItemWithKeyInView by remember {
                     derivedStateOf {
-                        isActive &&
-                                !listState.isScrollInProgress &&
+                        !listState.isScrollInProgress &&
                                 listState.layoutInfo
                                     .visibleItemsInfo
                                     .any { it.key == item.id }

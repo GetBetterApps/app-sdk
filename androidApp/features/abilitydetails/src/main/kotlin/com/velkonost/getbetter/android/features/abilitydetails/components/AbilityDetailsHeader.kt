@@ -55,7 +55,7 @@ fun AbilityDetailsHeader(
             modifier = modifier.padding(start = 12.dp),
             text = title,
             style = MaterialTheme.typography.headlineSmall,
-            color = colorResource(resource = SharedR.colors.text_title)
+            color = colorResource(resource = SharedR.colors.text_title),
         )
     }
 }
