@@ -39,12 +39,27 @@ internal constructor(
                         ability = ability
                     )
                 )
+                fetchAffirmations()
             }
         }
     }
 
     override fun dispatch(action: AbilityDetailsAction) = when (action) {
         is AbilityDetailsAction.UserNotesLoadNextPage -> fetchNotes()
+    }
+
+    private fun fetchAffirmations() {
+        launchJob {
+            viewState.value.ability?.id?.let { abilityId ->
+                abilitiesRepository.getDetails(abilityId) collectAndProcess {
+                    onSuccess { abilityDetails ->
+                        abilityDetails?.let {
+                            emit(viewState.value.copy(affirmations = abilityDetails.affirmations))
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun fetchNotes() {
