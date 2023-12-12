@@ -3,4 +3,6 @@ package com.velkonost.getbetter.shared.features.abilitydetails.presentation.cont
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 
 sealed interface AbilityDetailsAction : UIContract.Action {
+
+    data object UserNotesLoadNextPage : AbilityDetailsAction
 }
