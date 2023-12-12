@@ -45,9 +45,6 @@ internal constructor(
 
     override fun dispatch(action: AbilityDetailsAction) = when (action) {
         is AbilityDetailsAction.UserNotesLoadNextPage -> fetchNotes()
-        else -> {
-
-        }
     }
 
     private fun fetchNotes() {

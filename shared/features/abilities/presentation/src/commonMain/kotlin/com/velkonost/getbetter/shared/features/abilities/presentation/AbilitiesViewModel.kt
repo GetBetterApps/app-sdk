@@ -22,9 +22,7 @@ internal constructor(
 
     override fun dispatch(action: AbilitiesAction) = when (action) {
         is AbilitiesAction.LoadNextPage -> fetchAbilities()
-        else -> {
-
-        }
+        is AbilitiesAction.AbilityClick -> emit(AbilitiesNavigation.NavigateToAbilityDetail(action.value))
     }
 
     private fun fetchAbilities() {

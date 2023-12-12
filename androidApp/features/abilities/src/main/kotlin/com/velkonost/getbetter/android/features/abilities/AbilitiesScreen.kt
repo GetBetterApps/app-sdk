@@ -47,7 +47,7 @@ fun AbilitiesScreen(
                     AbilityItem(
                         item = item,
                         onClick = {
-
+                            viewModel.dispatch(AbilitiesAction.AbilityClick(it))
                         }
                     )
                 }
