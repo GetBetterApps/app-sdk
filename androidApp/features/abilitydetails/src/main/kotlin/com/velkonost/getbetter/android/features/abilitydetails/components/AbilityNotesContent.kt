@@ -32,11 +32,11 @@ fun AbilityNotesContent(
 
     LazyColumn(
         modifier = modifier
-            .padding(top = 20.dp)
+            .padding(top = 40.dp)
             .fillMaxSize()
             .fadingEdge(),
         state = listState,
-        contentPadding = PaddingValues(bottom = 140.dp)
+        contentPadding = PaddingValues(bottom = 140.dp, top = 20.dp)
     ) {
         items(items, key = { it.id }) { item ->
             NoteItem(
