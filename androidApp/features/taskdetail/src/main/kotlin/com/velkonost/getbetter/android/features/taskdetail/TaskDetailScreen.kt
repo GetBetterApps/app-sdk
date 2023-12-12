@@ -382,6 +382,7 @@ fun TaskDetailScreen(
             when (it) {
                 is TaskDetailEvent.NewNoteCreatedSuccess -> {
                     createNewNoteSheetState.hide()
+                    viewModel.dispatch(TaskDetailAction.RefreshUserNotes)
                 }
             }
         }

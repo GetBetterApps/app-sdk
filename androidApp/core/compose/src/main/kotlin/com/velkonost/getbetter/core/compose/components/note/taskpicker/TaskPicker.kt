@@ -61,7 +61,8 @@ fun TaskPicker(
                         if (tasks.isNotEmpty()) {
                             if (it == 0) {
                                 "empty"
-                            } else tasks[it]!!.id.toString()
+                            } else if (tasks.lastIndex >= it) tasks[it]!!.id.toString()
+                            else randomUUID()
                         } else randomUUID()
                     }
                 ) {

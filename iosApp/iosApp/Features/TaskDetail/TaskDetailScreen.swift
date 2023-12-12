@@ -300,6 +300,7 @@ extension TaskDetailScreen {
                     switch(event) {
                     case _ as TaskDetailEventNewNoteCreatedSuccess: do {
                         showingCreateNewNoteSheet = false
+                        viewModel.dispatch(action: TaskDetailActionRefreshUserNotes())
                     }
                     default:
                         break
