@@ -271,7 +271,9 @@ fun TaskDetailScreen(
 
                 if (state.userNotesViewState.items.isEmpty() && state.userNotesViewState.isLoading) {
                     item {
-                        Loader(modifier = Modifier.align(Alignment.Center))
+                        Loader(modifier = Modifier
+                            .fillMaxWidth()
+                            .align(Alignment.Center))
                     }
                 }
 
