@@ -67,6 +67,8 @@
     <string name="task_completed_title">Completed</string>
 
     <string name="task_ability_hidden">Hidden</string>
+
+    <string name="task_user_notes_title">Your notes</string>
     <!--  TASK DETAIL  -->
 
     <!--  PROFILE  -->

@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.android.features.taskdetail
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -8,9 +9,11 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Text
@@ -36,6 +39,8 @@ import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.createnewnote.CreateNewNoteBottomSheet
 import com.velkonost.getbetter.core.compose.components.details.AreaData
 import com.velkonost.getbetter.core.compose.components.notelist.AddNoteItem
+import com.velkonost.getbetter.core.compose.components.notelist.NoteItem
+import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
 import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.TaskDetailViewModel
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailAction
@@ -57,6 +62,7 @@ fun TaskDetailScreen(
     val scope = rememberCoroutineScope()
 
     val interactionSource = remember { MutableInteractionSource() }
+    val listState = rememberLazyListState()
 
     val selectedAreaId = remember { mutableStateOf<Int?>(null) }
     val areaDetailSheetState = rememberModalBottomSheetState(
@@ -77,6 +83,7 @@ fun TaskDetailScreen(
                 modifier = modifier
                     .padding(start = 20.dp, end = 20.dp)
                     .fillMaxSize(),
+                state = listState,
                 contentPadding = PaddingValues(bottom = 220.dp)
             ) {
                 item {
@@ -248,6 +255,38 @@ fun TaskDetailScreen(
                         AbilityDataHidden()
                     }
                 }
+
+                item {
+                    AnimatedVisibility(visible = state.userNotesViewState.items.isNotEmpty()) {
+                        androidx.compose.material3.Text(
+                            modifier = modifier
+                                .padding(top = 24.dp)
+                                .fillMaxWidth(0.8f),
+                            text = stringResource(resource = SharedR.strings.task_user_notes_title),
+                            color = colorResource(resource = SharedR.colors.text_primary),
+                            style = MaterialTheme.typography.headlineSmall
+                        )
+                    }
+                }
+
+                if (state.userNotesViewState.items.isEmpty() && state.userNotesViewState.isLoading) {
+                    item {
+                        Loader(modifier = Modifier.align(Alignment.Center))
+                    }
+                }
+
+                items(state.userNotesViewState.items, key = { it.id }) {
+                    NoteItem(
+                        item = it,
+                        horizontalPadding = 0,
+                        onClick = {
+
+                        },
+                        onLikeClick = {
+
+                        }
+                    )
+                }
             }
 
             if (!state.task!!.isShortInfo) {
@@ -276,6 +315,13 @@ fun TaskDetailScreen(
                 )
             }
         }
+    }
+
+    listState.OnBottomReached(
+        buffer = state.userNotesViewState.loadMorePrefetch,
+        isLoading = state.userNotesViewState.isLoading
+    ) {
+        viewModel.dispatch(TaskDetailAction.UserNotesLoadNextPage)
     }
 
     AreaDetailScreen(

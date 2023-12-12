@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.diary.notes.components.item
+package com.velkonost.getbetter.core.compose.components.notelist
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,8 +21,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.core.compose.components.note.tags.TagItem
-import com.velkonost.getbetter.core.compose.components.notelist.NoteItemData
-import com.velkonost.getbetter.core.compose.components.notelist.NoteItemHeader
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
@@ -34,6 +32,7 @@ import dev.icerock.moko.resources.compose.colorResource
 fun NoteItem(
     modifier: Modifier = Modifier,
     item: Note,
+    horizontalPadding: Int = 20,
     onClick: (Note) -> Unit,
     onLikeClick: (Note) -> Unit
 ) {
@@ -42,7 +41,7 @@ fun NoteItem(
 
     PrimaryBox(
         modifier = modifier
-            .padding(start = 20.dp, end = 20.dp)
+            .padding(horizontal = horizontalPadding.dp)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null
