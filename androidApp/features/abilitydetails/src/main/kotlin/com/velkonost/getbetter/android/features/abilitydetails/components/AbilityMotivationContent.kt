@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import coil.compose.SubcomposeAsyncImage
+import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.coil.CoilImage
@@ -76,7 +77,8 @@ fun AbilityMotivationContent(
 
                 val isItemWithKeyInView by remember {
                     derivedStateOf {
-                        !listState.isScrollInProgress &&
+                        isActive &&
+                                !listState.isScrollInProgress &&
                                 listState.layoutInfo
                                     .visibleItemsInfo
                                     .any { it.key == item.id }
@@ -84,11 +86,8 @@ fun AbilityMotivationContent(
                 }
                 if (isItemWithKeyInView) {
                     LaunchedEffect(Unit) {
-//                        scope.launch {
                         delay(500)
                         isItemAppeared.value = true
-//                        }
-
                     }
                 } else {
                     LaunchedEffect(Unit) {
@@ -101,10 +100,17 @@ fun AbilityMotivationContent(
                         modifier = modifier
                             .fillParentMaxSize()
                             .align(Alignment.Center),
-                        imageModel = { item.imageUrl },
+                        imageRequest = {
+                            ImageRequest
+                                .Builder(context)
+                                .data(item.imageUrl)
+                                .diskCachePolicy(CachePolicy.ENABLED)
+                                .crossfade(true)
+                                .build()
+                        },
                         imageOptions = ImageOptions(
                             contentScale = ContentScale.Crop,
-                            alignment = Alignment.Center
+                            alignment = Alignment.Center,
                         ),
                         component = rememberImageComponent {
 //                        +ShimmerPlugin(
@@ -113,9 +119,6 @@ fun AbilityMotivationContent(
 //                        )
                             +ThumbnailPlugin()
                             +BlurTransformationPlugin(radius = 20)
-//                        if (!isItemAppeared.value) {
-//                            +BlurTransformationPlugin(radius = 0)
-//                        }
                         }
                     )
                     SubcomposeAsyncImage(
@@ -123,20 +126,15 @@ fun AbilityMotivationContent(
                             .fillParentMaxSize()
                             .alpha(imageAlpha)
                             .scale(if (isActive) imageScale else 1f),
-//                            imageModel = { item.imageUrl },
                         model = ImageRequest
                             .Builder(context)
                             .data(item.imageUrl)
+                            .diskCachePolicy(CachePolicy.ENABLED)
                             .crossfade(true)
                             .build(),
                         contentScale = ContentScale.Crop,
                         contentDescription = null,
-//                            imageOptions = ImageOptions(
-//                                contentScale = ContentScale.Crop,
-//                                alignment = Alignment.Center,
-//                            )
                     )
-//                    }
                 }
 
 //                SubcomposeAsyncImage(

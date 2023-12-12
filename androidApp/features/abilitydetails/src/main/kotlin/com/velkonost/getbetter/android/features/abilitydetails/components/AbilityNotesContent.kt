@@ -32,7 +32,7 @@ fun AbilityNotesContent(
 
     LazyColumn(
         modifier = modifier
-            .padding(top = 40.dp)
+            .padding(top = 60.dp)
             .fillMaxSize()
             .fadingEdge(),
         state = listState,
