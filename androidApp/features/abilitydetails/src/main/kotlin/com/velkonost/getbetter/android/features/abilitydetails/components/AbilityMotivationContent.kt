@@ -18,7 +18,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
+import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.coil.CoilImage
+import com.skydoves.landscapist.components.rememberImageComponent
+import com.skydoves.landscapist.placeholder.shimmer.ShimmerPlugin
+import com.skydoves.landscapist.placeholder.thumbnail.ThumbnailPlugin
 import com.velkonost.getbetter.shared.core.model.task.Affirmation
+import com.velkonost.getbetter.shared.resources.SharedR
+import dev.icerock.moko.resources.compose.colorResource
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -42,10 +49,27 @@ fun AbilityMotivationContent(
             ),
         ) {
             items(items, key = { it.id }) { item ->
+                CoilImage(
+                    modifier = modifier
+                        .fillParentMaxHeight()
+                        .align(Alignment.Center),
+                    imageModel = { item.imageUrl }, // loading a network image or local resource using an URL.
+                    imageOptions = ImageOptions(
+                        contentScale = ContentScale.Crop,
+                        alignment = Alignment.Center
+                    ),
+                    component = rememberImageComponent {
+                        +ShimmerPlugin(
+                            baseColor = colorResource(resource = SharedR.colors.main_background),
+                            highlightColor = colorResource(resource = SharedR.colors.button_gradient_start)
+                        )
+                        +ThumbnailPlugin()
+                    }
+                )
+
                 SubcomposeAsyncImage(
                     modifier = modifier
                         .fillParentMaxHeight()
-//                        .fillMaxSize()
                         .align(Alignment.Center),
                     model = ImageRequest
                         .Builder(context)

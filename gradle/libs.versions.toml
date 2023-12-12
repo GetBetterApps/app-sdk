@@ -39,6 +39,7 @@ androidx-lifecycle = "2.6.1"
 androidx-navigation = "2.7.1"
 android-compose-lootie = "6.1.0"
 coil = "2.4.0"
+coil-landscapist = "2.2.12"
 
 gradle-plugin-android-build-tools = "8.0.2"
 gradle-plugin-buildkonfig = "0.13.3"
@@ -121,6 +122,8 @@ androidx-navigation-runtime = { module = "androidx.navigation:navigation-runtime
 
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
+coil-landscapist = { module = "com.github.skydoves:landscapist-coil", version.ref = "coil-landscapist" }
+coil-landscapist-placeholder = { module = "com.github.skydoves:landscapist-placeholder", version.ref = "coil-landscapist" }
 
 google-services = { module = "com.google.gms:google-services", version.ref = "google-services" }
 gradle-plugin-android-build-tools = { module = "com.android.tools.build:gradle", version.ref = "gradle-plugin-android-build-tools" }
@@ -222,7 +225,9 @@ app-ui = [
     "androidx-lifecycle-viewmodel-compose",
     "androidx-navigation-common",
     "coil-compose",
-    "coil-svg"
+    "coil-svg",
+    "coil-landscapist",
+    "coil-landscapist-placeholder"
 ]
 ktor-common = [
     "ktor-client-auth",
