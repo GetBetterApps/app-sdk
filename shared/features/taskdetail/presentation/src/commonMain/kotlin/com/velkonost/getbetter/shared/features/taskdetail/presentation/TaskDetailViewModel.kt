@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.taskdetail.presentation
 
 import AreasRepository
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
@@ -37,6 +38,9 @@ internal constructor(
 
     private var _changeNotInterestingJob: Job? = null
     private var _changeCompletedJob: Job? = null
+
+    private val _notesPagingConfig = PagingConfig()
+    private var notesLoadingJob: Job? = null
 
     init {
         fetchTasks()
@@ -113,6 +117,37 @@ internal constructor(
                         createNewNoteViewModel.value.dispatch(
                             CreateNewNoteAction.InitTasksList(list)
                         )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun fetchUserNotes() {
+        if (_notesPagingConfig.lastPageReached || notesLoadingJob?.isActive == true) return
+
+        notesLoadingJob?.cancel()
+        notesLoadingJob = launchJob {
+            viewState.value.task?.id?.let { taskId ->
+                notesRepository.fetchNotesByTask(
+                    taskId = taskId,
+                    page = _notesPagingConfig.page,
+                    perPage = _notesPagingConfig.pageSize
+                ) collectAndProcess {
+                    isLoading {
+                        val notesViewState =
+                            viewState.value.userNotesViewState.copy(isLoading = true)
+                        emit(viewState.value.copy(userNotesViewState = notesViewState))
+                    }
+                    onSuccess { list ->
+                        list?.let {
+                            val allItems = viewState.value.userNotesViewState.items.plus(list)
+                            val notesViewState = viewState.value.userNotesViewState.copy(
+                                isLoading = false,
+                                items = allItems
+                            )
+                            emit(viewState.value.copy(userNotesViewState = notesViewState))
+                        }
                     }
                 }
             }
