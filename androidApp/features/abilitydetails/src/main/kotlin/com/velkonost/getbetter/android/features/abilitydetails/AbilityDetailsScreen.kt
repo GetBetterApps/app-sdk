@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.android.features.abilitydetails
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -30,18 +31,12 @@ fun AbilityDetailsScreen(
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { state.tabs.size })
 
     val tabsTopPadding: Float by animateFloatAsState(
-        targetValue = if (pagerState.currentPage == 0) 100F else 40F,
+        targetValue = if (pagerState.currentPage == 0) 110F else 40F,
         animationSpec = tween(durationMillis = 300, easing = FastOutLinearInEasing),
         label = ""
     )
 
     Box(modifier = modifier.fillMaxSize()) {
-        AbilityDetailsHeader(
-            title = state.ability?.name ?: "",
-            onBackClick = {
-                viewModel.dispatch(AbilityDetailsAction.NavigateBack)
-            }
-        )
 
         HorizontalPager(
             state = pagerState,
@@ -69,6 +64,15 @@ fun AbilityDetailsScreen(
                     isActive = pagerState.currentPage == 1
                 )
             }
+        }
+
+        AnimatedVisibility(visible = pagerState.currentPage == 0) {
+            AbilityDetailsHeader(
+                title = state.ability?.name ?: "",
+                onBackClick = {
+                    viewModel.dispatch(AbilityDetailsAction.NavigateBack)
+                }
+            )
         }
 
         PrimaryTabs(
