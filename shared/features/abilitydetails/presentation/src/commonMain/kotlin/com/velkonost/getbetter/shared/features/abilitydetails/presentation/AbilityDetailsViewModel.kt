@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.abilitydetails.presentation
 
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.core.vm.SavedStateHandle
 import com.velkonost.getbetter.shared.features.abilities.api.AbilitiesRepository
 import com.velkonost.getbetter.shared.features.abilitydetails.presentation.contract.AbilityDetailsAction
 import com.velkonost.getbetter.shared.features.abilitydetails.presentation.contract.AbilityDetailsNavigation
@@ -12,11 +13,13 @@ import kotlinx.coroutines.Job
 
 class AbilityDetailsViewModel
 internal constructor(
+    savedStateHandle: SavedStateHandle,
     private val notesRepository: NotesRepository,
     private val abilitiesRepository: AbilitiesRepository,
     private val affirmationsRepository: AffirmationsRepository
 ) : BaseViewModel<AbilityDetailsViewState, AbilityDetailsAction, AbilityDetailsNavigation, Nothing>(
-    initialState = AbilityDetailsViewState()
+    initialState = AbilityDetailsViewState(),
+    savedStateHandle = savedStateHandle
 ) {
 
     private val _notesPagingConfig = PagingConfig()
