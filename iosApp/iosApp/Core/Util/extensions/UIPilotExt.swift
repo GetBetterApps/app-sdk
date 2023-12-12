@@ -238,6 +238,9 @@ class PopAwareUINavigationController<E: Equatable>: UINavigationController, UINa
             })),
             String(TaskDetailRoute().route.prefix(while: { value in
                 value != "?"
+            })),
+            String(AbilityDetailsRoute().route.prefix(while: { value in
+                value != "?"
             }))
         ]
         

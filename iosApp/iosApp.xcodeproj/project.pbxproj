@@ -42,6 +42,8 @@
 		461F7C6C2AA8D71F003791CF /* BaseViewModelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C6B2AA8D71F003791CF /* BaseViewModelExt.swift */; };
 		462922D82B13351F00DF080D /* FeedbackDetailBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462922D72B13351F00DF080D /* FeedbackDetailBottomSheet.swift */; };
 		463049E32AFD0590006F60D2 /* LevelBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463049E22AFD0590006F60D2 /* LevelBlock.swift */; };
+		46407B962B28734E004A3AA2 /* AbilityDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46407B952B28734E004A3AA2 /* AbilityDetailsScreen.swift */; };
+		46407B982B28735F004A3AA2 /* AbilityDetailsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46407B972B28735F004A3AA2 /* AbilityDetailsRoute.swift */; };
 		46445AFA2ACD5484008934B2 /* PrivateSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46445AF92ACD5484008934B2 /* PrivateSwitch.swift */; };
 		464478C72B0A0C5800926899 /* ProfileDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464478C62B0A0C5800926899 /* ProfileDetailScreen.swift */; };
 		464478C92B0A101C00926899 /* ProfileDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464478C82B0A101C00926899 /* ProfileDetailViewModel.swift */; };
@@ -201,6 +203,8 @@
 		461F7C6B2AA8D71F003791CF /* BaseViewModelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelExt.swift; sourceTree = "<group>"; };
 		462922D72B13351F00DF080D /* FeedbackDetailBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackDetailBottomSheet.swift; sourceTree = "<group>"; };
 		463049E22AFD0590006F60D2 /* LevelBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelBlock.swift; sourceTree = "<group>"; };
+		46407B952B28734E004A3AA2 /* AbilityDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityDetailsScreen.swift; sourceTree = "<group>"; };
+		46407B972B28735F004A3AA2 /* AbilityDetailsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityDetailsRoute.swift; sourceTree = "<group>"; };
 		46445AF92ACD5484008934B2 /* PrivateSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateSwitch.swift; sourceTree = "<group>"; };
 		464478C62B0A0C5800926899 /* ProfileDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailScreen.swift; sourceTree = "<group>"; };
 		464478C82B0A101C00926899 /* ProfileDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewModel.swift; sourceTree = "<group>"; };
@@ -497,6 +501,7 @@
 		461F7C6D2AA8D7DE003791CF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				46407B942B287345004A3AA2 /* AbilityDetails */,
 				46E380492B24D86500056C0D /* Abilities */,
 				46F0B3BB2B1CD5D700D6BCC1 /* TaskDetail */,
 				467DB0132B14C89200BB9CB3 /* Settings */,
@@ -514,6 +519,15 @@
 				46CDB56A2AADB45200800096 /* Auth */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		46407B942B287345004A3AA2 /* AbilityDetails */ = {
+			isa = PBXGroup;
+			children = (
+				46407B952B28734E004A3AA2 /* AbilityDetailsScreen.swift */,
+				46407B972B28735F004A3AA2 /* AbilityDetailsRoute.swift */,
+			);
+			path = AbilityDetails;
 			sourceTree = "<group>";
 		};
 		464478C52B0A0C3C00926899 /* ProfileDetail */ = {
@@ -1140,6 +1154,7 @@
 				465EC4452B108A0E00444C9C /* ThemingTabs.swift in Sources */,
 				465C1FCA2AC157C300B7AE18 /* ImagePicker.swift in Sources */,
 				46F0B3C82B1CFBE900D6BCC1 /* TaskDetailHeader.swift in Sources */,
+				46407B962B28734E004A3AA2 /* AbilityDetailsScreen.swift in Sources */,
 				46AEEF7D2B0BB76B00A9376C /* CalendarDateItem.swift in Sources */,
 				467D996C2AFA1C9C00F4397E /* AuthorData.swift in Sources */,
 				46B17E142AADE482008C2BC4 /* AuthTextField.swift in Sources */,
@@ -1184,6 +1199,7 @@
 				46FCD3D92AF537590025D2C6 /* AreaData.swift in Sources */,
 				460054A12ABB0D0100586767 /* SettingsButton.swift in Sources */,
 				46F0B3BD2B1CD5F100D6BCC1 /* TaskDetailScreen.swift in Sources */,
+				46407B982B28735F004A3AA2 /* AbilityDetailsRoute.swift in Sources */,
 				466E51982B12328A00088425 /* FeedbackRoute.swift in Sources */,
 				46D857762ACFF23100BE74DA /* PaginationState.swift in Sources */,
 				4646BF9C2AD2BD72000980DD /* AreaDetailBottomButtons.swift in Sources */,
