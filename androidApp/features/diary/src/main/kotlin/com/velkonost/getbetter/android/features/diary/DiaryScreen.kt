@@ -32,6 +32,7 @@ import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
+import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.diary.presentation.DiaryViewModel
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.AddAreaClick
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.AreaLikeClick
@@ -45,7 +46,6 @@ import com.velkonost.getbetter.shared.features.diary.presentation.contracts.Note
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.NotesViewState
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.TaskClick
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.TasksViewState
-import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteAction
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
@@ -86,6 +86,10 @@ fun DiaryScreen(
 
             if (createNewNoteSheetState.currentValue == ModalBottomSheetValue.Expanded) {
                 createNewNoteSheetState.hide()
+            }
+
+            if (areaDetailSheetState.currentValue == ModalBottomSheetValue.Expanded) {
+                areaDetailSheetState.hide()
             }
         }
     }
