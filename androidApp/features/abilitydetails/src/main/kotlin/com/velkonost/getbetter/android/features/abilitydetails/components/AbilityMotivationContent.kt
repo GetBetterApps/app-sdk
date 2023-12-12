@@ -61,9 +61,9 @@ fun AbilityMotivationContent(
             ),
         ) {
             items(items, key = { it.id }) { item ->
-                val isItemAppeared = remember {
-                    mutableStateOf(false)
-                }
+                val isItemAppeared = remember { mutableStateOf(false) }
+                val isTextVisible = remember { mutableStateOf(false) }
+
                 val imageScale by animateFloatAsState(
                     targetValue = if (!isItemAppeared.value) 1F else 1.1F,
                     animationSpec = tween(durationMillis = 750, easing = FastOutLinearInEasing),
@@ -74,10 +74,9 @@ fun AbilityMotivationContent(
                     animationSpec = tween(durationMillis = 750, easing = FastOutLinearInEasing),
                     label = ""
                 )
-
                 val textAlpha by animateFloatAsState(
-                    targetValue = if (!isItemAppeared.value) 0F else 1F,
-                    animationSpec = tween(durationMillis = 150, easing = FastOutLinearInEasing),
+                    targetValue = if (!isTextVisible.value) 0F else 1F,
+                    animationSpec = tween(durationMillis = 250, easing = FastOutLinearInEasing),
                     label = ""
                 )
 
@@ -91,11 +90,13 @@ fun AbilityMotivationContent(
                 }
                 if (isItemWithKeyInView) {
                     LaunchedEffect(Unit) {
+                        isTextVisible.value = true
                         delay(500)
                         isItemAppeared.value = true
                     }
                 } else {
                     LaunchedEffect(Unit) {
+                        isTextVisible.value = false
                         isItemAppeared.value = false
                     }
                 }

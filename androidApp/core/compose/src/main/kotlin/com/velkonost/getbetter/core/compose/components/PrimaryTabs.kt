@@ -20,6 +20,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
@@ -35,6 +36,7 @@ fun PrimaryTabs(
     modifier: Modifier = Modifier,
     tabs: List<String>,
     topPadding: Int = 40,
+    alpha: Float = 1f,
     pagerState: PagerState
 ) {
     val scope = rememberCoroutineScope()
@@ -42,6 +44,7 @@ fun PrimaryTabs(
     CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
         TabRow(
             modifier = modifier
+                .alpha(alpha)
                 .padding(top = topPadding.dp, start = 20.dp, end = 20.dp)
                 .shadow(
                     elevation = 8.dp,

@@ -35,6 +35,11 @@ fun AbilityDetailsScreen(
         animationSpec = tween(durationMillis = 300, easing = FastOutLinearInEasing),
         label = ""
     )
+    val tabsAlpha by animateFloatAsState(
+        targetValue = if (pagerState.currentPage == 0) 1F else 0.6F,
+        animationSpec = tween(durationMillis = 300, easing = FastOutLinearInEasing),
+        label = ""
+    )
 
     Box(modifier = modifier.fillMaxSize()) {
         HorizontalPager(
@@ -75,6 +80,7 @@ fun AbilityDetailsScreen(
         }
 
         PrimaryTabs(
+            alpha = tabsAlpha,
             tabs = state.tabs.map { it.title.toString(LocalContext.current) },
             pagerState = pagerState,
             topPadding = tabsTopPadding.toInt()
