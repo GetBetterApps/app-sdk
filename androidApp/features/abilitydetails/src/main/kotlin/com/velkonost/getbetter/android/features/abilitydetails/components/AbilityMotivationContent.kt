@@ -75,6 +75,12 @@ fun AbilityMotivationContent(
                     label = ""
                 )
 
+                val textAlpha by animateFloatAsState(
+                    targetValue = if (!isItemAppeared.value) 0F else 1F,
+                    animationSpec = tween(durationMillis = 150, easing = FastOutLinearInEasing),
+                    label = ""
+                )
+
                 val isItemWithKeyInView by remember {
                     derivedStateOf {
                         !listState.isScrollInProgress &&
@@ -94,7 +100,6 @@ fun AbilityMotivationContent(
                     }
                 }
                 Box {
-
                     CoilImage(
                         modifier = modifier
                             .fillParentMaxSize()
@@ -112,10 +117,6 @@ fun AbilityMotivationContent(
                             alignment = Alignment.Center,
                         ),
                         component = rememberImageComponent {
-//                        +ShimmerPlugin(
-//                            baseColor = colorResource(resource = SharedR.colors.main_background),
-//                            highlightColor = colorResource(resource = SharedR.colors.button_gradient_start)
-//                        )
                             +ThumbnailPlugin()
                             +BlurTransformationPlugin(radius = 20)
                         }
@@ -134,39 +135,12 @@ fun AbilityMotivationContent(
                         contentScale = ContentScale.Crop,
                         contentDescription = null,
                     )
-                }
 
-//                SubcomposeAsyncImage(
-//                    modifier = modifier
-//                        .fillParentMaxHeight()
-//                        .align(Alignment.Center),
-//                    model = ImageRequest
-//                        .Builder(context)
-//                        .data(item.imageUrl)
-//                        .crossfade(true)
-//                        .build(),
-//                    contentScale = ContentScale.Crop,
-//                    contentDescription = null,
-////            loading = {
-////                Box {
-////                    CircularProgressIndicator(
-////                        modifier = modifier
-////                            .size(64.dp)
-////                            .align(Alignment.Center),
-////                        color = colorResource(resource = SharedR.colors.text_light).copy(alpha = 0.5f)
-////                    )
-////                }
-////            },
-////            error = {
-////                Image(
-////                    modifier = modifier
-////                        .size(64.dp)
-////                        .clip(MaterialTheme.shapes.small),
-////                    painter = painterResource(imageResource = SharedR.images.logo),
-////                    contentDescription = null
-////                )
-////            }
-//                )
+                    AffirmationText(
+                        modifier = modifier.alpha(textAlpha),
+                        text = item.text
+                    )
+                }
             }
         }
     }
