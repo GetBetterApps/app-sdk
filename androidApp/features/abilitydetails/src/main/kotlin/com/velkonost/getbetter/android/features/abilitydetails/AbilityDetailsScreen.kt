@@ -38,7 +38,8 @@ fun AbilityDetailsScreen(
         Box {
             PrimaryTabs(
                 tabs = state.tabs.map { it.title.toString(LocalContext.current) },
-                pagerState = pagerState
+                pagerState = pagerState,
+                topPadding = 12
             )
 
             HorizontalPager(

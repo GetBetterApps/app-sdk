@@ -31,7 +31,7 @@ sealed class NavigationScreen(val route: String) {
     data object AbilitiesNavScreen : NavigationScreen(ABILITIES_DESTINATION)
 
     data object AbilityDetailsNavScreen : NavigationScreen(
-        "$ABILITIES_DESTINATION/?$ARG_ABILITY={$ARG_ABILITY}"
+        "$ABILITY_DETAIL_DESTINATION/?$ARG_ABILITY={$ARG_ABILITY}"
     )
 }
 

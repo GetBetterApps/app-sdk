@@ -34,6 +34,7 @@ import kotlinx.coroutines.launch
 fun PrimaryTabs(
     modifier: Modifier = Modifier,
     tabs: List<String>,
+    topPadding: Int = 40,
     pagerState: PagerState
 ) {
     val scope = rememberCoroutineScope()
@@ -41,7 +42,7 @@ fun PrimaryTabs(
     CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
         TabRow(
             modifier = modifier
-                .padding(top = 40.dp, start = 20.dp, end = 20.dp)
+                .padding(top = topPadding.dp, start = 20.dp, end = 20.dp)
                 .shadow(
                     elevation = 8.dp,
                     shape = MaterialTheme.shapes.medium,
