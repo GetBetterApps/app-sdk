@@ -88,12 +88,23 @@ internal constructor(
         is TaskDetailAction.CreateGoalClick -> obtainCreateGoal()
         is TaskDetailAction.CreateNoteClick -> obtainCreateDefaultNote()
         is TaskDetailAction.UserNotesLoadNextPage -> fetchUserNotes()
+        is TaskDetailAction.RefreshUserNotes -> refreshUserNotes()
     }
 
     fun dispatch(action: CreateNewNoteAction) = dispatchCreateNewNoteAction(action)
 
     private fun dispatchCreateNewNoteAction(action: CreateNewNoteAction) {
         createNewNoteViewModel.value.dispatch(action)
+    }
+
+    private fun refreshUserNotes() {
+        _notesPagingConfig.page = 0
+        _notesPagingConfig.lastPageReached = false
+
+        val notesViewState = viewState.value.userNotesViewState.copy(items = emptyList())
+        emit(viewState.value.copy(userNotesViewState = notesViewState))
+
+        fetchUserNotes()
     }
 
     private fun fetchAreas() {
