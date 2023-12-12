@@ -153,13 +153,48 @@ struct TaskDetailScreen : View {
                                 AbilityDataHidden()
                             }
                             
+                            if !state.userNotesViewState.items.isEmpty {
+                                HStack {
+                                    Text(SharedR.strings().task_user_notes_title.desc().localized())
+                                        .style(.headlineSmall)
+                                        .foregroundColor(.textPrimary)
+                                    Spacer()
+                                }
+                            }
+                            
+                            ForEach(state.userNotesViewState.items, id: \.self.id) { item in
+                                NoteItem(
+                                    item: item,
+                                    onClick: { value in
+                                        
+                                    },
+                                    onLikeClick: { value in
+                                        
+                                    }
+                                )
+                                .onAppear {
+                                    checkPaginationThreshold(
+                                        currentItemId: item.id,
+                                        loadMorePrefetch: Int(state.userNotesViewState.loadMorePrefetch),
+                                        isLoading: state.userNotesViewState.isLoading,
+                                        onBottomReach: {
+                                            viewModel.dispatch(action: TaskDetailActionUserNotesLoadNextPage())
+                                        }
+                                    )
+                                }
+                            }
+                            
+                            if state.userNotesViewState.items.isEmpty && state.userNotesViewState.isLoading {
+                                Loader().frame(alignment: .center)
+                            }
+                            
                             
                             Spacer().frame(height: 140)
                         }
                         .frame(alignment: .leading)
                         .padding(.horizontal, 20)
                     }
-                }
+                }.animation(.easeInOut, value: state.userNotesViewState)
                 
                 if !state.task!.isShortInfo {
                     VStack(alignment: .trailing) {
@@ -264,6 +299,15 @@ extension TaskDetailScreen {
                     }
                 }
             }
+        }
+    }
+    
+    func checkPaginationThreshold(currentItemId: Int32, loadMorePrefetch: Int, isLoading: Bool, onBottomReach: () -> Void) {
+        let data = (viewModel.viewStateValue as! TaskDetailViewState).userNotesViewState.items
+        let thresholdIndex = data.index(data.endIndex, offsetBy: -loadMorePrefetch)
+        
+        if data.firstIndex(where: { $0.id == currentItemId })! >= thresholdIndex && !isLoading {
+            onBottomReach()
         }
     }
 }

@@ -269,14 +269,6 @@ fun TaskDetailScreen(
                     }
                 }
 
-                if (state.userNotesViewState.items.isEmpty() && state.userNotesViewState.isLoading) {
-                    item {
-                        Loader(modifier = Modifier
-                            .fillMaxWidth()
-                            .align(Alignment.Center))
-                    }
-                }
-
                 items(state.userNotesViewState.items, key = { it.id }) {
                     NoteItem(
                         item = it,
@@ -288,6 +280,16 @@ fun TaskDetailScreen(
 
                         }
                     )
+                }
+
+                if (state.userNotesViewState.items.isEmpty() && state.userNotesViewState.isLoading) {
+                    item {
+                        Loader(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .align(Alignment.Center)
+                        )
+                    }
                 }
             }
 
