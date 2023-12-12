@@ -29,7 +29,7 @@ struct AbilitiesScreen: View {
                             AbilityItem(
                                 item: item,
                                 onClick: { value in
-                                    
+                                    viewModel.dispatch(action: AbilitiesActionAbilityClick(value: value))
                                 }
                             )
                             .onAppear {
