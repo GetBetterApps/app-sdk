@@ -60,7 +60,9 @@ fun AbilityDetailsScreen(
                         }
                     )
 
-                    1 -> AbilityMotivationContent()
+                    1 -> AbilityMotivationContent(
+                        items = state.affirmations
+                    )
                 }
             }
 
