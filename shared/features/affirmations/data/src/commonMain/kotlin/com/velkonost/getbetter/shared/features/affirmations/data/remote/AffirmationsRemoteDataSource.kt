@@ -33,5 +33,4 @@ class AffirmationsRemoteDataSource(
             body = body
         )
     }.body()
-
 }

@@ -1,8 +1,12 @@
 package com.velkonost.getbetter.android.features.abilitydetails.components
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -10,34 +14,35 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
+import com.velkonost.getbetter.shared.core.model.task.Affirmation
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AbilityMotivationContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    items: List<Affirmation>
 ) {
 
+    val listState = rememberLazyListState()
     val context = LocalContext.current
-    var imageRequest = ImageRequest.Builder(context)
-        .data("http://62.113.117.236/affirmations/image")
-        .crossfade(true)
-        .build()
-
 
     Box(modifier = modifier.fillMaxSize()) {
-        SubcomposeAsyncImage(
-            modifier = modifier
-                .fillMaxSize()
-                .align(Alignment.Center)
-                .clickable {
-                    imageRequest = ImageRequest
+        LazyColumn(
+            state = listState,
+            flingBehavior = rememberSnapFlingBehavior(listState),
+        ) {
+            items(items, key = { it.id }) { item ->
+                SubcomposeAsyncImage(
+                    modifier = modifier
+                        .fillMaxSize()
+                        .align(Alignment.Center),
+                    model = ImageRequest
                         .Builder(context)
-                        .data("http://62.113.117.236/affirmations/image")
+                        .data(item.imageUrl)
                         .crossfade(true)
-                        .build()
-                },
-            model = imageRequest,
-            contentScale = ContentScale.Crop,
-            contentDescription = null,
+                        .build(),
+                    contentScale = ContentScale.Crop,
+                    contentDescription = null,
 //            loading = {
 //                Box {
 //                    CircularProgressIndicator(
@@ -57,7 +62,9 @@ fun AbilityMotivationContent(
 //                    contentDescription = null
 //                )
 //            }
-        )
+                )
+            }
+        }
     }
 
 }

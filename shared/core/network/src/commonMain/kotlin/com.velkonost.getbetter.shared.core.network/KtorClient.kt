@@ -18,7 +18,7 @@ const val KTOR_REQUEST_TIMEOUT_MILLIS = 30_000L
 
 private const val URL = "http://62.113.117.236"
 const val AVATAR_URL = "$URL/userinfo/getAvatar/"
-const val AFFIRMATION_IMAGE_URL = "$URL/affirmations/image"
+const val AFFIRMATION_IMAGE_URL = "$URL/affirmations/image/"
 
 internal val KtorClient: HttpClient
     get() {
