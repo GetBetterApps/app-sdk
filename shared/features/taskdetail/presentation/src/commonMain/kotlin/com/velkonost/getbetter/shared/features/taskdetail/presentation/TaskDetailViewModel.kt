@@ -87,6 +87,7 @@ internal constructor(
         is TaskDetailAction.CompletedClick -> obtainChangeCompleted()
         is TaskDetailAction.CreateGoalClick -> obtainCreateGoal()
         is TaskDetailAction.CreateNoteClick -> obtainCreateDefaultNote()
+        is TaskDetailAction.UserNotesLoadNextPage -> fetchUserNotes()
     }
 
     fun dispatch(action: CreateNewNoteAction) = dispatchCreateNewNoteAction(action)
@@ -140,6 +141,9 @@ internal constructor(
                         emit(viewState.value.copy(userNotesViewState = notesViewState))
                     }
                     onSuccess { list ->
+                        _notesPagingConfig.lastPageReached = list.isNullOrEmpty()
+                        _notesPagingConfig.page++
+
                         list?.let {
                             val allItems = viewState.value.userNotesViewState.items.plus(list)
                             val notesViewState = viewState.value.userNotesViewState.copy(

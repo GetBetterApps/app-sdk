@@ -20,4 +20,6 @@ sealed interface TaskDetailAction : UIContract.Action {
     data object NavigateBack : TaskDetailAction, TaskDetailNavigation {
         override val event: NavigationEvent = NavigationEvent.NavigateUp()
     }
+
+    data object UserNotesLoadNextPage : TaskDetailAction
 }

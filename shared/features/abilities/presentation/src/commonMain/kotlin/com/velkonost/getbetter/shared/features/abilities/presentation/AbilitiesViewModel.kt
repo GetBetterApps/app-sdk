@@ -19,9 +19,6 @@ internal constructor(
 
     private val _abilitiesPagingConfig = PagingConfig()
     private var abilitiesLoadingJob: Job? = null
-    init {
-//        fetchAbilities()
-    }
 
     override fun dispatch(action: AbilitiesAction) = when (action) {
         is AbilitiesAction.LoadNextPage -> fetchAbilities()
