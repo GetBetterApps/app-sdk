@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.android.features.abilitydetails
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,23 +29,19 @@ fun AbilityDetailsScreen(
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { state.tabs.size })
 
     Column(modifier = modifier.fillMaxSize()) {
-        AbilityDetailsHeader(
-            title = state.ability?.name ?: "",
-            onBackClick = {
-                viewModel.dispatch(AbilityDetailsAction.NavigateBack)
-            }
-        )
+        AnimatedVisibility(visible = pagerState.currentPage == 0) {
+            AbilityDetailsHeader(
+                title = state.ability?.name ?: "",
+                onBackClick = {
+                    viewModel.dispatch(AbilityDetailsAction.NavigateBack)
+                }
+            )
+        }
 
         Box {
-            PrimaryTabs(
-                tabs = state.tabs.map { it.title.toString(LocalContext.current) },
-                pagerState = pagerState,
-                topPadding = 12
-            )
-
             HorizontalPager(
                 state = pagerState,
-                userScrollEnabled = false,
+                userScrollEnabled = true,
                 beyondBoundsPageCount = 2
             ) { index ->
                 when (index) {
@@ -63,9 +60,15 @@ fun AbilityDetailsScreen(
                         }
                     )
 
-                    else -> AbilityMotivationContent()
+                    1 -> AbilityMotivationContent()
                 }
             }
+
+            PrimaryTabs(
+                tabs = state.tabs.map { it.title.toString(LocalContext.current) },
+                pagerState = pagerState,
+                topPadding = if (pagerState.currentPage == 0) 12 else 40
+            )
         }
     }
 

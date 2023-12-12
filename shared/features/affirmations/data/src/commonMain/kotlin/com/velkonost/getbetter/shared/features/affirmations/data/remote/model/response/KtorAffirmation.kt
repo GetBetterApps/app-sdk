@@ -13,12 +13,16 @@ data class KtorAffirmation(
     val text: String,
 
     @SerialName("isFavorite")
-    val isFavorite: Boolean
+    val isFavorite: Boolean,
+
+    @SerialName("imageUrl")
+    val imageUrl: String
 )
 
 fun KtorAffirmation.asExternalModel() =
     Affirmation(
         id = id,
         text = text,
-        isFavorite = isFavorite
+        isFavorite = isFavorite,
+        imageUrl = imageUrl
     )
