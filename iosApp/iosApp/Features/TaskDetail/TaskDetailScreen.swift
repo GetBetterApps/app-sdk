@@ -160,6 +160,7 @@ struct TaskDetailScreen : View {
                                         .foregroundColor(.textPrimary)
                                     Spacer()
                                 }
+                                .padding(.top, 24)
                             }
                             
                             ForEach(state.userNotesViewState.items, id: \.self.id) { item in
@@ -194,7 +195,13 @@ struct TaskDetailScreen : View {
                         .frame(alignment: .leading)
                         .padding(.horizontal, 20)
                     }
-                }.animation(.easeInOut, value: state.userNotesViewState)
+                }
+                .animation(.easeInOut, value: state.userNotesViewState)
+                .onAppear {
+                    if state.userNotesViewState.items.isEmpty {
+                        viewModel.dispatch(action: TaskDetailActionUserNotesLoadNextPage())
+                    }
+                }
                 
                 if !state.task!.isShortInfo {
                     VStack(alignment: .trailing) {
