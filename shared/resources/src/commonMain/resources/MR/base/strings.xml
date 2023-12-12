@@ -71,6 +71,11 @@
     <string name="task_user_notes_title">Your notes</string>
     <!--  TASK DETAIL  -->
 
+    <!--  ABILITY DETAIL  -->
+    <string name="ability_detail_notes_title">Your notes</string>
+    <string name="ability_detail_motivation_title">Motivation</string>
+    <!--  ABILITY DETAIL  -->
+
     <!--  PROFILE  -->
     <string name="profile_title">Profile</string>
 
