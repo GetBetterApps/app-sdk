@@ -31,10 +31,13 @@ struct AbilityItem: View {
                     Spacer()
                 }
                 
-                Text(item.description_)
-                    .style(.labelMedium)
-                    .foregroundColor(.textPrimary)
-                    .padding(.top, 12)
+                HStack {
+                    Text(item.description_)
+                        .style(.labelMedium)
+                        .foregroundColor(.textPrimary)
+                        .padding(.top, 12)
+                    Spacer()
+                }
                 
                 HStack {
                     Text(SharedR.strings().experience_your_title.desc().localized())
