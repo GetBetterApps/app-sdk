@@ -42,7 +42,10 @@ struct AbilityDetailsScreen: View {
                 
                 AbilityMotivationContent(
                     items: state.affirmations,
-                    isActive: currentIndex == 1
+                    isActive: currentIndex == 1,
+                    itemFavoriteClick: { value in
+//                        viewModel.dispatch(action: AbiliDEFa)
+                    }
                 ).tag(1)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))

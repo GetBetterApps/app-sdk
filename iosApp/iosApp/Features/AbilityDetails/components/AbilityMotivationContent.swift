@@ -15,10 +15,14 @@ struct AbilityMotivationContent: View {
     
     private let items: [Affirmation]
     private let isActive: Bool
+    private let itemFavoriteClick: (Affirmation) -> Void
     
-    init(items: [Affirmation], isActive: Bool) {
+    init(items: [Affirmation], isActive: Bool, itemFavoriteClick: @escaping (Affirmation) -> Void) {
         self.items = items
         self.isActive = isActive
+        self.itemFavoriteClick = itemFavoriteClick
+        self.isBlurred = isBlurred
+        self.isScaled = isScaled
     }
     
     @StateObject var page: Page = .first()
@@ -73,38 +77,43 @@ struct AbilityMotivationContent: View {
             })
             .edgesIgnoringSafeArea(.all)
             
-            VStack {
-                Spacer()
-                HStack(spacing: 0) {
+            if !items.isEmpty {
+                VStack {
                     Spacer()
-                    
-                    Image(uiImage: SharedR.images().ic_empty_star.toUIImage()!)
-                        .resizable()
-                        .renderingMode(.template)
-                        .foregroundColor(.iconActive)
-                        .frame(width: 26, height: 26)
-                        .padding(10)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.backgroundIcon.opacity(0.6))
-                                .shadow(radius: 8)
-                        )
-                        .padding(.trailing, 12)
-                    
-                    Image(uiImage: SharedR.images().ic_share.toUIImage()!)
-                        .resizable()
-                        .renderingMode(.template)
-                        .foregroundColor(.iconActive)
-                        .frame(width: 26, height: 26)
-                        .padding(10)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.backgroundIcon.opacity(0.6))
-                                .shadow(radius: 8)
-                        )
-                        .padding(.trailing, 24)
+                    HStack(spacing: 0) {
+                        Spacer()
+                        
+                        Image(uiImage: items[page.index].isFavorite ? SharedR.images().ic_star.toUIImage()! : SharedR.images().ic_empty_star.toUIImage()!)
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.iconActive)
+                            .frame(width: 26, height: 26)
+                            .padding(10)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.backgroundIcon.opacity(0.6))
+                                    .shadow(radius: 8)
+                            )
+                            .padding(.trailing, 12)
+                            .onTapGesture {
+                                itemFavoriteClick(items[page.index])
+                            }
+                        
+                        Image(uiImage: SharedR.images().ic_share.toUIImage()!)
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.iconActive)
+                            .frame(width: 26, height: 26)
+                            .padding(10)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.backgroundIcon.opacity(0.6))
+                                    .shadow(radius: 8)
+                            )
+                            .padding(.trailing, 24)
+                    }
+                    .padding(.bottom, 48)
                 }
-                .padding(.bottom, 48)
             }
         }
         
