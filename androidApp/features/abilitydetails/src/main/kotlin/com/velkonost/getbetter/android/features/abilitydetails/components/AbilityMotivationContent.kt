@@ -66,8 +66,8 @@ fun AbilityMotivationContent(
                         .size(42.dp)
                         .background(
                             color = colorResource(resource = SharedR.colors.background_icon)
-                                .copy(alpha = 0.4f),
-                            shape = androidx.compose.material3.MaterialTheme.shapes.small
+                                .copy(alpha = 0.6f),
+                            shape = androidx.compose.material3.MaterialTheme.shapes.medium
                         )
                         .padding(8.dp),
                     painter = painterResource(imageResource = SharedR.images.ic_empty_star),
@@ -81,8 +81,8 @@ fun AbilityMotivationContent(
                         .size(42.dp)
                         .background(
                             color = colorResource(resource = SharedR.colors.background_icon)
-                                .copy(alpha = 0.4f),
-                            shape = androidx.compose.material3.MaterialTheme.shapes.small
+                                .copy(alpha = 0.6f),
+                            shape = androidx.compose.material3.MaterialTheme.shapes.medium
                         )
                         .padding(8.dp),
                     painter = painterResource(imageResource = SharedR.images.ic_share),
