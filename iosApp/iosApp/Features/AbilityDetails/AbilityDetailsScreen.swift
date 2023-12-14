@@ -44,7 +44,7 @@ struct AbilityDetailsScreen: View {
                     items: state.affirmations,
                     isActive: currentIndex == 1,
                     itemFavoriteClick: { value in
-//                        viewModel.dispatch(action: AbiliDEFa)
+                        viewModel.dispatch(action: AbilityDetailsActionFavoriteClick(value: value))
                     }
                 ).tag(1)
             }
