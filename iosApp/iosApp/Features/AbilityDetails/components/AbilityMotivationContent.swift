@@ -38,13 +38,10 @@ struct AbilityMotivationContent: View {
                 )
             }
             .vertical()
-            .sensitivity(.low)
-//            .interactive(rotation: true)
-//            .preferredItemSize(UIScreen.screenSize)
+            .sensitivity(.medium)
+            
+            .preferredItemSize(UIScreen.screenSize)
             .edgesIgnoringSafeArea(.all)
-            
-            
-//            .alignment(.center)
         }
         
        

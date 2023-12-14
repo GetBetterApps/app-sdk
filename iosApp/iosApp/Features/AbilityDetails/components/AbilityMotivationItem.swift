@@ -30,18 +30,20 @@ struct AbilityMotivationItem: View {
             AsyncImage(url: URL(string: item.imageUrl)) { image in
                 image
                     .resizable()
-                    .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
+                    
 //                            .scaledToFit()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
                     .blur(radius: isActive ? 0 : 20)
-                    .scaleEffect(isScaled ? 1.2 : 1)
-                    
+                    .scaleEffect(isScaled ? 1.2 : 1.02)
+                    .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
+                    .clipped()
                     
             } placeholder: {
                 
             }
         }
+        
         .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
         
         .animation(.easeInOut.delay(0.5).speed(0.5), value: isActive)
