@@ -43,7 +43,37 @@ struct AbilityMotivationContent: View {
             .edgesIgnoringSafeArea(.all)
             
             VStack {
-                
+                Spacer()
+                HStack(spacing: 0) {
+                    Spacer()
+                    
+                    Image(uiImage: SharedR.images().ic_empty_star.toUIImage()!)
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(.iconActive)
+                        .frame(width: 32, height: 32)
+                        .padding(12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 6)
+                                .fill(Color.backgroundIcon.opacity(0.4))
+                                .shadow(radius: 8)
+                        )
+                        .padding(.trailing, 12)
+                    
+                    Image(uiImage: SharedR.images().ic_share.toUIImage()!)
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(.iconActive)
+                        .frame(width: 32, height: 32)
+                        .padding(12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 6)
+                                .fill(Color.backgroundIcon.opacity(0.4))
+                                .shadow(radius: 8)
+                        )
+                        .padding(.trailing, 24)
+                }
+                .padding(.bottom, 32)
             }
         }
         
