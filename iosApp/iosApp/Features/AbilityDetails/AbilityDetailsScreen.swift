@@ -18,12 +18,43 @@ struct AbilityDetailsScreen: View {
     
     @StateViewModel var viewModel: AbilityDetailsViewModel
     @State private var eventsObserver: Task<(), Error>? = nil
+    @State var currentIndex: Int = 0
     
     var body: some View {
         @State var state = viewModel.viewStateValue as! AbilityDetailsViewState
         
         ZStack {
+            TabView(selection: $currentIndex) {
+                AbilityNotesContent(
+                    isLoading: state.userNotesViewState.isLoading,
+                    items: state.userNotesViewState.items,
+                    loadMorePrefetch: Int(state.userNotesViewState.loadMorePrefetch),
+                    itemClick: { value in
+                        
+                    },
+                    itemLikeClick: { value in
+                        
+                    },
+                    onBottomReach: {
+                        viewModel.dispatch(action: AbilityDetailsActionUserNotesLoadNextPage())
+                    }
+                ).tag(0)
+                
+                AbilityMotivationContent(
+                    items: state.affirmations,
+                    isActive: currentIndex == 1
+                ).tag(1)
+            }
             
+            if currentIndex == 0 {
+                AbilityDetailsHeader(title: state.ability?.name?)
+            }
+            
+            PrimaryTabs(
+                selectedPage: Binding<Int>,
+                tabs: state.tabs.map({ tab in tab.title.localized()})
+            )
         }
+        .animation(.easeInOut, value: currentIndex)
     }
 }
