@@ -65,10 +65,5 @@ struct AbilityDetailsScreen: View {
         }
         .animation(.easeInOut, value: currentIndex)
         .edgesIgnoringSafeArea(.all)
-        .onAppear {
-//            if state.userNotesViewState.items.isEmpty {
-//                viewModel.dispatch(action: AbilityDetailsActionUserNotesLoadNextPage())
-//            }
-        }
     }
 }

@@ -55,11 +55,6 @@ struct AbilityNotesContent: View {
             }.fadingEdge()
         }
         .padding(.top, 80)
-//        .onAppear {
-////            if items.isEmpty {
-//                onBottomReach()
-////            }
-//        }
     }
 }
 
