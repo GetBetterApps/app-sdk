@@ -16,11 +16,13 @@ struct AbilityMotivationItem: View {
     
     private let isActive: Bool
     private let isScaled: Bool
+    private let isTextVisible: Bool
     
     init(item: Affirmation, isActive: Bool) {
         self.item = item
         self.isActive = isActive
         self.isScaled = isActive
+        self.isTextVisible = isActive
     }
     
     @State var blurRadius: CGFloat = 20
@@ -44,11 +46,13 @@ struct AbilityMotivationItem: View {
             VStack {
                 Spacer()
                 AffirmationText(text: item.text)
+                    .opacity(isTextVisible ? 1 : 0)
                 Spacer()
             }
         }
         .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
         .animation(.easeInOut.delay(0.5).speed(0.5), value: isActive)
         .animation(.easeInOut.delay(1.5).speed(0.5), value: isScaled)
+        .animation(.easeInOut.speed(2), value: isTextVisible)
     }
 }

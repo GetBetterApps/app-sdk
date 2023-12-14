@@ -10,11 +10,11 @@ import Foundation
 import SwiftUI
 
 public extension Text {
-    func style(_ style: TextStyle, withSize size: CGFloat = CGFloat.nan) -> some View {
+    func style(_ style: TextStyle, withSize size: CGFloat = CGFloat.nan, withLineSpacing lineSpacing: CGFloat = CGFloat.nan) -> some View {
         return self
             .font(Font(style.font.uiFont(withSize: !size.isNaN ? size : style.size)))
             .tracking(style.tracking)
-            .lineSpacing(style.lineSpacing)
+            .lineSpacing(!lineSpacing.isNaN ? lineSpacing : style.lineSpacing)
     }
 }
 

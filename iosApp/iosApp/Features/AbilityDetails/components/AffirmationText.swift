@@ -21,9 +21,8 @@ struct AffirmationText: View {
     var body: some View {
         VStack(alignment: .center) {
             Text(text)
-                .style(.titleMedium)
+                .style(.titleMedium, withLineSpacing: 12)
                 .foregroundColor(.textTitle)
-                .lineSpacing(12)
                 .multilineTextAlignment(.center)
             
         }
