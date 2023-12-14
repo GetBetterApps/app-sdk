@@ -62,7 +62,7 @@ internal constructor(
                 pageSize = 100
             ) collectAndProcess {
                 onSuccess { items ->
-                    val currentItems = viewState.value.items.toMutableList()
+                    val currentItems = viewState.value.items
                     currentItems.forEach { currentItem ->
                         items?.firstOrNull { item -> item.id == currentItem.id }?.let {
                             currentItem.experienceData = it.experienceData

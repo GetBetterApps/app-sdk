@@ -25,7 +25,7 @@ struct AbilitiesScreen: View {
             } else {
                 ScrollView(showsIndicators: false) {
                     LazyVStack(spacing: 0) {
-                        ForEach(state.items, id: \.self.id) { item in
+                        ForEach(state.items, id: \.self.experienceData.id) { item in
                             AbilityItem(
                                 item: item,
                                 onClick: { value in
@@ -51,6 +51,8 @@ struct AbilitiesScreen: View {
         .onAppear {
             if state.items.isEmpty {
                 viewModel.dispatch(action: AbilitiesActionLoadNextPage())
+            } else {
+                viewModel.onAppear()
             }
         }
     }

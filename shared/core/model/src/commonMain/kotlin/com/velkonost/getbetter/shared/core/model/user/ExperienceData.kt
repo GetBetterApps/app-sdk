@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.core.model.user
 
+import com.velkonost.getbetter.shared.core.util.randomUUID
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.ResourceFormatted
 import dev.icerock.moko.resources.desc.StringDesc
@@ -7,6 +8,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ExperienceData(
+    val id: String = randomUUID(),
+
     val currentLevel: Int,
 
     val remainExperience: Int,
