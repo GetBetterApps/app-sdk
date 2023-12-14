@@ -17,6 +17,9 @@ struct AbilityMotivationContent: View {
     private let isActive: Bool
     private let itemFavoriteClick: (Affirmation) -> Void
     
+    @State private var image: UIImage? = nil
+    
+    
     init(items: [Affirmation], isActive: Bool, itemFavoriteClick: @escaping (Affirmation) -> Void) {
         self.items = items
         self.isActive = isActive
@@ -30,23 +33,52 @@ struct AbilityMotivationContent: View {
     @State var isBlurred: Bool = true
     @State var isScaled: Bool = true
     
+    @State var shareSheetVisible = false
+    
     var body: some View {
         ZStack {
             Color.mainBackground.edgesIgnoringSafeArea(.all)
             
-            AsyncImage(url: URL(string: items[page.index].imageUrl)) { image in
-                image
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                    .blur(radius: isBlurred ? 0 : 20)
-                    .scaleEffect(isScaled ? 1.2 : 1.02)
-                    .transition(.opacity.animation(.default))
-                    .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
-                    .clipped()
-            } placeholder: {
+            AsyncImage(url: URL(string: items[page.index].imageUrl)) { phase in
                 
+                switch phase {
+                case .empty:
+                    ProgressView()
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .edgesIgnoringSafeArea(.all)
+                        .blur(radius: isBlurred ? 0 : 20)
+                        .scaleEffect(isScaled ? 1.2 : 1.02)
+                        .transition(.opacity.animation(.default))
+                        .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
+                        .clipped()
+                        .onAppear {
+                            self.image = image.snapshot()
+                        }
+                    
+                case .failure(_):
+                    EmptyView()
+                @unknown default:
+                    EmptyView()
+                }
             }.edgesIgnoringSafeArea(.all)
+            
+//            AsyncImage(url: URL(string: items[page.index].imageUrl)) { image in
+//                image
+//                    .resizable()
+//                    .scaledToFill()
+//                    .edgesIgnoringSafeArea(.all)
+//                    .blur(radius: isBlurred ? 0 : 20)
+//                    .scaleEffect(isScaled ? 1.2 : 1.02)
+//                    .transition(.opacity.animation(.default))
+//                    .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
+//                    .clipped()
+//                
+//            } placeholder: {
+//                
+//            }.edgesIgnoringSafeArea(.all)
             
             Pager(
                 page: page,
@@ -111,11 +143,67 @@ struct AbilityMotivationContent: View {
                                     .shadow(radius: 8)
                             )
                             .padding(.trailing, 24)
+                            .onTapGesture {
+                                shareSheetVisible = true
+//                                if let data = shareableImage.snapshot() {
+//                                    ShareSheet(photo: data)
+//                                }
+                            }
                     }
                     .padding(.bottom, 48)
                 }
             }
         }
+        .sheet(isPresented: $shareSheetVisible) {
+            if image != nil {
+                ShareSheet(photo: image!)
+            }
+        }
         
     }
 }
+
+extension AbilityMotivationContent {
+    var shareableImage: some View {
+        AsyncImage(url: URL(string: items[page.index].imageUrl)) { image in
+            image
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+                .scaleEffect(1.2)
+                .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
+                .clipped()
+        } placeholder: {
+            
+        }.edgesIgnoringSafeArea(.all)
+    }
+}
+
+
+import LinkPresentation
+
+
+//This code is from https://gist.github.com/tsuzukihashi/d08fce005a8d892741f4cf965533bd56
+
+struct ShareSheet: UIViewControllerRepresentable {
+    let photo: UIImage
+    
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        //let text = ""
+        //let itemSource = ShareActivityItemSource(shareText: text, shareImage: photo)
+        
+        let activityItems: [Any] = [photo]
+        
+        let controller = UIActivityViewController(
+            activityItems: activityItems,
+            applicationActivities: nil)
+        
+        return controller
+    }
+    
+    func updateUIViewController(_ vc: UIActivityViewController, context: Context) {
+        
+    }
+}
+
+
