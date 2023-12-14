@@ -13,12 +13,14 @@ import SharedSDK
 struct AbilityMotivationItem: View {
     
     private let item: Affirmation
+    
     private let isActive: Bool
+    private let isScaled: Bool
     
     init(item: Affirmation, isActive: Bool) {
         self.item = item
         self.isActive = isActive
-        self.blurRadius = blurRadius
+        self.isScaled = isActive
     }
     
     @State var blurRadius: CGFloat = 20
@@ -26,20 +28,26 @@ struct AbilityMotivationItem: View {
     var body: some View {
         ZStack {
             AsyncImage(url: URL(string: item.imageUrl)) { image in
-                
                 image
                     .resizable()
                     .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
 //                            .scaledToFit()
                     .scaledToFill()
-                    .blur(radius: isActive ? 0 : 20)
                     .edgesIgnoringSafeArea(.all)
+                    .blur(radius: isActive ? 0 : 20)
+                    .scaleEffect(isScaled ? 1.2 : 1)
+                    
                     
             } placeholder: {
                 
             }
         }
-        .animation(.easeInOut, value: isActive)
+        .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
+        
+        .animation(.easeInOut.delay(0.5).speed(0.5), value: isActive)
+        
+        .animation(.easeInOut.delay(1.5).speed(0.5), value: isScaled)
+        
         
     }
 }
