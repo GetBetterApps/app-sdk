@@ -37,11 +37,8 @@ struct AbilityMotivationContent: View {
                     .edgesIgnoringSafeArea(.all)
                     .blur(radius: isBlurred ? 0 : 20)
                     .scaleEffect(isScaled ? 1.2 : 1.02)
-                //                    .animation(.easeInOut.delay(0.5).speed(0.5), value: isActive)
-                //                    .animation(.easeInOut.delay(0.5).speed(0.3), value: isScaled)
                     .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
                     .clipped()
-                
             } placeholder: {
                 
             }.edgesIgnoringSafeArea(.all)
@@ -72,9 +69,6 @@ struct AbilityMotivationContent: View {
                         isScaled = true
                     }
                 }
-            })
-            .onPageChanged({ page in
-                
             })
             .edgesIgnoringSafeArea(.all)
             
