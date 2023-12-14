@@ -11,6 +11,20 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in AbilityMotivationContent.body.getter:AbilityMotivationContent.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "item.id">
+            </PersistentString>
+            <PersistentString
+               value = "items[page.index].id">
+            </PersistentString>
+            <PersistentString
+               value = "page.index">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #4 in NavigationControllerHost.makeUIViewController(context:):UIPilotExt.swift">
          <PersistentStrings>
             <PersistentString
