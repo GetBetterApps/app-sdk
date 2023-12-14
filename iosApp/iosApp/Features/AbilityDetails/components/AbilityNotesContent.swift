@@ -51,7 +51,7 @@ struct AbilityNotesContent: View {
         }
         .onAppear {
             if items.isEmpty {
-                viewModel.dispatch(action: TaskDetailActionUserNotesLoadNextPage())
+                onBottomReach()
             }
         }
     }
