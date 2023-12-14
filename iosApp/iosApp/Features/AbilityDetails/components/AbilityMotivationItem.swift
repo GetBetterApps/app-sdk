@@ -30,8 +30,6 @@ struct AbilityMotivationItem: View {
             AsyncImage(url: URL(string: item.imageUrl)) { image in
                 image
                     .resizable()
-                    
-//                            .scaledToFit()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
                     .blur(radius: isActive ? 0 : 20)
@@ -42,14 +40,15 @@ struct AbilityMotivationItem: View {
             } placeholder: {
                 
             }
+            
+            VStack {
+                Spacer()
+                AffirmationText(text: item.text)
+                Spacer()
+            }
         }
-        
         .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
-        
         .animation(.easeInOut.delay(0.5).speed(0.5), value: isActive)
-        
         .animation(.easeInOut.delay(1.5).speed(0.5), value: isScaled)
-        
-        
     }
 }

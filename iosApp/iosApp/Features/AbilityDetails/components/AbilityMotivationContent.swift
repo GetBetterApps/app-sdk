@@ -39,12 +39,9 @@ struct AbilityMotivationContent: View {
             }
             .vertical()
             .sensitivity(.medium)
-            
             .preferredItemSize(UIScreen.screenSize)
             .edgesIgnoringSafeArea(.all)
         }
-        
-       
         
     }
 }

@@ -20,10 +20,11 @@ struct AffirmationText: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Spacer()
             Text(text)
                 .style(.titleMedium)
                 .foregroundColor(.textTitle)
+                .lineSpacing(12)
+                .multilineTextAlignment(.center)
             
         }
         .padding(.init(16))
