@@ -23,9 +23,28 @@ struct AbilityMotivationContent: View {
     
     @StateObject var page: Page = .first()
     
+    @State var isBlurred: Bool = true
+    @State var isScaled: Bool = true
+    
     var body: some View {
         ZStack {
             Color.mainBackground.edgesIgnoringSafeArea(.all)
+            
+            AsyncImage(url: URL(string: items[page.index].imageUrl)) { image in
+                image
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .blur(radius: isBlurred ? 0 : 20)
+                    .scaleEffect(isScaled ? 1.2 : 1.02)
+                //                    .animation(.easeInOut.delay(0.5).speed(0.5), value: isActive)
+                //                    .animation(.easeInOut.delay(0.5).speed(0.3), value: isScaled)
+                    .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
+                    .clipped()
+                
+            } placeholder: {
+                
+            }.edgesIgnoringSafeArea(.all)
             
             Pager(
                 page: page,
@@ -40,6 +59,23 @@ struct AbilityMotivationContent: View {
             .vertical()
             .sensitivity(.medium)
             .preferredItemSize(UIScreen.screenSize)
+            .onPageWillChange({ page in
+                isBlurred = false
+                isScaled = false
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    withAnimation(Animation.linear.speed(0.5)) {
+                        isBlurred = true
+                    }
+                    
+                    withAnimation(Animation.linear.speed(0.3)) {
+                        isScaled = true
+                    }
+                }
+            })
+            .onPageChanged({ page in
+                
+            })
             .edgesIgnoringSafeArea(.all)
             
             VStack {
@@ -73,7 +109,7 @@ struct AbilityMotivationContent: View {
                         )
                         .padding(.trailing, 24)
                 }
-                .padding(.bottom, 32)
+                .padding(.bottom, 48)
             }
         }
         

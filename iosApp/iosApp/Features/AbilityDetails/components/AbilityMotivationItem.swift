@@ -29,22 +29,6 @@ struct AbilityMotivationItem: View {
     
     var body: some View {
         ZStack {
-            AsyncImage(url: URL(string: item.imageUrl)) { image in
-                image
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                    .blur(radius: isActive ? 0 : 20)
-                    .scaleEffect(isScaled ? 1.2 : 1.02)
-                    .animation(.easeInOut.delay(0.5).speed(0.5), value: isActive)
-                    .animation(.easeInOut.delay(0.5).speed(0.3), value: isScaled)
-                    .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
-                    .clipped()
-                    
-            } placeholder: {
-                
-            }
-            
             VStack {
                 Spacer()
                 AffirmationText(text: item.text)
@@ -53,7 +37,9 @@ struct AbilityMotivationItem: View {
                 Spacer()
             }
         }
+        .contentShape(Rectangle())
         .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
+        
         
         
         
