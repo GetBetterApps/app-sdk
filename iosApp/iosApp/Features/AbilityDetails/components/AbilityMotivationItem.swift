@@ -51,8 +51,8 @@ struct AbilityMotivationItem: View {
             }
         }
         .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
-        .animation(.easeInOut.delay(0.5).speed(0.5), value: isActive)
-        .animation(.easeInOut.delay(1.5).speed(0.5), value: isScaled)
-        .animation(.easeInOut.speed(2), value: isTextVisible)
+        .animation(.easeInOut.delay(0.5).speed(0.3), value: isActive)
+        .animation(.easeInOut.delay(1.5).speed(0.3), value: isScaled)
+        .animation(.easeInOut.speed(10), value: isTextVisible)
     }
 }
