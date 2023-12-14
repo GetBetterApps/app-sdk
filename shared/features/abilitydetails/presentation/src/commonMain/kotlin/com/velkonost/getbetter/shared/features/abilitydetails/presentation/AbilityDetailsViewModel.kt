@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.abilitydetails.presentation
 
+import com.velkonost.getbetter.shared.core.model.task.Affirmation
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
@@ -30,6 +31,8 @@ internal constructor(
     private val _notesPagingConfig = PagingConfig()
     private var notesLoadingJob: Job? = null
 
+    private val favoritesJobsMap: HashMap<Int, Job> = hashMapOf()
+
     init {
         launchJob {
             ability.collectLatest { ability ->
@@ -48,6 +51,7 @@ internal constructor(
     override fun dispatch(action: AbilityDetailsAction) = when (action) {
         is AbilityDetailsAction.UserNotesLoadNextPage -> fetchNotes()
         is AbilityDetailsAction.NavigateBack -> emit(action)
+        is AbilityDetailsAction.FavoriteClick -> obtainFavoriteClick(action.value)
     }
 
     private fun fetchAffirmations() {
@@ -95,6 +99,31 @@ internal constructor(
                     }
                 }
             }
+        }
+    }
+
+    private fun obtainFavoriteClick(value: Affirmation) {
+        if (favoritesJobsMap.containsKey(value.id)) return
+
+        launchJob {
+            affirmationsRepository.updateFavorite(
+                affirmationId = value.id,
+                isFavorite = !value.isFavorite
+            ) collectAndProcess {
+                onSuccess {
+                    val affirmations = viewState.value.affirmations.toMutableList()
+                    val indexOfChangedItem = affirmations.indexOf(value)
+                    affirmations[indexOfChangedItem] =
+                        affirmations[indexOfChangedItem].copy(isFavorite = !value.isFavorite)
+                    emit(viewState.value.copy(affirmations = affirmations.toList()))
+
+                    favoritesJobsMap.remove(value.id)
+                }
+            }
+        }.also {
+            favoritesJobsMap[value.id] = it
+        }.invokeOnCompletion {
+
         }
     }
 

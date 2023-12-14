@@ -8,7 +8,7 @@ data class Affirmation(
 
     val text: String,
 
-    val isFavorite: Boolean,
+    var isFavorite: Boolean,
 
     val imageUrl: String
 )

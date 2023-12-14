@@ -1,12 +1,15 @@
 package com.velkonost.getbetter.android.features.abilitydetails.components
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.gestures.ScrollScope
 import androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +21,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -32,12 +36,15 @@ import dev.icerock.moko.resources.compose.painterResource
 fun AbilityMotivationContent(
     modifier: Modifier = Modifier,
     items: List<Affirmation>,
-    isActive: Boolean
+    isActive: Boolean,
+    itemFavoriteClick: (Affirmation) -> Unit
 ) {
 
     val listState = rememberLazyListState()
     val snappingLayout = remember(listState) { SnapLayoutInfoProvider(listState) }
     val flingBehavior = rememberSnapFlingBehavior(snappingLayout)
+
+    val currentIndex = remember { derivedStateOf { listState.firstVisibleItemIndex } }
 
     Box(modifier = modifier.fillMaxSize()) {
 
@@ -57,39 +64,57 @@ fun AbilityMotivationContent(
             }
         }
 
-        Column {
-            Spacer(modifier.weight(1f))
-            Row(modifier = modifier.padding(bottom = 64.dp)) {
+        if (items.isNotEmpty()) {
+            Column {
                 Spacer(modifier.weight(1f))
-                Image(
-                    modifier = modifier
-                        .padding(end = 12.dp)
-                        .size(42.dp)
-                        .background(
-                            color = colorResource(resource = SharedR.colors.background_icon)
-                                .copy(alpha = 0.6f),
-                            shape = androidx.compose.material3.MaterialTheme.shapes.medium
-                        )
-                        .padding(8.dp),
-                    painter = painterResource(imageResource = SharedR.images.ic_empty_star),
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_active))
-                )
+                Row(modifier = modifier.padding(bottom = 64.dp)) {
+                    Spacer(modifier.weight(1f))
 
-                Image(
-                    modifier = modifier
-                        .padding(end = 24.dp)
-                        .size(42.dp)
-                        .background(
-                            color = colorResource(resource = SharedR.colors.background_icon)
-                                .copy(alpha = 0.6f),
-                            shape = androidx.compose.material3.MaterialTheme.shapes.medium
+                    AnimatedContent(
+                        targetState = items[currentIndex.value].isFavorite,
+                        label = ""
+                    ) {
+                        Image(
+                            modifier = modifier
+                                .padding(end = 12.dp)
+                                .size(42.dp)
+                                .background(
+                                    color = colorResource(resource = SharedR.colors.background_icon)
+                                        .copy(alpha = 0.6f),
+                                    shape = androidx.compose.material3.MaterialTheme.shapes.medium
+                                )
+                                .padding(8.dp)
+                                .clickable(
+                                    interactionSource = remember { MutableInteractionSource() },
+                                    indication = null,
+                                    onClick = {
+                                        itemFavoriteClick(items[currentIndex.value])
+                                    }
+                                ),
+                            painter = painterResource(
+                                imageResource = if (it) SharedR.images.ic_star else SharedR.images.ic_empty_star
+                            ),
+                            contentDescription = null,
+                            colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_active))
                         )
-                        .padding(8.dp),
-                    painter = painterResource(imageResource = SharedR.images.ic_share),
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_active))
-                )
+                    }
+
+
+                    Image(
+                        modifier = modifier
+                            .padding(end = 24.dp)
+                            .size(42.dp)
+                            .background(
+                                color = colorResource(resource = SharedR.colors.background_icon)
+                                    .copy(alpha = 0.6f),
+                                shape = androidx.compose.material3.MaterialTheme.shapes.medium
+                            )
+                            .padding(8.dp),
+                        painter = painterResource(imageResource = SharedR.images.ic_share),
+                        contentDescription = null,
+                        colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_active))
+                    )
+                }
             }
         }
     }

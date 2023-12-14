@@ -65,7 +65,10 @@ fun AbilityDetailsScreen(
 
                 1 -> AbilityMotivationContent(
                     items = state.affirmations,
-                    isActive = pagerState.currentPage == 1
+                    isActive = pagerState.currentPage == 1,
+                    itemFavoriteClick = {
+                        viewModel.dispatch(AbilityDetailsAction.FavoriteClick(it))
+                    }
                 )
             }
         }
