@@ -57,6 +57,7 @@ struct AbilityDetailsScreen: View {
                     selectedPage: $currentIndex,
                     tabs: state.tabs.map({ tab in tab.title.localized()})
                 )
+                .opacity(currentIndex == 0 ? 1 : 0.6)
                 Spacer()
             }
             .padding(.top, 40)

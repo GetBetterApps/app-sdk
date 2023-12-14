@@ -35,7 +35,9 @@ struct AbilityMotivationItem: View {
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
                     .blur(radius: isActive ? 0 : 20)
+                    .animation(.easeInOut.delay(0.5).speed(0.5), value: isActive)
                     .scaleEffect(isScaled ? 1.2 : 1.02)
+                    .animation(.easeInOut.delay(0.5).speed(0.3), value: isScaled)
                     .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
                     .clipped()
                     
@@ -47,12 +49,14 @@ struct AbilityMotivationItem: View {
                 Spacer()
                 AffirmationText(text: item.text)
                     .opacity(isTextVisible ? 1 : 0)
+                    .animation(.easeInOut.speed(0.5), value: isTextVisible)
                 Spacer()
             }
         }
         .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
-        .animation(.easeInOut.delay(0.5).speed(0.3), value: isActive)
-        .animation(.easeInOut.delay(1.5).speed(0.3), value: isScaled)
-        .animation(.easeInOut.speed(10), value: isTextVisible)
+        
+        
+        
+        
     }
 }
