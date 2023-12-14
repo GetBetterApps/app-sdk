@@ -41,6 +41,10 @@ struct AbilityMotivationContent: View {
             .sensitivity(.medium)
             .preferredItemSize(UIScreen.screenSize)
             .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                
+            }
         }
         
     }
