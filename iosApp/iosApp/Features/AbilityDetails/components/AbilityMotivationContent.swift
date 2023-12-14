@@ -37,7 +37,7 @@ struct AbilityMotivationContent: View {
                     .edgesIgnoringSafeArea(.all)
                     .blur(radius: isBlurred ? 0 : 20)
                     .scaleEffect(isScaled ? 1.2 : 1.02)
-                    .animation(.easeInOut, value: page.index)
+                    .transition(.opacity.animation(.default))
                     .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
                     .clipped()
             } placeholder: {
