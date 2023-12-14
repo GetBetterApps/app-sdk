@@ -41,6 +41,7 @@ struct AbilityNotesContent: View {
                                 onClick: itemClick,
                                 onLikeClick: itemLikeClick
                             )
+                            .padding(.horizontal, 16)
                             .onAppear {
                                 checkPaginationThreshold(currentItemId: item.id)
                             }
