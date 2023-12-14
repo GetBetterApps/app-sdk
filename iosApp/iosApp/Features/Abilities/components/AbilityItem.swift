@@ -56,5 +56,9 @@ struct AbilityItem: View {
                     
             }
         }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            onClick()
+        }
     }
 }
