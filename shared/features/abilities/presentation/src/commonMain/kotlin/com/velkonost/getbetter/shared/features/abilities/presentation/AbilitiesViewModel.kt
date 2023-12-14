@@ -20,6 +20,10 @@ internal constructor(
     private val _abilitiesPagingConfig = PagingConfig()
     private var abilitiesLoadingJob: Job? = null
 
+    fun onAppear() {
+        updateAbilitiesData()
+    }
+
     override fun dispatch(action: AbilitiesAction) = when (action) {
         is AbilitiesAction.LoadNextPage -> fetchAbilities()
         is AbilitiesAction.AbilityClick -> emit(AbilitiesNavigation.NavigateToAbilityDetail(action.value))
@@ -51,4 +55,22 @@ internal constructor(
         }
     }
 
+    private fun updateAbilitiesData() {
+        launchJob {
+            abilitiesRepository.getAll(
+                page = 0,
+                pageSize = 100
+            ) collectAndProcess {
+                onSuccess { items ->
+                    val currentItems = viewState.value.items.toMutableList()
+                    currentItems.forEach { currentItem ->
+                        items?.firstOrNull { item -> item.id == currentItem.id }?.let {
+                            currentItem.experienceData = it.experienceData
+                        }
+                    }
+                    emit(viewState.value.copy(items = currentItems))
+                }
+            }
+        }
+    }
 }

@@ -12,9 +12,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.abilities.components.AbilityItem
 import com.velkonost.getbetter.core.compose.components.Loader
+import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
 import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
 import com.velkonost.getbetter.shared.features.abilities.presentation.AbilitiesViewModel
 import com.velkonost.getbetter.shared.features.abilities.presentation.contract.AbilitiesAction
@@ -62,4 +64,14 @@ fun AbilitiesScreen(
             viewModel.dispatch(AbilitiesAction.LoadNextPage)
         }
     )
+
+    OnLifecycleEvent { _, event ->
+        when (event) {
+            Lifecycle.Event.ON_RESUME -> {
+                viewModel.onAppear()
+            }
+
+            else -> {}
+        }
+    }
 }
