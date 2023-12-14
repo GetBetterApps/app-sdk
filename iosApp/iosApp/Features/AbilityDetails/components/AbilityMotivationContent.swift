@@ -32,13 +32,24 @@ struct AbilityMotivationContent: View {
                 data: items,
                 id: \.self.id
             ) { item in
+                
+                @State var blurRadius: CGFloat = 20
+                
                 ZStack {
                     AsyncImage(url: URL(string: item.imageUrl)) { image in
                         image
                             .resizable()
                             .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
 //                            .scaledToFit()
+                            .scaledToFill()
+                            .blur(radius: blurRadius)
                             .edgesIgnoringSafeArea(.all)
+                            .onAppear {
+                                withAnimation(Animation.linear.delay(2)) {
+                                    blurRadius = 0
+                                }
+                            }
+                        
                     } placeholder: {
                         
                     }
@@ -46,6 +57,7 @@ struct AbilityMotivationContent: View {
                 
             }
             .vertical()
+            .sensitivity(.low)
 //            .interactive(rotation: true)
 //            .preferredItemSize(UIScreen.screenSize)
             .edgesIgnoringSafeArea(.all)
