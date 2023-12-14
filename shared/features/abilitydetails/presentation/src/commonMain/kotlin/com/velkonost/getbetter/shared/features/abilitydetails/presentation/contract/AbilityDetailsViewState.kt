@@ -9,7 +9,7 @@ import com.velkonost.getbetter.shared.features.abilitydetails.presentation.model
 
 data class AbilityDetailsViewState(
     val isLoading: Boolean = false,
-    val tabs: List<AbilityDetailsTab> = AbilityDetailsTab.values().toList(),
+    val tabs: List<AbilityDetailsTab> = AbilityDetailsTab.entries,
     val ability: Ability? = null,
     val affirmations: List<Affirmation> = emptyList(),
     val userNotesViewState: UserNotesViewState = UserNotesViewState()

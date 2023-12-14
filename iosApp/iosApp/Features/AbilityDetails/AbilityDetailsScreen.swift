@@ -51,6 +51,7 @@ struct AbilityDetailsScreen: View {
             VStack {
                 if currentIndex == 0 {
                     AbilityDetailsHeader(title: state.ability?.name == nil ? "" : state.ability!.name)
+                        .padding(.horizontal, 16)
                 }
             
                 PrimaryTabs(
@@ -64,5 +65,10 @@ struct AbilityDetailsScreen: View {
         }
         .animation(.easeInOut, value: currentIndex)
         .edgesIgnoringSafeArea(.all)
+        .onAppear {
+//            if state.userNotesViewState.items.isEmpty {
+//                viewModel.dispatch(action: AbilityDetailsActionUserNotesLoadNextPage())
+//            }
+        }
     }
 }

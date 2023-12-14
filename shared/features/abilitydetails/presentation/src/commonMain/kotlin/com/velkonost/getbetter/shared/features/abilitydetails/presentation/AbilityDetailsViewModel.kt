@@ -40,6 +40,7 @@ internal constructor(
                     )
                 )
                 fetchAffirmations()
+                fetchNotes()
             }
         }
     }

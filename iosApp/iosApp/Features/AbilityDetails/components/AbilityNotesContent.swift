@@ -51,13 +51,14 @@ struct AbilityNotesContent: View {
                         }
                     }
                 }
-            }
+            }.fadingEdge()
         }
-        .onAppear {
-            if items.isEmpty {
-                onBottomReach()
-            }
-        }
+        .padding(.top, 80)
+//        .onAppear {
+////            if items.isEmpty {
+//                onBottomReach()
+////            }
+//        }
     }
 }
 
