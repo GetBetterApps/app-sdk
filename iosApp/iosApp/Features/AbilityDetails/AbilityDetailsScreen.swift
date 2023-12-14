@@ -45,16 +45,23 @@ struct AbilityDetailsScreen: View {
                     isActive: currentIndex == 1
                 ).tag(1)
             }
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .edgesIgnoringSafeArea(.all)
             
-            if currentIndex == 0 {
-                AbilityDetailsHeader(title: state.ability?.name?)
+            VStack {
+                if currentIndex == 0 {
+                    AbilityDetailsHeader(title: state.ability?.name == nil ? "" : state.ability!.name)
+                }
+            
+                PrimaryTabs(
+                    selectedPage: $currentIndex,
+                    tabs: state.tabs.map({ tab in tab.title.localized()})
+                )
+                Spacer()
             }
-            
-            PrimaryTabs(
-                selectedPage: Binding<Int>,
-                tabs: state.tabs.map({ tab in tab.title.localized()})
-            )
+            .padding(.top, 40)
         }
         .animation(.easeInOut, value: currentIndex)
+        .edgesIgnoringSafeArea(.all)
     }
 }

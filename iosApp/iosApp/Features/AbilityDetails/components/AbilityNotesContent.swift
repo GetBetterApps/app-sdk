@@ -29,22 +29,26 @@ struct AbilityNotesContent: View {
     }
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            ScrollViewReader { value in
-                LazyVStack(spacing: 0) {
-                    ForEach(items, id: \.self.id) { item in
-                        NoteItem(
-                            item: item,
-                            onClick: itemClick,
-                            onLikeClick: itemLikeClick
-                        )
-                        .onAppear {
-                            checkPaginationThreshold(currentItemId: item.id)
+        ZStack {
+            Color.mainBackground.edgesIgnoringSafeArea(.all)
+            
+            ScrollView(.vertical, showsIndicators: false) {
+                ScrollViewReader { value in
+                    LazyVStack(spacing: 0) {
+                        ForEach(items, id: \.self.id) { item in
+                            NoteItem(
+                                item: item,
+                                onClick: itemClick,
+                                onLikeClick: itemLikeClick
+                            )
+                            .onAppear {
+                                checkPaginationThreshold(currentItemId: item.id)
+                            }
                         }
-                    }
-                    
-                    if isLoading {
-                        Loader().frame(alignment: .center)
+                        
+                        if isLoading {
+                            Loader().frame(alignment: .center)
+                        }
                     }
                 }
             }

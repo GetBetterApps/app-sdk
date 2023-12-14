@@ -24,25 +24,35 @@ struct AbilityMotivationContent: View {
     @StateObject var page: Page = .first()
     
     var body: some View {
-        Pager(
-            page: page,
-            data: items,
-            id: \.self.id
-        ) { item in
-            ZStack {
-                AsyncImage(url: URL(string: item.imageUrl)) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } placeholder: {
-                    
+        ZStack {
+            Color.mainBackground.edgesIgnoringSafeArea(.all)
+            
+            Pager(
+                page: page,
+                data: items,
+                id: \.self.id
+            ) { item in
+                ZStack {
+                    AsyncImage(url: URL(string: item.imageUrl)) { image in
+                        image
+                            .resizable()
+                            .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
+//                            .scaledToFit()
+                            .edgesIgnoringSafeArea(.all)
+                    } placeholder: {
+                        
+                    }
                 }
+                
             }
+            .vertical()
+//            .interactive(rotation: true)
+//            .preferredItemSize(UIScreen.screenSize)
+            .edgesIgnoringSafeArea(.all)
+            
+            
+//            .alignment(.center)
         }
-        .vertical()
-        .interactive(rotation: true)
-                .alignment(.center)
         
        
         

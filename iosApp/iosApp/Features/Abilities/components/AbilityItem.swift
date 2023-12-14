@@ -55,10 +55,11 @@ struct AbilityItem: View {
                     .accentColor(.buttonGradientStart)
                     
             }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                onClick(item)
+            }
         }
-        .contentShape(Rectangle())
-        .onTapGesture {
-            onClick()
-        }
+        
     }
 }
