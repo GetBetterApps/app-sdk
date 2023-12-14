@@ -32,6 +32,8 @@
 		4616B0872AF629B100A4CDDE /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B0862AF629B100A4CDDE /* DateExt.swift */; };
 		4616B08B2AF62B9500A4CDDE /* CompletionDateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B08A2AF62B9500A4CDDE /* CompletionDateButton.swift */; };
 		4616B08D2AF62C7200A4CDDE /* CompletedOnBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B08C2AF62C7200A4CDDE /* CompletedOnBlock.swift */; };
+		46171B072B2AF6DF00FD8F92 /* AbilityDetailsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46171B062B2AF6DF00FD8F92 /* AbilityDetailsHeader.swift */; };
+		46171B092B2AF73C00FD8F92 /* AffirmationText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46171B082B2AF73C00FD8F92 /* AffirmationText.swift */; };
 		46182DC12AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */; };
 		461A28CF2B10B20A00075C4A /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461A28CE2B10B20A00075C4A /* NotificationManager.swift */; };
 		461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */; };
@@ -193,6 +195,8 @@
 		4616B0862AF629B100A4CDDE /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
 		4616B08A2AF62B9500A4CDDE /* CompletionDateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionDateButton.swift; sourceTree = "<group>"; };
 		4616B08C2AF62C7200A4CDDE /* CompletedOnBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedOnBlock.swift; sourceTree = "<group>"; };
+		46171B062B2AF6DF00FD8F92 /* AbilityDetailsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityDetailsHeader.swift; sourceTree = "<group>"; };
+		46171B082B2AF73C00FD8F92 /* AffirmationText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffirmationText.swift; sourceTree = "<group>"; };
 		46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinByteArrayExt.swift; sourceTree = "<group>"; };
 		461A28CE2B10B20A00075C4A /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifecycleAwareObservableObject.swift; sourceTree = "<group>"; };
@@ -447,6 +451,15 @@
 			path = completiondate;
 			sourceTree = "<group>";
 		};
+		46171B052B2AF6D300FD8F92 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				46171B062B2AF6DF00FD8F92 /* AbilityDetailsHeader.swift */,
+				46171B082B2AF73C00FD8F92 /* AffirmationText.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
 		461F7C5F2AA878D0003791CF /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -524,6 +537,7 @@
 		46407B942B287345004A3AA2 /* AbilityDetails */ = {
 			isa = PBXGroup;
 			children = (
+				46171B052B2AF6D300FD8F92 /* components */,
 				46407B952B28734E004A3AA2 /* AbilityDetailsScreen.swift */,
 				46407B972B28735F004A3AA2 /* AbilityDetailsRoute.swift */,
 			);
@@ -1167,9 +1181,11 @@
 				461F7C652AA88A39003791CF /* NavRoute.swift in Sources */,
 				46E2DD2D2AE9364D00B4B2B5 /* AreaPickerHeader.swift in Sources */,
 				46C6606C2AFCD2D600FA189C /* NewCommentTextField.swift in Sources */,
+				46171B072B2AF6DF00FD8F92 /* AbilityDetailsHeader.swift in Sources */,
 				468B87702ABC45DB001BBEB1 /* SocialRoute.swift in Sources */,
 				46D8577A2ACFFC7C00BE74DA /* ScrollViewExt.swift in Sources */,
 				467DB01A2B14C92E00BB9CB3 /* SettingsHeader.swift in Sources */,
+				46171B092B2AF73C00FD8F92 /* AffirmationText.swift in Sources */,
 				4616B08B2AF62B9500A4CDDE /* CompletionDateButton.swift in Sources */,
 				46AD39D72B1E16AD00EB60F8 /* TaskPickerEmptyItem.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
