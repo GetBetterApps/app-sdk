@@ -34,6 +34,7 @@
 		4616B08D2AF62C7200A4CDDE /* CompletedOnBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B08C2AF62C7200A4CDDE /* CompletedOnBlock.swift */; };
 		46171B072B2AF6DF00FD8F92 /* AbilityDetailsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46171B062B2AF6DF00FD8F92 /* AbilityDetailsHeader.swift */; };
 		46171B092B2AF73C00FD8F92 /* AffirmationText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46171B082B2AF73C00FD8F92 /* AffirmationText.swift */; };
+		46171B0B2B2AF7AB00FD8F92 /* AbilityNotesContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46171B0A2B2AF7AB00FD8F92 /* AbilityNotesContent.swift */; };
 		46182DC12AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */; };
 		461A28CF2B10B20A00075C4A /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461A28CE2B10B20A00075C4A /* NotificationManager.swift */; };
 		461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */; };
@@ -197,6 +198,7 @@
 		4616B08C2AF62C7200A4CDDE /* CompletedOnBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedOnBlock.swift; sourceTree = "<group>"; };
 		46171B062B2AF6DF00FD8F92 /* AbilityDetailsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityDetailsHeader.swift; sourceTree = "<group>"; };
 		46171B082B2AF73C00FD8F92 /* AffirmationText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffirmationText.swift; sourceTree = "<group>"; };
+		46171B0A2B2AF7AB00FD8F92 /* AbilityNotesContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityNotesContent.swift; sourceTree = "<group>"; };
 		46182DC02AE6C2A800FEB8E4 /* KotlinByteArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinByteArrayExt.swift; sourceTree = "<group>"; };
 		461A28CE2B10B20A00075C4A /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		461D21ED2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifecycleAwareObservableObject.swift; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 			children = (
 				46171B062B2AF6DF00FD8F92 /* AbilityDetailsHeader.swift */,
 				46171B082B2AF73C00FD8F92 /* AffirmationText.swift */,
+				46171B0A2B2AF7AB00FD8F92 /* AbilityNotesContent.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -1251,6 +1254,7 @@
 				4669DDB82B1F49BF00C1EF4E /* TaskData.swift in Sources */,
 				460054A92ABB18A800586767 /* AppSettings.swift in Sources */,
 				462922D82B13351F00DF080D /* FeedbackDetailBottomSheet.swift in Sources */,
+				46171B0B2B2AF7AB00FD8F92 /* AbilityNotesContent.swift in Sources */,
 				4667C9042AC589EC00BAA9DD /* SingleLineTextField.swift in Sources */,
 				46E2DD312AE9420600B4B2B5 /* AreaPickerItem.swift in Sources */,
 				4667C9062AC58B0700BAA9DD /* SelectedEmojiImage.swift in Sources */,
