@@ -31,7 +31,7 @@ fun AbilitiesScreen(
     val state by viewModel.viewState.collectAsStateWithLifecycle()
 
     Box(modifier = modifier.fillMaxSize()) {
-        if (state.isLoading && state.items.isEmpty()) {
+        if (state.isLoading && state.items.size <= 1) {
             Loader(modifier = Modifier.align(Alignment.Center))
         } else {
             LazyColumn(

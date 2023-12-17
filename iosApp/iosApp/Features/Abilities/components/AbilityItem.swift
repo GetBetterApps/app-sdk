@@ -25,7 +25,6 @@ struct AbilityItem: View {
     var body: some View {
         PrimaryBox(isBright: isFavorite) {
             VStack(spacing: 0) {
-                
                 HStack {
                     Text(isFavorite ? SharedR.strings().ability_favorite_title.desc().localized() : item.name)
                         .style(.titleMedium)

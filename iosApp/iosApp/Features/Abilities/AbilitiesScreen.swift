@@ -20,7 +20,7 @@ struct AbilitiesScreen: View {
         @State var state = viewModel.viewStateValue as! AbilitiesViewState
         
         ZStack {
-            if state.isLoading && state.items.isEmpty {
+            if state.isLoading && state.items.count <= 1 {
                 Loader().frame(alignment: .center)
             } else {
                 ScrollView(showsIndicators: false) {

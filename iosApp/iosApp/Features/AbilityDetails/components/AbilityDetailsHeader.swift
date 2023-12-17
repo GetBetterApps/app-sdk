@@ -14,9 +14,11 @@ struct AbilityDetailsHeader: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     private let title: String
+    private let imageAlpha: CGFloat
     
-    init(title: String) {
+    init(title: String, imageAlpha: CGFloat) {
         self.title = title
+        self.imageAlpha = imageAlpha
     }
     
     var body: some View {
@@ -37,6 +39,8 @@ struct AbilityDetailsHeader: View {
                     impactMed.impactOccurred()
                     presentationMode.wrappedValue.dismiss()
                 }
+                .opacity(imageAlpha)
+                .animation(.easeInOut, value: imageAlpha)
             
             Text(title)
                 .style(.headlineSmall)

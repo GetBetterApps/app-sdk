@@ -78,6 +78,8 @@ internal constructor(
     }
 
     private fun fetchAffirmations() {
+        if (isFavorite.value) return
+
         launchJob {
             viewState.value.ability?.id?.let { abilityId ->
                 abilitiesRepository.getDetails(abilityId) collectAndProcess {
@@ -92,6 +94,7 @@ internal constructor(
     }
 
     private fun fetchNotes() {
+        if (isFavorite.value) return
         if (_notesPagingConfig.lastPageReached || notesLoadingJob?.isActive == true) return
 
         notesLoadingJob?.cancel()

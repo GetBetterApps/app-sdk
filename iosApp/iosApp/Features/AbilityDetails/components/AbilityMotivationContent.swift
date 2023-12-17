@@ -40,7 +40,10 @@ struct AbilityMotivationContent: View {
             Color.mainBackground.edgesIgnoringSafeArea(.all)
             
             if !items.isEmpty {
-                AsyncImage(url: URL(string: items[page.index].imageUrl)) { phase in
+                AsyncImage(
+                    url: URL(string: items[page.index].imageUrl),
+                    transaction: .init(animation: .easeInOut)
+                ) { phase in
                     
                     switch phase {
                     case .empty:
@@ -52,7 +55,6 @@ struct AbilityMotivationContent: View {
                             .edgesIgnoringSafeArea(.all)
                             .blur(radius: isBlurred ? 0 : 20)
                             .scaleEffect(isScaled ? 1.2 : 1.02)
-                            .transition(.opacity.animation(.default))
                             .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
                             .clipped()
                             .task({
@@ -139,6 +141,7 @@ struct AbilityMotivationContent: View {
                                 itemFavoriteClick(items[page.index])
                             }
                         
+///                       TODO ADD LATER
 //                        Image(uiImage: SharedR.images().ic_share.toUIImage()!)
 //                            .resizable()
 //                            .renderingMode(.template)

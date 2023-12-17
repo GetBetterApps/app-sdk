@@ -80,5 +80,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "closure #1 in AbilityMotivationContent.body.getter:AbilityMotivationContent.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "page.index">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>
