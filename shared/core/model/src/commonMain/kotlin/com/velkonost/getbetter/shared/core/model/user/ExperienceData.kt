@@ -20,6 +20,13 @@ data class ExperienceData(
 ) {
     companion object {
         const val LEVEL_LIMIT = 100
+
+        val EMPTY_ITEM = ExperienceData(
+            currentLevel = 0,
+            remainExperience = 0,
+            remainExperiencePercent = 0f,
+            currentLevelExperienceLimit = 0
+        )
     }
 
     val currentLevelStr: StringDesc

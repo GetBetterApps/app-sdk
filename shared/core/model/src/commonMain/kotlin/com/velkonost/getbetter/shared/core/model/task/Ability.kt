@@ -4,7 +4,7 @@ import com.velkonost.getbetter.shared.core.model.user.ExperienceData
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Ability(
+open class Ability(
     val id: Int?,
 
     val name: String,

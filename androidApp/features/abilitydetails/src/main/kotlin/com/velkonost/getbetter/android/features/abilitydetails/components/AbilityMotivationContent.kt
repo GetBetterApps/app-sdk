@@ -99,21 +99,20 @@ fun AbilityMotivationContent(
                         )
                     }
 
-
-                    Image(
-                        modifier = modifier
-                            .padding(end = 24.dp)
-                            .size(42.dp)
-                            .background(
-                                color = colorResource(resource = SharedR.colors.background_icon)
-                                    .copy(alpha = 0.6f),
-                                shape = androidx.compose.material3.MaterialTheme.shapes.medium
-                            )
-                            .padding(8.dp),
-                        painter = painterResource(imageResource = SharedR.images.ic_share),
-                        contentDescription = null,
-                        colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_active))
-                    )
+//                    Image(
+//                        modifier = modifier
+//                            .padding(end = 24.dp)
+//                            .size(42.dp)
+//                            .background(
+//                                color = colorResource(resource = SharedR.colors.background_icon)
+//                                    .copy(alpha = 0.6f),
+//                                shape = androidx.compose.material3.MaterialTheme.shapes.medium
+//                            )
+//                            .padding(8.dp),
+//                        painter = painterResource(imageResource = SharedR.images.ic_share),
+//                        contentDescription = null,
+//                        colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_active))
+//                    )
                 }
             }
         }
