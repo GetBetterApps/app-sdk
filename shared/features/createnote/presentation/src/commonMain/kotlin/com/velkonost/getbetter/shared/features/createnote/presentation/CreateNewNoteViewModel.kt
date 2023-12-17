@@ -20,8 +20,7 @@ import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
 
-class CreateNewNoteViewModel
-constructor(
+class CreateNewNoteViewModel(
     private val notesRepository: NotesRepository,
     private val diaryRepository: DiaryRepository?,
 ) : BaseViewModel<CreateNewNoteViewState, CreateNewNoteAction, Nothing, CreateNewNoteEvent>(
@@ -66,7 +65,7 @@ constructor(
         val selectedArea = viewState.value.availableAreas.firstOrNull()
         val availableTasks =
             if (selectedArea != null) {
-                val items: MutableList<TaskUI?> = _tasksList.filter {
+                val items: MutableList<TaskUI?> = _tasksList.asSequence().filter {
                     it.area.id == selectedArea.id
                 }.toMutableList()
                 items.add(0, null)
@@ -90,7 +89,7 @@ constructor(
         }
         val availableTasks =
             if (selectedArea != null) {
-                val items: MutableList<TaskUI?> = _tasksList.filter {
+                val items: MutableList<TaskUI?> = _tasksList.asSequence().filter {
                     it.area.id == selectedArea.id
                 }.toMutableList()
                 items.add(0, null)
@@ -114,7 +113,7 @@ constructor(
         val selectedArea = viewState.value.availableAreas.firstOrNull()
         val availableTasks =
             if (selectedArea != null) {
-                val items: MutableList<TaskUI?> = _tasksList.filter {
+                val items: MutableList<TaskUI?> = _tasksList.asSequence().filter {
                     it.area.id == selectedArea.id
                 }.toMutableList()
                 items.add(0, null)
@@ -138,7 +137,7 @@ constructor(
         }
         val availableTasks =
             if (selectedArea != null) {
-                val items: MutableList<TaskUI?> = _tasksList.filter {
+                val items: MutableList<TaskUI?> = _tasksList.asSequence().filter {
                     it.area.id == selectedArea.id
                 }.toMutableList()
                 items.add(0, null)
@@ -160,7 +159,7 @@ constructor(
 
 
     private fun obtainAreaSelect(value: Area) {
-        val availableTasks: MutableList<TaskUI?> = _tasksList.filter {
+        val availableTasks: MutableList<TaskUI?> = _tasksList.asSequence().filter {
             it.area.id == value.id
         }.toMutableList()
         availableTasks.add(0, null)

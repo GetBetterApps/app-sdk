@@ -279,7 +279,7 @@ internal constructor(
                     items?.let {
                         val allItems =
                             if (refreshList) it
-                            else viewState.value.generalFeed.items.plus(it)
+                            else viewState.value.generalFeed.items.plusUnique(it)
                         val generalFeedViewState = viewState.value.generalFeed.copy(
                             isLoading = false,
                             isRefreshing = false,
@@ -316,7 +316,7 @@ internal constructor(
                         items?.let {
                             val allItems =
                                 if (refreshList) it
-                                else viewState.value.areasFeed.items.plus(it)
+                                else viewState.value.areasFeed.items.plusUnique(it)
                             val areasFeedViewState = viewState.value.areasFeed.copy(
                                 isLoading = false,
                                 isRefreshing = false,
@@ -330,4 +330,5 @@ internal constructor(
         }
     }
 
+    private fun List<Note>.plusUnique(items: List<Note>) = this.plus(items).distinctBy { it.id }
 }
