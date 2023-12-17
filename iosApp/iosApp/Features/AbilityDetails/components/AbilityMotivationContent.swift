@@ -37,33 +37,42 @@ struct AbilityMotivationContent: View {
     
     var body: some View {
         ZStack {
+            shareableImage
             Color.mainBackground.edgesIgnoringSafeArea(.all)
             
-            AsyncImage(url: URL(string: items[page.index].imageUrl)) { phase in
-                
-                switch phase {
-                case .empty:
-                    ProgressView()
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .edgesIgnoringSafeArea(.all)
-                        .blur(radius: isBlurred ? 0 : 20)
-                        .scaleEffect(isScaled ? 1.2 : 1.02)
-                        .transition(.opacity.animation(.default))
-                        .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
-                        .clipped()
-                        .onAppear {
-                            self.image = image.snapshot()
-                        }
+            if !items.isEmpty {
+                AsyncImage(url: URL(string: items[page.index].imageUrl)) { phase in
                     
-                case .failure(_):
-                    EmptyView()
-                @unknown default:
-                    EmptyView()
-                }
-            }.edgesIgnoringSafeArea(.all)
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .edgesIgnoringSafeArea(.all)
+                            .blur(radius: isBlurred ? 0 : 20)
+                            .scaleEffect(isScaled ? 1.2 : 1.02)
+                            .transition(.opacity.animation(.default))
+                            .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
+                            .clipped()
+                            .task({
+                                self.image = image.snapshot()
+                            })
+                            .onAppear {
+                                self.image = image.snapshot()
+                            }
+                            .onChange(of: image) { newValue in
+                                self.image = newValue.snapshot()
+                            }
+                        
+                    case .failure(_):
+                        EmptyView()
+                    @unknown default:
+                        EmptyView()
+                    }
+                }.edgesIgnoringSafeArea(.all)
+            }
             
 //            AsyncImage(url: URL(string: items[page.index].imageUrl)) { image in
 //                image
@@ -156,7 +165,7 @@ struct AbilityMotivationContent: View {
         }
         .sheet(isPresented: $shareSheetVisible) {
             if image != nil {
-                ShareSheet(photo: image!)
+                ShareSheet(photo: shareableImage.snapshot()!)
             }
         }
         
@@ -165,17 +174,23 @@ struct AbilityMotivationContent: View {
 
 extension AbilityMotivationContent {
     var shareableImage: some View {
-        AsyncImage(url: URL(string: items[page.index].imageUrl)) { image in
-            image
-                .resizable()
-                .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
-                .scaleEffect(1.2)
-                .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
-                .clipped()
-        } placeholder: {
+        ZStack {
+            //        AsyncImage(url: URL(string: items[page.index].imageUrl)) { image in
+//            if image != nil {
+                
+                Image(uiImage: SharedR.images().emoji_1.toUIImage()!)
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                    .scaleEffect(1.2)
+                    .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
+                    .clipped()
+//            }
+            Text("123")
+        }.frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
+//        } placeholder: {
             
-        }.edgesIgnoringSafeArea(.all)
+//        }.edgesIgnoringSafeArea(.all)
     }
 }
 
