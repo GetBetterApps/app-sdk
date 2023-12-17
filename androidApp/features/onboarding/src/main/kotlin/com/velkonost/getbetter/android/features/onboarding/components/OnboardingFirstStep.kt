@@ -273,7 +273,7 @@ fun BoxScope.OnboardingFirstStep(
                             shape = MaterialTheme.shapes.medium,
                         )
                         .width(300.dp),
-                    painter = painterResource(imageResource = SharedR.images.ic_onboarding_1_4),
+                    painter = painterResource(imageResource = SharedR.images.ic_onboarding_1_5),
                     contentDescription = null
                 )
             }

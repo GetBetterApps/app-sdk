@@ -1,11 +1,13 @@
 package com.velkonost.getbetter.android.features.onboarding
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
@@ -24,12 +26,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -66,6 +73,10 @@ fun OnboardingScreen(
         label = ""
     )
 
+    var positionInRootButton by remember { mutableStateOf(Offset.Zero) }
+    var positionInRootText by remember { mutableStateOf(Offset.Zero) }
+
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -74,7 +85,7 @@ fun OnboardingScreen(
 
         Column {
 
-            Spacer(modifier.weight(1f))
+            Spacer(modifier.height(140.dp))
 
             Box(
                 contentAlignment = Alignment.Center
@@ -119,12 +130,26 @@ fun OnboardingScreen(
             }
 
 
-            Column {
-                this.AnimatedVisibility(visible = moveTextToBottom.value) {
-                    Spacer(modifier = modifier.height(48.dp))
-                }
+            this.AnimatedVisibility(
+                visible = moveTextToBottom.value,
+                enter = fadeIn(animationSpec = tween(durationMillis = 500)) + expandVertically(
+                    animationSpec = tween(durationMillis = 1000)
+                ),
+            ) {
+                val height = (positionInRootButton.y - positionInRootText.y)
+                val heightDp = with(LocalDensity.current) { height.toDp() - 160.dp }
+
+                Spacer(modifier = modifier.height(heightDp))
+            }
+
+            AnimatedContent(targetState = state.title, label = "") {
                 Box(
                     modifier = modifier
+                        .onGloballyPositioned {
+                            if (positionInRootText.y == 0f) {
+                                positionInRootText = it.positionInRoot()
+                            }
+                        }
                         .alpha(textAlpha)
                         .fillMaxWidth()
                         .height(96.dp)
@@ -132,13 +157,14 @@ fun OnboardingScreen(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = state.title.toString(LocalContext.current),
+                        text = it.toString(LocalContext.current),
                         style = MaterialTheme.typography.headlineLarge.copy(fontStyle = FontStyle.Italic),
                         color = colorResource(resource = SharedR.colors.text_title),
                         textAlign = TextAlign.Center
                     )
                 }
             }
+
 
 //            AnimatedContent(
 //                transitionSpec = {
@@ -159,7 +185,13 @@ fun OnboardingScreen(
             Spacer(modifier.weight(1f))
 
             AppButton(
-                modifier = modifier.align(Alignment.CenterHorizontally),
+                modifier = modifier
+                    .align(Alignment.CenterHorizontally)
+                    .onGloballyPositioned {
+                        if (positionInRootButton.y == 0f) {
+                            positionInRootButton = it.positionInRoot()
+                        }
+                    },
                 labelText = stringResource(resource = SharedR.strings.continue_btn),
                 isLoading = false,
                 onClick = {
