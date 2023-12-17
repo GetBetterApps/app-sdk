@@ -20,6 +20,8 @@ import com.velkonost.getbetter.android.features.abilitydetails.components.Abilit
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
 import com.velkonost.getbetter.shared.features.abilitydetails.presentation.AbilityDetailsViewModel
 import com.velkonost.getbetter.shared.features.abilitydetails.presentation.contract.AbilityDetailsAction
+import com.velkonost.getbetter.shared.resources.SharedR
+import dev.icerock.moko.resources.compose.stringResource
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -42,53 +44,66 @@ fun AbilityDetailsScreen(
     )
 
     Box(modifier = modifier.fillMaxSize()) {
-        HorizontalPager(
-            state = pagerState,
-            userScrollEnabled = true,
-            beyondBoundsPageCount = 2
-        ) { index ->
-            when (index) {
-                0 -> AbilityNotesContent(
-                    isLoading = state.userNotesViewState.isLoading,
-                    items = state.userNotesViewState.items,
-                    loadMorePrefetch = state.userNotesViewState.loadMorePrefetch,
-                    itemClick = {
+        if (!state.isFavorite) {
+            HorizontalPager(
+                state = pagerState,
+                userScrollEnabled = true,
+                beyondBoundsPageCount = 2
+            ) { index ->
+                when (index) {
+                    0 -> AbilityNotesContent(
+                        isLoading = state.userNotesViewState.isLoading,
+                        items = state.userNotesViewState.items,
+                        loadMorePrefetch = state.userNotesViewState.loadMorePrefetch,
+                        itemClick = {
 
-                    },
-                    itemLikeClick = {
+                        },
+                        itemLikeClick = {
 
-                    },
-                    onBottomReach = {
-                        viewModel.dispatch(AbilityDetailsAction.UserNotesLoadNextPage)
-                    }
-                )
+                        },
+                        onBottomReach = {
+                            viewModel.dispatch(AbilityDetailsAction.UserNotesLoadNextPage)
+                        }
+                    )
 
-                1 -> AbilityMotivationContent(
-                    items = state.affirmations,
-                    isActive = pagerState.currentPage == 1,
-                    itemFavoriteClick = {
-                        viewModel.dispatch(AbilityDetailsAction.FavoriteClick(it))
-                    }
-                )
+                    1 -> AbilityMotivationContent(
+                        items = state.affirmations,
+                        isActive = pagerState.currentPage == 1,
+                        itemFavoriteClick = {
+                            viewModel.dispatch(AbilityDetailsAction.FavoriteClick(it))
+                        }
+                    )
+                }
             }
+        } else {
+            AbilityMotivationContent(
+                items = state.affirmations,
+                isActive = true,
+                itemFavoriteClick = {
+                    viewModel.dispatch(AbilityDetailsAction.FavoriteClick(it))
+                }
+            )
         }
 
         AnimatedVisibility(visible = pagerState.currentPage == 0) {
             AbilityDetailsHeader(
-                title = state.ability?.name ?: "",
+                title =
+                if (state.isFavorite) stringResource(resource = SharedR.strings.ability_favorite_title)
+                else state.ability?.name ?: "",
                 onBackClick = {
                     viewModel.dispatch(AbilityDetailsAction.NavigateBack)
                 }
             )
         }
 
-        PrimaryTabs(
-            alpha = tabsAlpha,
-            tabs = state.tabs.map { it.title.toString(LocalContext.current) },
-            pagerState = pagerState,
-            topPadding = tabsTopPadding.toInt()
-        )
-
+        if (!state.isFavorite) {
+            PrimaryTabs(
+                alpha = tabsAlpha,
+                tabs = state.tabs.map { it.title.toString(LocalContext.current) },
+                pagerState = pagerState,
+                topPadding = tabsTopPadding.toInt()
+            )
+        }
     }
 
 }
