@@ -3,6 +3,8 @@ package com.velkonost.getbetter.shared.core.vm.navigation
 sealed class NavigationScreen(val route: String) {
     data object SplashNavScreen : NavigationScreen(SPLASH_DESTINATION)
 
+    data object OnboardingNavScreen : NavigationScreen(ONBOARDING_DESTINATION)
+
     data object AuthNavScreen : NavigationScreen(
         "$AUTH_DESTINATION/?$ARG_IDENTIFY_ANONYMOUS={$ARG_IDENTIFY_ANONYMOUS}"
     )
@@ -38,6 +40,7 @@ sealed class NavigationScreen(val route: String) {
 const val NAV_PREFIX: String = "com.velkonost.getbetter"
 
 const val SPLASH_DESTINATION: String = "$NAV_PREFIX.splash/SplashScreen"
+const val ONBOARDING_DESTINATION: String = "$NAV_PREFIX.splash/OnboardingScreen"
 const val AUTH_DESTINATION: String = "$NAV_PREFIX.auth/AuthScreen"
 
 const val SOCIAL_DESTINATION: String = "$NAV_PREFIX.social/SocialScreen"

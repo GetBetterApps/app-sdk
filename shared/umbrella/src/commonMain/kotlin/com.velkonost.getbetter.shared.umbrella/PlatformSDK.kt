@@ -15,15 +15,16 @@ import com.velkonost.getbetter.shared.features.auth.domain.di.AuthDomainModule
 import com.velkonost.getbetter.shared.features.auth.presentation.di.AuthPresentationModule
 import com.velkonost.getbetter.shared.features.calendars.data.di.CalendarsDataModule
 import com.velkonost.getbetter.shared.features.calendars.data.di.DiaryDataModule
-import com.velkonost.getbetter.shared.features.diary.presentation.di.DiaryPresentationModule
 import com.velkonost.getbetter.shared.features.calendars.presentation.di.CalendarsPresentationModule
 import com.velkonost.getbetter.shared.features.comments.data.di.CommentsDataModule
+import com.velkonost.getbetter.shared.features.diary.presentation.di.DiaryPresentationModule
 import com.velkonost.getbetter.shared.features.feedback.data.di.FeedbackDataModule
 import com.velkonost.getbetter.shared.features.feedback.presentation.di.FeedbackPresentationModule
 import com.velkonost.getbetter.shared.features.follows.data.di.FollowsDataModule
 import com.velkonost.getbetter.shared.features.likes.data.di.LikesDataModule
 import com.velkonost.getbetter.shared.features.notedetail.presentation.di.NoteDetailPresentationModule
 import com.velkonost.getbetter.shared.features.notes.data.di.NotesDataModule
+import com.velkonost.getbetter.shared.features.onboarding.presentation.di.OnboardingPresentationModule
 import com.velkonost.getbetter.shared.features.presentation.di.WisdomPresentationModule
 import com.velkonost.getbetter.shared.features.profile.data.di.ProfileDataModule
 import com.velkonost.getbetter.shared.features.profile.di.ProfilePresentationModule
@@ -74,6 +75,7 @@ object PlatformSDK {
 
             SocialDataModule,
             SocialPresentationModule,
+            OnboardingPresentationModule,
 
             DiaryDataModule,
             DiaryPresentationModule,

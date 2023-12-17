@@ -14,6 +14,7 @@ dependencies {
 
     implementation(projects.androidApp.features.auth)
     implementation(projects.androidApp.features.splash)
+    implementation(projects.androidApp.features.onboarding)
     implementation(projects.androidApp.features.social)
     implementation(projects.androidApp.features.diary)
     implementation(projects.androidApp.features.addarea)

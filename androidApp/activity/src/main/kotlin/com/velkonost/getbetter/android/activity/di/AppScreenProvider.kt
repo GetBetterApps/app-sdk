@@ -13,6 +13,7 @@ import com.velkonost.getbetter.android.features.diary.DiaryNavRoute
 import com.velkonost.getbetter.android.features.feedback.FeedbackNavRoute
 import com.velkonost.getbetter.android.features.home.WisdomNavRoute
 import com.velkonost.getbetter.android.features.notedetail.NoteDetailNavRoute
+import com.velkonost.getbetter.android.features.onboarding.OnboardingNavRoute
 import com.velkonost.getbetter.android.features.profile.ProfileNavRoute
 import com.velkonost.getbetter.android.features.settings.SettingsNavRoute
 import com.velkonost.getbetter.android.features.social.SocialNavRoute
@@ -46,6 +47,7 @@ fun NavGraphBuilder.addSplashRoute(
         startDestination = NavigationScreen.SplashNavScreen.route
     ) {
         SplashNavRoute.provide(this, navController, forceHideBottomBar)
+        OnboardingNavRoute.provide(this, navController, forceHideBottomBar)
     }
 }
 

@@ -104,6 +104,7 @@ include(
 
     ":androidApp:features:auth",
     ":androidApp:features:splash",
+    ":androidApp:features:onboarding",
     ":androidApp:features:social",
     ":androidApp:features:diary",
     ":androidApp:features:addarea",
