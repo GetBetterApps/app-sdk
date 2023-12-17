@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -60,7 +61,7 @@ fun OnboardingScreen(
                     .padding(start = 32.dp, end = 32.dp)
                     .align(Alignment.CenterHorizontally),
                 text = stringResource(resource = SharedR.strings.onboarding_step_1),
-                style = MaterialTheme.typography.headlineLarge,
+                style = MaterialTheme.typography.headlineLarge.copy(fontStyle = FontStyle.Italic),
                 color = colorResource(resource = SharedR.colors.text_title),
                 textAlign = TextAlign.Center
             )
