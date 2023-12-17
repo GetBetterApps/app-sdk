@@ -18,6 +18,7 @@ fun PrimaryBox(
     modifier: Modifier = Modifier,
     padding: Int = 16,
     topPadding: Int = 12,
+    isBright: Boolean = false,
     content: @Composable BoxScope.() -> Unit
 ) {
     Box(
@@ -29,7 +30,11 @@ fun PrimaryBox(
             )
             .fillMaxWidth()
             .background(
-                color = colorResource(resource = SharedR.colors.background_item),
+                color = colorResource(
+                    resource =
+                    if (isBright) SharedR.colors.button_gradient_start
+                    else SharedR.colors.background_item
+                ),
                 shape = MaterialTheme.shapes.medium
             )
             .padding(padding.dp)

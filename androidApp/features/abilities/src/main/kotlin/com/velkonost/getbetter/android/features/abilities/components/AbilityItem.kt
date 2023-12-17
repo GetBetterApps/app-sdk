@@ -33,7 +33,7 @@ fun AbilityItem(
     val context = LocalContext.current
     val isFavorite = item is FavoriteAbility
 
-    PrimaryBox {
+    PrimaryBox(isBright = isFavorite) {
         Column(
             modifier = modifier.clickable(
                 interactionSource = remember { MutableInteractionSource() },
@@ -51,7 +51,10 @@ fun AbilityItem(
                 modifier = modifier.padding(top = 12.dp),
                 text = if (isFavorite) stringResource(resource = SharedR.strings.ability_favorite_description) else item.description,
                 style = MaterialTheme.typography.labelMedium,
-                color = colorResource(resource = SharedR.colors.text_primary)
+                color = colorResource(
+                    resource = if (isFavorite) SharedR.colors.text_title
+                    else SharedR.colors.text_primary
+                )
             )
 
             if (!isFavorite) {
