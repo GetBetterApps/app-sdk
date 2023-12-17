@@ -6,13 +6,12 @@ import Combine
 struct ContentView: View {
     
     let navigationScreens: [any NavRoute] = [
-//        SocialRoute(),
+        SocialRoute(),
         DiaryRoute(),
         CalendarsRoute(),
         ProfileRoute(),
         AbilitiesRoute(),
     ]
-    
     
     @StateObject var pilot = UIPilot(initial: NavigationScreenKt.SPLASH_DESTINATION)
     
@@ -21,7 +20,6 @@ struct ContentView: View {
     @State private var showSnackBar: Bool = false
     @State private var showToast: Bool = false
     @State private var messageDequeObserver: Task<(), Error>? = nil
-    
     
     var body: some View {
         
