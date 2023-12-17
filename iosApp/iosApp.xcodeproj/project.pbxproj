@@ -150,6 +150,8 @@
 		46D8577E2AD0787E00BE74DA /* AddAreaHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D8577D2AD0787E00BE74DA /* AddAreaHeader.swift */; };
 		46D9381C2ABAECB70096A221 /* ProfileRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9381B2ABAECB70096A221 /* ProfileRoute.swift */; };
 		46D9381E2ABAECBE0096A221 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9381D2ABAECBE0096A221 /* ProfileScreen.swift */; };
+		46E20A282B2F4DAA0037CEEF /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E20A272B2F4DAA0037CEEF /* OnboardingScreen.swift */; };
+		46E20A2A2B2F4DB10037CEEF /* OnboardingRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E20A292B2F4DB10037CEEF /* OnboardingRoute.swift */; };
 		46E2DD2D2AE9364D00B4B2B5 /* AreaPickerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E2DD2C2AE9364D00B4B2B5 /* AreaPickerHeader.swift */; };
 		46E2DD2F2AE93A3B00B4B2B5 /* AreaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E2DD2E2AE93A3B00B4B2B5 /* AreaPicker.swift */; };
 		46E2DD312AE9420600B4B2B5 /* AreaPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E2DD302AE9420600B4B2B5 /* AreaPickerItem.swift */; };
@@ -313,6 +315,8 @@
 		46D8577D2AD0787E00BE74DA /* AddAreaHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaHeader.swift; sourceTree = "<group>"; };
 		46D9381B2ABAECB70096A221 /* ProfileRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRoute.swift; sourceTree = "<group>"; };
 		46D9381D2ABAECBE0096A221 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		46E20A272B2F4DAA0037CEEF /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
+		46E20A292B2F4DB10037CEEF /* OnboardingRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRoute.swift; sourceTree = "<group>"; };
 		46E2DD2C2AE9364D00B4B2B5 /* AreaPickerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPickerHeader.swift; sourceTree = "<group>"; };
 		46E2DD2E2AE93A3B00B4B2B5 /* AreaPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPicker.swift; sourceTree = "<group>"; };
 		46E2DD302AE9420600B4B2B5 /* AreaPickerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPickerItem.swift; sourceTree = "<group>"; };
@@ -523,6 +527,7 @@
 		461F7C6D2AA8D7DE003791CF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				46E20A262B2F4DA20037CEEF /* Onboarding */,
 				46407B942B287345004A3AA2 /* AbilityDetails */,
 				46E380492B24D86500056C0D /* Abilities */,
 				46F0B3BB2B1CD5D700D6BCC1 /* TaskDetail */,
@@ -885,6 +890,15 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		46E20A262B2F4DA20037CEEF /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				46E20A272B2F4DAA0037CEEF /* OnboardingScreen.swift */,
+				46E20A292B2F4DB10037CEEF /* OnboardingRoute.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		46E2DD2B2AE935BE00B4B2B5 /* areapicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -1183,6 +1197,7 @@
 				46B17E142AADE482008C2BC4 /* AuthTextField.swift in Sources */,
 				46E2DD2F2AE93A3B00B4B2B5 /* AreaPicker.swift in Sources */,
 				460054B72ABB576B00586767 /* WisdomItem.swift in Sources */,
+				46E20A282B2F4DAA0037CEEF /* OnboardingScreen.swift in Sources */,
 				467668BA2AEABFCA007C17DE /* SubNoteItem.swift in Sources */,
 				4667C9022AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift in Sources */,
 				466E51962B12326700088425 /* FeedbackScreen.swift in Sources */,
@@ -1249,6 +1264,7 @@
 				46E380502B24D94A00056C0D /* AbilityItem.swift in Sources */,
 				467668BC2AEABFDE007C17DE /* AddSubNoteItem.swift in Sources */,
 				46ACAF212AEEC9B8000A9CD8 /* NoteItemHeader.swift in Sources */,
+				46E20A2A2B2F4DB10037CEEF /* OnboardingRoute.swift in Sources */,
 				4678E4482AAC6A67000B88E8 /* AppDelegate.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				466C5CCB2AB73240002C089C /* BottomBar.swift in Sources */,
