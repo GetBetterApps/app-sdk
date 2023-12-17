@@ -25,3 +25,11 @@ data object NavigateToMainFlow : SplashNavigation {
         rootRoute = true
     )
 }
+
+data object NavigateToOnboarding : SplashNavigation {
+    override val event: NavigationEvent = NavigationEvent.NavigateAndPopUpToRoute(
+        route = NavigationScreen.OnboardingNavScreen.route,
+        popUpTo = NavigationScreen.SplashNavScreen.route,
+        rootRoute = false
+    )
+}

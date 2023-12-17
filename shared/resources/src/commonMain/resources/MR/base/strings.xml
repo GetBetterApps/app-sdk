@@ -14,6 +14,13 @@
 
     <!--  ONBOARDING  -->
     <string name="onboarding_btn">I am ready</string>
+
+    <string name="onboarding_step_1">впечатления для твоей жизни</string>
+    <string name="onboarding_step_2">начинай с простого</string>
+    <string name="onboarding_step_3">выходи из зоны комфорта</string>
+    <string name="onboarding_step_4">управляй личной продуктивностью</string>
+    <string name="onboarding_step_5">достигай своих целей</string>
+    <string name="onboarding_step_6">мотивируй себя</string>
     <!--  ONBOARDING  -->
 
     <!--  AUTH  -->
