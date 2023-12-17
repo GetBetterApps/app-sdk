@@ -6,7 +6,7 @@ import Combine
 struct ContentView: View {
     
     let navigationScreens: [any NavRoute] = [
-        SocialRoute(),
+//        SocialRoute(),
         DiaryRoute(),
         CalendarsRoute(),
         ProfileRoute(),

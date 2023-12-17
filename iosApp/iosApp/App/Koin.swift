@@ -35,7 +35,7 @@ extension KoinApplication {
          \.SettingsViewModel,
          \.TaskDetailViewModel,
          \.AbilitiesViewModel,
-         \.AbilityDetailsViewModel.
+         \.AbilityDetailsViewModel,
          \.OnboardingViewModel
     ]
     

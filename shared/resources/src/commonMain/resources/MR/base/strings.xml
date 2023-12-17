@@ -7,8 +7,14 @@
     <!--  GENERAL  -->
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
+    <string name="continue_btn">Continue</string>
     <string name="private_state">Private</string>
     <string name="public_state">Public</string>
+    <!--  GENERAL  -->
+
+    <!--  ONBOARDING  -->
+    <string name="onboarding_btn">I am ready</string>
+    <!--  ONBOARDING  -->
 
     <!--  AUTH  -->
     <string name="auth_email_label">Email</string>
