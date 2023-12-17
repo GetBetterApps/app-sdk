@@ -42,6 +42,7 @@ kotlin {
             export(projects.shared.features.auth.presentation)
 
             export(projects.shared.features.splash.presentation)
+            export(projects.shared.features.onboarding.presentation)
 
             export(projects.shared.features.social.presentation)
             export(projects.shared.features.diary.presentation)
@@ -92,6 +93,7 @@ kotlin {
 
                 implementation(projects.shared.features.splash.data)
                 implementation(projects.shared.features.splash.presentation)
+                implementation(projects.shared.features.onboarding.presentation)
 
                 implementation(projects.shared.features.social.data)
                 implementation(projects.shared.features.social.presentation)
@@ -143,6 +145,7 @@ kotlin {
                 api(projects.shared.features.auth.presentation)
 
                 api(projects.shared.features.splash.presentation)
+                api(projects.shared.features.onboarding.presentation)
                 api(projects.shared.features.social.presentation)
                 api(projects.shared.features.diary.presentation)
                 api(projects.shared.features.addarea.presentation)
