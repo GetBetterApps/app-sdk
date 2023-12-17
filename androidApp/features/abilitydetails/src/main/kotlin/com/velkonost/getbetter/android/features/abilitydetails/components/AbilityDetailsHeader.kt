@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -23,6 +24,7 @@ import dev.icerock.moko.resources.compose.painterResource
 fun AbilityDetailsHeader(
     modifier: Modifier = Modifier,
     title: String,
+    imageAlpha: Float,
     onBackClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -33,6 +35,7 @@ fun AbilityDetailsHeader(
     ) {
         Image(
             modifier = modifier
+                .alpha(imageAlpha)
                 .padding(start = 20.dp)
                 .size(42.dp)
                 .background(
@@ -40,6 +43,7 @@ fun AbilityDetailsHeader(
                     shape = MaterialTheme.shapes.small
                 )
                 .padding(4.dp)
+
                 .clickable(
                     interactionSource = interactionSource,
                     indication = null

@@ -47,7 +47,6 @@ fun AbilityMotivationContent(
     val currentIndex = remember { derivedStateOf { listState.firstVisibleItemIndex } }
 
     Box(modifier = modifier.fillMaxSize()) {
-
         LazyColumn(
             state = listState,
             flingBehavior = rememberFlingBehaviorMultiplier(

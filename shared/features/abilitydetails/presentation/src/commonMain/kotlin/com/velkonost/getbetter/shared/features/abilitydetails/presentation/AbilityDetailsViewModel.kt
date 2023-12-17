@@ -51,6 +51,8 @@ internal constructor(
                     if (!it) {
                         fetchAffirmations()
                         fetchNotes()
+                    } else {
+                        fetchFavoriteAffirmations()
                     }
                 }
             }
@@ -61,6 +63,18 @@ internal constructor(
         is AbilityDetailsAction.UserNotesLoadNextPage -> fetchNotes()
         is AbilityDetailsAction.NavigateBack -> emit(action)
         is AbilityDetailsAction.FavoriteClick -> obtainFavoriteClick(action.value)
+    }
+
+    private fun fetchFavoriteAffirmations() {
+        launchJob {
+            affirmationsRepository.getFavoritesList() collectAndProcess {
+                onSuccess { items ->
+                    items?.let {
+                        emit(viewState.value.copy(affirmations = items))
+                    }
+                }
+            }
+        }
     }
 
     private fun fetchAffirmations() {

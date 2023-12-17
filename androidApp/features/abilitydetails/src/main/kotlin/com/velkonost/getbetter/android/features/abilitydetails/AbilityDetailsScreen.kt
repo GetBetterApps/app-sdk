@@ -38,7 +38,7 @@ fun AbilityDetailsScreen(
         label = ""
     )
     val tabsAlpha by animateFloatAsState(
-        targetValue = if (pagerState.currentPage == 0) 1F else 0.6F,
+        targetValue = if (pagerState.currentPage == 0 && !state.isFavorite) 1F else 0.6F,
         animationSpec = tween(durationMillis = 300, easing = FastOutLinearInEasing),
         label = ""
     )
@@ -87,6 +87,7 @@ fun AbilityDetailsScreen(
 
         AnimatedVisibility(visible = pagerState.currentPage == 0) {
             AbilityDetailsHeader(
+                imageAlpha = tabsAlpha,
                 title =
                 if (state.isFavorite) stringResource(resource = SharedR.strings.ability_favorite_title)
                 else state.ability?.name ?: "",
