@@ -72,6 +72,8 @@
     <!--  TASK DETAIL  -->
 
     <!--  ABILITY DETAIL  -->
+    <string name="ability_favorite_title">Favorite</string>
+    <string name="ability_favorite_description">All what you like in one place</string>
     <string name="ability_detail_notes_title">Your notes</string>
     <string name="ability_detail_motivation_title">Motivation</string>
     <!--  ABILITY DETAIL  -->
