@@ -13,6 +13,7 @@ struct PrimaryBox<Content: View>: View {
     
     var padding: EdgeInsets = .init(top: 16, leading: 16, bottom: 16, trailing: 16)
     var topPadding = 8
+    var isBright: Bool = false
     @ViewBuilder let content: Content
     
     var body: some View {
@@ -22,7 +23,7 @@ struct PrimaryBox<Content: View>: View {
         .padding(padding)
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color.backgroundItem)
+                .fill(isBright ? Color.buttonGradientStart : Color.backgroundItem)
                 .shadow(radius: 8)
         )
         .padding(.init(top: CGFloat(topPadding), leading: .zero, bottom: .zero, trailing: .zero))

@@ -14,46 +14,49 @@ struct AbilityItem: View {
     
     let item: Ability
     let onClick: (Ability) -> Void
+    let isFavorite: Bool
     
     init(item: Ability, onClick: @escaping (Ability) -> Void) {
         self.item = item
         self.onClick = onClick
+        self.isFavorite = item is FavoriteAbility
     }
     
     var body: some View {
-        PrimaryBox {
+        PrimaryBox(isBright: isFavorite) {
             VStack(spacing: 0) {
                 
                 HStack {
-                    Text(item.name)
+                    Text(isFavorite ? SharedR.strings().ability_favorite_title.desc().localized() : item.name)
                         .style(.titleMedium)
                         .foregroundColor(.textLight)
                     Spacer()
                 }
                 
                 HStack {
-                    Text(item.description_)
+                    Text(isFavorite ? SharedR.strings().ability_favorite_description.desc().localized() : item.description_)
                         .style(.labelMedium)
-                        .foregroundColor(.textPrimary)
+                        .foregroundColor(isFavorite ? .textLight : .textPrimary)
                         .padding(.top, 12)
                     Spacer()
                 }
                 
-                HStack {
-                    Text(SharedR.strings().experience_your_title.desc().localized())
-                        .style(.bodyMedium)
-                        .foregroundColor(.textPrimary)
-                    Spacer()
-                    Text(item.experienceData.currentLevelStr.localized())
-                        .style(.bodyMedium)
-                        .foregroundColor(.textPrimary)
-                }
-                .padding(.top, 12)
-                
-                ProgressView(value: Double(item.experienceData.remainExperiencePercent))
-                    .padding(.top, 6)
-                    .accentColor(.buttonGradientStart)
+                if !isFavorite {
+                    HStack {
+                        Text(SharedR.strings().experience_your_title.desc().localized())
+                            .style(.bodyMedium)
+                            .foregroundColor(.textPrimary)
+                        Spacer()
+                        Text(item.experienceData.currentLevelStr.localized())
+                            .style(.bodyMedium)
+                            .foregroundColor(.textPrimary)
+                    }
+                    .padding(.top, 12)
                     
+                    ProgressView(value: Double(item.experienceData.remainExperiencePercent))
+                        .padding(.top, 6)
+                        .accentColor(.buttonGradientStart)
+                }
             }
             .contentShape(Rectangle())
             .onTapGesture {
