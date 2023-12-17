@@ -9,6 +9,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -30,10 +31,11 @@ import dev.icerock.moko.resources.compose.painterResource
 import kotlinx.coroutines.delay
 
 @Composable
-fun OnboardingFirstStep(
+fun BoxScope.OnboardingFirstStep(
     modifier: Modifier = Modifier,
     enable: Boolean,
-    moveTextToBottom: MutableState<Boolean>
+    moveTextToBottom: MutableState<Boolean>,
+    animationEnded: MutableState<Boolean>
 ) {
     val animationDuration = 1200
 
@@ -164,16 +166,21 @@ fun OnboardingFirstStep(
         delay(500)
 
         imagesBlockShow.value = false
-        delay(3500)
+        delay(500)
+        animationEnded.value = true
+        delay(3000)
         moveTextToBottom.value = true
     }
 
-    Column(modifier.fillMaxWidth()) {
+    Column(
+        modifier
+            .fillMaxWidth()
+            .align(Alignment.Center)) {
         AnimatedVisibility(
             modifier = modifier
                 .fillMaxWidth()
                 .align(Alignment.CenterHorizontally),
-            visible = imagesBlockShow.value,
+            visible = enable,
             enter = fadeIn(
                 tween(
                     durationMillis = animationDuration,

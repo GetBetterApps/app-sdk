@@ -1,6 +1,6 @@
 package com.velkonost.getbetter.android.features.onboarding
 
-import androidx.compose.animation.AnimatedContent
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.LinearEasing
@@ -43,6 +43,7 @@ import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
 
+@SuppressLint("UnusedContentLambdaTargetStateParameter")
 @Composable
 fun OnboardingScreen(
     modifier: Modifier = Modifier,
@@ -53,9 +54,15 @@ fun OnboardingScreen(
     val animationDuration = 1200
 
     val moveTextToBottom = remember { mutableStateOf(false) }
+    val firstStepAnimationEnded = remember { mutableStateOf(false) }
+
     val textAlpha by animateFloatAsState(
-        targetValue = if (moveTextToBottom.value) 1f else 0f,
-        animationSpec = tween(durationMillis = 1500, easing = FastOutLinearInEasing),
+        targetValue = if (firstStepAnimationEnded.value) 1f else 0f,
+        animationSpec = tween(
+            durationMillis = 1500,
+            easing = FastOutLinearInEasing,
+            delayMillis = 500
+        ),
         label = ""
     )
 
@@ -69,10 +76,13 @@ fun OnboardingScreen(
 
             Spacer(modifier.weight(1f))
 
-            Box {
+            Box(
+                contentAlignment = Alignment.Center
+            ) {
                 OnboardingFirstStep(
                     enable = state.step == 1,
-                    moveTextToBottom = moveTextToBottom
+                    moveTextToBottom = moveTextToBottom,
+                    animationEnded = firstStepAnimationEnded
                 )
 
                 Column(modifier.fillMaxWidth()) {
@@ -108,44 +118,55 @@ fun OnboardingScreen(
                 }
             }
 
-            AnimatedContent(targetState = moveTextToBottom.value, label = "") {
-                Column {
-                    if (it) {
-                        Spacer(modifier.weight(1f))
-                    }
 
-                    AnimatedContent(targetState = state.title, label = "") {
-                        Box(
-                            modifier = modifier
-                                .alpha(textAlpha)
-                                .fillMaxWidth()
-                                .height(96.dp)
-                                .padding(start = 32.dp, end = 32.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = it.toString(LocalContext.current),
-                                style = MaterialTheme.typography.headlineLarge.copy(fontStyle = FontStyle.Italic),
-                                color = colorResource(resource = SharedR.colors.text_title),
-                                textAlign = TextAlign.Center
-                            )
-                        }
-                    }
-
-                    Spacer(modifier.weight(1f))
-
-                    AppButton(
-                        modifier = modifier.align(Alignment.CenterHorizontally),
-                        labelText = stringResource(resource = SharedR.strings.continue_btn),
-                        isLoading = false,
-                        onClick = {
-                            viewModel.dispatch(OnboardingAction.NextClick)
-                        }
+            Column {
+                this.AnimatedVisibility(visible = moveTextToBottom.value) {
+                    Spacer(modifier = modifier.height(48.dp))
+                }
+                Box(
+                    modifier = modifier
+                        .alpha(textAlpha)
+                        .fillMaxWidth()
+                        .height(96.dp)
+                        .padding(start = 32.dp, end = 32.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = state.title.toString(LocalContext.current),
+                        style = MaterialTheme.typography.headlineLarge.copy(fontStyle = FontStyle.Italic),
+                        color = colorResource(resource = SharedR.colors.text_title),
+                        textAlign = TextAlign.Center
                     )
-                    Spacer(modifier = modifier.height(64.dp))
                 }
             }
 
+//            AnimatedContent(
+//                transitionSpec = {
+//                    (slideInVertically() togetherWith slideOutVertically())
+//                },
+//                targetState = moveTextToBottom.value, label = "") {
+
+
+//            AnimatedContent(targetState = state.title, label = "") {
+
+
+//            }
+
+//                }
+
+//            }
+
+            Spacer(modifier.weight(1f))
+
+            AppButton(
+                modifier = modifier.align(Alignment.CenterHorizontally),
+                labelText = stringResource(resource = SharedR.strings.continue_btn),
+                isLoading = false,
+                onClick = {
+                    viewModel.dispatch(OnboardingAction.NextClick)
+                }
+            )
+            Spacer(modifier = modifier.height(64.dp))
 
         }
 
