@@ -32,7 +32,7 @@ struct AbilityDetailsRoute: NavRoute {
     }
     
     func getArguments() -> Array<String> {
-        return [NavigationScreenKt.ARG_ABILITY]
+        return [NavigationScreenKt.ARG_ABILITY, NavigationScreenKt.ARG_IS_FAVORITE]
     }
     
 }

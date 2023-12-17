@@ -6,6 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.velkonost.getbetter.core.compose.NavRoute
 import com.velkonost.getbetter.shared.core.vm.navigation.ARG_ABILITY
+import com.velkonost.getbetter.shared.core.vm.navigation.ARG_IS_FAVORITE
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationScreen
 import com.velkonost.getbetter.shared.features.abilitydetails.presentation.AbilityDetailsViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -23,5 +24,8 @@ object AbilityDetailsNavRoute : NavRoute<AbilityDetailsViewModel> {
         @Composable get() = koinViewModel()
 
     override fun getArguments(): List<NamedNavArgument> =
-        listOf(navArgument(ARG_ABILITY) { type = NavType.StringType })
+        listOf(
+            navArgument(ARG_ABILITY) { type = NavType.StringType },
+            navArgument(ARG_IS_FAVORITE) { type = NavType.StringType },
+        )
 }

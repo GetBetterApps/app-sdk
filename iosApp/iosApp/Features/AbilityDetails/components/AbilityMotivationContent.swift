@@ -37,7 +37,6 @@ struct AbilityMotivationContent: View {
     
     var body: some View {
         ZStack {
-            shareableImage
             Color.mainBackground.edgesIgnoringSafeArea(.all)
             
             if !items.isEmpty {
@@ -140,85 +139,27 @@ struct AbilityMotivationContent: View {
                                 itemFavoriteClick(items[page.index])
                             }
                         
-                        Image(uiImage: SharedR.images().ic_share.toUIImage()!)
-                            .resizable()
-                            .renderingMode(.template)
-                            .foregroundColor(.iconActive)
-                            .frame(width: 26, height: 26)
-                            .padding(10)
-                            .background(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color.backgroundIcon.opacity(0.6))
-                                    .shadow(radius: 8)
-                            )
-                            .padding(.trailing, 24)
-                            .onTapGesture {
-                                shareSheetVisible = true
-//                                if let data = shareableImage.snapshot() {
-//                                    ShareSheet(photo: data)
-//                                }
-                            }
+//                        Image(uiImage: SharedR.images().ic_share.toUIImage()!)
+//                            .resizable()
+//                            .renderingMode(.template)
+//                            .foregroundColor(.iconActive)
+//                            .frame(width: 26, height: 26)
+//                            .padding(10)
+//                            .background(
+//                                RoundedRectangle(cornerRadius: 12)
+//                                    .fill(Color.backgroundIcon.opacity(0.6))
+//                                    .shadow(radius: 8)
+//                            )
+//                            .padding(.trailing, 24)
+//                            .onTapGesture {
+//                                shareSheetVisible = true
+//                            }
                     }
                     .padding(.bottom, 48)
                 }
             }
         }
-        .sheet(isPresented: $shareSheetVisible) {
-            if image != nil {
-                ShareSheet(photo: shareableImage.snapshot()!)
-            }
-        }
+        
         
     }
 }
-
-extension AbilityMotivationContent {
-    var shareableImage: some View {
-        ZStack {
-            //        AsyncImage(url: URL(string: items[page.index].imageUrl)) { image in
-//            if image != nil {
-                
-                Image(uiImage: SharedR.images().emoji_1.toUIImage()!)
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                    .scaleEffect(1.2)
-                    .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
-                    .clipped()
-//            }
-            Text("123")
-        }.frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
-//        } placeholder: {
-            
-//        }.edgesIgnoringSafeArea(.all)
-    }
-}
-
-
-import LinkPresentation
-
-
-//This code is from https://gist.github.com/tsuzukihashi/d08fce005a8d892741f4cf965533bd56
-
-struct ShareSheet: UIViewControllerRepresentable {
-    let photo: UIImage
-    
-    func makeUIViewController(context: Context) -> UIActivityViewController {
-        //let text = ""
-        //let itemSource = ShareActivityItemSource(shareText: text, shareImage: photo)
-        
-        let activityItems: [Any] = [photo]
-        
-        let controller = UIActivityViewController(
-            activityItems: activityItems,
-            applicationActivities: nil)
-        
-        return controller
-    }
-    
-    func updateUIViewController(_ vc: UIActivityViewController, context: Context) {
-        
-    }
-}
-
-
