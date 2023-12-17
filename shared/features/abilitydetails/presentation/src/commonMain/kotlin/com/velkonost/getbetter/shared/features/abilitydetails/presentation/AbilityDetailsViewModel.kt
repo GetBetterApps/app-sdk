@@ -27,6 +27,8 @@ internal constructor(
 ) {
 
     private val ability = savedStateHandle.ability.stateInWhileSubscribed(initialValue = null)
+    private val isFavorite =
+        savedStateHandle.isFavorite.stateInWhileSubscribed(initialValue = false)
 
     private val _notesPagingConfig = PagingConfig()
     private var notesLoadingJob: Job? = null
@@ -35,15 +37,22 @@ internal constructor(
 
     init {
         launchJob {
-            ability.collectLatest { ability ->
-                emit(
-                    viewState.value.copy(
-                        isLoading = false,
-                        ability = ability
+            isFavorite.collectLatest {
+                emit(viewState.value.copy(isFavorite = it))
+
+                ability.collectLatest { ability ->
+                    emit(
+                        viewState.value.copy(
+                            isLoading = false,
+                            ability = ability
+                        )
                     )
-                )
-                fetchAffirmations()
-                fetchNotes()
+
+                    if (!it) {
+                        fetchAffirmations()
+                        fetchNotes()
+                    }
+                }
             }
         }
     }

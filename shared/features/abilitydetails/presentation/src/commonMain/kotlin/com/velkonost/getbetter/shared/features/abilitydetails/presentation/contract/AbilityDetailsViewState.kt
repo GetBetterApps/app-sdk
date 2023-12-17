@@ -11,6 +11,7 @@ data class AbilityDetailsViewState(
     val isLoading: Boolean = false,
     val tabs: List<AbilityDetailsTab> = AbilityDetailsTab.entries,
     val ability: Ability? = null,
+    val isFavorite: Boolean = false,
     val affirmations: List<Affirmation> = emptyList(),
     val userNotesViewState: UserNotesViewState = UserNotesViewState()
 ) : UIContract.State
