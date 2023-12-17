@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.core.compose.components.AppButton
@@ -35,9 +36,9 @@ fun OnboardingScreen(
 
     Box(modifier = modifier.fillMaxSize()) {
 
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Column {
 
-            Spacer(modifier.height(32.dp))
+            Spacer(modifier.weight(1f))
 
             Image(
                 modifier = modifier
@@ -46,28 +47,34 @@ fun OnboardingScreen(
                         shape = MaterialTheme.shapes.medium,
                     )
                     .fillMaxHeight(0.6f)
-                    .clip(MaterialTheme.shapes.medium),
+                    .clip(MaterialTheme.shapes.medium)
+                    .align(Alignment.CenterHorizontally),
                 painter = painterResource(imageResource = SharedR.images.ic_onboarding),
                 contentDescription = null
             )
 
             Spacer(modifier.weight(1f))
+
             Text(
                 modifier = modifier
-                    .padding(bottom = 32.dp),
+                    .padding(start = 32.dp, end = 32.dp)
+                    .align(Alignment.CenterHorizontally),
                 text = stringResource(resource = SharedR.strings.onboarding_step_1),
-                style = MaterialTheme.typography.titleMedium,
-                color = colorResource(resource = SharedR.colors.text_title)
+                style = MaterialTheme.typography.headlineLarge,
+                color = colorResource(resource = SharedR.colors.text_title),
+                textAlign = TextAlign.Center
             )
+            Spacer(modifier.weight(1f))
 
             AppButton(
+                modifier = modifier.align(Alignment.CenterHorizontally),
                 labelText = stringResource(resource = SharedR.strings.continue_btn),
                 isLoading = false,
                 onClick = {
 
                 }
             )
-            Spacer(modifier = modifier.height(56.dp))
+            Spacer(modifier = modifier.height(64.dp))
         }
 
     }
