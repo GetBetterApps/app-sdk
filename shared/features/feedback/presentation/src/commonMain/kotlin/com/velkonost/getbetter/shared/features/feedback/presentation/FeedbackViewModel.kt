@@ -12,7 +12,8 @@ import com.velkonost.getbetter.shared.features.feedback.presentation.contract.Fe
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackViewState
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.NewFeedbackAction
 
-class FeedbackViewModel internal constructor(
+class FeedbackViewModel
+internal constructor(
     private val feedbackRepository: FeedbackRepository
 ) : BaseViewModel<FeedbackViewState, FeedbackAction, FeedbackNavigation, FeedbackEvent>(
     initialState = FeedbackViewState()
