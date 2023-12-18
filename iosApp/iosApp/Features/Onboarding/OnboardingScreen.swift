@@ -32,10 +32,13 @@ struct OnboardingScreen: View {
                 )
                 .opacity(state.step == 1 ? 1 : 0)
                 
-                OnboardingSecondStep(
-                
-                )
-                .opacity(state.step == 2 ? 1 : 0)
+                if state.step == 2 {
+                    OnboardingSecondStep(
+                    
+                        textVisible: $textVisible
+                    )
+                    .opacity(state.step == 2 ? 1 : 0)
+                }
             }
             .animation(.easeInOut, value: state.step)
             .frame(minWidth: 0, maxWidth: .infinity)
@@ -59,7 +62,16 @@ struct OnboardingScreen: View {
                 labelText: SharedR.strings().continue_btn.desc().localized(),
                 isLoading: false,
                 onClick: {
-                    viewModel.dispatch(action: OnboardingActionNextClick())
+                    withAnimation(.easeInOut) {
+                        textVisible = false
+                        buttonVisible = false
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        viewModel.dispatch(action: OnboardingActionNextClick())
+                    }
+                    
+                    
                 }
             )
             .opacity(buttonVisible ? 1 : 0)

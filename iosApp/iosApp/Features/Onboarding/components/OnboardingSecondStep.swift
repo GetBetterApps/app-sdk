@@ -12,6 +12,12 @@ import SharedSDK
 
 struct OnboardingSecondStep: View {
     
+    @Binding var textVisible: Bool
+    
+    init(textVisible: Binding<Bool>) {
+        self._textVisible = textVisible
+    }
+    
     @State var imageIndex: Int = 0
     private let durationPerImage: Double = 3.5
     
@@ -84,6 +90,10 @@ struct OnboardingSecondStep: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 4 * durationPerImage) {
                 imageIndex += 1
                 flipped.toggle()
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4 * durationPerImage + 1) {
+                textVisible = true
             }
         }
     }
