@@ -38,6 +38,6 @@ struct AbilityMotivationItem: View {
             }
         }
         .contentShape(Rectangle())
-        .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight) 
+        .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
     }
 }

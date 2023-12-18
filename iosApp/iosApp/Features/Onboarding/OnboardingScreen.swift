@@ -102,7 +102,7 @@ struct OnboardingScreen: View {
                 )
                 .opacity(buttonVisible ? 1 : 0)
                 
-                Spacer().frame(height: 32)
+                Spacer().frame(height: 48)
             }
             .onChange(of: textVisible) { _ in
                 withAnimation(.easeInOut(duration: 0.5).delay(11)) {

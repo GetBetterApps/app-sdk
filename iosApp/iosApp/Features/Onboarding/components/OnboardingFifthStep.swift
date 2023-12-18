@@ -17,6 +17,7 @@ struct OnboardingFifthStep: View {
     
     private let isActive: Bool
     private let isScaled: Bool
+    private let isBlurred: Bool
     private let isTextVisible: Bool
     
     init(item: Affirmation, isActive: Bool, text: String) {
@@ -24,6 +25,7 @@ struct OnboardingFifthStep: View {
         self.text = text
         self.isActive = isActive
         self.isScaled = isActive
+        self.isBlurred = isActive
         self.isTextVisible = isActive
     }
     
@@ -31,6 +33,31 @@ struct OnboardingFifthStep: View {
     
     var body: some View {
         ZStack {
+            AsyncImage(
+                url: URL(string: item.imageUrl),
+                transaction: .init(animation: .easeInOut)
+            ) { phase in
+                
+                switch phase {
+                case .empty:
+                    ProgressView()
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .edgesIgnoringSafeArea(.all)
+                        .blur(radius: isBlurred ? 0 : 20)
+                        .scaleEffect(isScaled ? 1.2 : 1.02)
+                        .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
+                        .clipped()
+                    
+                case .failure(_):
+                    EmptyView()
+                @unknown default:
+                    EmptyView()
+                }
+            }.edgesIgnoringSafeArea(.all)
+            
             VStack {
                 Spacer()
                 OnboardingAffirmationText(text: text)
