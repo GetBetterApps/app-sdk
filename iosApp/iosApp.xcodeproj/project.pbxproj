@@ -54,6 +54,7 @@
 		464478C92B0A101C00926899 /* ProfileDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464478C82B0A101C00926899 /* ProfileDetailViewModel.swift */; };
 		464478CC2B0A393000926899 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 464478CB2B0A393000926899 /* CachedAsyncImage */; };
 		464583922B3018F10027F6AA /* OnboardingFirstStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464583912B3018F10027F6AA /* OnboardingFirstStep.swift */; };
+		464583942B3048620027F6AA /* OnboardingSecondStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464583932B3048620027F6AA /* OnboardingSecondStep.swift */; };
 		4646BF9A2AD2AF0B000980DD /* AreaDetailContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4646BF992AD2AF0B000980DD /* AreaDetailContent.swift */; };
 		4646BF9C2AD2BD72000980DD /* AreaDetailBottomButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4646BF9B2AD2BD72000980DD /* AreaDetailBottomButtons.swift */; };
 		464A426B2AEA62880019CB98 /* TagItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464A426A2AEA62880019CB98 /* TagItem.swift */; };
@@ -222,6 +223,7 @@
 		464478C62B0A0C5800926899 /* ProfileDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailScreen.swift; sourceTree = "<group>"; };
 		464478C82B0A101C00926899 /* ProfileDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewModel.swift; sourceTree = "<group>"; };
 		464583912B3018F10027F6AA /* OnboardingFirstStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirstStep.swift; sourceTree = "<group>"; };
+		464583932B3048620027F6AA /* OnboardingSecondStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecondStep.swift; sourceTree = "<group>"; };
 		4646BF992AD2AF0B000980DD /* AreaDetailContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaDetailContent.swift; sourceTree = "<group>"; };
 		4646BF9B2AD2BD72000980DD /* AreaDetailBottomButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaDetailBottomButtons.swift; sourceTree = "<group>"; };
 		464A426A2AEA62880019CB98 /* TagItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagItem.swift; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 			isa = PBXGroup;
 			children = (
 				464583912B3018F10027F6AA /* OnboardingFirstStep.swift */,
+				464583932B3048620027F6AA /* OnboardingSecondStep.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -1237,6 +1240,7 @@
 				467DB0152B14C8A000BB9CB3 /* SettingsScreen.swift in Sources */,
 				46D9381E2ABAECBE0096A221 /* ProfileScreen.swift in Sources */,
 				46059D292AC405BA00DC5015 /* AreaItem.swift in Sources */,
+				464583942B3048620027F6AA /* OnboardingSecondStep.swift in Sources */,
 				460054AD2ABB1B5E00586767 /* HelpAndSupport.swift in Sources */,
 				46C10D212AB46BF400E62846 /* UIPilotExt.swift in Sources */,
 				46F0B3BF2B1CD62800D6BCC1 /* TaskDetailRoute.swift in Sources */,

@@ -7,6 +7,6 @@ import dev.icerock.moko.resources.desc.StringDesc
 
 data class OnboardingViewState(
     val isLoading: Boolean = false,
-    val step: Int = 1,
+    val step: Int = 2,
     val title: StringDesc = StringDesc.Resource(SharedR.strings.onboarding_step_1)
 ) : UIContract.State
