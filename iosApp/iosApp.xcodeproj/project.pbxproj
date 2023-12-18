@@ -567,6 +567,13 @@
 			path = ProfileDetail;
 			sourceTree = "<group>";
 		};
+		464583902B3015AD0027F6AA /* components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
 		4646BF982AD2AE20000980DD /* components */ = {
 			isa = PBXGroup;
 			children = (
@@ -893,6 +900,7 @@
 		46E20A262B2F4DA20037CEEF /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				464583902B3015AD0027F6AA /* components */,
 				46E20A272B2F4DAA0037CEEF /* OnboardingScreen.swift */,
 				46E20A292B2F4DB10037CEEF /* OnboardingRoute.swift */,
 			);

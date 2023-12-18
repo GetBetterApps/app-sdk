@@ -194,7 +194,6 @@ fun BoxScope.OnboardingFirstStep(
                 )
             )
         ) {
-
             Box(
                 modifier = modifier
                     .fillMaxWidth()
@@ -213,6 +212,7 @@ fun BoxScope.OnboardingFirstStep(
                     painter = painterResource(imageResource = SharedR.images.ic_onboarding_1_3),
                     contentDescription = null
                 )
+
                 Image(
                     modifier = modifier
                         .alpha(secondImageAlpha)
@@ -267,7 +267,6 @@ fun BoxScope.OnboardingFirstStep(
                 Image(
                     modifier = modifier
                         .alpha(fifthImageAlpha)
-//                        .padding(top = forthImageTopPadding.dp, start = forthImageStartPadding.dp, end = forthImageEndPadding.dp)
                         .shadow(
                             elevation = 8.dp,
                             shape = MaterialTheme.shapes.medium,

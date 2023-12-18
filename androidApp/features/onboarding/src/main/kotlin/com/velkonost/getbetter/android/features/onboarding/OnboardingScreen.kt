@@ -204,23 +204,6 @@ fun OnboardingScreen(
                 }
             }
 
-
-//            AnimatedContent(
-//                transitionSpec = {
-//                    (slideInVertically() togetherWith slideOutVertically())
-//                },
-//                targetState = moveTextToBottom.value, label = "") {
-
-
-//            AnimatedContent(targetState = state.title, label = "") {
-
-
-//            }
-
-//                }
-
-//            }
-
             Spacer(modifier.weight(1f))
 
             AppButton(
