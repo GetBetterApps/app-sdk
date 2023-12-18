@@ -30,6 +30,12 @@ struct OnboardingFirstStep: View {
     @State var fifthImageShouldShow: Bool = false
     @State var fifthImageShown: Bool = false
     
+    @Binding var textVisible: Bool
+    
+    init(textVisible: Binding<Bool>) {
+        self._textVisible = textVisible
+    }
+    
     var body: some View {
         
         ZStack {
@@ -180,6 +186,10 @@ struct OnboardingFirstStep: View {
             }
             .onChange(of: fifthImageShouldShow) { _ in
                 withAnimation(.easeInOut(duration: 0.5).delay(9.5)) {
+                    textVisible = true
+                }
+                
+                withAnimation(.easeInOut(duration: 0.5).delay(10.5)) {
                     fifthImageShown = true
                 }
             }

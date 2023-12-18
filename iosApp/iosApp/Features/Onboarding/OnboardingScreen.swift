@@ -15,7 +15,10 @@ import KMPNativeCoroutinesAsync
 struct OnboardingScreen: View {
     
     @StateViewModel var viewModel: OnboardingViewModel
+    
     @State var textVisible: Bool = false
+    @State var moveTextToBottom: Bool = false
+    @State var buttonVisible: Bool = false
     
     var body: some View {
         @State var state = viewModel.viewStateValue as! OnboardingViewState
@@ -24,11 +27,44 @@ struct OnboardingScreen: View {
             Spacer().frame(height: 140)
             
             ZStack {
-                OnboardingFirstStep()
+                OnboardingFirstStep(
+                    textVisible: $textVisible
+                )
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             
+            if moveTextToBottom {
+                Spacer()
+            }
+            
+            Text(state.title.localized())
+                .style(.headlineLarge)
+//                .italic()
+                .foregroundColor(.textTitle)
+                .multilineTextAlignment(.center)
+                .opacity(textVisible ? 1 : 0)
+                .padding(.horizontal, 32)
+            
             Spacer()
+            
+            AppButton(
+                labelText: SharedR.strings().continue_btn.desc().localized(),
+                isLoading: false,
+                onClick: {
+                    viewModel.dispatch(action: OnboardingActionNextClick())
+                }
+            )
+            .opacity(buttonVisible ? 1 : 0)
+        }
+        .onChange(of: textVisible) { _ in
+            withAnimation(.easeInOut(duration: 0.5).delay(12)) {
+                moveTextToBottom = true
+            }
+        }
+        .onChange(of: moveTextToBottom) { _ in
+            withAnimation(.easeInOut(duration: 0.5).delay(15)) {
+                buttonVisible = true
+            }
         }
     }
 }
