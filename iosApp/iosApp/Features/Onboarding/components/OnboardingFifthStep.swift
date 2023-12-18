@@ -16,17 +16,14 @@ struct OnboardingFifthStep: View {
     private let text: String
     
     private let isActive: Bool
-    private let isScaled: Bool
-    private let isBlurred: Bool
-    private let isTextVisible: Bool
+    @State var isScaled: Bool = false
+    @State var isBlurred: Bool = false
+    @State var isTextVisible: Bool = false
     
     init(item: Affirmation, isActive: Bool, text: String) {
         self.item = item
         self.text = text
         self.isActive = isActive
-        self.isScaled = isActive
-        self.isBlurred = isActive
-        self.isTextVisible = isActive
     }
     
     @State var blurRadius: CGFloat = 20
@@ -68,5 +65,20 @@ struct OnboardingFifthStep: View {
         }
         .contentShape(Rectangle())
         .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
+        .onAppear {
+//            withAnimation(.easeInOut) {
+                isTextVisible = true
+//            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                withAnimation(Animation.linear.speed(0.5)) {
+                    isBlurred = true
+                }
+                
+                withAnimation(Animation.linear.speed(0.3)) {
+                    isScaled = true
+                }
+            }
+        }
     }
 }
