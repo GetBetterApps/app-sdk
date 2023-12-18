@@ -136,6 +136,17 @@ fun BoxScope.OnboardingFirstStep(
         label = ""
     )
 
+    val logoVisible = remember { mutableStateOf(false) }
+    val logoAlpha by animateFloatAsState(
+        targetValue = if (logoVisible.value) 1f else 0f,
+        animationSpec = tween(
+            durationMillis = 500,
+            easing = FastOutLinearInEasing,
+            delayMillis = 500
+        ),
+        label = ""
+    )
+
     val imagesBlockShow = remember { mutableStateOf(true) }
     val durationPerImage = 500L
 
@@ -170,6 +181,9 @@ fun BoxScope.OnboardingFirstStep(
         animationEnded.value = true
         delay(3000)
         moveTextToBottom.value = true
+
+        delay(500)
+        logoVisible.value = true
     }
 
     Column(
@@ -202,79 +216,93 @@ fun BoxScope.OnboardingFirstStep(
 
                 Image(
                     modifier = modifier
-                        .alpha(firstImageAlpha)
-                        .padding(top = firstImageTopPadding.dp, start = firstImageStartPadding.dp)
-                        .shadow(
-                            elevation = 8.dp,
-                            shape = MaterialTheme.shapes.medium,
-                        )
-                        .width(300.dp),
-                    painter = painterResource(imageResource = SharedR.images.ic_onboarding_1_3),
+                        .fillMaxWidth()
+                        .alpha(logoAlpha)
+                        .align(Alignment.Center),
+                    painter = painterResource(imageResource = SharedR.images.ic_getbetter_light_),
                     contentDescription = null
                 )
 
-                Image(
-                    modifier = modifier
-                        .alpha(secondImageAlpha)
-                        .padding(
-                            top = secondImageTopPadding.dp,
-                            start = secondImageStartPadding.dp,
-                            end = secondImageEndPadding.dp
-                        )
-                        .shadow(
-                            elevation = 8.dp,
-                            shape = MaterialTheme.shapes.medium,
-                        )
-                        .width(300.dp),
-                    painter = painterResource(imageResource = SharedR.images.ic_onboarding_1_2),
-                    contentDescription = null
-                )
+                Box(modifier = modifier.alpha(1 - logoAlpha)) {
+                    Image(
+                        modifier = modifier
+                            .alpha(firstImageAlpha)
+                            .padding(
+                                top = firstImageTopPadding.dp,
+                                start = firstImageStartPadding.dp
+                            )
+                            .shadow(
+                                elevation = 8.dp,
+                                shape = MaterialTheme.shapes.medium,
+                            )
+                            .width(300.dp),
+                        painter = painterResource(imageResource = SharedR.images.ic_onboarding_1_3),
+                        contentDescription = null
+                    )
 
-                Image(
-                    modifier = modifier
-                        .alpha(thirdImageAlpha)
-                        .padding(
-                            top = thirdImageTopPadding.dp,
-                            start = thirdImageStartPadding.dp,
-                            end = thirdImageEndPadding.dp
-                        )
-                        .shadow(
-                            elevation = 8.dp,
-                            shape = MaterialTheme.shapes.medium,
-                        )
-                        .width(300.dp),
-                    painter = painterResource(imageResource = SharedR.images.ic_onboarding_1_1),
-                    contentDescription = null
-                )
+                    Image(
+                        modifier = modifier
+                            .alpha(secondImageAlpha)
+                            .padding(
+                                top = secondImageTopPadding.dp,
+                                start = secondImageStartPadding.dp,
+                                end = secondImageEndPadding.dp
+                            )
+                            .shadow(
+                                elevation = 8.dp,
+                                shape = MaterialTheme.shapes.medium,
+                            )
+                            .width(300.dp),
+                        painter = painterResource(imageResource = SharedR.images.ic_onboarding_1_2),
+                        contentDescription = null
+                    )
 
-                Image(
-                    modifier = modifier
-                        .alpha(forthImageAlpha)
-                        .padding(
-                            top = forthImageTopPadding.dp,
-                            start = forthImageStartPadding.dp,
-                            end = forthImageEndPadding.dp
-                        )
-                        .shadow(
-                            elevation = 8.dp,
-                            shape = MaterialTheme.shapes.medium,
-                        )
-                        .width(300.dp),
-                    painter = painterResource(imageResource = SharedR.images.ic_onboarding_1_4),
-                    contentDescription = null
-                )
+                    Image(
+                        modifier = modifier
+                            .alpha(thirdImageAlpha)
+                            .padding(
+                                top = thirdImageTopPadding.dp,
+                                start = thirdImageStartPadding.dp,
+                                end = thirdImageEndPadding.dp
+                            )
+                            .shadow(
+                                elevation = 8.dp,
+                                shape = MaterialTheme.shapes.medium,
+                            )
+                            .width(300.dp),
+                        painter = painterResource(imageResource = SharedR.images.ic_onboarding_1_1),
+                        contentDescription = null
+                    )
 
-                Image(
-                    modifier = modifier
-                        .alpha(fifthImageAlpha)
-                        .shadow(
-                            elevation = 8.dp,
-                            shape = MaterialTheme.shapes.medium,
-                        )
-                        .width(300.dp),
-                    painter = painterResource(imageResource = SharedR.images.ic_onboarding_1_5),
-                    contentDescription = null
-                )
+                    Image(
+                        modifier = modifier
+                            .alpha(forthImageAlpha)
+                            .padding(
+                                top = forthImageTopPadding.dp,
+                                start = forthImageStartPadding.dp,
+                                end = forthImageEndPadding.dp
+                            )
+                            .shadow(
+                                elevation = 8.dp,
+                                shape = MaterialTheme.shapes.medium,
+                            )
+                            .width(300.dp),
+                        painter = painterResource(imageResource = SharedR.images.ic_onboarding_1_4),
+                        contentDescription = null
+                    )
+
+                    Image(
+                        modifier = modifier
+                            .alpha(fifthImageAlpha)
+                            .shadow(
+                                elevation = 8.dp,
+                                shape = MaterialTheme.shapes.medium,
+                            )
+                            .width(300.dp),
+                        painter = painterResource(imageResource = SharedR.images.ic_onboarding_1_5),
+                        contentDescription = null
+                    )
+                }
             }
         }
     }

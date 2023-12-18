@@ -8,11 +8,11 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -44,7 +44,6 @@ import com.velkonost.getbetter.shared.features.onboarding.presentation.Onboardin
 import com.velkonost.getbetter.shared.features.onboarding.presentation.contract.OnboardingAction
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
-import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
 import kotlinx.coroutines.delay
 
@@ -82,16 +81,6 @@ fun OnboardingScreen(
         label = ""
     )
 
-    val logoAlpha by animateFloatAsState(
-        targetValue = if (buttonVisible.value) 1f else 0f,
-        animationSpec = tween(
-            durationMillis = 500,
-            easing = FastOutLinearInEasing,
-            delayMillis = 500
-        ),
-        label = ""
-    )
-
     var positionInRootButton by remember { mutableStateOf(Offset.Zero) }
     var positionInRootText by remember { mutableStateOf(Offset.Zero) }
 
@@ -113,19 +102,12 @@ fun OnboardingScreen(
             Spacer(modifier.height(140.dp))
 
             Box(
-                contentAlignment = Alignment.Center
-            ) {
+                modifier = modifier.fillMaxHeight(0.6f),
+                contentAlignment = Alignment.Center,
 
-                Image(
-                    modifier = modifier
-                        .fillMaxWidth()
-                        .alpha(logoAlpha),
-                    painter = painterResource(imageResource = SharedR.images.ic_getbetter_light_),
-                    contentDescription = null
-                )
-
+                ) {
                 OnboardingFirstStep(
-                    modifier = modifier.alpha(1 - logoAlpha),
+
                     enable = state.step == 1,
                     moveTextToBottom = moveTextToBottom,
                     animationEnded = firstStepAnimationEnded
@@ -144,7 +126,7 @@ fun OnboardingScreen(
                 ),
             ) {
                 val height = (positionInRootButton.y - positionInRootText.y)
-                val heightDp = with(LocalDensity.current) { height.toDp() - 160.dp }
+                val heightDp = with(LocalDensity.current) { height.toDp() - 120.dp }
 
                 Spacer(modifier = modifier.height(heightDp))
             }

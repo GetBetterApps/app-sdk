@@ -48,7 +48,7 @@ fun BoxScope.OnboardingSecondStep(
         ), label = ""
     )
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(enable) {
         delay(durationPerImage)
         imageIndex.intValue++
 
@@ -61,7 +61,6 @@ fun BoxScope.OnboardingSecondStep(
         delay(durationPerImage)
         imageIndex.intValue++
     }
-
 
     Column(
         modifier
