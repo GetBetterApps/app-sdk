@@ -8,7 +8,7 @@ struct ContentView: View {
     let navigationScreens: [any NavRoute] = [
         SocialRoute(),
         DiaryRoute(),
-        CalendarsRoute(),
+//        CalendarsRoute(),
         ProfileRoute(),
         AbilitiesRoute(),
     ]

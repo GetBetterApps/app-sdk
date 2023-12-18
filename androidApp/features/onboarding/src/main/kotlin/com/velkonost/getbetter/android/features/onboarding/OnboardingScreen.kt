@@ -131,7 +131,6 @@ fun OnboardingScreen(
                 )
             }
 
-
             this.AnimatedVisibility(
                 visible = moveTextToBottom.value,
                 enter = fadeIn(animationSpec = tween(durationMillis = 500)) + expandVertically(
