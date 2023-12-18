@@ -34,7 +34,7 @@ struct OnboardingThirdStep: View {
         .interactive(rotation: true)
         .interactive(scale: 0.8)
         .alignment(.center)
-        .preferredItemSize(CGSize(width: 300, height: 350))
+        .preferredItemSize(CGSize(width: UIScreen.screenWidth - 100, height: 350))
         .frame(height: 450)
         .onAppear {
             withAnimation(.easeInOut(duration: 0.5).delay(1)) {
