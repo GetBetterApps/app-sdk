@@ -15,21 +15,32 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.core.model.task.Ability
 import com.velkonost.getbetter.shared.core.util.randomUUID
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BoxScope.OnboardingThirdStep(
     modifier: Modifier = Modifier,
     enable: Boolean,
-    items: List<Ability>
+    items: List<Ability>,
+    animationEnded: MutableState<Boolean>,
 ) {
     val animationDuration = 1200
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { items.size })
+
+    LaunchedEffect(enable) {
+        if (enable) {
+            delay(1000)
+            animationEnded.value = true
+        }
+    }
 
     Column(
         modifier

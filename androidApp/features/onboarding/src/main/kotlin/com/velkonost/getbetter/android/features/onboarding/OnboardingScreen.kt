@@ -60,15 +60,17 @@ fun OnboardingScreen(
     val state by viewModel.viewState.collectAsStateWithLifecycle()
     val animationDuration = 1200
 
-    val moveTextToBottom = remember { mutableStateOf(false) }
     val firstStepAnimationEnded = remember { mutableStateOf(false) }
     val secondStepAnimationEnded = remember { mutableStateOf(false) }
+    val thirdStepAnimationEnded = remember { mutableStateOf(false) }
+
+    val moveTextToBottom = remember { mutableStateOf(false) }
     val buttonVisible = remember { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
 
     val textAlpha by animateFloatAsState(
-        targetValue = if (firstStepAnimationEnded.value || secondStepAnimationEnded.value) 1f else 0f,
+        targetValue = if (firstStepAnimationEnded.value || secondStepAnimationEnded.value || thirdStepAnimationEnded.value) 1f else 0f,
         animationSpec = tween(
             durationMillis = 500,
             easing = FastOutLinearInEasing,
@@ -181,6 +183,8 @@ fun OnboardingScreen(
                     scope.launch {
                         firstStepAnimationEnded.value = false
                         secondStepAnimationEnded.value = false
+                        thirdStepAnimationEnded.value = false
+
                         delay(500)
                         viewModel.dispatch(OnboardingAction.NextClick)
                     }
