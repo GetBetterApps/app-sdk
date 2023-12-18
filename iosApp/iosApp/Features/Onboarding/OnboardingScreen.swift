@@ -34,7 +34,7 @@ struct OnboardingScreen: View {
             }
             
             VStack {
-                Spacer().frame(height: 140)
+                Spacer().frame(height: 100)
                 
                 ZStack {
                     OnboardingFirstStep(
@@ -72,12 +72,14 @@ struct OnboardingScreen: View {
                     Spacer()
                 }
                 
-                Text(state.title.localized())
-                    .style(.headlineLarge)
-                    .foregroundColor(.textTitle)
-                    .multilineTextAlignment(.center)
-                    .opacity(textVisible ? 1 : 0)
-                    .padding(.horizontal, 32)
+                if state.step != 5 {
+                    Text(state.title.localized())
+                        .style(.headlineLarge)
+                        .foregroundColor(.textTitle)
+                        .multilineTextAlignment(.center)
+                        .opacity(textVisible ? 1 : 0)
+                        .padding(.horizontal, 32)
+                }
                 
                 Spacer()
                 
@@ -100,8 +102,9 @@ struct OnboardingScreen: View {
                 )
                 .opacity(buttonVisible ? 1 : 0)
                 
-                Spacer().frame(height: 64)
+                Spacer().frame(height: 48)
             }
+            .edgesIgnoringSafeArea(.all)
             .onChange(of: textVisible) { _ in
                 withAnimation(.easeInOut(duration: 0.5).delay(11)) {
                     moveTextToBottom = true
@@ -113,5 +116,6 @@ struct OnboardingScreen: View {
                 }
             }
         }
+        .edgesIgnoringSafeArea(.all)
     }
 }

@@ -176,12 +176,14 @@ fun OnboardingScreen(
                         .padding(start = 32.dp, end = 32.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        text = it.toString(LocalContext.current),
-                        style = MaterialTheme.typography.headlineLarge.copy(fontStyle = FontStyle.Italic),
-                        color = colorResource(resource = SharedR.colors.text_title),
-                        textAlign = TextAlign.Center
-                    )
+                    if (state.step != 5) {
+                        Text(
+                            text = it.toString(LocalContext.current),
+                            style = MaterialTheme.typography.headlineLarge.copy(fontStyle = FontStyle.Italic),
+                            color = colorResource(resource = SharedR.colors.text_title),
+                            textAlign = TextAlign.Center
+                        )
+                    }
                 }
             }
 

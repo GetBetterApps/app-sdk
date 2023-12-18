@@ -66,11 +66,13 @@ struct OnboardingFifthStep: View {
         .contentShape(Rectangle())
         .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
         .onAppear {
-//            withAnimation(.easeInOut) {
-                isTextVisible = true
-//            }
-            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                withAnimation(Animation.linear.speed(0.5)) {
+                    isTextVisible = true
+                }
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 withAnimation(Animation.linear.speed(0.5)) {
                     isBlurred = true
                 }
