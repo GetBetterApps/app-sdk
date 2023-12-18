@@ -17,6 +17,21 @@ struct OnboardingSecondStep: View {
     
     var body: some View {
         @State var rotation: Angle = Angle(degrees: Double(imageIndex) * Double(180))
-        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Hello, world!@*/Text("Hello, world!")/*@END_MENU_TOKEN@*/
+        
+        Image(uiImage: SharedR.images().ic_onboarding_2_1.toUIImage()!)
+            .resizable()
+            .shadow(radius: 8)
+            .scaledToFit()
+            .frame(maxWidth: .infinity)
+            .padding(.horizontal, 32)
+            .rotation3DEffect(
+                rotation,
+                axis: (x: 1.0, y: 0.0, z: 0.0)
+            )
+            .onAppear {
+                withAnimation(.easeInOut(duration: 0.5).delay(3.5)) {
+                    imageIndex += 1
+                }
+            }
     }
 }
