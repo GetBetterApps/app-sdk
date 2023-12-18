@@ -15,6 +15,7 @@ import KMPNativeCoroutinesAsync
 struct OnboardingScreen: View {
     
     @StateViewModel var viewModel: OnboardingViewModel
+    @State var textVisible: Bool = false
     
     var body: some View {
         @State var state = viewModel.viewStateValue as! OnboardingViewState
