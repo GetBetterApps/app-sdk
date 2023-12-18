@@ -163,6 +163,14 @@ struct OnboardingFirstStep: View {
                 withAnimation(.easeInOut(duration: 0.5).delay(4.5)) {
                     thirdImageShouldShow = true
                 }
+                
+                withAnimation(.easeInOut(duration: 0.5).delay(5)) {
+                    textVisible = true
+                }
+                
+//                withAnimation(.easeInOut(duration: 0.5).delay(7)) {
+//                    fifthImageShown = true
+//                }
             }
             .onChange(of: thirdImageShouldShow) { _ in
                 withAnimation(.easeInOut(duration: 0.5).delay(6)) {
@@ -185,11 +193,11 @@ struct OnboardingFirstStep: View {
                 }
             }
             .onChange(of: fifthImageShouldShow) { _ in
-                withAnimation(.easeInOut(duration: 0.5).delay(9.5)) {
-                    textVisible = true
-                }
-                
-                withAnimation(.easeInOut(duration: 0.5).delay(11.5)) {
+//                withAnimation(.easeInOut(duration: 0.5).delay(9.5)) {
+//                    textVisible = true
+//                }
+//                
+                withAnimation(.easeInOut(duration: 0.5).delay(9)) {
                     fifthImageShown = true
                 }
             }

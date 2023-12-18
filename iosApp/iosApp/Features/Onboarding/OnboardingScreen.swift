@@ -106,12 +106,12 @@ struct OnboardingScreen: View {
             }
             .edgesIgnoringSafeArea(.all)
             .onChange(of: textVisible) { _ in
-                withAnimation(.easeInOut(duration: 0.5).delay(11)) {
+                withAnimation(.easeInOut(duration: 0.5).delay(9)) {
                     moveTextToBottom = true
                 }
             }
             .onChange(of: moveTextToBottom) { _ in
-                withAnimation(.easeInOut(duration: 0.5).delay(12)) {
+                withAnimation(.easeInOut(duration: 0.5).delay(10)) {
                     buttonVisible = true
                 }
             }

@@ -161,6 +161,7 @@ fun BoxScope.OnboardingFirstStep(
         secondImageShown.value = true
         delay(500)
 
+        animationEnded.value = true
         thirdImageShouldShow.value = true
         delay(durationPerImage)
         thirdImageShown.value = true
@@ -177,9 +178,9 @@ fun BoxScope.OnboardingFirstStep(
         delay(500)
 
         imagesBlockShow.value = false
-        delay(700)
-        animationEnded.value = true
-        delay(3000)
+//        delay(700)
+//        animationEnded.value = true
+//        delay(1000)
         moveTextToBottom.value = true
 
         delay(500)
