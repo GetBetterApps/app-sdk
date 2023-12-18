@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -23,7 +22,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.painterResource
@@ -69,10 +67,10 @@ fun BoxScope.OnboardingForthStep(
         if (enable) {
             delay(durationPerImage)
             imageIndex.intValue++
+            animationEnded.value = true
 
             delay(durationPerImage)
             imageIndex.intValue++
-            animationEnded.value = true
         }
     }
 
@@ -100,38 +98,41 @@ fun BoxScope.OnboardingForthStep(
             )
         ) {
             Box(
-                modifier = modifier
-                    .padding(horizontal = 32.dp)
+                modifier = modifier.padding(horizontal = 8.dp),
+                contentAlignment = Alignment.Center
             ) {
                 Image(
                     modifier = modifier
-                        .shadow(
-                            elevation = 8.dp,
-                            shape = MaterialTheme.shapes.medium,
-                        )
-                        .alpha(firstImageAlpha),
+                        .alpha(firstImageAlpha)
+//                        .shadow(
+//                            elevation = 8.dp,
+//                            shape = MaterialTheme.shapes.medium,
+//                        )
+                    ,
                     painter = painterResource(imageResource = SharedR.images.ic_onboarding_4_1),
                     contentDescription = null
                 )
 
                 Image(
                     modifier = modifier
-                        .shadow(
-                            elevation = 8.dp,
-                            shape = MaterialTheme.shapes.medium,
-                        )
-                        .alpha(secondImageAlpha),
+                        .alpha(secondImageAlpha)
+//                        .shadow(
+//                            elevation = 8.dp,
+//                            shape = MaterialTheme.shapes.medium,
+//                        )
+                    ,
                     painter = painterResource(imageResource = SharedR.images.ic_onboarding_4_2),
                     contentDescription = null
                 )
 
                 Image(
                     modifier = modifier
-                        .shadow(
-                            elevation = 8.dp,
-                            shape = MaterialTheme.shapes.medium,
-                        )
-                        .alpha(thirdImageAlpha),
+                        .alpha(thirdImageAlpha)
+//                        .shadow(
+//                            elevation = 8.dp,
+//                            shape = MaterialTheme.shapes.medium,
+//                        )
+                    ,
                     painter = painterResource(imageResource = SharedR.images.ic_onboarding_4_3),
                     contentDescription = null
                 )

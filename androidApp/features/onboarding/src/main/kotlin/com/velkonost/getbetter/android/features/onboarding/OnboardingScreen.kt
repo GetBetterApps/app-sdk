@@ -110,10 +110,10 @@ fun OnboardingScreen(
 
         Column {
 
-            Spacer(modifier.height(140.dp))
+            Spacer(modifier.height(70.dp))
 
             Box(
-                modifier = modifier.fillMaxHeight(0.6f),
+                modifier = modifier.fillMaxHeight(0.7f),
                 contentAlignment = Alignment.Center,
 
                 ) {
