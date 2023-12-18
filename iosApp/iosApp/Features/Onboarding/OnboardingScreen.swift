@@ -24,7 +24,7 @@ struct OnboardingScreen: View {
         @State var state = viewModel.viewStateValue as! OnboardingViewState
         
         VStack {
-            Spacer().frame(height: 140)
+            Spacer().frame(height: 70)
             
             ZStack {
                 OnboardingFirstStep(

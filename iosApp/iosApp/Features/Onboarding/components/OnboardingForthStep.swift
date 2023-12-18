@@ -30,10 +30,10 @@ struct OnboardingForthStep: View {
     var body: some View {
         Image(uiImage: images[imageIndex].toUIImage()!)
             .resizable()
-            .shadow(radius: 8)
+//            .shadow(radius: 8)
             .scaledToFit()
             .frame(maxWidth: .infinity)
-            .animation(.easeInOut, value: imageIndex)
+            .animation(.easeInOut(duration: 1), value: imageIndex)
             .padding(.horizontal, 8)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + durationPerImage) {
