@@ -25,6 +25,9 @@ struct OnboardingScreen: View {
             ZStack {
                 OnboardingFirstStep()
             }
+            .frame(minWidth: 0, maxWidth: .infinity)
+            
+            Spacer()
         }
     }
 }
