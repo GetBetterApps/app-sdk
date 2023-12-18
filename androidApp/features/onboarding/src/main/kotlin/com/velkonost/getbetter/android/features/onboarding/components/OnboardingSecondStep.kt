@@ -35,7 +35,8 @@ import kotlinx.coroutines.delay
 fun BoxScope.OnboardingSecondStep(
     modifier: Modifier = Modifier,
     enable: Boolean,
-    animationEnded: MutableState<Boolean>
+    buttonVisible: MutableState<Boolean>,
+    animationEnded: MutableState<Boolean>,
 ) {
 
     val animationDuration = 1200
@@ -52,8 +53,7 @@ fun BoxScope.OnboardingSecondStep(
 
     LaunchedEffect(enable) {
         if (enable) {
-            delay(durationPerImage)
-            imageIndex.intValue++
+            buttonVisible.value = false
 
             delay(durationPerImage)
             imageIndex.intValue++
@@ -64,8 +64,14 @@ fun BoxScope.OnboardingSecondStep(
             delay(durationPerImage)
             imageIndex.intValue++
 
-            delay(700)
+            delay(durationPerImage)
+            imageIndex.intValue++
+
+            delay(1500)
             animationEnded.value = true
+
+            delay(500)
+            buttonVisible.value = true
         }
     }
 

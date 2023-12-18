@@ -78,9 +78,8 @@ fun OnboardingScreen(
     val buttonAlpha by animateFloatAsState(
         targetValue = if (buttonVisible.value) 1f else 0f,
         animationSpec = tween(
-            durationMillis = 1500,
+            durationMillis = 1000,
             easing = FastOutLinearInEasing,
-            delayMillis = 500
         ),
         label = ""
     )
@@ -90,7 +89,7 @@ fun OnboardingScreen(
 
     LaunchedEffect(moveTextToBottom.value) {
         if (moveTextToBottom.value) {
-            delay(500)
+            delay(1000)
             buttonVisible.value = true
         }
     }
@@ -118,7 +117,8 @@ fun OnboardingScreen(
 
                 OnboardingSecondStep(
                     enable = state.step == 2,
-                    animationEnded = secondStepAnimationEnded
+                    animationEnded = secondStepAnimationEnded,
+                    buttonVisible = buttonVisible
                 )
             }
 
