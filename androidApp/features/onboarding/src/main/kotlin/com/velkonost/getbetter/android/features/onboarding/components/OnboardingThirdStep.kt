@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.velkonost.getbetter.core.compose.extensions.horizontalFadingEdge
 import com.velkonost.getbetter.shared.core.model.task.Ability
 import com.velkonost.getbetter.shared.core.util.randomUUID
 
@@ -57,9 +56,9 @@ fun BoxScope.OnboardingThirdStep(
         ) {
             HorizontalPager(
                 modifier = modifier
-                    .height(150.dp)
+                    .height(250.dp)
                     .fillMaxWidth()
-                    .horizontalFadingEdge()
+//                    .horizontalFadingEdge()
                     .padding(bottom = 16.dp),
                 state = pagerState,
                 contentPadding = PaddingValues(start = 38.dp, end = 38.dp),

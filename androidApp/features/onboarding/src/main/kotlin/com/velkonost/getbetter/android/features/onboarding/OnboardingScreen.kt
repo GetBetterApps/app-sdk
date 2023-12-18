@@ -98,7 +98,7 @@ fun OnboardingScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(color = colorResource(resource = SharedR.colors.background_item))
+            .background(color = colorResource(resource = SharedR.colors.main_background))
     ) {
 
         Column {
