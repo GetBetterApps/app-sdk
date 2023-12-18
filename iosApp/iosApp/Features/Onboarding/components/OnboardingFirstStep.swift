@@ -189,7 +189,7 @@ struct OnboardingFirstStep: View {
                     textVisible = true
                 }
                 
-                withAnimation(.easeInOut(duration: 0.5).delay(10.5)) {
+                withAnimation(.easeInOut(duration: 0.5).delay(11.5)) {
                     fifthImageShown = true
                 }
             }

@@ -35,11 +35,12 @@ struct OnboardingScreen: View {
             
             if moveTextToBottom {
                 Spacer()
+                Spacer()
+                Spacer()
             }
             
             Text(state.title.localized())
                 .style(.headlineLarge)
-//                .italic()
                 .foregroundColor(.textTitle)
                 .multilineTextAlignment(.center)
                 .opacity(textVisible ? 1 : 0)
@@ -55,14 +56,16 @@ struct OnboardingScreen: View {
                 }
             )
             .opacity(buttonVisible ? 1 : 0)
+            
+            Spacer().frame(height: 64)
         }
         .onChange(of: textVisible) { _ in
-            withAnimation(.easeInOut(duration: 0.5).delay(12)) {
+            withAnimation(.easeInOut(duration: 0.5).delay(11)) {
                 moveTextToBottom = true
             }
         }
         .onChange(of: moveTextToBottom) { _ in
-            withAnimation(.easeInOut(duration: 0.5).delay(15)) {
+            withAnimation(.easeInOut(duration: 0.5).delay(12)) {
                 buttonVisible = true
             }
         }

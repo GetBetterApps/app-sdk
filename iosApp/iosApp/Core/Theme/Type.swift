@@ -54,7 +54,7 @@ public extension TextStyle {
     static let displayMedium = TextStyle(SharedR.fontsSfpro.shared.rounded_regular, -2, 0, 45)
     static let displaySmall = TextStyle(SharedR.fontsSfpro.shared.rounded_regular, -1.5, 0, 36)
     
-    static let headlineLarge = TextStyle(SharedR.fontsSfpro.shared.rounded_regular, -1, 0, 32)
+    static let headlineLarge = TextStyle(SharedR.fontsSfpro.shared.rounded_bold, -1, 0, 32)
     static let headlineMedium = TextStyle(SharedR.fontsSfpro.shared.rounded_regular, -0.5, 0, 28)
     static let headlineSmall = TextStyle(SharedR.fontsSfpro.shared.rounded_semibold, -0.75, 0, 24)
     
