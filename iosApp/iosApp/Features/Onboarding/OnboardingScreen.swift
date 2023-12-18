@@ -31,6 +31,11 @@ struct OnboardingScreen: View {
                     textVisible: $textVisible
                 )
                 .opacity(state.step == 1 ? 1 : 0)
+                
+                OnboardingSecondStep(
+                
+                )
+                .opacity(state.step == 2 ? 1 : 0)
             }
             .animation(.easeInOut, value: state.step)
             .frame(minWidth: 0, maxWidth: .infinity)
