@@ -71,17 +71,17 @@ struct OnboardingSecondStep: View {
                 flipped.toggle()
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + durationPerImage) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2 * durationPerImage) {
                 imageIndex += 1
                 flipped.toggle()
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + durationPerImage) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3 * durationPerImage) {
                 imageIndex += 1
                 flipped.toggle()
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + durationPerImage) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4 * durationPerImage) {
                 imageIndex += 1
                 flipped.toggle()
             }
