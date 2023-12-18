@@ -12,8 +12,7 @@ import com.velkonost.getbetter.shared.features.abilities.data.remote.model.respo
 import com.velkonost.getbetter.shared.features.abilities.data.remote.model.response.asExternalModel
 import kotlinx.coroutines.flow.Flow
 
-class AbilitiesRepositoryImpl
-constructor(
+class AbilitiesRepositoryImpl(
     private val remoteDataSource: AbilitiesRemoteDataSource,
     private val localDataSource: DataStore<Preferences>
 ) : AbilitiesRepository {
@@ -31,6 +30,13 @@ constructor(
         request = {
             val token = localDataSource.getUserToken()
             remoteDataSource.getDetails(token, abilityId)
+        }
+    )
+
+    override fun getAbilitiesForOnboarding(): Flow<ResultState<List<Ability>>> = flowRequest(
+        mapper = { map { it.asExternalModel() } },
+        request = {
+            remoteDataSource.getDemo()
         }
     )
 

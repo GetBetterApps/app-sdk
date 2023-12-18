@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.onboarding.presentation
 
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.features.abilities.api.AbilitiesRepository
 import com.velkonost.getbetter.shared.features.onboarding.presentation.contract.OnboardingAction
 import com.velkonost.getbetter.shared.features.onboarding.presentation.contract.OnboardingEvent
 import com.velkonost.getbetter.shared.features.onboarding.presentation.contract.OnboardingNavigation
@@ -11,6 +12,7 @@ import dev.icerock.moko.resources.desc.StringDesc
 
 class OnboardingViewModel
 internal constructor(
+    private val abilitiesRepository: AbilitiesRepository
 ) : BaseViewModel<OnboardingViewState, OnboardingAction, OnboardingNavigation, OnboardingEvent>(
     initialState = OnboardingViewState()
 ) {
@@ -18,6 +20,15 @@ internal constructor(
         is OnboardingAction.NextClick -> obtainNextClick()
         else -> {
 
+        }
+    }
+
+    private fun fetchAbilities() {
+        launchJob {
+            abilitiesRepository.getAll(
+                page = 0,
+                pageSize = 10
+            )
         }
     }
 
@@ -42,8 +53,7 @@ internal constructor(
                 2 -> SharedR.strings.onboarding_step_2
                 3 -> SharedR.strings.onboarding_step_3
                 4 -> SharedR.strings.onboarding_step_4
-                5 -> SharedR.strings.onboarding_step_5
-                else -> SharedR.strings.onboarding_step_6
+                else -> SharedR.strings.onboarding_step_5
             }
         )
     

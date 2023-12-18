@@ -5,4 +5,6 @@ object Route {
 
     const val GET_ALL = "$PREFIX/all"
     const val GET_DETAILS = "$PREFIX/details"
+
+    const val GET_DEMO = "$PREFIX/demo"
 }

@@ -14,4 +14,6 @@ interface AbilitiesRepository {
     fun getDetails(
         abilityId: Int
     ): Flow<ResultState<Ability>>
+
+    fun getAbilitiesForOnboarding(): Flow<ResultState<List<Ability>>>
 }

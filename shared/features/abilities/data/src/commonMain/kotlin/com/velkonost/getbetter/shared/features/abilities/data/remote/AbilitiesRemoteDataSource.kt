@@ -39,4 +39,9 @@ class AbilitiesRemoteDataSource(
             )
         )
     }.body()
+
+    suspend fun getDemo(): RemoteResponse<List<KtorAbility>> = httpClient.get {
+        makeRequest(path = Route.GET_DEMO)
+    }.body()
+
 }
