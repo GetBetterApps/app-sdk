@@ -27,9 +27,6 @@ internal constructor(
 
     override fun dispatch(action: OnboardingAction) = when (action) {
         is OnboardingAction.NextClick -> obtainNextClick()
-        else -> {
-
-        }
     }
 
     private fun fetchAbilities() {
