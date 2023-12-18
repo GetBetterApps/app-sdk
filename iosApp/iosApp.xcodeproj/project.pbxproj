@@ -160,6 +160,8 @@
 		46E307CB2B309B5200A6B491 /* OnboardingThirdStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E307CA2B309B5200A6B491 /* OnboardingThirdStep.swift */; };
 		46E307CD2B309C0100A6B491 /* OnboardingAbilityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E307CC2B309C0100A6B491 /* OnboardingAbilityItem.swift */; };
 		46E307CF2B30A56900A6B491 /* OnboardingForthStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E307CE2B30A56900A6B491 /* OnboardingForthStep.swift */; };
+		46E307D12B30ACB200A6B491 /* OnboardingFifthStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E307D02B30ACB200A6B491 /* OnboardingFifthStep.swift */; };
+		46E307D32B30AD2700A6B491 /* OnboardingAffirmationText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E307D22B30AD2700A6B491 /* OnboardingAffirmationText.swift */; };
 		46E3804B2B24D86E00056C0D /* AbilitiesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E3804A2B24D86E00056C0D /* AbilitiesScreen.swift */; };
 		46E3804D2B24D87600056C0D /* AbilitiesRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E3804C2B24D87600056C0D /* AbilitiesRoute.swift */; };
 		46E380502B24D94A00056C0D /* AbilityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E3804F2B24D94A00056C0D /* AbilityItem.swift */; };
@@ -330,6 +332,8 @@
 		46E307CA2B309B5200A6B491 /* OnboardingThirdStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingThirdStep.swift; sourceTree = "<group>"; };
 		46E307CC2B309C0100A6B491 /* OnboardingAbilityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAbilityItem.swift; sourceTree = "<group>"; };
 		46E307CE2B30A56900A6B491 /* OnboardingForthStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingForthStep.swift; sourceTree = "<group>"; };
+		46E307D02B30ACB200A6B491 /* OnboardingFifthStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFifthStep.swift; sourceTree = "<group>"; };
+		46E307D22B30AD2700A6B491 /* OnboardingAffirmationText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAffirmationText.swift; sourceTree = "<group>"; };
 		46E3804A2B24D86E00056C0D /* AbilitiesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilitiesScreen.swift; sourceTree = "<group>"; };
 		46E3804C2B24D87600056C0D /* AbilitiesRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilitiesRoute.swift; sourceTree = "<group>"; };
 		46E3804F2B24D94A00056C0D /* AbilityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityItem.swift; sourceTree = "<group>"; };
@@ -585,6 +589,8 @@
 				46E307CA2B309B5200A6B491 /* OnboardingThirdStep.swift */,
 				46E307CC2B309C0100A6B491 /* OnboardingAbilityItem.swift */,
 				46E307CE2B30A56900A6B491 /* OnboardingForthStep.swift */,
+				46E307D02B30ACB200A6B491 /* OnboardingFifthStep.swift */,
+				46E307D22B30AD2700A6B491 /* OnboardingAffirmationText.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -1253,6 +1259,7 @@
 				460054AD2ABB1B5E00586767 /* HelpAndSupport.swift in Sources */,
 				46C10D212AB46BF400E62846 /* UIPilotExt.swift in Sources */,
 				46F0B3BF2B1CD62800D6BCC1 /* TaskDetailRoute.swift in Sources */,
+				46E307D32B30AD2700A6B491 /* OnboardingAffirmationText.swift in Sources */,
 				468B876E2ABC45D2001BBEB1 /* CalendarsScreen.swift in Sources */,
 				46059D222AC4037000DC5015 /* AreasView.swift in Sources */,
 				46E307CD2B309C0100A6B491 /* OnboardingAbilityItem.swift in Sources */,
@@ -1333,6 +1340,7 @@
 				467DAFD32B145FB500BB9CB3 /* FeedbackMessageView.swift in Sources */,
 				467BECCF2AC017CF00F74482 /* PrimaryTabs.swift in Sources */,
 				464A426D2AEA63D00019CB98 /* TagsBlock.swift in Sources */,
+				46E307D12B30ACB200A6B491 /* OnboardingFifthStep.swift in Sources */,
 				467668C02AEAC007007C17DE /* SubNotesHeader.swift in Sources */,
 				468B876A2ABC45C6001BBEB1 /* DiaryScreen.swift in Sources */,
 				46171B0D2B2AFBDC00FD8F92 /* AbilityMotivationContent.swift in Sources */,

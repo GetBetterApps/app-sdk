@@ -23,85 +23,96 @@ struct OnboardingScreen: View {
     var body: some View {
         @State var state = viewModel.viewStateValue as! OnboardingViewState
         
-        VStack {
+        ZStack {
             
-            Spacer().frame(height: 70)
-            
-            ZStack {
-                OnboardingFirstStep(
-                    textVisible: $textVisible
+            if state.affirmation != nil {
+                OnboardingFifthStep(
+                    item: state.affirmation!,
+                    isActive: state.step == 5,
+                    text: state.title.localized()
                 )
-                .opacity(state.step == 1 ? 1 : 0)
+                .opacity(state.step == 5 ? 1 : 0)
+            }
+            
+            VStack {
+                Spacer().frame(height: 70)
                 
-                if state.step == 2 {
-                    OnboardingSecondStep(
-                        textVisible: $textVisible,
-                        buttonVisible: $buttonVisible
-                    )
-                    .frame(alignment: .center)
-                }
-                
-                if state.step == 3 {
-                    OnboardingThirdStep(
-                        textVisible: $textVisible,
-                        items: state.abilities
-                    )
-                }
-                
-                if state.step == 4 {
-                    OnboardingForthStep(
+                ZStack {
+                    OnboardingFirstStep(
                         textVisible: $textVisible
                     )
+                    .opacity(state.step == 1 ? 1 : 0)
+                    
+                    if state.step == 2 {
+                        OnboardingSecondStep(
+                            textVisible: $textVisible,
+                            buttonVisible: $buttonVisible
+                        )
+                        .frame(alignment: .center)
+                    }
+                    
+                    if state.step == 3 {
+                        OnboardingThirdStep(
+                            textVisible: $textVisible,
+                            items: state.abilities
+                        )
+                    }
+                    
+                    if state.step == 4 {
+                        OnboardingForthStep(
+                            textVisible: $textVisible
+                        )
+                    }
                 }
-            }
-            .animation(.easeInOut, value: state.step)
-            .frame(minWidth: 0, maxWidth: .infinity)
-            
-            if moveTextToBottom {
+                .animation(.easeInOut, value: state.step)
+                .frame(minWidth: 0, maxWidth: .infinity)
+                
+                if moveTextToBottom {
+                    Spacer()
+                    Spacer()
+                }
+                
+                Text(state.title.localized())
+                    .style(.headlineLarge)
+                    .foregroundColor(.textTitle)
+                    .multilineTextAlignment(.center)
+                    .opacity(textVisible ? 1 : 0)
+                    .padding(.horizontal, 32)
+                
                 Spacer()
-                Spacer()
-            }
-            
-            Text(state.title.localized())
-                .style(.headlineLarge)
-                .foregroundColor(.textTitle)
-                .multilineTextAlignment(.center)
-                .opacity(textVisible ? 1 : 0)
-                .padding(.horizontal, 32)
-            
-            Spacer()
-            
-            AppButton(
-                labelText: SharedR.strings().continue_btn.desc().localized(),
-                isLoading: false,
-                onClick: {
-                    withAnimation(.easeInOut) {
-                        textVisible = false
-                        
-                        if state.step == 1 {
-                            buttonVisible = false
+                
+                AppButton(
+                    labelText: SharedR.strings().continue_btn.desc().localized(),
+                    isLoading: false,
+                    onClick: {
+                        withAnimation(.easeInOut) {
+                            textVisible = false
+                            
+                            if state.step == 1 {
+                                buttonVisible = false
+                            }
                         }
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            viewModel.dispatch(action: OnboardingActionNextClick())
+                        }
+                        
+                        
                     }
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        viewModel.dispatch(action: OnboardingActionNextClick())
-                    }
-                    
-                    
-                }
-            )
-            .opacity(buttonVisible ? 1 : 0)
-            
-            Spacer().frame(height: 32)
-        }
-        .onChange(of: textVisible) { _ in
-            withAnimation(.easeInOut(duration: 0.5).delay(11)) {
-                moveTextToBottom = true
+                )
+                .opacity(buttonVisible ? 1 : 0)
+                
+                Spacer().frame(height: 32)
             }
-        }
-        .onChange(of: moveTextToBottom) { _ in
-            withAnimation(.easeInOut(duration: 0.5).delay(12)) {
-                buttonVisible = true
+            .onChange(of: textVisible) { _ in
+                withAnimation(.easeInOut(duration: 0.5).delay(11)) {
+                    moveTextToBottom = true
+                }
+            }
+            .onChange(of: moveTextToBottom) { _ in
+                withAnimation(.easeInOut(duration: 0.5).delay(12)) {
+                    buttonVisible = true
+                }
             }
         }
     }

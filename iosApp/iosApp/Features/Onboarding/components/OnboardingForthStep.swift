@@ -30,7 +30,6 @@ struct OnboardingForthStep: View {
     var body: some View {
         Image(uiImage: images[imageIndex].toUIImage()!)
             .resizable()
-//            .shadow(radius: 8)
             .scaledToFit()
             .frame(maxHeight: UIScreen.screenHeight * 0.6)
             .animation(.easeInOut(duration: 1), value: imageIndex)

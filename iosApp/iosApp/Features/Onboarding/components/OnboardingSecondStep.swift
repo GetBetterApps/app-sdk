@@ -83,7 +83,7 @@ struct OnboardingSecondStep: View {
                 flipped.toggle()
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4 * durationPerImage + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2 * durationPerImage + 1) {
                 withAnimation(.easeInOut(duration: 0.5)) {
                     textVisible = true
                 }
