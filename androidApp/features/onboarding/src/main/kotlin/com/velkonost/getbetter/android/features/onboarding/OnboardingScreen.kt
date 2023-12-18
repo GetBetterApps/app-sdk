@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,6 +50,7 @@ import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
+import kotlinx.coroutines.delay
 
 @SuppressLint("UnusedContentLambdaTargetStateParameter")
 @Composable
@@ -62,6 +64,7 @@ fun OnboardingScreen(
 
     val moveTextToBottom = remember { mutableStateOf(false) }
     val firstStepAnimationEnded = remember { mutableStateOf(false) }
+    val buttonVisible = remember { mutableStateOf(false) }
 
     val textAlpha by animateFloatAsState(
         targetValue = if (firstStepAnimationEnded.value) 1f else 0f,
@@ -73,9 +76,35 @@ fun OnboardingScreen(
         label = ""
     )
 
+    val buttonAlpha by animateFloatAsState(
+        targetValue = if (buttonVisible.value) 1f else 0f,
+        animationSpec = tween(
+            durationMillis = 1500,
+            easing = FastOutLinearInEasing,
+            delayMillis = 500
+        ),
+        label = ""
+    )
+
+    val logoAlpha by animateFloatAsState(
+        targetValue = if (buttonVisible.value) 1f else 0f,
+        animationSpec = tween(
+            durationMillis = 500,
+            easing = FastOutLinearInEasing,
+            delayMillis = 500
+        ),
+        label = ""
+    )
+
     var positionInRootButton by remember { mutableStateOf(Offset.Zero) }
     var positionInRootText by remember { mutableStateOf(Offset.Zero) }
 
+    LaunchedEffect(moveTextToBottom.value) {
+        if (moveTextToBottom.value) {
+            delay(500)
+            buttonVisible.value = true
+        }
+    }
 
     Box(
         modifier = modifier
@@ -90,7 +119,17 @@ fun OnboardingScreen(
             Box(
                 contentAlignment = Alignment.Center
             ) {
+
+                Image(
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .alpha(logoAlpha),
+                    painter = painterResource(imageResource = SharedR.images.ic_getbetter_light_),
+                    contentDescription = null
+                )
+
                 OnboardingFirstStep(
+                    modifier = modifier.alpha(1 - logoAlpha),
                     enable = state.step == 1,
                     moveTextToBottom = moveTextToBottom,
                     animationEnded = firstStepAnimationEnded
@@ -186,6 +225,7 @@ fun OnboardingScreen(
 
             AppButton(
                 modifier = modifier
+                    .alpha(buttonAlpha)
                     .align(Alignment.CenterHorizontally)
                     .onGloballyPositioned {
                         if (positionInRootButton.y == 0f) {
