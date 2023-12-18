@@ -49,17 +49,19 @@ fun BoxScope.OnboardingSecondStep(
     )
 
     LaunchedEffect(enable) {
-        delay(durationPerImage)
-        imageIndex.intValue++
+        if (enable) {
+            delay(durationPerImage)
+            imageIndex.intValue++
 
-        delay(durationPerImage)
-        imageIndex.intValue++
+            delay(durationPerImage)
+            imageIndex.intValue++
 
-        delay(durationPerImage)
-        imageIndex.intValue++
+            delay(durationPerImage)
+            imageIndex.intValue++
 
-        delay(durationPerImage)
-        imageIndex.intValue++
+            delay(durationPerImage)
+            imageIndex.intValue++
+        }
     }
 
     Column(
@@ -85,9 +87,7 @@ fun BoxScope.OnboardingSecondStep(
                 )
             )
         ) {
-
             Box(
-
                 modifier = modifier
                     .padding(horizontal = 32.dp)
                     .graphicsLayer {
@@ -95,7 +95,6 @@ fun BoxScope.OnboardingSecondStep(
                         cameraDistance = 12f * density
                     },
             ) {
-
                 Image(
                     modifier = modifier
                         .shadow(
@@ -111,7 +110,6 @@ fun BoxScope.OnboardingSecondStep(
                                     rotation <= 540f -> 180f
                                     else -> 0f
                                 }
-
                         },
                     painter = painterResource(
                         imageResource =

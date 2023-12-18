@@ -24,6 +24,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,6 +47,7 @@ import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedContentLambdaTargetStateParameter")
 @Composable
@@ -59,14 +61,16 @@ fun OnboardingScreen(
 
     val moveTextToBottom = remember { mutableStateOf(false) }
     val firstStepAnimationEnded = remember { mutableStateOf(false) }
+    val secondStepAnimationEnded = remember { mutableStateOf(false) }
     val buttonVisible = remember { mutableStateOf(false) }
 
+    val scope = rememberCoroutineScope()
+
     val textAlpha by animateFloatAsState(
-        targetValue = if (firstStepAnimationEnded.value) 1f else 0f,
+        targetValue = if (firstStepAnimationEnded.value || secondStepAnimationEnded.value) 1f else 0f,
         animationSpec = tween(
-            durationMillis = 1500,
+            durationMillis = 500,
             easing = FastOutLinearInEasing,
-            delayMillis = 500
         ),
         label = ""
     )
@@ -107,7 +111,6 @@ fun OnboardingScreen(
 
                 ) {
                 OnboardingFirstStep(
-
                     enable = state.step == 1,
                     moveTextToBottom = moveTextToBottom,
                     animationEnded = firstStepAnimationEnded
@@ -168,7 +171,12 @@ fun OnboardingScreen(
                 labelText = stringResource(resource = SharedR.strings.continue_btn),
                 isLoading = false,
                 onClick = {
-                    viewModel.dispatch(OnboardingAction.NextClick)
+                    scope.launch {
+                        firstStepAnimationEnded.value = false
+                        secondStepAnimationEnded.value = false
+                        delay(500)
+                        viewModel.dispatch(OnboardingAction.NextClick)
+                    }
                 }
             )
             Spacer(modifier = modifier.height(64.dp))
