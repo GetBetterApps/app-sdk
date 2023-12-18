@@ -126,7 +126,8 @@ fun OnboardingScreen(
 
                 OnboardingThirdStep(
                     enable = state.step == 3,
-                    items = state.abilities
+                    items = state.abilities,
+                    animationEnded = thirdStepAnimationEnded
                 )
             }
 
