@@ -35,9 +35,7 @@ class AbilitiesRepositoryImpl(
 
     override fun getAbilitiesForOnboarding(): Flow<ResultState<List<Ability>>> = flowRequest(
         mapper = { map { it.asExternalModel() } },
-        request = {
-            remoteDataSource.getDemo()
-        }
+        request = { remoteDataSource.getDemo() }
     )
 
 }

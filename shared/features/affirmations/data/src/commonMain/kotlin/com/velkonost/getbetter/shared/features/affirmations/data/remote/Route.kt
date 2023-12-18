@@ -5,4 +5,6 @@ object Route {
 
     const val UPDATE_FAVORITE = "$PREFIX/updateFavorite"
     const val FAVORITES_LIST = "$PREFIX/favoritesList"
+
+    const val GET_DEMO = "$PREFIX/demo"
 }

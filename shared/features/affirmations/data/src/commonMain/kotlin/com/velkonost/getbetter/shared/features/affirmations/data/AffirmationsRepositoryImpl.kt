@@ -9,11 +9,11 @@ import com.velkonost.getbetter.shared.core.util.flowRequest
 import com.velkonost.getbetter.shared.features.affirmations.api.AffirmationsRepository
 import com.velkonost.getbetter.shared.features.affirmations.data.remote.AffirmationsRemoteDataSource
 import com.velkonost.getbetter.shared.features.affirmations.data.remote.model.request.UpdateAffirmationFavoriteRequest
+import com.velkonost.getbetter.shared.features.affirmations.data.remote.model.response.KtorAffirmation
 import com.velkonost.getbetter.shared.features.affirmations.data.remote.model.response.asExternalModel
 import kotlinx.coroutines.flow.Flow
 
-class AffirmationsRepositoryImpl
-constructor(
+class AffirmationsRepositoryImpl(
     private val remoteDataSource: AffirmationsRemoteDataSource,
     private val localDataSource: DataStore<Preferences>
 ) : AffirmationsRepository {
@@ -39,6 +39,11 @@ constructor(
             val token = localDataSource.getUserToken()
             remoteDataSource.getFavoritesList(token)
         }
+    )
+
+    override fun getAffirmationForOnboarding(): Flow<ResultState<Affirmation>> = flowRequest(
+        mapper = KtorAffirmation::asExternalModel,
+        request = { remoteDataSource.getDemo() }
     )
 
 }

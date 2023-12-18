@@ -33,4 +33,8 @@ class AffirmationsRemoteDataSource(
             body = body
         )
     }.body()
+
+    suspend fun getDemo(): RemoteResponse<KtorAffirmation> = httpClient.get {
+        makeRequest(path = Route.GET_DEMO)
+    }.body()
 }

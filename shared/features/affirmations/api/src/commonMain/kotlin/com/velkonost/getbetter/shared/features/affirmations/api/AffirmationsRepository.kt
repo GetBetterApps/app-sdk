@@ -12,4 +12,6 @@ interface AffirmationsRepository {
     ): Flow<ResultState<List<Affirmation>>>
 
     fun getFavoritesList(): Flow<ResultState<List<Affirmation>>>
+
+    fun getAffirmationForOnboarding(): Flow<ResultState<Affirmation>>
 }
