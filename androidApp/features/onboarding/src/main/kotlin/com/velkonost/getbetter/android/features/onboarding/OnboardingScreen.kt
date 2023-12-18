@@ -39,6 +39,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.onboarding.components.OnboardingFirstStep
+import com.velkonost.getbetter.android.features.onboarding.components.OnboardingForthStep
 import com.velkonost.getbetter.android.features.onboarding.components.OnboardingSecondStep
 import com.velkonost.getbetter.android.features.onboarding.components.OnboardingThirdStep
 import com.velkonost.getbetter.core.compose.components.AppButton
@@ -63,6 +64,7 @@ fun OnboardingScreen(
     val firstStepAnimationEnded = remember { mutableStateOf(false) }
     val secondStepAnimationEnded = remember { mutableStateOf(false) }
     val thirdStepAnimationEnded = remember { mutableStateOf(false) }
+    val forthStepAnimationEnded = remember { mutableStateOf(false) }
 
     val moveTextToBottom = remember { mutableStateOf(false) }
     val buttonVisible = remember { mutableStateOf(false) }
@@ -70,7 +72,10 @@ fun OnboardingScreen(
     val scope = rememberCoroutineScope()
 
     val textAlpha by animateFloatAsState(
-        targetValue = if (firstStepAnimationEnded.value || secondStepAnimationEnded.value || thirdStepAnimationEnded.value) 1f else 0f,
+        targetValue = if (
+            firstStepAnimationEnded.value || secondStepAnimationEnded.value ||
+            thirdStepAnimationEnded.value || forthStepAnimationEnded.value
+        ) 1f else 0f,
         animationSpec = tween(
             durationMillis = 500,
             easing = FastOutLinearInEasing,
@@ -129,6 +134,11 @@ fun OnboardingScreen(
                     items = state.abilities,
                     animationEnded = thirdStepAnimationEnded
                 )
+
+                OnboardingForthStep(
+                    enable = state.step == 4,
+                    animationEnded = forthStepAnimationEnded
+                )
             }
 
             this.AnimatedVisibility(
@@ -184,6 +194,7 @@ fun OnboardingScreen(
                         firstStepAnimationEnded.value = false
                         secondStepAnimationEnded.value = false
                         thirdStepAnimationEnded.value = false
+                        forthStepAnimationEnded.value = false
 
                         delay(500)
                         viewModel.dispatch(OnboardingAction.NextClick)

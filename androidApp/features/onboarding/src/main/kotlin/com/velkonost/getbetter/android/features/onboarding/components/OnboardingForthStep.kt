@@ -72,6 +72,7 @@ fun BoxScope.OnboardingForthStep(
 
             delay(durationPerImage)
             imageIndex.intValue++
+            animationEnded.value = true
         }
     }
 
