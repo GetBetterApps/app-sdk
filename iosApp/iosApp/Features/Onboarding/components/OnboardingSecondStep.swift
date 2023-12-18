@@ -13,9 +13,11 @@ import SharedSDK
 struct OnboardingSecondStep: View {
     
     @Binding var textVisible: Bool
+    @Binding var buttonVisible: Bool
     
-    init(textVisible: Binding<Bool>) {
+    init(textVisible: Binding<Bool>, buttonVisible: Binding<Bool>) {
         self._textVisible = textVisible
+        self._buttonVisible = buttonVisible
     }
     
     @State var imageIndex: Int = 0
@@ -93,8 +95,14 @@ struct OnboardingSecondStep: View {
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 4 * durationPerImage + 1) {
-                textVisible = true
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    textVisible = true
+                }
+                withAnimation(.easeInOut(duration: 0.5).delay(0.5)) {
+                    buttonVisible = true
+                }
             }
+            
         }
     }
 }
