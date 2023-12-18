@@ -34,9 +34,8 @@ struct OnboardingThirdStep: View {
         .interactive(rotation: true)
         .interactive(scale: 0.8)
         .alignment(.center)
-        .preferredItemSize(CGSize(width: 300, height: 150))
-        .frame(height: 150)
-        .padding(.bottom, 16)
+        .preferredItemSize(CGSize(width: 300, height: 350))
+        .frame(height: 450)
         .onAppear {
             withAnimation(.easeInOut(duration: 0.5).delay(1)) {
                 textVisible = true

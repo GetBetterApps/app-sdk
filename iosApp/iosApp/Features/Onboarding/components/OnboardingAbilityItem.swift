@@ -31,6 +31,7 @@ struct OnboardingAbilityItem: View {
                 HStack {
                     Text(item.description_)
                         .style(.labelMedium)
+                        .lineLimit(3)
                         .foregroundColor(.textPrimary)
                         .padding(.top, 12)
                     Spacer()
