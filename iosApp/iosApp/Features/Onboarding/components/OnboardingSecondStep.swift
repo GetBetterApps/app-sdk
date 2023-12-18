@@ -36,15 +36,6 @@ struct OnboardingSecondStep: View {
     var body: some View {
         @State var rotation: Angle = Angle(degrees: Double(imageIndex) * Double(180))
         
-        
-        @State var imageRotationDegrees: Double = if imageIndex == 1 || imageIndex == 3 {
-            180
-        } else {
-            0
-        }
-        
-        @State var imageRotation: Angle = Angle(degrees: imageRotationDegrees)
-        
         ZStack {
             if flipped {
                 Image(uiImage: images[imageIndex].toUIImage()!)
@@ -65,9 +56,7 @@ struct OnboardingSecondStep: View {
                     .frame(maxWidth: .infinity)
                     .padding(.horizontal, 32)
             }
-           
         }
-        
         .rotation3DEffect(
             rotation,
             axis: (x: 0.0, y: 1.0, z: 0.0)

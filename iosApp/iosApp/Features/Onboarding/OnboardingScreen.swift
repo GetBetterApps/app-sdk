@@ -37,13 +37,18 @@ struct OnboardingScreen: View {
                         textVisible: $textVisible,
                         buttonVisible: $buttonVisible
                     )
-                    .opacity(state.step == 2 ? 1 : 0)
                 }
                 
                 if state.step == 3 {
                     OnboardingThirdStep(
                         textVisible: $textVisible,
                         items: state.abilities
+                    )
+                }
+                
+                if state.step == 4 {
+                    OnboardingForthStep(
+                        textVisible: $textVisible
                     )
                 }
             }
