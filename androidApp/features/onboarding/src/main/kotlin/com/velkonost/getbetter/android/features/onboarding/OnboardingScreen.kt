@@ -38,6 +38,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.velkonost.getbetter.android.features.onboarding.components.OnboardingFifthStep
 import com.velkonost.getbetter.android.features.onboarding.components.OnboardingFirstStep
 import com.velkonost.getbetter.android.features.onboarding.components.OnboardingForthStep
 import com.velkonost.getbetter.android.features.onboarding.components.OnboardingSecondStep
@@ -107,6 +108,14 @@ fun OnboardingScreen(
             .fillMaxSize()
             .background(color = colorResource(resource = SharedR.colors.main_background))
     ) {
+
+        if (state.affirmation != null) {
+            OnboardingFifthStep(
+                enable = state.step == 5,
+                item = state.affirmation!!,
+                text = state.title.toString(LocalContext.current),
+            )
+        }
 
         Column {
 
@@ -204,6 +213,7 @@ fun OnboardingScreen(
             Spacer(modifier = modifier.height(64.dp))
 
         }
+
 
     }
 

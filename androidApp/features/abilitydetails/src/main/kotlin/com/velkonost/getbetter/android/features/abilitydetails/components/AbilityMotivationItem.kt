@@ -77,6 +77,7 @@ fun LazyItemScope.AbilityMotivationItem(
             isItemAppeared.value = false
         }
     }
+
     Box {
         CoilImage(
             modifier = modifier
