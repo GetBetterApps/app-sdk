@@ -24,6 +24,7 @@ struct OnboardingScreen: View {
         @State var state = viewModel.viewStateValue as! OnboardingViewState
         
         VStack {
+            
             Spacer().frame(height: 70)
             
             ZStack {
@@ -37,6 +38,7 @@ struct OnboardingScreen: View {
                         textVisible: $textVisible,
                         buttonVisible: $buttonVisible
                     )
+                    .frame(alignment: .center)
                 }
                 
                 if state.step == 3 {
@@ -56,7 +58,6 @@ struct OnboardingScreen: View {
             .frame(minWidth: 0, maxWidth: .infinity)
             
             if moveTextToBottom {
-                Spacer()
                 Spacer()
                 Spacer()
             }

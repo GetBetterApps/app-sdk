@@ -32,13 +32,16 @@ struct OnboardingForthStep: View {
             .resizable()
 //            .shadow(radius: 8)
             .scaledToFit()
-            .frame(maxWidth: .infinity)
+            .frame(maxHeight: UIScreen.screenHeight * 0.6)
             .animation(.easeInOut(duration: 1), value: imageIndex)
             .padding(.horizontal, 8)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + durationPerImage) {
                     imageIndex += 1
-                    textVisible = true
+                    
+                    withAnimation {
+                        textVisible = true
+                    }
                 }
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2 * durationPerImage) {
