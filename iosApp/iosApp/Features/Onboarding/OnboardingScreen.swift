@@ -25,17 +25,16 @@ struct OnboardingScreen: View {
         
         ZStack {
             
-            if state.affirmation != nil {
+            if state.affirmation != nil && state.step == 5 {
                 OnboardingFifthStep(
                     item: state.affirmation!,
                     isActive: state.step == 5,
                     text: state.title.localized()
                 )
-                .opacity(state.step == 5 ? 1 : 0)
             }
             
             VStack {
-                Spacer().frame(height: 70)
+                Spacer().frame(height: 140)
                 
                 ZStack {
                     OnboardingFirstStep(
@@ -70,6 +69,7 @@ struct OnboardingScreen: View {
                 if moveTextToBottom {
                     Spacer()
                     Spacer()
+                    Spacer()
                 }
                 
                 Text(state.title.localized())
@@ -82,7 +82,7 @@ struct OnboardingScreen: View {
                 Spacer()
                 
                 AppButton(
-                    labelText: SharedR.strings().continue_btn.desc().localized(),
+                    labelText: state.step == 5 ? SharedR.strings().onboarding_btn.desc().localized() : SharedR.strings().continue_btn.desc().localized(),
                     isLoading: false,
                     onClick: {
                         withAnimation(.easeInOut) {
@@ -96,8 +96,6 @@ struct OnboardingScreen: View {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             viewModel.dispatch(action: OnboardingActionNextClick())
                         }
-                        
-                        
                     }
                 )
                 .opacity(buttonVisible ? 1 : 0)
