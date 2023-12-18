@@ -158,6 +158,7 @@
 		46E2DD2F2AE93A3B00B4B2B5 /* AreaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E2DD2E2AE93A3B00B4B2B5 /* AreaPicker.swift */; };
 		46E2DD312AE9420600B4B2B5 /* AreaPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E2DD302AE9420600B4B2B5 /* AreaPickerItem.swift */; };
 		46E307CB2B309B5200A6B491 /* OnboardingThirdStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E307CA2B309B5200A6B491 /* OnboardingThirdStep.swift */; };
+		46E307CD2B309C0100A6B491 /* OnboardingAbilityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E307CC2B309C0100A6B491 /* OnboardingAbilityItem.swift */; };
 		46E3804B2B24D86E00056C0D /* AbilitiesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E3804A2B24D86E00056C0D /* AbilitiesScreen.swift */; };
 		46E3804D2B24D87600056C0D /* AbilitiesRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E3804C2B24D87600056C0D /* AbilitiesRoute.swift */; };
 		46E380502B24D94A00056C0D /* AbilityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E3804F2B24D94A00056C0D /* AbilityItem.swift */; };
@@ -326,6 +327,7 @@
 		46E2DD2E2AE93A3B00B4B2B5 /* AreaPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPicker.swift; sourceTree = "<group>"; };
 		46E2DD302AE9420600B4B2B5 /* AreaPickerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPickerItem.swift; sourceTree = "<group>"; };
 		46E307CA2B309B5200A6B491 /* OnboardingThirdStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingThirdStep.swift; sourceTree = "<group>"; };
+		46E307CC2B309C0100A6B491 /* OnboardingAbilityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAbilityItem.swift; sourceTree = "<group>"; };
 		46E3804A2B24D86E00056C0D /* AbilitiesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilitiesScreen.swift; sourceTree = "<group>"; };
 		46E3804C2B24D87600056C0D /* AbilitiesRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilitiesRoute.swift; sourceTree = "<group>"; };
 		46E3804F2B24D94A00056C0D /* AbilityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityItem.swift; sourceTree = "<group>"; };
@@ -579,6 +581,7 @@
 				464583912B3018F10027F6AA /* OnboardingFirstStep.swift */,
 				464583932B3048620027F6AA /* OnboardingSecondStep.swift */,
 				46E307CA2B309B5200A6B491 /* OnboardingThirdStep.swift */,
+				46E307CC2B309C0100A6B491 /* OnboardingAbilityItem.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -1249,6 +1252,7 @@
 				46F0B3BF2B1CD62800D6BCC1 /* TaskDetailRoute.swift in Sources */,
 				468B876E2ABC45D2001BBEB1 /* CalendarsScreen.swift in Sources */,
 				46059D222AC4037000DC5015 /* AreasView.swift in Sources */,
+				46E307CD2B309C0100A6B491 /* OnboardingAbilityItem.swift in Sources */,
 				460054A32ABB101600586767 /* SubscriptionBox.swift in Sources */,
 				466E519B2B1232DB00088425 /* FeedbackItem.swift in Sources */,
 				4667C90A2AC59A9B00BAA9DD /* MultilineTextField.swift in Sources */,

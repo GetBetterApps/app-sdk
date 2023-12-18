@@ -69,7 +69,6 @@ fun BoxScope.OnboardingThirdStep(
                 modifier = modifier
                     .height(250.dp)
                     .fillMaxWidth()
-//                    .horizontalFadingEdge()
                     .padding(bottom = 16.dp),
                 state = pagerState,
                 contentPadding = PaddingValues(start = 38.dp, end = 38.dp),

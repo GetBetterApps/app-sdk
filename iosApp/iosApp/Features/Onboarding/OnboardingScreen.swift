@@ -39,6 +39,13 @@ struct OnboardingScreen: View {
                     )
                     .opacity(state.step == 2 ? 1 : 0)
                 }
+                
+                if state.step == 3 {
+                    OnboardingThirdStep(
+                        textVisible: $textVisible,
+                        items: state.abilities
+                    )
+                }
             }
             .animation(.easeInOut, value: state.step)
             .frame(minWidth: 0, maxWidth: .infinity)
@@ -64,7 +71,10 @@ struct OnboardingScreen: View {
                 onClick: {
                     withAnimation(.easeInOut) {
                         textVisible = false
-                        buttonVisible = false
+                        
+                        if state.step == 1 {
+                            buttonVisible = false
+                        }
                     }
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

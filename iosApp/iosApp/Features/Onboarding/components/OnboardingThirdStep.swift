@@ -28,8 +28,8 @@ struct OnboardingThirdStep: View {
             page: page,
             data: items,
             id: \.self.id
-        ) { areaWrapper in
-//            AreaPickerItem(area: areaWrapper.area)
+        ) { item in
+            OnboardingAbilityItem(item: item)
         }
         .interactive(rotation: true)
         .interactive(scale: 0.8)
@@ -37,6 +37,11 @@ struct OnboardingThirdStep: View {
         .preferredItemSize(CGSize(width: 300, height: 150))
         .frame(height: 150)
         .padding(.bottom, 16)
+        .onAppear {
+            withAnimation(.easeInOut(duration: 0.5).delay(1)) {
+                textVisible = true
+            }
+        }
         
     }
 }
