@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.onboarding.components.OnboardingFirstStep
 import com.velkonost.getbetter.android.features.onboarding.components.OnboardingSecondStep
+import com.velkonost.getbetter.android.features.onboarding.components.OnboardingThirdStep
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.shared.features.onboarding.presentation.OnboardingViewModel
 import com.velkonost.getbetter.shared.features.onboarding.presentation.contract.OnboardingAction
@@ -119,6 +120,11 @@ fun OnboardingScreen(
                     enable = state.step == 2,
                     animationEnded = secondStepAnimationEnded,
                     buttonVisible = buttonVisible
+                )
+
+                OnboardingThirdStep(
+                    enable = state.step == 3,
+                    items = state.abilities
                 )
             }
 

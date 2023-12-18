@@ -5,14 +5,24 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.extensions.horizontalFadingEdge
 import com.velkonost.getbetter.shared.core.model.task.Ability
+import com.velkonost.getbetter.shared.core.util.randomUUID
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BoxScope.OnboardingThirdStep(
     modifier: Modifier = Modifier,
@@ -20,6 +30,7 @@ fun BoxScope.OnboardingThirdStep(
     items: List<Ability>
 ) {
     val animationDuration = 1200
+    val pagerState = rememberPagerState(initialPage = 0, pageCount = { items.size })
 
     Column(
         modifier
@@ -44,7 +55,26 @@ fun BoxScope.OnboardingThirdStep(
                 )
             )
         ) {
+            HorizontalPager(
+                modifier = modifier
+                    .height(150.dp)
+                    .fillMaxWidth()
+                    .horizontalFadingEdge()
+                    .padding(bottom = 16.dp),
+                state = pagerState,
+                contentPadding = PaddingValues(start = 38.dp, end = 38.dp),
+                key = {
+                    if (items.isNotEmpty()) {
+                        items[it].id.toString()
+                    } else randomUUID()
+                }
+            ) {
+                if (items.isEmpty()) {
+                    return@HorizontalPager
+                }
 
+                OnboardingAbilityItem(item = items[it])
+            }
         }
     }
 }
