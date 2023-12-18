@@ -177,7 +177,7 @@ fun BoxScope.OnboardingFirstStep(
         delay(500)
 
         imagesBlockShow.value = false
-        delay(500)
+        delay(700)
         animationEnded.value = true
         delay(3000)
         moveTextToBottom.value = true

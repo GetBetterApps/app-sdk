@@ -17,6 +17,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -33,7 +34,8 @@ import kotlinx.coroutines.delay
 @Composable
 fun BoxScope.OnboardingSecondStep(
     modifier: Modifier = Modifier,
-    enable: Boolean
+    enable: Boolean,
+    animationEnded: MutableState<Boolean>
 ) {
 
     val animationDuration = 1200
@@ -61,6 +63,9 @@ fun BoxScope.OnboardingSecondStep(
 
             delay(durationPerImage)
             imageIndex.intValue++
+
+            delay(700)
+            animationEnded.value = true
         }
     }
 

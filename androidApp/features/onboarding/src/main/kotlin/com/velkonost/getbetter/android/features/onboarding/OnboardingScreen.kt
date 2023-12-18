@@ -117,7 +117,8 @@ fun OnboardingScreen(
                 )
 
                 OnboardingSecondStep(
-                    enable = state.step == 2
+                    enable = state.step == 2,
+                    animationEnded = secondStepAnimationEnded
                 )
             }
 
