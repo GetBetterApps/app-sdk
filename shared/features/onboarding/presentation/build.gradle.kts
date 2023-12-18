@@ -31,6 +31,7 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.core)
 
                 implementation(projects.shared.features.abilities.api)
+                implementation(projects.shared.features.affirmations.api)
             }
         }
 

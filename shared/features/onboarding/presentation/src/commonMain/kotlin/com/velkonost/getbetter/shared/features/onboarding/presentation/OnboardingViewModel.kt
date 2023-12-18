@@ -1,7 +1,9 @@
 package com.velkonost.getbetter.shared.features.onboarding.presentation
 
+import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.abilities.api.AbilitiesRepository
+import com.velkonost.getbetter.shared.features.affirmations.api.AffirmationsRepository
 import com.velkonost.getbetter.shared.features.onboarding.presentation.contract.OnboardingAction
 import com.velkonost.getbetter.shared.features.onboarding.presentation.contract.OnboardingEvent
 import com.velkonost.getbetter.shared.features.onboarding.presentation.contract.OnboardingNavigation
@@ -12,10 +14,17 @@ import dev.icerock.moko.resources.desc.StringDesc
 
 class OnboardingViewModel
 internal constructor(
-    private val abilitiesRepository: AbilitiesRepository
+    private val abilitiesRepository: AbilitiesRepository,
+    private val affirmationsRepository: AffirmationsRepository
 ) : BaseViewModel<OnboardingViewState, OnboardingAction, OnboardingNavigation, OnboardingEvent>(
     initialState = OnboardingViewState()
 ) {
+
+    init {
+        fetchAbilities()
+        fetchAffirmation()
+    }
+
     override fun dispatch(action: OnboardingAction) = when (action) {
         is OnboardingAction.NextClick -> obtainNextClick()
         else -> {
@@ -25,10 +34,23 @@ internal constructor(
 
     private fun fetchAbilities() {
         launchJob {
-            abilitiesRepository.getAll(
-                page = 0,
-                pageSize = 10
-            )
+            abilitiesRepository.getAbilitiesForOnboarding() collectAndProcess {
+                onSuccess { items ->
+                    items?.let {
+                        emit(viewState.value.copy(abilities = items))
+                    }
+                }
+            }
+        }
+    }
+
+    private fun fetchAffirmation() {
+        launchJob {
+            affirmationsRepository.getAffirmationForOnboarding() collectAndProcess {
+                onSuccess { item ->
+                    emit(viewState.value.copy(affirmation = item))
+                }
+            }
         }
     }
 
@@ -56,6 +78,6 @@ internal constructor(
                 else -> SharedR.strings.onboarding_step_5
             }
         )
-    
+
 
 }
