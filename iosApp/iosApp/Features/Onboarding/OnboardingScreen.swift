@@ -30,7 +30,9 @@ struct OnboardingScreen: View {
                 OnboardingFirstStep(
                     textVisible: $textVisible
                 )
+                .opacity(state.step == 1 ? 1 : 0)
             }
+            .animation(.easeInOut, value: state.step)
             .frame(minWidth: 0, maxWidth: .infinity)
             
             if moveTextToBottom {

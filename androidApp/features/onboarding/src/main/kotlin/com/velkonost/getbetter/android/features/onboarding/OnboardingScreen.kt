@@ -4,18 +4,15 @@ import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutLinearInEasing
-import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -31,8 +28,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
@@ -43,6 +38,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.onboarding.components.OnboardingFirstStep
+import com.velkonost.getbetter.android.features.onboarding.components.OnboardingSecondStep
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.shared.features.onboarding.presentation.OnboardingViewModel
 import com.velkonost.getbetter.shared.features.onboarding.presentation.contract.OnboardingAction
@@ -135,37 +131,9 @@ fun OnboardingScreen(
                     animationEnded = firstStepAnimationEnded
                 )
 
-                Column(modifier.fillMaxWidth()) {
-                    AnimatedVisibility(
-                        modifier = modifier.align(Alignment.CenterHorizontally),
-                        visible = state.step == 2,
-                        enter = fadeIn(
-                            tween(
-                                durationMillis = animationDuration,
-                                easing = LinearEasing
-                            )
-                        ),
-                        exit = fadeOut(
-                            tween(
-                                durationMillis = animationDuration,
-                                easing = LinearEasing
-                            )
-                        )
-                    ) {
-                        Image(
-                            modifier = modifier
-                                .shadow(
-                                    elevation = 8.dp,
-                                    shape = MaterialTheme.shapes.medium,
-                                )
-                                .fillMaxHeight(0.6f)
-                                .clip(MaterialTheme.shapes.medium)
-                                .align(Alignment.CenterHorizontally),
-                            painter = painterResource(imageResource = SharedR.images.ic_onboarding_2),
-                            contentDescription = null
-                        )
-                    }
-                }
+                OnboardingSecondStep(
+                    enable = state.step == 2
+                )
             }
 
 
