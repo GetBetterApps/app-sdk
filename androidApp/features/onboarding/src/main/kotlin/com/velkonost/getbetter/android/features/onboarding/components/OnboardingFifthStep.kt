@@ -67,7 +67,7 @@ fun BoxScope.OnboardingFifthStep(
         if (enable) {
             delay(1200)
             isTextVisible.value = true
-            delay(500)
+            delay(1000)
             isItemAppeared.value = true
         }
     }

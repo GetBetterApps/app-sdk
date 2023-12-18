@@ -61,17 +61,19 @@ fun BoxScope.OnboardingSecondStep(
             delay(durationPerImage)
             imageIndex.intValue++
 
-            delay(durationPerImage)
-            imageIndex.intValue++
-
-            delay(durationPerImage)
-            imageIndex.intValue++
-
-            delay(1500)
+//            delay(1500)
             animationEnded.value = true
 
-            delay(500)
+//            delay(500)
             buttonVisible.value = true
+
+            delay(durationPerImage)
+            imageIndex.intValue++
+
+            delay(durationPerImage)
+            imageIndex.intValue++
+
+
         }
     }
 

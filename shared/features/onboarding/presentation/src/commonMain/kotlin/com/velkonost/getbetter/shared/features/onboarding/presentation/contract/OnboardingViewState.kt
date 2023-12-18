@@ -9,7 +9,7 @@ import dev.icerock.moko.resources.desc.StringDesc
 
 data class OnboardingViewState(
     val isLoading: Boolean = false,
-    val step: Int = 5,
+    val step: Int = 1,
     val title: StringDesc = StringDesc.Resource(SharedR.strings.onboarding_step_1),
     val abilities: List<Ability> = emptyList(),
     val affirmation: Affirmation? = null

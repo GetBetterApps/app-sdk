@@ -122,7 +122,7 @@ fun OnboardingScreen(
             Spacer(modifier.height(70.dp))
 
             Box(
-                modifier = modifier.fillMaxHeight(0.7f),
+                modifier = modifier.fillMaxHeight(0.6f),
                 contentAlignment = Alignment.Center,
 
                 ) {
@@ -196,7 +196,10 @@ fun OnboardingScreen(
                             positionInRootButton = it.positionInRoot()
                         }
                     },
-                labelText = stringResource(resource = SharedR.strings.continue_btn),
+                labelText = stringResource(
+                    resource = if (state.step == 5) SharedR.strings.onboarding_btn
+                    else SharedR.strings.continue_btn
+                ),
                 isLoading = false,
                 onClick = {
                     scope.launch {

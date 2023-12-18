@@ -53,7 +53,7 @@ internal constructor(
 
     private fun obtainNextClick() {
         val nextStep = viewState.value.step + 1
-        if (nextStep == 5) {
+        if (nextStep == 6) {
 
         } else {
             emit(
