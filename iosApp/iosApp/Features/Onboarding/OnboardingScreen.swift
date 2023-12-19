@@ -34,7 +34,7 @@ struct OnboardingScreen: View {
             }
             
             VStack {
-                Spacer().frame(height: 80)
+                Spacer().frame(height: 60)
                 
                 HStack {
                     Spacer()
@@ -47,6 +47,7 @@ struct OnboardingScreen: View {
                             viewModel.dispatch(action: OnboardingActionSkipClick())
                         }
                 }
+                .padding(.bottom, 20)
                 
                 ZStack {
                     OnboardingFirstStep(
@@ -97,7 +98,7 @@ struct OnboardingScreen: View {
                 
                 AppButton(
                     labelText: state.step == 5 ? SharedR.strings().onboarding_btn.desc().localized() : SharedR.strings().continue_btn.desc().localized(),
-                    isLoading: false,
+                    isLoading: state.isLoading,
                     onClick: {
                         withAnimation(.easeInOut) {
                             textVisible = false

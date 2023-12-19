@@ -136,7 +136,7 @@ fun OnboardingScreen(
                                 viewModel.dispatch(OnboardingAction.SkipClick)
                             }
                         )
-                        .alpha(if (state.step != 1 && state.step != 5) 0f else 1f),
+                        .alpha(if (state.step != 1 && state.step != 5) 1f else 0f),
                     text = stringResource(resource = SharedR.strings.skip_btn),
                     style = MaterialTheme.typography.bodyLarge,
                     color = colorResource(resource = SharedR.colors.text_primary)
