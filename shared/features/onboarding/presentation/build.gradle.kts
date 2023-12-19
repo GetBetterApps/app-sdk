@@ -30,6 +30,9 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
 
+                implementation(projects.shared.features.auth.api)
+                implementation(projects.shared.features.auth.domain)
+
                 implementation(projects.shared.features.abilities.api)
                 implementation(projects.shared.features.affirmations.api)
             }

@@ -25,8 +25,8 @@ kotlin {
                 api(projects.shared.core.util)
                 implementation(projects.shared.resources)
 
-                implementation(projects.shared.features.auth.domain)
                 implementation(projects.shared.features.auth.api)
+                implementation(projects.shared.features.auth.domain)
 
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.koin.core)
