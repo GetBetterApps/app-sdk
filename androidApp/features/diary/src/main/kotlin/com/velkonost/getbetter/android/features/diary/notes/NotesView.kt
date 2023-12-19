@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.Loader
+import com.velkonost.getbetter.core.compose.components.PlaceholderView
 import com.velkonost.getbetter.core.compose.components.notelist.AddNoteItem
 import com.velkonost.getbetter.core.compose.components.notelist.NoteItem
 import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
@@ -34,6 +35,8 @@ fun NotesView(
     Box(modifier = modifier.fillMaxSize()) {
         if (isLoading && items.isEmpty()) {
             Loader(modifier = Modifier.align(Alignment.Center))
+        } else if (items.isEmpty()) {
+            PlaceholderView(text = "diary is empty")
         } else {
             LazyColumn(
                 modifier = modifier

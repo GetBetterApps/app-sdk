@@ -27,16 +27,15 @@ fun PlaceholderView(
 
     val availableAnimations =
         listOf(
-            SharedR.files.anim_emoji_1,
-            SharedR.files.anim_emoji_2,
-            SharedR.files.anim_emoji_3,
-            SharedR.files.anim_emoji_4,
-            SharedR.files.anim_emoji_5,
-            SharedR.files.anim_emoji_6,
-            SharedR.files.anim_emoji_7,
-            SharedR.files.anim_emoji_8
+//            SharedR.files.gif_emoji_1,
+            SharedR.files.anim_placeholder_6,
+//            SharedR.files.anim_emoji_3,
+//            SharedR.files.anim_emoji_4,
+//            SharedR.files.anim_emoji_5,
+//            SharedR.files.anim_emoji_6,
+//            SharedR.files.anim_emoji_7,
+//            SharedR.files.anim_emoji_8
         )
-
 
     val composition by rememberLottieComposition(
         LottieCompositionSpec.RawRes(availableAnimations.random().rawResId)
@@ -53,7 +52,6 @@ fun PlaceholderView(
             composition = composition,
             iterations = LottieConstants.IterateForever,
         )
-
         Text(
             modifier = modifier.padding(top = 12.dp),
             text = text,
@@ -63,5 +61,4 @@ fun PlaceholderView(
 
         Spacer(modifier.weight(1f))
     }
-
 }

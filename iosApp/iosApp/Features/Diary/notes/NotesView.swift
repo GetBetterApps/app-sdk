@@ -48,6 +48,8 @@ struct NotesView: View {
         ZStack {
             if isLoading && items.isEmpty {
                 Loader()
+            } else if items.isEmpty {
+                PlaceholderView(text: "kekeke")
             } else {
                 ScrollView(showsIndicators: false) {
                     LazyVStack(spacing: 0) {
