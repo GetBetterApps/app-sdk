@@ -34,7 +34,19 @@ struct OnboardingScreen: View {
             }
             
             VStack {
-                Spacer().frame(height: 100)
+                Spacer().frame(height: 80)
+                
+                HStack {
+                    Spacer()
+                    Text(SharedR.strings().skip_btn.desc().localized())
+                        .style(.bodyLarge)
+                        .foregroundColor(.textPrimary)
+                        .padding(.trailing, 16)
+                        .opacity(state.step != 1 && state.step != 5 ? 1 : 0)
+                        .onTapGesture {
+                            viewModel.dispatch(action: OnboardingActionSkipClick())
+                        }
+                }
                 
                 ZStack {
                     OnboardingFirstStep(

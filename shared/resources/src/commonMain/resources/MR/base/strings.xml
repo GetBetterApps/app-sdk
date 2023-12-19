@@ -13,6 +13,7 @@
     <!--  GENERAL  -->
 
     <!--  ONBOARDING  -->
+    <string name="skip_btn">SKIP</string>
     <string name="onboarding_btn">I am ready</string>
 
     <string name="onboarding_step_1">впечатления для твоей жизни</string>

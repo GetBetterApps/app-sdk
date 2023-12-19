@@ -9,8 +9,11 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -119,7 +122,26 @@ fun OnboardingScreen(
 
         Column {
 
-            Spacer(modifier.height(70.dp))
+            Spacer(modifier.height(50.dp))
+
+            Row {
+                Spacer(modifier.weight(1f))
+                Text(
+                    modifier = modifier
+                        .padding(end = 16.dp)
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null,
+                            onClick = {
+                                viewModel.dispatch(OnboardingAction.SkipClick)
+                            }
+                        )
+                        .alpha(if (state.step != 1 && state.step != 5) 0f else 1f),
+                    text = stringResource(resource = SharedR.strings.skip_btn),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = colorResource(resource = SharedR.colors.text_primary)
+                )
+            }
 
             Box(
                 modifier = modifier.fillMaxHeight(0.6f),
@@ -202,7 +224,7 @@ fun OnboardingScreen(
                     resource = if (state.step == 5) SharedR.strings.onboarding_btn
                     else SharedR.strings.continue_btn
                 ),
-                isLoading = false,
+                isLoading = state.isLoading,
                 onClick = {
                     scope.launch {
                         firstStepAnimationEnded.value = false

@@ -73,8 +73,8 @@ internal constructor(
     }
 
     private fun obtainNextClick() {
-        val nextStep = viewState.value.step + 4
-        if (nextStep == 6) {
+        val nextStep = viewState.value.step + 1
+        if (nextStep >= 6) {
             obtainSkipClick()
         } else {
             emit(
