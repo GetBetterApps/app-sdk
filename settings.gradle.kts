@@ -27,6 +27,9 @@ include(
     ":shared:features:splash:api",
     ":shared:features:splash:data",
     ":shared:features:splash:presentation",
+
+    ":shared:features:onboarding:api",
+    ":shared:features:onboarding:data",
     ":shared:features:onboarding:presentation",
 
     ":shared:features:userinfo:api",
