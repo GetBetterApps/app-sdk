@@ -32,6 +32,7 @@ import com.velkonost.getbetter.android.features.feedback.components.FeedbackItem
 import com.velkonost.getbetter.android.features.feedback.components.FeedbackListHeader
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.Loader
+import com.velkonost.getbetter.core.compose.components.PlaceholderView
 import com.velkonost.getbetter.shared.features.feedback.presentation.FeedbackViewModel
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackAction
 import com.velkonost.getbetter.shared.features.feedback.presentation.contract.FeedbackAnswerAction
@@ -70,21 +71,25 @@ fun FeedbackScreen(
                     viewModel.dispatch(FeedbackAction.NavigateBack)
                 }
 
-                LazyColumn(
-                    modifier = modifier.padding(horizontal = 16.dp),
-                    contentPadding = PaddingValues(bottom = 140.dp)
-                ) {
-                    items(state.items, key = { it.id!! }) { item ->
-                        FeedbackItem(
-                            item = item,
-                            onClick = {
-                                selectedItemId.value = item.id
-                                viewModel.dispatch(FeedbackAction.DetailsClick(item.id!!))
-                                scope.launch {
-                                    feedbackDetailsSheetState.show()
+                if (state.items.isEmpty()) {
+                    PlaceholderView(text = stringResource(resource = SharedR.strings.placeholder_profile_support))
+                } else {
+                    LazyColumn(
+                        modifier = modifier.padding(horizontal = 16.dp),
+                        contentPadding = PaddingValues(bottom = 140.dp)
+                    ) {
+                        items(state.items, key = { it.id!! }) { item ->
+                            FeedbackItem(
+                                item = item,
+                                onClick = {
+                                    selectedItemId.value = item.id
+                                    viewModel.dispatch(FeedbackAction.DetailsClick(item.id!!))
+                                    scope.launch {
+                                        feedbackDetailsSheetState.show()
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             }

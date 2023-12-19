@@ -32,20 +32,24 @@ struct FeedbackScreen: View {
                 VStack {
                     FeedbackListHeader()
                     
-                    ScrollView(showsIndicators: false) {
-                        LazyVStack(spacing: 0) {
-                            ForEach(state.items, id: \.self) { item in
-                                FeedbackItem(
-                                    item: item,
-                                    onClick: {
-                                        selectedFeedbackId = item.id
-                                        viewModel.dispatch(action: FeedbackActionDetailsClick(feedbackId: item.id as! Int32))
-                                        showingFeedbackDetailsSheet = true
-                                    }
-                                )
+                    if state.items.isEmpty {
+                        PlaceholderView(text: SharedR.strings().placeholder_profile_support)
+                    } else {
+                        ScrollView(showsIndicators: false) {
+                            LazyVStack(spacing: 0) {
+                                ForEach(state.items, id: \.self) { item in
+                                    FeedbackItem(
+                                        item: item,
+                                        onClick: {
+                                            selectedFeedbackId = item.id
+                                            viewModel.dispatch(action: FeedbackActionDetailsClick(feedbackId: item.id as! Int32))
+                                            showingFeedbackDetailsSheet = true
+                                        }
+                                    )
+                                }
                             }
+                            .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
                         }
-                        .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
                     }
                 }
                 
