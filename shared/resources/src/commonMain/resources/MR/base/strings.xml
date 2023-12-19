@@ -12,6 +12,33 @@
     <string name="public_state">Public</string>
     <!--  GENERAL  -->
 
+    <!--  PLACEHOLDERS  -->
+    <string name="placeholder_social_all">Скоро здесь будет контент, созданный сообществом</string>
+    <string name="placeholder_social_areas">Публичные записи по областям, в которых вы состоите
+    </string>
+
+    <string name="placeholder_diary_notes">Дневник пуст, но ты можешь это исправить - создай цель
+        или обычную запись
+    </string>
+    <string name="placeholder_diary_areas">Список областей пуст! Скорее создай новую область или
+        вступи в уже существующие
+    </string>
+
+    <string name="placeholder_calendars_day_past">В этот день ничего не произошло</string>
+    <string name="placeholder_calendars_day_future">На этот день пока нет планов</string>
+
+    <string name="placeholder_abilities_favorite_affirmations">Ты пока не добавил(а) ничего в
+        избранное. Стоит это исправить
+    </string>
+    <string name="placeholder_ability_details_notes">Пока в твоем дневнике нет записей, которые бы
+        принесли опыт по этой способности
+    </string>
+
+    <string name="placeholder_profile_support">Нашел баг или хочешь что-нибудь предложить? Скорее
+        пиши нам!
+    </string>
+    <!--  PLACEHOLDERS  -->
+
     <!--  ONBOARDING  -->
     <string name="skip_btn">SKIP</string>
     <string name="onboarding_btn">I am ready</string>
