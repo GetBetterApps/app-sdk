@@ -31,6 +31,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.social.components.FeedNoteItem
 import com.velkonost.getbetter.core.compose.components.Loader
+import com.velkonost.getbetter.core.compose.components.PlaceholderView
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
 import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
 import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
@@ -40,6 +41,7 @@ import com.velkonost.getbetter.shared.features.social.contracts.FeedViewState
 import com.velkonost.getbetter.shared.features.social.contracts.SocialAction
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
+import dev.icerock.moko.resources.compose.stringResource
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -137,6 +139,7 @@ fun SocialScreenContent(
                 loadMorePrefetch = generalFeedState.loadMorePrefetch,
                 isLoading = generalFeedState.isLoading,
                 isRefreshing = generalFeedState.isRefreshing,
+                emptyText = stringResource(resource = SharedR.strings.placeholder_social_all),
                 items = generalFeedState.items,
                 itemClick = noteClick,
                 itemLikeClick = noteLikeClick,
@@ -148,6 +151,7 @@ fun SocialScreenContent(
                 loadMorePrefetch = areasFeedState.loadMorePrefetch,
                 isLoading = areasFeedState.isLoading,
                 isRefreshing = areasFeedState.isRefreshing,
+                emptyText = stringResource(resource = SharedR.strings.placeholder_social_areas),
                 items = areasFeedState.items,
                 itemClick = noteClick,
                 itemLikeClick = noteLikeClick,
@@ -164,6 +168,7 @@ fun SocialFeedView(
     modifier: Modifier = Modifier,
     loadMorePrefetch: Int,
     isLoading: Boolean,
+    emptyText: String,
     isRefreshing: Boolean,
     items: List<Note>,
     itemClick: (Note) -> Unit,
@@ -182,28 +187,31 @@ fun SocialFeedView(
         if (isLoading && items.isEmpty()) {
             Loader(modifier = Modifier.align(Alignment.Center))
         } else {
-            LazyColumn(
-                modifier = modifier
-                    .fillMaxSize(),
-                state = listState,
-                contentPadding = PaddingValues(bottom = 140.dp)
-            ) {
-                items(items, key = { it.id }, contentType = { it.noteType }) { item ->
-                    FeedNoteItem(
-                        item = item,
-                        onClick = itemClick,
-                        onLikeClick = itemLikeClick
-                    )
-                }
+            if (items.isEmpty()) {
+                PlaceholderView(text = emptyText)
+            } else {
+                LazyColumn(
+                    modifier = modifier
+                        .fillMaxSize(),
+                    state = listState,
+                    contentPadding = PaddingValues(bottom = 140.dp)
+                ) {
+                    items(items, key = { it.id }, contentType = { it.noteType }) { item ->
+                        FeedNoteItem(
+                            item = item,
+                            onClick = itemClick,
+                            onLikeClick = itemLikeClick
+                        )
+                    }
 
-                if (isLoading) {
-                    item {
-                        Box(modifier = modifier.fillMaxSize()) {
-                            Loader(modifier = modifier.align(Alignment.Center))
+                    if (isLoading) {
+                        item {
+                            Box(modifier = modifier.fillMaxSize()) {
+                                Loader(modifier = modifier.align(Alignment.Center))
+                            }
                         }
                     }
                 }
-
             }
         }
 
