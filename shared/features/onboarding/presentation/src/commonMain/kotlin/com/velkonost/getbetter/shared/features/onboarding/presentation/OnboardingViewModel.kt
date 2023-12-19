@@ -6,6 +6,7 @@ import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.abilities.api.AbilitiesRepository
 import com.velkonost.getbetter.shared.features.affirmations.api.AffirmationsRepository
 import com.velkonost.getbetter.shared.features.auth.domain.LoginAnonymousUseCase
+import com.velkonost.getbetter.shared.features.onboarding.api.OnboardingRepository
 import com.velkonost.getbetter.shared.features.onboarding.presentation.contract.OnboardingAction
 import com.velkonost.getbetter.shared.features.onboarding.presentation.contract.OnboardingEvent
 import com.velkonost.getbetter.shared.features.onboarding.presentation.contract.OnboardingNavigation
@@ -18,7 +19,8 @@ class OnboardingViewModel
 internal constructor(
     private val abilitiesRepository: AbilitiesRepository,
     private val affirmationsRepository: AffirmationsRepository,
-    private val loginAnonymousUseCase: LoginAnonymousUseCase
+    private val loginAnonymousUseCase: LoginAnonymousUseCase,
+    private val onboardingRepository: OnboardingRepository
 ) : BaseViewModel<OnboardingViewState, OnboardingAction, OnboardingNavigation, OnboardingEvent>(
     initialState = OnboardingViewState()
 ) {
@@ -57,6 +59,8 @@ internal constructor(
 
     private fun obtainSkipClick() {
         launchJob {
+            onboardingRepository.updateOnboardingState()
+
             loginAnonymousUseCase() collectAndProcess {
                 isLoading {
                     emit(viewState.value.copy(isLoading = it))

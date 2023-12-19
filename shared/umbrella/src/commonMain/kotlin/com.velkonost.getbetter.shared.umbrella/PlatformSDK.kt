@@ -24,6 +24,7 @@ import com.velkonost.getbetter.shared.features.follows.data.di.FollowsDataModule
 import com.velkonost.getbetter.shared.features.likes.data.di.LikesDataModule
 import com.velkonost.getbetter.shared.features.notedetail.presentation.di.NoteDetailPresentationModule
 import com.velkonost.getbetter.shared.features.notes.data.di.NotesDataModule
+import com.velkonost.getbetter.shared.features.onboarding.api.di.OnboardingDataModule
 import com.velkonost.getbetter.shared.features.onboarding.presentation.di.OnboardingPresentationModule
 import com.velkonost.getbetter.shared.features.presentation.di.WisdomPresentationModule
 import com.velkonost.getbetter.shared.features.profile.data.di.ProfileDataModule
@@ -75,6 +76,8 @@ object PlatformSDK {
 
             SocialDataModule,
             SocialPresentationModule,
+
+            OnboardingDataModule,
             OnboardingPresentationModule,
 
             DiaryDataModule,

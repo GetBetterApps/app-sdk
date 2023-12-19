@@ -8,6 +8,8 @@ interface SplashRepository {
 
     suspend fun isUserRegistrationDateSaved(): Boolean
 
+    suspend fun shouldShowOnboarding(): Boolean
+
     suspend fun saveUserRegistrationDate(value: Long)
 
     suspend fun getTheme(): UIThemeMode

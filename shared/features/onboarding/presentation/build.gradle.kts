@@ -34,6 +34,7 @@ kotlin {
                 implementation(projects.shared.features.auth.domain)
 
                 implementation(projects.shared.features.abilities.api)
+                implementation(projects.shared.features.onboarding.api)
                 implementation(projects.shared.features.affirmations.api)
             }
         }

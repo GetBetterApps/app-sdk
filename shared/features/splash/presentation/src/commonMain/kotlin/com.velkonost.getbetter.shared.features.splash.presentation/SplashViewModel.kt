@@ -4,6 +4,7 @@ import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.auth.api.AuthRepository
 import com.velkonost.getbetter.shared.features.splash.api.SplashRepository
+import com.velkonost.getbetter.shared.features.splash.presentation.contract.NavigateToAuth
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.NavigateToMainFlow
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.NavigateToOnboarding
 import com.velkonost.getbetter.shared.features.splash.presentation.contract.SplashAction
@@ -56,8 +57,11 @@ internal constructor(
         launchJob {
             delay(500)
             val isLoggedIn = authRepository.isUserLoggedIn()
+            val shouldShowOnboarding = splashRepository.shouldShowOnboarding()
+
             val startDestination = if (isLoggedIn) NavigateToMainFlow
-            else NavigateToOnboarding
+            else if (shouldShowOnboarding) NavigateToOnboarding
+            else NavigateToAuth
 
             emit(startDestination)
         }
