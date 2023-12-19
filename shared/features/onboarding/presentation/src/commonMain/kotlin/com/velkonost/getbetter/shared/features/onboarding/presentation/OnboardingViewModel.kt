@@ -1,9 +1,11 @@
 package com.velkonost.getbetter.shared.features.onboarding.presentation
 
+import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.abilities.api.AbilitiesRepository
 import com.velkonost.getbetter.shared.features.affirmations.api.AffirmationsRepository
+import com.velkonost.getbetter.shared.features.auth.domain.LoginAnonymousUseCase
 import com.velkonost.getbetter.shared.features.onboarding.presentation.contract.OnboardingAction
 import com.velkonost.getbetter.shared.features.onboarding.presentation.contract.OnboardingEvent
 import com.velkonost.getbetter.shared.features.onboarding.presentation.contract.OnboardingNavigation
@@ -15,7 +17,8 @@ import dev.icerock.moko.resources.desc.StringDesc
 class OnboardingViewModel
 internal constructor(
     private val abilitiesRepository: AbilitiesRepository,
-    private val affirmationsRepository: AffirmationsRepository
+    private val affirmationsRepository: AffirmationsRepository,
+    private val loginAnonymousUseCase: LoginAnonymousUseCase
 ) : BaseViewModel<OnboardingViewState, OnboardingAction, OnboardingNavigation, OnboardingEvent>(
     initialState = OnboardingViewState()
 ) {
@@ -53,11 +56,20 @@ internal constructor(
     }
 
     private fun obtainSkipClick() {
-
+        launchJob {
+            loginAnonymousUseCase() collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
+                }
+                onSuccess {
+                    emit(OnboardingNavigation.NavigateToMainFlow)
+                }
+            }
+        }
     }
 
     private fun obtainNextClick() {
-        val nextStep = viewState.value.step + 1
+        val nextStep = viewState.value.step + 4
         if (nextStep == 6) {
             obtainSkipClick()
         } else {
