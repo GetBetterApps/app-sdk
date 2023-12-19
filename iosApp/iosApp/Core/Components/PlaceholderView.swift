@@ -14,17 +14,31 @@ import SharedSDK
 struct PlaceholderView: View {
     
     private let text: String
+    
     init(text: String) {
         self.text = text
+        selectedAnimation = animations.randomElement()!
     }
     
+    var selectedAnimation: FileResource
+    let animations = [
+        SharedR.files().anim_placeholder_1,
+        SharedR.files().anim_placeholder_2,
+        SharedR.files().anim_placeholder_3,
+        SharedR.files().anim_placeholder_5,
+        SharedR.files().anim_placeholder_6
+    ]
     
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
-            PlaceholderLottieView()
-                .frame(width: 200, height: 200)
-                .scaleEffect(0.6)
+            PlaceholderLottieView(
+                animation: selectedAnimation
+            )
+            .frame(width: 200, height: 200)
+            .scaleEffect(0.7)
+            .padding(.bottom, 12)
+            
             Text(text)
                 .style(.bodyMedium)
                 .foregroundColor(.textTitle)
@@ -38,26 +52,19 @@ struct PlaceholderView: View {
 
 struct PlaceholderLottieView: UIViewRepresentable {
     
-    let animations = [
-//        SharedR.files().anim_placeholder_1,
-//        SharedR.files().anim_placeholder_2,
-//        SharedR.files().anim_placeholder_3,
-        SharedR.files().anim_placeholder_4,
-//        SharedR.files().anim_placeholder_5,
-//        SharedR.files().anim_placeholder_6
-    ]
-
+    let animation: FileResource
+    
     func updateUIView(_ uiView: UIViewType, context: Context) {
         
     }
-
+    
     func makeUIView(context: Context) -> Lottie.LottieAnimationView {
         
         let animationView = LottieAnimationView(
-            filePath: animations.randomElement()!.path
+            filePath: animation.path
         )
         
-//        animationView.contentMode = .scaleAspectFit
+        //        animationView.contentMode = .scaleAspectFit
         animationView.contentMode = .scaleToFill
         animationView.loopMode = .loop
         animationView.play()
