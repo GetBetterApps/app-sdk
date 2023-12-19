@@ -48,27 +48,29 @@ struct NotesView: View {
         ZStack {
             if isLoading && items.isEmpty {
                 Loader()
-            } else if items.isEmpty {
-                PlaceholderView(text: "kekeke")
             } else {
-                ScrollView(showsIndicators: false) {
-                    LazyVStack(spacing: 0) {
-                        ForEach(items, id: \.self.id) { item in
-                            NoteItem(
-                                item: item,
-                                onClick: itemClick,
-                                onLikeClick: itemLikeClick
-                            )
-                            .onAppear {
-                                checkPaginationThreshold(currentItemId: item.id)
+                if items.isEmpty {
+                    PlaceholderView(text: SharedR.strings().placeholder_diary_notes.desc().localized())
+                } else {
+                    ScrollView(showsIndicators: false) {
+                        LazyVStack(spacing: 0) {
+                            ForEach(items, id: \.self.id) { item in
+                                NoteItem(
+                                    item: item,
+                                    onClick: itemClick,
+                                    onLikeClick: itemLikeClick
+                                )
+                                .onAppear {
+                                    checkPaginationThreshold(currentItemId: item.id)
+                                }
                             }
                         }
+                        .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
+                        
+                        Loader().opacity(state.isLoading ? 1 : 0)
                     }
-                    .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
-                    
-                    Loader().opacity(state.isLoading ? 1 : 0)
+                    .fadingEdge()
                 }
-                .fadingEdge()
                 
                 VStack(alignment: .trailing) {
                     Spacer()

@@ -55,10 +55,10 @@ fun PlaceholderView(
             modifier = modifier.padding(top = 12.dp, start = 32.dp, end = 32.dp),
             text = text,
             style = MaterialTheme.typography.bodyMedium,
-            color = colorResource(resource = SharedR.colors.text_title),
+            color = colorResource(resource = SharedR.colors.text_primary),
             textAlign = TextAlign.Center
         )
 
-        Spacer(modifier.weight(1f))
+        Spacer(modifier.weight(1.5f))
     }
 }

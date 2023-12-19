@@ -23,12 +23,12 @@ struct PlaceholderView: View {
         VStack(spacing: 0) {
             Spacer()
             PlaceholderLottieView()
-                .scaleEffect(0.4)
+                .frame(width: 200, height: 200)
+                .scaleEffect(0.6)
             Text(text)
                 .style(.bodyMedium)
                 .foregroundColor(.textTitle)
                 .multilineTextAlignment(.center)
-                .padding(.top, 12)
                 .padding(.horizontal, 32)
             Spacer()
         }
@@ -39,12 +39,12 @@ struct PlaceholderView: View {
 struct PlaceholderLottieView: UIViewRepresentable {
     
     let animations = [
-        SharedR.files().anim_placeholder_1,
-        SharedR.files().anim_placeholder_2,
-        SharedR.files().anim_placeholder_3,
+//        SharedR.files().anim_placeholder_1,
+//        SharedR.files().anim_placeholder_2,
+//        SharedR.files().anim_placeholder_3,
         SharedR.files().anim_placeholder_4,
-        SharedR.files().anim_placeholder_5,
-        SharedR.files().anim_placeholder_6
+//        SharedR.files().anim_placeholder_5,
+//        SharedR.files().anim_placeholder_6
     ]
 
     func updateUIView(_ uiView: UIViewType, context: Context) {
@@ -57,7 +57,8 @@ struct PlaceholderLottieView: UIViewRepresentable {
             filePath: animations.randomElement()!.path
         )
         
-        animationView.contentMode = .scaleAspectFit
+//        animationView.contentMode = .scaleAspectFit
+        animationView.contentMode = .scaleToFill
         animationView.loopMode = .loop
         animationView.play()
         

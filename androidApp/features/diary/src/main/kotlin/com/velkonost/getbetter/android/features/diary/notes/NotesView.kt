@@ -37,32 +37,33 @@ fun NotesView(
     Box(modifier = modifier.fillMaxSize()) {
         if (isLoading && items.isEmpty()) {
             Loader(modifier = Modifier.align(Alignment.Center))
-        } else if (items.isEmpty()) {
-            PlaceholderView(text = stringResource(resource = SharedR.strings.placeholder_diary_notes))
         } else {
-            LazyColumn(
-                modifier = modifier
-                    .fillMaxSize()
-                    .fadingEdge(),
-                state = listState,
-                contentPadding = PaddingValues(bottom = 140.dp)
-            ) {
-                items(items, key = { it.id }) { item ->
-                    NoteItem(
-                        item = item,
-                        onClick = itemClick,
-                        onLikeClick = itemLikeClick
-                    )
-                }
+            if (items.isEmpty()) {
+                PlaceholderView(text = stringResource(resource = SharedR.strings.placeholder_diary_notes))
+            } else {
+                LazyColumn(
+                    modifier = modifier
+                        .fillMaxSize()
+                        .fadingEdge(),
+                    state = listState,
+                    contentPadding = PaddingValues(bottom = 140.dp)
+                ) {
+                    items(items, key = { it.id }) { item ->
+                        NoteItem(
+                            item = item,
+                            onClick = itemClick,
+                            onLikeClick = itemLikeClick
+                        )
+                    }
 
-                if (isLoading) {
-                    item {
-                        Box(modifier = modifier.fillMaxSize()) {
-                            Loader(modifier = modifier.align(Alignment.Center))
+                    if (isLoading) {
+                        item {
+                            Box(modifier = modifier.fillMaxSize()) {
+                                Loader(modifier = modifier.align(Alignment.Center))
+                            }
                         }
                     }
                 }
-
             }
 
             AddNoteItem(
