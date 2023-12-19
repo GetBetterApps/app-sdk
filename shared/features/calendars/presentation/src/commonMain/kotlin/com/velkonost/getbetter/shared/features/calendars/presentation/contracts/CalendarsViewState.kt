@@ -18,6 +18,7 @@ data class DatesState(
 
 data class SelectedDate(
     val id: Long,
+    val isPast: Boolean,
     val year: StringDesc,
     val monthDay: StringDesc,
     val isLoading: Boolean = true,

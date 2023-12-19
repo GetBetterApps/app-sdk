@@ -100,35 +100,41 @@ struct CalendarsScreen: View {
                     }.frame(maxHeight: .infinity)
                 } else {
                     ZStack {
-                        ScrollView(showsIndicators: false) {
-                            LazyVStack {
-                                ForEach(
-                                    state.datesState.selectedDate!.items.map { ActionUIItemWrapper(item: $0) },
-                                    id: \.self.id
-                                ) { wrapper in
-                                    ActionItem(
-                                        item: wrapper.item,
-                                        onAreaClick: { value in
-                                            selectedAreaId = value
-                                            showingAreaDetailSheet = true
-                                        },
-                                        onNoteClick: { value in
-                                            viewModel.dispatch(action: CalendarsActionNoteClick(value: value))
-                                        },
-                                        onUserClick: {
-                                            selectedUserId = (wrapper.item.data as! UserInfoShort).id
-                                            showingProfileDetailSheet = true
-                                        },
-                                        onTaskClick: { value in
-                                            viewModel.dispatch(action: CalendarsActionTaskClick(value: value))
-                                        }
-                                    )
-                                }
-                                Spacer().frame(height: 160)
-                            }
+                        if ((state.datesState.selectedDate?.items.isEmpty) != nil) {
+                            PlaceholderView(
+                                text: state.datesState.selectedDate!.isPast ? SharedR.strings().placeholder_calendars_day_past.desc().localized() : SharedR.strings().placeholder_calendars_day_future.desc().localized()
+                            )
+                        } else {
                             
-                            .padding(.horizontal, 20)
-                        }.fadingEdge()
+                            ScrollView(showsIndicators: false) {
+                                LazyVStack {
+                                    ForEach(
+                                        state.datesState.selectedDate!.items.map { ActionUIItemWrapper(item: $0) },
+                                        id: \.self.id
+                                    ) { wrapper in
+                                        ActionItem(
+                                            item: wrapper.item,
+                                            onAreaClick: { value in
+                                                selectedAreaId = value
+                                                showingAreaDetailSheet = true
+                                            },
+                                            onNoteClick: { value in
+                                                viewModel.dispatch(action: CalendarsActionNoteClick(value: value))
+                                            },
+                                            onUserClick: {
+                                                selectedUserId = (wrapper.item.data as! UserInfoShort).id
+                                                showingProfileDetailSheet = true
+                                            },
+                                            onTaskClick: { value in
+                                                viewModel.dispatch(action: CalendarsActionTaskClick(value: value))
+                                            }
+                                        )
+                                    }
+                                    Spacer().frame(height: 160)
+                                }
+                                .padding(.horizontal, 20)
+                            }.fadingEdge()
+                        }
                     }
                 }
             }

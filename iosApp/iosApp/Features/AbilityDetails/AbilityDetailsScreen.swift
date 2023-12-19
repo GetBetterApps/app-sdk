@@ -61,6 +61,8 @@ struct AbilityDetailsScreen: View {
                         }
                     )
                     .edgesIgnoringSafeArea(.all)
+                } else {
+                    PlaceholderView(text: SharedR.strings().placeholder_abilities_favorite_affirmations.desc().localized())
                 }
             }
             

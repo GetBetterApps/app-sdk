@@ -78,7 +78,8 @@ internal constructor(
                     val selectedDate = SelectedDate(
                         id = dateMillis,
                         year = dateMillis.convertToYear(),
-                        monthDay = dateMillis.convertToMonthDay()
+                        monthDay = dateMillis.convertToMonthDay(),
+                        isPast = false
                     )
                     datesState = datesState.copy(
                         selectedDate = selectedDate,
@@ -145,11 +146,15 @@ internal constructor(
     }
 
     private fun obtainDateClick(dateId: Long) {
+        val todayItemIndex = _dates.value.indexOfFirst { it.selectedByDefault }
+        val selectedItemIndex = _dates.value.indexOfFirst { it.millis == dateId }
+
         viewState.value.datesState.items.firstOrNull { it.id == dateId }?.let {
             val selectedDate = SelectedDate(
                 id = dateId,
                 year = dateId.convertToYear(),
-                monthDay = dateId.convertToMonthDay()
+                monthDay = dateId.convertToMonthDay(),
+                isPast = selectedItemIndex < todayItemIndex
             )
 
             launchJob { getItemsForDay(dateId) }

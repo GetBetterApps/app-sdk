@@ -40,12 +40,14 @@ import com.velkonost.getbetter.android.features.calendars.extension.OnSideReache
 import com.velkonost.getbetter.android.features.calendars.extension.centerItem
 import com.velkonost.getbetter.android.features.profiledetail.ProfileDetailScreen
 import com.velkonost.getbetter.core.compose.components.Loader
+import com.velkonost.getbetter.core.compose.components.PlaceholderView
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.features.calendars.presentation.CalendarsViewModel
 import com.velkonost.getbetter.shared.features.calendars.presentation.contracts.CalendarsAction
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
+import dev.icerock.moko.resources.compose.stringResource
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -74,10 +76,7 @@ fun CalendarsScreen(
     val selectedAreaId = remember { mutableStateOf<Int?>(null) }
     val selectedUserId = remember { mutableStateOf<String?>(null) }
 
-    Column(
-        modifier = modifier.padding(top = 40.dp)
-    ) {
-
+    Column(modifier = modifier.padding(top = 40.dp)) {
         AnimatedContent(
             targetState = state.datesState.selectedDate?.monthDay,
             label = ""
@@ -129,35 +128,44 @@ fun CalendarsScreen(
                 }
             } else {
                 Box {
-                    LazyColumn(
-                        modifier = modifier
-                            .fillMaxSize(),
-                        contentPadding = PaddingValues(bottom = 160.dp)
-                    ) {
-                        items(state.datesState.selectedDate?.items!!) { item ->
-                            ActionItem(
-                                item = item,
-                                onAreaClick = {
-                                    scope.launch {
-                                        selectedAreaId.value =
-                                            (item.relatedData as Area).id
-                                        areaDetailSheetState.show()
-                                    }
-                                },
-                                onNoteClick = {
-                                    viewModel.dispatch(CalendarsAction.NoteClick(it))
-                                },
-                                onUserClick = {
-                                    scope.launch {
-                                        selectedUserId.value =
-                                            (item.data as UserInfoShort).id
-                                        profileDetailSheetState.show()
-                                    }
-                                },
-                                onTaskClick = {
-                                    viewModel.dispatch(CalendarsAction.TaskClick(it))
-                                }
+                    if (state.datesState.selectedDate?.items.isNullOrEmpty()) {
+                        PlaceholderView(
+                            text = stringResource(
+                                resource =
+                                if (state.datesState.selectedDate!!.isPast) SharedR.strings.placeholder_calendars_day_past
+                                else SharedR.strings.placeholder_calendars_day_future
                             )
+                        )
+                    } else {
+                        LazyColumn(
+                            modifier = modifier.fillMaxSize(),
+                            contentPadding = PaddingValues(bottom = 160.dp)
+                        ) {
+                            items(state.datesState.selectedDate?.items!!) { item ->
+                                ActionItem(
+                                    item = item,
+                                    onAreaClick = {
+                                        scope.launch {
+                                            selectedAreaId.value =
+                                                (item.relatedData as Area).id
+                                            areaDetailSheetState.show()
+                                        }
+                                    },
+                                    onNoteClick = {
+                                        viewModel.dispatch(CalendarsAction.NoteClick(it))
+                                    },
+                                    onUserClick = {
+                                        scope.launch {
+                                            selectedUserId.value =
+                                                (item.data as UserInfoShort).id
+                                            profileDetailSheetState.show()
+                                        }
+                                    },
+                                    onTaskClick = {
+                                        viewModel.dispatch(CalendarsAction.TaskClick(it))
+                                    }
+                                )
+                            }
                         }
                     }
 

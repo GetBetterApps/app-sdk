@@ -32,27 +32,31 @@ struct AbilityNotesContent: View {
         ZStack {
             Color.mainBackground.edgesIgnoringSafeArea(.all)
             
-            ScrollView(.vertical, showsIndicators: false) {
-                ScrollViewReader { value in
-                    LazyVStack(spacing: 0) {
-                        ForEach(items, id: \.self.id) { item in
-                            NoteItem(
-                                item: item,
-                                onClick: itemClick,
-                                onLikeClick: itemLikeClick
-                            )
-                            .padding(.horizontal, 16)
-                            .onAppear {
-                                checkPaginationThreshold(currentItemId: item.id)
+            if items.isEmpty {
+                PlaceholderView(text: SharedR.strings().placeholder_ability_details_notes.desc().localized())
+            } else {
+                ScrollView(.vertical, showsIndicators: false) {
+                    ScrollViewReader { value in
+                        LazyVStack(spacing: 0) {
+                            ForEach(items, id: \.self.id) { item in
+                                NoteItem(
+                                    item: item,
+                                    onClick: itemClick,
+                                    onLikeClick: itemLikeClick
+                                )
+                                .padding(.horizontal, 16)
+                                .onAppear {
+                                    checkPaginationThreshold(currentItemId: item.id)
+                                }
+                            }
+                            
+                            if isLoading {
+                                Loader().frame(alignment: .center)
                             }
                         }
-                        
-                        if isLoading {
-                            Loader().frame(alignment: .center)
-                        }
                     }
-                }
-            }.fadingEdge()
+                }.fadingEdge()
+            }
         }
         .padding(.top, 80)
     }

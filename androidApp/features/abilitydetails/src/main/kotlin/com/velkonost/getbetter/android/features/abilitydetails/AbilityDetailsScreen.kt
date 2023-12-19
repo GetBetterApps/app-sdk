@@ -17,6 +17,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.abilitydetails.components.AbilityDetailsHeader
 import com.velkonost.getbetter.android.features.abilitydetails.components.AbilityMotivationContent
 import com.velkonost.getbetter.android.features.abilitydetails.components.AbilityNotesContent
+import com.velkonost.getbetter.core.compose.components.PlaceholderView
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
 import com.velkonost.getbetter.shared.features.abilitydetails.presentation.AbilityDetailsViewModel
 import com.velkonost.getbetter.shared.features.abilitydetails.presentation.contract.AbilityDetailsAction
@@ -76,13 +77,17 @@ fun AbilityDetailsScreen(
                 }
             }
         } else {
-            AbilityMotivationContent(
-                items = state.affirmations,
-                isActive = true,
-                itemFavoriteClick = {
-                    viewModel.dispatch(AbilityDetailsAction.FavoriteClick(it))
-                }
-            )
+            if (state.affirmations.isEmpty()) {
+                PlaceholderView(text = stringResource(resource = SharedR.strings.placeholder_abilities_favorite_affirmations))
+            } else {
+                AbilityMotivationContent(
+                    items = state.affirmations,
+                    isActive = true,
+                    itemFavoriteClick = {
+                        viewModel.dispatch(AbilityDetailsAction.FavoriteClick(it))
+                    }
+                )
+            }
         }
 
         AnimatedVisibility(visible = pagerState.currentPage == 0) {
