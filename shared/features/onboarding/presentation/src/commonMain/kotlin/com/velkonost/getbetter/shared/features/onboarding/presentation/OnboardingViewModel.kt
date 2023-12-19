@@ -27,6 +27,7 @@ internal constructor(
 
     override fun dispatch(action: OnboardingAction) = when (action) {
         is OnboardingAction.NextClick -> obtainNextClick()
+        is OnboardingAction.SkipClick -> obtainSkipClick()
     }
 
     private fun fetchAbilities() {
@@ -51,10 +52,14 @@ internal constructor(
         }
     }
 
+    private fun obtainSkipClick() {
+
+    }
+
     private fun obtainNextClick() {
         val nextStep = viewState.value.step + 1
         if (nextStep == 6) {
-
+            obtainSkipClick()
         } else {
             emit(
                 viewState.value.copy(

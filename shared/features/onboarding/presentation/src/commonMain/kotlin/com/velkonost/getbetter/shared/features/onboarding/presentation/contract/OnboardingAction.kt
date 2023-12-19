@@ -6,4 +6,5 @@ sealed interface OnboardingAction : UIContract.Action {
 
     data object NextClick : OnboardingAction
 
+    data object SkipClick : OnboardingAction
 }
