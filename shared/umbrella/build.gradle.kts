@@ -93,6 +93,8 @@ kotlin {
 
                 implementation(projects.shared.features.splash.data)
                 implementation(projects.shared.features.splash.presentation)
+
+                implementation(projects.shared.features.onboarding.data)
                 implementation(projects.shared.features.onboarding.presentation)
 
                 implementation(projects.shared.features.social.data)
