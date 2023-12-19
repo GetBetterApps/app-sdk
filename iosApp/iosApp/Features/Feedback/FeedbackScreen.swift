@@ -33,7 +33,7 @@ struct FeedbackScreen: View {
                     FeedbackListHeader()
                     
                     if state.items.isEmpty {
-                        PlaceholderView(text: SharedR.strings().placeholder_profile_support)
+                        PlaceholderView(text: SharedR.strings().placeholder_profile_support.desc().localized())
                     } else {
                         ScrollView(showsIndicators: false) {
                             LazyVStack(spacing: 0) {

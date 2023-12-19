@@ -13,6 +13,7 @@ import SharedSDK
 struct SocialFeedView: View {
     
     @Binding var isLoading: Bool
+    let emptyText: String
     let items: [Note]
     let loadMorePrefetch: Int
     
@@ -23,9 +24,10 @@ struct SocialFeedView: View {
     let onRefresh: () -> Void
     
     init(isLoading: Binding<Bool>,
-         loadMorePrefetch: Int,
+         emptyText: String, loadMorePrefetch: Int,
          items: [Note], itemClick: @escaping (Note) -> Void, itemLikeClick: @escaping (Note) -> Void, onBottomReach: @escaping () -> Void, onRefresh: @escaping () -> Void) {
         self._isLoading = isLoading
+        self.emptyText = emptyText
         self.loadMorePrefetch = loadMorePrefetch
         
         self.items = items
@@ -42,24 +44,28 @@ struct SocialFeedView: View {
             if isLoading && items.isEmpty {
                 Loader()
             } else {
-                ScrollView(showsIndicators: false) {
-                    LazyVStack(spacing: 0) {
-                        ForEach(items, id: \.self.id) { item in
-                            FeedNoteItem(
-                                item: item,
-                                onClick: itemClick,
-                                onLikeClick: itemLikeClick
-                            )
-                            .onAppear {
-                                checkPaginationThreshold(currentItemId: item.id)
+                if items.isEmpty {
+                    PlaceholderView(text: emptyText)
+                } else {
+                    ScrollView(showsIndicators: false) {
+                        LazyVStack(spacing: 0) {
+                            ForEach(items, id: \.self.id) { item in
+                                FeedNoteItem(
+                                    item: item,
+                                    onClick: itemClick,
+                                    onLikeClick: itemLikeClick
+                                )
+                                .onAppear {
+                                    checkPaginationThreshold(currentItemId: item.id)
+                                }
                             }
                         }
+                        .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
+                        
+                        Loader().opacity(isLoading ? 1 : 0)
                     }
-                    .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
-                    
-                    Loader().opacity(isLoading ? 1 : 0)
+                    .fadingEdge()
                 }
-                .fadingEdge()
             }
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)

@@ -31,6 +31,7 @@ struct SocialScreen: View {
             switch(selectedPage) {
             case 0: SocialFeedView(
                 isLoading: Binding(get: { generalFeedState.isLoading }, set: {_ in }),
+                emptyText: SharedR.strings().placeholder_social_all.desc().localized(),
                 loadMorePrefetch: Int(generalFeedState.loadMorePrefetch),
                 items: generalFeedState.items,
                 itemClick: { value in
@@ -48,6 +49,7 @@ struct SocialScreen: View {
             )
             default: SocialFeedView(
                 isLoading: Binding(get: { areasFeedState.isLoading }, set: {_ in }),
+                emptyText: SharedR.strings().placeholder_social_areas.desc().localized(),
                 loadMorePrefetch: Int(areasFeedState.loadMorePrefetch),
                 items: areasFeedState.items,
                 itemClick: { value in
