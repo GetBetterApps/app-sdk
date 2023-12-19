@@ -41,21 +41,24 @@ struct AreasView: View {
                 Loader()
                     .frame(alignment: .center)
             } else {
-                
-                ScrollView(showsIndicators: false) {
-                    LazyVStack(spacing: 0) {
-                        ForEach(items, id: \.self) { item in
-                            AreaItem(
-                                item: item,
-                                onClick: areaClick,
-                                onLikeClick: areaLikeClick
-                            )
+                if items.isEmpty {
+                    PlaceholderView(text: SharedR.strings().placeholder_diary_areas.desc().localized())
+                } else {
+                    ScrollView(showsIndicators: false) {
+                        LazyVStack(spacing: 0) {
+                            ForEach(items, id: \.self) { item in
+                                AreaItem(
+                                    item: item,
+                                    onClick: areaClick,
+                                    onLikeClick: areaLikeClick
+                                )
+                            }
                         }
+                        .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
+                        
                     }
-                    .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
-                    
+                    .fadingEdge()
                 }
-                .fadingEdge()
                 
                 VStack(alignment: .trailing) {
                     Spacer()
