@@ -17,6 +17,8 @@ import com.velkonost.getbetter.core.compose.components.notelist.NoteItem
 import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
 import com.velkonost.getbetter.core.compose.extensions.fadingEdge
 import com.velkonost.getbetter.shared.core.model.note.Note
+import com.velkonost.getbetter.shared.resources.SharedR
+import dev.icerock.moko.resources.compose.stringResource
 
 @Composable
 fun NotesView(
@@ -36,7 +38,7 @@ fun NotesView(
         if (isLoading && items.isEmpty()) {
             Loader(modifier = Modifier.align(Alignment.Center))
         } else if (items.isEmpty()) {
-            PlaceholderView(text = "diary is empty")
+            PlaceholderView(text = stringResource(resource = SharedR.strings.placeholder_diary_notes))
         } else {
             LazyColumn(
                 modifier = modifier

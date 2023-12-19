@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
@@ -51,10 +52,11 @@ fun PlaceholderView(
             iterations = LottieConstants.IterateForever,
         )
         Text(
-            modifier = modifier.padding(top = 12.dp),
+            modifier = modifier.padding(top = 12.dp, start = 32.dp, end = 32.dp),
             text = text,
             style = MaterialTheme.typography.bodyMedium,
-            color = colorResource(resource = SharedR.colors.text_title)
+            color = colorResource(resource = SharedR.colors.text_title),
+            textAlign = TextAlign.Center
         )
 
         Spacer(modifier.weight(1f))

@@ -27,7 +27,9 @@ struct PlaceholderView: View {
             Text(text)
                 .style(.bodyMedium)
                 .foregroundColor(.textTitle)
+                .multilineTextAlignment(.center)
                 .padding(.top, 12)
+                .padding(.horizontal, 32)
             Spacer()
         }
     }
