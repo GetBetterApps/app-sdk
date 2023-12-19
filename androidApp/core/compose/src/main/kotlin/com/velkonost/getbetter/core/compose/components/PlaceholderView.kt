@@ -27,14 +27,12 @@ fun PlaceholderView(
 
     val availableAnimations =
         listOf(
-//            SharedR.files.gif_emoji_1,
+            SharedR.files.anim_placeholder_1,
+            SharedR.files.anim_placeholder_2,
+            SharedR.files.anim_placeholder_3,
+            SharedR.files.anim_placeholder_4,
+            SharedR.files.anim_placeholder_5,
             SharedR.files.anim_placeholder_6,
-//            SharedR.files.anim_emoji_3,
-//            SharedR.files.anim_emoji_4,
-//            SharedR.files.anim_emoji_5,
-//            SharedR.files.anim_emoji_6,
-//            SharedR.files.anim_emoji_7,
-//            SharedR.files.anim_emoji_8
         )
 
     val composition by rememberLottieComposition(

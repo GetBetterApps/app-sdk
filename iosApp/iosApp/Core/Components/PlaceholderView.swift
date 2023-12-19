@@ -20,10 +20,14 @@ struct PlaceholderView: View {
     
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Spacer()
             PlaceholderLottieView()
                 .scaleEffect(0.4)
+            Text(text)
+                .style(.bodyMedium)
+                .foregroundColor(.textTitle)
+                .padding(.top, 12)
             Spacer()
         }
     }
@@ -31,6 +35,15 @@ struct PlaceholderView: View {
 
 
 struct PlaceholderLottieView: UIViewRepresentable {
+    
+    let animations = [
+        SharedR.files().anim_placeholder_1,
+        SharedR.files().anim_placeholder_2,
+        SharedR.files().anim_placeholder_3,
+        SharedR.files().anim_placeholder_4,
+        SharedR.files().anim_placeholder_5,
+        SharedR.files().anim_placeholder_6
+    ]
 
     func updateUIView(_ uiView: UIViewType, context: Context) {
         
@@ -39,11 +52,8 @@ struct PlaceholderLottieView: UIViewRepresentable {
     func makeUIView(context: Context) -> Lottie.LottieAnimationView {
         
         let animationView = LottieAnimationView(
-            filePath: SharedR.files().anim_placeholder_6.path,
-            
-            configuration: .init(renderingEngine: .mainThread)
+            filePath: animations.randomElement()!.path
         )
-        
         
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
