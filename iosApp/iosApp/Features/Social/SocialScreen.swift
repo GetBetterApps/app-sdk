@@ -17,6 +17,9 @@ struct SocialScreen: View {
     @StateViewModel var viewModel: SocialViewModel
     @State private var selectedPage: Int = 0
     
+    @State private var showingCredits = false
+
+    
     var body: some View {
         @State var state = viewModel.viewStateValue as! SocialViewState
         @State var generalFeedState = state.generalFeed
@@ -69,6 +72,8 @@ struct SocialScreen: View {
             }
         }
         .onAppear {
+            showingCredits = true
+            
             viewModel.onAppear()
             
             if state.generalFeed.items.isEmpty {
@@ -79,5 +84,10 @@ struct SocialScreen: View {
                 viewModel.dispatch(action: SocialActionAreasFeedLoadNextPage())
             }
         }
+        .sheet(isPresented: $showingCredits) {
+                   Text("This app was brought to you by Hacking with Swift")
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+               }
     }
 }
