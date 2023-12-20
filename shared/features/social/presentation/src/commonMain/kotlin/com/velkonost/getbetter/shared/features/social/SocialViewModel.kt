@@ -55,6 +55,7 @@ internal constructor(
         is SocialAction.NoteLikeClick -> obtainNoteLikeClick(action.value)
         is SocialAction.RefreshGeneralFeed -> obtainRefreshGeneralFeed()
         is SocialAction.RefreshAreasFeed -> obtainRefreshAreasFeed()
+        is SocialAction.HintClick -> showHint()
     }
 
     private fun showHint(firstTime: Boolean = false) {

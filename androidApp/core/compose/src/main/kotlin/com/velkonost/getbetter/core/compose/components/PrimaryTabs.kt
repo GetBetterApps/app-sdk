@@ -37,6 +37,7 @@ fun PrimaryTabs(
     tabs: List<String>,
     topPadding: Int = 40,
     alpha: Float = 1f,
+    widthFraction: Float = 1f,
     pagerState: PagerState
 ) {
     val scope = rememberCoroutineScope()
@@ -50,7 +51,7 @@ fun PrimaryTabs(
                     elevation = 8.dp,
                     shape = MaterialTheme.shapes.medium,
                 )
-                .fillMaxWidth()
+                .fillMaxWidth(widthFraction)
                 .background(
                     color = colorResource(resource = SharedR.colors.background_item),
                     shape = MaterialTheme.shapes.medium

@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -30,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.social.components.FeedNoteItem
+import com.velkonost.getbetter.core.compose.components.HintButton
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.PlaceholderView
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
@@ -54,10 +56,19 @@ fun SocialScreen(
 
     Box {
         Column {
-            PrimaryTabs(
-                tabs = state.tabs.map { it.title.toString(LocalContext.current) },
-                pagerState = pagerState
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                PrimaryTabs(
+                    tabs = state.tabs.map { it.title.toString(LocalContext.current) },
+                    pagerState = pagerState,
+                    widthFraction = 0.9f
+                )
+
+                HintButton(modifier = Modifier.padding(top = 40.dp)) {
+                    viewModel.dispatch(SocialAction.HintClick)
+                }
+            }
 
             Box(modifier = Modifier.padding(top = 6.dp)) {
                 SocialScreenContent(
