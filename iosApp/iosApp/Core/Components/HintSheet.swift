@@ -32,6 +32,7 @@ struct HintSheet: View {
                 Text((state?.text!.localized())!)
                     .style(.bodyMedium)
                     .foregroundColor(.textTitle)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             
         }
@@ -53,7 +54,6 @@ extension View {
         sheet: MessageType.Sheet?,
         sheetHeight: Binding<CGFloat>
     ) -> some View {
-        
         return self.sheet(isPresented: isShowing) {
             HintSheet(sheetHeight: sheetHeight, state: sheet)
                
