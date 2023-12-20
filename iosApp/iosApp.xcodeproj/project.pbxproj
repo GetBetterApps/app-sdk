@@ -67,6 +67,7 @@
 		465C1FCA2AC157C300B7AE18 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465C1FC92AC157C300B7AE18 /* ImagePicker.swift */; };
 		465EC4422B10899100444C9C /* ThemingMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465EC4412B10899100444C9C /* ThemingMenuItem.swift */; };
 		465EC4452B108A0E00444C9C /* ThemingTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465EC4442B108A0E00444C9C /* ThemingTabs.swift */; };
+		4662502E2B32DCA70063F71A /* HintSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4662502D2B32DCA70063F71A /* HintSheet.swift */; };
 		4667C9022AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C9012AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift */; };
 		4667C9042AC589EC00BAA9DD /* SingleLineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C9032AC589EC00BAA9DD /* SingleLineTextField.swift */; };
 		4667C9062AC58B0700BAA9DD /* SelectedEmojiImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4667C9052AC58B0700BAA9DD /* SelectedEmojiImage.swift */; };
@@ -241,6 +242,7 @@
 		465C1FC92AC157C300B7AE18 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		465EC4412B10899100444C9C /* ThemingMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemingMenuItem.swift; sourceTree = "<group>"; };
 		465EC4442B108A0E00444C9C /* ThemingTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemingTabs.swift; sourceTree = "<group>"; };
+		4662502D2B32DCA70063F71A /* HintSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintSheet.swift; sourceTree = "<group>"; };
 		4667C9012AC585B000BAA9DD /* CreateNewAreaBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewAreaBottomSheet.swift; sourceTree = "<group>"; };
 		4667C9032AC589EC00BAA9DD /* SingleLineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLineTextField.swift; sourceTree = "<group>"; };
 		4667C9052AC58B0700BAA9DD /* SelectedEmojiImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedEmojiImage.swift; sourceTree = "<group>"; };
@@ -879,6 +881,7 @@
 				46FCD3DC2AF540D70025D2C6 /* BottomActionButton.swift */,
 				4616B0842AF626F900A4CDDE /* MultilineTextFieldBinding.swift */,
 				468913622B31AAD9002C7105 /* PlaceholderView.swift */,
+				4662502D2B32DCA70063F71A /* HintSheet.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1292,6 +1295,7 @@
 				468B794F2ACC57F000A8886C /* AddNoteItem.swift in Sources */,
 				468B876C2ABC45CC001BBEB1 /* CalendarsRoute.swift in Sources */,
 				468356FF2B0E326800DC356A /* ActionItem.swift in Sources */,
+				4662502E2B32DCA70063F71A /* HintSheet.swift in Sources */,
 				46C10D232AB4734200E62846 /* AuthAnonymousButton.swift in Sources */,
 				46AD39D02B1DCD9500EB60F8 /* AbilityData.swift in Sources */,
 				467BECD12AC0350400F74482 /* WisdomViewModel.swift in Sources */,

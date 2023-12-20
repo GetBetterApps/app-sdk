@@ -107,7 +107,11 @@ struct ContentView: View {
             text: resourceMessageText ?? "",
             snackBar: snackBar
         )
-        .onAppear {            
+        .hintSheet(
+            isShowing: $showHintSheet,
+            sheet: hintSheet
+        )
+        .onAppear {
             if messageDequeObserver == nil {
                 messageDequeObserver = Task {
                     for try await message in asyncSequence(for: MessageDeque.shared.invoke()) {
