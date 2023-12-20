@@ -61,7 +61,7 @@ fun AddAreaHeader(
         )
 
         HintButton(
-            modifier = modifier.padding(start = 6.dp),
+            modifier = modifier.padding(start = 12.dp, top = 6.dp),
             onClick = onHintClick
         )
     }
