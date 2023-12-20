@@ -17,7 +17,9 @@ struct ContentView: View {
     
     @State private var resourceMessageText: String?
     @State private var snackBar: MessageType.SnackBar?
+    @State private var hintSheet: MessageType.Sheet?
     @State private var showSnackBar: Bool = false
+    @State private var showHintSheet: Bool = false
     @State private var showToast: Bool = false
     @State private var messageDequeObserver: Task<(), Error>? = nil
     
@@ -122,6 +124,19 @@ struct ContentView: View {
     
     private func handle(resource message: Message) {
         switch message.messageType {
+            
+        case let hintSheet as MessageType.Sheet : do {
+            if showHintSheet == false {
+                resourceMessageText = message.text != nil ? message.text : message.textResource?.localized()
+                self.hintSheet = hintSheet
+                withAnimation {
+                    showHintSheet.toggle()
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    Task { try await MessageDeque.shared.dequeue() }
+                }
+            }
+        }
             
         case let snackBar as MessageType.SnackBar : do {
             if showSnackBar == false {

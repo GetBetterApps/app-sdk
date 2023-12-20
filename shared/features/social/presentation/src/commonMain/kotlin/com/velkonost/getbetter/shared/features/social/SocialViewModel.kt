@@ -8,6 +8,8 @@ import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.core.vm.resource.Message
+import com.velkonost.getbetter.shared.core.vm.resource.MessageType
 import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.social.api.SocialRepository
@@ -15,6 +17,9 @@ import com.velkonost.getbetter.shared.features.social.contracts.NavigateToNoteDe
 import com.velkonost.getbetter.shared.features.social.contracts.SocialAction
 import com.velkonost.getbetter.shared.features.social.contracts.SocialNavigation
 import com.velkonost.getbetter.shared.features.social.contracts.SocialViewState
+import com.velkonost.getbetter.shared.resources.SharedR
+import dev.icerock.moko.resources.desc.Resource
+import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.coroutines.Job
 
 class SocialViewModel
@@ -43,6 +48,7 @@ internal constructor(
                 obtainRefreshAreasFeed()
             }
         }
+        showHint()
     }
 
     override fun dispatch(action: SocialAction) = when (action) {
@@ -52,6 +58,19 @@ internal constructor(
         is SocialAction.NoteLikeClick -> obtainNoteLikeClick(action.value)
         is SocialAction.RefreshGeneralFeed -> obtainRefreshGeneralFeed()
         is SocialAction.RefreshAreasFeed -> obtainRefreshAreasFeed()
+    }
+
+    private fun showHint() {
+        val message = Message.Builder()
+            .id("hint_social_all")
+            .messageType(
+                MessageType.Sheet.Builder()
+                    .title(StringDesc.Resource(SharedR.strings.hint_social_all_title))
+                    .text(StringDesc.Resource(SharedR.strings.hint_social_all_text))
+                    .build()
+            )
+            .build()
+        emit(message)
     }
 
     private fun obtainNoteLikeClick(value: Note) {

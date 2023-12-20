@@ -5,14 +5,18 @@ import dev.icerock.moko.resources.desc.StringDesc
 sealed class MessageType {
 
     class Sheet(
-        val title: StringDesc? = null
+        val title: StringDesc? = null,
+        val text: StringDesc? = null
     ) : MessageType() {
         class Builder {
             private var title: StringDesc? = null
+            private var text: StringDesc? = null
 
-            fun addTitle(title: StringDesc?) = apply { this.title = title }
+            fun title(title: StringDesc?) = apply { this.title = title }
 
-            fun build() = Sheet(title)
+            fun text(text: StringDesc?) = apply { this.text = text }
+
+            fun build() = Sheet(title, text)
         }
     }
 
