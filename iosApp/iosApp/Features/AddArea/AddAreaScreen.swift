@@ -26,7 +26,9 @@ struct AddAreaScreen: View {
                 Loader().frame(alignment: .center)
             } else {
                 VStack {
-                    AddAreaHeader()
+                    AddAreaHeader {
+                        viewModel.dispatch(action: AddAreaActionHintClick())
+                    }
                     
                     ScrollView(showsIndicators: false) {
                         LazyVStack(spacing: 0) {

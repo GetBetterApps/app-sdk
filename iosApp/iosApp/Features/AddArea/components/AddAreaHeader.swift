@@ -14,6 +14,11 @@ struct AddAreaHeader: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    private let onHintClick: () -> Void
+    init( onHintClick: @escaping () -> Void) {
+        self.onHintClick = onHintClick
+    }
+    
     var body: some View {
         HStack {
             Image(uiImage: SharedR.images().ic_arrow_back.toUIImage()!)
@@ -38,6 +43,9 @@ struct AddAreaHeader: View {
                 .foregroundColor(.textTitle)
                 .padding(.leading, 12)
             Spacer()
+            
+            HintButton(onClick: onHintClick)
+                .padding(.leading, 12)
         }
     }
 }
