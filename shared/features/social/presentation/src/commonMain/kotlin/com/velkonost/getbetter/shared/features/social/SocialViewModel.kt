@@ -44,7 +44,8 @@ internal constructor(
                 obtainRefreshAreasFeed()
             }
         }
-        showHint()
+
+        showHint(firstTime = true)
     }
 
     override fun dispatch(action: SocialAction) = when (action) {
@@ -56,8 +57,14 @@ internal constructor(
         is SocialAction.RefreshAreasFeed -> obtainRefreshAreasFeed()
     }
 
-    private fun showHint() {
-        UIHint.SocialAll.send()
+    private fun showHint(firstTime: Boolean = false) {
+        if (firstTime) {
+            launchJob {
+                if (socialRepository.shouldShowHint()) {
+                    UIHint.SocialAll.send()
+                }
+            }
+        } else UIHint.SocialAll.send()
     }
 
     private fun obtainNoteLikeClick(value: Note) {

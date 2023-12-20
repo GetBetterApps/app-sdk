@@ -3,6 +3,7 @@ package com.velkonost.getbetter.shared.features.social.data
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import com.velkonost.getbetter.shared.core.datastore.HINT_SOCIAL_ALL_SHOULD_SHOW
 import com.velkonost.getbetter.shared.core.datastore.NEW_USER_RESET_SOCIAL_STATE
 import com.velkonost.getbetter.shared.core.datastore.SOCIAL_UPDATED_NOTE_ID
 import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
@@ -17,8 +18,7 @@ import com.velkonost.getbetter.shared.features.social.data.remote.SocialRemoteDa
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 
-class SocialRepositoryImpl
-constructor(
+class SocialRepositoryImpl(
     private val remoteDataSource: SocialRemoteDataSource,
     private val localDataSource: DataStore<Preferences>
 ) : SocialRepository {
@@ -60,6 +60,15 @@ constructor(
         val value = localDataSource.data.first()[NEW_USER_RESET_SOCIAL_STATE] == true
         localDataSource.edit { preferences ->
             preferences[NEW_USER_RESET_SOCIAL_STATE] = false
+        }
+
+        return value
+    }
+
+    override suspend fun shouldShowHint(): Boolean {
+        val value = localDataSource.data.first()[HINT_SOCIAL_ALL_SHOULD_SHOW] != false
+        localDataSource.edit { preferences ->
+            preferences[HINT_SOCIAL_ALL_SHOULD_SHOW] = false
         }
 
         return value
