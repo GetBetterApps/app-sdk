@@ -33,24 +33,31 @@ struct CalendarsScreen: View {
         
         VStack(spacing: 0) {
             if state.datesState.selectedDate != nil {
-                VStack(spacing: 0) {
-                    HStack {
-                        Text(state.datesState.selectedDate!.monthDay.localized().capitalized)
-                            .style(.headlineSmall)
-                            .foregroundColor(.textSecondaryTitle)
-                        Spacer()
+                HStack(spacing: 0) {
+                    VStack(spacing: 0) {
+                        HStack {
+                            Text(state.datesState.selectedDate!.monthDay.localized().capitalized)
+                                .style(.headlineSmall)
+                                .foregroundColor(.textSecondaryTitle)
+                            Spacer()
+                        }
+                        
+                        HStack {
+                            Text(state.datesState.selectedDate!.year.localized())
+                                .style(.bodyLarge)
+                                .foregroundColor(.textPrimary)
+                                .padding(.top, 6)
+                            Spacer()
+                        }
                     }
+                    .animation(.easeInOut, value: state.datesState.selectedDate)
                     
-                    HStack {
-                        Text(state.datesState.selectedDate!.year.localized())
-                            .style(.bodyLarge)
-                            .foregroundColor(.textPrimary)
-                            .padding(.top, 6)
-                        Spacer()
+                    Spacer()
+                    HintButton {
+                        viewModel.dispatch(action: CalendarsActionHintClick())
                     }
                 }
                 .padding(.horizontal, 16)
-                .animation(.easeInOut, value: state.datesState.selectedDate)
             }
             
             ScrollViewReader { view in
@@ -105,7 +112,6 @@ struct CalendarsScreen: View {
                                 text: state.datesState.selectedDate!.isPast ? SharedR.strings().placeholder_calendars_day_past.desc().localized() : SharedR.strings().placeholder_calendars_day_future.desc().localized()
                             )
                         } else {
-                            
                             ScrollView(showsIndicators: false) {
                                 LazyVStack {
                                     ForEach(
