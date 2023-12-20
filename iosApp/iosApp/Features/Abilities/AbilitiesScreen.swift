@@ -25,6 +25,18 @@ struct AbilitiesScreen: View {
             } else {
                 ScrollView(showsIndicators: false) {
                     LazyVStack(spacing: 0) {
+                        
+                        HStack {
+                            Text(SharedR.strings().task_abilities_title.desc().localized())
+                                .style(.headlineSmall)
+                                .foregroundColor(.textTitle)
+                            Spacer()
+                            HintButton {
+                                viewModel.dispatch(action: AbilitiesActionHintClick())
+                            }
+                                
+                        }
+                        
                         ForEach(state.items, id: \.self.id) { item in
                             AbilityItem(
                                 item: item,

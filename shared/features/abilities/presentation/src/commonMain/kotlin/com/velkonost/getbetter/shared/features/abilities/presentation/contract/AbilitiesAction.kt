@@ -7,4 +7,6 @@ sealed interface AbilitiesAction : UIContract.Action {
     data object LoadNextPage : AbilitiesAction
 
     data class AbilityClick(val value: Ability) : AbilitiesAction
+
+    data object HintClick : AbilitiesAction
 }

@@ -16,4 +16,6 @@ interface AbilitiesRepository {
     ): Flow<ResultState<Ability>>
 
     fun getAbilitiesForOnboarding(): Flow<ResultState<List<Ability>>>
+
+    suspend fun shouldShowHint(): Boolean
 }

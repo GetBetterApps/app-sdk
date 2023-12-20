@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.abilities.presentation
 
+import com.velkonost.getbetter.shared.core.model.hint.UIHint
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
@@ -22,11 +23,23 @@ internal constructor(
 
     fun onAppear() {
         updateAbilitiesData()
+        showHint(firstTime = true)
     }
 
     override fun dispatch(action: AbilitiesAction) = when (action) {
         is AbilitiesAction.LoadNextPage -> fetchAbilities()
         is AbilitiesAction.AbilityClick -> emit(AbilitiesNavigation.NavigateToAbilityDetail(action.value))
+        is AbilitiesAction.HintClick -> showHint()
+    }
+
+    private fun showHint(firstTime: Boolean = false) {
+        if (firstTime) {
+            launchJob {
+                if (abilitiesRepository.shouldShowHint()) {
+                    UIHint.Abilities.send()
+                }
+            }
+        } else UIHint.Abilities.send()
     }
 
     private fun fetchAbilities() {
