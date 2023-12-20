@@ -79,10 +79,5 @@ struct SocialScreen: View {
                 viewModel.dispatch(action: SocialActionAreasFeedLoadNextPage())
             }
         }
-//        .sheet(isPresented: $showingCredits) {
-//                   Text("This app was brought to you by Hacking with Swift")
-//                .presentationDetents([.medium, .large])
-//                .presentationDragIndicator(.visible)
-//               }
     }
 }

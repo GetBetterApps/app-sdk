@@ -1,6 +1,7 @@
 import SwiftUI
 import SharedSDK
 import KMPNativeCoroutinesAsync
+import SwiftUIModal
 import Combine
 
 struct ContentView: View {
@@ -152,7 +153,7 @@ struct ContentView: View {
                     showSnackBar.toggle()
                 }
             }
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 Task { try await MessageDeque.shared.dequeue() }
             }
         }

@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "swiftuimodal",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nonameplum/SwiftUIModal",
+      "state" : {
+        "revision" : "cd89b0f163843af3b621fc43e778cde918ebf977",
+        "version" : "1.0.3"
+      }
+    },
+    {
       "identity" : "swiftuipager",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fermoya/SwiftUIPager.git",

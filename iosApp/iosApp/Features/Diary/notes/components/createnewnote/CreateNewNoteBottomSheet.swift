@@ -49,6 +49,10 @@ struct CreateNewNoteBottomSheet: View {
     @State private var showSnackBar: Bool = false
     @State private var messageDequeObserver: Task<(), Error>? = nil
     
+    @State private var hintSheet: MessageType.Sheet?
+    @State var sheetHeight: CGFloat = .zero
+    @State private var showHintSheet: Bool = false
+    
     init(
         state: Binding<CreateNewNoteViewState>,
         onAreaSelect: @escaping (Area) -> Void,
@@ -226,6 +230,11 @@ struct CreateNewNoteBottomSheet: View {
             text: resourceMessageText ?? "",
             snackBar: snackBar
         )
+        .hintSheet(
+            isShowing: $showHintSheet,
+            sheet: hintSheet,
+            sheetHeight: $sheetHeight
+        )
         .onAppear {
             if messageDequeObserver == nil {
                 messageDequeObserver = Task {
@@ -246,6 +255,18 @@ extension CreateNewNoteBottomSheet {
     private func handle(resource message: Message) {
         switch message.messageType {
             
+        case let hintSheet as MessageType.Sheet : do {
+            if showHintSheet == false {
+                self.hintSheet = hintSheet
+                withAnimation {
+                    showHintSheet.toggle()
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                Task { try await MessageDeque.shared.dequeue() }
+            }
+        }
+            
         case let snackBar as MessageType.SnackBar : do {
             if showSnackBar == false {
                 resourceMessageText = message.text != nil ? message.text : message.textResource?.localized()
@@ -254,7 +275,7 @@ extension CreateNewNoteBottomSheet {
                     showSnackBar.toggle()
                 }
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
                 Task { try await MessageDeque.shared.dequeue() }
             }
         }
