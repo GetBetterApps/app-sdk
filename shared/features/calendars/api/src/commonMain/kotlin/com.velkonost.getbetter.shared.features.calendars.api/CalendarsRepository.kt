@@ -22,4 +22,6 @@ interface CalendarsRepository {
 
     suspend fun getUpdatedNoteId(): Flow<ResultState<Int>>
 
+    suspend fun shouldShowHint(): Boolean
+
 }

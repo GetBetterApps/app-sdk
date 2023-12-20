@@ -4,6 +4,7 @@ import AreasRepository
 import com.velkonost.getbetter.shared.core.model.EntityType
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.comments.Comment
+import com.velkonost.getbetter.shared.core.model.hint.UIHint
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.note.SubNote
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
@@ -108,6 +109,8 @@ internal constructor(
                 }
             }
         }
+
+        showHint(firstTime = true)
     }
 
     override fun dispatch(action: CalendarsAction) = when (action) {
@@ -115,6 +118,17 @@ internal constructor(
         is CalendarsAction.DateClick -> obtainDateClick(action.id)
         is CalendarsAction.NoteClick -> obtainNoteClick(action.value)
         is CalendarsAction.TaskClick -> obtainTaskClick(action.value)
+        is CalendarsAction.HintClick -> showHint()
+    }
+
+    private fun showHint(firstTime: Boolean = false) {
+        if (firstTime) {
+            launchJob {
+                if (calendarsRepository.shouldShowHint()) {
+                    UIHint.Calendars.send()
+                }
+            }
+        } else UIHint.Calendars.send()
     }
 
     private fun obtainNoteClick(value: Note) {

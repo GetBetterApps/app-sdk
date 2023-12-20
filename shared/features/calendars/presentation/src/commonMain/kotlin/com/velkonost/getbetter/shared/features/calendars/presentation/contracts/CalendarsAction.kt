@@ -13,4 +13,6 @@ sealed interface CalendarsAction : UIContract.Action {
     data class NoteClick(val value: Note) : CalendarsAction
 
     data class TaskClick(val value: TaskUI) : CalendarsAction
+
+    data object HintClick : CalendarsAction
 }

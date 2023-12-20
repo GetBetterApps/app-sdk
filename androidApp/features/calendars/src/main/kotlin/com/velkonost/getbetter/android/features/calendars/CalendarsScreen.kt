@@ -5,6 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -39,6 +41,7 @@ import com.velkonost.getbetter.android.features.calendars.components.CalendarDat
 import com.velkonost.getbetter.android.features.calendars.extension.OnSideReached
 import com.velkonost.getbetter.android.features.calendars.extension.centerItem
 import com.velkonost.getbetter.android.features.profiledetail.ProfileDetailScreen
+import com.velkonost.getbetter.core.compose.components.HintButton
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.PlaceholderView
 import com.velkonost.getbetter.shared.core.model.area.Area
@@ -82,25 +85,34 @@ fun CalendarsScreen(
             label = ""
         ) { selectedDate ->
             selectedDate?.let {
-                Column(
-                    modifier = modifier.padding(horizontal = 16.dp)
+                Row(
+                    modifier = modifier.padding(horizontal = 16.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = it.toString(LocalContext.current).replaceFirstChar {
-                            if (it.isLowerCase()) it.titlecase(Locale.getDefault())
-                            else it.toString()
-                        },
-                        style = MaterialTheme.typography.headlineSmall,
-                        color = colorResource(resource = SharedR.colors.text_secondary)
-                    )
+                    Column {
+                        Text(
+                            text = it.toString(LocalContext.current).replaceFirstChar {
+                                if (it.isLowerCase()) it.titlecase(Locale.getDefault())
+                                else it.toString()
+                            },
+                            style = MaterialTheme.typography.headlineSmall,
+                            color = colorResource(resource = SharedR.colors.text_secondary)
+                        )
 
-                    Text(
-                        modifier = modifier.padding(top = 6.dp),
-                        text = state.datesState.selectedDate?.year?.toString(LocalContext.current)
-                            ?: "",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = colorResource(resource = SharedR.colors.text_primary)
-                    )
+                        Text(
+                            modifier = modifier.padding(top = 6.dp),
+                            text = state.datesState.selectedDate?.year?.toString(LocalContext.current)
+                                ?: "",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = colorResource(resource = SharedR.colors.text_primary)
+                        )
+                    }
+
+                    Spacer(modifier.weight(1f))
+
+                    HintButton {
+                        viewModel.dispatch(CalendarsAction.HintClick)
+                    }
                 }
             }
         }

@@ -4,6 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import com.velkonost.getbetter.shared.core.datastore.CALENDARS_UPDATED_NOTE_ID
+import com.velkonost.getbetter.shared.core.datastore.HINT_CALENDARS_SHOULD_SHOW
 import com.velkonost.getbetter.shared.core.datastore.USER_REGISTRATION_MILLIS
 import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
 import com.velkonost.getbetter.shared.core.model.user.UserAction
@@ -102,5 +103,14 @@ class CalendarsRepositoryImpl(
         }
 
         noteId!!
+    }
+
+    override suspend fun shouldShowHint(): Boolean {
+        val value = localDataSource.data.first()[HINT_CALENDARS_SHOULD_SHOW] != false
+        localDataSource.edit { preferences ->
+            preferences[HINT_CALENDARS_SHOULD_SHOW] = false
+        }
+
+        return value
     }
 }
