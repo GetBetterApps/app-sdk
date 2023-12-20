@@ -134,14 +134,13 @@ struct ContentView: View {
             
         case let hintSheet as MessageType.Sheet : do {
             if showHintSheet == false {
-                resourceMessageText = message.text != nil ? message.text : message.textResource?.localized()
                 self.hintSheet = hintSheet
                 withAnimation {
                     showHintSheet.toggle()
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    Task { try await MessageDeque.shared.dequeue() }
-                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                Task { try await MessageDeque.shared.dequeue() }
             }
         }
             
@@ -152,9 +151,9 @@ struct ContentView: View {
                 withAnimation {
                     showSnackBar.toggle()
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    Task { try await MessageDeque.shared.dequeue() }
-                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                Task { try await MessageDeque.shared.dequeue() }
             }
         }
             

@@ -29,6 +29,7 @@ suspend fun onMessageReceived(
                 hintSheet.value = component
                 hintSheetState.show()
             }
+            MessageDeque.dequeue()
         }
 
         is MessageType.SnackBar -> {

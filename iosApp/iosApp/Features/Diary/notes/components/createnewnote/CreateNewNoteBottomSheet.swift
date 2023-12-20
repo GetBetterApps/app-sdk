@@ -179,10 +179,7 @@ struct CreateNewNoteBottomSheet: View {
                                 }
                                 .id(3)
                             }
-                            
                             Spacer()
-                            
-                            
                         }
                         .padding(20)
                         .padding(.bottom, 140)
@@ -190,13 +187,11 @@ struct CreateNewNoteBottomSheet: View {
                     Spacer()
                 }
                 
-                
                 VStack {
                     Spacer()
                     
                     VStack {
-                        Spacer()
-                            .frame(height: 20)
+                        Spacer().frame(height: 20)
                         
                         AppButton(
                             labelText: SharedR.strings().diary_areas_create_button.desc().localized(),
@@ -258,9 +253,9 @@ extension CreateNewNoteBottomSheet {
                 withAnimation {
                     showSnackBar.toggle()
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    Task { try await MessageDeque.shared.dequeue() }
-                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                Task { try await MessageDeque.shared.dequeue() }
             }
         }
             

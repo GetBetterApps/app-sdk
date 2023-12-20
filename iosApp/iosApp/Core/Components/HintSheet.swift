@@ -56,7 +56,6 @@ extension View {
     ) -> some View {
         return self.sheet(isPresented: isShowing) {
             HintSheet(sheetHeight: sheetHeight, state: sheet)
-               
         }
     }
 }

@@ -81,6 +81,17 @@ class CreateNewNoteViewModel(
                 selectedTask = null
             )
         )
+
+        val message = Message.Builder()
+            .id("hint_didid")
+            .messageType(
+                MessageType.Sheet.Builder()
+                    .title(StringDesc.Resource(SharedR.strings.hint_diary_create_note_title))
+                    .text(StringDesc.Resource(SharedR.strings.hint_diary_create_note_text))
+                    .build()
+            )
+            .build()
+        emit(message)
     }
 
     private fun obtainOpenDefaultWithTask(value: TaskUI) {
