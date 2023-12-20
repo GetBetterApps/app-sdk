@@ -5,6 +5,24 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 
+// HINTS
+val HINT_SOCIAL_ALL_SHOULD_SHOW = booleanPreferencesKey("hint_social_feed_should_show")
+val HINT_NOTE_COMMENTS_SHOULD_SHOW = booleanPreferencesKey("hint_note_comment_should_show")
+val HINT_DIARY_NOTES_SHOULD_SHOW = booleanPreferencesKey("hint_diary_notes_should_show")
+val HINT_DIARY_CREATE_NOTE_SHOULD_SHOW = booleanPreferencesKey("hint_diary_create_note_should_show")
+val HINT_DIARY_CREATE_GOAL_SHOULD_SHOW = booleanPreferencesKey("hint_diary_create_goal_should_show")
+val HINT_DIARY_NOTE_DETAIL_SHOULD_SHOW = booleanPreferencesKey("hint_diary_note_detail_should_show")
+val HINT_DIARY_GOAL_DETAIL_SHOULD_SHOW = booleanPreferencesKey("hint_diary_goal_detail_should_show")
+val HINT_DIARY_AREAS_SHOULD_SHOW = booleanPreferencesKey("hint_diary_areas_should_show")
+val HINT_DIARY_CREATE_AREA_SHOULD_SHOW = booleanPreferencesKey("hint_diary_create_area_should_show")
+val HINT_DIARY_ADD_AREA_SHOULD_SHOW = booleanPreferencesKey("hint_diary_add_area_should_show")
+val HINT_DIARY_AREA_DETAIL_SHOULD_SHOW = booleanPreferencesKey("hint_diary_area_detail_should_show")
+val HINT_DIARY_TASKS_SHOULD_SHOW = booleanPreferencesKey("hint_diary_tasks_should_show")
+val HINT_DIARY_TASK_DETAIL_SHOULD_SHOW = booleanPreferencesKey("hint_diary_task_detail_should_show")
+val HINT_CALENDARS_SHOULD_SHOW = booleanPreferencesKey("hint_calendars_should_show")
+val HINT_ABILITIES_SHOULD_SHOW = booleanPreferencesKey("hint_abilities_should_show")
+
+// OTHER
 val ONBOARDING_SHOWN = booleanPreferencesKey("onboarding_shown")
 
 val SELECTED_UI_MODE = stringPreferencesKey("selected_ui_mode")
