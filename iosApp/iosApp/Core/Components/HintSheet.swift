@@ -12,9 +12,11 @@ import SharedSDK
 
 struct HintSheet: View {
     
+    @Binding var sheetHeight: CGFloat
     private let state: MessageType.Sheet?
     
-    init(state: MessageType.Sheet?) {
+    init(sheetHeight: Binding<CGFloat>, state: MessageType.Sheet?) {
+        self._sheetHeight = sheetHeight
         self.state = state
     }
     
@@ -27,22 +29,41 @@ struct HintSheet: View {
             }
             
             if state?.text != nil {
-                Text((state?.text.localized())!)
+                Text((state?.text!.localized())!)
                     .style(.bodyMedium)
                     .foregroundColor(.textTitle)
             }
             
         }
+        .overlay {
+            GeometryReader { geometry in
+                Color.clear.preference(key: InnerHeightPreferenceKey.self, value: geometry.size.height)
+            }
+        }
+        .onPreferenceChange(InnerHeightPreferenceKey.self) { newHeight in
+            sheetHeight = newHeight
+        }
+        .presentationDetents([.height(sheetHeight)])
     }
 }
 
 extension View {
     func hintSheet(
         isShowing: Binding<Bool>,
-        sheet: MessageType.Sheet?
+        sheet: MessageType.Sheet?,
+        sheetHeight: Binding<CGFloat>
     ) -> some View {
-        self.sheet(isPresented: isShowing) {
-            HintSheet(state: sheet)
+        
+        return self.sheet(isPresented: isShowing) {
+            HintSheet(sheetHeight: sheetHeight, state: sheet)
+               
         }
+    }
+}
+
+struct InnerHeightPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = .zero
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
     }
 }

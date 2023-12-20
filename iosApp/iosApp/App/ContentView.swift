@@ -17,11 +17,13 @@ struct ContentView: View {
     
     @State private var resourceMessageText: String?
     @State private var snackBar: MessageType.SnackBar?
-    @State private var hintSheet: MessageType.Sheet?
     @State private var showSnackBar: Bool = false
-    @State private var showHintSheet: Bool = false
     @State private var showToast: Bool = false
     @State private var messageDequeObserver: Task<(), Error>? = nil
+    
+    @State private var hintSheet: MessageType.Sheet?
+    @State var sheetHeight: CGFloat = .zero
+    @State private var showHintSheet: Bool = false
     
     var body: some View {
         
@@ -109,7 +111,8 @@ struct ContentView: View {
         )
         .hintSheet(
             isShowing: $showHintSheet,
-            sheet: hintSheet
+            sheet: hintSheet,
+            sheetHeight: $sheetHeight
         )
         .onAppear {
             if messageDequeObserver == nil {
