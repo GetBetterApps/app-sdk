@@ -3,7 +3,9 @@ package com.velkonost.getbetter.shared.features.addarea.presentation.contract
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationEvent
 
-sealed interface AddAreaAction : UIContract.Action
+sealed interface AddAreaAction : UIContract.Action {
+    data object HintClick : AddAreaAction
+}
 
 data object LoadNextPage : AddAreaAction
 

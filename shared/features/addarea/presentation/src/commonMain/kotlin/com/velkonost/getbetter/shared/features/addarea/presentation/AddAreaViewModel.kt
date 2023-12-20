@@ -2,10 +2,12 @@ package com.velkonost.getbetter.shared.features.addarea.presentation
 
 import AreasRepository
 import com.velkonost.getbetter.shared.core.model.area.TermsOfMembership
+import com.velkonost.getbetter.shared.core.model.hint.UIHint
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.features.addarea.api.AddAreaRepository
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaAction
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaClick
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaNavigation
@@ -17,7 +19,8 @@ import com.velkonost.getbetter.shared.features.addarea.presentation.model.toUI
 
 class AddAreaViewModel
 internal constructor(
-    private val areasRepository: AreasRepository
+    private val areasRepository: AreasRepository,
+    private val addAreaRepository: AddAreaRepository
 ) : BaseViewModel<AddAreaViewState, AddAreaAction, AddAreaNavigation, Nothing>(
     initialState = AddAreaViewState()
 ) {
@@ -26,6 +29,7 @@ internal constructor(
 
     init {
         fetchAreas()
+        showHint(firstTime = true)
     }
 
     override fun dispatch(action: AddAreaAction) = when (action) {
@@ -33,6 +37,17 @@ internal constructor(
         is AddAreaClick -> obtainAddAreaClick(action.areaId)
         is AreaChanged -> obtainAreaChanged(action.areaId)
         is NavigateBack -> emit(action)
+        is AddAreaAction.HintClick -> showHint()
+    }
+
+    private fun showHint(firstTime: Boolean = false) {
+        if (firstTime) {
+            launchJob {
+                if (addAreaRepository.shouldShowHint()) {
+                    UIHint.DiaryAddArea.send()
+                }
+            }
+        } else UIHint.DiaryAddArea.send()
     }
 
     private fun fetchAreas() {

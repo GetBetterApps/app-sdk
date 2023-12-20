@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.components.HintButton
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
@@ -23,7 +24,8 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun AddAreaHeader(
     modifier: Modifier = Modifier,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onHintClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -56,6 +58,11 @@ fun AddAreaHeader(
             text = stringResource(resource = SharedR.strings.add_area_title),
             style = MaterialTheme.typography.headlineSmall,
             color = colorResource(resource = SharedR.colors.text_title)
+        )
+
+        HintButton(
+            modifier = modifier.padding(start = 6.dp),
+            onClick = onHintClick
         )
     }
 }

@@ -21,6 +21,7 @@ import com.velkonost.getbetter.android.features.areadetail.AreaDetailScreen
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
 import com.velkonost.getbetter.shared.features.addarea.presentation.AddAreaViewModel
+import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaAction
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AddAreaClick
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.AreaChanged
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.LoadNextPage
@@ -48,7 +49,10 @@ fun AddAreaScreen(
             Loader(modifier = Modifier.align(Alignment.Center))
         } else {
             Column {
-                AddAreaHeader { viewModel.dispatch(NavigateBack) }
+                AddAreaHeader(
+                    onBackClick = { viewModel.dispatch(NavigateBack) },
+                    onHintClick = { viewModel.dispatch(AddAreaAction.HintClick) }
+                )
                 AddAreaList(
                     items = state.items,
                     listState = listState,
