@@ -87,8 +87,10 @@ include(
 
     ":shared:features:createnote:presentation",
 
+    ":shared:features:addarea:api",
+    ":shared:features:addarea:data",
     ":shared:features:addarea:presentation",
-    
+
     ":shared:features:areadetail:presentation",
     ":shared:features:notedetail:presentation",
     ":shared:features:taskdetail:presentation",
