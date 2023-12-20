@@ -3,7 +3,9 @@ package com.velkonost.getbetter.android.activity.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -53,11 +55,15 @@ fun HintSheet(
                         )
                     }
 
+                    if (state?.title != null && state.text != null) {
+                        Spacer(modifier = modifier.height(12.dp))
+                    }
+
                     if (state?.text != null) {
                         Text(
                             text = state.text!!.toString(context),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = colorResource(resource = SharedR.colors.text_title)
+                            color = colorResource(resource = SharedR.colors.text_title).copy(alpha = 0.7f)
                         )
                     }
                 }

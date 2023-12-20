@@ -21,30 +21,49 @@ struct HintSheet: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            if state?.title != nil {
-                Text((state?.title!.localized())!)
-                    .style(.titleMedium)
-                    .foregroundColor(.textTitle)
-            }
+        ZStack {
+            Color.buttonGradientStart.edgesIgnoringSafeArea(.all)
             
-            if state?.text != nil {
-                Text((state?.text!.localized())!)
-                    .style(.bodyMedium)
-                    .foregroundColor(.textTitle)
-                    .fixedSize(horizontal: false, vertical: true)
+            VStack(spacing: 0) {
+                if state?.title != nil {
+                    HStack {
+                        Text((state?.title!.localized())!)
+                            .style(.titleMedium)
+                            .foregroundColor(.textTitle)
+                            .multilineTextAlignment(.leading)
+                        Spacer()
+                    }
+                }
+                
+                if state?.title != nil && state?.text != nil {
+                    Spacer().frame(height: 12)
+                }
+                
+                if state?.text != nil {
+                    HStack {
+                        Text((state?.text!.localized())!)
+                            .style(.bodyMedium)
+                            .foregroundColor(.textTitle)
+                            .multilineTextAlignment(.leading)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .opacity(0.7)
+                        Spacer()
+                    }
+                }
             }
-            
-        }
-        .overlay {
-            GeometryReader { geometry in
-                Color.clear.preference(key: InnerHeightPreferenceKey.self, value: geometry.size.height)
+            .padding(.horizontal, 16)
+            .padding(.bottom, 16)
+            .padding(.top, 16)
+            .overlay {
+                GeometryReader { geometry in
+                    Color.clear.preference(key: InnerHeightPreferenceKey.self, value: geometry.size.height)
+                }
             }
+            .onPreferenceChange(InnerHeightPreferenceKey.self) { newHeight in
+                sheetHeight = newHeight
+            }
+            .presentationDetents([.height(sheetHeight)])
         }
-        .onPreferenceChange(InnerHeightPreferenceKey.self) { newHeight in
-            sheetHeight = newHeight
-        }
-        .presentationDetents([.height(sheetHeight)])
     }
 }
 
