@@ -84,21 +84,15 @@ class CreateNewNoteViewModel(
         )
 
         launchJob {
-            delay(2000)
-//            val message = Message.Builder()
-//                .id("hint_didid")
-//                .messageType(
-//                    MessageType.Sheet.Builder()
-//                        .title(StringDesc.Resource(SharedR.strings.hint_diary_create_note_title))
-//                        .text(StringDesc.Resource(SharedR.strings.hint_diary_create_note_text))
-//                        .build()
-//                )
-//                .build()
-//            emit(message)
+            delay(1000)
             val message = Message.Builder()
-                .id("error_code_message")
-                .text(StringDesc.Resource(SharedR.strings.create_note_error_no_areas))
-                .messageType(MessageType.SnackBar.Builder().build())
+                .id("hint_didid")
+                .messageType(
+                    MessageType.Sheet.Builder()
+                        .title(StringDesc.Resource(SharedR.strings.hint_diary_create_note_title))
+                        .text(StringDesc.Resource(SharedR.strings.hint_diary_create_note_text))
+                        .build()
+                )
                 .build()
             emit(message)
         }

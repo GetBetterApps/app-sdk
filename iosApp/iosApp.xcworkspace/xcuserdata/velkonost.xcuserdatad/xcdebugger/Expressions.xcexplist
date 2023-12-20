@@ -3,10 +3,18 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "closure #3 in NavigationControllerHost.makeUIViewController(context:):UIPilotExt.swift">
+         contextName = "closure #4 in NavigationControllerHost.makeUIViewController(context:):UIPilotExt.swift">
          <PersistentStrings>
             <PersistentString
-               value = "vc[lastIndex!].copy()">
+               value = "navigation.viewControllers">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PopAwareUINavigationController.gestureRecognizerShouldBegin(_:):UIPilotExt.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "uipilot.routes.last">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -25,10 +33,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #4 in NavigationControllerHost.makeUIViewController(context:):UIPilotExt.swift">
+         contextName = "closure #3 in HintSheet.body.getter:HintSheet.swift">
          <PersistentStrings>
             <PersistentString
-               value = "navigation.viewControllers">
+               value = "newHeight">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in AbilityMotivationContent.body.getter:AbilityMotivationContent.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "page.index">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -37,6 +53,22 @@
          <PersistentStrings>
             <PersistentString
                value = "pilot.routes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in ProfileScreen.body.getter:ProfileScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "image.pngData().base64EncodedString()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #3 in NavigationControllerHost.makeUIViewController(context:):UIPilotExt.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "vc[lastIndex!].copy()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -57,10 +89,29 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #2 in ProfileScreen.body.getter:ProfileScreen.swift">
+         contextName = "closure #1 in closure #3 in CreateNewNoteBottomSheet.body.getter:CreateNewNoteBottomSheet.swift">
          <PersistentStrings>
             <PersistentString
-               value = "image.pngData().base64EncodedString()">
+               value = "message.messageType">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CreateNewNoteBottomSheet.handle(resource:):CreateNewNoteBottomSheet.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.showHintSheet">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HintSheet.body.getter:HintSheet.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "state">
+            </PersistentString>
+            <PersistentString
+               value = "state?.title">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -69,22 +120,6 @@
          <PersistentStrings>
             <PersistentString
                value = "data as! AreaDataViewState">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "PopAwareUINavigationController.gestureRecognizerShouldBegin(_:):UIPilotExt.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "uipilot.routes.last">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in AbilityMotivationContent.body.getter:AbilityMotivationContent.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "page.index">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -1,8 +1,10 @@
 package com.velkonost.getbetter.android.activity.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
@@ -31,14 +33,18 @@ fun HintSheet(
     ModalBottomSheetLayout(
         sheetState = modalSheetState,
         sheetShape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
-        sheetBackgroundColor = colorResource(resource = SharedR.colors.main_background),
+        sheetBackgroundColor = colorResource(resource = SharedR.colors.button_gradient_start),
         sheetContent = {
             Box(
                 modifier = modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
+                    .padding(horizontal = 16.dp)
+                    .padding(bottom = 48.dp, top = 16.dp)
             ) {
-                Column {
+                Column(
+                    verticalArrangement = Arrangement.SpaceEvenly
+                ) {
                     if (state?.title != null) {
                         Text(
                             text = state.title!!.toString(context),
