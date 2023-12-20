@@ -5,6 +5,7 @@ import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import com.rickclephas.kmm.viewmodel.coroutineScope
 import com.rickclephas.kmm.viewmodel.stateIn
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
+import com.velkonost.getbetter.shared.core.model.hint.UIHint
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.vm.contracts.ActionDispatcher
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
@@ -13,6 +14,7 @@ import com.velkonost.getbetter.shared.core.vm.navigation.NavigationEvent
 import com.velkonost.getbetter.shared.core.vm.navigation.RouteNavigator
 import com.velkonost.getbetter.shared.core.vm.resource.Message
 import com.velkonost.getbetter.shared.core.vm.resource.MessageDeque
+import com.velkonost.getbetter.shared.core.vm.resource.MessageType
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -24,8 +26,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel
-<S : UIContract.State, A : UIContract.Action, N : UIContract.Navigation, E : UIContract.Event>
-constructor(
+<S : UIContract.State, A : UIContract.Action, N : UIContract.Navigation, E : UIContract.Event>(
     val savedStateHandle: SavedStateHandle = SavedStateHandle(),
     val initialState: S
 ) : KMMViewModel(), ActionDispatcher<A>, RouteNavigator, BaseJobContainer {
@@ -76,6 +77,19 @@ constructor(
 
     protected fun emit(message: Message) {
         vmScope.launch { MessageDeque.enqueue(message) }
+    }
+
+    protected fun UIHint.send() {
+        val message = Message.Builder()
+            .id(this.name)
+            .messageType(
+                MessageType.Sheet.Builder()
+                    .title(this.title)
+                    .text(this.text)
+                    .build()
+            )
+            .build()
+        emit(message)
     }
 
     protected fun <T> Flow<T>.stateInWhileSubscribed(
