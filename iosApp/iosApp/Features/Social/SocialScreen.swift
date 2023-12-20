@@ -23,10 +23,15 @@ struct SocialScreen: View {
         @State var areasFeedState = state.areasFeed
         
         VStack {
-            PrimaryTabs(
-                selectedPage: $selectedPage,
-                tabs: state.tabs.map { tab in tab.title.localized() }
-            )
+            HStack {
+                PrimaryTabs(
+                    selectedPage: $selectedPage,
+                    tabs: state.tabs.map { tab in tab.title.localized() }
+                )
+                HintButton {
+                    viewModel.dispatch(action: SocialActionHintClick())
+                }
+            }
             
             switch(selectedPage) {
             case 0: SocialFeedView(
