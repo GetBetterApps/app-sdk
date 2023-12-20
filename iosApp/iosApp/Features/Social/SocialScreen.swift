@@ -31,6 +31,8 @@ struct SocialScreen: View {
                 HintButton {
                     viewModel.dispatch(action: SocialActionHintClick())
                 }
+                .padding(.leading, -10)
+                .padding(.trailing, 16)
             }
             
             switch(selectedPage) {
