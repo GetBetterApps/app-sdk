@@ -106,12 +106,6 @@ fun CreateNewNoteBottomSheet(
                         .fillMaxWidth()
                         .fillMaxHeight(0.9f)
                 ) {
-
-                    Row {
-                        Spacer(modifier.weight(1f))
-                        HintButton(onClick = onHintClick)
-                    }
-
                     Column(
                         modifier = modifier
                             .fillMaxWidth()
@@ -124,16 +118,26 @@ fun CreateNewNoteBottomSheet(
                                 .padding(20.dp)
                                 .padding(bottom = 50.dp)
                         ) {
-                            Text(
+
+                            Row(
                                 modifier = modifier.align(Alignment.CenterHorizontally),
-                                text = stringResource(
-                                    resource =
-                                    if (state.type == NoteType.Default) SharedR.strings.create_note_title
-                                    else SharedR.strings.create_goal_title
-                                ),
-                                color = colorResource(resource = SharedR.colors.text_title),
-                                style = MaterialTheme.typography.headlineSmall
-                            )
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = stringResource(
+                                        resource =
+                                        if (state.type == NoteType.Default) SharedR.strings.create_note_title
+                                        else SharedR.strings.create_goal_title
+                                    ),
+                                    color = colorResource(resource = SharedR.colors.text_title),
+                                    style = MaterialTheme.typography.headlineSmall
+                                )
+
+                                HintButton(
+                                    modifier = modifier.padding(start = 8.dp),
+                                    onClick = onHintClick
+                                )
+                            }
 
                             AreaPicker(
                                 areas = state.availableAreas,
@@ -232,7 +236,6 @@ fun CreateNewNoteBottomSheet(
                             onClick = onCreateClick
                         )
                     }
-
                 }
             }
         }

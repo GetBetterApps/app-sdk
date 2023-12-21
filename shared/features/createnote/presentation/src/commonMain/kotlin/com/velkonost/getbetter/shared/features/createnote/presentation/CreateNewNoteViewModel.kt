@@ -68,10 +68,10 @@ class CreateNewNoteViewModel(
                     else createNoteRepository.shouldShowGoalHint()
 
                 if (shouldShow) {
-                    uiHint.send()
+                    uiHint.send(isMain = false)
                 }
             }
-        } else uiHint.send()
+        } else uiHint.send(isMain = false)
     }
 
     private fun initAvailableAreas(value: List<Area>) {

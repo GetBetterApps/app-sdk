@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.shared.features.calendars.data
+package com.velkonost.getbetter.shared.features.diary.data
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -37,5 +37,9 @@ class DiaryRepositoryImpl(
         }
 
         return value
+    }
+
+    override suspend fun shouldShowNotesHint(): Boolean {
+        TODO("Not yet implemented")
     }
 }
