@@ -56,9 +56,7 @@ fun SocialScreen(
 
     Box {
         Column {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 PrimaryTabs(
                     tabs = state.tabs.map { it.title.toString(LocalContext.current) },
                     pagerState = pagerState,

@@ -4,6 +4,8 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
@@ -18,7 +20,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.areadetail.AreaDetailScreen
@@ -26,6 +31,7 @@ import com.velkonost.getbetter.android.features.diary.areas.AreasView
 import com.velkonost.getbetter.android.features.diary.areas.components.createnewarea.CreateNewAreaBottomSheet
 import com.velkonost.getbetter.android.features.diary.notes.NotesView
 import com.velkonost.getbetter.android.features.diary.tasks.TasksView
+import com.velkonost.getbetter.core.compose.components.HintButton
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
 import com.velkonost.getbetter.core.compose.components.createnewnote.CreateNewNoteBottomSheet
 import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
@@ -96,10 +102,16 @@ fun DiaryScreen(
 
     Box {
         Column {
-            PrimaryTabs(
-                tabs = state.tabs.map { it.title.toString(LocalContext.current) },
-                pagerState = pagerState
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                PrimaryTabs(
+                    tabs = state.tabs.map { it.title.toString(LocalContext.current) },
+                    pagerState = pagerState,
+                    widthFraction = 0.9f
+                )
+                HintButton(modifier = Modifier.padding(top = 40.dp)) {
+                    viewModel.dispatch(DiaryAction.HintClick(index = pagerState.currentPage))
+                }
+            }
 
             DiaryScreenContent(
                 pagerState = pagerState,
@@ -274,6 +286,12 @@ fun DiaryScreen(
                     viewModel.refreshData()
                 }
             }
+        }
+    }
+
+    LaunchedEffect(pagerState) {
+        snapshotFlow { pagerState.currentPage }.collect { page ->
+            viewModel.dispatch(DiaryAction.HintClick(firstTime = true, index = page))
         }
     }
 
