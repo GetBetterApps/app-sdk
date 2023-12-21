@@ -23,6 +23,7 @@ import com.velkonost.getbetter.shared.features.feedback.data.di.FeedbackDataModu
 import com.velkonost.getbetter.shared.features.feedback.presentation.di.FeedbackPresentationModule
 import com.velkonost.getbetter.shared.features.follows.data.di.FollowsDataModule
 import com.velkonost.getbetter.shared.features.likes.data.di.LikesDataModule
+import com.velkonost.getbetter.shared.features.notedetail.data.di.NoteDetailDataModule
 import com.velkonost.getbetter.shared.features.notedetail.presentation.di.NoteDetailPresentationModule
 import com.velkonost.getbetter.shared.features.notes.data.di.NotesDataModule
 import com.velkonost.getbetter.shared.features.onboarding.api.di.OnboardingDataModule
@@ -61,6 +62,7 @@ object PlatformSDK {
             AddAreaDataModule,
             NotesDataModule,
             TaskDetailDataModule,
+            NoteDetailDataModule,
             TasksDataModule,
             UserInfoDataModule,
             LikesDataModule,
