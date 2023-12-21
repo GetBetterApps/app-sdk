@@ -91,6 +91,8 @@ include(
     ":shared:features:addarea:data",
     ":shared:features:addarea:presentation",
 
+    ":shared:features:areadetail:api",
+    ":shared:features:areadetail:data",
     ":shared:features:areadetail:presentation",
 
     ":shared:features:notedetail:api",
