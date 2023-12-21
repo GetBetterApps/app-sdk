@@ -228,6 +228,9 @@ fun DiaryScreen(
             },
             onCreateClick = {
                 viewModel.dispatch(CreateNewNoteAction.CreateClick)
+            },
+            onHintClick = {
+                viewModel.dispatch(CreateNewNoteAction.HintClick)
             }
         )
 

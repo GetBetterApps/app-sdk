@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,6 +32,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.AppButton
+import com.velkonost.getbetter.core.compose.components.HintButton
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
 import com.velkonost.getbetter.core.compose.components.note.areapicker.AreaPicker
@@ -67,7 +69,8 @@ fun CreateNewNoteBottomSheet(
     onAddNewSubNote: () -> Unit,
     onSubNoteDelete: (SubNoteUI) -> Unit,
     onSetCompletionDate: (Long?) -> Unit,
-    onCreateClick: () -> Unit
+    onCreateClick: () -> Unit,
+    onHintClick: () -> Unit
 ) {
 
     val isAreaPickerVisible = remember { mutableStateOf(false) }
@@ -103,6 +106,12 @@ fun CreateNewNoteBottomSheet(
                         .fillMaxWidth()
                         .fillMaxHeight(0.9f)
                 ) {
+
+                    Row {
+                        Spacer(modifier.weight(1f))
+                        HintButton(onClick = onHintClick)
+                    }
+
                     Column(
                         modifier = modifier
                             .fillMaxWidth()
