@@ -32,6 +32,10 @@ struct AreaDetailScreen: View {
     @State private var showSnackBar: Bool = false
     @State private var messageDequeObserver: Task<(), Error>? = nil
     
+    @State private var hintSheet: MessageType.Sheet?
+    @State var sheetHeight: CGFloat = .zero
+    @State private var showHintSheet: Bool = false
+    
     init(
         areaId: Binding<Int32?>,
         onClose: @escaping () -> Void,
@@ -69,6 +73,9 @@ struct AreaDetailScreen: View {
                         },
                         onLikeClick: {
                             viewModel.dispatch(action: AreaDetailActionLikeClick())
+                        },
+                        onHintClick: {
+                            viewModel.dispatch(action: AreaDetailActionHintClick())
                         }
                     )
                     
@@ -98,7 +105,8 @@ struct AreaDetailScreen: View {
                             isEmojiPickerVisible = false
                             viewModel.dispatch(action: AreaDetailActionCancelEdit())
                             viewModel.onAppear(areaId: areaId!) // TODO: fix this with restore name & desc values locally
-                        }
+                        },
+                        
                     )
                 }
             }
@@ -107,6 +115,11 @@ struct AreaDetailScreen: View {
             isShowing: $showSnackBar,
             text: resourceMessageText ?? "",
             snackBar: snackBar
+        )
+        .hintSheet(
+            isShowing: $showHintSheet,
+            sheet: hintSheet,
+            sheetHeight: $sheetHeight
         )
         .onAppear {
             viewModel.onAppear(areaId: areaId!)
@@ -186,6 +199,20 @@ extension AreaDetailScreen {
     private func handle(resource message: Message) {
         switch message.messageType {
             
+        case let hintSheet as MessageType.Sheet : do {
+            if hintSheet.type == MessageType.SheetType.secondary {
+                if showHintSheet == false {
+                    self.hintSheet = hintSheet
+                    withAnimation {
+                        showHintSheet.toggle()
+                    }
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                    Task { try await MessageDeque.shared.dequeue() }
+                }
+            }
+        }
+            
         case let snackBar as MessageType.SnackBar : do {
             if showSnackBar == false {
                 resourceMessageText = message.text != nil ? message.text : message.textResource?.localized()
@@ -193,7 +220,7 @@ extension AreaDetailScreen {
                 withAnimation {
                     showSnackBar.toggle()
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                DispatchQueue.main.asyncAfter(deadline: .now()) {
                     Task { try await MessageDeque.shared.dequeue() }
                 }
             }

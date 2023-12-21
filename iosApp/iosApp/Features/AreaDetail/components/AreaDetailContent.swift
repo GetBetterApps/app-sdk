@@ -20,8 +20,9 @@ struct AreaDetailContent: View {
     let onNameChanged: (String) -> Void
     let onDescriptionChanged: (String) -> Void
     let onLikeClick: () -> Void
+    let onHintClick: () -> Void
     
-    init(areaData: AreaDetailUI, isEditing: Bool, isEmojiPickerVisible: Binding<Bool>, onEmojiClick: @escaping (Emoji) -> Void, onNameChanged: @escaping (String) -> Void, onDescriptionChanged: @escaping (String) -> Void, onLikeClick: @escaping () -> Void) {
+    init(areaData: AreaDetailUI, isEditing: Bool, isEmojiPickerVisible: Binding<Bool>, onEmojiClick: @escaping (Emoji) -> Void, onNameChanged: @escaping (String) -> Void, onDescriptionChanged: @escaping (String) -> Void, onLikeClick: @escaping () -> Void, onHintClick: @escaping () -> Void) {
         self.areaData = areaData
         self.isEditing = isEditing
         self._isEmojiPickerVisible = isEmojiPickerVisible
@@ -29,6 +30,7 @@ struct AreaDetailContent: View {
         self.onNameChanged = onNameChanged
         self.onDescriptionChanged = onDescriptionChanged
         self.onLikeClick = onLikeClick
+        self.onHintClick = onHintClick
     }
     
     var body: some View {
@@ -53,6 +55,9 @@ struct AreaDetailContent: View {
                     }
                     
                     HStack {
+                        
+                        HintButton(onClick: onHintClick)
+                        
                         Spacer()
                         ZStack(alignment: .center) {
                             if (!areaData.likesData.isLikesLoading) {
