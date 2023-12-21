@@ -175,6 +175,9 @@ struct DiaryScreen: View {
                 },
                 onCreateClick: {
                     viewModel.dispatch(action_: CreateNewNoteActionCreateClick())
+                },
+                onHintClick: {
+                    viewModel.dispatch(action_: CreateNewNoteActionHintClick())
                 }
             )
         }
