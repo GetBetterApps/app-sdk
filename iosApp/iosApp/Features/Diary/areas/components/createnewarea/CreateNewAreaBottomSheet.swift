@@ -23,6 +23,7 @@ struct CreateNewAreaBottomSheet: View {
     let onRequiredLevelChanged: (Int) -> Void
     let onPrivateChanged: () -> Void
     let onCreateClick: () -> Void
+    let onHintClick: () -> Void
     
     @State private var isEmojiPickerVisible = false
     
@@ -38,7 +39,9 @@ struct CreateNewAreaBottomSheet: View {
          onDescriptionChanged: @escaping (String) -> Void,
          onRequiredLevelChanged: @escaping (Int) -> Void,
          onPrivateChanged: @escaping () -> Void,
-         onCreateClick: @escaping () -> Void) {
+         onCreateClick: @escaping () -> Void,
+         onHintClick: @escaping () -> Void
+    ) {
         self._state = state
         self.emojiItems = emojiItems
         self.onEmojiClick = onEmojiClick
@@ -47,6 +50,7 @@ struct CreateNewAreaBottomSheet: View {
         self.onRequiredLevelChanged = onRequiredLevelChanged
         self.onPrivateChanged = onPrivateChanged
         self.onCreateClick = onCreateClick
+        self.onHintClick = onHintClick
     }
     
     
@@ -60,10 +64,14 @@ struct CreateNewAreaBottomSheet: View {
                 if state.isLoading {
                     Loader()
                 } else {
-                    Text(SharedR.strings().diary_areas_create_new_area_title.desc().localized())
-                        .style(.headlineSmall)
-                        .foregroundColor(.textTitle)
-                        .frame(alignment: .center)
+                    HStack(spacing: 0) {
+                        Text(SharedR.strings().diary_areas_create_new_area_title.desc().localized())
+                            .style(.headlineSmall)
+                            .foregroundColor(.textTitle)
+                            .frame(alignment: .center)
+                        HintButton(onClick: onHintClick)
+                            .padding(.leading, 8)
+                    }
                     
                     HStack {
                         SelectedEmojiImage(selectedEmoji: state.selectedEmoji.icon.toUIImage()!) {

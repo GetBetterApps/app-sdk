@@ -124,6 +124,8 @@ struct DiaryScreen: View {
                 viewModel.dispatch(action: CreateNewAreaActionPrivateChanged())
             } onCreateClick: {
                 viewModel.dispatch(action: CreateNewAreaActionCreateClick())
+            } onHintClick: {
+                viewModel.dispatch(action: CreateNewAreaActionHintClick())
             }
         }
         .sheet(isPresented: $showingAreaDetailSheet) {
