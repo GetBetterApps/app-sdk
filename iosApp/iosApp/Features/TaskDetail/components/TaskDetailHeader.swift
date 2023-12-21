@@ -17,12 +17,14 @@ struct TaskDetailHeader : View {
     private let isFavorite: Bool
     private let isFavoriteLoading: Bool
     private let onFavoriteClick: () -> Void
+    private let onHintClick: () -> Void
     
-    init(isShortInfo: Bool, isFavorite: Bool, isFavoriteLoading: Bool, onFavoriteClick: @escaping () -> Void) {
+    init(isShortInfo: Bool, isFavorite: Bool, isFavoriteLoading: Bool, onFavoriteClick: @escaping () -> Void, onHintClick: @escaping () -> Void) {
         self.isShortInfo = isShortInfo
         self.isFavorite = isFavorite
         self.isFavoriteLoading = isFavoriteLoading
         self.onFavoriteClick = onFavoriteClick
+        self.onHintClick = onHintClick
     }
     
     var body: some View {
@@ -48,6 +50,10 @@ struct TaskDetailHeader : View {
                 .style(.headlineSmall)
                 .foregroundColor(.textTitle)
                 .padding(.leading, 12)
+            
+            HintButton(onClick: onHintClick)
+                .padding(.top, 4)
+            
             Spacer()
             
             if !isShortInfo {

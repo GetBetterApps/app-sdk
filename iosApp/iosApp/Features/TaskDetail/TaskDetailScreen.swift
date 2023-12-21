@@ -42,6 +42,9 @@ struct TaskDetailScreen : View {
                                 isFavoriteLoading: state.task!.isFavoriteLoading,
                                 onFavoriteClick: {
                                     viewModel.dispatch(action: TaskDetailActionFavoriteClick())
+                                },
+                                onHintClick: {
+                                    viewModel.dispatch(action: TaskDetailActionHintClick())
                                 }
                             )
                             
