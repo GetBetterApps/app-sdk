@@ -11,4 +11,7 @@ interface DiaryRepository {
 
     suspend fun checkNeedsResetState(): Boolean
 
+    suspend fun shouldShowNotesHint(): Boolean
+
+
 }

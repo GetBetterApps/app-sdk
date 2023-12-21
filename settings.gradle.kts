@@ -85,6 +85,8 @@ include(
     ":shared:features:diary:data",
     ":shared:features:diary:presentation",
 
+    ":shared:features:createnote:api",
+    ":shared:features:createnote:data",
     ":shared:features:createnote:presentation",
 
     ":shared:features:addarea:api",
