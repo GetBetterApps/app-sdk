@@ -32,6 +32,10 @@ struct CreateNewAreaBottomSheet: View {
     @State private var showSnackBar: Bool = false
     @State private var messageDequeObserver: Task<(), Error>? = nil
     
+    @State private var hintSheet: MessageType.Sheet?
+    @State var sheetHeight: CGFloat = .zero
+    @State private var showHintSheet: Bool = false
+    
     init(state: Binding<CreateNewAreaViewState>,
          emojiItems: [Emoji],
          onEmojiClick: @escaping (Emoji) -> Void,
@@ -138,6 +142,11 @@ struct CreateNewAreaBottomSheet: View {
             text: resourceMessageText ?? "",
             snackBar: snackBar
         )
+        .hintSheet(
+            isShowing: $showHintSheet,
+            sheet: hintSheet,
+            sheetHeight: $sheetHeight
+        )
         .onAppear {
             if messageDequeObserver == nil {
                 messageDequeObserver = Task {
@@ -157,6 +166,20 @@ struct CreateNewAreaBottomSheet: View {
 extension CreateNewAreaBottomSheet {
     private func handle(resource message: Message) {
         switch message.messageType {
+            
+        case let hintSheet as MessageType.Sheet : do {
+            if hintSheet.type == MessageType.SheetType.secondary {
+                if showHintSheet == false {
+                    self.hintSheet = hintSheet
+                    withAnimation {
+                        showHintSheet.toggle()
+                    }
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                    Task { try await MessageDeque.shared.dequeue() }
+                }
+            }
+        }
             
         case let snackBar as MessageType.SnackBar : do {
             if showSnackBar == false {

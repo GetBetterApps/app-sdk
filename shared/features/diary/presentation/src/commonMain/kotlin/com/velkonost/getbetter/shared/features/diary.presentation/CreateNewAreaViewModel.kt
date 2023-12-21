@@ -33,10 +33,10 @@ internal constructor(
         if (firstTime) {
             launchJob {
                 if (diaryRepository.shouldShowCreateAreaHint()) {
-                    UIHint.DiaryCreateArea.send()
+                    UIHint.DiaryCreateArea.send(isMain = false)
                 }
             }
-        } else UIHint.DiaryCreateArea.send()
+        } else UIHint.DiaryCreateArea.send(isMain = false)
     }
 
     private fun obtainOpen() {
