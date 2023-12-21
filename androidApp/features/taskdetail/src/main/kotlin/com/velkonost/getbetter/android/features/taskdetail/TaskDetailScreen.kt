@@ -96,6 +96,9 @@ fun TaskDetailScreen(
                         },
                         onFavoriteClick = {
                             viewModel.dispatch(TaskDetailAction.FavoriteClick)
+                        },
+                        onHintClick = {
+                            viewModel.dispatch(TaskDetailAction.HintClick)
                         }
                     )
                 }

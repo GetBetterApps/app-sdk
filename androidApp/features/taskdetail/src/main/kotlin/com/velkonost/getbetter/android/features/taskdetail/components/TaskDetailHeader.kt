@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.components.HintButton
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -33,7 +34,8 @@ fun TaskDetailHeader(
     isFavorite: Boolean,
     isFavoriteLoading: Boolean,
     onBackClick: () -> Unit,
-    onFavoriteClick: () -> Unit
+    onFavoriteClick: () -> Unit,
+    onHintClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -68,6 +70,12 @@ fun TaskDetailHeader(
             style = MaterialTheme.typography.headlineSmall,
             color = colorResource(resource = SharedR.colors.text_title)
         )
+
+        HintButton(
+            modifier = modifier.padding(start = 6.dp, top = 6.dp),
+            onClick = onHintClick
+        )
+
         Spacer(modifier.weight(1f))
 
         if (!isShortInfo) {
