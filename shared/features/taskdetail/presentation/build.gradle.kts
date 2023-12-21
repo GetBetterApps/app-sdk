@@ -34,6 +34,7 @@ kotlin {
                 implementation(projects.shared.features.notes.api)
                 implementation(projects.shared.features.areas.api)
                 implementation(projects.shared.features.tasks.api)
+                implementation(projects.shared.features.taskdetail.api)
 
                 implementation(projects.shared.features.createnote.presentation)
             }

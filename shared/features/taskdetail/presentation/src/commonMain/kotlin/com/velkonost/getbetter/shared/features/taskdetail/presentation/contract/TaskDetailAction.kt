@@ -24,4 +24,6 @@ sealed interface TaskDetailAction : UIContract.Action {
     data object UserNotesLoadNextPage : TaskDetailAction
 
     data object RefreshUserNotes : TaskDetailAction
+
+    data object HintClick : TaskDetailAction
 }

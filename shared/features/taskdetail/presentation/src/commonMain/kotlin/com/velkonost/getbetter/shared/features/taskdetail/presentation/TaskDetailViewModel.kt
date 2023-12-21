@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.taskdetail.presentation
 
 import AreasRepository
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+import com.velkonost.getbetter.shared.core.model.hint.UIHint
 import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
@@ -12,6 +13,7 @@ import com.velkonost.getbetter.shared.features.createnote.presentation.contract.
 import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteEvent
 import com.velkonost.getbetter.shared.features.diary.api.DiaryRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
+import com.velkonost.getbetter.shared.features.taskdetail.api.TaskDetailRepository
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailAction
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailEvent
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailNavigation
@@ -28,7 +30,8 @@ internal constructor(
     private val notesRepository: NotesRepository,
     private val tasksRepository: TasksRepository,
     private val areasRepository: AreasRepository,
-    private val diaryRepository: DiaryRepository
+    private val diaryRepository: DiaryRepository,
+    private val taskDetailRepository: TaskDetailRepository
 ) : BaseViewModel<TaskDetailViewState, TaskDetailAction, TaskDetailNavigation, TaskDetailEvent>(
     initialState = TaskDetailViewState(),
     savedStateHandle = savedStateHandle
@@ -57,6 +60,8 @@ internal constructor(
                 )
             }
         }
+
+        showHint(firstTime = true)
     }
 
     override fun init() {
@@ -89,12 +94,23 @@ internal constructor(
         is TaskDetailAction.CreateNoteClick -> obtainCreateDefaultNote()
         is TaskDetailAction.UserNotesLoadNextPage -> fetchUserNotes()
         is TaskDetailAction.RefreshUserNotes -> refreshUserNotes()
+        is TaskDetailAction.HintClick -> showHint()
     }
 
     fun dispatch(action: CreateNewNoteAction) = dispatchCreateNewNoteAction(action)
 
     private fun dispatchCreateNewNoteAction(action: CreateNewNoteAction) {
         createNewNoteViewModel.value.dispatch(action)
+    }
+
+    private fun showHint(firstTime: Boolean = false) {
+        if (firstTime) {
+            launchJob {
+                if (taskDetailRepository.shouldShowHint()) {
+                    UIHint.DiaryTaskDetail.send()
+                }
+            }
+        } else UIHint.DiaryTaskDetail.send()
     }
 
     private fun refreshUserNotes() {

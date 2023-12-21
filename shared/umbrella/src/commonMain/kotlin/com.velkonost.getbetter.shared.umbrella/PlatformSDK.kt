@@ -36,6 +36,7 @@ import com.velkonost.getbetter.shared.features.social.data.di.SocialDataModule
 import com.velkonost.getbetter.shared.features.social.di.SocialPresentationModule
 import com.velkonost.getbetter.shared.features.splash.data.di.SplashDataModule
 import com.velkonost.getbetter.shared.features.splash.presentation.di.SplashPresentationModule
+import com.velkonost.getbetter.shared.features.taskdetail.data.di.TaskDetailDataModule
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.di.TaskDetailPresentationModule
 import com.velkonost.getbetter.shared.features.tasks.data.di.TasksDataModule
 import com.velkonost.getbetter.shared.features.userinfo.data.di.UserInfoDataModule
@@ -59,6 +60,7 @@ object PlatformSDK {
             AreasDataModule,
             AddAreaDataModule,
             NotesDataModule,
+            TaskDetailDataModule,
             TasksDataModule,
             UserInfoDataModule,
             LikesDataModule,
