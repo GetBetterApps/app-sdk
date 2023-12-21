@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.components.HintButton
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
 import com.velkonost.getbetter.core.compose.components.area.EmojiPicker
@@ -47,7 +48,8 @@ fun AreaDetailContent(
     onEmojiClick: (Emoji) -> Unit,
     onNameChanged: (String) -> Unit,
     onDescriptionChanged: (String) -> Unit,
-    onLikeClick: () -> Unit
+    onLikeClick: () -> Unit,
+    onHintClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -72,6 +74,11 @@ fun AreaDetailContent(
 
             if (!areaData.isPrivate) {
                 Row {
+
+                    HintButton(
+                        onClick = onHintClick
+                    )
+
                     Spacer(modifier.weight(1f))
                     Box {
                         AnimatedContent(

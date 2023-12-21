@@ -95,6 +95,9 @@ fun AreaDetailScreen(
                             },
                             onLikeClick = {
                                 viewModel.dispatch(AreaDetailAction.LikeClick)
+                            },
+                            onHintClick = {
+                                viewModel.dispatch(AreaDetailAction.HintClick)
                             }
                         )
                     }
