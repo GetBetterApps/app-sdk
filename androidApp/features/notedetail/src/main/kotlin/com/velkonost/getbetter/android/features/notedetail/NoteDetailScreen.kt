@@ -97,6 +97,9 @@ fun NoteDetailScreen(
                         },
                         onLikeClick = {
                             viewModel.dispatch(NoteDetailAction.LikeClick)
+                        },
+                        onHintClick = {
+                            viewModel.dispatch(NoteDetailAction.HintClick)
                         }
                     )
                 }

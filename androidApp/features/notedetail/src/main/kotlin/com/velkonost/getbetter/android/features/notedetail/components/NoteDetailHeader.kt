@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.components.HintButton
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import com.velkonost.getbetter.shared.core.model.likes.LikesData
@@ -36,7 +37,8 @@ fun NoteDetailHeader(
     isNotePrivate: Boolean,
     likesData: LikesData,
     onBackClick: () -> Unit,
-    onLikeClick: () -> Unit
+    onLikeClick: () -> Unit,
+    onHintClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -73,6 +75,12 @@ fun NoteDetailHeader(
             style = MaterialTheme.typography.headlineSmall,
             color = colorResource(resource = SharedR.colors.text_title)
         )
+
+        HintButton(
+            modifier = modifier.padding(start = 6.dp, top = 6.dp),
+            onClick = onHintClick
+        )
+
         Spacer(modifier.weight(1f))
 
         if (isNotePrivate) {
