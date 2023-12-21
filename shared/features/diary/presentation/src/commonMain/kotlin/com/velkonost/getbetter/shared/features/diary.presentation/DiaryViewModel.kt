@@ -12,6 +12,11 @@ import com.velkonost.getbetter.shared.core.util.PagingConfig
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.features.createnote.api.CreateNoteRepository
+import com.velkonost.getbetter.shared.features.createnote.presentation.CreateNewNoteViewModel
+import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteAction
+import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteEvent
+import com.velkonost.getbetter.shared.features.diary.api.DiaryRepository
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.AddAreaClick
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.AreaLikeClick
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.CreateNewAreaAction
@@ -25,10 +30,6 @@ import com.velkonost.getbetter.shared.features.diary.presentation.contracts.Navi
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.NoteClick
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.NoteLikeClick
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.TaskClick
-import com.velkonost.getbetter.shared.features.createnote.presentation.CreateNewNoteViewModel
-import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteAction
-import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteEvent
-import com.velkonost.getbetter.shared.features.diary.api.DiaryRepository
 import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.tasks.api.TasksRepository
@@ -42,7 +43,8 @@ internal constructor(
     private val notesRepository: NotesRepository,
     private val tasksRepository: TasksRepository,
     private val diaryRepository: DiaryRepository,
-    private val likesRepository: LikesRepository
+    private val likesRepository: LikesRepository,
+    private val createNoteRepository: CreateNoteRepository
 ) : BaseViewModel<DiaryViewState, DiaryAction, DiaryNavigation, DiaryEvent>(
     initialState = DiaryViewState()
 ) {
@@ -103,7 +105,13 @@ internal constructor(
 
     @NativeCoroutinesState
     val createNewNoteViewModel: StateFlow<CreateNewNoteViewModel> =
-        MutableStateFlow(CreateNewNoteViewModel(notesRepository, diaryRepository))
+        MutableStateFlow(
+            CreateNewNoteViewModel(
+                notesRepository,
+                diaryRepository,
+                createNoteRepository
+            )
+        )
 
     override fun dispatch(action: DiaryAction) = when (action) {
         is CreateNewAreaAction -> dispatchCreateNewAreaAction(action)

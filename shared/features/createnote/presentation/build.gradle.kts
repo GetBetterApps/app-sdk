@@ -35,7 +35,7 @@ kotlin {
                 implementation(projects.shared.features.notes.api)
                 implementation(projects.shared.features.diary.api)
                 implementation(projects.shared.features.likes.api)
-                implementation(projects.shared.features.createnote.api)
+                api(projects.shared.features.createnote.api)
             }
         }
 
