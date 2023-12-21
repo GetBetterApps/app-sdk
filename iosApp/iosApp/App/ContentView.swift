@@ -134,14 +134,16 @@ struct ContentView: View {
         switch message.messageType {
             
         case let hintSheet as MessageType.Sheet : do {
-//            if showHintSheet == false {
-                self.hintSheet = hintSheet
-                withAnimation {
-                    showHintSheet = true
+            if hintSheet.type == MessageType.SheetType.main {
+                if showHintSheet == false {
+                    self.hintSheet = hintSheet
+                    withAnimation {
+                        showHintSheet = true
+                    }
                 }
-//            }
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
-                Task { try await MessageDeque.shared.dequeue() }
+                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                    Task { try await MessageDeque.shared.dequeue() }
+                }
             }
         }
             

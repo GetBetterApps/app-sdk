@@ -1092,8 +1092,8 @@
             filePath = "iosApp/Features/Diary/notes/components/createnewnote/CreateNewNoteBottomSheet.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "271"
-            endingLineNumber = "271"
+            startingLineNumber = "273"
+            endingLineNumber = "273"
             landmarkName = "handle(resource:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1250,8 +1250,8 @@
             filePath = "iosApp/Features/Diary/notes/components/createnewnote/CreateNewNoteBottomSheet.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
             landmarkName = "handle(resource:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1266,8 +1266,8 @@
             filePath = "iosApp/Features/Diary/notes/components/createnewnote/CreateNewNoteBottomSheet.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
             landmarkName = "handle(resource:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1282,8 +1282,8 @@
             filePath = "iosApp/Features/Diary/notes/components/createnewnote/CreateNewNoteBottomSheet.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "265"
-            endingLineNumber = "265"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
             landmarkName = "handle(resource:)"
             landmarkType = "7">
             <Locations>
@@ -1378,8 +1378,8 @@
             filePath = "iosApp/App/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "handle(resource:)"
             landmarkType = "7">
             <Locations>
@@ -1441,8 +1441,8 @@
             filePath = "iosApp/App/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "handle(resource:)"
             landmarkType = "7">
             <Locations>

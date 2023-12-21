@@ -256,14 +256,16 @@ extension CreateNewNoteBottomSheet {
         switch message.messageType {
             
         case let hintSheet as MessageType.Sheet : do {
-            if showHintSheet == false {
-                self.hintSheet = hintSheet
-                withAnimation {
-                    showHintSheet.toggle()
+            if hintSheet.type == MessageType.SheetType.secondary {
+                if showHintSheet == false {
+                    self.hintSheet = hintSheet
+                    withAnimation {
+                        showHintSheet.toggle()
+                    }
                 }
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
-                Task { try await MessageDeque.shared.dequeue() }
+                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                    Task { try await MessageDeque.shared.dequeue() }
+                }
             }
         }
             
