@@ -101,7 +101,7 @@ internal constructor(
 
     @NativeCoroutinesState
     val createNewAreaViewModel: StateFlow<CreateNewAreaViewModel> =
-        MutableStateFlow(CreateNewAreaViewModel(areasRepository))
+        MutableStateFlow(CreateNewAreaViewModel(areasRepository, diaryRepository))
 
     @NativeCoroutinesState
     val createNewNoteViewModel: StateFlow<CreateNewNoteViewModel> =

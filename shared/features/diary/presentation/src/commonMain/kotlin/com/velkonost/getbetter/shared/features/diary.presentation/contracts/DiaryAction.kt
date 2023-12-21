@@ -32,4 +32,6 @@ sealed interface CreateNewAreaAction : DiaryAction {
     data class RequiredLevelChanged(val value: Int) : CreateNewAreaAction
     data object PrivateChanged : CreateNewAreaAction
     data object CreateClick : CreateNewAreaAction
+
+    data object HintClick : CreateNewAreaAction
 }

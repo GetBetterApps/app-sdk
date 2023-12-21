@@ -2,18 +2,21 @@ package com.velkonost.getbetter.shared.features.diary.presentation
 
 import AreasRepository
 import com.velkonost.getbetter.shared.core.model.Emoji
+import com.velkonost.getbetter.shared.core.model.hint.UIHint
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.features.diary.api.DiaryRepository
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.CreateNewAreaAction
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.CreateNewAreaEvent
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.CreateNewAreaViewState
 
 class CreateNewAreaViewModel
 internal constructor(
-    private val areasRepository: AreasRepository
+    private val areasRepository: AreasRepository,
+    private val diaryRepository: DiaryRepository
 ) : BaseViewModel<CreateNewAreaViewState, CreateNewAreaAction, Nothing, CreateNewAreaEvent>(
-    initialState = CreateNewAreaViewState(selectedEmoji = Emoji.values().first())
+    initialState = CreateNewAreaViewState(selectedEmoji = Emoji.entries.first())
 ) {
     override fun dispatch(action: CreateNewAreaAction) = when (action) {
         is CreateNewAreaAction.Open -> obtainOpen()
@@ -23,10 +26,22 @@ internal constructor(
         is CreateNewAreaAction.RequiredLevelChanged -> obtainRequiredLevelChanged(action.value)
         is CreateNewAreaAction.PrivateChanged -> obtainPrivateChanged()
         is CreateNewAreaAction.CreateClick -> obtainCreateClick()
+        is CreateNewAreaAction.HintClick -> showHint()
+    }
+
+    private fun showHint(firstTime: Boolean = false) {
+        if (firstTime) {
+            launchJob {
+                if (diaryRepository.shouldShowCreateAreaHint()) {
+                    UIHint.DiaryCreateArea.send()
+                }
+            }
+        } else UIHint.DiaryCreateArea.send()
     }
 
     private fun obtainOpen() {
         emit(initialState)
+        showHint(firstTime = true)
     }
 
     private fun obtainPrivateChanged() {

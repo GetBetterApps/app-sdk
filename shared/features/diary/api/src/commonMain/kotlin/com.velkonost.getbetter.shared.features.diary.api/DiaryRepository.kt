@@ -13,5 +13,11 @@ interface DiaryRepository {
 
     suspend fun shouldShowNotesHint(): Boolean
 
+    suspend fun shouldShowAreasHint(): Boolean
+
+    suspend fun shouldShowTasksHint(): Boolean
+
+    suspend fun shouldShowCreateAreaHint(): Boolean
+
 
 }

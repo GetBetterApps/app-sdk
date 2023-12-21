@@ -42,4 +42,12 @@ class DiaryRepositoryImpl(
     override suspend fun shouldShowNotesHint(): Boolean {
         TODO("Not yet implemented")
     }
+
+    override suspend fun shouldShowAreasHint(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun shouldShowTasksHint(): Boolean {
+        TODO("Not yet implemented")
+    }
 }
