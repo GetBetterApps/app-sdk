@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.AppButton
+import com.velkonost.getbetter.core.compose.components.HintButton
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
 import com.velkonost.getbetter.core.compose.components.SingleLineTextField
@@ -45,7 +46,8 @@ fun CreateNewAreaBottomSheet(
     onDescriptionChanged: (String) -> Unit,
     onRequiredLevelChanged: (Int) -> Unit,
     onPrivateChanged: (Boolean) -> Unit,
-    onCreateClick: () -> Unit
+    onCreateClick: () -> Unit,
+    onHintClick: () -> Unit
 ) {
     val isEmojiPickerVisible = remember { mutableStateOf(false) }
 
@@ -71,14 +73,23 @@ fun CreateNewAreaBottomSheet(
                         .padding(20.dp)
                 ) {
 
-                    Text(
+                    Row(
                         modifier = modifier.align(Alignment.CenterHorizontally),
-                        text = stringResource(
-                            resource = SharedR.strings.diary_areas_create_new_area_title
-                        ),
-                        color = colorResource(resource = SharedR.colors.text_title),
-                        style = MaterialTheme.typography.headlineSmall
-                    )
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = stringResource(
+                                resource = SharedR.strings.diary_areas_create_new_area_title
+                            ),
+                            color = colorResource(resource = SharedR.colors.text_title),
+                            style = MaterialTheme.typography.headlineSmall
+                        )
+                        HintButton(
+                            modifier = modifier.padding(start = 8.dp),
+                            onClick = onHintClick
+                        )
+                    }
+
 
                     Row(modifier = modifier.padding(top = 24.dp)) {
                         SelectedEmojiImage(selectedEmoji = state.selectedEmoji) {
