@@ -42,10 +42,10 @@ struct AddAreaHeader: View {
                 .style(.headlineSmall)
                 .foregroundColor(.textTitle)
                 .padding(.leading, 12)
-            Spacer()
-            
             HintButton(onClick: onHintClick)
-                .padding(.leading, 12)
+                .padding(.top, 4)
+            Spacer()
+           
         }
     }
 }

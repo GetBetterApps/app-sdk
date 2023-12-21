@@ -29,3 +29,4 @@ google-services.json
 # Android Profiling
 *.hprof
 /.fleet/
+iosApp/iosApp.xcworkspace/xcuserdata/velkonost.xcuserdatad/UserInterfaceState.xcuserstate
