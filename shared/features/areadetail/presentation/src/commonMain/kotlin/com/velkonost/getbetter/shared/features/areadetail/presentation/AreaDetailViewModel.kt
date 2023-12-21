@@ -3,12 +3,14 @@ package com.velkonost.getbetter.shared.features.areadetail.presentation
 import AreasRepository
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.EntityType
+import com.velkonost.getbetter.shared.core.model.hint.UIHint
 import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.extension.onFailureWithMsg
+import com.velkonost.getbetter.shared.features.areadetail.api.AreaDetailRepository
 import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.AreaDetailAction
 import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.AreaDetailEvent
 import com.velkonost.getbetter.shared.features.areadetail.presentation.contract.AreaDetailNavigation
@@ -20,7 +22,8 @@ import kotlinx.coroutines.Job
 class AreaDetailViewModel
 internal constructor(
     private val areasRepository: AreasRepository,
-    private val likesRepository: LikesRepository
+    private val likesRepository: LikesRepository,
+    private val areaDetailRepository: AreaDetailRepository
 ) : BaseViewModel<AreaDetailViewState, AreaDetailAction, AreaDetailNavigation, AreaDetailEvent>(
     initialState = AreaDetailViewState()
 ) {
@@ -39,6 +42,17 @@ internal constructor(
         is AreaDetailAction.JoinClick -> obtainJoinArea()
         is AreaDetailAction.CancelEdit -> obtainCancelEdit()
         is AreaDetailAction.LikeClick -> obtainLikeClick()
+        is AreaDetailAction.HintClick -> showHint()
+    }
+
+    private fun showHint(firstTime: Boolean = false) {
+        if (firstTime) {
+            launchJob {
+                if (areaDetailRepository.shouldShowHint()) {
+                    UIHint.DiaryAreaDetail.send(isMain = false)
+                }
+            }
+        } else UIHint.DiaryAreaDetail.send(isMain = false)
     }
 
     private fun obtainLikeClick() {
@@ -107,6 +121,8 @@ internal constructor(
                                 isAllowLeave = area.isAllowLeave
                             )
                         )
+
+                        showHint(firstTime = true)
                     }
                 }
             }

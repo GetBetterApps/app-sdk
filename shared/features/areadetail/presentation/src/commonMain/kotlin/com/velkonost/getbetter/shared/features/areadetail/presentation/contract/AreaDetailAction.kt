@@ -26,4 +26,6 @@ sealed interface AreaDetailAction : UIContract.Action {
 
     data object CancelEdit : AreaDetailAction
 
+    data object HintClick : AreaDetailAction
+
 }
