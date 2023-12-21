@@ -194,6 +194,8 @@ struct DiaryScreen: View {
         .onAppear {
             viewModel.refreshData()
             observeEvents()
+            
+            viewModel.dispatch(action: DiaryActionHintClick(firstTime: true, index: Int32(0)))
         }
         .onDisappear {
             eventsObserver?.cancel()

@@ -60,7 +60,9 @@ struct HintSheet: View {
                 }
             }
             .onPreferenceChange(InnerHeightPreferenceKey.self) { newHeight in
-                sheetHeight = newHeight
+                if newHeight < UIScreen.screenHeight - 10 {
+                    sheetHeight = newHeight
+                }
             }
             .presentationDetents([.height(sheetHeight)])
         }
