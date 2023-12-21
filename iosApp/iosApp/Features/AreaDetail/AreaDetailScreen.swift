@@ -105,8 +105,7 @@ struct AreaDetailScreen: View {
                             isEmojiPickerVisible = false
                             viewModel.dispatch(action: AreaDetailActionCancelEdit())
                             viewModel.onAppear(areaId: areaId!) // TODO: fix this with restore name & desc values locally
-                        },
-                        
+                        }
                     )
                 }
             }
