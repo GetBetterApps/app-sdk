@@ -3,6 +3,10 @@ package com.velkonost.getbetter.shared.features.diary.data
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import com.velkonost.getbetter.shared.core.datastore.HINT_DIARY_AREAS_SHOULD_SHOW
+import com.velkonost.getbetter.shared.core.datastore.HINT_DIARY_CREATE_AREA_SHOULD_SHOW
+import com.velkonost.getbetter.shared.core.datastore.HINT_DIARY_NOTES_SHOULD_SHOW
+import com.velkonost.getbetter.shared.core.datastore.HINT_DIARY_TASKS_SHOULD_SHOW
 import com.velkonost.getbetter.shared.core.datastore.NEW_USER_RESET_DIARY_STATE
 import com.velkonost.getbetter.shared.core.datastore.UPDATED_NOTE_ID
 import com.velkonost.getbetter.shared.core.util.ResultState
@@ -40,14 +44,38 @@ class DiaryRepositoryImpl(
     }
 
     override suspend fun shouldShowNotesHint(): Boolean {
-        TODO("Not yet implemented")
+        val value = localDataSource.data.first()[HINT_DIARY_NOTES_SHOULD_SHOW] != false
+        localDataSource.edit { preferences ->
+            preferences[HINT_DIARY_NOTES_SHOULD_SHOW] = false
+        }
+
+        return value
     }
 
     override suspend fun shouldShowAreasHint(): Boolean {
-        TODO("Not yet implemented")
+        val value = localDataSource.data.first()[HINT_DIARY_AREAS_SHOULD_SHOW] != false
+        localDataSource.edit { preferences ->
+            preferences[HINT_DIARY_AREAS_SHOULD_SHOW] = false
+        }
+
+        return value
     }
 
     override suspend fun shouldShowTasksHint(): Boolean {
-        TODO("Not yet implemented")
+        val value = localDataSource.data.first()[HINT_DIARY_TASKS_SHOULD_SHOW] != false
+        localDataSource.edit { preferences ->
+            preferences[HINT_DIARY_TASKS_SHOULD_SHOW] = false
+        }
+
+        return value
+    }
+
+    override suspend fun shouldShowCreateAreaHint(): Boolean {
+        val value = localDataSource.data.first()[HINT_DIARY_CREATE_AREA_SHOULD_SHOW] != false
+        localDataSource.edit { preferences ->
+            preferences[HINT_DIARY_CREATE_AREA_SHOULD_SHOW] = false
+        }
+
+        return value
     }
 }
