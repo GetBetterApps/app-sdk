@@ -12,6 +12,8 @@ sealed interface DiaryAction : UIContract.Action {
     data class TaskFavoriteClick(val value: TaskUI) : DiaryAction
 
     data object TasksListUpdateClick : DiaryAction
+
+    data class HintClick(val firstTime: Boolean = false, val index: Int) : DiaryAction
 }
 
 data object AddAreaClick : DiaryAction

@@ -6,12 +6,12 @@ import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.util.PrefetchDistanceValue
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
-import com.velkonost.getbetter.shared.features.diary.presentation.model.DiaryTab
 import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteViewState
+import com.velkonost.getbetter.shared.features.diary.presentation.model.DiaryTab
 
 data class DiaryViewState(
-    val tabs: List<DiaryTab> = DiaryTab.values().toList(),
-    val emojiList: List<Emoji> = Emoji.values().toList(),
+    val tabs: List<DiaryTab> = DiaryTab.entries,
+    val emojiList: List<Emoji> = Emoji.entries,
     val notesViewState: NotesViewState = NotesViewState(),
     val areasViewState: AreasViewState = AreasViewState(),
     val tasksViewState: TasksViewState = TasksViewState(),

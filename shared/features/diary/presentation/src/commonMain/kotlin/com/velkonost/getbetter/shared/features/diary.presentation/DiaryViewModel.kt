@@ -4,6 +4,7 @@ import AreasRepository
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import com.velkonost.getbetter.shared.core.model.EntityType
 import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.hint.UIHint
 import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.model.note.Note
@@ -30,6 +31,7 @@ import com.velkonost.getbetter.shared.features.diary.presentation.contracts.Navi
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.NoteClick
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.NoteLikeClick
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.TaskClick
+import com.velkonost.getbetter.shared.features.diary.presentation.model.DiaryTab
 import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.tasks.api.TasksRepository
@@ -123,9 +125,33 @@ internal constructor(
         is DiaryAction.NotesLoadNextPage -> fetchNotes()
         is DiaryAction.TaskFavoriteClick -> obtainTaskFavorite(action.value)
         is DiaryAction.TasksListUpdateClick -> fetchTasks(forceUpdate = true)
+        is DiaryAction.HintClick -> showHint(firstTime = action.firstTime, index = action.index)
     }
 
     fun dispatch(action: CreateNewNoteAction) = dispatchCreateNewNoteAction(action)
+
+    private fun showHint(firstTime: Boolean = false, index: Int) {
+        val selectedTab = DiaryTab.entries[index]
+        val uiHint = when (selectedTab) {
+            DiaryTab.Notes -> UIHint.DiaryNotes
+            DiaryTab.Areas -> UIHint.DiaryAreas
+            DiaryTab.Tasks -> UIHint.DiaryTasks
+        }
+
+        if (firstTime) {
+            launchJob {
+                val shouldShow = when (selectedTab) {
+                    DiaryTab.Notes -> diaryRepository.shouldShowNotesHint()
+                    DiaryTab.Areas -> diaryRepository.shouldShowAreasHint()
+                    DiaryTab.Tasks -> diaryRepository.shouldShowTasksHint()
+                }
+
+                if (shouldShow) {
+                    uiHint.send()
+                }
+            }
+        } else uiHint.send()
+    }
 
     private fun obtainNoteLikeClick(value: Note) {
         if (notesLikesJobsMap.containsKey(value.id)) return
