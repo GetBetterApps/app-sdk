@@ -43,6 +43,7 @@ struct CreateNewNoteBottomSheet: View {
     let onSetCompletionDate: (Int64?) -> Void
     
     let onCreateClick: () -> Void
+    let onHintClick: () -> Void
     
     @State private var resourceMessageText: String?
     @State private var snackBar: MessageType.SnackBar?
@@ -66,7 +67,8 @@ struct CreateNewNoteBottomSheet: View {
         onAddNewSubNote: @escaping () -> Void,
         onSubNoteDelete: @escaping (SubNoteUI) -> Void,
         onSetCompletionDate: @escaping (Int64?) -> Void,
-        onCreateClick: @escaping () -> Void
+        onCreateClick: @escaping () -> Void,
+        onHintClick: @escaping () -> Void
     ) {
         self._state = state
         self.onAreaSelect = onAreaSelect
@@ -84,6 +86,7 @@ struct CreateNewNoteBottomSheet: View {
         
         self.onSetCompletionDate = onSetCompletionDate
         self.onCreateClick = onCreateClick
+        self.onHintClick = onHintClick
     }
     
     var body: some View {
@@ -103,12 +106,17 @@ struct CreateNewNoteBottomSheet: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     ScrollViewReader { value in
                         VStack {
-                            Text(
-                                state.type == NoteType.default_ ? SharedR.strings().create_note_title.desc().localized() : SharedR.strings().create_goal_title.desc().localized()
-                            )
-                            .style(.headlineSmall)
-                            .foregroundColor(.textTitle)
-                            .frame(alignment: .center)
+                            HStack(spacing: 0) {
+                                Text(
+                                    state.type == NoteType.default_ ? SharedR.strings().create_note_title.desc().localized() : SharedR.strings().create_goal_title.desc().localized()
+                                )
+                                .style(.headlineSmall)
+                                .foregroundColor(.textTitle)
+                                .frame(alignment: .center)
+                                
+                                HintButton(onClick: onHintClick)
+                                    .padding(.leading, 8)
+                            }
                             
                             AreaPicker(
                                 areas: state.availableAreas,

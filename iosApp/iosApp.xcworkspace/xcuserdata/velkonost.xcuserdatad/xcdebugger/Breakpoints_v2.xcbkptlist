@@ -1092,8 +1092,8 @@
             filePath = "iosApp/Features/Diary/notes/components/createnewnote/CreateNewNoteBottomSheet.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
             landmarkName = "handle(resource:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1108,8 +1108,8 @@
             filePath = "iosApp/Features/Diary/notes/components/createnewnote/CreateNewNoteBottomSheet.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
             landmarkName = "handle(resource:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1124,8 +1124,8 @@
             filePath = "iosApp/Features/Diary/notes/components/createnewnote/CreateNewNoteBottomSheet.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -1140,8 +1140,8 @@
             filePath = "iosApp/Features/Diary/notes/components/createnewnote/CreateNewNoteBottomSheet.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -1234,8 +1234,8 @@
             filePath = "iosApp/Features/Diary/notes/components/createnewnote/CreateNewNoteBottomSheet.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
             landmarkName = "handle(resource:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1250,8 +1250,8 @@
             filePath = "iosApp/Features/Diary/notes/components/createnewnote/CreateNewNoteBottomSheet.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "handle(resource:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1266,8 +1266,8 @@
             filePath = "iosApp/Features/Diary/notes/components/createnewnote/CreateNewNoteBottomSheet.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
+            startingLineNumber = "269"
+            endingLineNumber = "269"
             landmarkName = "handle(resource:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1282,8 +1282,8 @@
             filePath = "iosApp/Features/Diary/notes/components/createnewnote/CreateNewNoteBottomSheet.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
             landmarkName = "handle(resource:)"
             landmarkType = "7">
             <Locations>
