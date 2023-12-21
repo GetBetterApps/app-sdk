@@ -5,4 +5,7 @@ interface NoteDetailRepository {
     suspend fun shouldShowCommentsHint(): Boolean
 
     suspend fun shouldShowNoteHint(): Boolean
+
+    suspend fun shouldShowGoalHint(): Boolean
+
 }

@@ -7,6 +7,7 @@ import com.velkonost.getbetter.shared.core.model.hint.UIHint
 import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.model.note.Note
+import com.velkonost.getbetter.shared.core.model.note.NoteType
 import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
 import com.velkonost.getbetter.shared.core.model.ui.asExternalModels
@@ -95,14 +96,18 @@ internal constructor(
     }
 
     private fun showHint(firstTime: Boolean = false) {
-        val hint = if (viewState.value.allowEdit) UIHint.DiaryNoteDetail
-        else UIHint.NoteComments
+        val hint = if (viewState.value.allowEdit) {
+            if (viewState.value.noteType == NoteType.Default) UIHint.DiaryNoteDetail
+            else UIHint.DiaryGoalDetail
+        } else UIHint.NoteComments
 
         if (firstTime) {
             launchJob {
                 val shouldShow =
-                    if (viewState.value.allowEdit) noteDetailRepository.shouldShowNoteHint()
-                    else noteDetailRepository.shouldShowCommentsHint()
+                    if (viewState.value.allowEdit) {
+                        if (viewState.value.noteType == NoteType.Default) noteDetailRepository.shouldShowNoteHint()
+                        else noteDetailRepository.shouldShowGoalHint()
+                    } else noteDetailRepository.shouldShowCommentsHint()
 
                 if (shouldShow) {
                     hint.send()
