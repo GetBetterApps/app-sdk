@@ -34,10 +34,17 @@ struct DiaryScreen: View {
         @State var notesLoading = state.notesViewState.isLoading
         
         VStack {
-            PrimaryTabs(
-                selectedPage: $selectedPage,
-                tabs: state.tabs.map { tab in tab.title.localized() }
-            )
+            HStack {
+                PrimaryTabs(
+                    selectedPage: $selectedPage,
+                    tabs: state.tabs.map { tab in tab.title.localized() }
+                )
+                HintButton {
+                    viewModel.dispatch(action: DiaryActionHintClick(firstTime: false, index: Int32(selectedPage)))
+                }
+                .padding(.leading, -10)
+                .padding(.trailing, 16)
+            }
             
             switch(selectedPage) {
             case 0: NotesView(
@@ -109,7 +116,8 @@ struct DiaryScreen: View {
             }
             Spacer()
             
-        }.sheet(isPresented: $showingCreateNewAreaSheet) {
+        }
+        .sheet(isPresented: $showingCreateNewAreaSheet) {
             CreateNewAreaBottomSheet(state: $createNewAreaState, emojiItems: state.emojiList) { value in
                 withAnimation {
                     viewModel.dispatch(action: CreateNewAreaActionEmojiSelect(value: value))
@@ -190,6 +198,9 @@ struct DiaryScreen: View {
         .onDisappear {
             eventsObserver?.cancel()
             eventsObserver = nil
+        }
+        .onChange(of: selectedPage) { newValue in
+            viewModel.dispatch(action: DiaryActionHintClick(firstTime: true, index: Int32(newValue)))
         }
     }
 }
