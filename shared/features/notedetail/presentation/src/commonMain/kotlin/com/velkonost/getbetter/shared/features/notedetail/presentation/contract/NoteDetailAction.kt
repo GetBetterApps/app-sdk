@@ -51,6 +51,8 @@ sealed interface NoteDetailAction : UIContract.Action {
     data class CommentRemoveClick(val value: Comment) : NoteDetailAction
 
     data object TaskClick : NoteDetailAction
+
+    data object HintClick : NoteDetailAction
 }
 
 data object NavigateBack : NoteDetailAction, NoteDetailNavigation {

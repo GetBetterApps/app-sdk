@@ -3,6 +3,7 @@ package com.velkonost.getbetter.shared.features.notedetail.presentation
 import AreasRepository
 import com.velkonost.getbetter.shared.core.model.EntityType
 import com.velkonost.getbetter.shared.core.model.comments.Comment
+import com.velkonost.getbetter.shared.core.model.hint.UIHint
 import com.velkonost.getbetter.shared.core.model.likes.LikeType
 import com.velkonost.getbetter.shared.core.model.likes.LikesData
 import com.velkonost.getbetter.shared.core.model.note.Note
@@ -17,6 +18,7 @@ import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.SavedStateHandle
 import com.velkonost.getbetter.shared.features.comments.api.CommentsRepository
 import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
+import com.velkonost.getbetter.shared.features.notedetail.api.NoteDetailRepository
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.CommentsData
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NavigateBack
 import com.velkonost.getbetter.shared.features.notedetail.presentation.contract.NoteDetailAction
@@ -36,7 +38,8 @@ internal constructor(
     private val notesRepository: NotesRepository,
     private val userInfoRepository: UserInfoRepository,
     private val likesRepository: LikesRepository,
-    private val commentsRepository: CommentsRepository
+    private val commentsRepository: CommentsRepository,
+    private val noteDetailRepository: NoteDetailRepository
 ) : BaseViewModel<NoteDetailViewState, NoteDetailAction, NoteDetailNavigation, NoteDetailEvent>(
     initialState = NoteDetailViewState(),
     savedStateHandle = savedStateHandle
@@ -57,6 +60,8 @@ internal constructor(
                         getNoteComments(note.id)
                     }
                 }
+
+                showHint(firstTime = true)
             }
         }
     }
@@ -86,6 +91,24 @@ internal constructor(
         is NoteDetailAction.CommentTextChanged -> obtainCommentTextChanged(action.value)
         is NoteDetailAction.CommentAddClick -> obtainCommentAdd()
         is NoteDetailAction.CommentRemoveClick -> obtainCommentRemove(action.value)
+        is NoteDetailAction.HintClick -> showHint()
+    }
+
+    private fun showHint(firstTime: Boolean = false) {
+        val hint = if (viewState.value.allowEdit) UIHint.DiaryNoteDetail
+        else UIHint.NoteComments
+
+        if (firstTime) {
+            launchJob {
+                val shouldShow =
+                    if (viewState.value.allowEdit) noteDetailRepository.shouldShowNoteHint()
+                    else noteDetailRepository.shouldShowCommentsHint()
+
+                if (shouldShow) {
+                    hint.send()
+                }
+            }
+        } else hint.send()
     }
 
     private fun obtainTaskClick() {
