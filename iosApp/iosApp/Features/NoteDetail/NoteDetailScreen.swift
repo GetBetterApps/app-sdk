@@ -54,7 +54,11 @@ struct NoteDetailScreen : View {
                                 likesData: state.likesData,
                                 onLikeClick: {
                                     viewModel.dispatch(action: NoteDetailActionLikeClick())
+                                },
+                                onHintClick: {
+                                    viewModel.dispatch(action: NoteDetailActionHintClick())
                                 }
+                                
                             )
                             
                             if !state.allowEdit {

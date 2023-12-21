@@ -79,13 +79,17 @@ abstract class BaseViewModel
         vmScope.launch { MessageDeque.enqueue(message) }
     }
 
-    protected fun UIHint.send() {
+    protected fun UIHint.send(isMain: Boolean = true) {
         val message = Message.Builder()
             .id(this.name)
             .messageType(
                 MessageType.Sheet.Builder()
                     .title(this.title)
                     .text(this.text)
+                    .type(
+                        if (isMain) MessageType.Sheet.Type.Main
+                        else MessageType.Sheet.Type.Secondary
+                    )
                     .build()
             )
             .build()

@@ -66,7 +66,7 @@ struct ContentView: View {
                     
                 case _ where route.starts(with: NavigationScreenKt.NOTE_DETAIL_DESTINATION) :
                     NoteDetailRoute().view(pilot: pilot, route: route)
-                
+                    
                 case _ where route.starts(with: NavigationScreenKt.FEEDBACK_DESTINATION) :
                     FeedbackRoute().view(pilot: pilot, route: route)
                     
@@ -134,12 +134,12 @@ struct ContentView: View {
         switch message.messageType {
             
         case let hintSheet as MessageType.Sheet : do {
-            if showHintSheet == false {
+//            if showHintSheet == false {
                 self.hintSheet = hintSheet
                 withAnimation {
-                    showHintSheet.toggle()
+                    showHintSheet = true
                 }
-            }
+//            }
             DispatchQueue.main.asyncAfter(deadline: .now()) {
                 Task { try await MessageDeque.shared.dequeue() }
             }
@@ -166,7 +166,11 @@ struct ContentView: View {
             }
         }
             
-        default: break
+        default: do {
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                Task { try await MessageDeque.shared.dequeue() }
+            }
+        }
         }
     }
 }

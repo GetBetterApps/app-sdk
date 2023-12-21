@@ -26,7 +26,7 @@ object MessageDeque : Queue<Message> {
 
         // If the element being enqueued is the only element in Deque, emit the message
         // else wait for the Deque to be dequeued
-        if (count == 1) {
+        if (count <= 1) {
             peekAndUpdate()
         }
 

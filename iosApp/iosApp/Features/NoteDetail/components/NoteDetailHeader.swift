@@ -17,14 +17,16 @@ struct NoteDetailHeader : View {
     let likesData: LikesData
     
     let onLikeClick: () -> Void
+    private let onHintClick: () -> Void
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    init(noteType: NoteType, isNotePrivate: Bool, likesData: LikesData, onLikeClick: @escaping () -> Void) {
+    init(noteType: NoteType, isNotePrivate: Bool, likesData: LikesData, onLikeClick: @escaping () -> Void, onHintClick: @escaping () -> Void) {
         self.noteType = noteType
         self.isNotePrivate = isNotePrivate
         self.likesData = likesData
         self.onLikeClick = onLikeClick
+        self.onHintClick = onHintClick
     }
     
     var body: some View {
@@ -52,6 +54,10 @@ struct NoteDetailHeader : View {
                 .style(.headlineSmall)
                 .foregroundColor(.textTitle)
                 .padding(.leading, 12)
+            
+            HintButton(onClick: onHintClick)
+                .padding(.top, 4)
+            
             Spacer()
             
             if isNotePrivate {

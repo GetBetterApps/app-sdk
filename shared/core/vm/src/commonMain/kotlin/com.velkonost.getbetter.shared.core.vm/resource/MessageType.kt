@@ -6,17 +6,26 @@ sealed class MessageType {
 
     class Sheet(
         val title: StringDesc? = null,
-        val text: StringDesc? = null
+        val text: StringDesc? = null,
+        val type: Type = Type.Main
     ) : MessageType() {
+
+        enum class Type {
+            Main, Secondary
+        }
+
         class Builder {
             private var title: StringDesc? = null
             private var text: StringDesc? = null
+            private var type: Type = Type.Main
 
             fun title(title: StringDesc?) = apply { this.title = title }
 
             fun text(text: StringDesc?) = apply { this.text = text }
 
-            fun build() = Sheet(title, text)
+            fun type(type: Type) = apply { this.type = type }
+
+            fun build() = Sheet(title, text, type)
         }
     }
 

@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.createnote.presentation
 
 import com.velkonost.getbetter.shared.core.model.area.Area
+import com.velkonost.getbetter.shared.core.model.hint.UIHint
 import com.velkonost.getbetter.shared.core.model.note.NoteType
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
@@ -85,16 +86,7 @@ class CreateNewNoteViewModel(
 
         launchJob {
             delay(1000)
-            val message = Message.Builder()
-                .id("hint_didid")
-                .messageType(
-                    MessageType.Sheet.Builder()
-                        .title(StringDesc.Resource(SharedR.strings.hint_diary_create_note_title))
-                        .text(StringDesc.Resource(SharedR.strings.hint_diary_create_note_text))
-                        .build()
-                )
-                .build()
-            emit(message)
+            UIHint.DiaryCreateNote.send(isMain = false)
         }
 
     }
