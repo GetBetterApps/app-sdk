@@ -12,6 +12,7 @@ import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.core.vm.resource.Message
 import com.velkonost.getbetter.shared.core.vm.resource.MessageType
+import com.velkonost.getbetter.shared.features.createnote.api.CreateNoteRepository
 import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteEvent
 import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteViewState
@@ -20,11 +21,11 @@ import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
-import kotlinx.coroutines.delay
 
 class CreateNewNoteViewModel(
     private val notesRepository: NotesRepository,
     private val diaryRepository: DiaryRepository?,
+    private val createNoteRepository: CreateNoteRepository
 ) : BaseViewModel<CreateNewNoteViewState, CreateNewNoteAction, Nothing, CreateNewNoteEvent>(
     initialState = CreateNewNoteViewState()
 ) {
@@ -53,6 +54,24 @@ class CreateNewNoteViewModel(
         is CreateNewNoteAction.SetCompletionDate -> obtainSetCompletionDate(action.value)
         is CreateNewNoteAction.CloseBecauseZeroAreas -> obtainZeroAreasError()
         is CreateNewNoteAction.CreateClick -> obtainCreateClick()
+        is CreateNewNoteAction.HintClick -> showHint()
+    }
+
+    private fun showHint(firstTime: Boolean = false) {
+        val uiHint = if (viewState.value.type == NoteType.Default) UIHint.DiaryCreateNote
+        else UIHint.DiaryCreateGoal
+
+        if (firstTime) {
+            launchJob {
+                val shouldShow =
+                    if (viewState.value.type == NoteType.Default) createNoteRepository.shouldShowNoteHint()
+                    else createNoteRepository.shouldShowGoalHint()
+
+                if (shouldShow) {
+                    uiHint.send()
+                }
+            }
+        } else uiHint.send()
     }
 
     private fun initAvailableAreas(value: List<Area>) {
@@ -84,11 +103,7 @@ class CreateNewNoteViewModel(
             )
         )
 
-        launchJob {
-            delay(1000)
-            UIHint.DiaryCreateNote.send(isMain = false)
-        }
-
+        showHint(firstTime = true)
     }
 
     private fun obtainOpenDefaultWithTask(value: TaskUI) {
@@ -115,6 +130,8 @@ class CreateNewNoteViewModel(
                 forceSelectedTask = value
             )
         )
+
+        showHint(firstTime = true)
     }
 
     private fun obtainOpenGoal() {
@@ -137,6 +154,8 @@ class CreateNewNoteViewModel(
                 selectedTask = null
             )
         )
+
+        showHint(firstTime = true)
     }
 
     private fun obtainOpenGoalWithTask(value: TaskUI) {
@@ -163,6 +182,8 @@ class CreateNewNoteViewModel(
                 forceSelectedTask = value
             )
         )
+
+        showHint(firstTime = true)
     }
 
 

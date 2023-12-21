@@ -49,4 +49,6 @@ sealed interface CreateNewNoteAction : UIContract.Action {
     data object CloseBecauseZeroAreas : CreateNewNoteAction
 
     data object CreateClick : CreateNewNoteAction
+
+    data object HintClick : CreateNewNoteAction
 }

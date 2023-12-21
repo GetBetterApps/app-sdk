@@ -19,6 +19,7 @@ import com.velkonost.getbetter.shared.features.calendars.data.di.CalendarsDataMo
 import com.velkonost.getbetter.shared.features.calendars.data.di.DiaryDataModule
 import com.velkonost.getbetter.shared.features.calendars.presentation.di.CalendarsPresentationModule
 import com.velkonost.getbetter.shared.features.comments.data.di.CommentsDataModule
+import com.velkonost.getbetter.shared.features.createnote.data.di.CreateNoteDataModule
 import com.velkonost.getbetter.shared.features.diary.presentation.di.DiaryPresentationModule
 import com.velkonost.getbetter.shared.features.feedback.data.di.FeedbackDataModule
 import com.velkonost.getbetter.shared.features.feedback.presentation.di.FeedbackPresentationModule
@@ -65,6 +66,7 @@ object PlatformSDK {
             TaskDetailDataModule,
             NoteDetailDataModule,
             AreaDetailDataModule,
+            CreateNoteDataModule,
             TasksDataModule,
             UserInfoDataModule,
             LikesDataModule,
