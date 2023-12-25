@@ -68,8 +68,6 @@ rickclephas-nativecoroutines = "1.0.0-ALPHA-18"
 rickclephas-kmm-viewmodel = "1.0.0-ALPHA-14"
 squareup-okio = "3.4.0"
 
-firebase-kmm-analytics = "1.5.0"
-
 testing-arch-core = "2.2.0"
 testing-junit = "4.13.2"
 testing-junit5 = "5.9.1"
@@ -150,8 +148,6 @@ moko-resources-test = { module = "dev.icerock.moko:resources-test", version.ref 
 
 kermit-crashlytics = { module = "co.touchlab:kermit-crashlytics", version.ref = "kermit" }
 kermit-log = { module = "co.touchlab:kermit", version.ref = "kermit" }
-
-firebase-kmm-analytics = { module = "com.github.satoshun.firebase:analytics", version.ref = "firebase-kmm-analytics" }
 
 datastore = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastore" }
 
