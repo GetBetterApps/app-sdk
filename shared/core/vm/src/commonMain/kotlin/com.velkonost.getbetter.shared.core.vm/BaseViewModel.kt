@@ -104,6 +104,7 @@ abstract class BaseViewModel
     protected suspend inline infix fun <T> Flow<ResultState<T>>.collectAndProcess(
         crossinline resultProcessing: ResultState<T>.() -> Unit,
     ) {
+
         collect { result ->
             with(result) {
                 resultProcessing.invoke(this)

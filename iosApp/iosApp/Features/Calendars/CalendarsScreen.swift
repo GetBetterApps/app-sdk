@@ -107,7 +107,7 @@ struct CalendarsScreen: View {
                     }.frame(maxHeight: .infinity)
                 } else {
                     ZStack {
-                        if ((state.datesState.selectedDate?.items.isEmpty) != nil) {
+                        if state.datesState.selectedDate!.items.isEmpty {
                             PlaceholderView(
                                 text: state.datesState.selectedDate!.isPast ? SharedR.strings().placeholder_calendars_day_past.desc().localized() : SharedR.strings().placeholder_calendars_day_future.desc().localized()
                             )
