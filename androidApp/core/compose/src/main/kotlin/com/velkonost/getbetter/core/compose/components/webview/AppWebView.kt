@@ -6,8 +6,7 @@ import android.webkit.WebViewClient
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
-import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -18,13 +17,9 @@ import dev.icerock.moko.resources.compose.colorResource
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AppWebView(
-    link: String
+    link: String?,
+    sheetState: ModalBottomSheetState
 ) {
-
-    val sheetState = rememberModalBottomSheetState(
-        initialValue = ModalBottomSheetValue.Hidden,
-        skipHalfExpanded = true,
-    )
 
     ModalBottomSheetLayout(
         sheetState = sheetState,
@@ -43,7 +38,7 @@ fun AppWebView(
                     }
                 },
                 update = { webView ->
-                    webView.loadUrl(link)
+                    link?.let { webView.loadUrl(it) }
                 }
             )
         }

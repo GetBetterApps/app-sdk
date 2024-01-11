@@ -240,6 +240,10 @@
     <string name="profile_help_contact_support">Contact Support</string>
     <string name="profile_logout">Logout</string>
 
+    <string name="profile_other_title">Other</string>
+    <string name="profile_terms_title">Terms Of Use</string>
+    <string name="profile_privacy_title">Privacy Policy</string>
+
     <string name="experience_your_title">Your experience</string>
     <string name="experience_user_title">User experience</string>
     <string name="experience_level">Level %s</string>
@@ -254,7 +258,7 @@
     <string name="support_feature_hint">I want...</string>
     <string name="support_report_hint">I found bug...</string>
 
-    <string name="tg_group_title">Telegram community</string>
+    <string name="tg_group_title">Telegram Community</string>
     <!--  PROFILE  -->
 
     <!--  SETTINGS  -->

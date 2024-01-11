@@ -20,6 +20,9 @@ private const val URL = "http://get-better.pro"
 const val AVATAR_URL = "$URL/userinfo/getAvatar/"
 const val AFFIRMATION_IMAGE_URL = "$URL/affirmations/image/"
 
+const val TERMS_URL = "$URL/terms"
+const val PRIVACY_URL = "$URL/privacy"
+
 internal val KtorClient: HttpClient
     get() {
         val ktorClient = withPlatformEngine {

@@ -15,9 +15,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -27,11 +33,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.profile.components.AppSettings
 import com.velkonost.getbetter.android.features.profile.components.HelpAndSupport
+import com.velkonost.getbetter.android.features.profile.components.OtherBlock
 import com.velkonost.getbetter.android.features.profile.components.ProfileHeader
-import com.velkonost.getbetter.android.features.profile.components.SubscriptionBox
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.VersionName
 import com.velkonost.getbetter.core.compose.components.experience.LevelBlock
+import com.velkonost.getbetter.core.compose.components.webview.AppWebView
 import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
 import com.velkonost.getbetter.shared.core.model.profile.UIThemeMode
 import com.velkonost.getbetter.shared.features.profile.ProfileViewModel
@@ -43,8 +50,10 @@ import com.velkonost.getbetter.shared.features.profile.contracts.SignUpClick
 import com.velkonost.getbetter.shared.features.profile.contracts.ThemeChange
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.stringResource
+import kotlinx.coroutines.launch
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @SuppressLint("Recycle")
 @Composable
 fun ProfileScreen(
@@ -76,6 +85,14 @@ fun ProfileScreen(
             // Permission Denied: Do something
         }
     }
+
+    val webViewSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = true,
+    )
+
+    val scope = rememberCoroutineScope()
+    val webViewLink = remember { mutableStateOf<String?>(null) }
 
     LaunchedEffect(launcherPermissions) {
         if (
@@ -153,6 +170,22 @@ fun ProfileScreen(
                 context.startActivity(intent)
             }
         )
+
+        OtherBlock(
+            onPrivacyClick = {
+                scope.launch {
+                    webViewLink.value = state.privacyLink
+                    webViewSheetState.show()
+                }
+            },
+            onTermsClick = {
+                scope.launch {
+                    webViewLink.value = state.termsLink
+                    webViewSheetState.show()
+                }
+            }
+        )
+
         AppButton(
             modifier = modifier
                 .align(Alignment.CenterHorizontally)
@@ -162,6 +195,11 @@ fun ProfileScreen(
         ) { viewModel.dispatch(LogoutClick) }
         VersionName()
     }
+
+    AppWebView(
+        link = webViewLink.value,
+        sheetState = webViewSheetState
+    )
 
     OnLifecycleEvent { _, event ->
         when (event) {
