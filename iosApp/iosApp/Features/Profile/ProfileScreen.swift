@@ -55,9 +55,9 @@ struct ProfileScreen: View {
                     LevelBlock(experienceData: state.experienceData!)
                 }
                 
-                SubscriptionBox(subscriptionPlan: SharedR.strings().profile_sub_basic.desc().localized()) {
-                    
-                }
+//                SubscriptionBox(subscriptionPlan: SharedR.strings().profile_sub_basic.desc().localized()) {
+//                    
+//                }
                 
                 AppSettings(
                     selectedTheme: state.selectedTheme,
