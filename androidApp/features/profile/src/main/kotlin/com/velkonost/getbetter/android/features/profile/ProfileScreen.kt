@@ -123,11 +123,11 @@ fun ProfileScreen(
         }
 
 
-        SubscriptionBox(
-            subscriptionPlan = stringResource(resource = SharedR.strings.profile_sub_basic)
-        ) {
-
-        }
+//        SubscriptionBox(
+//            subscriptionPlan = stringResource(resource = SharedR.strings.profile_sub_basic)
+//        ) {
+//
+//        }
 
         AppSettings(
             selectedTheme = state.selectedTheme,
