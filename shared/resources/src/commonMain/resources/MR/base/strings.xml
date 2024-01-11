@@ -5,11 +5,11 @@
     <!-- NOT TRANSLATABLE   -->
 
     <!--  GENERAL  -->
-    <string name="cancel">Cancel</string>
-    <string name="confirm">Confirm</string>
-    <string name="continue_btn">Continue</string>
-    <string name="private_state">Private</string>
-    <string name="public_state">Public</string>
+    <string name="cancel">Отмена</string>
+    <string name="confirm">Подтвердить</string>
+    <string name="continue_btn">Дальше</string>
+    <string name="private_state">Приватно</string>
+    <string name="public_state">Публично</string>
     <!--  GENERAL  -->
 
     <!--  HINTS  -->
@@ -146,8 +146,8 @@
     <!--  PLACEHOLDERS  -->
 
     <!--  ONBOARDING  -->
-    <string name="skip_btn">SKIP</string>
-    <string name="onboarding_btn">I am ready</string>
+    <string name="skip_btn">ПРОПУСТИТЬ</string>
+    <string name="onboarding_btn">Я готов</string>
 
     <string name="onboarding_step_1">впечатления для твоей жизни</string>
     <string name="onboarding_step_2">выходи из зоны комфорта</string>
@@ -157,125 +157,127 @@
     <!--  ONBOARDING  -->
 
     <!--  AUTH  -->
-    <string name="auth_email_label">Email</string>
-    <string name="auth_password_label">Password</string>
-    <string name="auth_login_button">Sign in</string>
-    <string name="auth_signup_button">Sign up</string>
-    <string name="auth_forgot_password">Forgot?</string>
-    <string name="auth_later">Later</string>
-    <string name="auth_footer_text">By signing in, you are agreeing to our</string>
-    <string name="auth_dont_have_account">I don\'t have an account</string>
-    <string name="auth_have_account">I already have an account</string>
+    <string name="auth_email_label">Почта</string>
+    <string name="auth_password_label">Пароль</string>
+    <string name="auth_login_button">Войти</string>
+    <string name="auth_signup_button">Зарегистрировать</string>
+    <string name="auth_forgot_password">Забыли?</string>
+    <string name="auth_later">Позже</string>
+    <string name="auth_footer_text">Выполняя вход, вы соглашаетесь с нашими</string>
+    <string name="auth_dont_have_account">У меня нет аккаунта</string>
+    <string name="auth_have_account">У меня уже есть аккаунт</string>
 
-    <string name="auth_login_anonymous_failure">Something went wrong. Try again</string>
+    <string name="auth_login_anonymous_failure">Что-то пошло не так. Попробуйте позднее</string>
 
-    <string name="auth_error_incorrect_email">Incorrect email. Try different</string>
-    <string name="auth_error_incorrect_credentials">Incorrect email or password</string>
-    <string name="auth_error_weak_password">Weak password</string>
-    <string name="auth_error_email_exist">This email already exist</string>
+    <string name="auth_error_incorrect_email">Неверная почта. Попробуйте другую</string>
+    <string name="auth_error_incorrect_credentials">Неправильная почта или пароль</string>
+    <string name="auth_error_weak_password">Слабый пароль</string>
+    <string name="auth_error_email_exist">Почта уже занята</string>
 
     <!--  DIARY  -->
-    <string name="diary_areas_title">Areas</string>
-    <string name="diary_notes_title">Notes</string>
-    <string name="diary_tasks_title">Tasks</string>
+    <string name="diary_areas_title">Области</string>
+    <string name="diary_notes_title">Записи</string>
+    <string name="diary_tasks_title">Задания</string>
 
-    <string name="diary_areas_add_existing_title">Add existing</string>
-    <string name="diary_areas_create_new_title">Create new</string>
+    <string name="diary_areas_add_existing_title">Добавить</string>
+    <string name="diary_areas_create_new_title">Создать новую</string>
 
-    <string name="diary_areas_create_new_area_title">Create new area</string>
-    <string name="diary_areas_create_new_required_level">Required level</string>
-    <string name="diary_areas_create_new_name_hint">Enter area\'s name</string>
-    <string name="diary_areas_create_new_description_hint">Tell me what the area includes</string>
+    <string name="diary_areas_create_new_area_title">Создать новую область</string>
+    <string name="diary_areas_create_new_required_level">Требуемый уровень</string>
+    <string name="diary_areas_create_new_name_hint">Введи название области</string>
+    <string name="diary_areas_create_new_description_hint">Расскажи, что включает в себя эта
+        область
+    </string>
 
-    <string name="diary_areas_create_button">Create</string>
+    <string name="diary_areas_create_button">Создать</string>
 
-    <string name="diary_area_members">%s\nmembers</string>
-    <string name="diary_area_notes">%s\nnotes</string>
-    <string name="diary_area_tasks">%s\ntasks</string>
+    <string name="diary_area_members">%s\nучастников</string>
+    <string name="diary_area_notes">%s\nзаписей</string>
+    <string name="diary_area_tasks">%s\nзаданий</string>
 
     <!--  TASKS  -->
-    <string name="tasks_favorite_title">Favorite</string>
-    <string name="tasks_current_list_title">For Today</string>
-    <string name="tasks_completed_title">Completed</string>
-    <string name="tasks_update_list_title">Update</string>
+    <string name="tasks_favorite_title">Избранное</string>
+    <string name="tasks_current_list_title">На Сегодня</string>
+    <string name="tasks_completed_title">Завершенные</string>
+    <string name="tasks_update_list_title">Обновить</string>
     <!--  TASKS  -->
 
     <!--  TASK DETAIL  -->
-    <string name="task_detail_title">Task Info</string>
+    <string name="task_detail_title">Задание</string>
     <string name="task_what_to_do_title">Как действовать?</string>
     <string name="task_why_title">Зачем?</string>
-    <string name="task_abilities_title">Abilities</string>
+    <string name="task_abilities_title">Способности</string>
 
-    <string name="task_mask_as">Mark task as</string>
-    <string name="task_not_interesting_title">Not interesting</string>
-    <string name="task_completed_title">Completed</string>
+    <string name="task_mask_as">Пометить задание как</string>
+    <string name="task_not_interesting_title">Не интересное</string>
+    <string name="task_completed_title">Завершенное</string>
 
-    <string name="task_ability_hidden">Hidden</string>
+    <string name="task_ability_hidden">Скрыто</string>
 
-    <string name="task_user_notes_title">Your notes</string>
+    <string name="task_user_notes_title">Твои записи</string>
     <!--  TASK DETAIL  -->
 
     <!--  ABILITY DETAIL  -->
-    <string name="ability_favorite_title">Favorite</string>
-    <string name="ability_favorite_description">All what you like in one place</string>
-    <string name="ability_detail_notes_title">Your notes</string>
-    <string name="ability_detail_motivation_title">Motivation</string>
+    <string name="ability_favorite_title">Избранное</string>
+    <string name="ability_favorite_description">Все что тебе нравится в одном месте</string>
+    <string name="ability_detail_notes_title">Твои записи</string>
+    <string name="ability_detail_motivation_title">Мотивация</string>
     <!--  ABILITY DETAIL  -->
 
     <!--  PROFILE  -->
-    <string name="profile_title">Profile</string>
+    <string name="profile_title">Профиль</string>
 
-    <string name="profile_sub_upgrade">Upgrade</string>
-    <string name="profile_sub_active_plan">Active Plan</string>
-    <string name="profile_sub_basic">GetBetter Basic</string>
+    <string name="profile_sub_upgrade">Повысить</string>
+    <string name="profile_sub_active_plan">Текущий План</string>
+    <string name="profile_sub_basic">GetBetter Базовый</string>
 
-    <string name="profile_app_settings_title">App Settings</string>
-    <string name="profile_app_settings_theming">Theming</string>
-    <string name="profile_app_settings_notifications">Notifications</string>
+    <string name="profile_app_settings_title">Настройки Приложения</string>
+    <string name="profile_app_settings_theming">Тема</string>
+    <string name="profile_app_settings_notifications">Уведомления</string>
 
-    <string name="profile_help_title">Help &amp; Support</string>
-    <string name="profile_help_rate">Rate GetBetter</string>
-    <string name="profile_help_contact_support">Contact Support</string>
-    <string name="profile_logout">Logout</string>
+    <string name="profile_help_title">Помощь &amp; Поддержка</string>
+    <string name="profile_help_rate">Оценить GetBetter</string>
+    <string name="profile_help_contact_support">Написать в Поддержку</string>
+    <string name="profile_logout">Выйти</string>
 
-    <string name="profile_other_title">Other</string>
-    <string name="profile_terms_title">Terms Of Use</string>
-    <string name="profile_privacy_title">Privacy Policy</string>
+    <string name="profile_other_title">Другое</string>
+    <string name="profile_terms_title">Условия Использования</string>
+    <string name="profile_privacy_title">Политика Конфиденциальности</string>
 
-    <string name="experience_your_title">Your experience</string>
-    <string name="experience_user_title">User experience</string>
-    <string name="experience_level">Level %s</string>
+    <string name="experience_your_title">Твой опыт</string>
+    <string name="experience_user_title">Опыт пользователя</string>
+    <string name="experience_level">Уровень %s</string>
 
-    <string name="uimode_dark_title">Dark</string>
-    <string name="uimode_light_title">Light</string>
-    <string name="uimode_system_title">System</string>
+    <string name="uimode_dark_title">Темная</string>
+    <string name="uimode_light_title">Светлая</string>
+    <string name="uimode_system_title">Системная</string>
 
-    <string name="support_feature_title">FEATURE</string>
-    <string name="support_report_title">REPORT</string>
+    <string name="support_feature_title">ПРЕДЛОЖЕНИЕ</string>
+    <string name="support_report_title">ЖАЛОБА</string>
 
-    <string name="support_feature_hint">I want...</string>
-    <string name="support_report_hint">I found bug...</string>
+    <string name="support_feature_hint">Я хочу...</string>
+    <string name="support_report_hint">Я нашел баг...</string>
 
-    <string name="tg_group_title">Telegram Community</string>
+    <string name="tg_group_title">Telegram Канал</string>
     <!--  PROFILE  -->
 
     <!--  SETTINGS  -->
-    <string name="settings_title">Settings</string>
-    <string name="settings_delete_account_title">Delete account</string>
-    <string name="settings_delete_account_text">It can\'t be undone</string>
+    <string name="settings_title">Настройки</string>
+    <string name="settings_delete_account_title">Удалить аккаунт</string>
+    <string name="settings_delete_account_text">Это невозможно отменить</string>
 
-    <string name="settings_name_hint">Your visible name</string>
-    <string name="settings_change_password_button">Change password</string>
-    <string name="settings_delete_account_button">Delete account</string>
+    <string name="settings_name_hint">Твое отображаемое имя</string>
+    <string name="settings_change_password_button">Поменять пароль</string>
+    <string name="settings_delete_account_button">Удалить аккаунт</string>
 
-    <string name="settings_old_password_hint">Your current password</string>
-    <string name="settings_new_password_hint">Enter new password</string>
-    <string name="settings_repeat_new_password_hint">Repeat new password</string>
+    <string name="settings_old_password_hint">Твой текущий пароль</string>
+    <string name="settings_new_password_hint">Введи новый пароль</string>
+    <string name="settings_repeat_new_password_hint">Повтори новый пароль</string>
     <!--  SETTINGS  -->
 
     <!--  PROFILE DETAIL  -->
-    <string name="follow_title">Follow</string>
-    <string name="unfollow_title">Unfollow</string>
+    <string name="follow_title">Подписаться</string>
+    <string name="unfollow_title">Отписаться</string>
     <!--  PROFILE DETAIL  -->
 
     <!--  WISDOM  -->
@@ -352,199 +354,203 @@
     </string>
 
     <!--  ADD AREA  -->
-    <string name="add_area_title">Public Areas</string>
-    <string name="add_area_add_area_button">Add area</string>
-    <string name="add_area_already_added_button">Already added</string>
-    <string name="add_area_low_level_button">Low level</string>
+    <string name="add_area_title">Публичные Области</string>
+    <string name="add_area_add_area_button">Добавить область</string>
+    <string name="add_area_already_added_button">Уже добавлена</string>
+    <string name="add_area_low_level_button">Низкий уровень</string>
 
-    <string name="add_area_edit_button">Edit</string>
-    <string name="add_area_leave_button">Leave</string>
-    <string name="add_area_delete_button">Delete</string>
-    <string name="add_area_save_button">Save</string>
+    <string name="add_area_edit_button">Изменить</string>
+    <string name="add_area_leave_button">Покинуть</string>
+    <string name="add_area_delete_button">Удалить</string>
+    <string name="add_area_save_button">Сохранить</string>
 
-    <string name="add_area_confirm_delete_title">Delete area</string>
-    <string name="add_area_confirm_delete_text">All your notes and experience will be saved but
-        tasks will be deleted
+    <string name="add_area_confirm_delete_title">Удалить область</string>
+    <string name="add_area_confirm_delete_text">Все ваши заметки и опыт будут сохранены, но задачи
+        будут удалены
     </string>
-    <string name="add_area_confirm_leave_title">Leave area</string>
-    <string name="add_area_confirm_leave_text">All your notes and experience will be saved</string>
+    <string name="add_area_confirm_leave_title">Покинуть область</string>
+    <string name="add_area_confirm_leave_text">Все ваши заметки и опыт будут сохранены</string>
     <!--  ADD AREA  -->
 
     <!--  CREATE NOTE  -->
-    <string name="create_note_title">Create new note</string>
-    <string name="create_goal_title">Create new goal</string>
+    <string name="create_note_title">Создать новую запись</string>
+    <string name="create_goal_title">Создать новую цель</string>
 
-    <string name="create_note_button">Create note</string>
-    <string name="create_goal_button">Create goal</string>
+    <string name="create_note_button">Создание записи</string>
+    <string name="create_goal_button">Создание цели</string>
 
-    <string name="create_note_error_no_areas">You must first add or create an area</string>
-    <string name="select_area_for_note">Select area for note</string>
-    <string name="select_area_for_goal">Select area for goal</string>
+    <string name="create_note_error_no_areas">Сначала необходимо добавить или создать область
+    </string>
+    <string name="select_area_for_note">Выбери область для записи</string>
+    <string name="select_area_for_goal">Выбери область для цели</string>
 
-    <string name="create_note_text_hint">Place here note\'s content</string>
-    <string name="create_goal_text_hint">Place here your goal</string>
+    <string name="create_note_text_hint">Текст записи</string>
+    <string name="create_goal_text_hint">Текст цели</string>
 
-    <string name="create_note_tags_title">Tags</string>
-    <string name="create_note_tags_hint">Enter your tag</string>
+    <string name="create_note_tags_title">Теги</string>
+    <string name="create_note_tags_hint">Введи новый тег</string>
 
-    <string name="create_note_subnote_title">SubGoals</string>
-    <string name="create_note_subnote_hint">Enter here sub goals</string>
+    <string name="create_note_subnote_title">Подзадачи</string>
+    <string name="create_note_subnote_hint">Введи новую подзадачу</string>
 
-    <string name="create_note_completion_date_title">Deadline</string>
-    <string name="create_note_completion_date_hint">Not set</string>
+    <string name="create_note_completion_date_title">Срок выполнения</string>
+    <string name="create_note_completion_date_hint">Нет</string>
 
-    <string name="create_note_no_tasks_title">No available tasks</string>
-    <string name="create_note_without_task">Without task</string>
+    <string name="create_note_no_tasks_title">Нет доступных заданий</string>
+    <string name="create_note_without_task">Без задания</string>
     <!--  CREATE NOTE  -->
 
     <!--  NOTE DETAIL  -->
-    <string name="note_detail_title">Note Info</string>
-    <string name="goal_detail_title">Goal Info</string>
+    <string name="note_detail_title">Запись</string>
+    <string name="goal_detail_title">Цель</string>
 
-    <string name="note_detail_confirm_delete_title">Delete note</string>
-    <string name="goal_detail_confirm_delete_title">Delete goal</string>
-    <string name="note_detail_confirm_delete_text">Are you sure?</string>
+    <string name="note_detail_confirm_delete_title">Удалить запись</string>
+    <string name="goal_detail_confirm_delete_title">Удалить цель</string>
+    <string name="note_detail_confirm_delete_text">Ты уверен?</string>
 
-    <string name="note_detail_complete_goal_text">Complete</string>
-    <string name="note_detail_completed_goal_title">Completed on</string>
+    <string name="note_detail_complete_goal_text">Завершить</string>
+    <string name="note_detail_completed_goal_title">Завершено</string>
 
-    <string name="note_detail_cancel_completion_title">Cancel completion date</string>
-    <string name="note_detail_cancel_completion_text">Goal become uncompleted again</string>
+    <string name="note_detail_cancel_completion_title">Отменить завершение</string>
+    <string name="note_detail_cancel_completion_text">Цель снова станет незавершенной</string>
 
-    <string name="note_detail_comments_title">Comments</string>
-    <string name="note_detail_add_comment_hint">Add comment...</string>
+    <string name="note_detail_comments_title">Комментарии</string>
+    <string name="note_detail_add_comment_hint">Добавить комментарий...</string>
     <!--  NOTE DETAIL  -->
 
 
     <!--  SOCIAL  -->
-    <string name="social_general_feed_title">All</string>
-    <string name="social_areas_feed_title">Your areas</string>
-    <string name="social_followers_feed_title">You follows</string>
+    <string name="social_general_feed_title">Все</string>
+    <string name="social_areas_feed_title">Твои области</string>
+    <string name="social_followers_feed_title">Твои подписки</string>
     <!--  SOCIAL  -->
 
     <!--  CALENDARS  -->
-    <string name="action_user_registered">You joined to GetBetter!</string>
-    <string name="action_user_created_area">You created an area!</string>
-    <string name="action_user_joined_area">You joined an area!</string>
-    <string name="action_user_leaved_area">You leaved an area!</string>
+    <string name="action_user_registered">Ты присоединился к GetBetter!</string>
+    <string name="action_user_created_area">Ты создал область!</string>
+    <string name="action_user_joined_area">Ты присоединился к области!</string>
+    <string name="action_user_leaved_area">Ты покинул область!</string>
 
-    <string name="action_user_created_note">You created note!</string>
-    <string name="action_user_create_goal">You crated goal!</string>
+    <string name="action_user_created_note">Ты создал запись!</string>
+    <string name="action_user_create_goal">Ты создал цель!</string>
 
-    <string name="action_user_completed_task">You completed task!</string>
+    <string name="action_user_completed_task">Ты завершил задание!</string>
 
-    <string name="action_user_completed_goal">You completed the goal!</string>
-    <string name="action_user_completed_subgoal">You completed the subgoal!</string>
+    <string name="action_user_completed_goal">Ты завершил цель!</string>
+    <string name="action_user_completed_subgoal">Ты завершил подзадачу!</string>
 
-    <string name="action_user_created_comment">You created comment</string>
-    <string name="action_user_got_comment">%s created comment</string>
+    <string name="action_user_created_comment">Ты оставил комментарий</string>
+    <string name="action_user_got_comment">%s оставил комментарий</string>
 
-    <string name="action_user_created_like">You liked</string>
-    <string name="action_user_got_like">%s add like</string>
-    <string name="action_user_got_like_anonymous">+1 new like</string>
+    <string name="action_user_created_like">Ты оценил</string>
+    <string name="action_user_got_like">%s оценил</string>
+    <string name="action_user_got_like_anonymous">+1 новая оценка</string>
 
-    <string name="action_user_followed">You followed</string>
-    <string name="action_user_got_follower">%s follows you</string>
+    <string name="action_user_followed">Ты подписался</string>
+    <string name="action_user_got_follower">%s подписался на тебя</string>
     <!--  CALENDARS  -->
 
     <!--  SERVER EXCEPTIONS  -->
-    <string name="error_default">Something went wrong. Try again</string>
+    <string name="error_default">Что-то пошло не так. Попробуйте позднее</string>
 
-    <string name="error_1001">Your session expired. Log in again</string>
-    <string name="error_905">Incorrect user\'s name</string>
-    <string name="error_906">Incorrect user\'s locale</string>
-    <string name="error_907">User not found</string>
-    <string name="error_908">Old password incorrect</string>
-    <string name="error_909">New passwords not match</string>
+    <string name="error_1001">Твоя сессия истекла. Войдите заново</string>
+    <string name="error_905">Неверное имя пользователя</string>
+    <string name="error_906">Неверная локаль пользователя</string>
+    <string name="error_907">Пользователь не найден</string>
+    <string name="error_908">Старый пароль неверен</string>
+    <string name="error_909">Новые пароли не совпадают</string>
 
-    <string name="error_900">This account is not anonymous</string>
-    <string name="error_901">This email already exist. Try different</string>
-    <string name="error_902">Incorrect email. Try different</string>
-    <string name="error_903">Weak password. Try different</string>
-    <string name="error_904">Invalid credentials</string>
+    <string name="error_900">Этот аккаунт не анонимен</string>
+    <string name="error_901">Почта занята. Попробуй другую</string>
+    <string name="error_902">Неверная почта. Попробуй другую</string>
+    <string name="error_903">Слабый пароль. Попробуй другой</string>
+    <string name="error_904">Неверные данные для входа</string>
 
-    <string name="error_801">Incorrect area\'s name</string>
-    <string name="error_802">Incorrect area\'s description</string>
-    <string name="error_803">Incorrect area\'s required level</string>
-    <string name="error_804">You are already joined</string>
-    <string name="error_805">You are already leaved</string>
-    <string name="error_806">You don\'t have permissions to edit this area</string>
-    <string name="error_807">You don\'t have permissions to delete this area</string>
-    <string name="error_808">Area doesn\'t exist</string>
-    <string name="error_809">Your level is too low to join</string>
-    <string name="error_810">You can\'t join because area is private</string>
-    <string name="error_811">You can\'t join because area is inactive</string>
-    <string name="error_812">You can\'t delete because area is inactive</string>
-    <string name="error_813">You can\'t edit because area is inactive</string>
-    <string name="error_814">Your can\'t get area\'s details because its private</string>
+    <string name="error_801">Неверное название области</string>
+    <string name="error_802">Неверное описание области</string>
+    <string name="error_803">Неверный минимальный уровень для области</string>
+    <string name="error_804">Ты уже вступил</string>
+    <string name="error_805">Ты уже покинул</string>
+    <string name="error_806">Нет прав на редактирование области</string>
+    <string name="error_807">Нет прав на удаление области</string>
+    <string name="error_808">Область не существует</string>
+    <string name="error_809">Твой уровень слишком низкий для вступления</string>
+    <string name="error_810">Ты не можешь вступить, так как область приватна</string>
+    <string name="error_811">Ты не можешь вступить, так как область неактивна</string>
+    <string name="error_812">Ты не можешь удалить, так как область неактивна</string>
+    <string name="error_813">Ты не можешь редактировать, так как область неактивна</string>
+    <string name="error_814">Невозможно получить детали области, так как она приватна</string>
 
-    <string name="error_699">Incorrect note\'s type</string>
-    <string name="error_700">Incorrect note\'s text</string>
-    <string name="error_701">Incorrect area selected</string>
-    <string name="error_702">You are not a member of this area</string>
-    <string name="error_703">Incorrect sub note text</string>
-    <string name="error_704">You don\'t have permissions to edit this note</string>
-    <string name="error_705">You don\'t have permission to delete this note</string>
-    <string name="error_706">Note doesn\'t exist</string>
-    <string name="error_707">You can\'t edit because note is inactive</string>
-    <string name="error_708">You can\'t delete because note is inactive</string>
-    <string name="error_709">You can\'t complete because note is inactive</string>
-    <string name="error_710">Goal already completed</string>
-    <string name="error_711">Sub goal already completed</string>
-    <string name="error_712">This note is not a goal</string>
-    <string name="error_713">You don\'t have permissions to complete this goal</string>
-    <string name="error_714">Sub goal doesn\'t exist</string>
-    <string name="error_715">This note doesn\'t contain such sub goal</string>
-    <string name="error_716">You can\'t get details because note is private</string>
-    <string name="error_717">The goal already uncompleted</string>
-    <string name="error_718">Subgoal already uncompleted</string>
-    <string name="error_719">Incorrect author</string>
+    <string name="error_699">Неверный тип записи</string>
+    <string name="error_700">Неверный текст записи</string>
+    <string name="error_701">Неверная область выбрана</string>
+    <string name="error_702">Ты не вступил в эту область</string>
+    <string name="error_703">Неверный текст подзадачи</string>
+    <string name="error_704">У тебя нет прав на редактирование записи</string>
+    <string name="error_705">У тебя нет прав на удаление записи</string>
+    <string name="error_706">Запись не существует</string>
+    <string name="error_707">Ты не можешь редактировать запись, так как она неактивна</string>
+    <string name="error_708">Ты не можешь удалить запись, так как она неактивна</string>
+    <string name="error_709">Ты не можешь завершить цель, так как она неактивна</string>
+    <string name="error_710">Цель уже завершена</string>
+    <string name="error_711">Подзадача уже завершена</string>
+    <string name="error_712">Запись не является целью</string>
+    <string name="error_713">Нет прав на завершение цели</string>
+    <string name="error_714">Подзадача не существует</string>
+    <string name="error_715">Эта цель не содержит такой подзадачи</string>
+    <string name="error_716">Невозможно получить детали записи, так как она приватна</string>
+    <string name="error_717">Цель уже помечена как незавершенная</string>
+    <string name="error_718">Подзадача уже помечена как незавершенная</string>
+    <string name="error_719">Неверный автор</string>
 
-    <string name="error_600">Can\'t create comment because entity doesn\'t exist</string>
-    <string name="error_601">Incorrect text of comment</string>
-    <string name="error_602">You can\'t create comment because area is inactive</string>
-    <string name="error_603">You can\'t create comment because note is inactive</string>
-    <string name="error_604">You can\'t create comment because area is private</string>
-    <string name="error_605">You can\'t create comment because note is private</string>
-    <string name="error_606">Comment not found</string>
-    <string name="error_607">Invalid entity type for comment</string>
-    <string name="error_608">You can\'t delete comment because you are not an author</string>
+    <string name="error_600">Невозможно оставить комментарий, так как сущность не существует
+    </string>
+    <string name="error_601">Неверный текст комментария</string>
+    <string name="error_602">Ты не можешь оставить комментарий, так как область неактивна</string>
+    <string name="error_603">Ты не можешь оставить комментарий, так как запись неактивна</string>
+    <string name="error_604">Ты не можешь оставить комментарий, так как область приватна</string>
+    <string name="error_605">Ты не можешь оставить комментарий, так как запись приватна</string>
+    <string name="error_606">Комментарий не найден</string>
+    <string name="error_607">Неверная сущность для комментария</string>
+    <string name="error_608">Ты не можешь удалить этот комментарий, так как не являешься его
+        автором
+    </string>
 
-    <string name="error_650">Entity for like not found</string>
-    <string name="error_651">You already liked it</string>
-    <string name="error_652">You already disliked it</string>
-    <string name="error_653">You already removed like</string>
-    <string name="error_654">Invalid entity type for like</string>
+    <string name="error_650">Сущность для оценки не найдена</string>
+    <string name="error_651">Ты уже оценил это</string>
+    <string name="error_652">Ты уже снял оценку</string>
+    <string name="error_653">Ты уже снял оценку</string>
+    <string name="error_654">Неверная сущность для оценки</string>
 
-    <string name="error_500">User to follow not found</string>
-    <string name="error_501">You already followed on this user</string>
-    <string name="error_502">You already unfollowed from this user</string>
+    <string name="error_500">Пользователь для подписки не найден</string>
+    <string name="error_501">Ты уже подписался на этого пользователя</string>
+    <string name="error_502">Ты уже отписался от этого пользователя</string>
 
-    <string name="error_550">Incorrect feedback\'s message</string>
-    <string name="error_551">Feedback not found</string>
-    <string name="error_552">Incorrect feedback\'s type</string>
-    <string name="error_553">Incorrect feedback\'s status</string>
-    <string name="error_554">You don\'t have permission to add answer</string>
+    <string name="error_550">Неверный текст отзыва</string>
+    <string name="error_551">Отзыв не найден</string>
+    <string name="error_552">Неверный тип отзыва</string>
+    <string name="error_553">Неверный статус отзыва</string>
+    <string name="error_554">Нет прав добавить ответ</string>
 
-    <string name="error_400">Task not found</string>
-    <string name="error_401">Task already in favorite</string>
-    <string name="error_402">Task is not in favorite</string>
-    <string name="error_403">Task already marked as not interesting</string>
-    <string name="error_404">Task already removed from not interesting</string>
-    <string name="error_405">Task already marked as completed</string>
-    <string name="error_406">Task already removed from completed</string>
-    <string name="error_407">You reached limit of favorite tasks</string>
-    <string name="error_408">You don\'t have permissions to update current list</string>
-    <string name="error_409">This task is not in your current list</string>
+    <string name="error_400">Задание не найдено</string>
+    <string name="error_401">Задание уже в избранном</string>
+    <string name="error_402">Задание не в избранном</string>
+    <string name="error_403">Задание уже помечено как неинтересное</string>
+    <string name="error_404">С задания уже убрана метка 'неинтересное'</string>
+    <string name="error_405">Задание уже завершено</string>
+    <string name="error_406">С задания уже убрана метка 'завершено'</string>
+    <string name="error_407">Ты достиг лимита избранных заданий</string>
+    <string name="error_408">Нет прав на обновление списка заданий</string>
+    <string name="error_409">Этого задания нет в твоем списке текущих заданий</string>
     <!--  SERVER EXCEPTIONS  -->
 
     <!--  DATE FORMATTER  -->
-    <string name="date_just_now">Just now</string>
-    <string name="date_one_min">1 min ago</string>
-    <string name="date_minutes">%s minutes ago</string>
-    <string name="date_one_hour">1 hour ago</string>
-    <string name="date_hours">%s hours ago</string>
-    <string name="date_yesterday">Yesterday at %s</string>
+    <string name="date_just_now">Только что</string>
+    <string name="date_one_min">1 мин назад</string>
+    <string name="date_minutes">%s мин назад</string>
+    <string name="date_one_hour">1 час назад</string>
+    <string name="date_hours">%s часов назад</string>
+    <string name="date_yesterday">Вчера в %s</string>
     <string name="date_same_year">%s</string>
     <!--  DATE FORMATTER  -->
 </resources>
