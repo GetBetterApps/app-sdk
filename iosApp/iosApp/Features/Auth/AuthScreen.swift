@@ -16,6 +16,9 @@ struct AuthScreen: View {
     
     @StateViewModel var viewModel: AuthViewModel
     
+    @State private var webViewVisible: Bool = false
+    @State private var webViewLink: String = "http://google.com"
+    
     var body: some View {
         @State var state = viewModel.viewStateValue as! AuthViewState
         
@@ -87,12 +90,41 @@ struct AuthScreen: View {
                 
                 Spacer().frame(height: 32)
                 
-                Text(SharedR.strings().auth_footer_text.desc().localized())
-                    .foregroundColor(.textLight)
-                    .style(.bodySmall)
-                    .multilineTextAlignment(.center)
-                    .opacity(0.2)
-                    .padding(.init(top: .zero, leading: 32, bottom: 48, trailing: 32))
+                HStack {
+                    Spacer()
+                    Text(SharedR.strings().auth_footer_text.desc().localized())
+                        .foregroundColor(.textLight)
+                        .style(.bodySmall)
+                        .multilineTextAlignment(.center)
+                        .opacity(0.2)
+                        .padding(.init(top: .zero, leading: 32, bottom: .zero, trailing: 32))
+                    Spacer()
+                }
+                
+                HStack {
+                    Spacer()
+                    Text(SharedR.strings().profile_privacy_title.desc().localized())
+                        .foregroundColor(.textLight)
+                        .style(.bodySmall)
+                        .multilineTextAlignment(.center)
+                        .opacity(0.2)
+                        .onTapGesture {
+                            webViewLink = state.privacyLink
+                            webViewVisible = true
+                        }
+                    
+                    Text(SharedR.strings().profile_terms_title.desc().localized())
+                        .foregroundColor(.textLight)
+                        .style(.bodySmall)
+                        .multilineTextAlignment(.center)
+                        .opacity(0.2)
+                        .onTapGesture {
+                            webViewLink = state.termsLink
+                            webViewVisible = true
+                        }
+                    Spacer()
+                }
+                .padding(.bottom, 48)
             }
             .padding(.init(top: 50, leading: 16, bottom: 0, trailing: 16))
         }
@@ -103,6 +135,10 @@ struct AuthScreen: View {
         }
         .onTapGesture {
             self.endTextEditing()
+        }
+        .sheet(isPresented: $webViewVisible) {
+            AppWebView(link: $webViewLink)
+                .ignoresSafeArea(.all)
         }
     }
 }
