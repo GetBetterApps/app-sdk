@@ -1,5 +1,550 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
-    <string name="task_what_to_do_title">What to do?</string>
-    <string name="task_why_title">Why?</string>
+    <!-- NOT TRANSLATABLE   -->
+    <string name="tg_link">https://t.me/getbetterapp</string>
+    <!-- NOT TRANSLATABLE   -->
+
+    <!--  GENERAL  -->
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="continue_btn">Continue</string>
+    <string name="private_state">Private</string>
+    <string name="public_state">Public</string>
+    <!--  GENERAL  -->
+
+    <!--  HINTS  -->
+    <string name="hint_social_all_title">Добро пожаловать в ленту публичных записей!</string>
+    <string name="hint_social_all_text">Здесь собраны вдохновляющие истории и достижения сообщества
+        в различных областях. Погрузись в увлекательный мир, обменивайся опытом и найди вдохновение
+        для своих собственных свершений.\n\nПрокручивай ленту, чтобы быть в курсе последних событий
+        и делись своими собственными историями успеха!
+    </string>
+
+    <string name="hint_note_comments_text">Под записью ты всегда можешь поделиться своим мнением или
+        оставить вдохновляющий комментарий.\n\nТвои слова могут быть источником вдохновения для
+        других!
+    </string>
+
+    <string name="hint_diary_notes_title">Это твой дневник</string>
+    <string name="hint_diary_notes_text">Место, где твои вдохновляющие моменты и цели оживают. Здесь
+        ты найдешь все свои записи - как публичные, так и приватные.
+    </string>
+
+    <string name="hint_diary_create_note_title">Создание записи</string>
+    <string name="hint_diary_create_note_text">Выбери область, которая лучше всего описывает твою
+        запись. Это поможет тебе и другим пользователям легче находить истории по интересам, а также
+        фильтровать записи в дневнике \n\nЕсли у твоей записи есть конкретное задание, добавь его
+        здесь. Это поможет яснее понимать суть твоего достижения \n\nДобавь теги, которые отражают
+        ключевые моменты или темы твоей записи. Так тебе будет легче ориентироваться в дальнейшем
+        \n\nВыбери уровень доступа: приватный, если хочешь сохранить историю для себя, или
+        публичный, чтобы поделиться своим вдохновением с сообществом
+    </string>
+
+    <string name="hint_diary_create_goal_title">Создание цели</string>
+    <string name="hint_diary_create_goal_text">Выбери область, которая наилучшим образом отражает
+        твою цель. Это поможет другим пользователям лучше понять, чему ты стремишься.\n\nЕсли у
+        твоей цели есть конкретное задание, добавь его здесь. Это поможет яснее определить, каким
+        образом ты планируешь ее достичь.\n\nДобавь теги, которые наилучшим образом описывают
+        ключевые моменты или темы твоей цели. Так она будет более понятной и
+        вдохновляющей.\n\nВыбери уровень доступа: приватный, если хочешь держать свои цели в
+        секрете, или публичный, чтобы вдохновить других своими стремлениями.\n\nУкажи срок, в
+        котором ты планируешь достичь своей цели. Это поможет тебе структурировать свои усилия и
+        добиться желаемого.\n\nДобавь подзадачи, чтобы разбить свою цель на более управляемые шаги.
+        Так ты сможешь лучше следить за своим прогрессом.
+    </string>
+
+    <string name="hint_diary_note_detail_text">На детальном экране записи ты можешь внести изменения
+        или удалить её, если нужно.\n\nВоплощай свои идеи в жизнь, редактируй и формируй свой
+        уникальный след в мире!
+    </string>
+    <string name="hint_diary_goal_detail_text">Детальный экран цели предоставляет возможность
+        отметить её как завершенную, менять статусы подзадач, а также редактировать или удалять
+        цель.\n\nТвои достижения под контролем!
+    </string>
+
+    <string name="hint_diary_areas_title">Области</string>
+    <string name="hint_diary_areas_text">Экран областей представляет собой сборник тем, в которых вы
+        можете совершенствоваться.\nЗдесь отображены области, которые вы уже добавили себе для
+        развития.\n\nЕсли хотите расширить свои горизонты, создайте собственную область, отражающую
+        ваш интерес или добавьте уже имеющиеся, нажав на \'+\'
+    </string>
+
+    <string name="hint_diary_create_area_title">Создание области</string>
+    <string name="hint_diary_create_area_text">Задайте название, опишите, что область для вас
+        значит,
+        и решите, будете ли делиться ею с другими или оставите личной.\n\nВаша собственная область
+        поможет вам лучше фокусироваться на задачах и управлять своими приоритетами.
+    </string>
+
+    <string name="hint_diary_add_area_title">Добавление области</string>
+    <string name="hint_diary_add_area_text">Выберите интересующие вас публичные области, созданные
+        другими пользователями.\nВместе с областью вы получите задания, связанные с этой тематикой,
+        которые будут вас вдохновлять.
+    </string>
+
+    <string name="hint_diary_area_detail_text">Здесь вы найдете всю информацию о конкретной области,
+        включая количество участников, заданий и созданных записей.\nВы можете в любой момент
+        вступить в эту область или наоборот покинуть ее.\nЕсли вы являетесь создателем области, вы
+        также можете отредактировать или удалить ее.
+    </string>
+
+    <string name="hint_diary_tasks_title">Задания</string>
+    <string name="hint_diary_tasks_text">Здесь находятся ваши текущие задания.\nСписок \'На
+        сегодня\'
+        обновляется ежедневно, предоставляя новые интересные задания специально для вас. \nЕсли вы
+        хотите сохранить задание для будущего выполнения, добавьте его в избранное. \nЗавершенные
+        задания сохраняются в отдельном разделе. \n\nЕсли вы желаете обновить список \'На сегодня\'
+        мгновенно, просто нажмите кнопку \'Обновить\'."
+    </string>
+
+    <string name="hint_diary_task_detail_title">Детали задания</string>
+    <string name="hint_diary_task_detail_text">Каждое задание связано с определенной
+        областью.\nСоздание записей по заданию приносит опыт в указанные в задании способности.\nВы
+        можете указать, что задание вам не интересно, и оно будет встречаться реже.\nКогда задание
+        выполнено, поместите его в раздел \'Завершено\'.
+    </string>
+
+    <string name="hint_calendars_title">Центр уведомлений</string>
+    <string name="hint_calendars_text">Здесь собраны все важные события, связанные с вами и вашими
+        достижениями.\nПросматривайте список, чтобы следить за тем, как формируется ваш путь
+        самосовершенствования: лайки, комментарии, созданные записи, добавленные области и многое
+        другое!
+    </string>
+
+    <string name="hint_abilities_title">Способности</string>
+    <string name="hint_abilities_text">Это твой уникальный набор навыков!\nПрокачивай их, создавая
+        записи и выполняя цели по соответствующим заданиям.\nЧем выше уровень способностей, тем
+        больше контента доступно внутри каждой способности.
+    </string>
+    <!--  HINTS  -->
+
+    <!--  PLACEHOLDERS  -->
+    <string name="placeholder_social_all">Скоро здесь будет контент, созданный сообществом</string>
+    <string name="placeholder_social_areas">Публичные записи по областям, в которых вы состоите
+    </string>
+
+    <string name="placeholder_diary_notes">Дневник пуст, но ты можешь это исправить - создай цель
+        или обычную запись
+    </string>
+    <string name="placeholder_diary_areas">Список областей пуст! Скорее создай новую область или
+        вступи в уже существующие
+    </string>
+
+    <string name="placeholder_calendars_day_past">В этот день ничего не произошло</string>
+    <string name="placeholder_calendars_day_future">На этот день пока нет планов</string>
+
+    <string name="placeholder_abilities_favorite_affirmations">Ты пока не добавил(а) ничего в
+        избранное. Стоит это исправить
+    </string>
+    <string name="placeholder_ability_details_notes">Пока в твоем дневнике нет записей, которые бы
+        принесли опыт по этой способности
+    </string>
+
+    <string name="placeholder_profile_support">Нашел баг или хочешь что-нибудь предложить? Скорее
+        пиши нам!
+    </string>
+    <!--  PLACEHOLDERS  -->
+
+    <!--  ONBOARDING  -->
+    <string name="skip_btn">SKIP</string>
+    <string name="onboarding_btn">I am ready</string>
+
+    <string name="onboarding_step_1">впечатления для твоей жизни</string>
+    <string name="onboarding_step_2">выходи из зоны комфорта</string>
+    <string name="onboarding_step_3">управляй личной продуктивностью</string>
+    <string name="onboarding_step_4">достигай своих целей</string>
+    <string name="onboarding_step_5">мотивируй себя</string>
+    <!--  ONBOARDING  -->
+
+    <!--  AUTH  -->
+    <string name="auth_email_label">Email</string>
+    <string name="auth_password_label">Password</string>
+    <string name="auth_login_button">Sign in</string>
+    <string name="auth_signup_button">Sign up</string>
+    <string name="auth_forgot_password">Forgot?</string>
+    <string name="auth_later">Later</string>
+    <string name="auth_footer_text">By signing in, you are agreeing to our</string>
+    <string name="auth_dont_have_account">I don\'t have an account</string>
+    <string name="auth_have_account">I already have an account</string>
+
+    <string name="auth_login_anonymous_failure">Something went wrong. Try again</string>
+
+    <string name="auth_error_incorrect_email">Incorrect email. Try different</string>
+    <string name="auth_error_incorrect_credentials">Incorrect email or password</string>
+    <string name="auth_error_weak_password">Weak password</string>
+    <string name="auth_error_email_exist">This email already exist</string>
+
+    <!--  DIARY  -->
+    <string name="diary_areas_title">Areas</string>
+    <string name="diary_notes_title">Notes</string>
+    <string name="diary_tasks_title">Tasks</string>
+
+    <string name="diary_areas_add_existing_title">Add existing</string>
+    <string name="diary_areas_create_new_title">Create new</string>
+
+    <string name="diary_areas_create_new_area_title">Create new area</string>
+    <string name="diary_areas_create_new_required_level">Required level</string>
+    <string name="diary_areas_create_new_name_hint">Enter area\'s name</string>
+    <string name="diary_areas_create_new_description_hint">Tell me what the area includes</string>
+
+    <string name="diary_areas_create_button">Create</string>
+
+    <string name="diary_area_members">%s\nmembers</string>
+    <string name="diary_area_notes">%s\nnotes</string>
+    <string name="diary_area_tasks">%s\ntasks</string>
+
+    <!--  TASKS  -->
+    <string name="tasks_favorite_title">Favorite</string>
+    <string name="tasks_current_list_title">For Today</string>
+    <string name="tasks_completed_title">Completed</string>
+    <string name="tasks_update_list_title">Update</string>
+    <!--  TASKS  -->
+
+    <!--  TASK DETAIL  -->
+    <string name="task_detail_title">Task Info</string>
+    <string name="task_what_to_do_title">Как действовать?</string>
+    <string name="task_why_title">Зачем?</string>
+    <string name="task_abilities_title">Abilities</string>
+
+    <string name="task_mask_as">Mark task as</string>
+    <string name="task_not_interesting_title">Not interesting</string>
+    <string name="task_completed_title">Completed</string>
+
+    <string name="task_ability_hidden">Hidden</string>
+
+    <string name="task_user_notes_title">Your notes</string>
+    <!--  TASK DETAIL  -->
+
+    <!--  ABILITY DETAIL  -->
+    <string name="ability_favorite_title">Favorite</string>
+    <string name="ability_favorite_description">All what you like in one place</string>
+    <string name="ability_detail_notes_title">Your notes</string>
+    <string name="ability_detail_motivation_title">Motivation</string>
+    <!--  ABILITY DETAIL  -->
+
+    <!--  PROFILE  -->
+    <string name="profile_title">Profile</string>
+
+    <string name="profile_sub_upgrade">Upgrade</string>
+    <string name="profile_sub_active_plan">Active Plan</string>
+    <string name="profile_sub_basic">GetBetter Basic</string>
+
+    <string name="profile_app_settings_title">App Settings</string>
+    <string name="profile_app_settings_theming">Theming</string>
+    <string name="profile_app_settings_notifications">Notifications</string>
+
+    <string name="profile_help_title">Help &amp; Support</string>
+    <string name="profile_help_rate">Rate GetBetter</string>
+    <string name="profile_help_contact_support">Contact Support</string>
+    <string name="profile_logout">Logout</string>
+
+    <string name="profile_other_title">Other</string>
+    <string name="profile_terms_title">Terms Of Use</string>
+    <string name="profile_privacy_title">Privacy Policy</string>
+
+    <string name="experience_your_title">Your experience</string>
+    <string name="experience_user_title">User experience</string>
+    <string name="experience_level">Level %s</string>
+
+    <string name="uimode_dark_title">Dark</string>
+    <string name="uimode_light_title">Light</string>
+    <string name="uimode_system_title">System</string>
+
+    <string name="support_feature_title">FEATURE</string>
+    <string name="support_report_title">REPORT</string>
+
+    <string name="support_feature_hint">I want...</string>
+    <string name="support_report_hint">I found bug...</string>
+
+    <string name="tg_group_title">Telegram Community</string>
+    <!--  PROFILE  -->
+
+    <!--  SETTINGS  -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_delete_account_title">Delete account</string>
+    <string name="settings_delete_account_text">It can\'t be undone</string>
+
+    <string name="settings_name_hint">Your visible name</string>
+    <string name="settings_change_password_button">Change password</string>
+    <string name="settings_delete_account_button">Delete account</string>
+
+    <string name="settings_old_password_hint">Your current password</string>
+    <string name="settings_new_password_hint">Enter new password</string>
+    <string name="settings_repeat_new_password_hint">Repeat new password</string>
+    <!--  SETTINGS  -->
+
+    <!--  PROFILE DETAIL  -->
+    <string name="follow_title">Follow</string>
+    <string name="unfollow_title">Unfollow</string>
+    <!--  PROFILE DETAIL  -->
+
+    <!--  WISDOM  -->
+    <string name="wisdom_affirmations_title">Аффирмации и позитивное мышление</string>
+    <string name="wisdom_advices_title">Советы по самосовершенствованию</string>
+    <string name="wisdom_psychology_of_success_title">Психология успеха</string>
+    <string name="wisdom_motivation_title">Мотивация и вдохновение</string>
+    <string name="wisdom_education_title">Саморазвитие и образование</string>
+    <string name="wisdom_psychology_of_happiness_title">Психология счастья и удовлетворенности
+        жизнью
+    </string>
+    <string name="wisdom_plans_title">Цели и планирование</string>
+    <string name="wisdom_emotions_title">Эмоциональное здоровье и стресс</string>
+    <string name="wisdom_self_discipline_title">Самодисциплина и самоконтроль</string>
+    <string name="wisdom_sport_title">Спорт и физическое здоровье</string>
+    <string name="wisdom_creativity_title">Искусство и креативность</string>
+    <string name="wisdom_self_acceptance_title">Самооценка и самопринятие</string>
+    <string name="wisdom_family_title">Семейные отношения и мотивация</string>
+    <string name="wisdom_finance_title">Финансовое благополучие и инвестиции</string>
+    <string name="wisdom_personal_efficiency_title">Личная продуктивность и эффективность</string>
+    <string name="wisdom_self_reflection_title">Саморефлексия и развитие самосознания</string>
+    <string name="wisdom_meditation_title">Духовное развитие и медитация</string>
+    <string name="wisdom_carrier_title">Карьера и профессиональное развитие</string>
+    <string name="wisdom_social_title">Социальные навыки и коммуникация</string>
+    <string name="wisdom_personality_types_title">Исследование личности и типы личности</string>
+
+    <string name="wisdom_affirmations_desc">Укрепление позитивного мышления и повышения самооценки
+    </string>
+    <string name="wisdom_advices_desc">Рекомендации по улучшению навыков, развитию личности и
+        достижению целей
+    </string>
+    <string name="wisdom_psychology_of_success_desc">Психологические аспекты достижения успеха в
+        разных сферах жизни
+    </string>
+    <string name="wisdom_motivation_desc">Истории успеха, цитаты и источники вдохновения</string>
+    <string name="wisdom_education_desc">Саморазвитие через обучение и самообразование</string>
+    <string name="wisdom_psychology_of_happiness_desc">Исследования, какие факторы влияют на чувство
+        счастья и удовлетворенности жизнью
+    </string>
+    <string name="wisdom_plans_desc">Информация о постановке целей и разработке планов достижения
+    </string>
+    <string name="wisdom_emotions_desc">Методы управления стрессом и укрепления эмоционального
+        благополучия
+    </string>
+    <string name="wisdom_self_discipline_desc">Методы развития самодисциплины и улучшения
+        самоконтроля
+    </string>
+    <string name="wisdom_sport_desc">Здоровый образ жизни и физическая активность как средства
+        самосовершенствования
+    </string>
+    <string name="wisdom_creativity_desc">Как развивать и раскрывать свой креативный потенциал
+    </string>
+    <string name="wisdom_self_acceptance_desc">Как улучшить самооценку и развивать позитивное
+        отношение к себе
+    </string>
+    <string name="wisdom_family_desc">Советы по улучшению отношений в семье и поддержке друг друга
+    </string>
+    <string name="wisdom_finance_desc">Стратегии управления финансами и инвестирования для
+        достижения финансовых целей
+    </string>
+    <string name="wisdom_personal_efficiency_desc">Методы повышения личной продуктивности и
+        управления временем
+    </string>
+    <string name="wisdom_self_reflection_desc">Техники самоанализа и развития осознанности</string>
+    <string name="wisdom_meditation_desc">Пути духовного роста и методы медитации</string>
+    <string name="wisdom_carrier_desc">Советы по карьерному росту и улучшению профессиональных
+        навыков
+    </string>
+    <string name="wisdom_social_desc">Как улучшать коммуникативные навыки и отношения с
+        окружающими
+    </string>
+    <string name="wisdom_personality_types_desc">Различные методики оценки типов личности и их
+        влияние на поведение
+    </string>
+
+    <!--  ADD AREA  -->
+    <string name="add_area_title">Public Areas</string>
+    <string name="add_area_add_area_button">Add area</string>
+    <string name="add_area_already_added_button">Already added</string>
+    <string name="add_area_low_level_button">Low level</string>
+
+    <string name="add_area_edit_button">Edit</string>
+    <string name="add_area_leave_button">Leave</string>
+    <string name="add_area_delete_button">Delete</string>
+    <string name="add_area_save_button">Save</string>
+
+    <string name="add_area_confirm_delete_title">Delete area</string>
+    <string name="add_area_confirm_delete_text">All your notes and experience will be saved but
+        tasks will be deleted
+    </string>
+    <string name="add_area_confirm_leave_title">Leave area</string>
+    <string name="add_area_confirm_leave_text">All your notes and experience will be saved</string>
+    <!--  ADD AREA  -->
+
+    <!--  CREATE NOTE  -->
+    <string name="create_note_title">Create new note</string>
+    <string name="create_goal_title">Create new goal</string>
+
+    <string name="create_note_button">Create note</string>
+    <string name="create_goal_button">Create goal</string>
+
+    <string name="create_note_error_no_areas">You must first add or create an area</string>
+    <string name="select_area_for_note">Select area for note</string>
+    <string name="select_area_for_goal">Select area for goal</string>
+
+    <string name="create_note_text_hint">Place here note\'s content</string>
+    <string name="create_goal_text_hint">Place here your goal</string>
+
+    <string name="create_note_tags_title">Tags</string>
+    <string name="create_note_tags_hint">Enter your tag</string>
+
+    <string name="create_note_subnote_title">SubGoals</string>
+    <string name="create_note_subnote_hint">Enter here sub goals</string>
+
+    <string name="create_note_completion_date_title">Deadline</string>
+    <string name="create_note_completion_date_hint">Not set</string>
+
+    <string name="create_note_no_tasks_title">No available tasks</string>
+    <string name="create_note_without_task">Without task</string>
+    <!--  CREATE NOTE  -->
+
+    <!--  NOTE DETAIL  -->
+    <string name="note_detail_title">Note Info</string>
+    <string name="goal_detail_title">Goal Info</string>
+
+    <string name="note_detail_confirm_delete_title">Delete note</string>
+    <string name="goal_detail_confirm_delete_title">Delete goal</string>
+    <string name="note_detail_confirm_delete_text">Are you sure?</string>
+
+    <string name="note_detail_complete_goal_text">Complete</string>
+    <string name="note_detail_completed_goal_title">Completed on</string>
+
+    <string name="note_detail_cancel_completion_title">Cancel completion date</string>
+    <string name="note_detail_cancel_completion_text">Goal become uncompleted again</string>
+
+    <string name="note_detail_comments_title">Comments</string>
+    <string name="note_detail_add_comment_hint">Add comment...</string>
+    <!--  NOTE DETAIL  -->
+
+
+    <!--  SOCIAL  -->
+    <string name="social_general_feed_title">All</string>
+    <string name="social_areas_feed_title">Your areas</string>
+    <string name="social_followers_feed_title">You follows</string>
+    <!--  SOCIAL  -->
+
+    <!--  CALENDARS  -->
+    <string name="action_user_registered">You joined to GetBetter!</string>
+    <string name="action_user_created_area">You created an area!</string>
+    <string name="action_user_joined_area">You joined an area!</string>
+    <string name="action_user_leaved_area">You leaved an area!</string>
+
+    <string name="action_user_created_note">You created note!</string>
+    <string name="action_user_create_goal">You crated goal!</string>
+
+    <string name="action_user_completed_task">You completed task!</string>
+
+    <string name="action_user_completed_goal">You completed the goal!</string>
+    <string name="action_user_completed_subgoal">You completed the subgoal!</string>
+
+    <string name="action_user_created_comment">You created comment</string>
+    <string name="action_user_got_comment">%s created comment</string>
+
+    <string name="action_user_created_like">You liked</string>
+    <string name="action_user_got_like">%s add like</string>
+    <string name="action_user_got_like_anonymous">+1 new like</string>
+
+    <string name="action_user_followed">You followed</string>
+    <string name="action_user_got_follower">%s follows you</string>
+    <!--  CALENDARS  -->
+
+    <!--  SERVER EXCEPTIONS  -->
+    <string name="error_default">Something went wrong. Try again</string>
+
+    <string name="error_1001">Your session expired. Log in again</string>
+    <string name="error_905">Incorrect user\'s name</string>
+    <string name="error_906">Incorrect user\'s locale</string>
+    <string name="error_907">User not found</string>
+    <string name="error_908">Old password incorrect</string>
+    <string name="error_909">New passwords not match</string>
+
+    <string name="error_900">This account is not anonymous</string>
+    <string name="error_901">This email already exist. Try different</string>
+    <string name="error_902">Incorrect email. Try different</string>
+    <string name="error_903">Weak password. Try different</string>
+    <string name="error_904">Invalid credentials</string>
+
+    <string name="error_801">Incorrect area\'s name</string>
+    <string name="error_802">Incorrect area\'s description</string>
+    <string name="error_803">Incorrect area\'s required level</string>
+    <string name="error_804">You are already joined</string>
+    <string name="error_805">You are already leaved</string>
+    <string name="error_806">You don\'t have permissions to edit this area</string>
+    <string name="error_807">You don\'t have permissions to delete this area</string>
+    <string name="error_808">Area doesn\'t exist</string>
+    <string name="error_809">Your level is too low to join</string>
+    <string name="error_810">You can\'t join because area is private</string>
+    <string name="error_811">You can\'t join because area is inactive</string>
+    <string name="error_812">You can\'t delete because area is inactive</string>
+    <string name="error_813">You can\'t edit because area is inactive</string>
+    <string name="error_814">Your can\'t get area\'s details because its private</string>
+
+    <string name="error_699">Incorrect note\'s type</string>
+    <string name="error_700">Incorrect note\'s text</string>
+    <string name="error_701">Incorrect area selected</string>
+    <string name="error_702">You are not a member of this area</string>
+    <string name="error_703">Incorrect sub note text</string>
+    <string name="error_704">You don\'t have permissions to edit this note</string>
+    <string name="error_705">You don\'t have permission to delete this note</string>
+    <string name="error_706">Note doesn\'t exist</string>
+    <string name="error_707">You can\'t edit because note is inactive</string>
+    <string name="error_708">You can\'t delete because note is inactive</string>
+    <string name="error_709">You can\'t complete because note is inactive</string>
+    <string name="error_710">Goal already completed</string>
+    <string name="error_711">Sub goal already completed</string>
+    <string name="error_712">This note is not a goal</string>
+    <string name="error_713">You don\'t have permissions to complete this goal</string>
+    <string name="error_714">Sub goal doesn\'t exist</string>
+    <string name="error_715">This note doesn\'t contain such sub goal</string>
+    <string name="error_716">You can\'t get details because note is private</string>
+    <string name="error_717">The goal already uncompleted</string>
+    <string name="error_718">Subgoal already uncompleted</string>
+    <string name="error_719">Incorrect author</string>
+
+    <string name="error_600">Can\'t create comment because entity doesn\'t exist</string>
+    <string name="error_601">Incorrect text of comment</string>
+    <string name="error_602">You can\'t create comment because area is inactive</string>
+    <string name="error_603">You can\'t create comment because note is inactive</string>
+    <string name="error_604">You can\'t create comment because area is private</string>
+    <string name="error_605">You can\'t create comment because note is private</string>
+    <string name="error_606">Comment not found</string>
+    <string name="error_607">Invalid entity type for comment</string>
+    <string name="error_608">You can\'t delete comment because you are not an author</string>
+
+    <string name="error_650">Entity for like not found</string>
+    <string name="error_651">You already liked it</string>
+    <string name="error_652">You already disliked it</string>
+    <string name="error_653">You already removed like</string>
+    <string name="error_654">Invalid entity type for like</string>
+
+    <string name="error_500">User to follow not found</string>
+    <string name="error_501">You already followed on this user</string>
+    <string name="error_502">You already unfollowed from this user</string>
+
+    <string name="error_550">Incorrect feedback\'s message</string>
+    <string name="error_551">Feedback not found</string>
+    <string name="error_552">Incorrect feedback\'s type</string>
+    <string name="error_553">Incorrect feedback\'s status</string>
+    <string name="error_554">You don\'t have permission to add answer</string>
+
+    <string name="error_400">Task not found</string>
+    <string name="error_401">Task already in favorite</string>
+    <string name="error_402">Task is not in favorite</string>
+    <string name="error_403">Task already marked as not interesting</string>
+    <string name="error_404">Task already removed from not interesting</string>
+    <string name="error_405">Task already marked as completed</string>
+    <string name="error_406">Task already removed from completed</string>
+    <string name="error_407">You reached limit of favorite tasks</string>
+    <string name="error_408">You don\'t have permissions to update current list</string>
+    <string name="error_409">This task is not in your current list</string>
+    <!--  SERVER EXCEPTIONS  -->
+
+    <!--  DATE FORMATTER  -->
+    <string name="date_just_now">Just now</string>
+    <string name="date_one_min">1 min ago</string>
+    <string name="date_minutes">%s minutes ago</string>
+    <string name="date_one_hour">1 hour ago</string>
+    <string name="date_hours">%s hours ago</string>
+    <string name="date_yesterday">Yesterday at %s</string>
+    <string name="date_same_year">%s</string>
+    <!--  DATE FORMATTER  -->
 </resources>
