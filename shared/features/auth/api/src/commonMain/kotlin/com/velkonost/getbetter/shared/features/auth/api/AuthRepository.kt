@@ -16,4 +16,9 @@ interface AuthRepository<T> {
     suspend fun isUserLoggedIn(): Boolean
 
     suspend fun checkNeedsResetState(): Boolean
+
+    fun getPrivacyLink(): String
+
+    fun getTermsLink(): String
+
 }

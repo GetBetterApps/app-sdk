@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.android.features.auth
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
@@ -17,6 +18,17 @@ object AuthNavRoute : NavRoute<AuthViewModel> {
 
     @Composable
     override fun Content(viewModel: AuthViewModel) = AuthScreen(viewModel = viewModel)
+
+    @Composable
+    override fun Content(
+        viewModel: AuthViewModel,
+        forceHideBottomBar: MutableState<Boolean>
+    ) {
+        AuthScreen(
+            viewModel = viewModel,
+            forceHideBottomBar = forceHideBottomBar
+        )
+    }
 
     override val viewModel: AuthViewModel
         @Composable get() = koinViewModel()

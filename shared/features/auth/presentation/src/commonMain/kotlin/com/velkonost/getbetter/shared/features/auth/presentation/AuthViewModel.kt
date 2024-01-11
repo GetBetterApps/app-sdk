@@ -36,6 +36,8 @@ internal constructor(
                 emit(viewState.value.copy(forceSignUp = it))
             }
         }
+
+        fetchDocsLinks()
     }
 
     @Suppress("unused")
@@ -58,6 +60,15 @@ internal constructor(
 
         is AuthAction.AnonymousLoginClick -> loginAnonymous()
         is AuthAction.SwitchAuthClick -> switchAuth()
+    }
+
+    private fun fetchDocsLinks() {
+        emit(
+            viewState.value.copy(
+                privacyLink = authRepository.getPrivacyLink(),
+                termsLink = authRepository.getTermsLink()
+            )
+        )
     }
 
     private fun switchAuth() {

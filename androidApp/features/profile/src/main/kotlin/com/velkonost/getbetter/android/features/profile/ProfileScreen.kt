@@ -95,7 +95,6 @@ fun ProfileScreen(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true,
     )
-
     val scope = rememberCoroutineScope()
     val webViewLink = remember { mutableStateOf<String?>(null) }
 

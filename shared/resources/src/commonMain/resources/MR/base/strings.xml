@@ -163,9 +163,7 @@
     <string name="auth_signup_button">Sign up</string>
     <string name="auth_forgot_password">Forgot?</string>
     <string name="auth_later">Later</string>
-    <string name="auth_footer_text">By signing in, you are agreeing to our Terms of Service and
-        Privacy Policy
-    </string>
+    <string name="auth_footer_text">By signing in, you are agreeing to our</string>
     <string name="auth_dont_have_account">I don\'t have an account</string>
     <string name="auth_have_account">I already have an account</string>
 

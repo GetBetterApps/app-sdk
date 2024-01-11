@@ -6,6 +6,8 @@ import androidx.datastore.preferences.core.edit
 import com.velkonost.getbetter.shared.core.datastore.NEW_USER_RESET_AUTH_STATE
 import com.velkonost.getbetter.shared.core.datastore.TOKEN_KEY
 import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
+import com.velkonost.getbetter.shared.core.network.PRIVACY_URL
+import com.velkonost.getbetter.shared.core.network.TERMS_URL
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.flowRequest
 import com.velkonost.getbetter.shared.features.auth.api.AuthRepository
@@ -75,6 +77,10 @@ class AuthRepositoryImpl(
 
         return value
     }
+
+    override fun getPrivacyLink(): String = PRIVACY_URL
+
+    override fun getTermsLink(): String = TERMS_URL
 
     private suspend fun saveAuthToken(value: String) {
         localDataSource.edit { preferences ->

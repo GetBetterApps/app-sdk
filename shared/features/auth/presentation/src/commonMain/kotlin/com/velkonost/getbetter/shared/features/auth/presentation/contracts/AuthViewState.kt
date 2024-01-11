@@ -8,4 +8,6 @@ data class AuthViewState(
     val isRegistering: Boolean = true,
     val isLoading: Boolean = false,
     val forceSignUp: Boolean = false,
+    val privacyLink: String = "",
+    val termsLink: String = ""
 ) : UIContract.State
