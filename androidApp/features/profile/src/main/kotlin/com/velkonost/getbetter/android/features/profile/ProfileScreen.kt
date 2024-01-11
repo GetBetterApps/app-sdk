@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
@@ -20,10 +21,12 @@ import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -50,6 +53,7 @@ import com.velkonost.getbetter.shared.features.profile.contracts.SignUpClick
 import com.velkonost.getbetter.shared.features.profile.contracts.ThemeChange
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.stringResource
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 
@@ -58,7 +62,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun ProfileScreen(
     modifier: Modifier = Modifier,
-    viewModel: ProfileViewModel
+    viewModel: ProfileViewModel,
+    forceHideBottomBar: MutableState<Boolean> = mutableStateOf(false)
 ) {
     val scrollState = rememberScrollState()
     val state by viewModel.viewState.collectAsStateWithLifecycle()
@@ -93,6 +98,14 @@ fun ProfileScreen(
 
     val scope = rememberCoroutineScope()
     val webViewLink = remember { mutableStateOf<String?>(null) }
+
+    BackHandler {
+        scope.launch {
+            if (webViewSheetState.currentValue == ModalBottomSheetValue.Expanded) {
+                webViewSheetState.hide()
+            }
+        }
+    }
 
     LaunchedEffect(launcherPermissions) {
         if (
@@ -208,6 +221,17 @@ fun ProfileScreen(
             }
 
             else -> {}
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        combine(
+            snapshotFlow { webViewSheetState.currentValue }
+        ) { sheetState ->
+            val hideBottomBar = sheetState.first() != ModalBottomSheetValue.Hidden
+            hideBottomBar
+        }.collect {
+            forceHideBottomBar.value = it
         }
     }
 

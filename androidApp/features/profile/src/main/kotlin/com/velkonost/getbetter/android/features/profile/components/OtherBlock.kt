@@ -17,7 +17,7 @@ fun OtherBlock(
     onTermsClick: () -> Unit
 ) {
 
-    SectionTitle(text = stringResource(resource = SharedR.strings.profile_help_title))
+    SectionTitle(text = stringResource(resource = SharedR.strings.profile_other_title))
 
     PrimaryBox {
         Column {
