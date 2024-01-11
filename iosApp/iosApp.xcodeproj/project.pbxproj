@@ -174,6 +174,8 @@
 		46F0B3C32B1CDF1D00D6BCC1 /* TaskItemHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F0B3C22B1CDF1D00D6BCC1 /* TaskItemHeader.swift */; };
 		46F0B3C52B1CE3D700D6BCC1 /* TasksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F0B3C42B1CE3D700D6BCC1 /* TasksSection.swift */; };
 		46F0B3C82B1CFBE900D6BCC1 /* TaskDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F0B3C72B1CFBE900D6BCC1 /* TaskDetailHeader.swift */; };
+		46FAC9782B4FBC70007F2008 /* OtherBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FAC9772B4FBC70007F2008 /* OtherBlock.swift */; };
+		46FAC97B2B4FBCE2007F2008 /* AppWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FAC97A2B4FBCE2007F2008 /* AppWebView.swift */; };
 		46FCD3D32AF530BD0025D2C6 /* NoteDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FCD3D22AF530BD0025D2C6 /* NoteDetailScreen.swift */; };
 		46FCD3D52AF530D40025D2C6 /* NoteDetailRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FCD3D42AF530D40025D2C6 /* NoteDetailRoute.swift */; };
 		46FCD3D72AF532450025D2C6 /* NoteDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FCD3D62AF532450025D2C6 /* NoteDetailHeader.swift */; };
@@ -349,6 +351,8 @@
 		46F0B3C22B1CDF1D00D6BCC1 /* TaskItemHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemHeader.swift; sourceTree = "<group>"; };
 		46F0B3C42B1CE3D700D6BCC1 /* TasksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksSection.swift; sourceTree = "<group>"; };
 		46F0B3C72B1CFBE900D6BCC1 /* TaskDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailHeader.swift; sourceTree = "<group>"; };
+		46FAC9772B4FBC70007F2008 /* OtherBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherBlock.swift; sourceTree = "<group>"; };
+		46FAC97A2B4FBCE2007F2008 /* AppWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWebView.swift; sourceTree = "<group>"; };
 		46FCD3D22AF530BD0025D2C6 /* NoteDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailScreen.swift; sourceTree = "<group>"; };
 		46FCD3D42AF530D40025D2C6 /* NoteDetailRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailRoute.swift; sourceTree = "<group>"; };
 		46FCD3D62AF532450025D2C6 /* NoteDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailHeader.swift; sourceTree = "<group>"; };
@@ -633,6 +637,7 @@
 				460054AA2ABB18FC00586767 /* MenuItem.swift */,
 				460054AC2ABB1B5E00586767 /* HelpAndSupport.swift */,
 				463049E22AFD0590006F60D2 /* LevelBlock.swift */,
+				46FAC9772B4FBC70007F2008 /* OtherBlock.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -866,6 +871,7 @@
 		46B17E182AADF50D008C2BC4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				46FAC9792B4FBCDC007F2008 /* webview */,
 				4675C2A52AF76C2200B90AC3 /* notelist */,
 				4616B0882AF62B4200A4CDDE /* note */,
 				46B17E192AADF523008C2BC4 /* AppButton.swift */,
@@ -983,6 +989,14 @@
 				4669DDB92B1F4ACE00C1EF4E /* AbilityDataHidden.swift */,
 			);
 			path = components;
+			sourceTree = "<group>";
+		};
+		46FAC9792B4FBCDC007F2008 /* webview */ = {
+			isa = PBXGroup;
+			children = (
+				46FAC97A2B4FBCE2007F2008 /* AppWebView.swift */,
+			);
+			path = webview;
 			sourceTree = "<group>";
 		};
 		46FCD3D02AF530A20025D2C6 /* NoteDetail */ = {
@@ -1276,12 +1290,14 @@
 				460054A32ABB101600586767 /* SubscriptionBox.swift in Sources */,
 				466E519B2B1232DB00088425 /* FeedbackItem.swift in Sources */,
 				4667C90A2AC59A9B00BAA9DD /* MultilineTextField.swift in Sources */,
+				46FAC9782B4FBC70007F2008 /* OtherBlock.swift in Sources */,
 				46C6606A2AFCCCD900FA189C /* CommentItem.swift in Sources */,
 				468913632B31AAD9002C7105 /* PlaceholderView.swift in Sources */,
 				46B17E162AADF05D008C2BC4 /* ViewExt.swift in Sources */,
 				46FCD3D92AF537590025D2C6 /* AreaData.swift in Sources */,
 				460054A12ABB0D0100586767 /* SettingsButton.swift in Sources */,
 				46F0B3BD2B1CD5F100D6BCC1 /* TaskDetailScreen.swift in Sources */,
+				46FAC97B2B4FBCE2007F2008 /* AppWebView.swift in Sources */,
 				46407B982B28735F004A3AA2 /* AbilityDetailsRoute.swift in Sources */,
 				466E51982B12328A00088425 /* FeedbackRoute.swift in Sources */,
 				46D857762ACFF23100BE74DA /* PaginationState.swift in Sources */,

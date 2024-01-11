@@ -25,13 +25,6 @@ struct HelpAndSupport: View {
         
         PrimaryBox {
             VStack {
-//                MenuItem(
-//                    title: SharedR.strings().profile_help_rate.desc().localized(),
-//                    icon: SharedR.images().ic_empty_star.toUIImage()!
-//                ) {
-//                        
-//                }
-                
                 MenuItem(
                     title: SharedR.strings().profile_help_contact_support.desc().localized(),
                     icon: SharedR.images().ic_chat_cloud.toUIImage()!,

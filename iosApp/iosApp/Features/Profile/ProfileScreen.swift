@@ -27,6 +27,9 @@ struct ProfileScreen: View {
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var selectedImageData: Data? = nil
     
+    @State private var webViewVisible: Bool = false
+    @State private var webViewLink: String = "http://google.com"
+    
     var body: some View {
         @State var state = viewModel.viewStateValue as! ProfileViewState
         
@@ -76,6 +79,17 @@ struct ProfileScreen: View {
                     }
                 )
                 
+                OtherBlock(
+                    onPrivacyClick: {
+                        webViewLink = state.privacyLink
+                        webViewVisible = true
+                    },
+                    onTermsClick: {
+                        webViewLink = state.termsLink
+                        webViewVisible = true
+                    }
+                )
+                
                 AppButton(
                     labelText: SharedR.strings().profile_logout.desc().localized(),
                     isLoading: state.isLogoutLoading
@@ -101,6 +115,10 @@ struct ProfileScreen: View {
                     await uploadAvatar(selectedImage: image)
                 }
             }.edgesIgnoringSafeArea(.all)
+        }
+        .sheet(isPresented: $webViewVisible) {
+            AppWebView(link: webViewLink)
+                .ignoresSafeArea(.all)
         }
         .onAppear {
             viewModel.onAppear()
