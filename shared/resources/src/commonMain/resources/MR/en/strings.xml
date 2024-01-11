@@ -13,135 +13,132 @@
     <!--  GENERAL  -->
 
     <!--  HINTS  -->
-    <string name="hint_social_all_title">Добро пожаловать в ленту публичных записей!</string>
-    <string name="hint_social_all_text">Здесь собраны вдохновляющие истории и достижения сообщества
-        в различных областях. Погрузись в увлекательный мир, обменивайся опытом и найди вдохновение
-        для своих собственных свершений.\n\nПрокручивай ленту, чтобы быть в курсе последних событий
-        и делись своими собственными историями успеха!
+    <string name="hint_social_all_title">Welcome to the public feed!</string>
+    <string name="hint_social_all_text">Here you will find inspiring stories and achievements of the
+        community in various fields. Immerse yourself in the fascinating world, exchange
+        experiences, and find inspiration for your own accomplishments. \n\n Scroll through the feed
+        to stay up-to-date with the latest events and share your own success stories!
     </string>
 
-    <string name="hint_note_comments_text">Под записью ты всегда можешь поделиться своим мнением или
-        оставить вдохновляющий комментарий.\n\nТвои слова могут быть источником вдохновения для
-        других!
+    <string name="hint_note_comments_text">Under the post, you can always share your opinion or
+        leave an inspiring comment. \n\n Your words can be a source of inspiration for others!
     </string>
 
-    <string name="hint_diary_notes_title">Это твой дневник</string>
-    <string name="hint_diary_notes_text">Место, где твои вдохновляющие моменты и цели оживают. Здесь
-        ты найдешь все свои записи - как публичные, так и приватные.
+    <string name="hint_diary_notes_title">This is your diary</string>
+    <string name="hint_diary_notes_text">A place where your inspiring moments and goals come to
+        life. Here, you will find all your entries – both public and private.
     </string>
 
-    <string name="hint_diary_create_note_title">Создание записи</string>
-    <string name="hint_diary_create_note_text">Выбери область, которая лучше всего описывает твою
-        запись. Это поможет тебе и другим пользователям легче находить истории по интересам, а также
-        фильтровать записи в дневнике \n\nЕсли у твоей записи есть конкретное задание, добавь его
-        здесь. Это поможет яснее понимать суть твоего достижения \n\nДобавь теги, которые отражают
-        ключевые моменты или темы твоей записи. Так тебе будет легче ориентироваться в дальнейшем
-        \n\nВыбери уровень доступа: приватный, если хочешь сохранить историю для себя, или
-        публичный, чтобы поделиться своим вдохновением с сообществом
+    <string name="hint_diary_create_note_title">Creating a Post</string>
+    <string name="hint_diary_create_note_text">Choose the category that best describes your post.
+        This will help you and other users easily find stories based on interests and filter posts
+        in the journal. \n\n If your post has a specific task, add it here. This will help to
+        clarify the essence of your achievement. \n\n Add tags that reflect key moments or themes of
+        your post. This will make it easier for you to navigate in the future. \n\n Select the
+        access level: private if you want to keep the story for yourself, or public to share your
+        inspiration with the community.
     </string>
 
-    <string name="hint_diary_create_goal_title">Создание цели</string>
-    <string name="hint_diary_create_goal_text">Выбери область, которая наилучшим образом отражает
-        твою цель. Это поможет другим пользователям лучше понять, чему ты стремишься.\n\nЕсли у
-        твоей цели есть конкретное задание, добавь его здесь. Это поможет яснее определить, каким
-        образом ты планируешь ее достичь.\n\nДобавь теги, которые наилучшим образом описывают
-        ключевые моменты или темы твоей цели. Так она будет более понятной и
-        вдохновляющей.\n\nВыбери уровень доступа: приватный, если хочешь держать свои цели в
-        секрете, или публичный, чтобы вдохновить других своими стремлениями.\n\nУкажи срок, в
-        котором ты планируешь достичь своей цели. Это поможет тебе структурировать свои усилия и
-        добиться желаемого.\n\nДобавь подзадачи, чтобы разбить свою цель на более управляемые шаги.
-        Так ты сможешь лучше следить за своим прогрессом.
+    <string name="hint_diary_create_goal_title">Creating a Goal</string>
+    <string name="hint_diary_create_goal_text">Choose the category that best reflects your goal.
+        This will help other users better understand what you are striving for. \n\n If your goal
+        has a specific task, add it here. This will help to clarify how you plan to achieve it. \n\n
+        Add tags that best describe key moments or themes of your goal. This will make it more
+        understandable and inspiring. \n\n Select the access level: private if you want to keep your
+        goals a secret, or public to inspire others with your aspirations. \n\n Specify a timeframe
+        in which you plan to achieve your goal. This will help you structure your efforts and reach
+        your desired outcome. \n\n Add subtasks to break down your goal into more manageable steps.
+        This way, you can better track your progress.
     </string>
 
-    <string name="hint_diary_note_detail_text">На детальном экране записи ты можешь внести изменения
-        или удалить её, если нужно.\n\nВоплощай свои идеи в жизнь, редактируй и формируй свой
-        уникальный след в мире!
+    <string name="hint_diary_note_detail_text">On the detailed post screen, you can make changes or
+        delete it if necessary. \n\n Bring your ideas to life, edit, and shape your unique footprint
+        in the world!
     </string>
-    <string name="hint_diary_goal_detail_text">Детальный экран цели предоставляет возможность
-        отметить её как завершенную, менять статусы подзадач, а также редактировать или удалять
-        цель.\n\nТвои достижения под контролем!
-    </string>
-
-    <string name="hint_diary_areas_title">Области</string>
-    <string name="hint_diary_areas_text">Экран областей представляет собой сборник тем, в которых вы
-        можете совершенствоваться.\nЗдесь отображены области, которые вы уже добавили себе для
-        развития.\n\nЕсли хотите расширить свои горизонты, создайте собственную область, отражающую
-        ваш интерес или добавьте уже имеющиеся, нажав на \'+\'
+    <string name="hint_diary_goal_detail_text">The detailed goal screen provides the opportunity to
+        mark it as completed, change subtask statuses, as well as edit or delete the goal. \n\n Your
+        achievements under control!
     </string>
 
-    <string name="hint_diary_create_area_title">Создание области</string>
-    <string name="hint_diary_create_area_text">Задайте название, опишите, что область для вас
-        значит,
-        и решите, будете ли делиться ею с другими или оставите личной.\n\nВаша собственная область
-        поможет вам лучше фокусироваться на задачах и управлять своими приоритетами.
+    <string name="hint_diary_areas_title">Areas</string>
+    <string name="hint_diary_areas_text">The Areas screen is a collection of topics in which you can
+        improve yourself. \n\n Here are the areas you have already added for your development. \n\n
+        If you want to broaden your horizons, create your own area reflecting your interest, or add
+        existing ones by pressing \'+\'.
     </string>
 
-    <string name="hint_diary_add_area_title">Добавление области</string>
-    <string name="hint_diary_add_area_text">Выберите интересующие вас публичные области, созданные
-        другими пользователями.\nВместе с областью вы получите задания, связанные с этой тематикой,
-        которые будут вас вдохновлять.
+    <string name="hint_diary_create_area_title">Creating an Area</string>
+    <string name="hint_diary_create_area_text">Name your area, describe what it means to you, and
+        decide whether you will share it with others or keep it private. \n\n Your own area will
+        help you better focus on tasks and manage your priorities.
     </string>
 
-    <string name="hint_diary_area_detail_text">Здесь вы найдете всю информацию о конкретной области,
-        включая количество участников, заданий и созданных записей.\nВы можете в любой момент
-        вступить в эту область или наоборот покинуть ее.\nЕсли вы являетесь создателем области, вы
-        также можете отредактировать или удалить ее.
+    <string name="hint_diary_add_area_title">Adding an Area</string>
+    <string name="hint_diary_add_area_text">Select the public areas that interest you, created by
+        other users. \n\n Along with the area, you will receive tasks related to that topic, which
+        will inspire you.
     </string>
 
-    <string name="hint_diary_tasks_title">Задания</string>
-    <string name="hint_diary_tasks_text">Здесь находятся ваши текущие задания.\nСписок \'На
-        сегодня\'
-        обновляется ежедневно, предоставляя новые интересные задания специально для вас. \nЕсли вы
-        хотите сохранить задание для будущего выполнения, добавьте его в избранное. \nЗавершенные
-        задания сохраняются в отдельном разделе. \n\nЕсли вы желаете обновить список \'На сегодня\'
-        мгновенно, просто нажмите кнопку \'Обновить\'."
+    <string name="hint_diary_area_detail_text">Here you will find all the information about a
+        specific area, including the number of participants, tasks, and created posts. \n\n You can
+        join or leave this area at any time. \n\n If you are the creator of the area, you can also
+        edit or delete it.
     </string>
 
-    <string name="hint_diary_task_detail_title">Детали задания</string>
-    <string name="hint_diary_task_detail_text">Каждое задание связано с определенной
-        областью.\nСоздание записей по заданию приносит опыт в указанные в задании способности.\nВы
-        можете указать, что задание вам не интересно, и оно будет встречаться реже.\nКогда задание
-        выполнено, поместите его в раздел \'Завершено\'.
+    <string name="hint_diary_tasks_title">Tasks</string>
+    <string name="hint_diary_tasks_text">Here are your current tasks. \n The "For Today" list is
+        updated daily, providing new interesting tasks specifically for you. \n If you want to save
+        a task for future completion, add it to favorites. \n Completed tasks are stored in a
+        separate section. \n If you wish to instantly update the "For Today" list, simply press the
+        "Refresh" button.
     </string>
 
-    <string name="hint_calendars_title">Центр уведомлений</string>
-    <string name="hint_calendars_text">Здесь собраны все важные события, связанные с вами и вашими
-        достижениями.\nПросматривайте список, чтобы следить за тем, как формируется ваш путь
-        самосовершенствования: лайки, комментарии, созданные записи, добавленные области и многое
-        другое!
+    <string name="hint_diary_task_detail_title">Task Details</string>
+    <string name="hint_diary_task_detail_text">Each task is associated with a specific
+        area.\nCreating entries for the task earns experience in the abilities specified in the
+        task.\nYou
+        can indicate that the task is not interesting to you, and it will appear less
+        frequently.\nOnce the task
+        is completed, move it to the \'Completed\' section.
     </string>
 
-    <string name="hint_abilities_title">Способности</string>
-    <string name="hint_abilities_text">Это твой уникальный набор навыков!\nПрокачивай их, создавая
-        записи и выполняя цели по соответствующим заданиям.\nЧем выше уровень способностей, тем
-        больше контента доступно внутри каждой способности.
+    <string name="hint_calendars_title">Notification Center</string>
+    <string name="hint_calendars_text">Here, all important events related to you and your
+        achievements are gathered.\nBrowse the list to keep track of how your path to
+        self-improvement is forming: likes, comments, created posts, added areas, and much more!
     </string>
+
+    <string name="hint_abilities_title">Abilities</string>
+    <string name="hint_abilities_text">This is your unique set of skills!\nUpgrade them by creating
+        entries and accomplishing goals related to corresponding tasks.\nThe higher the level of
+        your abilities, the more content becomes available within each ability.
+    </string>
+
     <!--  HINTS  -->
 
     <!--  PLACEHOLDERS  -->
-    <string name="placeholder_social_all">Скоро здесь будет контент, созданный сообществом</string>
-    <string name="placeholder_social_areas">Публичные записи по областям, в которых вы состоите
+    <string name="placeholder_social_all">Community-generated content will be here soon</string>
+    <string name="placeholder_social_areas">Public posts in the areas you belong to</string>
+
+    <string name="placeholder_diary_notes">The diary is empty, but you can fix that - create a goal
+        or a regular entry
+    </string>
+    <string name="placeholder_diary_areas">The list of areas is empty! Quickly create a new area or
+        join existing ones
     </string>
 
-    <string name="placeholder_diary_notes">Дневник пуст, но ты можешь это исправить - создай цель
-        или обычную запись
+    <string name="placeholder_calendars_day_past">Nothing happened on this day</string>
+    <string name="placeholder_calendars_day_future">No plans for this day yet</string>
+
+    <string name="placeholder_abilities_favorite_affirmations">You haven\'t added anything to
+        favorites yet. It\'s time to fix that.
     </string>
-    <string name="placeholder_diary_areas">Список областей пуст! Скорее создай новую область или
-        вступи в уже существующие
+    <string name="placeholder_ability_details_notes">There are no entries in your diary yet that
+        would contribute experience to this ability.
     </string>
 
-    <string name="placeholder_calendars_day_past">В этот день ничего не произошло</string>
-    <string name="placeholder_calendars_day_future">На этот день пока нет планов</string>
-
-    <string name="placeholder_abilities_favorite_affirmations">Ты пока не добавил(а) ничего в
-        избранное. Стоит это исправить
-    </string>
-    <string name="placeholder_ability_details_notes">Пока в твоем дневнике нет записей, которые бы
-        принесли опыт по этой способности
-    </string>
-
-    <string name="placeholder_profile_support">Нашел баг или хочешь что-нибудь предложить? Скорее
-        пиши нам!
+    <string name="placeholder_profile_support">Found a bug or want to suggest something? Write to us
+        right away!
     </string>
     <!--  PLACEHOLDERS  -->
 
@@ -149,11 +146,12 @@
     <string name="skip_btn">SKIP</string>
     <string name="onboarding_btn">I am ready</string>
 
-    <string name="onboarding_step_1">впечатления для твоей жизни</string>
-    <string name="onboarding_step_2">выходи из зоны комфорта</string>
-    <string name="onboarding_step_3">управляй личной продуктивностью</string>
-    <string name="onboarding_step_4">достигай своих целей</string>
-    <string name="onboarding_step_5">мотивируй себя</string>
+    <string name="onboarding_step_1">Impressions for your life</string>
+    <string name="onboarding_step_2">Step out of your comfort zone</string>
+    <string name="onboarding_step_3">Manage personal productivity</string>
+    <string name="onboarding_step_4">Achieve your goals</string>
+    <string name="onboarding_step_5">Motivate yourself</string>
+
     <!--  ONBOARDING  -->
 
     <!--  AUTH  -->
@@ -202,8 +200,8 @@
 
     <!--  TASK DETAIL  -->
     <string name="task_detail_title">Task Info</string>
-    <string name="task_what_to_do_title">Как действовать?</string>
-    <string name="task_why_title">Зачем?</string>
+    <string name="task_what_to_do_title">What to do?</string>
+    <string name="task_why_title">Why?</string>
     <string name="task_abilities_title">Abilities</string>
 
     <string name="task_mask_as">Mark task as</string>
