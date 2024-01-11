@@ -6,7 +6,7 @@
 
     <!--  GENERAL  -->
     <string name="cancel">Отмена</string>
-    <string name="confirm">Подтвердить</string>
+    <string name="confirm">Да</string>
     <string name="continue_btn">Дальше</string>
     <string name="private_state">Приватно</string>
     <string name="public_state">Публично</string>
@@ -160,7 +160,7 @@
     <string name="auth_email_label">Почта</string>
     <string name="auth_password_label">Пароль</string>
     <string name="auth_login_button">Войти</string>
-    <string name="auth_signup_button">Зарегистрировать</string>
+    <string name="auth_signup_button">Регистрация</string>
     <string name="auth_forgot_password">Забыли?</string>
     <string name="auth_later">Позже</string>
     <string name="auth_footer_text">Выполняя вход, вы соглашаетесь с нашими</string>
@@ -180,7 +180,7 @@
     <string name="diary_tasks_title">Задания</string>
 
     <string name="diary_areas_add_existing_title">Добавить</string>
-    <string name="diary_areas_create_new_title">Создать новую</string>
+    <string name="diary_areas_create_new_title">Создать</string>
 
     <string name="diary_areas_create_new_area_title">Создать новую область</string>
     <string name="diary_areas_create_new_required_level">Требуемый уровень</string>
@@ -242,7 +242,7 @@
 
     <string name="profile_other_title">Другое</string>
     <string name="profile_terms_title">Условия Использования</string>
-    <string name="profile_privacy_title">Политика Конфиденциальности</string>
+    <string name="profile_privacy_title">Политика Конф-ти</string>
 
     <string name="experience_your_title">Твой опыт</string>
     <string name="experience_user_title">Опыт пользователя</string>
@@ -376,8 +376,8 @@
     <string name="create_note_title">Создать новую запись</string>
     <string name="create_goal_title">Создать новую цель</string>
 
-    <string name="create_note_button">Создание записи</string>
-    <string name="create_goal_button">Создание цели</string>
+    <string name="create_note_button">Запись</string>
+    <string name="create_goal_button">Цель</string>
 
     <string name="create_note_error_no_areas">Сначала необходимо добавить или создать область
     </string>
@@ -536,9 +536,9 @@
     <string name="error_401">Задание уже в избранном</string>
     <string name="error_402">Задание не в избранном</string>
     <string name="error_403">Задание уже помечено как неинтересное</string>
-    <string name="error_404">С задания уже убрана метка 'неинтересное'</string>
+    <string name="error_404">С задания уже убрана метка \'неинтересное\'</string>
     <string name="error_405">Задание уже завершено</string>
-    <string name="error_406">С задания уже убрана метка 'завершено'</string>
+    <string name="error_406">С задания уже убрана метка \'завершено\'</string>
     <string name="error_407">Ты достиг лимита избранных заданий</string>
     <string name="error_408">Нет прав на обновление списка заданий</string>
     <string name="error_409">Этого задания нет в твоем списке текущих заданий</string>
