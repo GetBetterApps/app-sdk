@@ -16,7 +16,7 @@ import kotlinx.serialization.json.Json
 
 const val KTOR_REQUEST_TIMEOUT_MILLIS = 30_000L
 
-private const val URL = "http://get-better.pro"
+private const val URL = "https://get-better.pro"
 const val AVATAR_URL = "$URL/userinfo/getAvatar/"
 const val AFFIRMATION_IMAGE_URL = "$URL/affirmations/image/"
 
