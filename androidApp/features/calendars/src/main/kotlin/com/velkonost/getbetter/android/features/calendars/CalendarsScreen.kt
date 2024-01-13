@@ -159,7 +159,7 @@ fun CalendarsScreen(
                                     onAreaClick = {
                                         scope.launch {
                                             selectedAreaId.value =
-                                                (item.relatedData as Area).id
+                                                (item.data as Area).id
                                             areaDetailSheetState.show()
                                         }
                                     },

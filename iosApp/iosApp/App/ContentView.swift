@@ -1,7 +1,6 @@
 import SwiftUI
 import SharedSDK
 import KMPNativeCoroutinesAsync
-import SwiftUIModal
 import Combine
 
 struct ContentView: View {
