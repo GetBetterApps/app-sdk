@@ -56,53 +56,53 @@ struct AreaActionItem: View {
                 
                 Spacer()
                 
-                if item.isPrivate {
-                    VStack {
-                        Image(uiImage: SharedR.images().ic_lock.toUIImage()!)
-                            .resizable()
-                            .renderingMode(.template)
-                            .scaledToFit()
-                            .padding(4)
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(.iconInactive)
-                            .background(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(Color.mainBackground)
-                            )
-                        Spacer()
-                    }
-                } else {
-                    ZStack(alignment: .center) {
-                        if (!item.likesData.isLikesLoading) {
-                            VStack {
-                                Image(
-                                    uiImage: item.likesData.userLike == LikeType.positive ? SharedR.images().ic_heart.toUIImage()! : SharedR.images().ic_heart_empty.toUIImage()!
-                                )
-                                .resizable()
-                                .renderingMode(.template)
-                                .foregroundColor(.buttonGradientStart)
-                                .scaledToFill()
-                                .frame(width: 24, height: 24)
-                                
-                                Text(String(item.likesData.totalLikes))
-                                    .style(.bodySmall)
-                                    .foregroundColor(.textPrimary)
-                            }
-                            .onTapGesture {
-                                onLikeClick(item)
-                            }
-                        } else {
-                            HStack {
-                                Spacer()
-                                Loader()
-                                    .scaleEffect(0.5)
-                                Spacer()
-                            }
-                        }
-                    }
-                    .frame(width: 32, height: 32)
-                    .animation(.easeInOut, value: item.likesData.isLikesLoading)
-                }
+//                if item.isPrivate {
+//                    VStack {
+//                        Image(uiImage: SharedR.images().ic_lock.toUIImage()!)
+//                            .resizable()
+//                            .renderingMode(.template)
+//                            .scaledToFit()
+//                            .padding(4)
+//                            .frame(width: 24, height: 24)
+//                            .foregroundColor(.iconInactive)
+//                            .background(
+//                                RoundedRectangle(cornerRadius: 8)
+//                                    .fill(Color.mainBackground)
+//                            )
+//                        Spacer()
+//                    }
+//                } else {
+//                    ZStack(alignment: .center) {
+//                        if (!item.likesData.isLikesLoading) {
+//                            VStack {
+//                                Image(
+//                                    uiImage: item.likesData.userLike == LikeType.positive ? SharedR.images().ic_heart.toUIImage()! : SharedR.images().ic_heart_empty.toUIImage()!
+//                                )
+//                                .resizable()
+//                                .renderingMode(.template)
+//                                .foregroundColor(.buttonGradientStart)
+//                                .scaledToFill()
+//                                .frame(width: 24, height: 24)
+//                                
+//                                Text(String(item.likesData.totalLikes))
+//                                    .style(.bodySmall)
+//                                    .foregroundColor(.textPrimary)
+//                            }
+//                            .onTapGesture {
+//                                onLikeClick(item)
+//                            }
+//                        } else {
+//                            HStack {
+//                                Spacer()
+//                                Loader()
+//                                    .scaleEffect(0.5)
+//                                Spacer()
+//                            }
+//                        }
+//                    }
+//                    .frame(width: 32, height: 32)
+//                    .animation(.easeInOut, value: item.likesData.isLikesLoading)
+//                }
                 
             }.frame(minWidth: 0, maxWidth: .infinity)
         }
