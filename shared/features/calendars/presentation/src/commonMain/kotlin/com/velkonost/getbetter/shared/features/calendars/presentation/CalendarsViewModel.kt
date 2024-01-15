@@ -58,6 +58,10 @@ internal constructor(
 
     private var fetchDateItemsJob: Job? = null
 
+    fun onAppear() {
+        viewState.value.datesState.selectedDate?.let { getItemsForDay(it.id) }
+    }
+
     init {
         initItems()
 

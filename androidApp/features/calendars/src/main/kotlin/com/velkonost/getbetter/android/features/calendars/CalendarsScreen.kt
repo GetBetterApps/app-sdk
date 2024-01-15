@@ -34,6 +34,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.areadetail.AreaDetailScreen
 import com.velkonost.getbetter.android.features.calendars.components.ActionItem
@@ -44,6 +45,7 @@ import com.velkonost.getbetter.android.features.profiledetail.ProfileDetailScree
 import com.velkonost.getbetter.core.compose.components.HintButton
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.PlaceholderView
+import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.features.calendars.presentation.CalendarsViewModel
@@ -239,6 +241,16 @@ fun CalendarsScreen(
             hideBottomBar
         }.collect {
             forceHideBottomBar.value = it
+        }
+    }
+
+    OnLifecycleEvent { _, event ->
+        when (event) {
+            Lifecycle.Event.ON_RESUME -> {
+                viewModel.onAppear()
+            }
+
+            else -> {}
         }
     }
 

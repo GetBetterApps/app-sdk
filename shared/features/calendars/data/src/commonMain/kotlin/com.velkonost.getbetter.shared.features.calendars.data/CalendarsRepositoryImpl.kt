@@ -5,6 +5,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import com.velkonost.getbetter.shared.core.datastore.CALENDARS_UPDATED_NOTE_ID
 import com.velkonost.getbetter.shared.core.datastore.HINT_CALENDARS_SHOULD_SHOW
+import com.velkonost.getbetter.shared.core.datastore.SOCIAL_UPDATED_NOTE_ID
+import com.velkonost.getbetter.shared.core.datastore.UPDATED_NOTE_ID
 import com.velkonost.getbetter.shared.core.datastore.USER_REGISTRATION_MILLIS
 import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
 import com.velkonost.getbetter.shared.core.model.user.UserAction
@@ -93,6 +95,8 @@ class CalendarsRepositoryImpl(
     override suspend fun saveUpdatedNoteId(noteId: Int) {
         localDataSource.edit { preferences ->
             preferences[CALENDARS_UPDATED_NOTE_ID] = noteId
+            preferences[UPDATED_NOTE_ID] = noteId
+            preferences[SOCIAL_UPDATED_NOTE_ID] = noteId
         }
     }
 

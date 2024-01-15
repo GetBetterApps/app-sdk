@@ -3,11 +3,13 @@ package com.velkonost.getbetter.shared.features.diary.data
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import com.velkonost.getbetter.shared.core.datastore.CALENDARS_UPDATED_NOTE_ID
 import com.velkonost.getbetter.shared.core.datastore.HINT_DIARY_AREAS_SHOULD_SHOW
 import com.velkonost.getbetter.shared.core.datastore.HINT_DIARY_CREATE_AREA_SHOULD_SHOW
 import com.velkonost.getbetter.shared.core.datastore.HINT_DIARY_NOTES_SHOULD_SHOW
 import com.velkonost.getbetter.shared.core.datastore.HINT_DIARY_TASKS_SHOULD_SHOW
 import com.velkonost.getbetter.shared.core.datastore.NEW_USER_RESET_DIARY_STATE
+import com.velkonost.getbetter.shared.core.datastore.SOCIAL_UPDATED_NOTE_ID
 import com.velkonost.getbetter.shared.core.datastore.UPDATED_NOTE_ID
 import com.velkonost.getbetter.shared.core.util.ResultState
 import com.velkonost.getbetter.shared.core.util.flowLocalRequest
@@ -22,6 +24,8 @@ class DiaryRepositoryImpl(
     override suspend fun saveUpdatedNoteId(noteId: Int) {
         localDataSource.edit { preferences ->
             preferences[UPDATED_NOTE_ID] = noteId
+            preferences[SOCIAL_UPDATED_NOTE_ID] = noteId
+            preferences[CALENDARS_UPDATED_NOTE_ID] = noteId
         }
     }
 
