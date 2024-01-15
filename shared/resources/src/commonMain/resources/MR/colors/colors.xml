@@ -27,6 +27,11 @@
         <dark>#1f2d4c</dark>
     </color>
 
+    <color name="auth_text_field_background">
+        <light>#1f2d4c</light>
+        <dark>#1f2d4c</dark>
+    </color>
+
     <color name="onboarding_background_gradient_start">
         <light>#8286de</light>
         <dark>#8286de</dark>

@@ -48,7 +48,7 @@ fun AuthTextField(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             unfocusedContainerColor = colorResource(resource = SharedR.colors.onboarding_text_field),
-            focusedContainerColor = colorResource(resource = SharedR.colors.text_field_background),
+            focusedContainerColor = colorResource(resource = SharedR.colors.auth_text_field_background),
             cursorColor = colorResource(resource = SharedR.colors.text_light)
         ),
 
