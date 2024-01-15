@@ -28,7 +28,7 @@ struct AreaPickerItem: View {
                 
                 Text(area.name)
                     .style(.titleLarge)
-                    .foregroundColor(.textPrimary)
+                    .foregroundColor(.textRegularTitle)
                     .padding(.top, 12)
             }
         }

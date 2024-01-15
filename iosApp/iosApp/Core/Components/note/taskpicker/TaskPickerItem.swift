@@ -23,7 +23,7 @@ struct TaskPickerItem: View {
             VStack {
                 Text(task.name)
                     .style(.titleMedium)
-                    .foregroundColor(.textLight)
+                    .foregroundColor(.textRegularTitle)
                     .lineLimit(1)
                 Text(task.why)
                     .style(.bodyMedium)

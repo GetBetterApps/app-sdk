@@ -16,7 +16,7 @@ struct TaskPickerEmptyItem : View {
             VStack {
                 Text(SharedR.strings().create_note_without_task.desc().localized())
                     .style(.titleLarge)
-                    .foregroundColor(.textPrimary)
+                    .foregroundColor(.textRegularTitle)
                     .padding(.top, 12)
             }
         }
