@@ -53,7 +53,12 @@ internal constructor(
     init {
         launchJob {
             note.collectLatest { note ->
-                emit(viewState.value.copy(commentsData = CommentsData()))
+                emit(
+                    viewState.value.copy(
+                        commentsData = CommentsData(),
+                        noteState = NoteState.View
+                    )
+                )
 
                 note?.updateUI()
                 note?.authorId?.let {

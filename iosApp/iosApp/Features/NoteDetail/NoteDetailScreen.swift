@@ -232,7 +232,7 @@ struct NoteDetailScreen : View {
                     endTextEditing()
                 }
                 
-                if !state.isNotePrivate {
+                if !state.isNotePrivate && state.noteState == NoteState.view {
                     VStack(spacing: 0) {
                         Spacer()
                         NewCommentTextField(
