@@ -118,8 +118,8 @@ fun TaskDetailScreen(
                     Text(
                         modifier = modifier.padding(top = 24.dp),
                         text = state.task!!.name,
-                        style = MaterialTheme.typography.labelLarge.copy(fontSize = 18.sp),
-                        color = colorResource(resource = SharedR.colors.text_title),
+                        style = MaterialTheme.typography.labelLarge.copy(fontSize = 20.sp),
+                        color = colorResource(resource = SharedR.colors.text_regular_title),
                     )
                 }
 
