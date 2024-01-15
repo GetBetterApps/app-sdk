@@ -64,7 +64,7 @@ struct AreaPicker: View {
                     .onPageChanged({ page in
                         onAreaSelect(areas[page])
                     })
-                    .preferredItemSize(CGSize(width: 300, height: 150))
+                    .preferredItemSize(CGSize(width: 280, height: 140))
                     .frame(height: 150)
                     .padding(.bottom, 16)
                 }

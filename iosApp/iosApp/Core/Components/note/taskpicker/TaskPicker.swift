@@ -67,7 +67,7 @@ struct TaskPicker: View {
                     .onPageChanged({ page in
                         onTaskSelect(tasks[page])
                     })
-                    .preferredItemSize(CGSize(width: 300, height: 150))
+                    .preferredItemSize(CGSize(width: 280, height: 140))
                     .frame(height: 150)
                     .padding(.bottom, 16)
                     .onChange(of: tasks) { value in
