@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.velkonost.getbetter.shared.core.model.area.StatsData
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -40,7 +41,7 @@ internal fun AreaDataContent(
                 modifier = modifier.align(Alignment.Center),
                 text = statsData.membersAmountStr.toString(LocalContext.current),
                 color = colorResource(resource = SharedR.colors.text_secondary),
-                style = MaterialTheme.typography.titleSmall,
+                style = MaterialTheme.typography.titleSmall.copy(fontSize = 13.sp),
                 textAlign = TextAlign.Center
             )
         }
@@ -60,7 +61,7 @@ internal fun AreaDataContent(
                     .align(Alignment.Center),
                 text = statsData.notesAmountStr.toString(LocalContext.current),
                 color = colorResource(resource = SharedR.colors.text_secondary),
-                style = MaterialTheme.typography.titleSmall,
+                style = MaterialTheme.typography.titleSmall.copy(fontSize = 13.sp),
                 textAlign = TextAlign.Center
             )
         }
@@ -80,7 +81,7 @@ internal fun AreaDataContent(
                     .align(Alignment.Center),
                 text = statsData.tasksAmountStr.toString(LocalContext.current),
                 color = colorResource(resource = SharedR.colors.text_secondary),
-                style = MaterialTheme.typography.titleSmall,
+                style = MaterialTheme.typography.titleSmall.copy(fontSize = 13.sp),
                 textAlign = TextAlign.Center
             )
         }

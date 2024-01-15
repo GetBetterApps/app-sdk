@@ -131,7 +131,7 @@ extension AreaDetailContent {
     private var AreaDataContent: some View {
         HStack {
             Text(areaData.statsData.membersAmountStr.localized())
-                .style(.titleSmall)
+                .style(.titleSmall, withSize: 13)
                 .foregroundColor(.textSecondaryTitle)
                 .multilineTextAlignment(.center)
                 .frame(width: UIScreen.screenWidth * 0.2)
@@ -145,7 +145,7 @@ extension AreaDetailContent {
                 )
             Spacer()
             Text(areaData.statsData.notesAmountStr.localized())
-                .style(.titleSmall)
+                .style(.titleSmall, withSize: 13)
                 .foregroundColor(.textSecondaryTitle)
                 .multilineTextAlignment(.center)
                 .frame(width: UIScreen.screenWidth * 0.2)
@@ -159,7 +159,7 @@ extension AreaDetailContent {
                 )
             Spacer()
             Text(areaData.statsData.tasksAmountStr.localized())
-                .style(.titleSmall)
+                .style(.titleSmall, withSize: 13)
                 .foregroundColor(.textSecondaryTitle)
                 .multilineTextAlignment(.center)
                 .frame(width: UIScreen.screenWidth * 0.2)
