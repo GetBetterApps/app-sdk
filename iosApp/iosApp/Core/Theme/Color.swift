@@ -19,6 +19,7 @@ public extension SwiftUI.Color {
     
     static let mainBackground = SwiftUI.Color(SharedR.colors.shared.main_background.getUIColor())
     static let textFieldBackground = SwiftUI.Color(SharedR.colors.shared.text_field_background.getUIColor())
+    static let authTextFieldBackground = SwiftUI.Color(SharedR.colors.shared.auth_text_field_background.getUIColor())
     
     static let onboardingBackgroundGradientStart = SwiftUI.Color(SharedR.colors.shared.onboarding_background_gradient_start.getUIColor())
     static let onboardingBackgroundGradientEnd = SwiftUI.Color(SharedR.colors.shared.onboarding_background_gradient_end.getUIColor())

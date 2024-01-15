@@ -42,7 +42,7 @@ struct AuthTextField: View {
                 .focused($isFocused)
                 .padding(.init(top: .zero, leading: 16, bottom: .zero, trailing: 16))
                 .frame(height: 56)
-                .background(isFocused ? Color.textFieldBackground : Color.onboardingTextField)
+                .background(isFocused ? Color.authTextFieldBackground : Color.onboardingTextField)
                 .cornerRadius(12)
                 .padding(.init(top: 12, leading: .zero, bottom: .zero, trailing: .zero))
                 .onChange(of: value) { newValue in
@@ -60,7 +60,7 @@ struct AuthTextField: View {
                 .focused($isFocused)
                 .padding(.init(top: .zero, leading: 16, bottom: .zero, trailing: 16))
                 .frame(height: 56)
-                .background(isFocused ? Color.textFieldBackground : Color.onboardingTextField)
+                .background(isFocused ? Color.authTextFieldBackground : Color.onboardingTextField)
                 .cornerRadius(12)
                 .padding(.init(top: 12, leading: .zero, bottom: .zero, trailing: .zero))
                 .onChange(of: value) { newValue in
