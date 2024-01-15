@@ -105,6 +105,7 @@ fun AbilityDetailsScreen(
         if (!state.isFavorite) {
             PrimaryTabs(
                 alpha = tabsAlpha,
+                shadow = if (pagerState.currentPage == 0) 8f else 0f,
                 tabs = state.tabs.map { it.title.toString(LocalContext.current) },
                 pagerState = pagerState,
                 topPadding = tabsTopPadding.toInt()

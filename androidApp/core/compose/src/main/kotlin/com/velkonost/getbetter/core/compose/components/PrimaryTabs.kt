@@ -38,6 +38,7 @@ fun PrimaryTabs(
     topPadding: Int = 40,
     alpha: Float = 1f,
     widthFraction: Float = 1f,
+    shadow: Float = 8f,
     pagerState: PagerState
 ) {
     val scope = rememberCoroutineScope()
@@ -48,7 +49,7 @@ fun PrimaryTabs(
                 .alpha(alpha)
                 .padding(top = topPadding.dp, start = 20.dp, end = 20.dp)
                 .shadow(
-                    elevation = 8.dp,
+                    elevation = shadow.dp,
                     shape = MaterialTheme.shapes.medium,
                 )
                 .fillMaxWidth(widthFraction)
