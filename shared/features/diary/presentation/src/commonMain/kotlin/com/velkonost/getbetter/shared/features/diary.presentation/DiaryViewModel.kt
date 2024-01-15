@@ -213,6 +213,8 @@ internal constructor(
     }
 
     private fun obtainTaskFavorite(value: TaskUI) {
+        if (tasksFavoriteJobsMap.containsKey(value.id)) return
+
         launchJob {
             val tasksViewState = viewState.value.tasksViewState
             val request = if (tasksViewState.favoriteItems.any { it.id == value.id }) {
@@ -239,16 +241,20 @@ internal constructor(
                             value.copy(isFavoriteLoading = it)
                     }
 
-                    val tasksViewState = viewState.value.tasksViewState.copy(
+                    val updatedTasksViewState = viewState.value.tasksViewState.copy(
                         favoriteItems = favoriteItems,
                         currentItems = currentItems
                     )
-                    emit(viewState.value.copy(tasksViewState = tasksViewState))
+                    emit(viewState.value.copy(tasksViewState = updatedTasksViewState))
                 }
                 onSuccess {
                     fetchTasks()
                 }
             }
+        }.also {
+            tasksFavoriteJobsMap[value.id!!] = it
+        }.invokeOnCompletion {
+            tasksFavoriteJobsMap.remove(value.id)
         }
     }
 
