@@ -162,6 +162,9 @@ struct CalendarsScreen: View {
         .sheet(isPresented: $showingProfileDetailSheet) {
             ProfileDetailScreen(userId: $selectedUserId)
         }
+        .onAppear {
+            viewModel.onAppear()    
+        }
         
     }
 }
