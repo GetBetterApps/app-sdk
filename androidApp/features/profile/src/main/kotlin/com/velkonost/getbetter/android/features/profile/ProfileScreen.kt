@@ -124,9 +124,9 @@ fun ProfileScreen(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(horizontal = 16.dp)
             .verticalScroll(scrollState)
-            .padding(bottom = 140.dp)
+            .padding(bottom = 140.dp, top = 16.dp)
     ) {
 
         ProfileHeader(
