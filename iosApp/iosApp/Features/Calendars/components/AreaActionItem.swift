@@ -33,7 +33,7 @@ struct AreaActionItem: View {
                     .scaledToFill()
                 
                 
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 0) {
                     Spacer()
                     Text(item.name)
                         .style(.labelLarge)
@@ -47,7 +47,7 @@ struct AreaActionItem: View {
                         .foregroundColor(.textSecondaryTitle)
                         .lineLimit(2)
                         .fixedSize(horizontal: false, vertical: true)
-                        .padding(.top, 4)
+                        .padding(.top, 2)
                         .multilineTextAlignment(.leading)
                     
                     Spacer()
