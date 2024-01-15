@@ -45,7 +45,7 @@ fun ColumnScope.TaskPickerEmptyItem(
             Text(
                 modifier = modifier.padding(top = 12.dp),
                 text = stringResource(resource = SharedR.strings.create_note_without_task),
-                color = colorResource(resource = SharedR.colors.text_primary),
+                color = colorResource(resource = SharedR.colors.text_regular_title),
                 style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Center,
                 overflow = TextOverflow.Ellipsis

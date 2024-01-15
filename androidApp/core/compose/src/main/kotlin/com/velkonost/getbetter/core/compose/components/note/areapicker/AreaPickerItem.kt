@@ -54,7 +54,7 @@ fun ColumnScope.AreaPickerItem(
             Text(
                 modifier = modifier.padding(top = 12.dp),
                 text = area.name,
-                color = colorResource(resource = SharedR.colors.text_primary),
+                color = colorResource(resource = SharedR.colors.text_regular_title),
                 style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Center,
                 overflow = TextOverflow.Ellipsis

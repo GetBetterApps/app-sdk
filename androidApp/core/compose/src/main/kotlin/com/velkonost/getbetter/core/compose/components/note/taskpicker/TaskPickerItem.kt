@@ -44,7 +44,7 @@ fun ColumnScope.TaskPickerItem(
 
             Text(
                 text = task.name,
-                color = colorResource(resource = SharedR.colors.text_light),
+                color = colorResource(resource = SharedR.colors.text_regular_title),
                 style = MaterialTheme.typography.titleMedium,
                 textAlign = TextAlign.Center,
                 overflow = TextOverflow.Ellipsis,
