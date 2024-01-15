@@ -23,7 +23,6 @@ struct CalendarDateItem: View {
     }
     
     var body: some View {
-        
         VStack {
             Text(item.dayOfWeek.localized().uppercased())
                 .style(.labelMedium)
@@ -39,7 +38,7 @@ struct CalendarDateItem: View {
         .background(
             RoundedRectangle(cornerRadius: 8)
                 .fill(isSelected ? Color.buttonGradientStart : Color.backgroundItem)
-                .shadow(radius: 4)
+                .shadow(radius: 2)
         )
         .onTapGesture {
             onClick(item.id)
