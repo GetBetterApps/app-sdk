@@ -61,7 +61,7 @@ struct TaskDetailScreen : View {
                             HStack {
                                 Text(state.task!.name)
                                     .style(.labelLarge, withSize: 18)
-                                    .foregroundColor(.textLight)
+                                    .foregroundColor(.textTitle)
                                     .padding(.top, 24)
                                 Spacer()
                             }
