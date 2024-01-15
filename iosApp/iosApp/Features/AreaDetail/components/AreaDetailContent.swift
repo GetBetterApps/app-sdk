@@ -36,7 +36,6 @@ struct AreaDetailContent: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
-                
                 ZStack {
                     HStack {
                         Spacer()
@@ -55,9 +54,7 @@ struct AreaDetailContent: View {
                     }
                     
                     HStack {
-                        
                         HintButton(onClick: onHintClick)
-                        
                         Spacer()
                         ZStack(alignment: .center) {
                             if (!areaData.likesData.isLikesLoading) {
@@ -137,7 +134,7 @@ extension AreaDetailContent {
                 .style(.titleSmall)
                 .foregroundColor(.textSecondaryTitle)
                 .multilineTextAlignment(.center)
-                .frame(width: 90)
+                .frame(width: UIScreen.screenWidth * 0.2)
                 .padding(.top, 4)
                 .padding(.bottom, 4)
                 .padding(.leading)
@@ -151,7 +148,7 @@ extension AreaDetailContent {
                 .style(.titleSmall)
                 .foregroundColor(.textSecondaryTitle)
                 .multilineTextAlignment(.center)
-                .frame(width: 90)
+                .frame(width: UIScreen.screenWidth * 0.2)
                 .padding(.top, 4)
                 .padding(.bottom, 4)
                 .padding(.leading)
@@ -165,7 +162,7 @@ extension AreaDetailContent {
                 .style(.titleSmall)
                 .foregroundColor(.textSecondaryTitle)
                 .multilineTextAlignment(.center)
-                .frame(width: 90)
+                .frame(width: UIScreen.screenWidth * 0.2)
                 .padding(.top, 4)
                 .padding(.bottom, 4)
                 .padding(.leading)
