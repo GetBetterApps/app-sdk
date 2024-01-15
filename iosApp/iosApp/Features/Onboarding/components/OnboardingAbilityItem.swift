@@ -24,7 +24,7 @@ struct OnboardingAbilityItem: View {
                 HStack {
                     Text(item.name)
                         .style(.titleMedium)
-                        .foregroundColor(.textLight)
+                        .foregroundColor(.textRegularTitle)
                     Spacer()
                 }
                 

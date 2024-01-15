@@ -44,7 +44,10 @@ fun AbilityItem(
             Text(
                 text = if (isFavorite) stringResource(resource = SharedR.strings.ability_favorite_title) else item.name,
                 style = MaterialTheme.typography.titleMedium,
-                color = colorResource(resource = SharedR.colors.text_light)
+                color = colorResource(
+                    resource = if (isFavorite) SharedR.colors.text_light
+                    else SharedR.colors.text_regular_title
+                )
             )
 
             Text(

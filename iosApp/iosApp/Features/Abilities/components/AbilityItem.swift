@@ -28,7 +28,7 @@ struct AbilityItem: View {
                 HStack {
                     Text(isFavorite ? SharedR.strings().ability_favorite_title.desc().localized() : item.name)
                         .style(.titleMedium)
-                        .foregroundColor(.textLight)
+                        .foregroundColor(isFavorite ? .textLight : .textRegularTitle)
                     Spacer()
                 }
                 

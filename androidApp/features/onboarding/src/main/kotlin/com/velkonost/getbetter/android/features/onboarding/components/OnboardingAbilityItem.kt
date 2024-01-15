@@ -33,7 +33,7 @@ fun OnboardingAbilityItem(
                 Text(
                     text = item.name,
                     style = MaterialTheme.typography.titleMedium,
-                    color = colorResource(resource = SharedR.colors.text_light)
+                    color = colorResource(resource = SharedR.colors.text_regular_title)
                 )
 
                 Text(
