@@ -45,7 +45,8 @@ fun AppAlertDialog(
             ) {
                 Text(
                     text = confirmTitle,
-                    style = androidx.compose.material3.MaterialTheme.typography.bodyMedium
+                    style = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
+                    color = colorResource(resource = SharedR.colors.text_light)
                 )
             }
         },
@@ -59,7 +60,8 @@ fun AppAlertDialog(
             ) {
                 Text(
                     text = cancelTitle,
-                    style = androidx.compose.material3.MaterialTheme.typography.bodyMedium
+                    style = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
+                    color = colorResource(resource = SharedR.colors.text_light)
                 )
             }
         },
