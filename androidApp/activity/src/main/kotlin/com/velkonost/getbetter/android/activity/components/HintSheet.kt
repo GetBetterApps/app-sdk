@@ -51,7 +51,7 @@ fun HintSheet(
                         Text(
                             text = state.title!!.toString(context),
                             style = MaterialTheme.typography.titleMedium,
-                            color = colorResource(resource = SharedR.colors.text_title)
+                            color = colorResource(resource = SharedR.colors.text_light)
                         )
                     }
 
@@ -63,7 +63,7 @@ fun HintSheet(
                         Text(
                             text = state.text!!.toString(context),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = colorResource(resource = SharedR.colors.text_title).copy(alpha = 0.7f)
+                            color = colorResource(resource = SharedR.colors.text_light).copy(alpha = 0.7f)
                         )
                     }
                 }

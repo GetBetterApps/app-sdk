@@ -29,7 +29,7 @@ struct HintSheet: View {
                     HStack {
                         Text((state?.title!.localized())!)
                             .style(.titleMedium)
-                            .foregroundColor(.textTitle)
+                            .foregroundColor(.textLight)
                             .multilineTextAlignment(.leading)
                         Spacer()
                     }
@@ -43,7 +43,7 @@ struct HintSheet: View {
                     HStack {
                         Text((state?.text!.localized())!)
                             .style(.bodyMedium)
-                            .foregroundColor(.textTitle)
+                            .foregroundColor(.textLight)
                             .multilineTextAlignment(.leading)
                             .fixedSize(horizontal: false, vertical: true)
                             .opacity(0.7)
