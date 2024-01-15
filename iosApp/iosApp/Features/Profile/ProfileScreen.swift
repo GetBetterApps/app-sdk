@@ -109,7 +109,8 @@ struct ProfileScreen: View {
             }
             .padding(.init(top: 16, leading: 16, bottom: 200, trailing: 16))
             .animation(.easeInOut, value: state.experienceData)
-        }.sheet(isPresented: $showImagePicker) {
+        }
+        .sheet(isPresented: $showImagePicker) {
             ImagePicker(sourceType: .photoLibrary) { image in
                 Task {
                     await uploadAvatar(selectedImage: image)

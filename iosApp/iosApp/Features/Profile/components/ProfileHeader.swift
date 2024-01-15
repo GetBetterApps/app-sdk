@@ -77,7 +77,8 @@ struct ProfileHeader: View {
                         )
                     }
                     Spacer()
-                }.padding(.init(top: .zero, leading: 16, bottom: .zero, trailing: .zero))
+                }
+                .padding(.init(top: .zero, leading: 16, bottom: .zero, trailing: .zero))
             }.frame(height: 128)
             
         }
