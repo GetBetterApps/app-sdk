@@ -63,7 +63,8 @@ fun SingleLineTextField(
             disabledContainerColor = colorResource(resource = SharedR.colors.text_field_background),
             unfocusedContainerColor = colorResource(resource = SharedR.colors.text_field_background),
             focusedContainerColor = colorResource(resource = SharedR.colors.text_field_background),
-            cursorColor = colorResource(resource = SharedR.colors.text_secondary)
+            cursorColor = colorResource(resource = SharedR.colors.text_secondary),
+            disabledIndicatorColor = Color.Transparent
         ),
         enabled = isEnabled
     )
