@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.android.activity
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetValue
@@ -11,7 +12,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.velkonost.getbetter.android.activity.components.BottomBar
@@ -51,10 +54,18 @@ internal fun MainContent() {
     )
     val hintSheet = remember { mutableStateOf<MessageType.Sheet?>(null) }
 
+    val localFocusManager = LocalFocusManager.current
+
     ApplicationTheme {
         Scaffold(
             snackbarHost = { MainSnackBarHost(snackBarHostState) },
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .pointerInput(Unit) {
+                    detectTapGestures(onTap = {
+                        localFocusManager.clearFocus()
+                    })
+                },
             bottomBar = {
                 BottomBar(navController, forceHideBottomBar)
             },
@@ -75,6 +86,7 @@ internal fun MainContent() {
                 addProfileRoute(navController, forceHideBottomBar)
             }
         }
+
         HintSheet(
             state = hintSheet.value,
             modalSheetState = hintSheetState

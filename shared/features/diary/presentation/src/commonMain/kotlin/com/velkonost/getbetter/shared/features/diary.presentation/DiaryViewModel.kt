@@ -369,7 +369,7 @@ internal constructor(
                         val allItems =
                             viewState.value.notesViewState.items.toMutableList()
 
-                        if (indexOfChangedItem == -1) {
+                        if (indexOfChangedItem == -1 && note.allowEdit) {
                             allItems.add(0, note)
                         } else if (!note.isActive) {
                             allItems.removeAt(indexOfChangedItem)
