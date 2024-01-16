@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
-		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		460054A12ABB0D0100586767 /* SettingsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460054A02ABB0D0100586767 /* SettingsButton.swift */; };
 		460054A32ABB101600586767 /* SubscriptionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460054A22ABB101600586767 /* SubscriptionBox.swift */; };
@@ -188,7 +187,6 @@
 
 /* Begin PBXFileReference section */
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		460054A02ABB0D0100586767 /* SettingsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButton.swift; sourceTree = "<group>"; };
 		460054A22ABB101600586767 /* SubscriptionBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionBox.swift; sourceTree = "<group>"; };
@@ -382,14 +380,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		058557D7273AAEEB004C7B11 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
 		1727E38462DEEDAE317A8B07 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1049,7 +1039,6 @@
 				461F7C6D2AA8D7DE003791CF /* Features */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF8C242A565B00829871 /* Info.plist */,
-				058557D7273AAEEB004C7B11 /* Preview Content */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -1135,7 +1124,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
 				4678E44C2AAC6CF8000B88E8 /* GoogleService-Info.plist in Resources */,
 			);
@@ -1528,14 +1516,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A94E91A91D61B9AD7FF8F12F /* Pods-iosApp.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphoneos*]" = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = iosApp/Assets.xcassets;
 				DEVELOPMENT_TEAM = 2Y83RX392R;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GetBetter;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1543,8 +1535,11 @@
 				MARKETING_VERSION = "0.2-DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.velkonost.getbetter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1552,14 +1547,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E6048413415DDDC574965275 /* Pods-iosApp.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphoneos*]" = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = iosApp/Assets.xcassets;
 				DEVELOPMENT_TEAM = 2Y83RX392R;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GetBetter;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1567,8 +1566,12 @@
 				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.velkonost.getbetter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
