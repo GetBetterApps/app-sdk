@@ -3,14 +3,18 @@ package com.velkonost.getbetter.core.compose.theme
 import android.os.Build
 import android.os.Build.VERSION_CODES.Q
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.LocalOverscrollConfiguration
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ApplicationTheme(content: @Composable () -> Unit) {
     val view = LocalView.current
@@ -35,7 +39,11 @@ fun ApplicationTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = LightColorPalette,
         typography = AppTypography,
-        shapes = AppShapes,
-        content = content
-    )
+        shapes = AppShapes
+    ) {
+        CompositionLocalProvider(
+            LocalOverscrollConfiguration provides null,
+            content = content
+        )
+    }
 }
