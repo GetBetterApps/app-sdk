@@ -68,6 +68,7 @@ struct AreasView: View {
                         createNewAreaClick()
                     }
                 }
+                .frame(width: UIScreen.screenWidth)
             }
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)

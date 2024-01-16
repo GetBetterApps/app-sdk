@@ -80,6 +80,7 @@ struct NotesView: View {
                         createNoteClick()
                     }
                 }
+                .frame(width: UIScreen.screenWidth)
                 
             }
         }
