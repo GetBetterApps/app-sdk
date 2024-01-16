@@ -85,7 +85,7 @@ struct AbilityDetailsScreen: View {
                 }
                 Spacer()
             }
-            .padding(.top, 40)
+            .padding(.top, 50)
         }
         .animation(.easeInOut, value: currentIndex)
         .edgesIgnoringSafeArea(.all)
