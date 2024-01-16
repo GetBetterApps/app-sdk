@@ -94,12 +94,16 @@ internal constructor(
 
     private fun loginAnonymous() {
         launchJob {
-            loginAnonymousUseCase() collectAndProcess {
-                isLoading {
-                    emit(viewState.value.copy(isLoading = it))
-                }
-                onSuccess {
-                    emit(NavigateToMainFlow)
+            if (viewState.value.forceSignUp) {
+                emit(NavigateToMainFlow)
+            } else {
+                loginAnonymousUseCase() collectAndProcess {
+                    isLoading {
+                        emit(viewState.value.copy(isLoading = it))
+                    }
+                    onSuccess {
+                        emit(NavigateToMainFlow)
+                    }
                 }
             }
         }
