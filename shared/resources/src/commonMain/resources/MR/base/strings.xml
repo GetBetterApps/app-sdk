@@ -406,7 +406,10 @@
 
     <string name="note_detail_confirm_delete_title">Удалить запись</string>
     <string name="goal_detail_confirm_delete_title">Удалить цель</string>
-    <string name="note_detail_confirm_delete_text">Ты уверен?</string>
+    <string name="note_detail_confirm_delete_text">Уверены?</string>
+
+    <string name="note_detail_hide_title">Скрыть запись</string>
+    <string name="note_detail_hide_text">Запись пропадет из вашей ленты</string>
 
     <string name="note_detail_complete_goal_text">Завершить</string>
     <string name="note_detail_completed_goal_title">Завершено</string>

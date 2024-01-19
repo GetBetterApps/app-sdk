@@ -65,6 +65,8 @@ fun NoteDetailScreen(
     val isSubNotesBlockVisible = remember { mutableStateOf(true) }
 
     val confirmDeleteNoteDialog = remember { mutableStateOf(false) }
+    val confirmHideNoteDialog = remember { mutableStateOf(false) }
+
     val areaDetailSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true
@@ -92,11 +94,15 @@ fun NoteDetailScreen(
                         noteType = state.noteType,
                         isNotePrivate = state.isNotePrivate,
                         likesData = state.likesData,
+                        allowHide = state.allowHide,
                         onBackClick = {
                             viewModel.dispatch(NavigateBack)
                         },
                         onLikeClick = {
                             viewModel.dispatch(NoteDetailAction.LikeClick)
+                        },
+                        onHideClick = {
+
                         },
                         onHintClick = {
                             viewModel.dispatch(NoteDetailAction.HintClick)
@@ -329,10 +335,32 @@ fun NoteDetailScreen(
         )
     }
 
+    if (confirmHideNoteDialog.value) {
+        AppAlertDialog(
+            title = stringResource(
+                resource =
+                if (state.noteType == NoteType.Default) SharedR.strings.note_detail_confirm_delete_title
+                else SharedR.strings.goal_detail_confirm_delete_title
+            ),
+            text = stringResource(resource = SharedR.strings.note_detail_confirm_delete_text),
+            confirmTitle = stringResource(resource = SharedR.strings.confirm),
+            cancelTitle = stringResource(resource = SharedR.strings.cancel),
+            onDismiss = { confirmDeleteNoteDialog.value = false },
+            onConfirmClick = {
+                viewModel.dispatch(NoteDetailAction.DeleteClick)
+                confirmDeleteNoteDialog.value = false
+            }
+        )
+    }
+
     LaunchedEffect(Unit) {
         viewModel.events.collectLatest {
             when (it) {
                 is NoteDetailEvent.DeleteSuccess -> {
+                    viewModel.dispatch(NavigateBack)
+                }
+
+                is NoteDetailEvent.HideSuccess -> {
                     viewModel.dispatch(NavigateBack)
                 }
 

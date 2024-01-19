@@ -98,6 +98,7 @@ internal constructor(
         is NoteDetailAction.CommentAddClick -> obtainCommentAdd()
         is NoteDetailAction.CommentRemoveClick -> obtainCommentRemove(action.value)
         is NoteDetailAction.HintClick -> showHint()
+        is NoteDetailAction.HideClick -> obtainHideClick()
     }
 
     private fun showHint(firstTime: Boolean = false) {
@@ -124,6 +125,18 @@ internal constructor(
     private fun obtainTaskClick() {
         viewState.value.task?.let {
             emit(NoteDetailNavigation.NavigateToTaskDetail(it))
+        }
+    }
+
+    private fun obtainHideClick() {
+        launchJob {
+            notesRepository.hideNote(
+                noteId = viewState.value.initialItem!!.id
+            ) collectAndProcess {
+                onSuccess {
+                    emit(NoteDetailEvent.HideSuccess)
+                }
+            }
         }
     }
 
@@ -450,6 +463,7 @@ internal constructor(
                 completionDate = completionDate,
                 completionDateStr = completionDateStr,
                 allowEdit = allowEdit,
+                allowHide = allowHide,
                 likesData = likesData
             )
         )

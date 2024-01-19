@@ -36,7 +36,9 @@ fun NoteDetailHeader(
     noteType: NoteType,
     isNotePrivate: Boolean,
     likesData: LikesData,
+    allowHide: Boolean,
     onBackClick: () -> Unit,
+    onHideClick: () -> Unit,
     onLikeClick: () -> Unit,
     onHintClick: () -> Unit
 ) {
@@ -103,6 +105,22 @@ fun NoteDetailHeader(
                 )
             )
         } else {
+            if (allowHide) {
+                Image(
+                    modifier = modifier
+                        .padding(end = 12.dp)
+                        .size(24.dp)
+                        .clickable(
+                            interactionSource = interactionSource,
+                            indication = null,
+                            onClick = onHideClick
+                        ),
+                    painter = painterResource(imageResource = SharedR.images.ic_hide),
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.icon_inactive))
+                )
+            }
+
             Box {
                 AnimatedContent(targetState = likesData.isLikesLoading, label = "") {
                     if (!it) {

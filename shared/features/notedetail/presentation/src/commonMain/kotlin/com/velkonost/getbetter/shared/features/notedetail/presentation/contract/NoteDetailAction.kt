@@ -53,6 +53,8 @@ sealed interface NoteDetailAction : UIContract.Action {
     data object TaskClick : NoteDetailAction
 
     data object HintClick : NoteDetailAction
+
+    data object HideClick : NoteDetailAction
 }
 
 data object NavigateBack : NoteDetailAction, NoteDetailNavigation {

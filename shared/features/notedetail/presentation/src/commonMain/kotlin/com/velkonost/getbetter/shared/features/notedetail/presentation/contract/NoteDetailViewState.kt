@@ -44,6 +44,7 @@ data class NoteDetailViewState(
     val author: UserInfoShort? = null,
 
     val allowEdit: Boolean = false,
+    val allowHide: Boolean = false,
 
     val likesData: LikesData = LikesData(totalLikes = 0, userLike = LikeType.None),
     val commentsData: CommentsData = CommentsData()

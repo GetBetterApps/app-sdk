@@ -403,6 +403,9 @@
     <string name="goal_detail_confirm_delete_title">Delete goal</string>
     <string name="note_detail_confirm_delete_text">Are you sure?</string>
 
+    <string name="note_detail_hide_title">Hide note</string>
+    <string name="note_detail_hide_text">The note will disappear from your feed</string>
+
     <string name="note_detail_complete_goal_text">Complete</string>
     <string name="note_detail_completed_goal_title">Completed on</string>
 

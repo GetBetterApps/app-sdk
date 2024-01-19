@@ -6,4 +6,6 @@ sealed interface NoteDetailEvent : UIContract.Event {
     data object DeleteSuccess : NoteDetailEvent
 
     data object EditSuccess : NoteDetailEvent
+
+    data object HideSuccess : NoteDetailEvent
 }
