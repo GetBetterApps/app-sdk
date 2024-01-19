@@ -57,7 +57,7 @@ fun ProfileHeader(
                         onSettingsClick.invoke()
                     }
                 }
-            } else {
+            } else if (!showSettings) {
                 Row {
                     Spacer(modifier = modifier.weight(1f))
 
