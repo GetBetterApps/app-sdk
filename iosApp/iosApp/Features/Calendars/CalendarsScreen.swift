@@ -160,7 +160,12 @@ struct CalendarsScreen: View {
             )
         }
         .sheet(isPresented: $showingProfileDetailSheet) {
-            ProfileDetailScreen(userId: $selectedUserId)
+            ProfileDetailScreen(
+                userId: $selectedUserId,
+                onBlockSuccess: {
+                    showingProfileDetailSheet = false
+                }
+            )
         }
         .onAppear {
             viewModel.onAppear()    

@@ -21,6 +21,7 @@ class ProfileDetailVIewModelDelegate: ObservableObject {
         followData: FollowUI(isLoading: true, state: FollowState.followed)
     )
     
+    
     private var stateStream: Task<(), Error>? = nil
     
     func dispatch(action: ProfileDetailAction) {

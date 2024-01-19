@@ -22,9 +22,13 @@ struct ProfileDetailScreen: View {
     @State private var snackBar: MessageType.SnackBar?
     @State private var showSnackBar: Bool = false
     @State private var messageDequeObserver: Task<(), Error>? = nil
+    @State private var eventsObserver: Task<(), Error>? = nil
     
-    init(userId: Binding<String?>) {
+    private let onBlockSuccess: (() -> Void)?
+    
+    init(userId: Binding<String?>, onBlockSuccess: (() -> Void)? = nil) {
         self._userId = userId
+        self.onBlockSuccess = onBlockSuccess
     }
     
     var body: some View {
@@ -48,7 +52,7 @@ struct ProfileDetailScreen: View {
                             onAvatarClick: {},
                             onSettingsClick: {},
                             onBlockUserClick: {
-                                
+                                viewModel.dispatch(action: ProfileDetailActionBlockClick())
                             }
                         )
                         
@@ -134,6 +138,9 @@ struct ProfileDetailScreen: View {
                     }
                 }
             }
+                
+            observeEvents()
+                
         }
         .onDisappear {
             viewModel.onDisappear()
@@ -176,3 +183,26 @@ extension ProfileDetailScreen {
         }
     }
 }
+
+extension ProfileDetailScreen {
+    func observeEvents() {
+        if eventsObserver == nil {
+            eventsObserver = Task {
+                for try await event in asyncSequence(for: viewModel.delegate.events) {
+                    switch(event) {
+                    case _ as ProfileDetailEventBlockSuccess: do {
+                        if onBlockSuccess != nil {
+                            onBlockSuccess!()
+                        }
+                    }
+                        
+                    default:
+                        break
+                    }
+                }
+            }
+        }
+    }
+    
+}
+

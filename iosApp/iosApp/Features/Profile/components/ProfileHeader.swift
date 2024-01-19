@@ -61,9 +61,12 @@ struct ProfileHeader: View {
                         }
                     }
                 } else if !showSettings {
-                    BlockUserButton {
-                        if onBlockUserClick != nil {
-                            confirmBlockDialog = true
+                    HStack {
+                        Spacer()
+                        BlockUserButton {
+                            if onBlockUserClick != nil {
+                                confirmBlockDialog = true
+                            }
                         }
                     }
                 }
@@ -95,14 +98,15 @@ struct ProfileHeader: View {
         }
         .padding(.init(top: 32, leading: .zero, bottom: .zero, trailing: .zero))
         .frame(height: 128)
+        
         .alert(
-             SharedR.strings().note_detail_hide_title.desc().localized(), isPresented: $confirmBlockDialog) {
+             SharedR.strings().profile_detail_block_title.desc().localized(), isPresented: $confirmBlockDialog) {
                 Button(SharedR.strings().confirm.desc().localized()) {
-                    viewModel.dispatch(action: NoteDetailActionHideClick())
+                    onBlockUserClick!()
                 }
                 Button(SharedR.strings().cancel.desc().localized(), role: .cancel) {}
             } message: {
-                Text(SharedR.strings().note_detail_hide_text.desc().localized())
+                Text(SharedR.strings().profile_detail_block_text.desc().localized())
             }
     }
 }

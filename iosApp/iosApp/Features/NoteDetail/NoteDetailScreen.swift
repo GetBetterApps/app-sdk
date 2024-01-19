@@ -286,13 +286,24 @@ struct NoteDetailScreen : View {
                 )
             }
             .sheet(isPresented: $showingProfileDetailSheet) {
-                ProfileDetailScreen(userId: $selectedUserId)
+                ProfileDetailScreen(
+                    userId: $selectedUserId,
+                    onBlockSuccess: {
+                        showingProfileDetailSheet = false
+                    }
+                )
             }
             .onAppear {
                 observeEvents()
             }
             .onDisappear {
                 //                viewModel.onCleared()
+            }
+        
+            .onChange(of: showingProfileDetailSheet) { newValue in
+                if !showingProfileDetailSheet {
+                    viewModel.refreshData()
+                }
             }
     }
 }
