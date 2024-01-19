@@ -32,6 +32,7 @@ internal constructor(
 
     private val _notesPagingConfig = PagingConfig()
     private val likesJobsMap: HashMap<Int, Job> = hashMapOf()
+    private var fetchUserJob: Job? = null
 
     override fun dispatch(action: ProfileDetailAction) = when (action) {
         is ProfileDetailAction.Load -> fetchUser(action.userId)
@@ -39,7 +40,7 @@ internal constructor(
         is ProfileDetailAction.NotesLoadNextPage -> fetchUserNotes()
         is ProfileDetailAction.NoteClick -> obtainNoteClick(action.value)
         is ProfileDetailAction.NoteLikeClick -> obtainNoteLikeClick(action.value)
-        is ProfileDetailAction.BlockClick ->
+        is ProfileDetailAction.BlockClick -> obtainBlockClick()
     }
 
     private fun fetchUser(userId: String) {
@@ -107,7 +108,18 @@ internal constructor(
 
     private fun obtainBlockClick() {
         launchJob {
+            userInfoRepository.blockUser(
+                userId = viewState.value.profileData.userId
+            ) collectAndProcess {
+                isLoading {
+                    val profileData = viewState.value.profileData.copy(isLoading = it)
+                    emit(viewState.value.copy(profileData = profileData))
+                }
 
+                onSuccess {
+                    emit(ProfileDetailEvent.BlockSuccess)
+                }
+            }
         }
     }
 

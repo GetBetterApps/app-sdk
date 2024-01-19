@@ -21,7 +21,10 @@ data class KtorUserInfoShort(
     val experience: Int = 0,
 
     @SerialName("isFollows")
-    val isFollows: Boolean = false
+    val isFollows: Boolean = false,
+
+    @SerialName("isBlocked")
+    val isBlocked: Boolean = false
 )
 
 fun KtorUserInfoShort.asExternalModel() =
@@ -30,5 +33,6 @@ fun KtorUserInfoShort.asExternalModel() =
         displayName = name,
         avatarUrl = "$AVATAR_URL$id",
         experienceData = experience.asExperienceData,
-        isFollows = isFollows
+        isFollows = isFollows,
+        isBlocked = isBlocked
     )

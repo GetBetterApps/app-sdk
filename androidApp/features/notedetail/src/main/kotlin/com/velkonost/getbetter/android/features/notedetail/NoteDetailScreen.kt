@@ -71,6 +71,8 @@ fun NoteDetailScreen(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true
     )
+
+    val profileOpened = remember { mutableStateOf(false) }
     val profileDetailSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true
@@ -119,6 +121,7 @@ fun NoteDetailScreen(
                                 scope.launch {
                                     selectedUserId.value = state.author?.id
                                     profileDetailSheetState.show()
+                                    profileOpened.value = true
                                 }
                             }
                         )
@@ -366,5 +369,22 @@ fun NoteDetailScreen(
             }
         }
     }
+
+    LaunchedEffect(profileDetailSheetState.currentValue) {
+        if (profileOpened.value && profileDetailSheetState.currentValue == ModalBottomSheetValue.Hidden) {
+            viewModel.refreshData()
+        }
+    }
+
+//    OnLifecycleEvent { _, event ->
+//        when (event) {
+//            Lifecycle.Event.ON_RESUME -> {
+//                viewModel.refreshData()
+//            }
+//
+//            else -> {}
+//        }
+//    }
+
 
 }

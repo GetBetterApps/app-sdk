@@ -30,5 +30,7 @@ data class UserInfoShort(
 
     val isFollows: Boolean = false,
 
-    val avatarUrl: String? = null
+    val avatarUrl: String? = null,
+
+    val isBlocked: Boolean = false
 )

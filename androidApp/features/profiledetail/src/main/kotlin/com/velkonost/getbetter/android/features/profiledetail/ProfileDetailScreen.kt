@@ -41,9 +41,11 @@ import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.ProfileDetailViewModel
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.FollowState
 import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailAction
+import com.velkonost.getbetter.shared.features.profiledetail.presentation.contract.ProfileDetailEvent
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -105,7 +107,7 @@ fun ProfileDetailScreen(
                                 onAvatarClick = {},
                                 onSettingsClick = {},
                                 onBlockUserClick = {
-
+                                    viewModel.dispatch(ProfileDetailAction.BlockClick)
                                 }
                             )
                         }
@@ -224,5 +226,17 @@ fun ProfileDetailScreen(
 
     LaunchedEffect(userId) {
         viewModel.dispatch(ProfileDetailAction.Load(userId))
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.events.collectLatest {
+            when (it) {
+                is ProfileDetailEvent.BlockSuccess -> {
+                    scope.launch {
+                        modalSheetState.hide()
+                    }
+                }
+            }
+        }
     }
 }

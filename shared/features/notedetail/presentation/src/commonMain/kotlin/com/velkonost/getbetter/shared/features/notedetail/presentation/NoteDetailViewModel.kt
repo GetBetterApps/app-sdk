@@ -72,6 +72,10 @@ internal constructor(
         }
     }
 
+    fun refreshData() {
+        viewState.value.initialItem?.let { getNoteAuthor(it.authorId) }
+    }
+
     override fun dispatch(action: NoteDetailAction) = when (action) {
         is NavigateBack -> emit(action)
         is NoteDetailAction.TaskClick -> obtainTaskClick()
@@ -224,15 +228,19 @@ internal constructor(
         }
     }
 
-    private fun getNoteAuthor(authorId: String, onSuccess: () -> Unit) {
+    private fun getNoteAuthor(authorId: String, onSuccess: (() -> Unit)? = null) {
         launchJob {
             userInfoRepository.fetchInfoAboutOtherUser(authorId) collectAndProcess {
                 isLoading {
                     emit(viewState.value.copy(authorLoading = it))
                 }
                 onSuccess {
-                    emit(viewState.value.copy(author = it))
-                    onSuccess.invoke()
+                    if (it?.isBlocked == true) {
+                        emit(NoteDetailEvent.HideSuccess)
+                    } else {
+                        emit(viewState.value.copy(author = it))
+                        onSuccess?.invoke()
+                    }
                 }
             }
         }
