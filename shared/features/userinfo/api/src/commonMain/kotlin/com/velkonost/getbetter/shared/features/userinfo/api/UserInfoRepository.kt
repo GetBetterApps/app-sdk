@@ -35,4 +35,8 @@ interface UserInfoRepository {
         newRepeatedPassword: String
     ): Flow<ResultState<UserInfo>>
 
+    suspend fun blockUser(
+        userId: String
+    ): Flow<ResultState<UserInfo>>
+
 }

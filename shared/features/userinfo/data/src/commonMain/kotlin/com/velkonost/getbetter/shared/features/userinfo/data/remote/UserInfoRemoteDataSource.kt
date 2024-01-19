@@ -2,6 +2,7 @@ package com.velkonost.getbetter.shared.features.userinfo.data.remote
 
 import com.velkonost.getbetter.shared.core.network.extensions.makeRequest
 import com.velkonost.getbetter.shared.core.network.model.RemoteResponse
+import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.BlockUserRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.ChangePasswordRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.InitSettingsRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.UpdateValueRequest
@@ -22,6 +23,15 @@ import io.ktor.http.path
 class UserInfoRemoteDataSource(
     private val httpClient: HttpClient
 ) {
+
+    suspend fun blockUser(token: String?, body: BlockUserRequest): RemoteResponse<KtorUserInfo> =
+        httpClient.post {
+            makeRequest(
+                path = Route.BLOCK_USER,
+                token = token,
+                body = body
+            )
+        }.body()
 
     suspend fun getInfo(token: String?): RemoteResponse<KtorUserInfo> =
         httpClient.get {

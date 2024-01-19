@@ -14,6 +14,7 @@ import com.velkonost.getbetter.shared.core.util.flowRequest
 import com.velkonost.getbetter.shared.core.util.locale
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.UserInfoRemoteDataSource
+import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.BlockUserRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.ChangePasswordRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.InitSettingsRequest
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.request.UpdateValueRequest
@@ -22,8 +23,7 @@ import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.respon
 import com.velkonost.getbetter.shared.features.userinfo.data.remote.model.response.asExternalModel
 import kotlinx.coroutines.flow.Flow
 
-class UserInfoRepositoryImpl
-constructor(
+class UserInfoRepositoryImpl(
     private val remoteDataSource: UserInfoRemoteDataSource,
     private val localDataSource: DataStore<Preferences>
 ) : UserInfoRepository {
@@ -147,6 +147,15 @@ constructor(
             }
 
             remoteDataSource.deleteAccount(token)
+        }
+    )
+
+    override suspend fun blockUser(userId: String): Flow<ResultState<UserInfo>> = flowRequest(
+        mapper = KtorUserInfo::asExternalModel,
+        request = {
+            val token = localDataSource.getUserToken()
+            val body = BlockUserRequest(userId)
+            remoteDataSource.blockUser(token, body)
         }
     )
 

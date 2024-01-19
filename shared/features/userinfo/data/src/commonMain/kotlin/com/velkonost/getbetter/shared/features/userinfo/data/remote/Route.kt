@@ -17,4 +17,6 @@ object Route {
 
     const val CHANGE_PASSWORD = "$PREFIX/changePassword"
     const val DELETE_ACCOUNT = "$PREFIX/delete"
+
+    const val BLOCK_USER = "$PREFIX/block"
 }
