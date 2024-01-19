@@ -9,8 +9,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.components.AppAlertDialog
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -26,8 +29,12 @@ fun ProfileHeader(
     onAvatarClick: () -> Unit,
     onSettingsClick: () -> Unit,
     isAnonymous: Boolean = false,
-    onSignUpClick: (() -> Unit)? = null
+    onSignUpClick: (() -> Unit)? = null,
+    onBlockUserClick: (() -> Unit)? = null
 ) {
+
+    val confirmBlockUserDialog = remember { mutableStateOf(false) }
+
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -48,6 +55,14 @@ fun ProfileHeader(
 
                     SettingsButton(modifier = modifier) {
                         onSettingsClick.invoke()
+                    }
+                }
+            } else {
+                Row {
+                    Spacer(modifier = modifier.weight(1f))
+
+                    BlockUserButton {
+                        confirmBlockUserDialog.value = true
                     }
                 }
             }
@@ -73,4 +88,19 @@ fun ProfileHeader(
             }
         }
     }
+
+    if (confirmBlockUserDialog.value) {
+        AppAlertDialog(
+            title = stringResource(resource = SharedR.strings.note_detail_hide_title),
+            text = stringResource(resource = SharedR.strings.note_detail_hide_text),
+            confirmTitle = stringResource(resource = SharedR.strings.confirm),
+            cancelTitle = stringResource(resource = SharedR.strings.cancel),
+            onDismiss = { confirmBlockUserDialog.value = false },
+            onConfirmClick = {
+                onBlockUserClick?.invoke()
+                confirmBlockUserDialog.value = false
+            }
+        )
+    }
+
 }

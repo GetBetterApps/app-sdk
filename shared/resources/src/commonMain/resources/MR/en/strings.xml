@@ -274,6 +274,9 @@
     <!--  PROFILE DETAIL  -->
     <string name="follow_title">Follow</string>
     <string name="unfollow_title">Unfollow</string>
+
+    <string name="profile_detail_block_title">Block this user?</string>
+    <string name="profile_detail_block_text">All user notes will disappear from your feed</string>
     <!--  PROFILE DETAIL  -->
 
     <!--  WISDOM  -->

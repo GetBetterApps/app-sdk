@@ -278,6 +278,10 @@
     <!--  PROFILE DETAIL  -->
     <string name="follow_title">Подписаться</string>
     <string name="unfollow_title">Отписаться</string>
+
+    <string name="profile_detail_block_title">Заблокировать этого пользователя?</string>
+    <string name="profile_detail_block_text">Все записи пользователя пропадут из вашей ленты
+    </string>
     <!--  PROFILE DETAIL  -->
 
     <!--  WISDOM  -->
