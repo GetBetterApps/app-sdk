@@ -102,7 +102,7 @@ fun NoteDetailScreen(
                             viewModel.dispatch(NoteDetailAction.LikeClick)
                         },
                         onHideClick = {
-
+                            confirmHideNoteDialog.value = true
                         },
                         onHintClick = {
                             viewModel.dispatch(NoteDetailAction.HintClick)
@@ -337,18 +337,14 @@ fun NoteDetailScreen(
 
     if (confirmHideNoteDialog.value) {
         AppAlertDialog(
-            title = stringResource(
-                resource =
-                if (state.noteType == NoteType.Default) SharedR.strings.note_detail_confirm_delete_title
-                else SharedR.strings.goal_detail_confirm_delete_title
-            ),
-            text = stringResource(resource = SharedR.strings.note_detail_confirm_delete_text),
+            title = stringResource(resource = SharedR.strings.note_detail_hide_title),
+            text = stringResource(resource = SharedR.strings.note_detail_hide_text),
             confirmTitle = stringResource(resource = SharedR.strings.confirm),
             cancelTitle = stringResource(resource = SharedR.strings.cancel),
-            onDismiss = { confirmDeleteNoteDialog.value = false },
+            onDismiss = { confirmHideNoteDialog.value = false },
             onConfirmClick = {
-                viewModel.dispatch(NoteDetailAction.DeleteClick)
-                confirmDeleteNoteDialog.value = false
+                viewModel.dispatch(NoteDetailAction.HideClick)
+                confirmHideNoteDialog.value = false
             }
         )
     }
