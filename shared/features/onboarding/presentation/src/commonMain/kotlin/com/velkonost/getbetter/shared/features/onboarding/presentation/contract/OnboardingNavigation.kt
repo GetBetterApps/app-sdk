@@ -13,4 +13,13 @@ sealed interface OnboardingNavigation : UIContract.Navigation {
             popUpTo = NavigationScreen.OnboardingNavScreen.route,
         )
     }
+
+    data object NavigateToAuth : OnboardingNavigation {
+        override val event: NavigationEvent = NavigationEvent.NavigateAndPopUpToRoute(
+            route = NavigationScreen.AuthNavScreen.route,
+            rootRoute = true,
+            popUpToStart = true,
+            popUpTo = NavigationScreen.OnboardingNavScreen.route,
+        )
+    }
 }
