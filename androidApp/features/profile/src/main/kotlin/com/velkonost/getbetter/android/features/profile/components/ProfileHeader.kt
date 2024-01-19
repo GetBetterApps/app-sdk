@@ -91,8 +91,8 @@ fun ProfileHeader(
 
     if (confirmBlockUserDialog.value) {
         AppAlertDialog(
-            title = stringResource(resource = SharedR.strings.note_detail_hide_title),
-            text = stringResource(resource = SharedR.strings.note_detail_hide_text),
+            title = stringResource(resource = SharedR.strings.profile_detail_block_title),
+            text = stringResource(resource = SharedR.strings.profile_detail_block_text),
             confirmTitle = stringResource(resource = SharedR.strings.confirm),
             cancelTitle = stringResource(resource = SharedR.strings.cancel),
             onDismiss = { confirmBlockUserDialog.value = false },

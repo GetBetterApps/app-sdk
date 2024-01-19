@@ -103,7 +103,10 @@ fun ProfileDetailScreen(
                                 showSettings = false,
                                 avatarUrl = state.profileData.avatarUrl,
                                 onAvatarClick = {},
-                                onSettingsClick = {}
+                                onSettingsClick = {},
+                                onBlockUserClick = {
+
+                                }
                             )
                         }
 

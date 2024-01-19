@@ -39,6 +39,7 @@ internal constructor(
         is ProfileDetailAction.NotesLoadNextPage -> fetchUserNotes()
         is ProfileDetailAction.NoteClick -> obtainNoteClick(action.value)
         is ProfileDetailAction.NoteLikeClick -> obtainNoteLikeClick(action.value)
+        is ProfileDetailAction.BlockClick ->
     }
 
     private fun fetchUser(userId: String) {
@@ -101,6 +102,12 @@ internal constructor(
                     }
                 }
             }
+        }
+    }
+
+    private fun obtainBlockClick() {
+        launchJob {
+
         }
     }
 

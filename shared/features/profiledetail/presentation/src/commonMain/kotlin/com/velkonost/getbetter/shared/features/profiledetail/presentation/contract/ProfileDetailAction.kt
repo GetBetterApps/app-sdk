@@ -13,4 +13,6 @@ sealed interface ProfileDetailAction : UIContract.Action {
     data class NoteClick(val value: Note) : ProfileDetailAction
 
     data class NoteLikeClick(val value: Note) : ProfileDetailAction
+
+    data object BlockClick : ProfileDetailAction
 }
