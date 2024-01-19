@@ -15,18 +15,22 @@ struct NoteDetailHeader : View {
     let noteType: NoteType
     let isNotePrivate: Bool
     let likesData: LikesData
+    let allowHide: Bool
     
     let onLikeClick: () -> Void
     private let onHintClick: () -> Void
+    private let onHideClick: () -> Void
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    init(noteType: NoteType, isNotePrivate: Bool, likesData: LikesData, onLikeClick: @escaping () -> Void, onHintClick: @escaping () -> Void) {
+    init(noteType: NoteType, isNotePrivate: Bool, likesData: LikesData, allowHide: Bool, onLikeClick: @escaping () -> Void, onHintClick: @escaping () -> Void, onHideClick: @escaping () -> Void) {
         self.noteType = noteType
         self.isNotePrivate = isNotePrivate
         self.likesData = likesData
+        self.allowHide = allowHide
         self.onLikeClick = onLikeClick
         self.onHintClick = onHintClick
+        self.onHideClick = onHideClick
     }
     
     var body: some View {
@@ -73,6 +77,20 @@ struct NoteDetailHeader : View {
                             .fill(Color.backgroundIcon)
                     )
             } else {
+                
+                if allowHide {
+                    Image(uiImage: SharedR.images().ic_hide.toUIImage()!)
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(.iconInactive)
+                        .scaledToFill()
+                        .frame(width: 24, height: 24)
+                        .onTapGesture {
+                            onHideClick()
+                        }
+                        .padding(.trailing, 12)
+                }
+                
                 ZStack(alignment: .center) {
                     if (!likesData.isLikesLoading) {
                         VStack {

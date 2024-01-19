@@ -20,6 +20,7 @@ struct NoteDetailScreen : View {
     @State private var eventsObserver: Task<(), Error>? = nil
     
     @State private var confirmDeleteNoteDialog = false
+    @State private var confirmHideNoteDialog = false
     @State private var isSubNotesBlockVisible = true
     
     @State private var selectedAreaId: Int32? = nil
@@ -52,11 +53,15 @@ struct NoteDetailScreen : View {
                                 noteType: state.noteType,
                                 isNotePrivate: state.isNotePrivate,
                                 likesData: state.likesData,
+                                allowHide: state.allowHide,
                                 onLikeClick: {
                                     viewModel.dispatch(action: NoteDetailActionLikeClick())
                                 },
                                 onHintClick: {
                                     viewModel.dispatch(action: NoteDetailActionHintClick())
+                                },
+                                onHideClick: {
+                                    confirmHideNoteDialog = true
                                 }
                                 
                             )
@@ -259,6 +264,15 @@ struct NoteDetailScreen : View {
             } message: {
                 Text(SharedR.strings().note_detail_confirm_delete_text.desc().localized())
             }
+            .alert(
+                 SharedR.strings().note_detail_hide_title.desc().localized(), isPresented: $confirmHideNoteDialog) {
+                    Button(SharedR.strings().confirm.desc().localized()) {
+                        viewModel.dispatch(action: NoteDetailActionHideClick())
+                    }
+                    Button(SharedR.strings().cancel.desc().localized(), role: .cancel) {}
+                } message: {
+                    Text(SharedR.strings().note_detail_hide_text.desc().localized())
+                }
         
             .sheet(isPresented: $showingAreaDetailSheet) {
                 AreaDetailScreen(
@@ -278,7 +292,7 @@ struct NoteDetailScreen : View {
                 observeEvents()
             }
             .onDisappear {
-//                viewModel.onCleared()
+                //                viewModel.onCleared()
             }
     }
 }
@@ -290,6 +304,10 @@ extension NoteDetailScreen {
                 for try await event in asyncSequence(for: viewModel.events) {
                     switch(event) {
                     case _ as NoteDetailEventDeleteSuccess: do {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                        
+                    case _ as NoteDetailEventHideSuccess: do {
                         presentationMode.wrappedValue.dismiss()
                     }
                         
