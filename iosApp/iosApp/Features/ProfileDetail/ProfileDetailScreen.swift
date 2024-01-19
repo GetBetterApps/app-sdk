@@ -46,7 +46,10 @@ struct ProfileDetailScreen: View {
                             isLoading: state.profileData.isLoading,
                             showSettings: state.profileData.isLoading,
                             onAvatarClick: {},
-                            onSettingsClick: {}
+                            onSettingsClick: {},
+                            onBlockUserClick: {
+                                
+                            }
                         )
                         
                         if state.profileData.experienceData != nil {

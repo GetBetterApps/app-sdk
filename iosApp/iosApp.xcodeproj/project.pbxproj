@@ -46,6 +46,7 @@
 		461F7C6C2AA8D71F003791CF /* BaseViewModelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C6B2AA8D71F003791CF /* BaseViewModelExt.swift */; };
 		462922D82B13351F00DF080D /* FeedbackDetailBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462922D72B13351F00DF080D /* FeedbackDetailBottomSheet.swift */; };
 		463049E32AFD0590006F60D2 /* LevelBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463049E22AFD0590006F60D2 /* LevelBlock.swift */; };
+		4639A06B2B5AAD8E00072606 /* BlockUserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4639A06A2B5AAD8E00072606 /* BlockUserButton.swift */; };
 		46407B962B28734E004A3AA2 /* AbilityDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46407B952B28734E004A3AA2 /* AbilityDetailsScreen.swift */; };
 		46407B982B28735F004A3AA2 /* AbilityDetailsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46407B972B28735F004A3AA2 /* AbilityDetailsRoute.swift */; };
 		46445AFA2ACD5484008934B2 /* PrivateSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46445AF92ACD5484008934B2 /* PrivateSwitch.swift */; };
@@ -225,6 +226,7 @@
 		461F7C6B2AA8D71F003791CF /* BaseViewModelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelExt.swift; sourceTree = "<group>"; };
 		462922D72B13351F00DF080D /* FeedbackDetailBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackDetailBottomSheet.swift; sourceTree = "<group>"; };
 		463049E22AFD0590006F60D2 /* LevelBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelBlock.swift; sourceTree = "<group>"; };
+		4639A06A2B5AAD8E00072606 /* BlockUserButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserButton.swift; sourceTree = "<group>"; };
 		46407B952B28734E004A3AA2 /* AbilityDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityDetailsScreen.swift; sourceTree = "<group>"; };
 		46407B972B28735F004A3AA2 /* AbilityDetailsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityDetailsRoute.swift; sourceTree = "<group>"; };
 		46445AF92ACD5484008934B2 /* PrivateSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateSwitch.swift; sourceTree = "<group>"; };
@@ -628,6 +630,7 @@
 				460054AC2ABB1B5E00586767 /* HelpAndSupport.swift */,
 				463049E22AFD0590006F60D2 /* LevelBlock.swift */,
 				46FAC9772B4FBC70007F2008 /* OtherBlock.swift */,
+				4639A06A2B5AAD8E00072606 /* BlockUserButton.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -1297,6 +1300,7 @@
 				46F0B3C32B1CDF1D00D6BCC1 /* TaskItemHeader.swift in Sources */,
 				468356F92B0E316C00DC356A /* AreaActionItem.swift in Sources */,
 				464B60B42ABAF7C300369EC3 /* ProfileHeader.swift in Sources */,
+				4639A06B2B5AAD8E00072606 /* BlockUserButton.swift in Sources */,
 				46059D2D2AC41DB500DC5015 /* ExpandableButtonPanel.swift in Sources */,
 				468B87682ABC45BF001BBEB1 /* DiaryRoute.swift in Sources */,
 				464B60B62ABAF81B00369EC3 /* Avatar.swift in Sources */,

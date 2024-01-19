@@ -20,6 +20,9 @@ struct ProfileHeader: View {
     let showSettings: Bool
     let isAnonymous: Bool
     let onSignUpClick: (() -> Void)?
+    let onBlockUserClick: (() -> Void)?
+    
+    @State private var confirmBlockDialog: Bool = false
     
     init(
         userName: String, avatarUrl: String?,
@@ -28,7 +31,8 @@ struct ProfileHeader: View {
         isAnonymous: Bool = false,
         onAvatarClick: @escaping () -> Void,
         onSettingsClick: @escaping () -> Void,
-        onSignUpClick: (() -> Void)? = nil
+        onSignUpClick: (() -> Void)? = nil,
+        onBlockUserClick: (() -> Void)? = nil
     ) {
         self.userName = userName
         self.avatarUrl = avatarUrl
@@ -39,6 +43,7 @@ struct ProfileHeader: View {
         self.onAvatarClick = onAvatarClick
         self.onSettingsClick = onSettingsClick
         self.onSignUpClick = onSignUpClick
+        self.onBlockUserClick = onBlockUserClick
     }
     
     var body: some View {
@@ -53,6 +58,12 @@ struct ProfileHeader: View {
                         Spacer()
                         SettingsButton {
                             onSettingsClick()
+                        }
+                    }
+                } else if !showSettings {
+                    BlockUserButton {
+                        if onBlockUserClick != nil {
+                            confirmBlockDialog = true
                         }
                     }
                 }
@@ -84,5 +95,14 @@ struct ProfileHeader: View {
         }
         .padding(.init(top: 32, leading: .zero, bottom: .zero, trailing: .zero))
         .frame(height: 128)
+        .alert(
+             SharedR.strings().note_detail_hide_title.desc().localized(), isPresented: $confirmBlockDialog) {
+                Button(SharedR.strings().confirm.desc().localized()) {
+                    viewModel.dispatch(action: NoteDetailActionHideClick())
+                }
+                Button(SharedR.strings().cancel.desc().localized(), role: .cancel) {}
+            } message: {
+                Text(SharedR.strings().note_detail_hide_text.desc().localized())
+            }
     }
 }
