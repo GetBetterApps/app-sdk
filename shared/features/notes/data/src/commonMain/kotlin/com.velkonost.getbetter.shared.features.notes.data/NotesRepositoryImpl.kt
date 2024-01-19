@@ -20,8 +20,7 @@ import com.velkonost.getbetter.shared.features.notes.data.remote.model.response.
 import com.velkonost.getbetter.shared.features.notes.data.remote.model.response.asExternalModel
 import kotlinx.coroutines.flow.Flow
 
-class NotesRepositoryImpl
-constructor(
+class NotesRepositoryImpl(
     private val remoteDataSource: NotesRemoteDataSource,
     private val localDataSource: DataStore<Preferences>
 ) : NotesRepository {
@@ -180,6 +179,16 @@ constructor(
                 remoteDataSource.unCompleteSubGoal(token, body)
             }
         )
+
+    override fun hideNote(noteId: Int): Flow<ResultState<Note>> = flowRequest(
+        mapper = KtorNote::asExternalModel,
+        request = {
+            val token = localDataSource.getUserToken()
+            val body = UpdateNoteStateRequest(noteId)
+
+            remoteDataSource.hideNote(token, body)
+        }
+    )
 
     override fun getNoteDetails(noteId: Int): Flow<ResultState<Note>> = flowRequest(
         mapper = KtorNote::asExternalModel,

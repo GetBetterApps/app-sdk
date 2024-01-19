@@ -70,13 +70,16 @@ data class KtorNote(
     val totalLikes: Int,
 
     @SerialName("userLike")
-    val userLike: String
+    val userLike: String,
+
+    @SerialName("canHide")
+    val canHide: Boolean
 )
 
 fun KtorNote.asExternalModel() =
     Note(
         id = id,
-        noteType = NoteType.values().first { it.responseName == noteType },
+        noteType = NoteType.entries.first { it.responseName == noteType },
         text = text,
         authorId = authorId,
         author = author.asExternalModel(),
@@ -92,6 +95,7 @@ fun KtorNote.asExternalModel() =
         area = ktorArea.asExternalModel(),
         task = ktorTask?.asExternalModel(),
         allowEdit = allowEdit,
+        allowHide = canHide,
         likesData = LikesData(
             totalLikes = totalLikes,
             userLike = LikeType.entries.first { it.responseName == userLike }

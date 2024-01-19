@@ -21,4 +21,6 @@ object Route {
     const val GET_OTHER_USER_NOTES = "$PREFIX/otherUserNotes"
     const val GET_NOTES_BY_TASK = "$PREFIX/byTask"
     const val GET_NOTES_BY_ABILITY = "$PREFIX/byAbility"
+
+    const val HIDE_NOTE = "$PREFIX/hide"
 }

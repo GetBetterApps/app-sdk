@@ -116,6 +116,17 @@ class NotesRemoteDataSource(
         )
     }.body()
 
+    suspend fun hideNote(
+        token: String?,
+        body: UpdateNoteStateRequest
+    ): RemoteResponse<KtorNote> = httpClient.post {
+        makeRequest(
+            path = Route.HIDE_NOTE,
+            token = token,
+            body = body
+        )
+    }.body()
+
     suspend fun getNoteDetails(
         token: String?,
         noteId: Int

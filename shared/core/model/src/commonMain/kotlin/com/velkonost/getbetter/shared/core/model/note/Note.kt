@@ -35,6 +35,7 @@ data class Note(
     val task: TaskUI? = null,
 
     val allowEdit: Boolean,
+    val allowHide: Boolean,
 
     var likesData: LikesData
 ) {

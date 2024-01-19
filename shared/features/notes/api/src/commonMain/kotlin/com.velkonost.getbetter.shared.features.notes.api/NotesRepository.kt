@@ -63,6 +63,10 @@ interface NotesRepository {
         subNoteId: Int
     ): Flow<ResultState<Note>>
 
+    fun hideNote(
+        noteId: Int
+    ): Flow<ResultState<Note>>
+
     fun getNoteDetails(
         noteId: Int
     ): Flow<ResultState<Note>>

@@ -10,6 +10,8 @@ import Foundation
 import SwiftUI
 import FirebaseCore
 import FirebaseMessaging
+import AppTrackingTransparency
+import AdSupport
 
 class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate  {
     func application(_ application: UIApplication,
@@ -26,6 +28,21 @@ class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate, UNUserNot
         Messaging.messaging().apnsToken = deviceToken
     }
     
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization { status in
+                switch status {
+                case .authorized:
+                    print("enable tracking")
+                case .denied:
+                    print("disable tracking")
+                default:
+                    print("disable tracking")
+                }
+            }
+        }
+    }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         if let fcm = Messaging.messaging().fcmToken {
