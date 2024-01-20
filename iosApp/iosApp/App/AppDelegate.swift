@@ -9,22 +9,24 @@
 import Foundation
 import SwiftUI
 import FirebaseCore
+import UserNotifications
 import FirebaseMessaging
 import AppTrackingTransparency
 import AdSupport
 
 class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate  {
+   
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        application.registerForRemoteNotifications()
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
         UNUserNotificationCenter.current().delegate = self
+        registerForNotification()
         
         return true
     }
     
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    internal func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
     }
     
@@ -42,6 +44,19 @@ class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate, UNUserNot
                 }
             }
         }
+    }
+    
+    func registerForNotification() {
+        UIApplication.shared.registerForRemoteNotifications()
+        
+        let center : UNUserNotificationCenter = UNUserNotificationCenter.current()
+        
+        center.requestAuthorization(options: [.sound , .alert , .badge ], completionHandler: { (granted, error) in
+            if ((error != nil)) { UIApplication.shared.registerForRemoteNotifications() }
+            else {
+                
+            }
+        })
     }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
