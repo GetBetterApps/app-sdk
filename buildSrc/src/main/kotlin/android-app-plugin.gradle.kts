@@ -33,6 +33,7 @@ android {
         versionName = libs.versions.versionName.get()
 
         multiDexEnabled = true
+        setProperty("archivesBaseName", "v$versionCode($versionName)")
     }
 
     applicationVariants.all {
