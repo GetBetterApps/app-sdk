@@ -94,12 +94,13 @@ struct ContentView: View {
                     .edgesIgnoringSafeArea(.bottom)
                 }
             }
-            .onChange(of: route) { newValue in
+            .onAppear {
                 Analytics.logEvent(
                     AnalyticsEventScreenView,
                     parameters: [AnalyticsParameterScreenName: "\(route)"]
                 )
             }
+            
         }
         .edgesIgnoringSafeArea(.all)
         //        .toast(
