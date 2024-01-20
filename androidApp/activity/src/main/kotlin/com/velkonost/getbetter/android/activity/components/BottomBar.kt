@@ -85,7 +85,7 @@ fun BottomBar(
                     shadowBlurRadius = 8.dp
                 )
                 .fillMaxWidth()
-                .height(90.dp)
+                .height(95.dp)
                 .background(
                     color = colorResource(resource = SharedR.colors.background_item),
                     shape = RoundedCornerShape(
