@@ -173,7 +173,7 @@ fun TaskDetailScreen(
                         AbilityData(
                             item = ability,
                             onClick = {
-
+                                viewModel.dispatch(TaskDetailAction.AbilityClick(it))
                             }
                         )
                     }

@@ -39,5 +39,8 @@ struct AbilityData : View {
                     
             }
         }
+        .onTapGesture {
+            onClick(item)
+        }
     }
 }

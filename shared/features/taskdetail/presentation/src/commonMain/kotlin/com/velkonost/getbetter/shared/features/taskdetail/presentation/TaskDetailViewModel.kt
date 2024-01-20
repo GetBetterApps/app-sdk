@@ -103,6 +103,7 @@ internal constructor(
         is TaskDetailAction.UserNotesLoadNextPage -> fetchUserNotes()
         is TaskDetailAction.RefreshUserNotes -> refreshUserNotes()
         is TaskDetailAction.HintClick -> showHint()
+        is TaskDetailAction.AbilityClick -> emit(TaskDetailNavigation.NavigateToAbilityDetail(action.value))
     }
 
     fun dispatch(action: CreateNewNoteAction) = dispatchCreateNewNoteAction(action)

@@ -111,7 +111,7 @@ struct TaskDetailScreen : View {
                                     AbilityData(
                                         item: ability,
                                         onClick: { value in
-                                            
+                                            viewModel.dispatch(action: TaskDetailActionAbilityClick(value: value))
                                         }
                                     )
                                 }

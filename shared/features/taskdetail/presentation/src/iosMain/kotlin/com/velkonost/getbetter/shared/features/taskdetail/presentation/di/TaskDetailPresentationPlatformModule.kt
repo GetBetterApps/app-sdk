@@ -13,7 +13,7 @@ internal actual val TaskDetailPresentationPlatformModule = module {
         SavedStateHandle()
     }
 
-    factory {
+    single {
         TaskDetailViewModel(
             savedStateHandle = get(named(SAVED_STATE_HANDLE_NAMED_QUALIFIER)),
             get(), get(), get(), get(), get(), get()
