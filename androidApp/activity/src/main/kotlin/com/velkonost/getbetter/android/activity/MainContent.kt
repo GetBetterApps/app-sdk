@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.core.os.bundleOf
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -100,10 +99,10 @@ internal fun MainContent() {
     }
 
     LaunchedEffect(Unit) {
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            val params = bundleOf(FirebaseAnalytics.Param.SCREEN_NAME to destination.route)
-            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, params)
-        }
+//        navController.addOnDestinationChangedListener { _, destination, _ ->
+//            val params = bundleOf(FirebaseAnalytics.Param.SCREEN_NAME to destination.route)
+//            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, params)
+//        }
     }
 
     LaunchedEffect(Unit) {

@@ -19,8 +19,6 @@ sealed interface OnboardingNavigation : UIContract.Navigation {
     data object NavigateToAuth : OnboardingNavigation {
         override val event: NavigationEvent = NavigationEvent.NavigateAndPopUpToRoute(
             route = NavigationScreen.AuthNavScreen.route,
-            rootRoute = true,
-            popUpToStart = true,
             popUpTo = NavigationScreen.OnboardingNavScreen.route,
             args = hashMapOf(
                 Pair(ARG_IDENTIFY_ANONYMOUS, false.encodeToString())

@@ -15,6 +15,7 @@ android {
 dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
+    implementation(libs.firebase.android.analytics)
 
     implementation(projects.shared.umbrella)
     implementation(projects.androidApp.activity)
