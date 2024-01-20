@@ -2,6 +2,7 @@ import SwiftUI
 import SharedSDK
 import KMPNativeCoroutinesAsync
 import Combine
+import FirebaseAnalytics
 
 struct ContentView: View {
     
@@ -92,6 +93,12 @@ struct ContentView: View {
                     }
                     .edgesIgnoringSafeArea(.bottom)
                 }
+            }
+            .onChange(of: route) { newValue in
+                Analytics.logEvent(
+                    AnalyticsEventScreenView,
+                    parameters: [AnalyticsParameterScreenName: "\(route)"]
+                )
             }
         }
         .edgesIgnoringSafeArea(.all)
