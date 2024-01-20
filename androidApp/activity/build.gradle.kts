@@ -31,4 +31,6 @@ dependencies {
     implementation(projects.shared.core.vm)
     implementation(projects.shared.core.util)
     implementation(projects.shared.resources)
+
+    implementation(libs.firebase.android.analytics)
 }

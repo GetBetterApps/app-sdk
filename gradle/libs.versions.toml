@@ -18,6 +18,7 @@ versionName = "1.1"
 firebase-android-bom = "32.3.1"
 firebase-android-crashlytics = "2.9.9"
 firebase-android-storage = "20.2.1"
+firebase-android-analytics = "21.5.0"
 firebase-kmm = "1.10.0"
 
 libres = "1.2.0-beta01"
@@ -186,6 +187,7 @@ squareup-okio = { module = "com.squareup.okio:okio", version.ref = "squareup-oki
 firebase-android-core = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-android-bom" }
 firebase-android-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-android-storage = { module = "com.google.firebase:firebase-storage-ktx", version.ref = "firebase-android-storage" }
+firebase-android-analytics = { module = "com.google.firebase:firebase-analytics-ktx", version.ref = "firebase-android-analytics" }
 firebase-android-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
 
 testing-androidx-core = { module = "androidx.arch.core:core-testing", version.ref = "testing-arch-core" }

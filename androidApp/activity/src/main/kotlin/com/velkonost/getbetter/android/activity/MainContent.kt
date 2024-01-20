@@ -15,8 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.core.os.bundleOf
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.velkonost.getbetter.android.activity.components.BottomBar
 import com.velkonost.getbetter.android.activity.components.HintSheet
 import com.velkonost.getbetter.android.activity.components.MainSnackBarHost
@@ -56,6 +58,10 @@ internal fun MainContent() {
 
     val localFocusManager = LocalFocusManager.current
 
+    val firebaseAnalytics = remember {
+        FirebaseAnalytics.getInstance(context)
+    }
+
     ApplicationTheme {
         Scaffold(
             snackbarHost = { MainSnackBarHost(snackBarHostState) },
@@ -91,6 +97,13 @@ internal fun MainContent() {
             state = hintSheet.value,
             modalSheetState = hintSheetState
         )
+    }
+
+    LaunchedEffect(Unit) {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            val params = bundleOf(FirebaseAnalytics.Param.SCREEN_NAME to destination.route)
+            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, params)
+        }
     }
 
     LaunchedEffect(Unit) {
