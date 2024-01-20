@@ -297,7 +297,6 @@ struct NoteDetailScreen : View {
                 observeEvents()
             }
             .onDisappear {
-                //                viewModel.onCleared()
             }
         
             .onChange(of: showingProfileDetailSheet) { newValue in

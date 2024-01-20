@@ -291,8 +291,8 @@ struct TaskDetailScreen : View {
             observeEvents()
         }
         .onDisappear {
-            eventsObserver?.cancel()
-            eventsObserver = nil
+//            eventsObserver?.cancel()
+//            eventsObserver = nil
         }
         
     }
