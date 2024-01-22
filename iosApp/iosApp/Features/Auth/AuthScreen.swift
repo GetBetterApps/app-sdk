@@ -96,7 +96,7 @@ struct AuthScreen: View {
                         .foregroundColor(.textLight)
                         .style(.bodySmall)
                         .multilineTextAlignment(.center)
-                        .opacity(0.2)
+                        .opacity(0.5)
                         .padding(.init(top: .zero, leading: 32, bottom: .zero, trailing: 32))
                     Spacer()
                 }
@@ -107,7 +107,7 @@ struct AuthScreen: View {
                         .foregroundColor(.textLight)
                         .style(.bodySmall)
                         .multilineTextAlignment(.center)
-                        .opacity(0.2)
+                        .opacity(0.5)
                         .onTapGesture {
                             webViewLink = state.privacyLink
                             webViewVisible = true
@@ -117,7 +117,7 @@ struct AuthScreen: View {
                         .foregroundColor(.textLight)
                         .style(.bodySmall)
                         .multilineTextAlignment(.center)
-                        .opacity(0.2)
+                        .opacity(0.5)
                         .onTapGesture {
                             webViewLink = state.termsLink
                             webViewVisible = true

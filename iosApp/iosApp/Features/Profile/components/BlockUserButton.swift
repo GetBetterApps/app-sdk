@@ -19,7 +19,7 @@ struct BlockUserButton: View {
     
     var body: some View {
         ZStack {
-            Image(uiImage: SharedR.images().ic_hide.toUIImage()!)
+            Image(uiImage: SharedR.images().ic_warning.toUIImage()!)
                 .resizable()
                 .renderingMode(.template)
                 .frame(width: 24, height: 24, alignment: .center)

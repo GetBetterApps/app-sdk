@@ -29,7 +29,7 @@ fun AuthFooterText(
         Text(
             modifier = modifier.padding(start = 32.dp, end = 32.dp),
             text = stringResource(resource = SharedR.strings.auth_footer_text),
-            color = colorResource(resource = SharedR.colors.text_light).copy(alpha = 0.2f),
+            color = colorResource(resource = SharedR.colors.text_light).copy(alpha = 0.5f),
             style = MaterialTheme.typography.bodySmall,
             textAlign = TextAlign.Center
         )
@@ -45,7 +45,7 @@ fun AuthFooterText(
                 onClick = onPrivacyClick
             ),
             text = stringResource(resource = SharedR.strings.profile_privacy_title),
-            color = colorResource(resource = SharedR.colors.text_light).copy(alpha = 0.2f),
+            color = colorResource(resource = SharedR.colors.text_light).copy(alpha = 0.5f),
             style = MaterialTheme.typography.bodySmall,
             textAlign = TextAlign.Center
         )
@@ -57,7 +57,7 @@ fun AuthFooterText(
                 onClick = onTermsClick
             ),
             text = stringResource(resource = SharedR.strings.profile_terms_title),
-            color = colorResource(resource = SharedR.colors.text_light).copy(alpha = 0.2f),
+            color = colorResource(resource = SharedR.colors.text_light).copy(alpha = 0.5f),
             style = MaterialTheme.typography.bodySmall,
             textAlign = TextAlign.Center
         )
