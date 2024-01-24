@@ -12,6 +12,10 @@
     <string name="public_state">Публично</string>
     <!--  GENERAL  -->
 
+    <!--  ADVERTISE  -->
+    <string name="ad_title">Рекламка</string>
+    <!--  ADVERTISE  -->
+
     <!--  HINTS  -->
     <string name="hint_social_all_title">Добро пожаловать в ленту публичных записей!</string>
     <string name="hint_social_all_text">Здесь собраны вдохновляющие истории и достижения сообщества

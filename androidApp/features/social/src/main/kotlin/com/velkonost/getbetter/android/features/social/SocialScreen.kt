@@ -23,14 +23,12 @@ import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.social.components.FeedNoteItem
@@ -38,6 +36,7 @@ import com.velkonost.getbetter.core.compose.components.HintButton
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.PlaceholderView
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
+import com.velkonost.getbetter.core.compose.components.ad.AdView
 import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
 import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
 import com.velkonost.getbetter.shared.core.model.note.Note
@@ -45,15 +44,8 @@ import com.velkonost.getbetter.shared.features.social.SocialViewModel
 import com.velkonost.getbetter.shared.features.social.contracts.FeedViewState
 import com.velkonost.getbetter.shared.features.social.contracts.SocialAction
 import com.velkonost.getbetter.shared.resources.SharedR
-import com.yandex.mobile.ads.banner.BannerAdEventListener
-import com.yandex.mobile.ads.banner.BannerAdSize
-import com.yandex.mobile.ads.banner.BannerAdView
-import com.yandex.mobile.ads.common.AdRequest
-import com.yandex.mobile.ads.common.AdRequestError
-import com.yandex.mobile.ads.common.ImpressionData
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
-import kotlin.math.roundToInt
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -202,23 +194,7 @@ fun SocialFeedView(
     val listState = rememberLazyListState()
     val pullRefreshState = rememberPullRefreshState(isRefreshing, onRefresh)
 
-    val context = LocalContext.current
-    val adSize: BannerAdSize = remember {
-        val screenHeight =
-            context.resources.displayMetrics.run { heightPixels / density }.roundToInt()
-        // Calculate the width of the ad, taking into account the padding in the ad container.
-        var adWidthPixels = context.resources.displayMetrics.run { heightPixels / density }
-            .roundToInt()//binding.adContainerView.width
-        if (adWidthPixels == 0) {
-            // If the ad hasn't been laid out, default to the full screen width
-            adWidthPixels = context.resources.displayMetrics.widthPixels
-        }
-        val adWidth = (adWidthPixels / context.resources.displayMetrics.density).roundToInt()
-        // Determine the maximum allowable ad height. The current value is given as an example.
-        val maxAdHeight = screenHeight / 2
 
-        BannerAdSize.inlineSize(context, adWidth, maxAdHeight)
-    }
 
     Box(
         modifier = modifier
@@ -244,55 +220,8 @@ fun SocialFeedView(
                             onLikeClick = itemLikeClick
                         )
 
-                        AndroidView(
-                            factory = {
-                                BannerAdView(it)
-                            },
-                            update = {
-                                it.apply {
-                                    setAdSize(adSize)
-                                    setAdUnitId("R-M-5517748-1")
-                                    setBannerAdEventListener(object : BannerAdEventListener {
-                                        override fun onAdLoaded() {
-                                            // If this callback occurs after the activity is destroyed, you
-                                            // must call destroy and return or you may get a memory leak.
-                                            // Note `isDestroyed` is a method on Activity.
-//                                            if (isDestroyed) {
-//                                                bannerAd?.destroy()
-//                                                return
-//                                            }
-                                        }
+                        AdView()
 
-                                        override fun onAdFailedToLoad(adRequestError: AdRequestError) {
-                                            // Ad failed to load with AdRequestError.
-                                            // Attempting to load a new ad from the onAdFailedToLoad() method is strongly discouraged.
-                                        }
-
-                                        override fun onAdClicked() {
-                                            // Called when a click is recorded for an ad.
-                                        }
-
-                                        override fun onLeftApplication() {
-                                            // Called when user is about to leave application (e.g., to go to the browser), as a result of clicking on the ad.
-                                        }
-
-                                        override fun onReturnedToApplication() {
-                                            // Called when user returned to application after click.
-                                        }
-
-                                        override fun onImpression(impressionData: ImpressionData?) {
-                                            // Called when an impression is recorded for an ad.
-                                        }
-                                    })
-                                    loadAd(
-                                        AdRequest.Builder()
-                                            // Methods in the AdRequest.Builder class can be used here to specify individual options settings.
-                                            .build()
-                                    )
-                                }
-
-                            }
-                        )
                     }
 
                     if (isLoading) {

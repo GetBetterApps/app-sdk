@@ -12,6 +12,10 @@
     <string name="public_state">Public</string>
     <!--  GENERAL  -->
 
+    <!--  ADVERTISE  -->
+    <string name="ad_title">Advertising</string>
+    <!--  ADVERTISE  -->
+
     <!--  HINTS  -->
     <string name="hint_social_all_title">Welcome to the public feed!</string>
     <string name="hint_social_all_text">Here you will find inspiring stories and achievements of the
