@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,34 +32,18 @@ import com.yandex.mobile.ads.common.ImpressionData
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
 import java.util.Locale
-import kotlin.math.roundToInt
 
 @Composable
 fun AdView(
     modifier: Modifier = Modifier
 ) {
 
-    val adLoaded = remember { mutableStateOf(false) }
-
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
 
     val adSize: BannerAdSize = remember {
-        val screenHeight =
-            context.resources.displayMetrics.run { heightPixels / density }.roundToInt()
-        val screenWidth = configuration.screenWidthDp - 40
-
-        // Calculate the width of the ad, taking into account the padding in the ad container.
-        var adWidthPixels = context.resources.displayMetrics.run { widthPixels / density }
-            .roundToInt()//binding.adContainerView.width
-        if (adWidthPixels == 0) {
-            // If the ad hasn't been laid out, default to the full screen width
-            adWidthPixels = context.resources.displayMetrics.widthPixels
-        }
-        val adWidth =
-            screenWidth//(adWidthPixels / context.resources.displayMetrics.density).roundToInt()
-        // Determine the maximum allowable ad height. The current value is given as an example.
-        val maxAdHeight = 300//screenHeight / 2
+        val adWidth = configuration.screenWidthDp - 40
+        val maxAdHeight = 300
 
         BannerAdSize.inlineSize(context, adWidth, maxAdHeight)
     }
@@ -71,30 +54,27 @@ fun AdView(
             .height(300.dp),
         padding = 0
     ) {
-
-        if (!adLoaded.value) {
-            Column(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .height(300.dp)
-                    .padding(bottom = 30.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Spacer(modifier.weight(1f))
-                Loader()
-                Text(
-                    text = stringResource(resource = SharedR.strings.ad_title).replaceFirstChar {
-                        if (it.isLowerCase()) it.titlecase(
-                            Locale.ROOT
-                        ) else it.toString()
-                    },
-                    color = colorResource(resource = SharedR.colors.onboarding_background_gradient_start),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontStyle = FontStyle.Italic
-                )
-                Spacer(modifier.weight(1f))
-            }
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .height(300.dp)
+                .padding(bottom = 30.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier.weight(1f))
+            Loader()
+            Text(
+                text = stringResource(resource = SharedR.strings.ad_title).replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase(
+                        Locale.ROOT
+                    ) else it.toString()
+                },
+                color = colorResource(resource = SharedR.colors.onboarding_background_gradient_start),
+                style = MaterialTheme.typography.headlineSmall,
+                fontStyle = FontStyle.Italic
+            )
+            Spacer(modifier.weight(1f))
         }
 
         Column {
@@ -113,7 +93,6 @@ fun AdView(
                             setAdUnitId("R-M-5517748-1")
                             setBannerAdEventListener(object : BannerAdEventListener {
                                 override fun onAdLoaded() {
-                                    adLoaded.value = true
                                 }
 
                                 override fun onAdFailedToLoad(adRequestError: AdRequestError) {

@@ -49,16 +49,31 @@ struct SocialFeedView: View {
                 } else {
                     ScrollView(showsIndicators: false) {
                         LazyVStack(spacing: 0) {
-                            ForEach(items, id: \.self.id) { item in
+                            ForEach(0..<items.count, id: \.self) { index in
                                 FeedNoteItem(
-                                    item: item,
+                                    item: items[index],
                                     onClick: itemClick,
                                     onLikeClick: itemLikeClick
                                 )
                                 .onAppear {
-                                    checkPaginationThreshold(currentItemId: item.id)
+                                    checkPaginationThreshold(currentItemId: items[index].id)
                                 }
+                                
+                                AdView()
                             }
+                            
+//                            ForEach(items, id: \.self.id) { item in
+//                                FeedNoteItem(
+//                                    item: item,
+//                                    onClick: itemClick,
+//                                    onLikeClick: itemLikeClick
+//                                )
+//                                .onAppear {
+//                                    checkPaginationThreshold(currentItemId: item.id)
+//                                }
+//                                
+//                                AdView()
+//                            }
                         }
                         .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
                         
