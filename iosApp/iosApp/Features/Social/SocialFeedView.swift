@@ -16,6 +16,8 @@ struct SocialFeedView: View {
     let emptyText: String
     let items: [Note]
     let loadMorePrefetch: Int
+    let adPosition: Int
+    
     
     let itemClick: (Note) -> Void
     let itemLikeClick: (Note) -> Void
@@ -25,12 +27,15 @@ struct SocialFeedView: View {
     
     init(isLoading: Binding<Bool>,
          emptyText: String, loadMorePrefetch: Int,
-         items: [Note], itemClick: @escaping (Note) -> Void, itemLikeClick: @escaping (Note) -> Void, onBottomReach: @escaping () -> Void, onRefresh: @escaping () -> Void) {
+         items: [Note],
+         adPosition: Int,
+         itemClick: @escaping (Note) -> Void, itemLikeClick: @escaping (Note) -> Void, onBottomReach: @escaping () -> Void, onRefresh: @escaping () -> Void) {
         self._isLoading = isLoading
         self.emptyText = emptyText
         self.loadMorePrefetch = loadMorePrefetch
         
         self.items = items
+        self.adPosition = adPosition
         
         self.itemClick = itemClick
         self.itemLikeClick = itemLikeClick
@@ -59,7 +64,10 @@ struct SocialFeedView: View {
                                     checkPaginationThreshold(currentItemId: items[index].id)
                                 }
                                 
-                                AdView()
+                                if index != 0 && index % adPosition == 0 {
+                                    AdView()
+                                        .padding(.vertical, 2)
+                                }
                             }
                             
 //                            ForEach(items, id: \.self.id) { item in
