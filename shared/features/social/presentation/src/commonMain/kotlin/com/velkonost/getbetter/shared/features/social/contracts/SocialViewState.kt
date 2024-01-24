@@ -6,9 +6,10 @@ import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import com.velkonost.getbetter.shared.features.social.model.SocialTab
 
 data class SocialViewState(
-    val tabs: List<SocialTab> = SocialTab.values().toList(),
+    val tabs: List<SocialTab> = SocialTab.entries,
     val generalFeed: FeedViewState = FeedViewState(),
-    val areasFeed: FeedViewState = FeedViewState()
+    val areasFeed: FeedViewState = FeedViewState(),
+    val adPosition: Int = (6..10).random()
 ) : UIContract.State
 
 data class FeedViewState(
