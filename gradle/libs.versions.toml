@@ -76,6 +76,7 @@ testing-junitext = "1.2.0-alpha01"
 testing-kotest = "5.5.4"
 testing-turbine = "1.0.0"
 
+yandex-ad = "6.3.0"
 
 [plugins]
 codingfeline-buildkonfig = { id = "com.codingfeline.buildkonfig", version = "0.13.3" }
@@ -189,6 +190,8 @@ firebase-android-crashlytics = { module = "com.google.firebase:firebase-crashlyt
 firebase-android-storage = { module = "com.google.firebase:firebase-storage-ktx", version.ref = "firebase-android-storage" }
 firebase-android-analytics = { module = "com.google.firebase:firebase-analytics-ktx", version.ref = "firebase-android-analytics" }
 firebase-android-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
+
+yandex-ad = { module = "com.yandex.android:mobileads", version.ref = "yandex-ad" }
 
 testing-androidx-core = { module = "androidx.arch.core:core-testing", version.ref = "testing-arch-core" }
 testing-androidx-junit = { module = "androidx.test.ext:junit", version.ref = "testing-junitext" }

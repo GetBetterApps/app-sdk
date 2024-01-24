@@ -105,6 +105,7 @@ android {
         implementation(libs.firebase.android.crashlytics)
         implementation(libs.firebase.android.messaging)
 
+        implementation(libs.yandex.ad)
     }
 }
 

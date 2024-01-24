@@ -1,6 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 import com.velkonost.getbetter.util.libs
+import gradle.kotlin.dsl.accessors._96aaa92c1a3d6567ab9284def8650ed9.implementation
 
 plugins {
     id("com.android.library")
@@ -59,6 +60,7 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.androidx.compose)
 
+    implementation(libs.yandex.ad)
 }
 
 tasks.withType<Test>().configureEach {
