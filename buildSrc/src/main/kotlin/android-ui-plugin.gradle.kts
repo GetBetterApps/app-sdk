@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.koin.androidx.compose)
 
     implementation(libs.yandex.ad)
+    implementation(libs.vk.ad)
 }
 
 tasks.withType<Test>().configureEach {

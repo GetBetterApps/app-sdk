@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.core.compose.components.ad
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -14,24 +15,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import com.my.target.ads.MyTargetView
+import com.my.target.ads.MyTargetView.AdSize
+import com.my.target.ads.MyTargetView.MyTargetViewListener
+import com.my.target.common.models.IAdLoadingError
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.shared.resources.SharedR
-import com.yandex.mobile.ads.banner.BannerAdEventListener
 import com.yandex.mobile.ads.banner.BannerAdSize
-import com.yandex.mobile.ads.banner.BannerAdView
-import com.yandex.mobile.ads.common.AdRequest
-import com.yandex.mobile.ads.common.AdRequestError
-import com.yandex.mobile.ads.common.ImpressionData
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
 import java.util.Locale
+
 
 @Composable
 fun AdView(
@@ -82,47 +82,79 @@ fun AdView(
             Row {
                 Spacer(modifier.weight(1f))
                 AndroidView(
-                    modifier = modifier
-                        .clip(MaterialTheme.shapes.medium),
                     factory = {
-                        BannerAdView(it)
-                    },
-                    update = {
-                        it.apply {
-                            setAdSize(adSize)
-                            setAdUnitId("R-M-5517748-1")
-                            setBannerAdEventListener(object : BannerAdEventListener {
-                                override fun onAdLoaded() {
-                                }
+                        val view = MyTargetView(it)
+                        view.init(1494645, AdSize.BANNER_300x250)
 
-                                override fun onAdFailedToLoad(adRequestError: AdRequestError) {
-                                }
+                        view.listener = object : MyTargetViewListener {
+                            override fun onLoad(myTargetView: MyTargetView) {
+                                // Данные успешно загружены, запускаем показ объявлений
+//                                layout.addView(adView)
+                                Log.d("keke", "keke")
+                            }
 
-                                override fun onAdClicked() {
-                                    // Called when a click is recorded for an ad.
-                                }
+                            override fun onNoAd(p0: IAdLoadingError, myTargetView: MyTargetView) {
+                                Log.d("keke", "keke")
+                            }
 
-                                override fun onLeftApplication() {
-                                    // Called when user is about to leave application (e.g., to go to the browser), as a result of clicking on the ad.
-                                }
+                            override fun onShow(myTargetView: MyTargetView) {
+                                Log.d("keke", "keke")
+                            }
 
-                                override fun onReturnedToApplication() {
-                                    // Called when user returned to application after click.
-                                }
-
-                                override fun onImpression(impressionData: ImpressionData?) {
-                                    // Called when an impression is recorded for an ad.
-                                }
-                            })
-                            loadAd(
-                                AdRequest.Builder()
-                                    // Methods in the AdRequest.Builder class can be used here to specify individual options settings.
-                                    .build()
-                            )
+                            override fun onClick(myTargetView: MyTargetView) {
+                                Log.d("keke", "keke")
+                            }
                         }
 
+
+                        view.load()
+                        view
                     }
                 )
+
+
+//                AndroidView(
+//                    modifier = modifier
+//                        .clip(MaterialTheme.shapes.medium),
+//                    factory = {
+//                        BannerAdView(it)
+//                    },
+//                    update = {
+//                        it.apply {
+//                            setAdSize(adSize)
+//                            setAdUnitId("R-M-5517748-1")
+//                            setBannerAdEventListener(object : BannerAdEventListener {
+//                                override fun onAdLoaded() {
+//                                }
+//
+//                                override fun onAdFailedToLoad(adRequestError: AdRequestError) {
+//                                }
+//
+//                                override fun onAdClicked() {
+//                                    // Called when a click is recorded for an ad.
+//                                }
+//
+//                                override fun onLeftApplication() {
+//                                    // Called when user is about to leave application (e.g., to go to the browser), as a result of clicking on the ad.
+//                                }
+//
+//                                override fun onReturnedToApplication() {
+//                                    // Called when user returned to application after click.
+//                                }
+//
+//                                override fun onImpression(impressionData: ImpressionData?) {
+//                                    // Called when an impression is recorded for an ad.
+//                                }
+//                            })
+//                            loadAd(
+//                                AdRequest.Builder()
+//                                    // Methods in the AdRequest.Builder class can be used here to specify individual options settings.
+//                                    .build()
+//                            )
+//                        }
+//
+//                    }
+//                )
                 Spacer(modifier.weight(1f))
             }
             Spacer(modifier.weight(1f))

@@ -54,5 +54,9 @@
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher" />
 
+        <activity
+            android:name="com.my.target.common.MyTargetActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+
     </application>
 </manifest>
