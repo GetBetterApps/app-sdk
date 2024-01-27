@@ -33,6 +33,8 @@ import java.util.Locale
 fun AdView(
     modifier: Modifier = Modifier
 ) {
+
+
     PrimaryBox(
         modifier = modifier
             .padding(PaddingValues(horizontal = 20.dp))

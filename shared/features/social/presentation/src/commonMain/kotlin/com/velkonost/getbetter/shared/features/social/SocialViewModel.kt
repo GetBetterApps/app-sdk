@@ -36,6 +36,7 @@ internal constructor(
     private val likesJobsMap: HashMap<Int, Job> = hashMapOf()
 
     fun onAppear() {
+
         checkUpdatedNote()
 
         launchJob {
