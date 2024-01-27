@@ -12,22 +12,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.my.target.ads.MyTargetView
 import com.my.target.ads.MyTargetView.AdSize
-import com.my.target.ads.MyTargetView.MyTargetViewListener
 import com.my.target.common.models.IAdLoadingError
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.shared.resources.SharedR
-import com.yandex.mobile.ads.banner.BannerAdSize
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
 import java.util.Locale
@@ -37,17 +33,6 @@ import java.util.Locale
 fun AdView(
     modifier: Modifier = Modifier
 ) {
-
-    val context = LocalContext.current
-    val configuration = LocalConfiguration.current
-
-    val adSize: BannerAdSize = remember {
-        val adWidth = configuration.screenWidthDp - 40
-        val maxAdHeight = 300
-
-        BannerAdSize.inlineSize(context, adWidth, maxAdHeight)
-    }
-
     PrimaryBox(
         modifier = modifier
             .padding(PaddingValues(horizontal = 20.dp))
@@ -81,28 +66,31 @@ fun AdView(
             Spacer(modifier.weight(1f))
             Row {
                 Spacer(modifier.weight(1f))
+
                 AndroidView(
+                    modifier = modifier
+                        .clip(MaterialTheme.shapes.small),
                     factory = {
                         val view = MyTargetView(it)
-                        view.init(1494645, AdSize.BANNER_300x250)
+                        view.setSlotId(1494645)
+                        view.setAdSize(AdSize.ADSIZE_300x250)
 
-                        view.listener = object : MyTargetViewListener {
+                        view.listener = object : MyTargetView.MyTargetViewListener {
                             override fun onLoad(myTargetView: MyTargetView) {
                                 // Данные успешно загружены, запускаем показ объявлений
 //                                layout.addView(adView)
-                                Log.d("keke", "keke")
                             }
 
                             override fun onNoAd(p0: IAdLoadingError, myTargetView: MyTargetView) {
-                                Log.d("keke", "keke")
+                                Log.d("ad", p0.message)
                             }
 
                             override fun onShow(myTargetView: MyTargetView) {
-                                Log.d("keke", "keke")
+
                             }
 
                             override fun onClick(myTargetView: MyTargetView) {
-                                Log.d("keke", "keke")
+
                             }
                         }
 

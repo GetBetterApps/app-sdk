@@ -21,6 +21,9 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
+
+        buildConfigField("String", "RUSTORE_AD_SLOT_ID", "1")
+        buildConfigField("String", "GP_AD_SLOT_ID", "2")
     }
 
     compileOptions {
