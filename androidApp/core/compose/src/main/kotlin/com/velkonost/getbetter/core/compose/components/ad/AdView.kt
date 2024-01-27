@@ -31,9 +31,9 @@ import java.util.Locale
 
 @Composable
 fun AdView(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    slotId: Int
 ) {
-
 
     PrimaryBox(
         modifier = modifier
@@ -74,7 +74,7 @@ fun AdView(
                         .clip(MaterialTheme.shapes.small),
                     factory = {
                         val view = MyTargetView(it)
-                        view.setSlotId(1494645)
+                        view.setSlotId(slotId)
                         view.setAdSize(AdSize.ADSIZE_300x250)
 
                         view.listener = object : MyTargetView.MyTargetViewListener {
@@ -96,55 +96,10 @@ fun AdView(
                             }
                         }
 
-
                         view.load()
                         view
                     }
                 )
-
-
-//                AndroidView(
-//                    modifier = modifier
-//                        .clip(MaterialTheme.shapes.medium),
-//                    factory = {
-//                        BannerAdView(it)
-//                    },
-//                    update = {
-//                        it.apply {
-//                            setAdSize(adSize)
-//                            setAdUnitId("R-M-5517748-1")
-//                            setBannerAdEventListener(object : BannerAdEventListener {
-//                                override fun onAdLoaded() {
-//                                }
-//
-//                                override fun onAdFailedToLoad(adRequestError: AdRequestError) {
-//                                }
-//
-//                                override fun onAdClicked() {
-//                                    // Called when a click is recorded for an ad.
-//                                }
-//
-//                                override fun onLeftApplication() {
-//                                    // Called when user is about to leave application (e.g., to go to the browser), as a result of clicking on the ad.
-//                                }
-//
-//                                override fun onReturnedToApplication() {
-//                                    // Called when user returned to application after click.
-//                                }
-//
-//                                override fun onImpression(impressionData: ImpressionData?) {
-//                                    // Called when an impression is recorded for an ad.
-//                                }
-//                            })
-//                            loadAd(
-//                                AdRequest.Builder()
-//                                    // Methods in the AdRequest.Builder class can be used here to specify individual options settings.
-//                                    .build()
-//                            )
-//                        }
-//
-//                    }
-//                )
                 Spacer(modifier.weight(1f))
             }
             Spacer(modifier.weight(1f))

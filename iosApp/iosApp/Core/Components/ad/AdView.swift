@@ -12,6 +12,7 @@ import SharedSDK
 import YandexMobileAds
 
 struct AdView: View {
+    
     var body: some View {
         PrimaryBox(
             padding: .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
@@ -44,15 +45,13 @@ struct AdBannerView: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: InlineBannerViewController, context: Context) {
         // Updates the state of the specified view controller with new information from SwiftUI.
     }
-    
-    
 }
 
 final class InlineBannerViewController: UIViewController {
     private lazy var adView: YMAAdView = {
         let adSize = YMABannerAdSize.inlineSize(withWidth: UIScreen.screenWidth - 40, maxHeight: 300)
         
-        let adView = YMAAdView(adUnitID: "R-M-5517759-1", adSize: adSize)
+        let adView = YMAAdView(adUnitID: UtilBuildKonfig.shared.AD_ID, adSize: adSize)
         adView.delegate = self
         adView.translatesAutoresizingMaskIntoConstraints = false
         return adView
@@ -61,14 +60,6 @@ final class InlineBannerViewController: UIViewController {
     func loadAd() {
         adView.loadAd()
         view.addSubview(adView)
-    }
-    
-    func showAd() {
-        
-        //           NSLayoutConstraint.activate([
-        //               adView.topAnchor.constraint(equalTo: loadButton.bottomAnchor, constant: 100),
-        //               adView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        //           ])
     }
 }
 

@@ -11,7 +11,7 @@ data class SocialViewState(
     val generalFeed: FeedViewState = FeedViewState(),
     val areasFeed: FeedViewState = FeedViewState(),
     val adPosition: Int = (6..10).random(),
-    val adId: Int = UtilBuildKonfig.AD_ID//UtilBuildKonfig.RUSTORE_AD_ID
+    val adId: String = UtilBuildKonfig.AD_ID//UtilBuildKonfig.RUSTORE_AD_ID
 ) : UIContract.State
 
 data class FeedViewState(

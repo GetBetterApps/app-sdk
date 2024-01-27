@@ -1,6 +1,7 @@
 @file:Suppress("DSL_SCOPE_VIOLATION")
 
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.INT
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import com.velkonost.getbetter.SHARED_PACKAGE
 import com.velkonost.getbetter.join
 
@@ -42,18 +43,18 @@ buildkonfig {
     exposeObjectWithName = "UtilBuildKonfig"
 
     defaultConfigs {
-        buildConfigField(INT, "AD_ID", "")
+        buildConfigField(STRING, "AD_ID", "")
         buildConfigField(INT, "RUSTORE_AD_ID", 1494678.toString())
     }
 
     targetConfigs {
         create("android") {
-            buildConfigField(INT, "AD_ID", 1494645.toString())
+            buildConfigField(STRING, "AD_ID", 1494645.toString())
             buildConfigField(INT, "RUSTORE_AD_ID", 1494678.toString())
         }
 
         create("ios") {
-            buildConfigField(INT, "AD_ID", 5517759.toString())
+            buildConfigField(STRING, "AD_ID", "R-M-5517759-1")
         }
     }
 }

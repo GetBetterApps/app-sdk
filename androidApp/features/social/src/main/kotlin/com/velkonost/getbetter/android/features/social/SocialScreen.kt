@@ -77,6 +77,7 @@ fun SocialScreen(
                     generalFeedState = state.generalFeed,
                     areasFeedState = state.areasFeed,
                     adPosition = state.adPosition,
+                    adSlotId = state.adId.toInt(),
                     noteClick = {
                         viewModel.dispatch(SocialAction.NoteClick(it))
                     },
@@ -135,6 +136,7 @@ fun SocialScreenContent(
     generalFeedState: FeedViewState,
     areasFeedState: FeedViewState,
     adPosition: Int,
+    adSlotId: Int,
     noteClick: (Note) -> Unit,
     noteLikeClick: (Note) -> Unit,
     generalFeedLoadNextPage: () -> Unit,
@@ -156,6 +158,7 @@ fun SocialScreenContent(
                 emptyText = stringResource(resource = SharedR.strings.placeholder_social_all),
                 items = generalFeedState.items,
                 adPosition = adPosition,
+                adSlotId = adSlotId,
                 itemClick = noteClick,
                 itemLikeClick = noteLikeClick,
                 onBottomReach = generalFeedLoadNextPage,
@@ -169,6 +172,7 @@ fun SocialScreenContent(
                 emptyText = stringResource(resource = SharedR.strings.placeholder_social_areas),
                 items = areasFeedState.items,
                 adPosition = adPosition,
+                adSlotId = adSlotId,
                 itemClick = noteClick,
                 itemLikeClick = noteLikeClick,
                 onBottomReach = areasFeedLoadNextPage,
@@ -188,6 +192,7 @@ fun SocialFeedView(
     isRefreshing: Boolean,
     items: List<Note>,
     adPosition: Int,
+    adSlotId: Int,
     itemClick: (Note) -> Unit,
     itemLikeClick: (Note) -> Unit,
     onBottomReach: () -> Unit,
@@ -226,7 +231,7 @@ fun SocialFeedView(
                         )
 
                         if (index % adPosition == 0 && index != 0) {
-                            AdView()
+                            AdView(slotId = adSlotId)
                         }
                     }
 

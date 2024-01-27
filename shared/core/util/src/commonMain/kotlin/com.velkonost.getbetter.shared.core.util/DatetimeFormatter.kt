@@ -1,6 +1,5 @@
 package com.velkonost.getbetter.shared.core.util
 
-import com.velkonost.getbetter.BuildKonfig
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.ResourceFormatted
