@@ -57,7 +57,7 @@ struct OnboardingContent: View {
                 .frame(width: 256, height: 256)
                 .scaleEffect(0.3)
             
-            Spacer().frame(height: 24)
+            Spacer().frame(height: 32)
             
             if firstPointVisible {
                 OnboardingPoint(
@@ -98,9 +98,9 @@ struct OnboardingContent: View {
             
             if buttonVisible {
                 AppButton(
-                    labelText: step == 5 ? SharedR.strings().onboarding_btn.desc().localized() : SharedR.strings().continue_btn.desc().localized(),
+                    labelText: SharedR.strings().onboarding_btn.desc().localized(),
                     isLoading: isLoading,
-                    onClick: onNextClick
+                    onClick: onSkipClick
                 )
             }
             
@@ -165,8 +165,8 @@ struct OnboardingPoint: View {
             Spacer()
                 
         }
-        .padding(.top, 12)
-        .padding(.horizontal, 32)
+        .padding(.top, 16)
+        .padding(.horizontal, 16)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5 + 2.0 * Double(index)) {
                 withAnimation(.bouncy) {
