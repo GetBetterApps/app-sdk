@@ -19,8 +19,8 @@ fun Loader(
 ) {
     val composition by rememberLottieComposition(
         LottieCompositionSpec.RawRes(
-            if (isSystemInDarkTheme()) SharedR.files.loader_light.rawResId
-            else SharedR.files.loader_dark.rawResId
+            if (!isSystemInDarkTheme()) SharedR.files.loader_new_light.rawResId
+            else SharedR.files.loader_new_dark.rawResId
         )
     )
 

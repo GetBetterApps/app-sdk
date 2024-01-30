@@ -22,6 +22,7 @@ struct AdView: View {
                 Text(SharedR.strings().ad_title.desc().localized().capitalized)
                     .style(.headlineSmall)
                     .foregroundColor(.onboardingBackgroundGradientStart)
+                    .padding(.top, 6)
             }
             .frame(height: 300)
             

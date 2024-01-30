@@ -26,11 +26,11 @@ struct Loader: View {
             if isDark {
                 LottieView(isDark: true)
                     .frame(width: size, height: size)
-                    .scaleEffect(0.2)
+                    .scaleEffect(0.3)
             } else{
                 LottieView(isDark: false)
                     .frame(width: size, height: size)
-                    .scaleEffect(0.2)
+                    .scaleEffect(0.3)
             }
             
         }
@@ -48,7 +48,7 @@ struct LottieView: UIViewRepresentable {
     func makeUIView(context: Context) -> Lottie.LottieAnimationView {
         
         let animationView = LottieAnimationView(
-            filePath: isDark ? SharedR.files().loader_light.path : SharedR.files().loader_dark.path
+            filePath: !isDark ? SharedR.files().loader_new_light.path : SharedR.files().loader_new_dark.path
         )
         
         animationView.contentMode = .scaleAspectFit
