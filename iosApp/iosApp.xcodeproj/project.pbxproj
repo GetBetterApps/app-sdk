@@ -155,6 +155,7 @@
 		46D8577E2AD0787E00BE74DA /* AddAreaHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D8577D2AD0787E00BE74DA /* AddAreaHeader.swift */; };
 		46D9381C2ABAECB70096A221 /* ProfileRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9381B2ABAECB70096A221 /* ProfileRoute.swift */; };
 		46D9381E2ABAECBE0096A221 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9381D2ABAECBE0096A221 /* ProfileScreen.swift */; };
+		46E0030A2B691F97006BF54E /* OnboardingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E003092B691F97006BF54E /* OnboardingContent.swift */; };
 		46E20A282B2F4DAA0037CEEF /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E20A272B2F4DAA0037CEEF /* OnboardingScreen.swift */; };
 		46E20A2A2B2F4DB10037CEEF /* OnboardingRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E20A292B2F4DB10037CEEF /* OnboardingRoute.swift */; };
 		46E2DD2D2AE9364D00B4B2B5 /* AreaPickerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E2DD2C2AE9364D00B4B2B5 /* AreaPickerHeader.swift */; };
@@ -336,6 +337,7 @@
 		46D8577D2AD0787E00BE74DA /* AddAreaHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaHeader.swift; sourceTree = "<group>"; };
 		46D9381B2ABAECB70096A221 /* ProfileRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRoute.swift; sourceTree = "<group>"; };
 		46D9381D2ABAECBE0096A221 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		46E003092B691F97006BF54E /* OnboardingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContent.swift; sourceTree = "<group>"; };
 		46E20A272B2F4DAA0037CEEF /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
 		46E20A292B2F4DB10037CEEF /* OnboardingRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRoute.swift; sourceTree = "<group>"; };
 		46E2DD2C2AE9364D00B4B2B5 /* AreaPickerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPickerHeader.swift; sourceTree = "<group>"; };
@@ -940,6 +942,7 @@
 				464583902B3015AD0027F6AA /* components */,
 				46E20A272B2F4DAA0037CEEF /* OnboardingScreen.swift */,
 				46E20A292B2F4DB10037CEEF /* OnboardingRoute.swift */,
+				46E003092B691F97006BF54E /* OnboardingContent.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1294,6 +1297,7 @@
 				464583942B3048620027F6AA /* OnboardingSecondStep.swift in Sources */,
 				460054AD2ABB1B5E00586767 /* HelpAndSupport.swift in Sources */,
 				46C10D212AB46BF400E62846 /* UIPilotExt.swift in Sources */,
+				46E0030A2B691F97006BF54E /* OnboardingContent.swift in Sources */,
 				46F0B3BF2B1CD62800D6BCC1 /* TaskDetailRoute.swift in Sources */,
 				46E307D32B30AD2700A6B491 /* OnboardingAffirmationText.swift in Sources */,
 				468B876E2ABC45D2001BBEB1 /* CalendarsScreen.swift in Sources */,

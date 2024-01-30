@@ -2,14 +2,12 @@ package com.velkonost.getbetter.android.features.onboarding
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,7 +38,8 @@ fun OnboardingContent(
 ) {
     val composition by rememberLottieComposition(
         LottieCompositionSpec.RawRes(
-            if (!isSystemInDarkTheme()) SharedR.files.loader_new_light.rawResId
+            if (step == 1) SharedR.files.anim_mark.rawResId
+            else if (step == 2) SharedR.files.anim_onboarding_2.rawResId
             else SharedR.files.loader_new_dark.rawResId
         )
     )
@@ -71,14 +70,15 @@ fun OnboardingContent(
         Spacer(modifier.weight(1f))
 
         LottieAnimation(
-            modifier = modifier.size(128.dp),
+            modifier = modifier.height(256.dp),
             composition = composition,
             iterations = LottieConstants.IterateForever,
         )
 
         Text(
-            text = title,
-            style = MaterialTheme.typography.bodyMedium.copy(fontStyle = FontStyle.Italic),
+            modifier = modifier.padding(top = 12.dp),
+            text = title.uppercase(),
+            style = MaterialTheme.typography.labelLarge.copy(fontStyle = FontStyle.Italic),
             color = colorResource(resource = SharedR.colors.text_title),
             textAlign = TextAlign.Center
         )
