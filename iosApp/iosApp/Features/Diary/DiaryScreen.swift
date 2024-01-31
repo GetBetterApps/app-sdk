@@ -48,6 +48,7 @@ struct DiaryScreen: View {
             
             switch(selectedPage) {
             case 0: NotesView(
+                adPosition: Int(state.adPosition),
                 state: $notesViewState,
                 isLoading: notesViewState.isLoading,
                 items: state.notesViewState.items,
@@ -81,6 +82,7 @@ struct DiaryScreen: View {
             case 1: AreasView(
                 items: state.areasViewState.items, 
                 isLoading: state.areasViewState.isLoading,
+                adPosition: Int(state.adPosition),
                 areaClick: { areaId in
                     selectedAreaId = areaId
                     showingAreaDetailSheet = true

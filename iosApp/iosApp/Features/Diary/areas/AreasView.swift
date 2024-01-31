@@ -14,6 +14,7 @@ struct AreasView: View {
     
     let items: [Area]
     let isLoading: Bool
+    private let adPosition: Int
     let areaClick: (Int32) -> Void
     let areaLikeClick: (Area) -> Void
     let createNewAreaClick: () -> Void
@@ -21,6 +22,7 @@ struct AreasView: View {
     
     init(
         items: [Area], isLoading: Bool,
+        adPosition: Int,
         areaClick: @escaping (Int32) -> Void,
         areaLikeClick: @escaping (Area) -> Void,
         createNewAreaClick: @escaping () -> Void,
@@ -28,6 +30,7 @@ struct AreasView: View {
     ) {
         self.items = items
         self.isLoading = isLoading
+        self.adPosition = adPosition
         self.areaClick = areaClick
         self.areaLikeClick = areaLikeClick
         self.createNewAreaClick = createNewAreaClick
@@ -46,12 +49,23 @@ struct AreasView: View {
                 } else {
                     ScrollView(showsIndicators: false) {
                         LazyVStack(spacing: 0) {
-                            ForEach(items, id: \.self) { item in
+//                            ForEach(items, id: \.self) { item in
+                            ForEach(0..<items.count, id: \.self) { index in
                                 AreaItem(
-                                    item: item,
+                                    item: items[index],
                                     onClick: areaClick,
                                     onLikeClick: areaLikeClick
                                 )
+                                
+                                if index != 0 && index % adPosition == 0 {
+                                    AdView()
+                                        .padding(.vertical, 2)
+                                }
+                            }
+                            
+                            if items.count < adPosition {
+                                AdView()
+                                    .padding(.vertical, 2)
                             }
                         }
                         .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))

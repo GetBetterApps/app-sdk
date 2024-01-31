@@ -50,6 +50,11 @@ struct TasksView: View {
                             onFavoriteClick: onTaskFavoriteClick
                         )
                         
+                        if !favoriteItems.isEmpty {
+                            AdView()
+                                .padding(.vertical, 2)
+                        }
+                        
                         TasksSection(
                             section: TasksUISection.current,
                             items: currentItems,
@@ -57,6 +62,9 @@ struct TasksView: View {
                             onFavoriteClick: onTaskFavoriteClick,
                             onUpdateClick: onTaskListUpdateClick
                         )
+                        
+                        AdView()
+                            .padding(.vertical, 2)
                         
                         TasksSection(
                             section: TasksUISection.completed,

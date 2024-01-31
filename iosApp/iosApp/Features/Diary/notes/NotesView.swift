@@ -14,6 +14,8 @@ struct NotesView: View {
     
     @Binding var state: NotesViewState
     
+    private let adPosition: Int
+    
     var isLoading: Bool
     let createGoalClick: () -> Void
     let createNoteClick: () -> Void
@@ -24,6 +26,7 @@ struct NotesView: View {
     let onBottomReach: () -> Void
     
     init(
+        adPosition: Int,
         state: Binding<NotesViewState>,
         isLoading: Bool, items: [Note],
         createGoalClick: @escaping () -> Void, createNoteClick: @escaping () -> Void,
@@ -31,6 +34,7 @@ struct NotesView: View {
         itemLikeClick: @escaping (Note) -> Void,
         onBottomReach: @escaping () -> Void
     ) {
+        self.adPosition = adPosition
         self._state = state
         self.isLoading = isLoading
         self.items = items
@@ -54,15 +58,25 @@ struct NotesView: View {
                 } else {
                     ScrollView(showsIndicators: false) {
                         LazyVStack(spacing: 0) {
-                            ForEach(items, id: \.self.id) { item in
+                            ForEach(0..<items.count, id: \.self) { index in
                                 NoteItem(
-                                    item: item,
+                                    item: items[index],
                                     onClick: itemClick,
                                     onLikeClick: itemLikeClick
                                 )
                                 .onAppear {
-                                    checkPaginationThreshold(currentItemId: item.id)
+                                    checkPaginationThreshold(currentItemId: items[index].id)
                                 }
+                                
+                                if index != 0 && index % adPosition == 0 {
+                                    AdView()
+                                        .padding(.vertical, 2)
+                                }
+                            }
+                            
+                            if items.count < adPosition {
+                                AdView()
+                                    .padding(.vertical, 2)
                             }
                         }
                         .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
