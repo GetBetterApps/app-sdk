@@ -168,7 +168,7 @@ struct OnboardingPoint: View {
         .padding(.top, 16)
         .padding(.horizontal, 16)
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5 + 2.0 * Double(index)) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1 + 2 * Double(index)) {
                 withAnimation(.bouncy) {
                     animVisible = true
                 }

@@ -57,7 +57,7 @@ fun OnboardingContent(
 
     LaunchedEffect(Unit) {
         scope.launch {
-            delay(2000)
+            delay(1000)
             firstPointVisible.value = true
             delay(2000)
             secondPointVisible.value = true
@@ -158,7 +158,7 @@ fun OnboardingContent(
                     .align(Alignment.CenterHorizontally),
                 labelText = stringResource(resource = SharedR.strings.onboarding_btn),
                 isLoading = isLoading,
-                onClick = onNextClick
+                onClick = onSkipClick
             )
         }
 
@@ -191,7 +191,7 @@ fun OnboardingPoint(
 
     Row(
         modifier = modifier
-            .padding(top = 8.dp, start = 16.dp, end = 16.dp),
+            .padding(start = 16.dp, end = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (animVisible.value) {
