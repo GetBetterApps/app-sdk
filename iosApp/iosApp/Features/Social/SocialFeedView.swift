@@ -69,19 +69,6 @@ struct SocialFeedView: View {
                                         .padding(.vertical, 2)
                                 }
                             }
-                            
-//                            ForEach(items, id: \.self.id) { item in
-//                                FeedNoteItem(
-//                                    item: item,
-//                                    onClick: itemClick,
-//                                    onLikeClick: itemLikeClick
-//                                )
-//                                .onAppear {
-//                                    checkPaginationThreshold(currentItemId: item.id)
-//                                }
-//                                
-//                                AdView()
-//                            }
                         }
                         .padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))
                         

@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetValue
@@ -45,6 +46,7 @@ import com.velkonost.getbetter.android.features.profiledetail.ProfileDetailScree
 import com.velkonost.getbetter.core.compose.components.HintButton
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.PlaceholderView
+import com.velkonost.getbetter.core.compose.components.ad.AdView
 import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
@@ -155,7 +157,7 @@ fun CalendarsScreen(
                             modifier = modifier.fillMaxSize(),
                             contentPadding = PaddingValues(bottom = 160.dp)
                         ) {
-                            items(state.datesState.selectedDate?.items!!) { item ->
+                            itemsIndexed(state.datesState.selectedDate?.items!!) { index, item ->
                                 ActionItem(
                                     item = item,
                                     onAreaClick = {
@@ -179,6 +181,19 @@ fun CalendarsScreen(
                                         viewModel.dispatch(CalendarsAction.TaskClick(it))
                                     }
                                 )
+
+                                if (index % state.adPosition == 0 && index != 0) {
+                                    AdView(slotId = state.adId.toInt())
+                                }
+                            }
+
+                            if (
+                                state.datesState.selectedDate?.items.isNullOrEmpty().not()
+                                && state.datesState.selectedDate?.items!!.size < state.adPosition
+                            ) {
+                                item {
+                                    AdView(slotId = state.adId.toInt())
+                                }
                             }
                         }
                     }
