@@ -37,9 +37,10 @@ struct AbilitiesScreen: View {
                                 
                         }
                         
-                        ForEach(state.items, id: \.self.id) { item in
+//                        ForEach(state.items, id: \.self.id) { item in
+                        ForEach(0..<state.items.count, id: \.self) { index in
                             AbilityItem(
-                                item: item,
+                                item: state.items[index],
                                 onClick: { value in
                                     viewModel.dispatch(action: AbilitiesActionAbilityClick(value: value))
                                 }
@@ -47,13 +48,18 @@ struct AbilitiesScreen: View {
                             .onAppear {
                                 checkPaginationThreshold(
                                     items: state.items,
-                                    currentItemId: item.id!,
+                                    currentItemId: state.items[index].id!,
                                     loadMorePrefetch: Int(state.loadMorePrefetch),
                                     isLoading: state.isLoading,
                                     onBottomReach: {
                                         viewModel.dispatch(action: AbilitiesActionLoadNextPage())
                                     }
                                 )
+                            }
+                            
+                            if index != 0 && index % Int(state.adPosition) == 0 {
+                                AdView()
+                                    .padding(.vertical, 2)
                             }
                         }
                     }.padding(.init(top: .zero, leading: 20, bottom: 100, trailing: 20))

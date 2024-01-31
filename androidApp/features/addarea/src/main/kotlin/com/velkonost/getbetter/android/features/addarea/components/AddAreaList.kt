@@ -46,15 +46,6 @@ fun AddAreaList(
             }
         }
 
-        if (
-            items.isNotEmpty()
-            && items.size < adPosition
-        ) {
-            item {
-                AdView(slotId = adSlotId)
-            }
-        }
-
         if (isLoading) {
             item {
                 Box(modifier = modifier.fillMaxSize()) {

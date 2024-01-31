@@ -114,12 +114,13 @@ struct CalendarsScreen: View {
                         } else {
                             ScrollView(showsIndicators: false) {
                                 LazyVStack {
-                                    ForEach(
-                                        state.datesState.selectedDate!.items.map { ActionUIItemWrapper(item: $0) },
-                                        id: \.self.id
-                                    ) { wrapper in
+                                    ForEach(0..<state.datesState.selectedDate!.items.count, id: \.self) { index in
+//                                    ForEach(
+//                                        state.datesState.selectedDate!.items.map { ActionUIItemWrapper(item: $0) },
+//                                        id: \.self.id
+//                                    ) { wrapper in
                                         ActionItem(
-                                            item: wrapper.item,
+                                            item: state.datesState.selectedDate!.items[index],
                                             onAreaClick: { value in
                                                 selectedAreaId = value
                                                 showingAreaDetailSheet = true
@@ -128,14 +129,25 @@ struct CalendarsScreen: View {
                                                 viewModel.dispatch(action: CalendarsActionNoteClick(value: value))
                                             },
                                             onUserClick: {
-                                                selectedUserId = (wrapper.item.data as! UserInfoShort).id
+                                                selectedUserId = (state.datesState.selectedDate!.items[index].data as! UserInfoShort).id
                                                 showingProfileDetailSheet = true
                                             },
                                             onTaskClick: { value in
                                                 viewModel.dispatch(action: CalendarsActionTaskClick(value: value))
                                             }
                                         )
+                                        
+                                        if index != 0 && index % Int(state.adPosition) == 0 {
+                                            AdView()
+                                                .padding(.vertical, 2)
+                                        }
                                     }
+                                    
+                                    if state.datesState.selectedDate!.items.count < state.adPosition {
+                                        AdView()
+                                            .padding(.vertical, 2)
+                                    }
+                                    
                                     Spacer().frame(height: 160)
                                 }
                                 .padding(.horizontal, 20)

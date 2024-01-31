@@ -32,9 +32,9 @@ struct AddAreaScreen: View {
                     
                     ScrollView(showsIndicators: false) {
                         LazyVStack(spacing: 0) {
-                            ForEach(state.items, id: \.self) { item in
+                            ForEach(0..<state.items.count, id: \.self) { index in
                                 AddAreaItem(
-                                    item: item,
+                                    item: state.items[index],
                                     onAreaClick: { areaId in
                                         selectedAreaId = areaId
                                         showingAreaDetailSheet = true
@@ -44,7 +44,12 @@ struct AddAreaScreen: View {
                                     }
                                 )
                                 .onAppear {
-                                    checkPaginationThreshold(currentItemId: item.id, isLoading: state.isLoading)
+                                    checkPaginationThreshold(currentItemId: state.items[index].id, isLoading: state.isLoading)
+                                }
+                                
+                                if index != 0 && index % Int(state.adPosition) == 0 {
+                                    AdView()
+                                        .padding(.vertical, 2)
                                 }
                             }
                         }
