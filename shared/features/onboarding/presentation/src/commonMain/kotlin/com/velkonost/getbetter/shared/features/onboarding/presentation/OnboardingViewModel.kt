@@ -61,7 +61,6 @@ internal constructor(
         launchJob {
             onboardingRepository.updateOnboardingState()
 
-
 //            emit(OnboardingNavigation.NavigateToAuth)
             loginAnonymousUseCase() collectAndProcess {
                 isLoading {
