@@ -13,7 +13,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.shared.features.onboarding.presentation.OnboardingViewModel
 import com.velkonost.getbetter.shared.features.onboarding.presentation.contract.OnboardingAction
@@ -72,11 +71,6 @@ fun OnboardingScreen(
 
     OnboardingContent(
         isLoading = state.isLoading,
-        title = state.title.toString(LocalContext.current),
-        step = state.step,
-        onNextClick = {
-            viewModel.dispatch(OnboardingAction.NextClick)
-        },
         onSkipClick = {
             viewModel.dispatch(OnboardingAction.SkipClick)
         }

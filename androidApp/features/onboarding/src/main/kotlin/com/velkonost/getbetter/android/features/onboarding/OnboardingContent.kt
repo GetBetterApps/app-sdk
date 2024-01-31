@@ -37,9 +37,6 @@ import kotlinx.coroutines.launch
 fun OnboardingContent(
     modifier: Modifier = Modifier,
     isLoading: Boolean,
-    title: String,
-    step: Int,
-    onNextClick: () -> Unit,
     onSkipClick: () -> Unit
 ) {
     val composition by rememberLottieComposition(
@@ -205,7 +202,6 @@ fun OnboardingPoint(
         }
 
         Text(
-//            modifier = modifier.padding(start = 8.dp),
             text = title.uppercase(),
             style = MaterialTheme.typography.labelMedium,
             color = colorResource(resource = SharedR.colors.text_title),

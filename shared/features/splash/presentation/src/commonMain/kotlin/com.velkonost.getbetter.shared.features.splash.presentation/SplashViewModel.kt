@@ -63,8 +63,7 @@ internal constructor(
             else if (shouldShowOnboarding) NavigateToOnboarding
             else NavigateToAuth
 
-            emit(NavigateToOnboarding)
-//            emit(startDestination)
+            emit(startDestination)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.onboarding.presentation
 
+import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.abilities.api.AbilitiesRepository
@@ -59,15 +60,17 @@ internal constructor(
     private fun obtainSkipClick() {
         launchJob {
             onboardingRepository.updateOnboardingState()
-            emit(OnboardingNavigation.NavigateToAuth)
-//            loginAnonymousUseCase() collectAndProcess {
-//                isLoading {
-//                    emit(viewState.value.copy(isLoading = it))
-//                }
-//                onSuccess {
-//                    emit(OnboardingNavigation.NavigateToAuth)
-//                }
-//            }
+
+
+//            emit(OnboardingNavigation.NavigateToAuth)
+            loginAnonymousUseCase() collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
+                }
+                onSuccess {
+                    emit(OnboardingNavigation.NavigateToAuth)
+                }
+            }
         }
     }
 
