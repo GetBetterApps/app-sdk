@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,6 +21,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.abilities.components.AbilityItem
 import com.velkonost.getbetter.core.compose.components.HintButton
 import com.velkonost.getbetter.core.compose.components.Loader
+import com.velkonost.getbetter.core.compose.components.ad.AdView
 import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
 import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
 import com.velkonost.getbetter.shared.features.abilities.presentation.AbilitiesViewModel
@@ -67,13 +68,20 @@ fun AbilitiesScreen(
                     }
                 }
 
-                items(state.items, key = { it.name }) { item ->
+                itemsIndexed(state.items, key = { _, it -> it.name }) { index, item ->
                     AbilityItem(
                         item = item,
                         onClick = {
                             viewModel.dispatch(AbilitiesAction.AbilityClick(it))
                         }
                     )
+
+                    if (index % state.adPosition == 0 && index != 0) {
+                        AdView(
+                            slotId = state.adId.toInt(),
+                            padding = 0
+                        )
+                    }
                 }
             }
         }

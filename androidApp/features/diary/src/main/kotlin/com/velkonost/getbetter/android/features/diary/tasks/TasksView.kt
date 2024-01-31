@@ -22,6 +22,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.android.features.diary.tasks.components.TaskItem
 import com.velkonost.getbetter.core.compose.components.Loader
+import com.velkonost.getbetter.core.compose.components.ad.AdView
 import com.velkonost.getbetter.core.compose.extensions.fadingEdge
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.features.diary.presentation.model.TasksUISection
@@ -36,6 +37,7 @@ fun TasksView(
     favoriteItems: List<TaskUI>,
     currentItems: List<TaskUI>,
     completedItems: List<TaskUI>,
+    adSlotId: Int,
     onTaskClick: (TaskUI) -> Unit,
     onTaskListUpdateClick: () -> Unit,
     onTaskFavoriteClick: (TaskUI) -> Unit
@@ -57,6 +59,12 @@ fun TasksView(
                     onFavoriteClick = onTaskFavoriteClick
                 )
 
+                if (favoriteItems.isNotEmpty()) {
+                    item {
+                        AdView(slotId = adSlotId)
+                    }
+                }
+
                 tasksSection(
                     section = TasksUISection.Current,
                     items = currentItems,
@@ -64,6 +72,10 @@ fun TasksView(
                     onFavoriteClick = onTaskFavoriteClick,
                     onUpdateClick = onTaskListUpdateClick
                 )
+
+                item {
+                    AdView(slotId = adSlotId)
+                }
 
                 tasksSection(
                     section = TasksUISection.Completed,

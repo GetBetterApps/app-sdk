@@ -118,6 +118,8 @@ fun DiaryScreen(
                 notesState = state.notesViewState,
                 areasState = state.areasViewState,
                 tasksState = state.tasksViewState,
+                adPosition = state.adPosition,
+                adSlotId = state.adId.toInt(),
                 noteClick = {
                     viewModel.dispatch(NoteClick(it))
                 },
@@ -315,6 +317,8 @@ fun DiaryScreenContent(
     notesState: NotesViewState,
     areasState: AreasViewState,
     tasksState: TasksViewState,
+    adPosition: Int,
+    adSlotId: Int,
     noteClick: (Note) -> Unit,
     noteLikeClick: (Note) -> Unit,
     areaClick: (Int) -> Unit,
@@ -338,6 +342,8 @@ fun DiaryScreenContent(
                 items = notesState.items,
                 isLoading = notesState.isLoading,
                 loadMorePrefetch = notesState.loadMorePrefetch,
+                adPosition = adPosition,
+                adSlotId = adSlotId,
                 createGoalClick = createGoalClick,
                 createNoteClick = createNoteClick,
                 itemClick = noteClick,
@@ -348,6 +354,8 @@ fun DiaryScreenContent(
             1 -> AreasView(
                 items = areasState.items,
                 isLoading = areasState.isLoading,
+                adPosition = adPosition,
+                adSlotId = adSlotId,
                 itemClick = areaClick,
                 itemLikeClick = areaLikeClick,
                 createNewAreaClick = createNewAreaClick,
@@ -359,6 +367,7 @@ fun DiaryScreenContent(
                 favoriteItems = tasksState.favoriteItems,
                 currentItems = tasksState.currentItems,
                 completedItems = tasksState.completedItems,
+                adSlotId = adSlotId,
                 onTaskClick = taskClick,
                 onTaskListUpdateClick = tasksListUpdateClick,
                 onTaskFavoriteClick = taskFavoriteClick

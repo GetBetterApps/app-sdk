@@ -15,7 +15,7 @@ class AddAreaViewModelDelegate: ObservableObject {
     
     @LazyKoin private var delegate: SharedSDK.AddAreaViewModel
     
-    @Published var state = AddAreaViewState(isLoading: false, items: [], loadMorePrefetch: 0)
+    @Published var state = AddAreaViewState(isLoading: false, items: [], loadMorePrefetch: 0, adId: "", adPosition: 0)
     
     private var stateStream: Task<(), Error>? = nil
     

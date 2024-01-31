@@ -32,12 +32,13 @@ import java.util.Locale
 @Composable
 fun AdView(
     modifier: Modifier = Modifier,
-    slotId: Int
+    slotId: Int,
+    padding: Int = 20
 ) {
 
     PrimaryBox(
         modifier = modifier
-            .padding(PaddingValues(horizontal = 20.dp))
+            .padding(PaddingValues(horizontal = padding.dp))
             .height(300.dp),
         padding = 0
     ) {

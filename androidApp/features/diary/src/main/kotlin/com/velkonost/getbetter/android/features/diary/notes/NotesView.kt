@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.PlaceholderView
+import com.velkonost.getbetter.core.compose.components.ad.AdView
 import com.velkonost.getbetter.core.compose.components.notelist.AddNoteItem
 import com.velkonost.getbetter.core.compose.components.notelist.NoteItem
 import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
@@ -26,6 +27,8 @@ fun NotesView(
     loadMorePrefetch: Int,
     isLoading: Boolean,
     items: List<Note>,
+    adPosition: Int,
+    adSlotId: Int,
     createGoalClick: () -> Unit,
     createNoteClick: () -> Unit,
     itemClick: (Note) -> Unit,
@@ -48,12 +51,22 @@ fun NotesView(
                     state = listState,
                     contentPadding = PaddingValues(bottom = 140.dp)
                 ) {
-                    items(items, key = { it.id }) { item ->
+                    itemsIndexed(items, key = { _, it -> it.id }) { index, item ->
                         NoteItem(
                             item = item,
                             onClick = itemClick,
                             onLikeClick = itemLikeClick
                         )
+
+                        if (index % adPosition == 0 && index != 0) {
+                            AdView(slotId = adSlotId)
+                        }
+                    }
+
+                    if (items.size < adPosition) {
+                        item {
+                            AdView(slotId = adSlotId)
+                        }
                     }
 
                     if (isLoading) {
