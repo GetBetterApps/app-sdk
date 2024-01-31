@@ -1,12 +1,16 @@
 package com.velkonost.getbetter.shared.features.calendars.presentation.contracts
 
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
+import com.velkonost.getbetter.shared.core.util.advertise.ACTUAL_AD_ID
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import dev.icerock.moko.resources.desc.StringDesc
 
 data class CalendarsViewState(
     val isLoading: Boolean = false,
-    val datesState: DatesState = DatesState()
+    val datesState: DatesState = DatesState(),
+
+    val adId: String = ACTUAL_AD_ID,
+    val adPosition: Int = (6..10).random()
 ) : UIContract.State
 
 data class DatesState(

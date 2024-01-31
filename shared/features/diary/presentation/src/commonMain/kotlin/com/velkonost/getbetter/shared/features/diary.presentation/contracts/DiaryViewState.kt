@@ -5,6 +5,7 @@ import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.util.PrefetchDistanceValue
+import com.velkonost.getbetter.shared.core.util.advertise.ACTUAL_AD_ID
 import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteViewState
 import com.velkonost.getbetter.shared.features.diary.presentation.model.DiaryTab
@@ -18,7 +19,10 @@ data class DiaryViewState(
     val createNewAreaViewState: CreateNewAreaViewState = CreateNewAreaViewState(
         selectedEmoji = emojiList.first()
     ),
-    val createNewNoteViewState: CreateNewNoteViewState = CreateNewNoteViewState()
+    val createNewNoteViewState: CreateNewNoteViewState = CreateNewNoteViewState(),
+
+    val adId: String = ACTUAL_AD_ID,
+    val adPosition: Int = (6..10).random()
 ) : UIContract.State
 
 data class NotesViewState(
