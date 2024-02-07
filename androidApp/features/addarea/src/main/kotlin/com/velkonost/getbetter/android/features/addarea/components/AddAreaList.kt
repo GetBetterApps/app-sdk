@@ -24,7 +24,7 @@ fun AddAreaList(
     onAddAreaClick: (Int) -> Unit,
     isLoading: Boolean,
     adPosition: Int,
-    adSlotId: Int
+    adSlotId: String
 ) {
     LazyColumn(
         state = listState,

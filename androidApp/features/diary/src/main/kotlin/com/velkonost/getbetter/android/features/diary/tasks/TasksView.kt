@@ -37,7 +37,7 @@ fun TasksView(
     favoriteItems: List<TaskUI>,
     currentItems: List<TaskUI>,
     completedItems: List<TaskUI>,
-    adSlotId: Int,
+    adSlotId: String,
     onTaskClick: (TaskUI) -> Unit,
     onTaskListUpdateClick: () -> Unit,
     onTaskFavoriteClick: (TaskUI) -> Unit

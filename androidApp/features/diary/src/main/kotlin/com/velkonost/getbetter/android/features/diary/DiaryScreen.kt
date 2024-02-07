@@ -119,7 +119,7 @@ fun DiaryScreen(
                 areasState = state.areasViewState,
                 tasksState = state.tasksViewState,
                 adPosition = state.adPosition,
-                adSlotId = state.adId.toInt(),
+                adSlotId = state.adId,
                 noteClick = {
                     viewModel.dispatch(NoteClick(it))
                 },
@@ -318,7 +318,7 @@ fun DiaryScreenContent(
     areasState: AreasViewState,
     tasksState: TasksViewState,
     adPosition: Int,
-    adSlotId: Int,
+    adSlotId: String,
     noteClick: (Note) -> Unit,
     noteLikeClick: (Note) -> Unit,
     areaClick: (Int) -> Unit,

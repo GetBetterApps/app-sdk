@@ -28,7 +28,7 @@ fun NotesView(
     isLoading: Boolean,
     items: List<Note>,
     adPosition: Int,
-    adSlotId: Int,
+    adSlotId: String,
     createGoalClick: () -> Unit,
     createNoteClick: () -> Unit,
     itemClick: (Note) -> Unit,

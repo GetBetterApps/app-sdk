@@ -25,7 +25,7 @@ fun AreasView(
     isLoading: Boolean,
     items: List<Area>,
     adPosition: Int,
-    adSlotId: Int,
+    adSlotId: String,
     itemClick: (Int) -> Unit,
     itemLikeClick: (Area) -> Unit,
     createNewAreaClick: () -> Unit,

@@ -77,7 +77,7 @@ fun SocialScreen(
                     generalFeedState = state.generalFeed,
                     areasFeedState = state.areasFeed,
                     adPosition = state.adPosition,
-                    adSlotId = state.adId.toInt(),
+                    adSlotId = state.adId,
                     noteClick = {
                         viewModel.dispatch(SocialAction.NoteClick(it))
                     },
@@ -136,7 +136,7 @@ fun SocialScreenContent(
     generalFeedState: FeedViewState,
     areasFeedState: FeedViewState,
     adPosition: Int,
-    adSlotId: Int,
+    adSlotId: String,
     noteClick: (Note) -> Unit,
     noteLikeClick: (Note) -> Unit,
     generalFeedLoadNextPage: () -> Unit,
@@ -192,7 +192,7 @@ fun SocialFeedView(
     isRefreshing: Boolean,
     items: List<Note>,
     adPosition: Int,
-    adSlotId: Int,
+    adSlotId: String,
     itemClick: (Note) -> Unit,
     itemLikeClick: (Note) -> Unit,
     onBottomReach: () -> Unit,

@@ -78,7 +78,7 @@ fun AbilitiesScreen(
 
                     if (index % state.adPosition == 0 && index != 0) {
                         AdView(
-                            slotId = state.adId.toInt(),
+                            slotId = state.adId,
                             padding = 0
                         )
                     }

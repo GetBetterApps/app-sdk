@@ -58,7 +58,7 @@ fun AddAreaScreen(
                     listState = listState,
                     isLoading = state.isLoading,
                     adPosition = state.adPosition,
-                    adSlotId = state.adId.toInt(),
+                    adSlotId = state.adId,
                     onAreaClick = {
                         scope.launch {
                             selectedAreaId.value = it
