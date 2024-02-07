@@ -63,7 +63,8 @@ fun SocialScreen(
                 PrimaryTabs(
                     tabs = state.tabs.map { it.title.toString(LocalContext.current) },
                     pagerState = pagerState,
-                    widthFraction = 0.9f
+                    widthFraction = 0.9f,
+                    shadow = 4f
                 )
 
                 HintButton(modifier = Modifier.padding(top = 40.dp)) {

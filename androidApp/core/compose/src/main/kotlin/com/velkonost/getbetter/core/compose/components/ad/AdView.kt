@@ -33,7 +33,6 @@ import com.yandex.mobile.ads.common.ImpressionData
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
 import java.util.Locale
-import kotlin.math.roundToInt
 
 
 @Composable
@@ -49,23 +48,10 @@ fun AdView(
     val configuration = LocalConfiguration.current
 
     val adSize: BannerAdSize = remember {
-        val screenHeight =
-            context.resources.displayMetrics.run { heightPixels / density }.roundToInt()
         val screenWidth = configuration.screenWidthDp - 40
+        val maxAdHeight = 300
 
-        // Calculate the width of the ad, taking into account the padding in the ad container.
-        var adWidthPixels = context.resources.displayMetrics.run { widthPixels / density }
-            .roundToInt()//binding.adContainerView.width
-        if (adWidthPixels == 0) {
-            // If the ad hasn't been laid out, default to the full screen width
-            adWidthPixels = context.resources.displayMetrics.widthPixels
-        }
-        val adWidth =
-            screenWidth//(adWidthPixels / context.resources.displayMetrics.density).roundToInt()
-        // Determine the maximum allowable ad height. The current value is given as an example.
-        val maxAdHeight = 300//screenHeight / 2
-
-        BannerAdSize.inlineSize(context, adWidth, maxAdHeight)
+        BannerAdSize.inlineSize(context, screenWidth, maxAdHeight)
     }
 
     PrimaryBox(
