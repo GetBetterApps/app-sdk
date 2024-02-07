@@ -6,12 +6,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -19,8 +22,6 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.my.target.ads.MyTargetView
-import com.my.target.ads.MyTargetView.AdSize
-import com.my.target.common.models.IAdLoadingError
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -35,6 +36,8 @@ fun AdView(
     slotId: Int,
     padding: Int = 20
 ) {
+
+    val tries = remember { mutableIntStateOf(0) }
 
     PrimaryBox(
         modifier = modifier
@@ -72,11 +75,13 @@ fun AdView(
 
                 AndroidView(
                     modifier = modifier
+                        .fillMaxSize()
                         .clip(MaterialTheme.shapes.small),
                     factory = {
                         val view = MyTargetView(it)
-                        view.setSlotId(slotId)
-                        view.setAdSize(AdSize.ADSIZE_300x250)
+                        view.setRefreshAd(true)
+                        view.setSlotId(1501672)
+//                        view.setAdSize(MyTargetView.AdSize.ADSIZE_300x250)
 
                         view.listener = object : MyTargetView.MyTargetViewListener {
                             override fun onLoad(myTargetView: MyTargetView) {
@@ -84,9 +89,17 @@ fun AdView(
 //                                layout.addView(adView)
                             }
 
-                            override fun onNoAd(p0: IAdLoadingError, myTargetView: MyTargetView) {
-                                Log.d("ad", p0.message)
+                            override fun onNoAd(p0: String, p1: MyTargetView) {
+                                tries.intValue += 1
+                                if (tries.intValue < 3) {
+                                    p1.load()
+                                }
+                                Log.d("ad", p0)
                             }
+
+//                            override fun onNoAd(p0: IAdLoadingError, myTargetView: MyTargetView) {
+//                                Log.d("ad", p0.message)
+//                            }
 
                             override fun onShow(myTargetView: MyTargetView) {
 

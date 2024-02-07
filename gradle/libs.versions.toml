@@ -77,7 +77,7 @@ testing-kotest = "5.5.4"
 testing-turbine = "1.0.0"
 
 yandex-ad = "6.3.0"
-vk-ad = "5.20.0"
+vk-ad = "5.17.0"
 
 [plugins]
 codingfeline-buildkonfig = { id = "com.codingfeline.buildkonfig", version = "0.13.3" }
