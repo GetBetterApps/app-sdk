@@ -45,7 +45,7 @@ struct AreaDetailScreen: View {
         self.onClose = onClose
         self.onAreaChanged = onAreaChanged
     }
-    
+
     var body: some View {
         @State var state = viewModel.state
         
