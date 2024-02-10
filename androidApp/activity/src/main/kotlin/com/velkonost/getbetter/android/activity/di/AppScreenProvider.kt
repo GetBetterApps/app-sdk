@@ -18,6 +18,7 @@ import com.velkonost.getbetter.android.features.profile.ProfileNavRoute
 import com.velkonost.getbetter.android.features.settings.SettingsNavRoute
 import com.velkonost.getbetter.android.features.social.SocialNavRoute
 import com.velkonost.getbetter.android.features.splash.SplashNavRoute
+import com.velkonost.getbetter.android.features.subscription.SubscriptionNavRoute
 import com.velkonost.getbetter.android.features.taskdetail.TaskDetailNavRoute
 import com.velkonost.getbetter.core.compose.provide
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationScreen
@@ -27,7 +28,8 @@ val AppScreens = setOf(
     AddAreaNavRoute,
     NoteDetailNavRoute,
     TaskDetailNavRoute,
-    AbilityDetailsNavRoute
+    AbilityDetailsNavRoute,
+    SubscriptionNavRoute
 )
 
 val NavigationScreens = setOf(

@@ -26,8 +26,7 @@ struct NotesView: View {
     let onBottomReach: () -> Void
     
     init(
-        adPosition: Int,
-        state: Binding<NotesViewState>,
+        adPosition: Int, state: Binding<NotesViewState>,
         isLoading: Bool, items: [Note],
         createGoalClick: @escaping () -> Void, createNoteClick: @escaping () -> Void,
         itemClick: @escaping (Note) -> Void, 

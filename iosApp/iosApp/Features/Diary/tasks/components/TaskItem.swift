@@ -17,7 +17,11 @@ struct TaskItem: View {
     private let onClick: () -> Void
     private let onFavoriteClick: () -> Void
     
-    init(item: TaskUI, onClick: @escaping () -> Void, onFavoriteClick: @escaping () -> Void) {
+    init(
+        item: TaskUI,
+        onClick: @escaping () -> Void,
+        onFavoriteClick: @escaping () -> Void
+    ) {
         self.item = item
         self.onClick = onClick
         self.onFavoriteClick = onFavoriteClick

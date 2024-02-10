@@ -155,6 +155,8 @@
 		46D8577E2AD0787E00BE74DA /* AddAreaHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D8577D2AD0787E00BE74DA /* AddAreaHeader.swift */; };
 		46D9381C2ABAECB70096A221 /* ProfileRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9381B2ABAECB70096A221 /* ProfileRoute.swift */; };
 		46D9381E2ABAECBE0096A221 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9381D2ABAECBE0096A221 /* ProfileScreen.swift */; };
+		46DEF1CC2B77778B00C238FE /* SubscriptionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DEF1CB2B77778B00C238FE /* SubscriptionScreen.swift */; };
+		46DEF1CE2B7777C300C238FE /* SubscriptionRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DEF1CD2B7777C300C238FE /* SubscriptionRoute.swift */; };
 		46E0030A2B691F97006BF54E /* OnboardingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E003092B691F97006BF54E /* OnboardingContent.swift */; };
 		46E20A282B2F4DAA0037CEEF /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E20A272B2F4DAA0037CEEF /* OnboardingScreen.swift */; };
 		46E20A2A2B2F4DB10037CEEF /* OnboardingRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E20A292B2F4DB10037CEEF /* OnboardingRoute.swift */; };
@@ -337,6 +339,8 @@
 		46D8577D2AD0787E00BE74DA /* AddAreaHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaHeader.swift; sourceTree = "<group>"; };
 		46D9381B2ABAECB70096A221 /* ProfileRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRoute.swift; sourceTree = "<group>"; };
 		46D9381D2ABAECBE0096A221 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		46DEF1CB2B77778B00C238FE /* SubscriptionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionScreen.swift; sourceTree = "<group>"; };
+		46DEF1CD2B7777C300C238FE /* SubscriptionRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionRoute.swift; sourceTree = "<group>"; };
 		46E003092B691F97006BF54E /* OnboardingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContent.swift; sourceTree = "<group>"; };
 		46E20A272B2F4DAA0037CEEF /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
 		46E20A292B2F4DB10037CEEF /* OnboardingRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRoute.swift; sourceTree = "<group>"; };
@@ -552,6 +556,7 @@
 		461F7C6D2AA8D7DE003791CF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				46DEF1CA2B77778200C238FE /* Subscription */,
 				46E20A262B2F4DA20037CEEF /* Onboarding */,
 				46407B942B287345004A3AA2 /* AbilityDetails */,
 				46E380492B24D86500056C0D /* Abilities */,
@@ -936,6 +941,15 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		46DEF1CA2B77778200C238FE /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				46DEF1CB2B77778B00C238FE /* SubscriptionScreen.swift */,
+				46DEF1CD2B7777C300C238FE /* SubscriptionRoute.swift */,
+			);
+			path = Subscription;
+			sourceTree = "<group>";
+		};
 		46E20A262B2F4DA20037CEEF /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -1261,6 +1275,7 @@
 				46407B962B28734E004A3AA2 /* AbilityDetailsScreen.swift in Sources */,
 				46AEEF7D2B0BB76B00A9376C /* CalendarDateItem.swift in Sources */,
 				467D996C2AFA1C9C00F4397E /* AuthorData.swift in Sources */,
+				46DEF1CC2B77778B00C238FE /* SubscriptionScreen.swift in Sources */,
 				46B17E142AADE482008C2BC4 /* AuthTextField.swift in Sources */,
 				46E2DD2F2AE93A3B00B4B2B5 /* AreaPicker.swift in Sources */,
 				460054B72ABB576B00586767 /* WisdomItem.swift in Sources */,
@@ -1329,6 +1344,7 @@
 				46059D2D2AC41DB500DC5015 /* ExpandableButtonPanel.swift in Sources */,
 				468B87682ABC45BF001BBEB1 /* DiaryRoute.swift in Sources */,
 				464B60B62ABAF81B00369EC3 /* Avatar.swift in Sources */,
+				46DEF1CE2B7777C300C238FE /* SubscriptionRoute.swift in Sources */,
 				468B794F2ACC57F000A8886C /* AddNoteItem.swift in Sources */,
 				468B876C2ABC45CC001BBEB1 /* CalendarsRoute.swift in Sources */,
 				468356FF2B0E326800DC356A /* ActionItem.swift in Sources */,

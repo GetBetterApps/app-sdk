@@ -19,7 +19,14 @@ struct TaskItemHeader : View {
     let isFavoriteLoading: Bool
     let onFavoriteClick: (() -> Void)?
     
-    init(areaName: String, taskName: String? = nil, areaIcon: UIImage, isFavorite: Bool,  isFavoriteLoading: Bool, onFavoriteClick: (() -> Void)? = nil) {
+    init(
+        areaName: String,
+        taskName: String? = nil,
+        areaIcon: UIImage,
+        isFavorite: Bool,
+        isFavoriteLoading: Bool,
+        onFavoriteClick: (() -> Void)? = nil
+    ) {
         self.areaName = areaName
         self.taskName = taskName
         self.areaIcon = areaIcon

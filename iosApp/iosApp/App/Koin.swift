@@ -36,7 +36,8 @@ extension KoinApplication {
          \.TaskDetailViewModel,
          \.AbilitiesViewModel,
          \.AbilityDetailsViewModel,
-         \.OnboardingViewModel
+         \.OnboardingViewModel,
+         \.SubscriptionViewModel
     ]
     
     static func inject<T>() -> T { shared.inject() }

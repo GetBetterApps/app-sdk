@@ -82,6 +82,9 @@ struct ContentView: View {
                 case _ where route.starts(with: NavigationScreenKt.ONBOARDING_DESTINATION) :
                     OnboardingRoute().view(pilot: pilot, route: route)
                     
+                case _ where route.starts(with: NavigationScreenKt.SUBSCRIPTION_DESTINATION) :
+                    SubscriptionRoute().view(pilot: pilot, route: route)
+                    
                 default : EmptyView()
                 }
                 

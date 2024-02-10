@@ -22,7 +22,10 @@ struct TasksView: View {
     private let onTaskFavoriteClick: (TaskUI) -> Void
     
     init(
-        isLoading: Bool, favoriteItems: [TaskUI], currentItems: [TaskUI], completedItems: [TaskUI],
+        isLoading: Bool,
+        favoriteItems: [TaskUI],
+        currentItems: [TaskUI],
+        completedItems: [TaskUI],
         onTaskClick: @escaping (TaskUI) -> Void,
         onTaskFavoriteClick: @escaping (TaskUI) -> Void,
         onTaskListUpdateClick: @escaping () -> Void
