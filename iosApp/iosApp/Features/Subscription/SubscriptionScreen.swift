@@ -31,6 +31,8 @@ struct SubscriptionScreen: View {
     @State private var titleVisible: Bool = false
     @State private var buttonVisible: Bool = false
     
+    @State private var offersSheetVisible: Bool = false
+    @State var offersSheetHeight: CGFloat = .zero
     
     var body: some View {
         @State var state = viewModel.viewStateValue as! SubscriptionViewState
@@ -129,7 +131,7 @@ struct SubscriptionScreen: View {
                                 labelText: SharedR.strings().continue_btn.desc().localized(),
                                 isLoading: state.isLoading,
                                 onClick: {
-                                    
+                                    offersSheetVisible = true
                                 }
                             )
                             Spacer()
@@ -150,6 +152,16 @@ struct SubscriptionScreen: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
+        .sheet(isPresented: $offersSheetVisible) {
+            OffersSheet(
+                items: state.items,
+                selectedItem: state.selectedItem,
+                sheetHeight: $offersSheetHeight,
+                itemClick: { value in
+                    viewModel.dispatch(action: SubscriptionActionSubscriptionItemClick(value: value))
+                }
+            )
+        }
         .onAppear {
             withAnimation(.bouncy.delay(0.5)) {
                 logoVisible = true

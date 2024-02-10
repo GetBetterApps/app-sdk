@@ -157,6 +157,7 @@
 		46D9381E2ABAECBE0096A221 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9381D2ABAECBE0096A221 /* ProfileScreen.swift */; };
 		46DEF1CC2B77778B00C238FE /* SubscriptionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DEF1CB2B77778B00C238FE /* SubscriptionScreen.swift */; };
 		46DEF1CE2B7777C300C238FE /* SubscriptionRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DEF1CD2B7777C300C238FE /* SubscriptionRoute.swift */; };
+		46DEF1D12B77BDE900C238FE /* OffersSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DEF1D02B77BDE900C238FE /* OffersSheet.swift */; };
 		46E0030A2B691F97006BF54E /* OnboardingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E003092B691F97006BF54E /* OnboardingContent.swift */; };
 		46E20A282B2F4DAA0037CEEF /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E20A272B2F4DAA0037CEEF /* OnboardingScreen.swift */; };
 		46E20A2A2B2F4DB10037CEEF /* OnboardingRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E20A292B2F4DB10037CEEF /* OnboardingRoute.swift */; };
@@ -341,6 +342,7 @@
 		46D9381D2ABAECBE0096A221 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		46DEF1CB2B77778B00C238FE /* SubscriptionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionScreen.swift; sourceTree = "<group>"; };
 		46DEF1CD2B7777C300C238FE /* SubscriptionRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionRoute.swift; sourceTree = "<group>"; };
+		46DEF1D02B77BDE900C238FE /* OffersSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersSheet.swift; sourceTree = "<group>"; };
 		46E003092B691F97006BF54E /* OnboardingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContent.swift; sourceTree = "<group>"; };
 		46E20A272B2F4DAA0037CEEF /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
 		46E20A292B2F4DB10037CEEF /* OnboardingRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRoute.swift; sourceTree = "<group>"; };
@@ -944,10 +946,19 @@
 		46DEF1CA2B77778200C238FE /* Subscription */ = {
 			isa = PBXGroup;
 			children = (
+				46DEF1CF2B77BDE200C238FE /* components */,
 				46DEF1CB2B77778B00C238FE /* SubscriptionScreen.swift */,
 				46DEF1CD2B7777C300C238FE /* SubscriptionRoute.swift */,
 			);
 			path = Subscription;
+			sourceTree = "<group>";
+		};
+		46DEF1CF2B77BDE200C238FE /* components */ = {
+			isa = PBXGroup;
+			children = (
+				46DEF1D02B77BDE900C238FE /* OffersSheet.swift */,
+			);
+			path = components;
 			sourceTree = "<group>";
 		};
 		46E20A262B2F4DA20037CEEF /* Onboarding */ = {
@@ -1349,6 +1360,7 @@
 				468B876C2ABC45CC001BBEB1 /* CalendarsRoute.swift in Sources */,
 				468356FF2B0E326800DC356A /* ActionItem.swift in Sources */,
 				4662502E2B32DCA70063F71A /* HintSheet.swift in Sources */,
+				46DEF1D12B77BDE900C238FE /* OffersSheet.swift in Sources */,
 				46C10D232AB4734200E62846 /* AuthAnonymousButton.swift in Sources */,
 				46AD39D02B1DCD9500EB60F8 /* AbilityData.swift in Sources */,
 				467BECD12AC0350400F74482 /* WisdomViewModel.swift in Sources */,

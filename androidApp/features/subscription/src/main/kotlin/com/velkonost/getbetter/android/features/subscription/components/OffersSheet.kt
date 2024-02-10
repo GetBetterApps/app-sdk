@@ -61,9 +61,7 @@ fun OffersSheet(
                     .padding(horizontal = 16.dp)
                     .padding(bottom = 48.dp, top = 16.dp)
             ) {
-                Column(
-                    verticalArrangement = Arrangement.SpaceEvenly
-                ) {
+                Column(verticalArrangement = Arrangement.SpaceEvenly) {
 
                     Row {
                         Spacer(modifier.weight(1f))
