@@ -14,6 +14,7 @@ internal constructor(
     initialState = SubscriptionViewState()
 ) {
     override fun dispatch(action: SubscriptionAction) = when (action) {
+        is SubscriptionAction.NavigateBack -> emit(action)
         else -> {
 
         }

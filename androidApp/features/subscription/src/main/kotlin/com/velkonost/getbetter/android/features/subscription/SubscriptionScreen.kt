@@ -3,6 +3,8 @@ package com.velkonost.getbetter.android.features.subscription
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -36,6 +38,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.shared.features.subscription.presentation.SubscriptionViewModel
+import com.velkonost.getbetter.shared.features.subscription.presentation.contract.SubscriptionAction
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
@@ -102,6 +105,14 @@ fun SubscriptionScreen(
         ) {
             Row(modifier = modifier.fillMaxWidth()) {
                 Image(
+                    modifier = modifier
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null,
+                            onClick = {
+                                viewModel.dispatch(SubscriptionAction.NavigateBack)
+                            }
+                        ),
                     painter = painterResource(imageResource = SharedR.images.ic_close),
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(

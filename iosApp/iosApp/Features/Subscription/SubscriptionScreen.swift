@@ -16,6 +16,8 @@ import Lottie
 struct SubscriptionScreen: View {
     
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @StateViewModel var viewModel: SubscriptionViewModel
     
     @State private var firstPointVisible: Bool = false
@@ -45,6 +47,9 @@ struct SubscriptionScreen: View {
                             .renderingMode(.template)
                             .frame(width: 24, height: 24)
                             .foregroundColor(.iconActive)
+                            .onTapGesture {
+                                presentationMode.wrappedValue.dismiss()
+                            }
                         
                         Spacer()
                         
@@ -61,6 +66,8 @@ struct SubscriptionScreen: View {
                             .opacity(0.8)
                     }
                     
+                    Spacer().frame(height: 16)
+                    
                     if titleVisible {
                         HStack {
                             Spacer()
@@ -71,9 +78,9 @@ struct SubscriptionScreen: View {
                         }
                     }
                     
-                    Spacer().frame(height: 32)
+                    Spacer().frame(height: 16)
                     
-                    if fifthPointVisible {
+                    if firstPointVisible {
                         SubscriptionPoint(
                             title: SharedR.strings().paywall_point_1.desc().localized(),
                             index: 0
@@ -216,9 +223,12 @@ struct SubscriptionPoint: View {
         }
         .padding(.top, 16)
         .onAppear {
-            withAnimation(.bouncy) {
-                animVisible = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1 + 0.5 * Double(index)) {
+                withAnimation(.bouncy) {
+                    animVisible = true
+                }
             }
+            
         }
     }
 }
