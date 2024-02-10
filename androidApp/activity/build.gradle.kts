@@ -27,6 +27,7 @@ dependencies {
     implementation(projects.androidApp.features.settings)
     implementation(projects.androidApp.features.abilities)
     implementation(projects.androidApp.features.abilitydetails)
+    implementation(projects.androidApp.features.subscription)
 
     implementation(projects.shared.core.vm)
     implementation(projects.shared.core.util)
