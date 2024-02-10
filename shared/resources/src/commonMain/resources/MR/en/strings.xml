@@ -466,6 +466,14 @@
     <string name="paywall_point_5">Advanced diary filters (soon)</string>
     <string name="paywall_point_6">Participate in decentralized voting on new functionality (soon)
     </string>
+
+    <string name="paywall_footer">To confirm your purchase, you must enter your payment information
+        correctly.\nSubscription renews automatically unless auto-renewal is turned off 24 hours
+        before the end of the paid period. If you cancel your subscription, it remains valid until
+        the end of the paid period.\nThere are no refunds for current subscriptions and cancellation
+        will occur after the end of the current subscription period. Deleting the app does not
+        terminate your subscription
+    </string>
     <!--  PAYWALL  -->
 
     <!--  SERVER EXCEPTIONS  -->

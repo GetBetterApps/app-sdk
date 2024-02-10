@@ -65,17 +65,17 @@ fun SubscriptionScreen(
             delay(500)
             titleVisible.value = true
 
-            delay(1000)
+            delay(500)
             firstPointVisible.value = true
-            delay(1000)
+            delay(500)
             secondPointVisible.value = true
-            delay(1000)
+            delay(500)
             thirdPointVisible.value = true
-            delay(1000)
+            delay(500)
             forthPointVisible.value = true
-            delay(1000)
+            delay(500)
             fifthPointVisible.value = true
-            delay(1000)
+            delay(500)
             sixthPointVisible.value = true
         }
     }
@@ -130,6 +130,8 @@ fun SubscriptionScreen(
                     Spacer(modifier.weight(1f))
                 }
             }
+
+            Spacer(modifier.padding(top = 32.dp))
 
             AnimatedVisibility(visible = firstPointVisible.value, label = "") {
                 SubscriptionPoint(
