@@ -67,7 +67,7 @@ internal constructor(
                     emit(viewState.value.copy(isLoading = it))
                 }
                 onSuccess {
-                    emit(OnboardingNavigation.NavigateToAuth)
+                    emit(OnboardingNavigation.NavigateToMainFlow)
                 }
             }
         }
