@@ -139,6 +139,7 @@ include(
     ":androidApp:features:settings",
     ":androidApp:features:abilities",
     ":androidApp:features:abilitydetails",
+    ":androidApp:features:subscription",
 
     ":shared:resources",
     ":shared:umbrella"
