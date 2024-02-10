@@ -58,6 +58,7 @@ kotlin {
             export(projects.shared.features.settings.presentation)
             export(projects.shared.features.abilities.presentation)
             export(projects.shared.features.abilitydetails.presentation)
+            export(projects.shared.features.subscription.presentation)
 
             export(libs.kermit.log)
             export(libs.moko.resources)
@@ -91,6 +92,7 @@ kotlin {
                 implementation(projects.shared.features.feedback.data)
                 implementation(projects.shared.features.abilities.data)
                 implementation(projects.shared.features.affirmations.data)
+                implementation(projects.shared.features.subscription.data)
 
                 implementation(projects.shared.features.auth.data)
                 implementation(projects.shared.features.auth.domain)
@@ -119,6 +121,7 @@ kotlin {
                 implementation(projects.shared.features.settings.presentation)
                 implementation(projects.shared.features.abilities.presentation)
                 implementation(projects.shared.features.abilitydetails.presentation)
+                implementation(projects.shared.features.subscription.presentation)
 
                 implementation(projects.shared.features.profile.data)
                 implementation(projects.shared.features.profile.presentation)
@@ -167,6 +170,7 @@ kotlin {
                 api(projects.shared.features.settings.presentation)
                 api(projects.shared.features.abilities.presentation)
                 api(projects.shared.features.abilitydetails.presentation)
+                api(projects.shared.features.subscription.presentation)
 
                 api(libs.kermit.log)
                 api(libs.moko.resources)
