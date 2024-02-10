@@ -21,6 +21,7 @@ import com.velkonost.getbetter.shared.features.profile.contracts.ProfileNavigati
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileViewState
 import com.velkonost.getbetter.shared.features.profile.contracts.SettingsClick
 import com.velkonost.getbetter.shared.features.profile.contracts.SignUpClick
+import com.velkonost.getbetter.shared.features.profile.contracts.SubscriptionClick
 import com.velkonost.getbetter.shared.features.profile.contracts.ThemeChange
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 import io.ktor.util.decodeBase64Bytes
@@ -50,6 +51,7 @@ internal constructor(
         is AvatarSelected -> obtainAvatarSelected(action.avatarContent)
         is AvatarSelectedBase64 -> obtainAvatarSelected(action.avatarContent.decodeBase64Bytes())
         is ContactUsClick -> emit(NavigateToFeedback)
+        is SubscriptionClick -> emit(action)
     }
 
     // ios fix

@@ -58,9 +58,12 @@ struct ProfileScreen: View {
                     LevelBlock(experienceData: state.experienceData!)
                 }
                 
-//                SubscriptionBox(subscriptionPlan: SharedR.strings().profile_sub_basic.desc().localized()) {
-//                    
-//                }
+                SubscriptionBox(
+                    subscriptionPlan: SharedR.strings().profile_sub_basic.desc().localized(),
+                    onUpgradeClick: {
+                        viewModel.dispatch(action: SubscriptionClick())
+                    }
+                )
                 
                 AppSettings(
                     selectedTheme: state.selectedTheme,

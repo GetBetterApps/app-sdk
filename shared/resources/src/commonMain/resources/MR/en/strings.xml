@@ -455,6 +455,19 @@
     <string name="action_user_got_follower">%s follows you</string>
     <!--  CALENDARS  -->
 
+    <!--  PAYWALL  -->
+    <string name="paywall_restore">Restore</string>
+    <string name="paywall_title">Open full access</string>
+
+    <string name="paywall_point_1">No ads</string>
+    <string name="paywall_point_2">Endless task list updates</string>
+    <string name="paywall_point_3">Create your own areas without limitations</string>
+    <string name="paywall_point_4">Favorite affirmations</string>
+    <string name="paywall_point_5">Advanced diary filters (soon)</string>
+    <string name="paywall_point_6">Participate in decentralized voting on new functionality (soon)
+    </string>
+    <!--  PAYWALL  -->
+
     <!--  SERVER EXCEPTIONS  -->
     <string name="error_default">Something went wrong. Try again</string>
 

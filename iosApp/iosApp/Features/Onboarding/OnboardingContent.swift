@@ -195,5 +195,4 @@ struct OnboardingLottieView: UIViewRepresentable {
         
         return animationView
     }
-    
 }

@@ -102,45 +102,35 @@ fun OnboardingContent(
 
         Spacer(modifier.height(32.dp))
 
-        AnimatedVisibility(
-            visible = firstPointVisible.value, label = ""
-        ) {
+        AnimatedVisibility(visible = firstPointVisible.value, label = "") {
             OnboardingPoint(
                 title = stringResource(resource = SharedR.strings.onboarding_step_1),
                 visible = firstPointVisible.value
             )
         }
 
-        AnimatedVisibility(
-            visible = secondPointVisible.value, label = ""
-        ) {
+        AnimatedVisibility(visible = secondPointVisible.value, label = "") {
             OnboardingPoint(
                 title = stringResource(resource = SharedR.strings.onboarding_step_2),
                 visible = secondPointVisible.value
             )
         }
 
-        AnimatedVisibility(
-            visible = thirdPointVisible.value, label = ""
-        ) {
+        AnimatedVisibility(visible = thirdPointVisible.value, label = "") {
             OnboardingPoint(
                 title = stringResource(resource = SharedR.strings.onboarding_step_3),
                 visible = thirdPointVisible.value
             )
         }
 
-        AnimatedVisibility(
-            visible = forthPointVisible.value, label = ""
-        ) {
+        AnimatedVisibility(visible = forthPointVisible.value, label = "") {
             OnboardingPoint(
                 title = stringResource(resource = SharedR.strings.onboarding_step_4),
                 visible = forthPointVisible.value
             )
         }
 
-        AnimatedVisibility(
-            visible = fifthPointVisible.value, label = ""
-        ) {
+        AnimatedVisibility(visible = fifthPointVisible.value, label = "") {
             OnboardingPoint(
                 title = stringResource(resource = SharedR.strings.onboarding_step_5),
                 visible = fifthPointVisible.value

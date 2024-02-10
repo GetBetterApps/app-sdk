@@ -461,6 +461,20 @@
     <string name="action_user_got_follower">%s подписался на тебя</string>
     <!--  CALENDARS  -->
 
+    <!--  PAYWALL  -->
+    <string name="paywall_restore">Восстановить</string>
+    <string name="paywall_title">Откройте полный доступ</string>
+
+    <string name="paywall_point_1">Никакой рекламы</string>
+    <string name="paywall_point_2">Бесконечные обновления списка задач</string>
+    <string name="paywall_point_3">Создавайте свои области без ограничений</string>
+    <string name="paywall_point_4">Избранные аффирмации</string>
+    <string name="paywall_point_5">Расширенные фильтры для дневника (скоро)</string>
+    <string name="paywall_point_6">Участвуйте в децентрализованных голосованиях о новом функционале
+        (скоро)
+    </string>
+    <!--  PAYWALL  -->
+
     <!--  SERVER EXCEPTIONS  -->
     <string name="error_default">Что-то пошло не так. Попробуйте позднее</string>
 

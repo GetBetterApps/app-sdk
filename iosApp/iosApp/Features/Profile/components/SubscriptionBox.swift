@@ -52,11 +52,7 @@ struct SubscriptionBox: View {
                             )
                             .shadow(radius: 8)
                     )
-                    .onTapGesture {
-                        let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                        impactMed.impactOccurred()
-                        onUpgradeClick()
-                    }
+                   
                 Spacer()
             }
         }
@@ -68,7 +64,11 @@ struct SubscriptionBox: View {
                 
         )
         .padding(.init(top: 12, leading: .zero, bottom: .zero, trailing: .zero))
-
+        .onTapGesture {
+            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+            impactMed.impactOccurred()
+            onUpgradeClick()
+        }
         
     }
 }

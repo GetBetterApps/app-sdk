@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.android.features.auth.components
+package com.velkonost.getbetter.core.compose.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,7 +10,7 @@ import com.velkonost.getbetter.shared.resources.SharedR
 
 @Composable
 fun Logo(
-    modifier: Modifier
+    modifier: Modifier = Modifier
 ) {
     Image(
         modifier = modifier

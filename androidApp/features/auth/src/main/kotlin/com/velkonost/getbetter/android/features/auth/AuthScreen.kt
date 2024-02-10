@@ -30,8 +30,8 @@ import com.velkonost.getbetter.android.features.auth.components.AuthAnonymousBut
 import com.velkonost.getbetter.android.features.auth.components.AuthFooterText
 import com.velkonost.getbetter.android.features.auth.components.AuthTextField
 import com.velkonost.getbetter.android.features.auth.components.InputType
-import com.velkonost.getbetter.android.features.auth.components.Logo
 import com.velkonost.getbetter.android.features.auth.components.SwitchRegisteringText
+import com.velkonost.getbetter.core.compose.components.Logo
 import com.velkonost.getbetter.core.compose.components.WhiteButton
 import com.velkonost.getbetter.core.compose.components.webview.AppWebView
 import com.velkonost.getbetter.shared.features.auth.presentation.AuthViewModel
@@ -88,7 +88,7 @@ fun AuthScreen(
                 viewModel.dispatch(AuthAction.AnonymousLoginClick)
             }
 
-            Logo(modifier = modifier)
+            Logo()
 
             Spacer(modifier = modifier.height(32.dp))
 

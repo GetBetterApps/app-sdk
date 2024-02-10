@@ -38,6 +38,7 @@ import com.velkonost.getbetter.android.features.profile.components.AppSettings
 import com.velkonost.getbetter.android.features.profile.components.HelpAndSupport
 import com.velkonost.getbetter.android.features.profile.components.OtherBlock
 import com.velkonost.getbetter.android.features.profile.components.ProfileHeader
+import com.velkonost.getbetter.android.features.profile.components.SubscriptionBox
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.VersionName
 import com.velkonost.getbetter.core.compose.components.experience.LevelBlock
@@ -50,6 +51,7 @@ import com.velkonost.getbetter.shared.features.profile.contracts.ContactUsClick
 import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
 import com.velkonost.getbetter.shared.features.profile.contracts.SettingsClick
 import com.velkonost.getbetter.shared.features.profile.contracts.SignUpClick
+import com.velkonost.getbetter.shared.features.profile.contracts.SubscriptionClick
 import com.velkonost.getbetter.shared.features.profile.contracts.ThemeChange
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.stringResource
@@ -152,11 +154,12 @@ fun ProfileScreen(
         }
 
 
-//        SubscriptionBox(
-//            subscriptionPlan = stringResource(resource = SharedR.strings.profile_sub_basic)
-//        ) {
-//
-//        }
+        SubscriptionBox(
+            subscriptionPlan = stringResource(resource = SharedR.strings.profile_sub_basic),
+            onUpgradeClick = {
+                viewModel.dispatch(SubscriptionClick)
+            }
+        )
 
         AppSettings(
             selectedTheme = state.selectedTheme,

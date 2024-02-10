@@ -47,6 +47,13 @@ fun SubscriptionBox(
                 shape = MaterialTheme.shapes.medium
             )
             .padding(start = 16.dp, end = 16.dp, top = 24.dp, bottom = 24.dp)
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null
+            ) {
+                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                onUpgradeClick.invoke()
+            }
     ) {
 
         Column {
@@ -83,14 +90,7 @@ fun SubscriptionBox(
                     ),
                     shape = MaterialTheme.shapes.extraLarge
                 )
-                .padding(top = 6.dp, bottom = 6.dp, end = 16.dp, start = 16.dp)
-                .clickable(
-                    interactionSource = interactionSource,
-                    indication = null
-                ) {
-                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                    onUpgradeClick.invoke()
-                },
+                .padding(top = 6.dp, bottom = 6.dp, end = 16.dp, start = 16.dp),
             text = stringResource(resource = SharedR.strings.profile_sub_upgrade).uppercase(),
             style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
             color = colorResource(resource = SharedR.colors.text_light),
