@@ -113,6 +113,10 @@ include(
     ":shared:features:feedback:data",
     ":shared:features:feedback:presentation",
 
+    ":shared:features:subscription:api",
+    ":shared:features:subscription:data",
+    ":shared:features:subscription:presentation",
+
     ":androidApp:app",
     ":androidApp:activity",
     ":androidApp:core:compose",
