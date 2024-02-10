@@ -10,8 +10,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,10 +29,12 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.shared.features.subscription.presentation.SubscriptionViewModel
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -55,6 +60,7 @@ fun SubscriptionScreen(
 
     val logoVisible = remember { mutableStateOf(false) }
     val titleVisible = remember { mutableStateOf(false) }
+    val buttonVisible = remember { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
 
@@ -77,6 +83,8 @@ fun SubscriptionScreen(
             fifthPointVisible.value = true
             delay(500)
             sixthPointVisible.value = true
+            delay(500)
+            buttonVisible.value = true
         }
     }
 
@@ -87,7 +95,11 @@ fun SubscriptionScreen(
             .padding(start = 16.dp, end = 16.dp)
     ) {
 
-        Column(modifier = modifier.padding(top = 50.dp)) {
+        Column(
+            modifier = modifier
+                .verticalScroll(rememberScrollState())
+                .padding(top = 50.dp)
+        ) {
             Row(modifier = modifier.fillMaxWidth()) {
                 Image(
                     painter = painterResource(imageResource = SharedR.images.ic_close),
@@ -180,6 +192,33 @@ fun SubscriptionScreen(
                     index = 5
                 )
             }
+
+            AnimatedVisibility(visible = buttonVisible.value, label = "") {
+                Row {
+                    Spacer(modifier.weight(1f))
+                    AppButton(
+                        modifier = modifier.padding(top = 32.dp),
+                        labelText = stringResource(resource = SharedR.strings.continue_btn),
+                        isLoading = state.isLoading,
+                        onClick = {
+
+                        }
+                    )
+                    Spacer(modifier.weight(1f))
+                }
+            }
+
+            AnimatedVisibility(visible = buttonVisible.value, label = "") {
+                Text(
+                    modifier = modifier.padding(top = 24.dp),
+                    text = stringResource(resource = SharedR.strings.paywall_footer),
+                    color = colorResource(resource = SharedR.colors.text_secondary),
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
+                    textAlign = TextAlign.Center
+                )
+            }
+
+            Spacer(modifier.height(48.dp))
 
         }
     }
