@@ -53,6 +53,10 @@ struct OffersSheet: View {
                         item: item,
                         selected: item == selectedItem
                     )
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        itemClick(item)
+                    }
                 }
                 
                 HStack {
@@ -66,8 +70,7 @@ struct OffersSheet: View {
                     )
                     Spacer()
                 }
-               
-                Spacer().frame(height: 32)
+                .padding(.top, 32)
                
             }
             .padding(.horizontal, 16)
@@ -105,13 +108,20 @@ struct OfferView: View {
                 .frame(width: 32, height: 32)
             
             VStack {
-                Text(item.title.localized())
-                    .style(.titleSmall)
-                    .foregroundColor(.textTitle)
                 
-                Text(item.text.localized())
-                    .style(.bodySmall)
-                    .foregroundColor(.textPrimary)
+                HStack {
+                    Text(item.title.localized())
+                        .style(.titleSmall)
+                        .foregroundColor(.textTitle)
+                    Spacer()
+                }
+                
+                HStack {
+                    Text(item.text.localized())
+                        .style(.bodySmall)
+                        .foregroundColor(.textPrimary)
+                    Spacer()
+                }
             }
             .padding(.leading, 12)
             
@@ -121,14 +131,16 @@ struct OfferView: View {
                 .style(.titleMedium)
                 .foregroundColor(.textTitle)
         }
-        .padding(.top, 16)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color.backgroundItem)
-                .shadow(radius: selected ? 8 : 0)
-                .border(selected ? Color.textPrimary : Color.onboardingBackgroundGradientStart, width: 1)
-        )
         .padding(16)
+        .background(Color.backgroundItem)
+        .cornerRadius(12)
+        .overlay{
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(selected ? Color.onboardingBackgroundGradientStart : Color.textPrimary, lineWidth: 1)
+        
+        }
+        .shadow(radius: selected ? 8 : 0)
+        .padding(.top, 16)
         .animation(.easeInOut, value: selected)
     }
 }
