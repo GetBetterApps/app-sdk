@@ -486,6 +486,8 @@
     <string name="offer_unlimited_title">Lifetime</string>
     <string name="offer_unlimited_text">32.99. Billed once</string>
     <string name="offer_unlimited_price">32.99$</string>
+
+    <string name="subscription_confirm">Confirm</string>
     <!--  PAYWALL  -->
 
     <!--  SERVER EXCEPTIONS  -->

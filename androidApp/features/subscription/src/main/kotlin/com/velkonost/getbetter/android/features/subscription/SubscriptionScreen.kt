@@ -105,13 +105,14 @@ fun SubscriptionScreen(
         modifier = modifier
             .fillMaxSize()
             .background(color = colorResource(resource = SharedR.colors.main_background))
-            .padding(start = 16.dp, end = 16.dp)
+
     ) {
 
         Column(
             modifier = modifier
                 .verticalScroll(rememberScrollState())
                 .padding(top = 50.dp)
+                .padding(start = 16.dp, end = 16.dp)
         ) {
             Row(modifier = modifier.fillMaxWidth()) {
                 Image(
@@ -245,7 +246,14 @@ fun SubscriptionScreen(
 
         }
 
-        OffersSheet(modalSheetState = offersSheetState)
+        OffersSheet(
+            items = state.items,
+            selectedItem = state.selectedItem,
+            modalSheetState = offersSheetState,
+            itemClick = {
+                viewModel.dispatch(SubscriptionAction.SubscriptionItemClick(it))
+            }
+        )
     }
 
 }

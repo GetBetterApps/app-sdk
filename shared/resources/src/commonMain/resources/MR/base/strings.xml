@@ -493,6 +493,8 @@
     <string name="offer_unlimited_title">Пожизненно</string>
     <string name="offer_unlimited_text">2990₽. Раз и навсегда</string>
     <string name="offer_unlimited_price">2990₽</string>
+
+    <string name="subscription_confirm">Подтвердить</string>
     <!--  PAYWALL  -->
 
     <!--  SERVER EXCEPTIONS  -->
