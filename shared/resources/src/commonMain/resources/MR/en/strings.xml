@@ -474,6 +474,18 @@
         will occur after the end of the current subscription period. Deleting the app does not
         terminate your subscription
     </string>
+
+    <string name="offer_month_title">Month</string>
+    <string name="offer_month_text">3.99$/month</string>
+    <string name="offer_month_price">3.99$</string>
+
+    <string name="offer_year_title">Year</string>
+    <string name="offer_year_text">1.24$/month. Billed annually</string>
+    <string name="offer_year_price">14.99$</string>
+
+    <string name="offer_unlimited_title">Lifetime</string>
+    <string name="offer_unlimited_text">32.99. Billed once</string>
+    <string name="offer_unlimited_price">32.99$</string>
     <!--  PAYWALL  -->
 
     <!--  SERVER EXCEPTIONS  -->

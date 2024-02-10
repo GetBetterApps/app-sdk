@@ -17,6 +17,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,6 +39,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.velkonost.getbetter.android.features.subscription.components.OffersSheet
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.shared.features.subscription.presentation.SubscriptionViewModel
 import com.velkonost.getbetter.shared.features.subscription.presentation.contract.SubscriptionAction
@@ -46,6 +50,7 @@ import dev.icerock.moko.resources.compose.stringResource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SubscriptionScreen(
     modifier: Modifier = Modifier,
@@ -66,6 +71,11 @@ fun SubscriptionScreen(
     val buttonVisible = remember { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
+
+    val offersSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = true,
+    )
 
     LaunchedEffect(Unit) {
         scope.launch {
@@ -212,7 +222,9 @@ fun SubscriptionScreen(
                         labelText = stringResource(resource = SharedR.strings.continue_btn),
                         isLoading = state.isLoading,
                         onClick = {
-
+                            scope.launch {
+                                offersSheetState.show()
+                            }
                         }
                     )
                     Spacer(modifier.weight(1f))
@@ -232,6 +244,8 @@ fun SubscriptionScreen(
             Spacer(modifier.height(48.dp))
 
         }
+
+        OffersSheet(modalSheetState = offersSheetState)
     }
 
 }

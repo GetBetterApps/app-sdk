@@ -481,6 +481,18 @@
         произойдет после окончания текущего периода подписки. Удаление приложения не прекращает
         действие подписки
     </string>
+
+    <string name="offer_month_title">Месяц</string>
+    <string name="offer_month_text">299₽/месяц</string>
+    <string name="offer_month_price">299₽</string>
+
+    <string name="offer_year_title">Год</string>
+    <string name="offer_year_text">107₽/месяц. Оплата ежегодно</string>
+    <string name="offer_year_price">1290₽</string>
+
+    <string name="offer_unlimited_title">Пожизненно</string>
+    <string name="offer_unlimited_text">2990₽. Раз и навсегда</string>
+    <string name="offer_unlimited_price">2990₽</string>
     <!--  PAYWALL  -->
 
     <!--  SERVER EXCEPTIONS  -->
