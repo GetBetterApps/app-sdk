@@ -31,6 +31,7 @@
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="GetBetter"
+        android:networkSecurityConfig="@xml/ym_network_security_config"
         android:requestLegacyExternalStorage="true"
         android:resizeableActivity="false"
         android:roundIcon="@mipmap/ic_launcher"
@@ -53,10 +54,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher" />
-
-        <activity
-            android:name="com.my.target.common.MyTargetActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
 
     </application>
 </manifest>

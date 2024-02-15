@@ -21,4 +21,5 @@ dependencies {
 
     implementation(projects.androidApp.core.compose)
     implementation(libs.android.compose.lootie)
+    implementation(libs.yookassa.android)
 }

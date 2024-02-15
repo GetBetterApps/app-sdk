@@ -106,7 +106,6 @@ android {
         implementation(libs.firebase.android.messaging)
 
         implementation(libs.yandex.ad)
-        implementation(libs.vk.ad)
     }
 }
 

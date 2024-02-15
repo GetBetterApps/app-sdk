@@ -19,9 +19,7 @@ firebase-android-bom = "32.3.1"
 firebase-android-crashlytics = "2.9.9"
 firebase-android-storage = "20.2.1"
 firebase-android-analytics = "21.5.0"
-firebase-kmm = "1.10.0"
 
-libres = "1.2.0-beta01"
 moko-resources = "0.23.0"
 
 google-services = "4.3.15"
@@ -77,7 +75,7 @@ testing-kotest = "5.5.4"
 testing-turbine = "1.0.0"
 
 yandex-ad = "6.3.0"
-vk-ad = "5.17.0"
+yookassa-android = "6.8.0"
 
 [plugins]
 codingfeline-buildkonfig = { id = "com.codingfeline.buildkonfig", version = "0.13.3" }
@@ -86,7 +84,6 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 nativecoroutines = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "rickclephas-nativecoroutines" }
 realm-kotlin = { id = "io.realm.kotlin", version.ref = "realm" }
-libres = { id = "io.github.skeptick.libres", version.ref = "libres" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 moko-resources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko-resources" }
 android-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-android-crashlytics" }
@@ -181,7 +178,6 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 
 realm-kotlin = { module = "io.realm.kotlin:library-base", version.ref = "realm" }
 
-libres-compose = { module = "io.github.skeptick.libres:libres-compose", version.ref = "libres" }
 
 rickclephas-kmm-viewmodel = { module = "com.rickclephas.kmm:kmm-viewmodel-core", version.ref = "rickclephas-kmm-viewmodel" }
 squareup-okio = { module = "com.squareup.okio:okio", version.ref = "squareup-okio" }
@@ -193,7 +189,7 @@ firebase-android-analytics = { module = "com.google.firebase:firebase-analytics-
 firebase-android-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
 
 yandex-ad = { module = "com.yandex.android:mobileads", version.ref = "yandex-ad" }
-vk-ad = { module = "com.my.target:mytarget-sdk", version.ref = "vk-ad" }
+yookassa-android = { module = "ru.yoomoney.sdk.kassa.payments:yookassa-android-sdk", version.ref = "yookassa-android" }
 
 testing-androidx-core = { module = "androidx.arch.core:core-testing", version.ref = "testing-arch-core" }
 testing-androidx-junit = { module = "androidx.test.ext:junit", version.ref = "testing-junitext" }
