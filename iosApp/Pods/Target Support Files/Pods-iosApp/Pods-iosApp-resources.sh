@@ -97,10 +97,14 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "${PODS_ROOT}/../../shared/umbrella/build/generated/libres/apple/libres-bundles"
+  install_resource "${PODS_ROOT}/YandexMobileAds/static/YandexMobileAds.xcframework/MobileAdsBundle.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/YandexMobileAds/MobileAdsCorePrivacyInfo.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/YandexMobileAdsInstream/YandexMobileAdsInstreamPrivacyInfo.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "${PODS_ROOT}/../../shared/umbrella/build/generated/libres/apple/libres-bundles"
+  install_resource "${PODS_ROOT}/YandexMobileAds/static/YandexMobileAds.xcframework/MobileAdsBundle.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/YandexMobileAds/MobileAdsCorePrivacyInfo.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/YandexMobileAdsInstream/YandexMobileAdsInstreamPrivacyInfo.bundle"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

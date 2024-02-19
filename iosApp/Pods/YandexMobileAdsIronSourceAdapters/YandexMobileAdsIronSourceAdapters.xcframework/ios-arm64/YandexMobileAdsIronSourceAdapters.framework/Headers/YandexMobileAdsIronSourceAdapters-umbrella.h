@@ -1,0 +1,1 @@
+#import "YMAYandexIronSourceVersion.h"

@@ -1,0 +1,13 @@
+framework module AppLovinYandexMobileAdsAdapters {
+    umbrella header "AppLovinYandexMobileAdsAdapters-umbrella.h"
+    
+    export *
+    module * { export * }
+    
+}
+
+module AppLovinYandexMobileAdsAdapters.Swift {
+    header "AppLovinYandexMobileAdsAdapters-Swift.h"
+    requires objc
+}
+

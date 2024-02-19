@@ -1,2 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-resources.sh
-${PODS_ROOT}/../../shared/umbrella/build/generated/libres/apple/libres-bundles
+${PODS_ROOT}/YandexMobileAds/static/YandexMobileAds.xcframework/MobileAdsBundle.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/YandexMobileAds/MobileAdsCorePrivacyInfo.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/YandexMobileAdsInstream/YandexMobileAdsInstreamPrivacyInfo.bundle

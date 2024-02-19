@@ -1,0 +1,6 @@
+framework module BigoADS {
+  umbrella header "BigoADS-umbrella.h"
+
+  export *
+  module * { export * }
+}

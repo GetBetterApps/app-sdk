@@ -1,24 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "divkit-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/divkit/divkit-ios",
-      "state" : {
-        "revision" : "8e44e1266f4325b382d18725c00d851d3143dafd",
-        "version" : "28.13.0"
-      }
-    },
-    {
-      "identity" : "metrica-sdk-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/yandexmobile/metrica-sdk-ios",
-      "state" : {
-        "revision" : "13d8b11181a33938ef42759d49466a621df5e7db",
-        "version" : "4.5.2"
-      }
-    },
-    {
       "identity" : "swiftui-cached-async-image",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lorenzofiamingo/swiftui-cached-async-image",
@@ -43,24 +25,6 @@
       "state" : {
         "revision" : "4ddc04c801aac143090bb14cf26603a3bf9c74cb",
         "version" : "2.5.0"
-      }
-    },
-    {
-      "identity" : "vgsl",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/yandex/vgsl.git",
-      "state" : {
-        "revision" : "714e915e99764be5940b4da7e30ccf9aea931eb4",
-        "version" : "2.4.1"
-      }
-    },
-    {
-      "identity" : "yandex-ads-sdk-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/yandexmobile/yandex-ads-sdk-ios",
-      "state" : {
-        "revision" : "10dbe1822d8af5c47dacda929cf169b066acb19b",
-        "version" : "6.3.0"
       }
     }
   ],

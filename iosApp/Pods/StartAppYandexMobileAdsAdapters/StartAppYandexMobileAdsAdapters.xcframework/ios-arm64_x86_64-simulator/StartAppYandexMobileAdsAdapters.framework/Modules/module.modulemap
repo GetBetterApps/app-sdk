@@ -1,0 +1,13 @@
+framework module StartAppYandexMobileAdsAdapters {
+    umbrella header "StartAppYandexMobileAdsAdapters-umbrella.h"
+    
+    export *
+    module * { export * }
+    
+}
+
+module StartAppYandexMobileAdsAdapters.Swift {
+    header "StartAppYandexMobileAdsAdapters-Swift.h"
+    requires objc
+}
+

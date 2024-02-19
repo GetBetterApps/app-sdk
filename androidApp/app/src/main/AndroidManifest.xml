@@ -31,7 +31,6 @@
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="GetBetter"
-        android:networkSecurityConfig="@xml/ym_network_security_config"
         android:requestLegacyExternalStorage="true"
         android:resizeableActivity="false"
         android:roundIcon="@mipmap/ic_launcher"

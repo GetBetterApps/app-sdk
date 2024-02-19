@@ -43,13 +43,12 @@ buildkonfig {
 
     defaultConfigs {
         buildConfigField(STRING, "AD_ID", "")
-//        buildConfigField(INT, "RUSTORE_AD_ID", 1494678.toString())
+        buildConfigField(STRING, "YOOKASSA_KEY", "live_MzMxMjA5lf8FLM_nMtwUESA8dc8wrvO3X4rtmPgTdng")
     }
 
     targetConfigs {
         create("android") {
             buildConfigField(STRING, "AD_ID", "R-M-5855367-1")
-//            buildConfigField(INT, "RUSTORE_AD_ID", 1494678.toString())
         }
 
         create("ios") {

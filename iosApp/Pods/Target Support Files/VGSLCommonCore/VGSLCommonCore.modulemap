@@ -1,0 +1,6 @@
+framework module CommonCorePublic {
+  umbrella header "VGSLCommonCore-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,13 @@
+framework module BigoADSYandexMobileAdsAdapters {
+    umbrella header "BigoADSYandexMobileAdsAdapters-umbrella.h"
+    
+    export *
+    module * { export * }
+    
+}
+
+module BigoADSYandexMobileAdsAdapters.Swift {
+    header "BigoADSYandexMobileAdsAdapters-Swift.h"
+    requires objc
+}
+

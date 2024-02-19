@@ -1,0 +1,13 @@
+framework module IronSourceYandexMobileAdsAdapters {
+    umbrella header "IronSourceYandexMobileAdsAdapters-umbrella.h"
+    
+    export *
+    module * { export * }
+    
+}
+
+module IronSourceYandexMobileAdsAdapters.Swift {
+    header "IronSourceYandexMobileAdsAdapters-Swift.h"
+    requires objc
+}
+

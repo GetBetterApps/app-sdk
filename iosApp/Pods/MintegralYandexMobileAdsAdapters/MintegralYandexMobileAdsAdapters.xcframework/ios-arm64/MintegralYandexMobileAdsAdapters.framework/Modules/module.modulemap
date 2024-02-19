@@ -1,0 +1,13 @@
+framework module MintegralYandexMobileAdsAdapters {
+    umbrella header "MintegralYandexMobileAdsAdapters-umbrella.h"
+    
+    export *
+    module * { export * }
+    
+}
+
+module MintegralYandexMobileAdsAdapters.Swift {
+    header "MintegralYandexMobileAdsAdapters-Swift.h"
+    requires objc
+}
+

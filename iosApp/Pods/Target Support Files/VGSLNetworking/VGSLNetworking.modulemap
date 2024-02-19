@@ -1,0 +1,6 @@
+framework module NetworkingPublic {
+  umbrella header "VGSLNetworking-umbrella.h"
+
+  export *
+  module * { export * }
+}

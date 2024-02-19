@@ -1,3 +1,6 @@
+source 'https://github.com/CocoaPods/Specs.git'
+#source 'https://git.yoomoney.ru/scm/sdk/cocoa-pod-specs.git'
+
 target 'iosApp' do
   use_frameworks!
   platform :ios, '16.0'
@@ -8,6 +11,9 @@ target 'iosApp' do
   pod 'FirebaseCrashlytics'
   pod 'FirebaseMessaging'
   pod 'lottie-ios'
+#  pod 'YooKassaPayments', :git => 'https://git.yoomoney.ru/scm/sdk/yookassa-payments-swift.git'
+  pod 'YandexMobileAds', '6.4.0'
+  pod 'YandexMobileAdsInstream', '0.24.0'
 
 end
 

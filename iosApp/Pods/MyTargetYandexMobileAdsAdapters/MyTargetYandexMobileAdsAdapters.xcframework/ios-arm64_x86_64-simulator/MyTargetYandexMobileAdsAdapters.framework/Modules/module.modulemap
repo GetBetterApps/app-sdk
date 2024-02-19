@@ -1,0 +1,13 @@
+framework module MyTargetYandexMobileAdsAdapters {
+    umbrella header "MyTargetYandexMobileAdsAdapters-umbrella.h"
+    
+    export *
+    module * { export * }
+    
+}
+
+module MyTargetYandexMobileAdsAdapters.Swift {
+    header "MyTargetYandexMobileAdsAdapters-Swift.h"
+    requires objc
+}
+

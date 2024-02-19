@@ -105,9 +105,7 @@ fun SubscriptionScreen(
         modifier = modifier
             .fillMaxSize()
             .background(color = colorResource(resource = SharedR.colors.main_background))
-
     ) {
-
         Column(
             modifier = modifier
                 .verticalScroll(rememberScrollState())

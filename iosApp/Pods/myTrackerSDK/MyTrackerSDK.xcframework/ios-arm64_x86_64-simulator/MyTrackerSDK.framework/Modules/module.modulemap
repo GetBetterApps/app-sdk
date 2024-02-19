@@ -1,0 +1,11 @@
+framework module MyTrackerSDK {
+  umbrella header "MyTrackerSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module MyTrackerSDK.Swift {
+  header "MyTrackerSDK-Swift.h"
+  requires objc
+}

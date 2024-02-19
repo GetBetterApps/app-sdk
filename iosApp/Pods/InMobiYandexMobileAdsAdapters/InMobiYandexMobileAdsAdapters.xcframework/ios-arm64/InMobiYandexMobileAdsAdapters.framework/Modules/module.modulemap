@@ -1,0 +1,13 @@
+framework module InMobiYandexMobileAdsAdapters {
+    umbrella header "InMobiYandexMobileAdsAdapters-umbrella.h"
+    
+    export *
+    module * { export * }
+    
+}
+
+module InMobiYandexMobileAdsAdapters.Swift {
+    header "InMobiYandexMobileAdsAdapters-Swift.h"
+    requires objc
+}
+

@@ -1,0 +1,166 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
+// swift-module-flags: -target arm64-apple-ios12.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MyTargetSDK
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVFAudio
+import AVFoundation
+import AdSupport
+import CoreTelephony.CTCarrier
+import CoreTelephony.CTTelephonyNetworkInfo
+import CoreTelephony
+import Foundation
+@_exported import MyTargetSDK
+import SafariServices
+import StoreKit
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+import os
+@objc public enum MTRGLogMessageType : Swift.Int {
+  case info
+  case warning
+  case error
+  case critical
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension MyTargetSDK.MTRGInstreamAd {
+  @_hasMissingDesignatedInitializers @objc(MTRGInstreamAdVideoMotionHeader) final public class VideoMotionHeader : ObjectiveC.NSObject {
+    @objc final public let icon: Foundation.URL
+    @objc final public let title: Swift.String
+    @objc final public let linkText: Swift.String
+    @objc final public let ageRestrictionText: Swift.String
+    @objc final public let adDisclaimerText: Swift.String
+    @objc deinit
+  }
+}
+@objc public protocol MTRGLogger {
+  @objc func logMessage(_ message: Swift.String, type: MyTargetSDK.MTRGLogMessageType)
+}
+@_inheritsConvenienceInitializers @objc final public class MTRGManager : ObjectiveC.NSObject {
+  @objc public static var sdkConfig: MyTargetSDK.MTRGConfig {
+    @objc get
+    @objc set
+  }
+  @objc public static var isAudioSessionManagedByApplication: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc public static var customLogger: (any MyTargetSDK.MTRGLogger)? {
+    @objc get
+    @objc set
+  }
+  @objc public static func initSdk()
+  @objc public static func setDebugMode(_ enabled: Swift.Bool)
+  @objc public static func getBidderToken() -> Swift.String
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc(MTRGShoppableAdsItem) final public class ShoppableAdsItem : ObjectiveC.NSObject, Swift.Decodable {
+  @objc final public let url: Swift.String
+  @objc final public let id: Swift.String
+  @objc final public let price: Swift.String?
+  @objc final public let oldPrice: Swift.String?
+  @objc final public let picture: Swift.String
+  @objc final public let text: Swift.String
+  @objc deinit
+  public init(from decoder: any Swift.Decoder) throws
+}
+@objc(MTRGInstreamAdVideoMotionPlayerDelegate) public protocol InstreamAdVideoMotionPlayerDelegate {
+  @objc func onBannerShow()
+  @objc func onBannerComplete()
+  @objc func onItemShow(_ itemId: Swift.String)
+  @objc func onItemClick(_ itemId: Swift.String)
+  @objc func onHeaderClick()
+  @objc func onCloseByUser()
+  @objc func onError(_ error: Swift.String)
+}
+@objc(MTRGInstreamAdVideoMotionPlayer) public protocol InstreamAdVideoMotionPlayer {
+  @objc weak var delegate: (any MyTargetSDK.InstreamAdVideoMotionPlayerDelegate)? { get set }
+  @objc func play(_ videoMotionBanner: MyTargetSDK.MTRGInstreamAd.VideoMotionBanner)
+}
+extension MyTargetSDK.MTRGInstreamAd {
+  @_hasMissingDesignatedInitializers @objc(MTRGInstreamAdVideoMotionDisclaimer) final public class VideoMotionDisclaimer : ObjectiveC.NSObject {
+    @objc final public let text: Swift.String
+    @objc deinit
+  }
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers final public class MTRGVersion : ObjectiveC.NSObject {
+  @objc final public class func currentVersion() -> Swift.String
+  @objc deinit
+}
+@objc(MTRGAdLoadingError) public enum AdLoadingError : Swift.Int, Foundation.LocalizedError {
+  case undefinedNetworkError = 1000
+  case invalidUrl = 1001
+  case networkFailed = 1002
+  case requestTimeout = 1003
+  case forbidden = 1403
+  case notFound = 1404
+  case internalServerError = 1500
+  case undefinedParseError = 2000
+  case emptyResponse = 2001
+  case invalidJson = 2002
+  case invalidXml = 2003
+  case invalidAdType = 2004
+  case requiredFieldMissed = 2005
+  case undefinedDataError = 3000
+  case missedImages = 3001
+  case missedHtml = 3002
+  case noBanners = 3003
+  case invalidBannerType = 3004
+  case reloadingNotAllowed = 4001
+  case undefinedMediationError = 5000
+  case mediationAdNotLoaded = 5001
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public static var _nsErrorDomain: Swift.String {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension MyTargetSDK.MTRGInstreamAd {
+  @_hasMissingDesignatedInitializers @objc(MTRGInstreamAdVideoMotionData) final public class VideoMotionData : ObjectiveC.NSObject {
+    @objc final public let header: MyTargetSDK.MTRGInstreamAd.VideoMotionHeader
+    @objc final public let items: [MyTargetSDK.MTRGInstreamAd.VideoMotionItem]
+    @objc final public let disclaimer: MyTargetSDK.MTRGInstreamAd.VideoMotionDisclaimer?
+    @objc deinit
+  }
+}
+extension MyTargetSDK.MTRGInstreamAd {
+  @_hasMissingDesignatedInitializers @objc(MTRGInstreamAdVideoMotionItem) final public class VideoMotionItem : ObjectiveC.NSObject {
+    @objc final public let id: Swift.String
+    @objc final public let price: Swift.String?
+    @objc final public let oldPrice: Swift.String?
+    @objc final public let currency: Swift.String
+    @objc final public let image: Foundation.URL
+    @objc final public let text: Swift.String
+    @objc final public let ctaText: Swift.String
+    @objc deinit
+  }
+}
+extension MyTargetSDK.MTRGInstreamAd {
+  @_hasMissingDesignatedInitializers @objc(MTRGInstreamAdVideoMotionBanner) final public class VideoMotionBanner : ObjectiveC.NSObject {
+    @objc final public let videoMotionData: MyTargetSDK.MTRGInstreamAd.VideoMotionData
+    @objc final public let allowClose: Swift.Bool
+    @objc final public let allowCloseDelay: Foundation.NSNumber?
+    @objc final public let duration: Swift.Float
+    @objc final public let adChoicesImage: UIKit.UIImage?
+    @objc final public let hasAdChoices: Swift.Bool
+    @objc deinit
+  }
+}
+extension MyTargetSDK.MTRGLogMessageType : Swift.Equatable {}
+extension MyTargetSDK.MTRGLogMessageType : Swift.Hashable {}
+extension MyTargetSDK.MTRGLogMessageType : Swift.RawRepresentable {}
+extension MyTargetSDK.AdLoadingError : Swift.Equatable {}
+extension MyTargetSDK.AdLoadingError : Swift.Hashable {}
+extension MyTargetSDK.AdLoadingError : Swift.RawRepresentable {}

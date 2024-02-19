@@ -1,0 +1,13 @@
+framework module AdColonyYandexMobileAdsAdapters {
+    umbrella header "AdColonyYandexMobileAdsAdapters-umbrella.h"
+    
+    export *
+    module * { export * }
+    
+}
+
+module AdColonyYandexMobileAdsAdapters.Swift {
+    header "AdColonyYandexMobileAdsAdapters-Swift.h"
+    requires objc
+}
+

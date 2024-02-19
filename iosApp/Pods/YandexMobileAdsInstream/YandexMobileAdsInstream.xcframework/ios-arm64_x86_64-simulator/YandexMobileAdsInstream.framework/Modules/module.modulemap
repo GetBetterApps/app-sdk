@@ -1,0 +1,4 @@
+framework module YandexMobileAdsInstream {
+  header "YandexMobileAdsInstream-Swift.h"
+  requires objc
+}
