@@ -63,7 +63,7 @@ fun AreaDetailContent(
                 Spacer(modifier = modifier.weight(1f))
                 SelectedEmojiImage(
                     selectedEmoji = areaData.emoji,
-                    imageSize = 96
+                    imageSize = 96.dp
                 ) {
                     if (isEditing) {
                         isEmojiPickerVisible.value = !isEmojiPickerVisible.value
@@ -125,15 +125,14 @@ fun AreaDetailContent(
             }
         }
 
-
         EmojiPicker(
             isVisible = isEmojiPickerVisible.value,
-            items = Emoji.values().toList(),
+            items = Emoji.entries,
             onEmojiClick = onEmojiClick
         )
 
         LevelBlock(
-            topPadding = 2,
+            topPadding = 2.dp,
             experienceData = areaData.experienceData
         )
 

@@ -15,7 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Dp
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_48
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_8
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -25,33 +27,38 @@ import dev.icerock.moko.resources.compose.painterResource
 fun SelectedEmojiImage(
     modifier: Modifier = Modifier,
     selectedEmoji: Emoji,
-    imageSize: Int = 48,
+    imageSize: Dp = DP_48,
     onClick: () -> Unit
 ) {
+
+    val shadowRadius = remember { DP_8 }
+    val innerPadding = remember { DP_8 }
+    val itemInnerPadding = remember { DP_8 }
+
     val haptic = LocalHapticFeedback.current
     val interactionSource = remember { MutableInteractionSource() }
 
     Box(
         modifier = modifier
             .shadow(
-                elevation = 8.dp,
+                elevation = shadowRadius,
                 shape = MaterialTheme.shapes.medium,
             )
             .background(
                 color = colorResource(resource = SharedR.colors.background_item),
                 shape = MaterialTheme.shapes.medium
             )
-            .padding(8.dp)
+            .padding(innerPadding)
     ) {
         AnimatedContent(targetState = selectedEmoji, label = "") {
             Image(
                 modifier = modifier
-                    .size(imageSize.dp)
+                    .size(imageSize)
                     .background(
                         color = colorResource(resource = SharedR.colors.text_field_background),
                         shape = MaterialTheme.shapes.medium
                     )
-                    .padding(8.dp)
+                    .padding(itemInnerPadding)
                     .clickable(
                         interactionSource = interactionSource,
                         indication = null

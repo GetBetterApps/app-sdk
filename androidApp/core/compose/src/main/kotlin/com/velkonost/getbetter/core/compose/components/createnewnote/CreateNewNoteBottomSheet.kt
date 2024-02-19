@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -29,16 +28,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.HintButton
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.MultilineTextField
+import com.velkonost.getbetter.core.compose.components.WeightedSpacer
 import com.velkonost.getbetter.core.compose.components.note.areapicker.AreaPicker
 import com.velkonost.getbetter.core.compose.components.note.completiondate.CompletionDateBlock
 import com.velkonost.getbetter.core.compose.components.note.subnotes.SubNotesBlock
 import com.velkonost.getbetter.core.compose.components.note.tags.TagsBlock
 import com.velkonost.getbetter.core.compose.components.note.taskpicker.TaskPicker
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_12
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_20
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_30
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_40
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_50
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_70
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_8
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.note.NoteType
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
@@ -72,6 +78,19 @@ fun CreateNewNoteBottomSheet(
     onHintClick: () -> Unit
 ) {
 
+    val sheetCorners = remember { DP_12 }
+    val viewPaddingBottom = remember { DP_40 }
+    val loadingViewPadding = remember { DP_20 }
+
+    val sheetHeight = remember { 0.9f }
+    val gradientAlpha = remember { 0.7f }
+    val gradientHeight = remember { DP_30 }
+
+    val contentPadding = remember { DP_20 }
+    val hintLeadingPadding = remember { DP_8 }
+    val buttonBottomPadding = remember { DP_70 }
+    val contentBottomPadding = remember { DP_50 }
+
     val isAreaPickerVisible = remember { mutableStateOf(false) }
     val isTaskPickerVisible = remember { mutableStateOf(false) }
     val isSubNotesBlockVisible = remember { mutableStateOf(false) }
@@ -85,15 +104,15 @@ fun CreateNewNoteBottomSheet(
 
     ModalBottomSheetLayout(
         sheetState = modalSheetState,
-        sheetShape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
+        sheetShape = RoundedCornerShape(topStart = sheetCorners, topEnd = sheetCorners),
         sheetBackgroundColor = colorResource(resource = SharedR.colors.main_background),
         sheetContent = {
             if (state.isLoading) {
                 Box(
                     modifier = modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(0.9f)
-                        .padding(20.dp)
+                        .fillMaxHeight(sheetHeight)
+                        .padding(loadingViewPadding)
                 ) {
                     Loader(modifier = modifier.align(Alignment.Center))
                 }
@@ -101,19 +120,19 @@ fun CreateNewNoteBottomSheet(
                 Box(
                     modifier = modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(0.9f)
+                        .fillMaxHeight(sheetHeight)
                 ) {
                     Column(
                         modifier = modifier
                             .fillMaxWidth()
-                            .fillMaxHeight(0.9f)
-                            .padding(bottom = 40.dp)
+                            .fillMaxHeight(sheetHeight)
+                            .padding(bottom = viewPaddingBottom)
                             .verticalScroll(scrollState)
                     ) {
                         Column(
                             modifier = modifier
-                                .padding(20.dp)
-                                .padding(bottom = 50.dp)
+                                .padding(contentPadding)
+                                .padding(bottom = contentBottomPadding)
                         ) {
 
                             Row(
@@ -131,7 +150,7 @@ fun CreateNewNoteBottomSheet(
                                 )
 
                                 HintButton(
-                                    modifier = modifier.padding(start = 8.dp),
+                                    modifier = modifier.padding(start = hintLeadingPadding),
                                     onClick = onHintClick
                                 )
                             }
@@ -167,9 +186,7 @@ fun CreateNewNoteBottomSheet(
                             )
 
                             AnimatedVisibility(visible = state.type == NoteType.Goal) {
-                                CompletionDateBlock(
-                                    onSetCompletionDate = onSetCompletionDate
-                                )
+                                CompletionDateBlock(onSetCompletionDate = onSetCompletionDate)
                             }
 
                             PrivateSwitch(
@@ -204,18 +221,18 @@ fun CreateNewNoteBottomSheet(
                         modifier = modifier.fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Spacer(modifier = modifier.weight(1f))
+                        WeightedSpacer()
 
                         Box(
                             modifier = modifier
-                                .height(30.dp)
+                                .height(gradientHeight)
                                 .fillMaxWidth()
                                 .background(
                                     brush = Brush.verticalGradient(
                                         colors = listOf(
                                             Color.Transparent,
                                             colorResource(resource = SharedR.colors.main_background)
-                                                .copy(alpha = 0.7f),
+                                                .copy(alpha = gradientAlpha),
                                             colorResource(resource = SharedR.colors.main_background),
                                         ),
                                     ),
@@ -225,7 +242,7 @@ fun CreateNewNoteBottomSheet(
                         AppButton(
                             modifier = modifier
                                 .align(Alignment.CenterHorizontally)
-                                .padding(bottom = 70.dp),
+                                .padding(bottom = buttonBottomPadding),
                             labelText = stringResource(
                                 resource = SharedR.strings.diary_areas_create_button
                             ),

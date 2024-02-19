@@ -19,9 +19,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.core.compose.extensions.horizontalFadingEdge
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_150
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_40
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_8
 import com.velkonost.getbetter.shared.core.model.Emoji
 import dev.icerock.moko.resources.compose.painterResource
 
@@ -32,6 +34,10 @@ fun ColumnScope.EmojiPicker(
     items: List<Emoji>,
     onEmojiClick: (Emoji) -> Unit
 ) {
+    val viewHeight = remember { DP_150 }
+    val itemSize = remember { DP_40 }
+    val itemInnerPadding = remember { DP_8 }
+
     val interactionSource = remember { MutableInteractionSource() }
 
     AnimatedVisibility(
@@ -43,14 +49,14 @@ fun ColumnScope.EmojiPicker(
         PrimaryBox {
             LazyHorizontalGrid(
                 modifier = modifier
-                    .height(150.dp)
+                    .height(viewHeight)
                     .horizontalFadingEdge(),
-                rows = GridCells.Adaptive(40.dp)
+                rows = GridCells.Adaptive(itemSize)
             ) {
                 items(items) {
                     Image(
                         modifier = modifier
-                            .padding(8.dp)
+                            .padding(itemInnerPadding)
                             .clickable(
                                 interactionSource = interactionSource,
                                 indication = null

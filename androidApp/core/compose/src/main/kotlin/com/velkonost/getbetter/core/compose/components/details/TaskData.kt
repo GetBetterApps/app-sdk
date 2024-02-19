@@ -13,8 +13,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_16
+import com.velkonost.getbetter.core.compose.theme.Pixel
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -25,12 +26,15 @@ fun TaskData(
     task: TaskUI,
     onClick: () -> Unit
 ) {
+    val viewPadding = remember { Pixel.PX_ZERO }
+    val viewInnerPadding = remember { DP_16 }
+
     val interactionSource = remember { MutableInteractionSource() }
 
-    PrimaryBox(padding = 0) {
+    PrimaryBox(padding = viewPadding) {
         Row(
             modifier = modifier
-                .padding(16.dp)
+                .padding(viewInnerPadding)
                 .clickable(
                     interactionSource = interactionSource,
                     indication = null,
