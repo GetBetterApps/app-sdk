@@ -21,8 +21,8 @@ fun ApplicationTheme(content: @Composable () -> Unit) {
     val window = (view.context as ComponentActivity).window
     val windowsInsetsController = WindowCompat.getInsetsController(window, view)
     val darkTheme = isSystemInDarkTheme()
-    val transparentNav = darkTheme || Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-    val transparentStatus = darkTheme || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+    val transparentNav = true
+    val transparentStatus = true
     val colorTransparent = Color.Transparent.toArgb()
     val colorBlackTranslucent = Color.Black.copy(alpha = 0.2F).toArgb()
 
