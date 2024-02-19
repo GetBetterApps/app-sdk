@@ -10,10 +10,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_12
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_16
+import com.velkonost.getbetter.core.compose.theme.Pixel.PX_ZERO
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -31,13 +35,16 @@ fun TagsBlock(
     onTagDelete: (String) -> Unit
 ) {
 
-    PrimaryBox(padding = 0) {
-        Column(
-            modifier = modifier.padding(16.dp)
-        ) {
+    val textWidth = remember { 0.8f }
+    val viewPadding = remember { DP_16 }
+    val viewMargin = remember { PX_ZERO }
+    val listTopPadding = remember { DP_12 }
+
+    PrimaryBox(padding = viewMargin) {
+        Column(modifier = modifier.padding(viewPadding)) {
             Text(
                 modifier = modifier
-                    .fillMaxWidth(0.8f),
+                    .fillMaxWidth(textWidth),
                 text = stringResource(resource = SharedR.strings.create_note_tags_title),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -48,7 +55,7 @@ fun TagsBlock(
             FlowRow(
                 modifier = modifier
                     .fillMaxWidth()
-                    .padding(top = 12.dp),
+                    .padding(top = listTopPadding),
                 horizontalArrangement = Arrangement.spacedBy(6.dp),
                 verticalArrangement = Arrangement.spacedBy(6.dp)
             ) {

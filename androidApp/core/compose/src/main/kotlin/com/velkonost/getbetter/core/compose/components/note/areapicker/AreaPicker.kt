@@ -15,12 +15,16 @@ import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.core.compose.extensions.horizontalFadingEdge
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_150
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_16
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_38
+import com.velkonost.getbetter.core.compose.theme.Pixel.PX_ZERO
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.note.NoteType
 import com.velkonost.getbetter.shared.core.util.randomUUID
@@ -38,9 +42,15 @@ fun AreaPicker(
     modalSheetState: ModalBottomSheetState,
     onAreaSelect: (Area) -> Unit
 ) {
+
+    val pagerHeight = remember { DP_150 }
+    val viewPadding = remember { PX_ZERO }
+    val contentPadding = remember { DP_38 }
+    val pagerBottomPadding = remember { DP_16 }
+
     val scope = rememberCoroutineScope()
 
-    PrimaryBox(padding = 0) {
+    PrimaryBox(padding = viewPadding) {
         Column {
             AreaPickerHeader(
                 selectedArea = selectedArea,
@@ -51,12 +61,12 @@ fun AreaPicker(
             AnimatedVisibility(visible = isAreaPickerVisible.value) {
                 HorizontalPager(
                     modifier = modifier
-                        .height(150.dp)
+                        .height(pagerHeight)
                         .fillMaxWidth()
                         .horizontalFadingEdge()
-                        .padding(bottom = 16.dp),
+                        .padding(bottom = pagerBottomPadding),
                     state = areasPagerState,
-                    contentPadding = PaddingValues(start = 38.dp, end = 38.dp),
+                    contentPadding = PaddingValues(horizontal = contentPadding),
                     key = {
                         if (areas.isNotEmpty()) {
                             areas[it].id

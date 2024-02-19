@@ -17,7 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_14
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_24
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_4
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_6
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -30,27 +33,33 @@ fun RowScope.TagItem(
     onlyView: Boolean = false,
     onTagDelete: ((String) -> Unit)? = null
 ) {
+
+    val textHeight = remember { DP_24 }
+    val itemHeight = remember { DP_24 }
+    val closeImageSize = remember { DP_14 }
+    val itemVerticalPadding = remember { DP_4 }
+    val itemHorizontalPadding = remember { DP_6 }
+    val closeImageLeadingPadding = remember { DP_4 }
+
     val interactionSource = remember { MutableInteractionSource() }
 
     Row(
         modifier = modifier
-            .height(24.dp)
+            .height(itemHeight)
             .align(Alignment.CenterVertically)
             .background(
                 color = colorResource(resource = SharedR.colors.button_gradient_start),
                 shape = MaterialTheme.shapes.small
             )
             .padding(
-                start = 6.dp,
-                end = 6.dp,
-                top = 4.dp,
-                bottom = 4.dp
+                vertical = itemVerticalPadding,
+                horizontal = itemHorizontalPadding,
             ),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             modifier = modifier
-                .height(24.dp)
+                .height(textHeight)
                 .align(Alignment.CenterVertically),
             text = tag.text,
             textAlign = TextAlign.Center,
@@ -61,9 +70,9 @@ fun RowScope.TagItem(
         if (onTagDelete != null && !onlyView) {
             Image(
                 modifier = modifier
-                    .padding(start = 4.dp)
+                    .padding(start = closeImageLeadingPadding)
                     .align(Alignment.CenterVertically)
-                    .size(14.dp)
+                    .size(closeImageSize)
                     .clickable(
                         interactionSource = interactionSource,
                         indication = null

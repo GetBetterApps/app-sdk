@@ -8,7 +8,6 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -23,7 +22,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.components.WeightedSpacer
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_12
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_16
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_24
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_36
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_56
 import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -38,26 +42,34 @@ fun SubNoteItem(
     onDeleteSubNote: (SubNoteUI) -> Unit,
     onCompleteClick: ((SubNoteUI) -> Unit)? = null
 ) {
-    val interactionSource = remember { MutableInteractionSource() }
+
+    val textWidth = remember { 0.8f }
+    val viewHeight = remember { DP_56 }
+    val buttonBoxSize = remember { DP_36 }
+    val buttonImageSize = remember { DP_24 }
+    val textLeadingPadding = remember { DP_12 }
+    val viewHorizontalMargin = remember { DP_16 }
+    val buttonBoxTrailingMargin = remember { DP_12 }
+
     val scroll = rememberScrollState(0)
+    val interactionSource = remember { MutableInteractionSource() }
 
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(56.dp)
-            .padding(horizontal = 16.dp)
+            .height(viewHeight)
+            .padding(horizontal = viewHorizontalMargin)
             .clip(shape = MaterialTheme.shapes.medium)
             .background(
                 color = colorResource(resource = SharedR.colors.text_field_background),
                 shape = MaterialTheme.shapes.medium
             ),
-
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             modifier = modifier
-                .fillMaxWidth(0.8f)
-                .padding(start = 12.dp)
+                .fillMaxWidth(textWidth)
+                .padding(start = textLeadingPadding)
                 .horizontalScroll(scroll),
             text = item.text,
             style = MaterialTheme.typography.titleSmall
@@ -68,13 +80,13 @@ fun SubNoteItem(
             maxLines = 1,
         )
 
-        Spacer(modifier = modifier.weight(1f))
+        WeightedSpacer()
 
         AnimatedVisibility(visible = !onlyView) {
             Box(
                 modifier = modifier
-                    .padding(end = 12.dp)
-                    .size(36.dp)
+                    .padding(end = buttonBoxTrailingMargin)
+                    .size(buttonBoxSize)
                     .background(
                         color = colorResource(resource = SharedR.colors.background_item),
                         shape = MaterialTheme.shapes.medium
@@ -84,7 +96,7 @@ fun SubNoteItem(
             ) {
                 Image(
                     modifier = modifier
-                        .size(24.dp)
+                        .size(buttonImageSize)
                         .align(Alignment.Center)
                         .clickable(
                             interactionSource = interactionSource,
@@ -100,8 +112,8 @@ fun SubNoteItem(
         AnimatedVisibility(visible = isCompleteVisible && onlyView) {
             Box(
                 modifier = modifier
-                    .padding(end = 12.dp)
-                    .size(36.dp)
+                    .padding(end = buttonBoxTrailingMargin)
+                    .size(buttonBoxSize)
                     .background(
                         color = colorResource(resource = SharedR.colors.button_gradient_start),
                         shape = MaterialTheme.shapes.medium
@@ -111,7 +123,7 @@ fun SubNoteItem(
             ) {
                 Image(
                     modifier = modifier
-                        .size(24.dp)
+                        .size(buttonImageSize)
                         .align(Alignment.Center)
                         .clickable(
                             interactionSource = interactionSource,

@@ -8,7 +8,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -23,10 +22,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.AppAlertDialog
 import com.velkonost.getbetter.core.compose.components.AppDatePickerDialog
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
+import com.velkonost.getbetter.core.compose.components.WeightedSpacer
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_12
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_16
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_4
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_60
+import com.velkonost.getbetter.core.compose.theme.Pixel.PX_ZERO
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
@@ -46,6 +50,14 @@ fun CompletionDateBlock(
     onSetCompletionDate: (Long?) -> Unit,
     onCompleteClick: (() -> Unit)? = null
 ) {
+
+    val viewPadding = remember { PX_ZERO }
+    val cancelIconSize = remember { DP_16 }
+    val labelRowHeight = remember { DP_60 }
+    val labelInnerPadding = remember { DP_12 }
+    val cancelIconTrailingPadding = remember { DP_4 }
+    val rowHorizontalInnerPadding = remember { DP_16 }
+
     val context = LocalContext.current
 
     val notSetText = StringDesc
@@ -58,25 +70,26 @@ fun CompletionDateBlock(
 
     val interactionSource = remember { MutableInteractionSource() }
 
-    PrimaryBox(padding = 0) {
+    PrimaryBox(padding = viewPadding) {
         Column {
             Row(
-                modifier = modifier.height(60.dp),
+                modifier = modifier.height(labelRowHeight),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    modifier = modifier.padding(start = 16.dp),
+                    modifier = modifier.padding(start = rowHorizontalInnerPadding),
                     text = stringResource(resource = SharedR.strings.create_note_completion_date_title),
                     style = MaterialTheme.typography.titleMedium,
                     color = colorResource(resource = SharedR.colors.text_primary)
                 )
-                Spacer(modifier = modifier.weight(1f))
+
+                WeightedSpacer()
 
                 AnimatedVisibility(visible = date != notSetText && enabled) {
                     Image(
                         modifier = modifier
-                            .padding(end = 4.dp)
-                            .size(16.dp)
+                            .padding(end = cancelIconTrailingPadding)
+                            .size(cancelIconSize)
                             .clickable(
                                 interactionSource = interactionSource,
                                 indication = null
@@ -93,12 +106,12 @@ fun CompletionDateBlock(
                 AnimatedContent(targetState = date, label = "") { content ->
                     Text(
                         modifier = modifier
-                            .padding(end = 16.dp)
+                            .padding(end = rowHorizontalInnerPadding)
                             .background(
                                 color = colorResource(resource = SharedR.colors.text_field_background),
                                 shape = MaterialTheme.shapes.medium
                             )
-                            .padding(12.dp)
+                            .padding(labelInnerPadding)
                             .clickable(
                                 interactionSource = interactionSource,
                                 indication = null
@@ -129,8 +142,6 @@ fun CompletionDateBlock(
                     confirmCancelCompletionDialog.value = true
                 }
             }
-
-
         }
     }
 

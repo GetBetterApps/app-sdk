@@ -20,7 +20,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_1
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_24
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_6
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -33,6 +35,11 @@ fun NewTagField(
     onValueChanged: (String) -> Unit,
     onAddNewTag: () -> Unit
 ) {
+
+    val viewSize = remember { DP_24 }
+    val contentVerticalPadding = remember { DP_1 }
+    val contentHorizontalPadding = remember { DP_6 }
+
     val interactionSource = remember { MutableInteractionSource() }
 
     val colors = TextFieldDefaults.colors(
@@ -48,14 +55,11 @@ fun NewTagField(
         value = value.text,
         modifier = Modifier
             .defaultMinSize(
-                minWidth = 24.dp,
-                minHeight = 24.dp
+                minWidth = viewSize,
+                minHeight = viewSize
             )
             .onKeyEvent {
-                if (it.nativeKeyEvent.keyCode in listOf(
-                        KeyEvent.KEYCODE_ENTER,
-                    )
-                ) {
+                if (it.nativeKeyEvent.keyCode in listOf(KeyEvent.KEYCODE_ENTER)) {
                     onAddNewTag.invoke()
                 }
                 false
@@ -98,7 +102,10 @@ fun NewTagField(
                 enabled = true,
                 interactionSource = interactionSource,
                 visualTransformation = VisualTransformation.None,
-                contentPadding = PaddingValues(horizontal = 6.dp, vertical = 1.dp)
+                contentPadding = PaddingValues(
+                    horizontal = contentHorizontalPadding,
+                    vertical = contentVerticalPadding
+                )
             )
         }
     )

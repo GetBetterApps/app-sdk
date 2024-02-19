@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -23,7 +22,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.components.WeightedSpacer
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_12
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_16
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_24
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_36
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_4
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_56
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
@@ -36,13 +41,23 @@ fun AddSubNoteItem(
     onValueChanged: (String) -> Unit,
     onAddSubNote: () -> Unit
 ) {
+
+    val addBoxSize = remember { DP_36 }
+    val viewHeight = remember { DP_56 }
+    val addImageSize = remember { DP_24 }
+    val textFieldWidth = remember { 0.8f }
+    val placeholderWidth = remember { 0.7f }
+    val placeholderTopPadding = remember { DP_4 }
+    val addBoxTrailingMargin = remember { DP_12 }
+    val viewHorizontalPadding = remember { DP_16 }
+
     val interactionSource = remember { MutableInteractionSource() }
 
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(56.dp)
-            .padding(horizontal = 16.dp)
+            .height(viewHeight)
+            .padding(horizontal = viewHorizontalPadding)
             .clip(shape = MaterialTheme.shapes.medium)
             .background(
                 color = colorResource(resource = SharedR.colors.text_field_background),
@@ -51,12 +66,9 @@ fun AddSubNoteItem(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         TextField(
-            modifier = modifier.fillMaxWidth(0.8f),
+            modifier = modifier.fillMaxWidth(textFieldWidth),
             value = value,
-            onValueChange = {
-                onValueChanged.invoke(it)
-            },
-
+            onValueChange = onValueChanged,
             textStyle = MaterialTheme.typography.titleSmall
                 .copy(
                     color = colorResource(resource = SharedR.colors.text_secondary),
@@ -66,8 +78,8 @@ fun AddSubNoteItem(
             placeholder = {
                 Text(
                     modifier = modifier
-                        .fillMaxWidth(0.7f)
-                        .padding(top = 4.dp),
+                        .fillMaxWidth(placeholderWidth)
+                        .padding(top = placeholderTopPadding),
                     text = placeholderText,
                     color = colorResource(resource = SharedR.colors.hint_color),
                     textAlign = TextAlign.Start,
@@ -84,12 +96,12 @@ fun AddSubNoteItem(
             ),
         )
 
-        Spacer(modifier = modifier.weight(1f))
+        WeightedSpacer()
 
         Box(
             modifier = modifier
-                .padding(end = 12.dp)
-                .size(36.dp)
+                .padding(end = addBoxTrailingMargin)
+                .size(addBoxSize)
                 .background(
                     color = colorResource(resource = SharedR.colors.button_gradient_start),
                     shape = MaterialTheme.shapes.medium
@@ -99,12 +111,13 @@ fun AddSubNoteItem(
         ) {
             Image(
                 modifier = modifier
-                    .size(24.dp)
+                    .size(addImageSize)
                     .align(Alignment.Center)
                     .clickable(
                         interactionSource = interactionSource,
-                        indication = null
-                    ) { onAddSubNote.invoke() },
+                        indication = null,
+                        onClick = onAddSubNote
+                    ),
                 painter = painterResource(imageResource = SharedR.images.ic_plus),
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(color = colorResource(resource = SharedR.colors.text_light))

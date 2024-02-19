@@ -8,7 +8,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -26,7 +25,9 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.components.WeightedSpacer
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_16
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_24
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
@@ -37,6 +38,10 @@ fun SubNotesHeader(
     modifier: Modifier = Modifier,
     isSubNotesBlockVisible: MutableState<Boolean>,
 ) {
+
+    val textWidth = remember { 0.6f }
+    val arrowSize = remember { DP_24 }
+    val viewMargin = remember { DP_16 }
 
     val interactionSource = remember { MutableInteractionSource() }
     val areaArrowRotationAngle by animateFloatAsState(
@@ -50,7 +55,7 @@ fun SubNotesHeader(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(viewMargin)
             .clickable(
                 interactionSource = interactionSource,
                 indication = null
@@ -62,10 +67,8 @@ fun SubNotesHeader(
         horizontalArrangement = Arrangement.Center
     ) {
         Text(
-            modifier = modifier.fillMaxWidth(0.6f),
-            text = stringResource(
-                resource = SharedR.strings.create_note_subnote_title
-            ),
+            modifier = modifier.fillMaxWidth(textWidth),
+            text = stringResource(resource = SharedR.strings.create_note_subnote_title),
             maxLines = 1,
             textAlign = TextAlign.Start,
             overflow = TextOverflow.Ellipsis,
@@ -73,11 +76,11 @@ fun SubNotesHeader(
             style = MaterialTheme.typography.titleMedium
         )
 
-        Spacer(modifier = modifier.weight(1f))
+        WeightedSpacer()
 
         Image(
             modifier = modifier
-                .size(24.dp)
+                .size(arrowSize)
                 .rotate(areaArrowRotationAngle),
             painter = painterResource(imageResource = SharedR.images.ic_arrow_right),
             contentDescription = null,

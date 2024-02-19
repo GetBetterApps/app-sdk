@@ -9,7 +9,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -27,7 +26,11 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.components.WeightedSpacer
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_12
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_16
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_24
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_32
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.area.Area
 import com.velkonost.getbetter.shared.core.model.note.NoteType
@@ -43,6 +46,13 @@ fun AreaPickerHeader(
     isAreaPickerVisible: MutableState<Boolean>,
     noteType: NoteType
 ) {
+
+    val textWidth = remember { 0.8f }
+    val arrowSize = remember { DP_24 }
+    val emojiSize = remember { DP_32 }
+    val viewPadding = remember { DP_16 }
+    val textLeadingPadding = remember { DP_12 }
+
     val interactionSource = remember { MutableInteractionSource() }
     val areaArrowRotationAngle by animateFloatAsState(
         targetValue = if (isAreaPickerVisible.value) -90F else 90F,
@@ -55,7 +65,7 @@ fun AreaPickerHeader(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(viewPadding)
             .clickable(
                 interactionSource = interactionSource,
                 indication = null
@@ -87,15 +97,15 @@ fun AreaPickerHeader(
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Image(
-                        modifier = modifier.size(32.dp),
+                        modifier = modifier.size(emojiSize),
                         painter = painterResource(imageResource = Emoji.getIconById(area.emojiId!!)),
                         contentDescription = null
                     )
 
                     Text(
                         modifier = modifier
-                            .padding(start = 12.dp)
-                            .fillMaxWidth(0.8f),
+                            .padding(start = textLeadingPadding)
+                            .fillMaxWidth(textWidth),
                         text = area.name,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -106,11 +116,11 @@ fun AreaPickerHeader(
             }
         }
 
-        Spacer(modifier = modifier.weight(1f))
+        WeightedSpacer()
 
         Image(
             modifier = modifier
-                .size(24.dp)
+                .size(arrowSize)
                 .rotate(areaArrowRotationAngle),
             painter = painterResource(imageResource = SharedR.images.ic_arrow_right),
             contentDescription = null,

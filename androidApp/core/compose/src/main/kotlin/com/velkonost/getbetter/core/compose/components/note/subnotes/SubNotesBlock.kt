@@ -7,9 +7,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_16
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_6
+import com.velkonost.getbetter.core.compose.theme.Pixel.PX_ZERO
 import com.velkonost.getbetter.shared.core.model.ui.SubNoteUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.stringResource
@@ -27,17 +30,20 @@ fun SubNotesBlock(
     onSubNoteDelete: (SubNoteUI) -> Unit,
     onCompleteClick: ((SubNoteUI) -> Unit)? = null
 ) {
-    PrimaryBox(padding = 0) {
+
+    val itemPadding = remember { DP_6 }
+    val viewPadding = remember { PX_ZERO }
+    val contentBottomPadding = remember { DP_16 }
+
+    PrimaryBox(padding = viewPadding) {
         Column {
-            SubNotesHeader(
-                isSubNotesBlockVisible = isSubNotesBlockVisible
-            )
+            SubNotesHeader(isSubNotesBlockVisible = isSubNotesBlockVisible)
 
             AnimatedVisibility(visible = isSubNotesBlockVisible.value) {
                 AnimatedContent(targetState = items, label = "") { subNotes ->
                     Column(
-                        modifier = modifier.padding(bottom = 16.dp),
-                        verticalArrangement = Arrangement.spacedBy(6.dp),
+                        modifier = modifier.padding(bottom = contentBottomPadding),
+                        verticalArrangement = Arrangement.spacedBy(itemPadding),
                     ) {
                         subNotes.forEach { item ->
                             SubNoteItem(

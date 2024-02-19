@@ -6,7 +6,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -15,7 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.components.WeightedSpacer
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_12
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_16
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_60
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
@@ -27,20 +29,26 @@ internal fun CompletedOnBlock(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
+
+    val viewHeight = remember { DP_60 }
+    val labelInnerPadding = remember { DP_12 }
+    val textLeadingPadding = remember { DP_16 }
+    val labelTrailingPadding = remember { DP_16 }
+
     val interactionSource = remember { MutableInteractionSource() }
 
     AnimatedVisibility(visible = label != null) {
         Row(
-            modifier = modifier.height(60.dp),
+            modifier = modifier.height(viewHeight),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                modifier = modifier.padding(start = 16.dp),
+                modifier = modifier.padding(start = textLeadingPadding),
                 text = stringResource(resource = SharedR.strings.note_detail_completed_goal_title),
                 style = MaterialTheme.typography.titleMedium,
                 color = colorResource(resource = SharedR.colors.text_primary)
             )
-            Spacer(modifier = modifier.weight(1f))
+            WeightedSpacer()
 
             AnimatedContent(
                 targetState = label,
@@ -49,18 +57,17 @@ internal fun CompletedOnBlock(
                 if (content != null) {
                     Text(
                         modifier = modifier
-                            .padding(end = 16.dp)
+                            .padding(end = labelTrailingPadding)
                             .background(
                                 color = colorResource(resource = SharedR.colors.button_gradient_start),
                                 shape = MaterialTheme.shapes.medium
                             )
-                            .padding(12.dp)
+                            .padding(labelInnerPadding)
                             .clickable(
                                 interactionSource = interactionSource,
-                                indication = null
-                            ) {
-                                onClick()
-                            },
+                                indication = null,
+                                onClick = onClick
+                            ),
                         text = content,
                         style = MaterialTheme.typography.titleMedium,
                         color = colorResource(resource = SharedR.colors.text_light),
