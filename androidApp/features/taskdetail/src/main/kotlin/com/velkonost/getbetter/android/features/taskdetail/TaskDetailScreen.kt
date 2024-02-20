@@ -41,6 +41,7 @@ import com.velkonost.getbetter.core.compose.components.details.AreaData
 import com.velkonost.getbetter.core.compose.components.notelist.AddNoteItem
 import com.velkonost.getbetter.core.compose.components.notelist.NoteItem
 import com.velkonost.getbetter.core.compose.extensions.OnBottomReached
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_ZERO
 import com.velkonost.getbetter.shared.features.createnote.presentation.contract.CreateNewNoteAction
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.TaskDetailViewModel
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.contract.TaskDetailAction
@@ -275,7 +276,7 @@ fun TaskDetailScreen(
                 items(state.userNotesViewState.items, key = { it.id }) {
                     NoteItem(
                         item = it,
-                        horizontalPadding = 0,
+                        horizontalPadding = DP_ZERO,
                         onClick = {
 
                         },
@@ -298,7 +299,7 @@ fun TaskDetailScreen(
 
             if (!state.task!!.isShortInfo) {
                 AddNoteItem(
-                    paddingBottom = 70,
+                    paddingBottom = 70.dp,
                     createGoalClick = {
                         scope.launch {
                             if (state.createNewNoteViewState.availableAreas.isEmpty()) {

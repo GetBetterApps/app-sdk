@@ -18,9 +18,13 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.core.compose.components.note.tags.TagItem
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_12
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_20
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_6
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_8
 import com.velkonost.getbetter.shared.core.model.Emoji
 import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
@@ -32,16 +36,24 @@ import dev.icerock.moko.resources.compose.colorResource
 fun NoteItem(
     modifier: Modifier = Modifier,
     item: Note,
-    horizontalPadding: Int = 20,
+    horizontalPadding: Dp = DP_20,
     onClick: (Note) -> Unit,
     onLikeClick: (Note) -> Unit
 ) {
+
+    val noteTextMaxLines = remember { 10 }
+    val tagsItemsPadding = remember { DP_6 }
+    val contentTopPadding = remember { DP_12 }
+    val contentInnerPadding = remember { DP_8 }
+    val noteTextTopPadding = remember { DP_12 }
+    val tagsListTopPadding = remember { DP_12 }
+
     val haptic = LocalHapticFeedback.current
     val context = LocalContext.current
 
     PrimaryBox(
         modifier = modifier
-            .padding(horizontal = horizontalPadding.dp)
+            .padding(horizontal = horizontalPadding)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null
@@ -65,12 +77,12 @@ fun NoteItem(
             Column(
                 modifier = modifier
                     .fillMaxWidth()
-                    .padding(top = 12.dp)
+                    .padding(top = contentTopPadding)
                     .background(
                         color = colorResource(resource = SharedR.colors.text_field_background),
                         shape = MaterialTheme.shapes.medium
                     )
-                    .padding(8.dp)
+                    .padding(contentInnerPadding)
             ) {
 
                 NoteItemData(
@@ -84,9 +96,9 @@ fun NoteItem(
                 )
 
                 Text(
-                    modifier = modifier.padding(top = 12.dp),
+                    modifier = modifier.padding(top = noteTextTopPadding),
                     text = item.text,
-                    maxLines = 10,
+                    maxLines = noteTextMaxLines,
                     overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.bodyMedium,
                     color = colorResource(resource = SharedR.colors.text_title)
@@ -95,9 +107,9 @@ fun NoteItem(
                 FlowRow(
                     modifier = modifier
                         .fillMaxWidth()
-                        .padding(top = 12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                    verticalArrangement = Arrangement.spacedBy(6.dp)
+                        .padding(top = tagsListTopPadding),
+                    horizontalArrangement = Arrangement.spacedBy(tagsItemsPadding),
+                    verticalArrangement = Arrangement.spacedBy(tagsItemsPadding)
                 ) {
                     item.tags.forEach { tag ->
                         TagItem(tag = TagUI(text = tag))

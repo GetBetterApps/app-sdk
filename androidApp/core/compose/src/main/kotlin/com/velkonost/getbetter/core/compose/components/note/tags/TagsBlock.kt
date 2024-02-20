@@ -13,10 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.core.compose.theme.Dimen.DP_12
 import com.velkonost.getbetter.core.compose.theme.Dimen.DP_16
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_6
 import com.velkonost.getbetter.core.compose.theme.Pixel.PX_ZERO
 import com.velkonost.getbetter.shared.core.model.ui.TagUI
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -39,6 +39,7 @@ fun TagsBlock(
     val viewPadding = remember { DP_16 }
     val viewMargin = remember { PX_ZERO }
     val listTopPadding = remember { DP_12 }
+    val listItemPadding = remember { DP_6 }
 
     PrimaryBox(padding = viewMargin) {
         Column(modifier = modifier.padding(viewPadding)) {
@@ -56,8 +57,8 @@ fun TagsBlock(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(top = listTopPadding),
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
-                verticalArrangement = Arrangement.spacedBy(6.dp)
+                horizontalArrangement = Arrangement.spacedBy(listItemPadding),
+                verticalArrangement = Arrangement.spacedBy(listItemPadding)
             ) {
 
                 tags.forEach { tag ->

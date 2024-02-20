@@ -30,7 +30,9 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_140
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 
@@ -40,7 +42,7 @@ fun BoxScope.ExpandableButtonPanel(
     expandable: Boolean = true,
     primaryItem: ExpandableButtonItem,
     items: List<ExpandableButtonItem>,
-    paddingBottom: Int = 140
+    paddingBottom: Dp = DP_140
 ) {
     val haptic = LocalHapticFeedback.current
     val interactionSource = remember { MutableInteractionSource() }
@@ -71,7 +73,7 @@ fun BoxScope.ExpandableButtonPanel(
         },
         modifier = modifier
             .align(Alignment.BottomEnd)
-            .padding(bottom = paddingBottom.dp, end = 12.dp)
+            .padding(bottom = paddingBottom, end = 12.dp)
             .shadow(
                 elevation = 8.dp,
                 shape = RoundedCornerShape(cornerRadius.value),

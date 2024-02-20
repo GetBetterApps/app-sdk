@@ -3,8 +3,10 @@ package com.velkonost.getbetter.core.compose.components.notelist
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import com.velkonost.getbetter.core.compose.components.ExpandableButtonItem
 import com.velkonost.getbetter.core.compose.components.ExpandableButtonPanel
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_14
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
@@ -12,7 +14,7 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun BoxScope.AddNoteItem(
     modifier: Modifier = Modifier,
-    paddingBottom: Int = 140,
+    paddingBottom: Dp = DP_14,
     createGoalClick: () -> Unit,
     createNoteClick: () -> Unit
 ) {

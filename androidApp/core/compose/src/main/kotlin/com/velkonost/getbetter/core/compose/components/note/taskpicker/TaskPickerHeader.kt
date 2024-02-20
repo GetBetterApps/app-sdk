@@ -9,7 +9,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -27,7 +26,9 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.components.WeightedSpacer
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_16
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_24
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -42,6 +43,10 @@ fun TaskPickerHeader(
     isTaskPickerVisible: MutableState<Boolean>
 ) {
 
+    val nameWidth = remember { 0.8f }
+    val arrowSize = remember { DP_24 }
+    val viewPadding = remember { DP_16 }
+
     val interactionSource = remember { MutableInteractionSource() }
     val areaArrowRotationAngle by animateFloatAsState(
         targetValue = if (isTaskPickerVisible.value) -90F else 90F,
@@ -54,7 +59,7 @@ fun TaskPickerHeader(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(viewPadding)
             .clickable(
                 interactionSource = interactionSource,
                 indication = null
@@ -84,7 +89,7 @@ fun TaskPickerHeader(
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Text(
-                        modifier = modifier.fillMaxWidth(0.8f),
+                        modifier = modifier.fillMaxWidth(nameWidth),
                         text = task?.name
                             ?: stringResource(resource = SharedR.strings.create_note_without_task),
                         maxLines = 1,
@@ -96,11 +101,11 @@ fun TaskPickerHeader(
             }
         }
 
-        Spacer(modifier = modifier.weight(1f))
+        WeightedSpacer()
 
         Image(
             modifier = modifier
-                .size(24.dp)
+                .size(arrowSize)
                 .rotate(areaArrowRotationAngle),
             painter = painterResource(imageResource = SharedR.images.ic_arrow_right),
             contentDescription = null,

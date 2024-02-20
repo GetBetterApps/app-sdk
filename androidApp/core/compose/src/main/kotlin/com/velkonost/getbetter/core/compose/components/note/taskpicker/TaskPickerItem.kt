@@ -11,11 +11,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_16
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_2
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_6
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -25,16 +28,21 @@ fun ColumnScope.TaskPickerItem(
     modifier: Modifier = Modifier,
     task: TaskUI
 ) {
+
+    val viewMargin = remember { DP_2 }
+    val viewPadding = remember { DP_16 }
+    val textWhyTopPadding = remember { DP_6 }
+
     Box(
         modifier = modifier
             .fillMaxWidth()
             .align(Alignment.CenterHorizontally)
-            .padding(start = 2.dp, end = 2.dp)
+            .padding(horizontal = viewMargin)
             .background(
                 color = colorResource(resource = SharedR.colors.text_field_background),
                 shape = MaterialTheme.shapes.medium
             )
-            .padding(16.dp)
+            .padding(viewPadding)
     ) {
         Column(
             modifier = modifier.fillMaxSize(),
@@ -50,8 +58,9 @@ fun ColumnScope.TaskPickerItem(
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1
             )
+
             Text(
-                modifier = modifier.padding(top = 6.dp),
+                modifier = modifier.padding(top = textWhyTopPadding),
                 text = task.why,
                 color = colorResource(resource = SharedR.colors.text_primary),
                 style = MaterialTheme.typography.bodyMedium,

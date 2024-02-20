@@ -3,7 +3,7 @@ package com.velkonost.getbetter.core.compose.theme
 import androidx.compose.ui.unit.dp
 
 object Dimen {
-    val ZERO = 0.dp
+    val DP_ZERO = 0.dp
 
     val DP_1 = 1.dp
     val DP_2 = 2.dp
@@ -25,6 +25,7 @@ object Dimen {
     val DP_60 = 60.dp
     val DP_64 = 64.dp
     val DP_70 = 70.dp
+    val DP_140 = 140.dp
     val DP_300 = 300.dp
 
     val DP_150 = 150.dp

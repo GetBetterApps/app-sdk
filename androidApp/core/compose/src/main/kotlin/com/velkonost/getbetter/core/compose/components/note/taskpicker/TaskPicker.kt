@@ -15,12 +15,16 @@ import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
 import com.velkonost.getbetter.core.compose.extensions.horizontalFadingEdge
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_150
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_16
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_36
+import com.velkonost.getbetter.core.compose.theme.Pixel.PX_ZERO
 import com.velkonost.getbetter.shared.core.model.task.TaskUI
 import com.velkonost.getbetter.shared.core.util.randomUUID
 import kotlinx.coroutines.launch
@@ -38,9 +42,14 @@ fun TaskPicker(
     onTaskSelect: (TaskUI?) -> Unit
 ) {
 
+    val pagerHeight = remember { DP_150 }
+    val viewPadding = remember { PX_ZERO }
+    val pagerBottomPadding = remember { DP_16 }
+    val pagerContentHorizontalPadding = remember { DP_36 }
+
     val scope = rememberCoroutineScope()
 
-    PrimaryBox(padding = 0) {
+    PrimaryBox(padding = viewPadding) {
         Column {
             TaskPickerHeader(
                 selectedTask = selectedTask,
@@ -51,12 +60,12 @@ fun TaskPicker(
             AnimatedVisibility(visible = isTaskPickerVisible.value) {
                 HorizontalPager(
                     modifier = modifier
-                        .height(150.dp)
+                        .height(pagerHeight)
                         .fillMaxWidth()
                         .horizontalFadingEdge()
-                        .padding(bottom = 16.dp),
+                        .padding(bottom = pagerBottomPadding),
                     state = tasksPagerState,
-                    contentPadding = PaddingValues(start = 36.dp, end = 36.dp),
+                    contentPadding = PaddingValues(horizontal = pagerContentHorizontalPadding),
                     key = {
                         if (tasks.isNotEmpty()) {
                             if (it == 0) {
