@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
@@ -15,7 +16,7 @@ import com.velkonost.getbetter.shared.resources.SharedR
 @Composable
 fun Loader(
     modifier: Modifier = Modifier,
-    size: Int = 128,
+    size: Dp = 128.dp,
 ) {
     val composition by rememberLottieComposition(
         LottieCompositionSpec.RawRes(
@@ -25,7 +26,7 @@ fun Loader(
     )
 
     LottieAnimation(
-        modifier = modifier.size(size.dp),
+        modifier = modifier.size(size),
         composition = composition,
         iterations = LottieConstants.IterateForever,
     )

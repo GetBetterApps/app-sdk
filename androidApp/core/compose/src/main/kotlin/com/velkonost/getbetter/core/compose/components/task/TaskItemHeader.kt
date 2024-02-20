@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -20,8 +19,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.Loader
+import com.velkonost.getbetter.core.compose.components.WeightedSpacer
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_2
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_32
+import com.velkonost.getbetter.core.compose.theme.Dimen.DP_6
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.compose.colorResource
@@ -37,24 +39,31 @@ fun TaskItemHeader(
     isFavoriteLoading: Boolean,
     onFavoriteClick: (() -> Unit)? = null
 ) {
+    val loaderSize = remember { DP_32 }
+    val areaImageSize = remember { DP_32 }
+    val headerColumnSize = remember { 0.9f }
+    val favoriteImageSize = remember { DP_32 }
+    val favoriteImagePadding = remember { DP_2 }
+    val areaNameBottomPadding = remember { DP_2 }
+    val taskNameBottomPadding = remember { DP_2 }
+    val headerColumnLeadingPadding = remember { DP_6 }
+
     val interactionSource = remember { MutableInteractionSource() }
 
-    Row(
-        verticalAlignment = Alignment.CenterVertically
-    ) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
         Image(
-            modifier = modifier.size(32.dp),
+            modifier = modifier.size(areaImageSize),
             painter = painterResource(imageResource = areaIcon),
             contentDescription = null
         )
 
         Column(
             modifier = modifier
-                .padding(start = 6.dp)
-                .fillMaxSize(0.9f)
+                .padding(start = headerColumnLeadingPadding)
+                .fillMaxSize(headerColumnSize)
         ) {
             Text(
-                modifier = modifier.padding(bottom = 2.dp),
+                modifier = modifier.padding(bottom = areaNameBottomPadding),
                 text = areaName,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -63,7 +72,7 @@ fun TaskItemHeader(
             )
 
             Text(
-                modifier = modifier.padding(bottom = 2.dp),
+                modifier = modifier.padding(bottom = taskNameBottomPadding),
                 text = taskName,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -72,7 +81,7 @@ fun TaskItemHeader(
             )
         }
 
-        Spacer(modifier = modifier.weight(1f))
+        WeightedSpacer()
 
         if (onFavoriteClick != null) {
             Box {
@@ -89,8 +98,8 @@ fun TaskItemHeader(
                         ) {
                             Image(
                                 modifier = modifier
-                                    .size(32.dp)
-                                    .padding(2.dp),
+                                    .size(favoriteImageSize)
+                                    .padding(favoriteImagePadding),
                                 painter = painterResource(
                                     imageResource = if (isFavorite) SharedR.images.ic_star
                                     else SharedR.images.ic_empty_star
@@ -100,7 +109,7 @@ fun TaskItemHeader(
                             )
                         }
                     } else {
-                        Loader(size = 32)
+                        Loader(size = loaderSize)
                     }
                 }
             }
