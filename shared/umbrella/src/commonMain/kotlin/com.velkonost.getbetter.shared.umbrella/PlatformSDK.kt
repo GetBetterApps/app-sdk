@@ -40,6 +40,7 @@ import com.velkonost.getbetter.shared.features.social.di.SocialPresentationModul
 import com.velkonost.getbetter.shared.features.splash.data.di.SplashDataModule
 import com.velkonost.getbetter.shared.features.splash.presentation.di.SplashPresentationModule
 import com.velkonost.getbetter.shared.features.subscription.data.di.SubscriptionDataModule
+import com.velkonost.getbetter.shared.features.subscription.domain.di.SubscriptionDomainModule
 import com.velkonost.getbetter.shared.features.subscription.presentation.di.SubscriptionPresentationModule
 import com.velkonost.getbetter.shared.features.taskdetail.data.di.TaskDetailDataModule
 import com.velkonost.getbetter.shared.features.taskdetail.presentation.di.TaskDetailPresentationModule
@@ -95,6 +96,8 @@ object PlatformSDK {
 
             DiaryDataModule,
             DiaryPresentationModule,
+
+            SubscriptionDomainModule,
 
             AddAreaPresentationModule,
             AreaDetailPresentationModule,

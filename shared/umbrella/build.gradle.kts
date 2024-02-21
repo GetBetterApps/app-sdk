@@ -110,6 +110,8 @@ kotlin {
                 implementation(projects.shared.features.diary.data)
                 implementation(projects.shared.features.diary.presentation)
 
+                implementation(projects.shared.features.subscription.domain)
+
                 implementation(projects.shared.features.addarea.presentation)
                 implementation(projects.shared.features.areadetail.presentation)
                 implementation(projects.shared.features.profiledetail.presentation)

@@ -1,3 +1,9 @@
 package com.velkonost.getbetter.shared.features.subscription.domain.di
 
-class SubscriptionDomainModule
+import com.velkonost.getbetter.shared.features.subscription.domain.CheckSubscriptionUseCase
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.module
+
+val SubscriptionDomainModule = module {
+    singleOf(::CheckSubscriptionUseCase)
+}
