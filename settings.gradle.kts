@@ -115,6 +115,7 @@ include(
 
     ":shared:features:subscription:api",
     ":shared:features:subscription:data",
+    ":shared:features:subscription:domain",
     ":shared:features:subscription:presentation",
 
     ":androidApp:app",

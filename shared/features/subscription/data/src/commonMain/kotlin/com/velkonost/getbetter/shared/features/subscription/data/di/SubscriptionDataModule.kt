@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val SubscriptionDataModule = module {
     single<SubscriptionRepository> {
-        SubscriptionRepositoryImpl(get())
+        SubscriptionRepositoryImpl(get(), get())
     }
 }
