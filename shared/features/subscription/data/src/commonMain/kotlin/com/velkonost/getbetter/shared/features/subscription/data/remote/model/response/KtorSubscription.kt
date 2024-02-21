@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.shared.features.subscription.data.remote.model.response
 
+import com.velkonost.getbetter.shared.core.model.subscription.Subscription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -19,4 +20,11 @@ data class KtorSubscription(
 
     @SerialName("trialUsed")
     val trialUsed: Boolean
+)
+
+fun KtorSubscription.asExternalModel() = Subscription(
+    isActive = isActive,
+    isUnlimited = isUnlimited,
+    expiredAt = expiredAt,
+    trialUsed = trialUsed
 )
