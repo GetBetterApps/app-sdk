@@ -1,4 +1,4 @@
-package com.velkonost.getbetter.shared.features.subscription.presentation.model
+package com.velkonost.getbetter.shared.core.model.subscription
 
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.desc.Resource

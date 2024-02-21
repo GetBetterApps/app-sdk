@@ -24,6 +24,7 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
 
+                implementation(projects.shared.core.util)
                 implementation(projects.shared.core.model)
             }
         }

@@ -1,3 +1,22 @@
 package com.velkonost.getbetter.shared.features.subscription.api
 
-interface SubscriptionRepository
+import com.velkonost.getbetter.shared.core.model.subscription.Subscription
+import com.velkonost.getbetter.shared.core.util.ResultState
+import com.velkonost.getbetter.shared.features.subscription.api.model.SubscriptionPayment
+import kotlinx.coroutines.flow.Flow
+
+interface SubscriptionRepository {
+
+    fun createSubscription(
+        subscriptionType: String
+    ): Flow<ResultState<SubscriptionPayment>>
+
+    fun startTrial(): Flow<ResultState<Subscription>>
+
+    fun cancelAutoRenewal(): Flow<ResultState<Subscription>>
+
+    fun isServiceAvailable(): Flow<ResultState<Boolean>>
+
+    fun fetchSubscriptionStatus(): Flow<ResultState<Subscription>>
+
+}

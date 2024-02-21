@@ -34,7 +34,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.core.compose.components.AppButton
-import com.velkonost.getbetter.shared.features.subscription.presentation.model.SubscriptionType
+import com.velkonost.getbetter.shared.core.model.subscription.SubscriptionType
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
