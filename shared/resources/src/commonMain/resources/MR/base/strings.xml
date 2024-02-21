@@ -593,6 +593,12 @@
     <string name="error_407">Ты достиг лимита избранных заданий</string>
     <string name="error_408">Нет прав на обновление списка заданий</string>
     <string name="error_409">Этого задания нет в твоем списке текущих заданий</string>
+
+    <string name="error_301">Выбранный вид подписки не найден</string>
+    <string name="error_302">Подписка не активна</string>
+    <string name="error_304">Достигнут бесплатный лимит</string>
+    <string name="error_305">Пробный период окончен</string>
+
     <!--  SERVER EXCEPTIONS  -->
 
     <!--  DATE FORMATTER  -->

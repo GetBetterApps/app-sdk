@@ -579,6 +579,11 @@
     <string name="error_407">You reached limit of favorite tasks</string>
     <string name="error_408">You don\'t have permissions to update current list</string>
     <string name="error_409">This task is not in your current list</string>
+
+    <string name="error_301">The selected subscription type was not found</string>
+    <string name="error_302">Subscription is not active</string>
+    <string name="error_304">Free limit reached</string>
+    <string name="error_305">Trial period is over</string>
     <!--  SERVER EXCEPTIONS  -->
 
     <!--  DATE FORMATTER  -->
