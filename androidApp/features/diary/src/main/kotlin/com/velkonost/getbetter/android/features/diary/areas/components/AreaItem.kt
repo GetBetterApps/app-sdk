@@ -142,7 +142,7 @@ fun AreaItem(
                                 )
                             }
                         } else {
-                            Loader(size = 28)
+                            Loader(size = 28.dp)
                         }
                     }
                 }

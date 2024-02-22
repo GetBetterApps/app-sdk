@@ -283,6 +283,12 @@ fun SubscriptionScreen(
         }
     }
 
+    LaunchedEffect(webViewSheetState.currentValue) {
+        if (webViewSheetState.currentValue == ModalBottomSheetValue.Hidden) {
+            viewModel.dispatch(SubscriptionAction.SubscriptionPurchaseProcessEnded)
+        }
+    }
+
 }
 
 @Composable

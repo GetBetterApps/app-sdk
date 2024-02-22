@@ -151,7 +151,7 @@ fun NoteDetailHeader(
                             )
                         }
                     } else {
-                        Loader(size = 32)
+                        Loader(size = 32.dp)
                     }
                 }
             }

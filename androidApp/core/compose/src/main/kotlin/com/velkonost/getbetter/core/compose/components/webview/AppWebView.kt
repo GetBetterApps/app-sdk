@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.core.compose.components.webview
 
 import android.annotation.SuppressLint
+import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.layout.Column
@@ -14,11 +15,13 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
+import kotlinx.coroutines.launch
 
 @SuppressLint("SetJavaScriptEnabled")
 @OptIn(ExperimentalMaterialApi::class)
@@ -27,8 +30,10 @@ fun AppWebView(
     modifier: Modifier = Modifier,
     link: String?,
     sheetGesturesEnabled: Boolean = true,
-    sheetState: ModalBottomSheetState
+    sheetState: ModalBottomSheetState,
 ) {
+
+    val scope = rememberCoroutineScope()
 
     ModalBottomSheetLayout(
         sheetState = sheetState,
@@ -48,11 +53,23 @@ fun AppWebView(
                     factory = { context ->
                         WebView(context).apply {
                             settings.javaScriptEnabled = true
-                            webViewClient = WebViewClient()
+                            settings.javaScriptCanOpenWindowsAutomatically = true
+                            webViewClient = MyWebViewClient(
+                                onBack = {
+                                    scope.launch {
+                                        sheetState.hide()
+                                    }
+                                }
+                            )
 
                             settings.loadWithOverviewMode = true
                             settings.useWideViewPort = true
+
+                            settings.builtInZoomControls = true
                             settings.setSupportZoom(true)
+                            settings.domStorageEnabled = true
+                            settings.loadsImagesAutomatically = true
+                            settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
                         }
                     },
                     update = { webView ->
@@ -62,5 +79,20 @@ fun AppWebView(
             }
         }
     ) {}
+}
 
+class MyWebViewClient(
+    private val onBack: () -> Unit
+) : WebViewClient() {
+
+    override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+        return when {
+            url?.contains("yookassaReturn") == true -> {
+                onBack()
+                true
+            }
+
+            else -> super.shouldOverrideUrlLoading(view, url)
+        }
+    }
 }

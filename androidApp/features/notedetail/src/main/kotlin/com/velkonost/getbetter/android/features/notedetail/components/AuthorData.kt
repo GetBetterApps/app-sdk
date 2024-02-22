@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -25,6 +24,7 @@ import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.PrimaryBox
+import com.velkonost.getbetter.core.compose.components.WeightedSpacer
 import com.velkonost.getbetter.shared.core.model.user.UserInfoShort
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
@@ -54,9 +54,9 @@ fun AuthorData(
             ) {
 
                 if (it) {
-                    Spacer(modifier.weight(1f))
-                    Loader(size = 32)
-                    Spacer(modifier.weight(1f))
+                    WeightedSpacer()
+                    Loader(size = 32.dp)
+                    WeightedSpacer()
                 } else {
 
                     author?.avatarUrl?.let { avatarUrl ->
