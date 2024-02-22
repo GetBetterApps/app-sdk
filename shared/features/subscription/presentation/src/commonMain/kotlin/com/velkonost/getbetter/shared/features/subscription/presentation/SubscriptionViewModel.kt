@@ -32,6 +32,8 @@ internal constructor(
     }
 
     private fun checkSubscription() {
+        emit(viewState.value.copy(paymentUrl = null))
+
         launchJob {
             checkSubscriptionUseCase() collectAndProcess {
                 onSuccess { subscription ->

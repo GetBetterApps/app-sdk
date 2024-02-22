@@ -41,6 +41,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.velkonost.getbetter.android.features.subscription.components.OffersSheet
 import com.velkonost.getbetter.core.compose.components.AppButton
+import com.velkonost.getbetter.core.compose.components.webview.AppWebView
 import com.velkonost.getbetter.shared.features.subscription.presentation.SubscriptionViewModel
 import com.velkonost.getbetter.shared.features.subscription.presentation.contract.SubscriptionAction
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -73,6 +74,11 @@ fun SubscriptionScreen(
     val scope = rememberCoroutineScope()
 
     val offersSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = true,
+    )
+
+    val webViewSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true,
     )
@@ -250,8 +256,31 @@ fun SubscriptionScreen(
             modalSheetState = offersSheetState,
             itemClick = {
                 viewModel.dispatch(SubscriptionAction.SubscriptionItemClick(it))
+            },
+            purchaseClick = {
+                viewModel.dispatch(SubscriptionAction.SubscriptionPurchaseClick)
             }
         )
+
+        AppWebView(
+            link = state.paymentUrl,
+            sheetState = webViewSheetState,
+            sheetGesturesEnabled = false
+        )
+
+    }
+
+    LaunchedEffect(state.paymentUrl) {
+
+        if (!state.paymentUrl.isNullOrEmpty()) {
+            scope.launch {
+                webViewSheetState.show()
+            }
+        }
+
+        scope.launch {
+            offersSheetState.hide()
+        }
     }
 
 }

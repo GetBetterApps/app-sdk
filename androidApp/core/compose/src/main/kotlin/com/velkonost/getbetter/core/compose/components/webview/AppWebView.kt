@@ -26,11 +26,13 @@ import dev.icerock.moko.resources.compose.colorResource
 fun AppWebView(
     modifier: Modifier = Modifier,
     link: String?,
+    sheetGesturesEnabled: Boolean = true,
     sheetState: ModalBottomSheetState
 ) {
 
     ModalBottomSheetLayout(
         sheetState = sheetState,
+        sheetGesturesEnabled = sheetGesturesEnabled,
         sheetShape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
         sheetBackgroundColor = colorResource(resource = SharedR.colors.main_background),
         sheetContent = {

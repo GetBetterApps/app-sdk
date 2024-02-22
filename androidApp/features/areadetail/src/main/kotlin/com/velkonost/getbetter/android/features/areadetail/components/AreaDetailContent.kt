@@ -117,7 +117,7 @@ fun AreaDetailContent(
                                     )
                                 }
                             } else {
-                                Loader(size = 32)
+                                Loader(size = 32.dp)
                             }
                         }
                     }

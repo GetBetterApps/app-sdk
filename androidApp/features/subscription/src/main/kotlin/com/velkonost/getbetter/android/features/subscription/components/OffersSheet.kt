@@ -1,8 +1,5 @@
 package com.velkonost.getbetter.android.features.subscription.components
 
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -39,13 +36,6 @@ import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
-import ru.yoomoney.sdk.kassa.payments.Checkout
-import ru.yoomoney.sdk.kassa.payments.checkoutParameters.Amount
-import ru.yoomoney.sdk.kassa.payments.checkoutParameters.PaymentMethodType
-import ru.yoomoney.sdk.kassa.payments.checkoutParameters.PaymentParameters
-import ru.yoomoney.sdk.kassa.payments.checkoutParameters.SavePaymentMethod
-import java.math.BigDecimal
-import java.util.Currency
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -54,13 +44,9 @@ fun OffersSheet(
     modalSheetState: ModalBottomSheetState,
     items: List<SubscriptionType>,
     selectedItem: SubscriptionType,
-    itemClick: (SubscriptionType) -> Unit
+    itemClick: (SubscriptionType) -> Unit,
+    purchaseClick: () -> Unit
 ) {
-
-    val paymentLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult()
-    ) { result: ActivityResult ->
-    }
 
     val context = LocalContext.current
 
@@ -110,27 +96,7 @@ fun OffersSheet(
                             modifier = modifier.padding(top = 32.dp),
                             labelText = stringResource(resource = SharedR.strings.subscription_confirm),
                             isLoading = false,
-                            onClick = {
-                                val paymentParameters = PaymentParameters(
-                                    amount = Amount(BigDecimal.TEN, Currency.getInstance("RUB")),
-                                    title = "Название товара",
-                                    subtitle = "Описание товара",
-                                    clientApplicationKey = "live_MzMxMjA5lf8FLM_nMtwUESA8dc8wrvO3X4rtmPgTdng", // ключ для клиентских приложений из личного кабинета ЮKassa (https://yookassa.ru/my/api-keys-settings)
-                                    shopId = "331209", // идентификатор магазина ЮKassa
-                                    paymentMethodTypes = setOf(
-                                        PaymentMethodType.BANK_CARD,
-                                        PaymentMethodType.SBERBANK,
-                                        PaymentMethodType.SBP,
-                                        PaymentMethodType.YOO_MONEY
-                                    ),
-                                    savePaymentMethod = SavePaymentMethod.OFF, // флаг выключенного сохранения платежного метода,
-                                    authCenterClientId = "ej2j4fcjn0p7va4nqtj28viqn9gn85mb", // идентификатор, полученный при регистрации приложения на сайте https://yookassa.ru
-//                                    userPhoneNumber = "+79041234567", // номер телефона пользователя. Используется для автозаполнения поля при оплате через SberPay. Поддерживаемый формат данных: "+7XXXXXXXXXX".
-                                )
-                                val intent =
-                                    Checkout.createTokenizeIntent(context, paymentParameters)
-                                paymentLauncher.launch(intent)
-                            }
+                            onClick = purchaseClick
                         )
                         Spacer(modifier.weight(1f))
                     }
