@@ -52,6 +52,15 @@ class SubscriptionRemoteDataSource(
         )
     }.body()
 
+    suspend fun isAreasLimitReached(
+        token: String?
+    ): RemoteResponse<Boolean> = httpClient.get {
+        makeRequest(
+            path = Route.IS_AREAS_LIMIT_REACHED,
+            token = token
+        )
+    }.body()
+
     suspend fun getSubscriptionStatus(
         token: String?
     ): RemoteResponse<KtorSubscription> = httpClient.get {

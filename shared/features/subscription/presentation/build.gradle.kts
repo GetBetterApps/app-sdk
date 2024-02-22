@@ -31,6 +31,7 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.core)
 
                 implementation(projects.shared.features.subscription.api)
+                implementation(projects.shared.features.subscription.domain)
             }
         }
 

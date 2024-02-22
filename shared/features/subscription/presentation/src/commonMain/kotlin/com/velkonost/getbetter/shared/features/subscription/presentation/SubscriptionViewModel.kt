@@ -3,6 +3,7 @@ package com.velkonost.getbetter.shared.features.subscription.presentation
 import com.velkonost.getbetter.shared.core.model.subscription.SubscriptionType
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
 import com.velkonost.getbetter.shared.features.subscription.api.SubscriptionRepository
+import com.velkonost.getbetter.shared.features.subscription.domain.CheckSubscriptionUseCase
 import com.velkonost.getbetter.shared.features.subscription.presentation.contract.SubscriptionAction
 import com.velkonost.getbetter.shared.features.subscription.presentation.contract.SubscriptionEvent
 import com.velkonost.getbetter.shared.features.subscription.presentation.contract.SubscriptionNavigation
@@ -11,6 +12,7 @@ import com.velkonost.getbetter.shared.features.subscription.presentation.contrac
 class SubscriptionViewModel
 internal constructor(
     private val subscriptionRepository: SubscriptionRepository,
+    private val checkSubscriptionUseCase: CheckSubscriptionUseCase
 ) : BaseViewModel<SubscriptionViewState, SubscriptionAction, SubscriptionNavigation, SubscriptionEvent>(
     initialState = SubscriptionViewState()
 ) {
@@ -21,10 +23,6 @@ internal constructor(
     }
 
     private fun obtainSubscriptionItemClick(value: SubscriptionType) {
-        emit(
-            viewState.value.copy(
-                selectedItem = value
-            )
-        )
+        emit(viewState.value.copy(selectedItem = value))
     }
 }

@@ -9,4 +9,5 @@ object Route {
     const val CANCEL = "$PREFIX/cancel"
 
     const val AVAILABLE = "$PREFIX/available"
+    const val IS_AREAS_LIMIT_REACHED = "$PREFIX/areasLimit"
 }

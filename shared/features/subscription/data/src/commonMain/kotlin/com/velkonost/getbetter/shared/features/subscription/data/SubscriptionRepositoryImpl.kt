@@ -47,7 +47,6 @@ class SubscriptionRepositoryImpl(
     )
 
     override fun isServiceAvailable(): Flow<ResultState<Boolean>> = flowRequest(
-        mapper = { this },
         request = {
             val token = localDataSource.getUserToken()
             remoteDataSource.isSubscriptionsAvailable(token)
@@ -59,6 +58,13 @@ class SubscriptionRepositoryImpl(
         request = {
             val token = localDataSource.getUserToken()
             remoteDataSource.getSubscriptionStatus(token)
+        }
+    )
+
+    override fun canCreateArea(): Flow<ResultState<Boolean>> = flowRequest(
+        request = {
+            val token = localDataSource.getUserToken()
+            remoteDataSource.isAreasLimitReached(token)
         }
     )
 

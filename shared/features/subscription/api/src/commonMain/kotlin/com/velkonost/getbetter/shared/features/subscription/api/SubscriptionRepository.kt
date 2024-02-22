@@ -19,4 +19,6 @@ interface SubscriptionRepository {
 
     fun fetchSubscriptionStatus(): Flow<ResultState<Subscription>>
 
+    fun canCreateArea(): Flow<ResultState<Boolean>>
+
 }
