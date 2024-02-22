@@ -8,6 +8,12 @@ sealed interface SubscriptionAction : UIContract.Action {
 
     data class SubscriptionItemClick(val value: SubscriptionType) : SubscriptionAction
 
+    data object SubscriptionPurchaseClick : SubscriptionAction
+
+    data object SubscriptionPurchaseProcessEnded : SubscriptionAction
+
+    data object CancelAutoRenewalClick : SubscriptionAction
+
     data object NavigateBack : SubscriptionAction, SubscriptionNavigation {
         override val event: NavigationEvent = NavigationEvent.NavigateUp()
     }
