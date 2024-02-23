@@ -6,7 +6,7 @@ sealed class NavigationScreen(val route: String) {
     data object OnboardingNavScreen : NavigationScreen(ONBOARDING_DESTINATION)
 
     data object AuthNavScreen : NavigationScreen(
-        "$AUTH_DESTINATION/?$ARG_IDENTIFY_ANONYMOUS={$ARG_IDENTIFY_ANONYMOUS}"
+        "$AUTH_DESTINATION/?$ARG_IDENTIFY_ANONYMOUS={$ARG_IDENTIFY_ANONYMOUS}&$ARG_GO_PAYWALL={$ARG_GO_PAYWALL}"
     )
 
     data object SocialNavScreen : NavigationScreen(SOCIAL_DESTINATION)
@@ -36,7 +36,9 @@ sealed class NavigationScreen(val route: String) {
         "$ABILITY_DETAIL_DESTINATION/?$ARG_ABILITY={$ARG_ABILITY}&$ARG_IS_FAVORITE={$ARG_IS_FAVORITE}"
     )
 
-    data object SubscriptionNavScreen : NavigationScreen(SUBSCRIPTION_DESTINATION)
+    data object SubscriptionNavScreen : NavigationScreen(
+        "$SUBSCRIPTION_DESTINATION/?$ARG_RETURN_TO_PROFILE={$ARG_RETURN_TO_PROFILE}"
+    )
 }
 
 const val NAV_PREFIX: String = "com.velkonost.getbetter"
@@ -70,7 +72,8 @@ const val ARG_TASK: String = "arg_note"
 const val ARG_ABILITY: String = "arg_ability"
 const val ARG_IS_FAVORITE: String = "arg_is_favorite"
 const val ARG_IDENTIFY_ANONYMOUS: String = "arg_identify_anonymous"
-const val ARG_GO_PAYWALL: String = "go_paywall"
+const val ARG_GO_PAYWALL: String = "arg_go_paywall"
+const val ARG_RETURN_TO_PROFILE: String = "arg_return_to_profile"
 
 
 

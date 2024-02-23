@@ -147,10 +147,14 @@ internal constructor(
     }
 
     private fun navigateNext() {
-        emit(
-            if (showPaywallAfterLogin.value) NavigateToPaywall
-            else NavigateToMainFlow
-        )
+        launchJob {
+            showPaywallAfterLogin.collectLatest {
+                emit(
+                    if (it) NavigateToPaywall
+                    else NavigateToMainFlow
+                )
+            }
+        }
     }
 
     private fun obtainEmailChanged(value: String) {
