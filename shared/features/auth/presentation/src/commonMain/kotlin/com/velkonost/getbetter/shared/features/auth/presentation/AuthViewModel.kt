@@ -12,6 +12,7 @@ import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthA
 import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthNavigation
 import com.velkonost.getbetter.shared.features.auth.presentation.contracts.AuthViewState
 import com.velkonost.getbetter.shared.features.auth.presentation.contracts.NavigateToMainFlow
+import com.velkonost.getbetter.shared.features.auth.presentation.contracts.NavigateToPaywall
 import kotlinx.coroutines.flow.collectLatest
 
 class AuthViewModel
@@ -28,6 +29,10 @@ internal constructor(
 
     private val identifyAnonymous = savedStateHandle
         .identifyAnonymous
+        .stateInWhileSubscribed(initialValue = false)
+
+    private val showPaywallAfterLogin = savedStateHandle
+        .showPaywallNext
         .stateInWhileSubscribed(initialValue = false)
 
     init {
@@ -86,7 +91,7 @@ internal constructor(
                     emit(viewState.value.copy(isLoading = it))
                 }
                 onSuccess {
-                    emit(NavigateToMainFlow)
+                    navigateNext()
                 }
             }
         }
@@ -95,14 +100,14 @@ internal constructor(
     private fun loginAnonymous() {
         launchJob {
             if (viewState.value.forceSignUp) {
-                emit(NavigateToMainFlow)
+                navigateNext()
             } else {
                 loginAnonymousUseCase() collectAndProcess {
                     isLoading {
                         emit(viewState.value.copy(isLoading = it))
                     }
                     onSuccess {
-                        emit(NavigateToMainFlow)
+                        navigateNext()
                     }
                 }
             }
@@ -119,7 +124,7 @@ internal constructor(
                     emit(viewState.value.copy(isLoading = it))
                 }
                 onSuccess {
-                    emit(NavigateToMainFlow)
+                    navigateNext()
                 }
             }
         }
@@ -135,10 +140,17 @@ internal constructor(
                     emit(viewState.value.copy(isLoading = it))
                 }
                 onSuccess {
-                    emit(NavigateToMainFlow)
+                    navigateNext()
                 }
             }
         }
+    }
+
+    private fun navigateNext() {
+        emit(
+            if (showPaywallAfterLogin.value) NavigateToPaywall
+            else NavigateToMainFlow
+        )
     }
 
     private fun obtainEmailChanged(value: String) {

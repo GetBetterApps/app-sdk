@@ -154,12 +154,21 @@ fun ProfileScreen(
         }
 
 
-        SubscriptionBox(
-            subscriptionPlan = stringResource(resource = SharedR.strings.profile_sub_basic),
-            onUpgradeClick = {
-                viewModel.dispatch(SubscriptionClick)
-            }
-        )
+        AnimatedVisibility(visible = state.subscriptionData.available) {
+            SubscriptionBox(
+                subscriptionPlan = stringResource(
+                    resource = if (state.subscriptionData.subscription?.isActive == true) SharedR.strings.profile_sub_premium
+                    else SharedR.strings.profile_sub_basic
+                ),
+                buttonText = stringResource(
+                    resource = if (state.subscriptionData.subscription?.isActive == true) SharedR.strings.profile_sub_more
+                    else SharedR.strings.profile_sub_upgrade
+                ),
+                onUpgradeClick = {
+                    viewModel.dispatch(SubscriptionClick)
+                }
+            )
+        }
 
         AppSettings(
             selectedTheme = state.selectedTheme,

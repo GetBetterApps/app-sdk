@@ -70,6 +70,7 @@ const val ARG_TASK: String = "arg_note"
 const val ARG_ABILITY: String = "arg_ability"
 const val ARG_IS_FAVORITE: String = "arg_is_favorite"
 const val ARG_IDENTIFY_ANONYMOUS: String = "arg_identify_anonymous"
+const val ARG_GO_PAYWALL: String = "go_paywall"
 
 
 

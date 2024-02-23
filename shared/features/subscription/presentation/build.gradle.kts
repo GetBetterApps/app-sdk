@@ -30,6 +30,7 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.coroutines.core)
 
+                implementation(projects.shared.features.userinfo.api)
                 implementation(projects.shared.features.subscription.api)
                 implementation(projects.shared.features.subscription.domain)
             }

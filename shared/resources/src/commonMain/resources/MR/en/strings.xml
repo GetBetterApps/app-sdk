@@ -228,8 +228,10 @@
     <string name="profile_title">Profile</string>
 
     <string name="profile_sub_upgrade">Upgrade</string>
+    <string name="profile_sub_more">Show</string>
     <string name="profile_sub_active_plan">Active Plan</string>
     <string name="profile_sub_basic">GetBetter Basic</string>
+    <string name="profile_sub_premium">GetBetter Premium</string>
 
     <string name="profile_app_settings_title">App Settings</string>
     <string name="profile_app_settings_theming">Theming</string>

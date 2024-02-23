@@ -14,3 +14,12 @@ data object NavigateToMainFlow : AuthNavigation {
         popUpTo = NavigationScreen.AuthNavScreen.route,
     )
 }
+
+data object NavigateToPaywall : AuthNavigation {
+    override val event: NavigationEvent = NavigationEvent.NavigateAndPopUpToRoute(
+        route = NavigationScreen.SubscriptionNavScreen.route,
+        rootRoute = true,
+        popUpToStart = true,
+        popUpTo = NavigationScreen.AuthNavScreen.route,
+    )
+}

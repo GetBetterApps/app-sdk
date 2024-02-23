@@ -232,8 +232,10 @@
     <string name="profile_title">Профиль</string>
 
     <string name="profile_sub_upgrade">Повысить</string>
+    <string name="profile_sub_more">Подробнее</string>
     <string name="profile_sub_active_plan">Текущий План</string>
     <string name="profile_sub_basic">GetBetter Базовый</string>
+    <string name="profile_sub_premium">GetBetter Премиум</string>
 
     <string name="profile_app_settings_title">Настройки Приложения</string>
     <string name="profile_app_settings_theming">Тема</string>

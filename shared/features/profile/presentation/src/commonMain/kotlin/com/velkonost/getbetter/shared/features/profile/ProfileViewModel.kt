@@ -22,8 +22,9 @@ import com.velkonost.getbetter.shared.features.profile.contracts.ProfileViewStat
 import com.velkonost.getbetter.shared.features.profile.contracts.SettingsClick
 import com.velkonost.getbetter.shared.features.profile.contracts.SignUpClick
 import com.velkonost.getbetter.shared.features.profile.contracts.SubscriptionClick
+import com.velkonost.getbetter.shared.features.profile.contracts.SubscriptionData
 import com.velkonost.getbetter.shared.features.profile.contracts.ThemeChange
-import com.velkonost.getbetter.shared.features.subscription.domain.CheckSubscriptionAvailableUseCase
+import com.velkonost.getbetter.shared.features.subscription.domain.CheckSubscriptionUseCase
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 import io.ktor.util.decodeBase64Bytes
 
@@ -32,7 +33,7 @@ internal constructor(
     private val authRepository: AuthRepository<String>,
     private val userInfoRepository: UserInfoRepository,
     private val profileRepository: ProfileRepository,
-    private val checkSubscriptionAvailableUseCase: CheckSubscriptionAvailableUseCase
+    private val checkSubscriptionUseCase: CheckSubscriptionUseCase
 ) : BaseViewModel<ProfileViewState, ProfileAction, ProfileNavigation, ProfileEvent>(
     initialState = ProfileViewState()
 ) {
@@ -43,6 +44,7 @@ internal constructor(
 
     fun onAppear() {
         fetchUserInfo()
+        fetchSubscriptionInfo()
     }
 
     override fun dispatch(action: ProfileAction) = when (action) {
@@ -79,6 +81,21 @@ internal constructor(
                 }
                 onFailure {
                     checkLoggingState()
+                }
+            }
+        }
+    }
+
+    private fun fetchSubscriptionInfo() {
+        launchJob {
+            checkSubscriptionUseCase() collectAndProcess {
+                onSuccess {
+                    val subscriptionData = SubscriptionData(
+                        subscription = it,
+                        available = it?.fake == false
+                    )
+
+                    emit(viewState.value.copy(subscriptionData = subscriptionData))
                 }
             }
         }

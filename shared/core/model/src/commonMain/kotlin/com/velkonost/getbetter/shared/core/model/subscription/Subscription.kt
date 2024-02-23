@@ -12,6 +12,7 @@ data class Subscription(
     val expiredAt: Long,
     val trialUsed: Boolean,
     val autoRenewal: Boolean,
+    val fake: Boolean = false
 ) {
 
     val expirationText: StringDesc
@@ -36,6 +37,17 @@ data class Subscription(
         get() = isActive && autoRenewal && isUnlimited
 
     companion object {
+
+        val FakeSubscription: Subscription
+            get() = Subscription(
+                isActive = true,
+                isUnlimited = true,
+                expiredAt = -1L,
+                trialUsed = true,
+                autoRenewal = false,
+                fake = true
+            )
+
         val NoSubscription: Subscription
             get() = Subscription(
                 isActive = false,

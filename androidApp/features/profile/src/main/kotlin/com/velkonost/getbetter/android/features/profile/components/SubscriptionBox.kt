@@ -29,6 +29,7 @@ import dev.icerock.moko.resources.compose.stringResource
 fun SubscriptionBox(
     modifier: Modifier = Modifier,
     subscriptionPlan: String,
+    buttonText: String,
     onUpgradeClick: () -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
@@ -91,7 +92,7 @@ fun SubscriptionBox(
                     shape = MaterialTheme.shapes.extraLarge
                 )
                 .padding(top = 6.dp, bottom = 6.dp, end = 16.dp, start = 16.dp),
-            text = stringResource(resource = SharedR.strings.profile_sub_upgrade).uppercase(),
+            text = buttonText.uppercase(),
             style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
             color = colorResource(resource = SharedR.colors.text_light),
             textAlign = TextAlign.End

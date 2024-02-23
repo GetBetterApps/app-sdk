@@ -24,7 +24,7 @@ class CheckSubscriptionUseCase(
                     if (availabilityResult.data) {
                         subscriptionRepository.fetchSubscriptionStatus()
                     } else {
-                        flow { emit(ResultState.Success(Subscription.NoSubscription)) }
+                        flow { emit(ResultState.Success(Subscription.FakeSubscription)) }
                     }
                 }
 
