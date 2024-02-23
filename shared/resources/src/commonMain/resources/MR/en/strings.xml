@@ -488,6 +488,17 @@
     <string name="offer_unlimited_price">32.99$</string>
 
     <string name="subscription_confirm">Confirm</string>
+
+    <string name="subscription_text_autorenew_on">Subscription expired at %s\nAuto-renewal enabled
+    </string>
+    <string name="subscription_text_autorenew_off">Subscription expired at %s\nAuto-renewal
+        disabled
+    </string>
+    <string name="subscription_text_unlimited">Lifetime subscription</string>
+    <string name="subscription_cancel_autorenew">Cancel auto renewal</string>
+    <string name="subscription_cancel_autorenew_text">Cancel auto-renewal and unlink the card? The
+        current subscription will be active until %s
+    </string>
     <!--  PAYWALL  -->
 
     <!--  SERVER EXCEPTIONS  -->
