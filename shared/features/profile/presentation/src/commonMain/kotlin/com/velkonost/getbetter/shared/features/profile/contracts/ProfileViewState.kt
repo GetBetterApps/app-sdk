@@ -14,6 +14,7 @@ data class ProfileViewState(
     val experienceData: ExperienceData? = null,
     val selectedTheme: UIThemeMode = UIThemeMode.SystemTheme,
     val isUserAnonymous: Boolean = true,
+
     val privacyLink: String = PRIVACY_URL,
     val termsLink: String = TERMS_URL
 ) : UIContract.State

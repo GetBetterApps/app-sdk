@@ -23,6 +23,7 @@ import com.velkonost.getbetter.shared.features.profile.contracts.SettingsClick
 import com.velkonost.getbetter.shared.features.profile.contracts.SignUpClick
 import com.velkonost.getbetter.shared.features.profile.contracts.SubscriptionClick
 import com.velkonost.getbetter.shared.features.profile.contracts.ThemeChange
+import com.velkonost.getbetter.shared.features.subscription.domain.CheckSubscriptionAvailableUseCase
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 import io.ktor.util.decodeBase64Bytes
 
@@ -30,14 +31,15 @@ class ProfileViewModel
 internal constructor(
     private val authRepository: AuthRepository<String>,
     private val userInfoRepository: UserInfoRepository,
-    private val profileRepository: ProfileRepository
+    private val profileRepository: ProfileRepository,
+    private val checkSubscriptionAvailableUseCase: CheckSubscriptionAvailableUseCase
 ) : BaseViewModel<ProfileViewState, ProfileAction, ProfileNavigation, ProfileEvent>(
     initialState = ProfileViewState()
 ) {
 
-    init {
-        fetchUserInfo()
-    }
+//    init {
+//        fetchUserInfo()
+//    }
 
     fun onAppear() {
         fetchUserInfo()

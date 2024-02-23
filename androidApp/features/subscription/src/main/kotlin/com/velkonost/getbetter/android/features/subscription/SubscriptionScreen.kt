@@ -334,8 +334,8 @@ fun SubscriptionScreen(
         }
     }
 
-    LaunchedEffect(webViewSheetState.currentValue) {
-        if (webViewSheetState.currentValue == ModalBottomSheetValue.Hidden) {
+    LaunchedEffect(webViewSheetState.targetValue) {
+        if (webViewSheetState.targetValue == ModalBottomSheetValue.Hidden) {
             viewModel.dispatch(SubscriptionAction.SubscriptionPurchaseProcessEnded)
         }
     }
