@@ -5,6 +5,7 @@ import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onFailure
 import com.velkonost.getbetter.shared.core.util.onSuccess
 import com.velkonost.getbetter.shared.core.vm.BaseViewModel
+import com.velkonost.getbetter.shared.core.vm.SavedStateHandle
 import com.velkonost.getbetter.shared.features.subscription.api.SubscriptionRepository
 import com.velkonost.getbetter.shared.features.subscription.domain.CheckSubscriptionUseCase
 import com.velkonost.getbetter.shared.features.subscription.presentation.contract.SubscriptionAction
@@ -16,6 +17,7 @@ import kotlinx.coroutines.Job
 
 class SubscriptionViewModel
 internal constructor(
+    savedStateHandle: SavedStateHandle,
     private val userInfoRepository: UserInfoRepository,
     private val subscriptionRepository: SubscriptionRepository,
     private val checkSubscriptionUseCase: CheckSubscriptionUseCase
