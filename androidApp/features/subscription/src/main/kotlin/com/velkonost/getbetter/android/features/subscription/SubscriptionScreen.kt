@@ -1,5 +1,6 @@
 package com.velkonost.getbetter.android.features.subscription
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -111,6 +112,10 @@ fun SubscriptionScreen(
             delay(100)
             buttonVisible.value = true
         }
+    }
+
+    BackHandler {
+        viewModel.dispatch(SubscriptionAction.NavigateBack)
     }
 
     Box(

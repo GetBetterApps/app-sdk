@@ -14,6 +14,7 @@ import com.velkonost.getbetter.shared.features.subscription.presentation.contrac
 import com.velkonost.getbetter.shared.features.subscription.presentation.contract.SubscriptionViewState
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
 
 class SubscriptionViewModel
 internal constructor(
@@ -22,8 +23,13 @@ internal constructor(
     private val subscriptionRepository: SubscriptionRepository,
     private val checkSubscriptionUseCase: CheckSubscriptionUseCase
 ) : BaseViewModel<SubscriptionViewState, SubscriptionAction, SubscriptionNavigation, SubscriptionEvent>(
-    initialState = SubscriptionViewState()
+    initialState = SubscriptionViewState(),
+    savedStateHandle = savedStateHandle
 ) {
+
+    private val returnToProfile = savedStateHandle
+        .returnToProfile
+        .stateInWhileSubscribed(initialValue = false)
 
     private var _checkSubscriptionJob: Job? = null
 
@@ -34,11 +40,22 @@ internal constructor(
     }
 
     override fun dispatch(action: SubscriptionAction) = when (action) {
-        is SubscriptionAction.NavigateBack -> emit(action)
+        is SubscriptionAction.NavigateBack -> obtainNavigateBack()
         is SubscriptionAction.CancelAutoRenewalClick -> obtainCancelAutoRenewal()
         is SubscriptionAction.SubscriptionPurchaseProcessEnded -> checkSubscription()
         is SubscriptionAction.SubscriptionPurchaseClick -> obtainSubscriptionPurchase()
         is SubscriptionAction.SubscriptionItemClick -> obtainSubscriptionItemClick(action.value)
+    }
+
+    private fun obtainNavigateBack() {
+        launchJob {
+            returnToProfile.collectLatest {
+                emit(
+                    if (it) SubscriptionNavigation.NavigateToProfile
+                    else SubscriptionAction.NavigateBack
+                )
+            }
+        }
     }
 
     private fun checkUserInfo(onSuccess: () -> Unit) {
