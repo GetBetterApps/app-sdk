@@ -496,9 +496,16 @@
 
     <string name="subscription_confirm">Подтвердить</string>
 
-    <string name="subscription_example">Подписка оформлено до 01.03.2024\nАвтопродление включено</string>
+    <string name="subscription_text_autorenew_on">Подписка оформлена до %s\nАвтопродление включено
+    </string>
+    <string name="subscription_text_autorenew_off">Подписка оформлена до %s\nАвтопродление
+        отключено
+    </string>
+    <string name="subscription_text_unlimited">Подписка оформлена пожизненно</string>
     <string name="subscription_cancel_autorenew">Отменить автопродление</string>
-    <string name="subscription_cancel_autorenew_text">Отменить автопродление и отвязать карту? Текущая подписка будет активна до 01.03.2024</string>
+    <string name="subscription_cancel_autorenew_text">Отменить автопродление и отвязать карту?
+        Текущая подписка будет активна до %s
+    </string>
     <!--  PAYWALL  -->
 
     <!--  SERVER EXCEPTIONS  -->

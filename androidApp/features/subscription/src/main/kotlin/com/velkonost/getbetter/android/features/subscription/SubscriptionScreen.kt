@@ -32,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,7 +41,9 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.velkonost.getbetter.android.features.subscription.components.OffersSheet
+import com.velkonost.getbetter.core.compose.components.AppAlertDialog
 import com.velkonost.getbetter.core.compose.components.AppButton
+import com.velkonost.getbetter.core.compose.components.WeightedSpacer
 import com.velkonost.getbetter.core.compose.components.webview.AppWebView
 import com.velkonost.getbetter.shared.features.subscription.presentation.SubscriptionViewModel
 import com.velkonost.getbetter.shared.features.subscription.presentation.contract.SubscriptionAction
@@ -59,6 +62,9 @@ fun SubscriptionScreen(
 ) {
 
     val state by viewModel.viewState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+
+    val cancelAutoRenewDialogVisible = remember { mutableStateOf(false) }
 
     val firstPointVisible = remember { mutableStateOf(false) }
     val secondPointVisible = remember { mutableStateOf(false) }
@@ -85,24 +91,24 @@ fun SubscriptionScreen(
 
     LaunchedEffect(Unit) {
         scope.launch {
-            delay(500)
+            delay(100)
             logoVisible.value = true
-            delay(500)
+            delay(100)
             titleVisible.value = true
 
-            delay(500)
+            delay(100)
             firstPointVisible.value = true
-            delay(500)
+            delay(100)
             secondPointVisible.value = true
-            delay(500)
+            delay(100)
             thirdPointVisible.value = true
-            delay(500)
+            delay(100)
             forthPointVisible.value = true
-            delay(500)
+            delay(100)
             fifthPointVisible.value = true
-            delay(500)
+            delay(100)
             sixthPointVisible.value = true
-            delay(500)
+            delay(100)
             buttonVisible.value = true
         }
     }
@@ -134,13 +140,14 @@ fun SubscriptionScreen(
                         color = colorResource(resource = SharedR.colors.icon_active)
                     )
                 )
-                Spacer(modifier.weight(1f))
 
-                Text(
-                    text = stringResource(resource = SharedR.strings.paywall_restore),
-                    style = MaterialTheme.typography.titleSmall,
-                    color = colorResource(resource = SharedR.colors.text_secondary)
-                )
+                WeightedSpacer()
+
+//                Text(
+//                    text = stringResource(resource = SharedR.strings.paywall_restore),
+//                    style = MaterialTheme.typography.titleSmall,
+//                    color = colorResource(resource = SharedR.colors.text_secondary)
+//                )
             }
 
             AnimatedVisibility(visible = logoVisible.value, label = "") {
@@ -219,31 +226,42 @@ fun SubscriptionScreen(
                 )
             }
 
-            AnimatedVisibility(visible = buttonVisible.value, label = "") {
-                Row {
-                    Spacer(modifier.weight(1f))
-                    AppButton(
-                        modifier = modifier.padding(top = 32.dp),
-                        labelText = stringResource(resource = SharedR.strings.continue_btn),
-                        isLoading = state.isLoading,
-                        onClick = {
-                            scope.launch {
-                                offersSheetState.show()
+            if (state.subscription.cancelAutoRenewEnable || !state.subscription.isActive) {
+                AnimatedVisibility(visible = buttonVisible.value, label = "") {
+                    Row {
+                        WeightedSpacer()
+                        AppButton(
+                            modifier = modifier.padding(top = 32.dp),
+                            labelText = stringResource(
+                                resource = if (!state.subscription.isActive) SharedR.strings.continue_btn
+                                else SharedR.strings.subscription_cancel_autorenew
+                            ),
+                            isLoading = state.isLoading,
+                            onClick = {
+                                if (state.subscription.isActive) {
+                                    cancelAutoRenewDialogVisible.value = true
+                                } else {
+                                    scope.launch {
+                                        offersSheetState.show()
+                                    }
+                                }
                             }
-                        }
-                    )
-                    Spacer(modifier.weight(1f))
+                        )
+                        WeightedSpacer()
+                    }
                 }
-            }
 
-            AnimatedVisibility(visible = buttonVisible.value, label = "") {
-                Text(
-                    modifier = modifier.padding(top = 24.dp),
-                    text = stringResource(resource = SharedR.strings.paywall_footer),
-                    color = colorResource(resource = SharedR.colors.text_secondary),
-                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
-                    textAlign = TextAlign.Center
-                )
+                if (!state.subscription.isActive) {
+                    AnimatedVisibility(visible = buttonVisible.value, label = "") {
+                        Text(
+                            modifier = modifier.padding(top = 24.dp),
+                            text = stringResource(resource = SharedR.strings.paywall_footer),
+                            color = colorResource(resource = SharedR.colors.text_secondary),
+                            style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
             }
 
             Spacer(modifier.height(48.dp))
@@ -268,6 +286,22 @@ fun SubscriptionScreen(
             sheetGesturesEnabled = false
         )
 
+        if (cancelAutoRenewDialogVisible.value) {
+            AppAlertDialog(
+                title = stringResource(resource = SharedR.strings.subscription_cancel_autorenew),
+                text = state.subscription.cancelSubscriptionText.toString(context),
+                confirmTitle = stringResource(resource = SharedR.strings.confirm),
+                cancelTitle = stringResource(resource = SharedR.strings.cancel),
+                onDismiss = {
+                    cancelAutoRenewDialogVisible.value = false
+                },
+                onConfirmClick = {
+                    viewModel.dispatch(SubscriptionAction.CancelAutoRenewalClick)
+                    cancelAutoRenewDialogVisible.value = false
+                }
+            )
+
+        }
     }
 
     LaunchedEffect(state.paymentUrl) {
@@ -314,9 +348,7 @@ fun SubscriptionPoint(
         }
     }
 
-    Row(
-        verticalAlignment = Alignment.CenterVertically
-    ) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
         if (animVisible.value) {
             LottieAnimation(
                 modifier = modifier.size(48.dp),

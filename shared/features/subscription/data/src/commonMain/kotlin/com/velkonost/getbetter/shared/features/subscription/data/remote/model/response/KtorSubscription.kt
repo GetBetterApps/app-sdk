@@ -26,5 +26,6 @@ fun KtorSubscription.asExternalModel() = Subscription(
     isActive = isActive,
     isUnlimited = isUnlimited,
     expiredAt = expiredAt,
-    trialUsed = trialUsed
+    trialUsed = trialUsed,
+    autoRenewal = autoRenewal
 )
