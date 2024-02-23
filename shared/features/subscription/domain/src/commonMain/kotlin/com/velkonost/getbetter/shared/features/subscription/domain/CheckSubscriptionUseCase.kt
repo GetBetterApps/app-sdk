@@ -8,11 +8,12 @@ import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
 
 class CheckSubscriptionUseCase(
+    private val checkSubscriptionAvailableUseCase: CheckSubscriptionAvailableUseCase,
     private val subscriptionRepository: SubscriptionRepository
 ) {
 
     suspend operator fun invoke(): Flow<ResultState<Subscription>> =
-        subscriptionRepository.isServiceAvailable().flatMapMerge { availabilityResult ->
+        checkSubscriptionAvailableUseCase().flatMapMerge { availabilityResult ->
             when (availabilityResult) {
 
                 is ResultState.Loading -> {

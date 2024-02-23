@@ -226,6 +226,22 @@ fun SubscriptionScreen(
                 )
             }
 
+            if (state.subscription.isActive) {
+                AnimatedVisibility(visible = buttonVisible.value, label = "") {
+                    Row {
+                        WeightedSpacer()
+                        Text(
+                            modifier = modifier.padding(top = 32.dp),
+                            text = state.subscription.expirationText.toString(context),
+                            color = colorResource(resource = SharedR.colors.text_title),
+                            style = MaterialTheme.typography.bodyMedium,
+                            textAlign = TextAlign.Center
+                        )
+                        WeightedSpacer()
+                    }
+                }
+            }
+
             if (state.subscription.cancelAutoRenewEnable || !state.subscription.isActive) {
                 AnimatedVisibility(visible = buttonVisible.value, label = "") {
                     Row {
@@ -250,19 +266,20 @@ fun SubscriptionScreen(
                         WeightedSpacer()
                     }
                 }
+            }
 
-                if (!state.subscription.isActive) {
-                    AnimatedVisibility(visible = buttonVisible.value, label = "") {
-                        Text(
-                            modifier = modifier.padding(top = 24.dp),
-                            text = stringResource(resource = SharedR.strings.paywall_footer),
-                            color = colorResource(resource = SharedR.colors.text_secondary),
-                            style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
-                            textAlign = TextAlign.Center
-                        )
-                    }
+            if (!state.subscription.isActive) {
+                AnimatedVisibility(visible = buttonVisible.value, label = "") {
+                    Text(
+                        modifier = modifier.padding(top = 24.dp),
+                        text = stringResource(resource = SharedR.strings.paywall_footer),
+                        color = colorResource(resource = SharedR.colors.text_secondary),
+                        style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
+                        textAlign = TextAlign.Center
+                    )
                 }
             }
+
 
             Spacer(modifier.height(48.dp))
 

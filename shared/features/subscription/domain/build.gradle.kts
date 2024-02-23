@@ -24,6 +24,7 @@ kotlin {
                 api(projects.shared.core.util)
 
                 implementation(projects.shared.core.model)
+                implementation(projects.shared.features.auth.api)
                 implementation(projects.shared.features.subscription.api)
 
                 implementation(libs.kotlinx.coroutines.core)
