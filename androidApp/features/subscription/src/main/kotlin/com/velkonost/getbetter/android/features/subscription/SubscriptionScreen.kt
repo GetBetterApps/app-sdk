@@ -171,13 +171,13 @@ fun SubscriptionScreen(
 
             AnimatedVisibility(visible = titleVisible.value, label = "") {
                 Row(modifier = modifier.padding(top = 16.dp)) {
-                    Spacer(modifier.weight(1f))
+                    WeightedSpacer()
                     Text(
                         text = stringResource(resource = SharedR.strings.paywall_title),
                         color = colorResource(resource = SharedR.colors.text_title),
                         style = MaterialTheme.typography.headlineSmall
                     )
-                    Spacer(modifier.weight(1f))
+                    WeightedSpacer()
                 }
             }
 
@@ -285,12 +285,11 @@ fun SubscriptionScreen(
                 }
             }
 
-
             Spacer(modifier.height(48.dp))
-
         }
 
         OffersSheet(
+            isLoading = state.isLoading,
             items = state.items,
             selectedItem = state.selectedItem,
             modalSheetState = offersSheetState,

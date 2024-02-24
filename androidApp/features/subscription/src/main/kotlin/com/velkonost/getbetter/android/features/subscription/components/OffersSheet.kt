@@ -42,6 +42,7 @@ import dev.icerock.moko.resources.compose.stringResource
 fun OffersSheet(
     modifier: Modifier = Modifier,
     modalSheetState: ModalBottomSheetState,
+    isLoading: Boolean,
     items: List<SubscriptionType>,
     selectedItem: SubscriptionType,
     itemClick: (SubscriptionType) -> Unit,
@@ -95,7 +96,7 @@ fun OffersSheet(
                         AppButton(
                             modifier = modifier.padding(top = 32.dp),
                             labelText = stringResource(resource = SharedR.strings.subscription_confirm),
-                            isLoading = false,
+                            isLoading = isLoading,
                             onClick = purchaseClick
                         )
                         Spacer(modifier.weight(1f))

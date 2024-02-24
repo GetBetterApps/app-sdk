@@ -80,6 +80,10 @@ internal constructor(
 
         _checkSubscriptionJob = launchJob {
             checkSubscriptionUseCase() collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
+                }
+
                 onSuccess { subscription ->
                     subscription?.let {
                         emit(viewState.value.copy(subscription = it))
@@ -98,7 +102,7 @@ internal constructor(
             val subscriptionType = viewState.value.selectedItem.responseName
             subscriptionRepository.createSubscription(subscriptionType) collectAndProcess {
                 isLoading {
-
+                    emit(viewState.value.copy(isLoading = it))
                 }
 
                 onSuccess {
@@ -112,7 +116,7 @@ internal constructor(
         launchJob {
             subscriptionRepository.cancelAutoRenewal() collectAndProcess {
                 isLoading {
-
+                    emit(viewState.value.copy(isLoading = it))
                 }
 
                 onSuccess { subscription ->

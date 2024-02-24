@@ -34,7 +34,7 @@ data class Subscription(
         )
 
     val cancelAutoRenewEnable: Boolean
-        get() = isActive && autoRenewal && isUnlimited
+        get() = isActive && autoRenewal && !isUnlimited
 
     companion object {
 

@@ -12,21 +12,27 @@ import SharedSDK
 
 struct OffersSheet: View {
     
+    private let isLoading: Bool
     private let items: [SubscriptionType]
     private let selectedItem: SubscriptionType
     private let itemClick: (SubscriptionType) -> Void
+    private let purchaseClick: () -> Void
     
     @Binding var sheetHeight: CGFloat
     
     init(
+        isLoading: Bool,
         items: [SubscriptionType],
         selectedItem: SubscriptionType,
         sheetHeight: Binding<CGFloat>,
-        itemClick: @escaping (SubscriptionType) -> Void
+        itemClick: @escaping (SubscriptionType) -> Void,
+        purchaseClick: @escaping () -> Void
     ) {
+        self.isLoading = isLoading
         self.items = items
         self.selectedItem = selectedItem
         self.itemClick = itemClick
+        self.purchaseClick = purchaseClick
         self._sheetHeight = sheetHeight
     }
     
@@ -63,10 +69,8 @@ struct OffersSheet: View {
                     Spacer()
                     AppButton(
                         labelText: SharedR.strings().subscription_confirm.desc().localized(),
-                        isLoading: false,
-                        onClick: {
-                            
-                        }
+                        isLoading: isLoading,
+                        onClick: purchaseClick
                     )
                     Spacer()
                 }

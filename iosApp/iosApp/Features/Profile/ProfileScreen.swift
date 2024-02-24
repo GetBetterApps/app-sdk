@@ -121,7 +121,7 @@ struct ProfileScreen: View {
             }.edgesIgnoringSafeArea(.all)
         }
         .sheet(isPresented: $webViewVisible) {
-            AppWebView(link: $webViewLink)
+            AppWebView(link: $webViewLink, isVisible: $webViewVisible)
                 .ignoresSafeArea(.all)
         }
         .onAppear {

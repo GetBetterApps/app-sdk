@@ -137,7 +137,7 @@ struct AuthScreen: View {
             self.endTextEditing()
         }
         .sheet(isPresented: $webViewVisible) {
-            AppWebView(link: $webViewLink)
+            AppWebView(link: $webViewLink, isVisible: $webViewVisible)
                 .ignoresSafeArea(.all)
         }
     }

@@ -29,10 +29,14 @@ struct SubscriptionScreen: View {
     
     @State private var logoVisible: Bool = false
     @State private var titleVisible: Bool = false
+    @State private var subscriptionTextVisible: Bool = false
     @State private var buttonVisible: Bool = false
     
     @State private var offersSheetVisible: Bool = false
     @State var offersSheetHeight: CGFloat = .zero
+    
+    @State var webViewVisible: Bool = false
+    @State var cancelAutoRenewDialogVisible: Bool = false
     
     var body: some View {
         @State var state = viewModel.viewStateValue as! SubscriptionViewState
@@ -55,9 +59,9 @@ struct SubscriptionScreen: View {
                         
                         Spacer()
                         
-                        Text(SharedR.strings().paywall_restore.desc().localized())
-                            .style(.titleSmall)
-                            .foregroundColor(.textSecondaryTitle)
+                        //                        Text(SharedR.strings().paywall_restore.desc().localized())
+                        //                            .style(.titleSmall)
+                        //                            .foregroundColor(.textSecondaryTitle)
                     }
                     
                     if logoVisible {
@@ -124,25 +128,53 @@ struct SubscriptionScreen: View {
                         )
                     }
                     
-                    if buttonVisible {
-                        HStack {
-                            Spacer()
-                            AppButton(
-                                labelText: SharedR.strings().continue_btn.desc().localized(),
-                                isLoading: state.isLoading,
-                                onClick: {
-                                    offersSheetVisible = true
-                                }
-                            )
-                            Spacer()
+//                    if state.subscription.isActive {
+                        if subscriptionTextVisible && state.subscription.isActive  {
+                            HStack {
+                                Spacer()
+                                
+                                Text(state.subscription.expirationText.localized())
+                                    .style(.bodyMedium)
+                                    .foregroundColor(.textTitle)
+                                    .multilineTextAlignment(.center)
+                                
+                                Spacer()
+                            }
+                            .padding(.top, 32)
                         }
-                        .padding(.top, 32)
-                        
-                        Text(SharedR.strings().paywall_footer.desc().localized())
-                            .style(.bodySmall, withSize: 11)
-                            .foregroundColor(.textSecondaryTitle)
-                            .multilineTextAlignment(.center)
-                            .padding(.top, 24)
+//                    }
+                    
+                    
+                    if state.subscription.cancelAutoRenewEnable || !state.subscription.isActive {
+                        if buttonVisible {
+                            HStack {
+                                Spacer()
+                                AppButton(
+                                    labelText: !state.subscription.isActive ? SharedR.strings().continue_btn.desc().localized() : SharedR.strings().subscription_cancel_autorenew.desc().localized(),
+                                    isLoading: state.isLoading,
+                                    onClick: {
+                                        if state.subscription.isActive {
+                                            cancelAutoRenewDialogVisible = true
+                                        } else {
+                                            offersSheetVisible = true
+                                        }
+                                        
+                                    }
+                                )
+                                Spacer()
+                            }
+                            .padding(.top, 32)
+                        }
+                    }
+                    
+                    if !state.subscription.isActive {
+                        if buttonVisible {
+                            Text(SharedR.strings().paywall_footer.desc().localized())
+                                .style(.bodySmall, withSize: 11)
+                                .foregroundColor(.textSecondaryTitle)
+                                .multilineTextAlignment(.center)
+                                .padding(.top, 24)
+                        }
                     }
                     
                     Spacer().frame(height: 48)
@@ -154,49 +186,76 @@ struct SubscriptionScreen: View {
         .edgesIgnoringSafeArea(.all)
         .sheet(isPresented: $offersSheetVisible) {
             OffersSheet(
+                isLoading: state.isLoading,
                 items: state.items,
                 selectedItem: state.selectedItem,
                 sheetHeight: $offersSheetHeight,
                 itemClick: { value in
                     viewModel.dispatch(action: SubscriptionActionSubscriptionItemClick(value: value))
+                },
+                purchaseClick: {
+                    viewModel.dispatch(action: SubscriptionActionSubscriptionPurchaseClick())
                 }
             )
         }
+        .sheet(isPresented: $webViewVisible) {
+            AppWebView(
+                link: Binding(get: { state.paymentUrl ?? "" }, set: { _ in}),
+                isVisible: $webViewVisible
+            )
+            .ignoresSafeArea(.all)
+        }
         .onAppear {
-            withAnimation(.bouncy.delay(0.5)) {
+            withAnimation(.bouncy.delay(0.1)) {
                 logoVisible = true
             }
             
-            withAnimation(.bouncy.delay(1)) {
+            withAnimation(.bouncy.delay(0.2)) {
                 titleVisible = true
             }
             
-            withAnimation(.bouncy.delay(1.5)) {
+            withAnimation(.bouncy.delay(0.3)) {
                 firstPointVisible = true
             }
             
-            withAnimation(.bouncy.delay(2)) {
+            withAnimation(.bouncy.delay(0.4)) {
                 secondPointVisible = true
             }
             
-            withAnimation(.bouncy.delay(2.5)) {
+            withAnimation(.bouncy.delay(0.5)) {
                 thirdPointVisible = true
             }
             
-            withAnimation(.bouncy.delay(3)) {
+            withAnimation(.bouncy.delay(0.6)) {
                 forthPointVisible = true
             }
             
-            withAnimation(.bouncy.delay(3.5)) {
+            withAnimation(.bouncy.delay(0.7)) {
                 fifthPointVisible = true
             }
             
-            withAnimation(.bouncy.delay(4)) {
+            withAnimation(.bouncy.delay(0.8)) {
                 sixthPointVisible = true
             }
             
-            withAnimation(.bouncy.delay(4.5)) {
+            withAnimation(.bouncy.delay(0.9)) {
+                            subscriptionTextVisible = true
+                        }
+            
+            withAnimation(.bouncy.delay(1)) {
                 buttonVisible = true
+            }
+        }
+        .onChange(of: state.paymentUrl) { newValue in
+            if newValue != nil && !newValue!.isEmpty {
+                webViewVisible = true
+            }
+            
+            offersSheetVisible = false
+        }
+        .onChange(of: webViewVisible) { newValue in
+            if !webViewVisible {
+                viewModel.dispatch(action: SubscriptionActionSubscriptionPurchaseProcessEnded())
             }
         }
     }
@@ -235,7 +294,7 @@ struct SubscriptionPoint: View {
         }
         .padding(.top, 16)
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1 + 0.5 * Double(index)) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1 + 0.1 * Double(index)) {
                 withAnimation(.bouncy) {
                     animVisible = true
                 }
