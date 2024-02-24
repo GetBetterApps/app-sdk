@@ -58,12 +58,15 @@ struct ProfileScreen: View {
                     LevelBlock(experienceData: state.experienceData!)
                 }
                 
-                SubscriptionBox(
-                    subscriptionPlan: SharedR.strings().profile_sub_basic.desc().localized(),
-                    onUpgradeClick: {
-                        viewModel.dispatch(action: SubscriptionClick())
-                    }
-                )
+                if state.subscriptionData.available {
+                    SubscriptionBox(
+                        subscriptionPlan: state.subscriptionData.subscription?.isActive == true ? SharedR.strings().profile_sub_premium.desc().localized() : SharedR.strings().profile_sub_basic.desc().localized(),
+                        buttonText: state.subscriptionData.subscription?.isActive == true ? SharedR.strings().profile_sub_more.desc().localized() : SharedR.strings().profile_sub_upgrade.desc().localized(),
+                        onUpgradeClick: {
+                            viewModel.dispatch(action: SubscriptionClick())
+                        }
+                    )
+                }
                 
                 AppSettings(
                     selectedTheme: state.selectedTheme,
@@ -112,6 +115,7 @@ struct ProfileScreen: View {
             }
             .padding(.init(top: 16, leading: 16, bottom: 200, trailing: 16))
             .animation(.easeInOut, value: state.experienceData)
+            .animation(.easeInOut, value: state.subscriptionData.available)
         }
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(sourceType: .photoLibrary) { image in

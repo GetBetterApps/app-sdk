@@ -12,11 +12,17 @@ import SharedSDK
 
 struct SubscriptionBox: View {
     
-    let subscriptionPlan: String
-    let onUpgradeClick: () -> Void
+    private let subscriptionPlan: String
+    private let buttonText: String
+    private let onUpgradeClick: () -> Void
     
-    init(subscriptionPlan: String, onUpgradeClick: @escaping () -> Void) {
+    init(
+        subscriptionPlan: String,
+        buttonText: String,
+        onUpgradeClick: @escaping () -> Void
+    ) {
         self.subscriptionPlan = subscriptionPlan
+        self.buttonText = buttonText
         self.onUpgradeClick = onUpgradeClick
     }
     
@@ -38,7 +44,7 @@ struct SubscriptionBox: View {
             
             VStack {
                 Spacer()
-                Text(SharedR.strings().profile_sub_upgrade.desc().localized().uppercased())
+                Text(buttonText.uppercased())
                     .style(.titleMedium, withSize: 14)
                     .foregroundColor(.textLight)
                     .padding(.init(top: 6, leading: 16, bottom: 6, trailing: 16))

@@ -128,8 +128,8 @@ struct SubscriptionScreen: View {
                         )
                     }
                     
-//                    if state.subscription.isActive {
-                        if subscriptionTextVisible && state.subscription.isActive  {
+                    if state.subscription.isActive {
+                        if subscriptionTextVisible {
                             HStack {
                                 Spacer()
                                 
@@ -142,7 +142,7 @@ struct SubscriptionScreen: View {
                             }
                             .padding(.top, 32)
                         }
-//                    }
+                    }
                     
                     
                     if state.subscription.cancelAutoRenewEnable || !state.subscription.isActive {
@@ -239,13 +239,23 @@ struct SubscriptionScreen: View {
             }
             
             withAnimation(.bouncy.delay(0.9)) {
-                            subscriptionTextVisible = true
-                        }
+                subscriptionTextVisible = true
+            }
             
             withAnimation(.bouncy.delay(1)) {
                 buttonVisible = true
             }
         }
+        .alert(
+             SharedR.strings().subscription_cancel_autorenew.desc().localized(), isPresented: $cancelAutoRenewDialogVisible) {
+                Button(SharedR.strings().confirm.desc().localized()) {
+                    viewModel.dispatch(action: SubscriptionActionCancelAutoRenewalClick())
+                }
+                Button(SharedR.strings().cancel.desc().localized(), role: .cancel) {}
+            } message: {
+                Text(state.subscription.cancelSubscriptionText.localized())
+            }
+        
         .onChange(of: state.paymentUrl) { newValue in
             if newValue != nil && !newValue!.isEmpty {
                 webViewVisible = true
