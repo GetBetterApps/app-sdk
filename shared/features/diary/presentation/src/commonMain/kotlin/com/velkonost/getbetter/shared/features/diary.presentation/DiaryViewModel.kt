@@ -27,6 +27,7 @@ import com.velkonost.getbetter.shared.features.diary.presentation.contracts.Diar
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.DiaryViewState
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.NavigateToAddArea
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.NavigateToNoteDetail
+import com.velkonost.getbetter.shared.features.diary.presentation.contracts.NavigateToPaywall
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.NavigateToTaskDetail
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.NoteClick
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.NoteLikeClick
@@ -126,6 +127,7 @@ internal constructor(
         is DiaryAction.TaskFavoriteClick -> obtainTaskFavorite(action.value)
         is DiaryAction.TasksListUpdateClick -> fetchTasks(forceUpdate = true)
         is DiaryAction.HintClick -> showHint(firstTime = action.firstTime, index = action.index)
+        is DiaryAction.NavigateToPaywallClick -> emit(NavigateToPaywall)
     }
 
     fun dispatch(action: CreateNewNoteAction) = dispatchCreateNewNoteAction(action)

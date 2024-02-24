@@ -39,16 +39,16 @@ fun HintSubscriptionSheet(
                     .fillMaxWidth()
                     .wrapContentHeight()
                     .padding(horizontal = 16.dp)
-                    .padding(bottom = 48.dp, top = 16.dp)
+                    .padding(bottom = 56.dp, top = 16.dp)
             ) {
                 Column(verticalArrangement = Arrangement.SpaceEvenly) {
                     Text(
                         text = text,
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = MaterialTheme.typography.bodyLarge,
                         color = colorResource(resource = SharedR.colors.text_title)
                     )
-                    
-                    Row(modifier = modifier.padding(top = 12.dp)) {
+
+                    Row(modifier = modifier.padding(top = 24.dp)) {
                         WeightedSpacer()
                         AppButton(
                             labelText = stringResource(resource = SharedR.strings.paywall_title),

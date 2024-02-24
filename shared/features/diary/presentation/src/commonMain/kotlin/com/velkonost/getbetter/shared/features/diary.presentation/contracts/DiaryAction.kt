@@ -14,6 +14,8 @@ sealed interface DiaryAction : UIContract.Action {
     data object TasksListUpdateClick : DiaryAction
 
     data class HintClick(val firstTime: Boolean = false, val index: Int) : DiaryAction
+
+    data object NavigateToPaywallClick : DiaryAction
 }
 
 data object AddAreaClick : DiaryAction

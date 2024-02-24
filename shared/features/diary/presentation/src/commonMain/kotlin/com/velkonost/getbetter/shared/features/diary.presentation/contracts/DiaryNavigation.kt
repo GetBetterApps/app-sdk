@@ -35,3 +35,9 @@ data class NavigateToTaskDetail(val task: TaskUI) : DiaryNavigation {
         )
     )
 }
+
+data object NavigateToPaywall : DiaryNavigation {
+    override val event: NavigationEvent = NavigationEvent.NavigateToRoute(
+        route = NavigationScreen.SubscriptionNavScreen.route,
+    )
+}

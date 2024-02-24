@@ -32,6 +32,7 @@ import com.velkonost.getbetter.android.features.diary.areas.components.createnew
 import com.velkonost.getbetter.android.features.diary.notes.NotesView
 import com.velkonost.getbetter.android.features.diary.tasks.TasksView
 import com.velkonost.getbetter.core.compose.components.HintButton
+import com.velkonost.getbetter.core.compose.components.HintSubscriptionSheet
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
 import com.velkonost.getbetter.core.compose.components.createnewnote.CreateNewNoteBottomSheet
 import com.velkonost.getbetter.core.compose.composable.OnLifecycleEvent
@@ -79,6 +80,11 @@ fun DiaryScreen(
 
     val areaDetailSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = true
+    )
+
+    val hintSubscriptionSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Expanded,
         skipHalfExpanded = true
     )
 
@@ -257,6 +263,14 @@ fun DiaryScreen(
             onAreaChanged = { viewModel.refreshData() }
         )
 
+        HintSubscriptionSheet(
+            modalSheetState = hintSubscriptionSheetState,
+            text = "trowughqeow",
+            onClick = {
+                viewModel.dispatch(DiaryAction.NavigateToPaywallClick)
+            }
+        )
+
     }
 
     LaunchedEffect(Unit) {
@@ -264,11 +278,13 @@ fun DiaryScreen(
             snapshotFlow { createNewAreaSheetState.currentValue },
             snapshotFlow { areaDetailSheetState.currentValue },
             snapshotFlow { createNewNoteSheetState.currentValue },
-        ) { createNewAreaState, areaDetailState, createNewNoteState ->
+            snapshotFlow { hintSubscriptionSheetState.currentValue },
+        ) { createNewAreaState, areaDetailState, createNewNoteState, hintSubscriptionState ->
             val hideBottomBar =
                 createNewAreaState != ModalBottomSheetValue.Hidden
                         || areaDetailState != ModalBottomSheetValue.Hidden
                         || createNewNoteState != ModalBottomSheetValue.Hidden
+                        || hintSubscriptionState != ModalBottomSheetValue.Hidden
             hideBottomBar
         }.collect {
             forceHideBottomBar.value = it
