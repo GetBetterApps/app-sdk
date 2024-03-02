@@ -16,11 +16,13 @@ import com.velkonost.getbetter.shared.features.addarea.presentation.contract.Are
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.LoadNextPage
 import com.velkonost.getbetter.shared.features.addarea.presentation.contract.NavigateBack
 import com.velkonost.getbetter.shared.features.addarea.presentation.model.toUI
+import com.velkonost.getbetter.shared.features.subscription.domain.CheckSubscriptionUseCase
 
 class AddAreaViewModel
 internal constructor(
     private val areasRepository: AreasRepository,
-    private val addAreaRepository: AddAreaRepository
+    private val addAreaRepository: AddAreaRepository,
+    private val checkSubscriptionUseCase: CheckSubscriptionUseCase
 ) : BaseViewModel<AddAreaViewState, AddAreaAction, AddAreaNavigation, Nothing>(
     initialState = AddAreaViewState()
 ) {
@@ -29,6 +31,7 @@ internal constructor(
 
     init {
         fetchAreas()
+        checkSubscription()
         showHint(firstTime = true)
     }
 
@@ -38,6 +41,18 @@ internal constructor(
         is AreaChanged -> obtainAreaChanged(action.areaId)
         is NavigateBack -> emit(action)
         is AddAreaAction.HintClick -> showHint()
+    }
+
+    private fun checkSubscription() {
+        launchJob {
+            checkSubscriptionUseCase() collectAndProcess {
+                onSuccess { result ->
+                    result?.let {
+                        emit(viewState.value.copy(showAds = !it.isActive))
+                    }
+                }
+            }
+        }
     }
 
     private fun showHint(firstTime: Boolean = false) {

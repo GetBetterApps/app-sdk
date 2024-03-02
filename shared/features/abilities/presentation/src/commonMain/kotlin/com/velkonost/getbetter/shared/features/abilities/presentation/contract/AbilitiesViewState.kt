@@ -11,6 +11,7 @@ data class AbilitiesViewState(
     val loadMorePrefetch: Int = PrefetchDistanceValue,
     val items: List<Ability> = listOf(FavoriteAbility),
 
+    val showAds: Boolean = false,
     val adId: String = ACTUAL_AD_ID,
     val adPosition: Int = (6..10).random()
 ) : UIContract.State

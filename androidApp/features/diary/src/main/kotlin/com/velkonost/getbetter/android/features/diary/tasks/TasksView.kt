@@ -75,7 +75,7 @@ fun TasksView(
                 )
 
                 item {
-                    AdView(slotId = adSlotId)
+                    AdView(slotId = adSlotId, show = showAd)
                 }
 
                 tasksSection(

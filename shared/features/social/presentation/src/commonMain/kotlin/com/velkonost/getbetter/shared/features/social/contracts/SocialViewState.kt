@@ -10,6 +10,8 @@ data class SocialViewState(
     val tabs: List<SocialTab> = SocialTab.entries,
     val generalFeed: FeedViewState = FeedViewState(),
     val areasFeed: FeedViewState = FeedViewState(),
+
+    val showAds: Boolean = false,
     val adPosition: Int = (6..10).random(),
     val adId: String = ACTUAL_AD_ID
 ) : UIContract.State

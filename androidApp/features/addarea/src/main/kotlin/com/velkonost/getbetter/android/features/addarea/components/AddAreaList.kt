@@ -23,6 +23,7 @@ fun AddAreaList(
     onAreaClick: (Int) -> Unit,
     onAddAreaClick: (Int) -> Unit,
     isLoading: Boolean,
+    showAd: Boolean,
     adPosition: Int,
     adSlotId: String
 ) {
@@ -42,7 +43,7 @@ fun AddAreaList(
             )
 
             if (index % adPosition == 0 && index != 0) {
-                AdView(slotId = adSlotId)
+                AdView(slotId = adSlotId, show = showAd)
             }
         }
 

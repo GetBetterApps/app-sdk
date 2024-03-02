@@ -29,6 +29,7 @@ import com.velkonost.getbetter.shared.features.calendars.presentation.model.User
 import com.velkonost.getbetter.shared.features.calendars.presentation.model.type
 import com.velkonost.getbetter.shared.features.comments.api.CommentsRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
+import com.velkonost.getbetter.shared.features.subscription.domain.CheckSubscriptionUseCase
 import com.velkonost.getbetter.shared.features.tasks.api.TasksRepository
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -47,7 +48,8 @@ internal constructor(
     private val areasRepository: AreasRepository,
     private val commentsRepository: CommentsRepository,
     private val userInfoRepository: UserInfoRepository,
-    private val tasksRepository: TasksRepository
+    private val tasksRepository: TasksRepository,
+    private val checkSubscriptionUseCase: CheckSubscriptionUseCase
 ) : BaseViewModel<CalendarsViewState, CalendarsAction, CalendarsNavigation, Nothing>(
     initialState = CalendarsViewState()
 ) {
@@ -60,6 +62,7 @@ internal constructor(
 
     fun onAppear() {
         viewState.value.datesState.selectedDate?.let { getItemsForDay(it.id) }
+        checkSubscription()
     }
 
     init {
@@ -123,6 +126,18 @@ internal constructor(
         is CalendarsAction.NoteClick -> obtainNoteClick(action.value)
         is CalendarsAction.TaskClick -> obtainTaskClick(action.value)
         is CalendarsAction.HintClick -> showHint()
+    }
+
+    private fun checkSubscription() {
+        launchJob {
+            checkSubscriptionUseCase() collectAndProcess {
+                onSuccess { result ->
+                    result?.let {
+                        emit(viewState.value.copy(showAds = !it.isActive))
+                    }
+                }
+            }
+        }
     }
 
     private fun showHint(firstTime: Boolean = false) {

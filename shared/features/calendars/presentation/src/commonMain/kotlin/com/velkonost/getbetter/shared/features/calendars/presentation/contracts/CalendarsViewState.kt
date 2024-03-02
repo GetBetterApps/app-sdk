@@ -9,6 +9,7 @@ data class CalendarsViewState(
     val isLoading: Boolean = false,
     val datesState: DatesState = DatesState(),
 
+    val showAds: Boolean = false,
     val adId: String = ACTUAL_AD_ID,
     val adPosition: Int = (6..10).random()
 ) : UIContract.State

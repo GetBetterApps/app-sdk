@@ -183,7 +183,7 @@ fun CalendarsScreen(
                                 )
 
                                 if (index % state.adPosition == 0 && index != 0) {
-                                    AdView(slotId = state.adId)
+                                    AdView(slotId = state.adId, show = state.showAds)
                                 }
                             }
 
@@ -192,7 +192,7 @@ fun CalendarsScreen(
                                 && state.datesState.selectedDate?.items!!.size < state.adPosition
                             ) {
                                 item {
-                                    AdView(slotId = state.adId)
+                                    AdView(slotId = state.adId, show = state.showAds)
                                 }
                             }
                         }

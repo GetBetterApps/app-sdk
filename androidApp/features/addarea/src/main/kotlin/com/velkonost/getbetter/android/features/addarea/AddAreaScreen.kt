@@ -57,6 +57,7 @@ fun AddAreaScreen(
                     items = state.items,
                     listState = listState,
                     isLoading = state.isLoading,
+                    showAd = state.showAds,
                     adPosition = state.adPosition,
                     adSlotId = state.adId,
                     onAreaClick = {

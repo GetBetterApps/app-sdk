@@ -10,6 +10,7 @@ data class AddAreaViewState(
     val items: List<AreaUI> = emptyList(),
     val loadMorePrefetch: Int = PrefetchDistanceValue,
 
+    val showAds: Boolean = false,
     val adId: String = ACTUAL_AD_ID,
     val adPosition: Int = (6..10).random()
 ) : UIContract.State

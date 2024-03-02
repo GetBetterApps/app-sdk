@@ -9,11 +9,13 @@ import com.velkonost.getbetter.shared.features.abilities.api.AbilitiesRepository
 import com.velkonost.getbetter.shared.features.abilities.presentation.contract.AbilitiesAction
 import com.velkonost.getbetter.shared.features.abilities.presentation.contract.AbilitiesNavigation
 import com.velkonost.getbetter.shared.features.abilities.presentation.contract.AbilitiesViewState
+import com.velkonost.getbetter.shared.features.subscription.domain.CheckSubscriptionUseCase
 import kotlinx.coroutines.Job
 
 class AbilitiesViewModel
 internal constructor(
-    private val abilitiesRepository: AbilitiesRepository
+    private val abilitiesRepository: AbilitiesRepository,
+    private val checkSubscriptionUseCase: CheckSubscriptionUseCase
 ) : BaseViewModel<AbilitiesViewState, AbilitiesAction, AbilitiesNavigation, Nothing>(
     initialState = AbilitiesViewState()
 ) {
@@ -23,6 +25,7 @@ internal constructor(
 
     fun onAppear() {
         updateAbilitiesData()
+        checkSubscription()
         showHint(firstTime = true)
     }
 
@@ -30,6 +33,18 @@ internal constructor(
         is AbilitiesAction.LoadNextPage -> fetchAbilities()
         is AbilitiesAction.AbilityClick -> emit(AbilitiesNavigation.NavigateToAbilityDetail(action.value))
         is AbilitiesAction.HintClick -> showHint()
+    }
+
+    private fun checkSubscription() {
+        launchJob {
+            checkSubscriptionUseCase() collectAndProcess {
+                onSuccess { result ->
+                    result?.let {
+                        emit(viewState.value.copy(showAds = !it.isActive))
+                    }
+                }
+            }
+        }
     }
 
     private fun showHint(firstTime: Boolean = false) {

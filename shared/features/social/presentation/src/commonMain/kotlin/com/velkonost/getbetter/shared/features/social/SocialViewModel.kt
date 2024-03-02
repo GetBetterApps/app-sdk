@@ -16,13 +16,15 @@ import com.velkonost.getbetter.shared.features.social.contracts.NavigateToNoteDe
 import com.velkonost.getbetter.shared.features.social.contracts.SocialAction
 import com.velkonost.getbetter.shared.features.social.contracts.SocialNavigation
 import com.velkonost.getbetter.shared.features.social.contracts.SocialViewState
+import com.velkonost.getbetter.shared.features.subscription.domain.CheckSubscriptionUseCase
 import kotlinx.coroutines.Job
 
 class SocialViewModel
 internal constructor(
     private val socialRepository: SocialRepository,
     private val notesRepository: NotesRepository,
-    private val likesRepository: LikesRepository
+    private val likesRepository: LikesRepository,
+    private val checkSubscriptionUseCase: CheckSubscriptionUseCase
 ) : BaseViewModel<SocialViewState, SocialAction, SocialNavigation, Nothing>(
     initialState = SocialViewState()
 ) {
@@ -46,6 +48,7 @@ internal constructor(
         }
 
         showHint(firstTime = true)
+        checkSubscription()
     }
 
     override fun dispatch(action: SocialAction) = when (action) {
@@ -56,6 +59,18 @@ internal constructor(
         is SocialAction.RefreshGeneralFeed -> obtainRefreshGeneralFeed()
         is SocialAction.RefreshAreasFeed -> obtainRefreshAreasFeed()
         is SocialAction.HintClick -> showHint()
+    }
+
+    private fun checkSubscription() {
+        launchJob {
+            checkSubscriptionUseCase() collectAndProcess {
+                onSuccess { result ->
+                    result?.let {
+                        emit(viewState.value.copy(showAds = !it.isActive))
+                    }
+                }
+            }
+        }
     }
 
     private fun showHint(firstTime: Boolean = false) {
