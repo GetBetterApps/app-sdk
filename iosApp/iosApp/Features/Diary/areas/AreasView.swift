@@ -12,16 +12,20 @@ import SharedSDK
 
 struct AreasView: View {
     
-    let items: [Area]
-    let isLoading: Bool
+    private let items: [Area]
+    private let isLoading: Bool
+    
+    private let showAd: Bool
     private let adPosition: Int
-    let areaClick: (Int32) -> Void
-    let areaLikeClick: (Area) -> Void
-    let createNewAreaClick: () -> Void
-    let addExistingAreaClick: () -> Void
+    
+    private let areaClick: (Int32) -> Void
+    private let areaLikeClick: (Area) -> Void
+    private let createNewAreaClick: () -> Void
+    private let addExistingAreaClick: () -> Void
     
     init(
         items: [Area], isLoading: Bool,
+        showAd: Bool,
         adPosition: Int,
         areaClick: @escaping (Int32) -> Void,
         areaLikeClick: @escaping (Area) -> Void,
@@ -30,6 +34,7 @@ struct AreasView: View {
     ) {
         self.items = items
         self.isLoading = isLoading
+        self.showAd = showAd
         self.adPosition = adPosition
         self.areaClick = areaClick
         self.areaLikeClick = areaLikeClick
@@ -58,13 +63,13 @@ struct AreasView: View {
                                 )
                                 
                                 if index != 0 && index % adPosition == 0 {
-                                    AdView()
+                                    AdView(showAd: showAd)
                                         .padding(.vertical, 2)
                                 }
                             }
                             
                             if items.count < adPosition {
-                                AdView()
+                                AdView(showAd: showAd)
                                     .padding(.vertical, 2)
                             }
                         }

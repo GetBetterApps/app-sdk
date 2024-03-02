@@ -13,28 +13,30 @@ import SharedSDK
 struct SocialFeedView: View {
     
     @Binding var isLoading: Bool
-    let emptyText: String
-    let items: [Note]
-    let loadMorePrefetch: Int
-    let adPosition: Int
+    private let emptyText: String
+    private let items: [Note]
+    private let loadMorePrefetch: Int
     
+    private let showAd: Bool
+    private let adPosition: Int
     
-    let itemClick: (Note) -> Void
-    let itemLikeClick: (Note) -> Void
+    private let itemClick: (Note) -> Void
+    private let itemLikeClick: (Note) -> Void
     
-    let onBottomReach: () -> Void
-    let onRefresh: () -> Void
+    private let onBottomReach: () -> Void
+    private let onRefresh: () -> Void
     
     init(isLoading: Binding<Bool>,
          emptyText: String, loadMorePrefetch: Int,
          items: [Note],
-         adPosition: Int,
+         showAd: Bool, adPosition: Int,
          itemClick: @escaping (Note) -> Void, itemLikeClick: @escaping (Note) -> Void, onBottomReach: @escaping () -> Void, onRefresh: @escaping () -> Void) {
         self._isLoading = isLoading
         self.emptyText = emptyText
         self.loadMorePrefetch = loadMorePrefetch
         
         self.items = items
+        self.showAd = showAd
         self.adPosition = adPosition
         
         self.itemClick = itemClick
@@ -65,7 +67,7 @@ struct SocialFeedView: View {
                                 }
                                 
                                 if index != 0 && index % adPosition == 0 {
-                                    AdView()
+                                    AdView(showAd: showAd)
                                         .padding(.vertical, 2)
                                 }
                             }

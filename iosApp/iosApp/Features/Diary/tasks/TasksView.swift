@@ -13,6 +13,7 @@ import SharedSDK
 struct TasksView: View {
     
     private let isLoading: Bool
+    private let showAd: Bool
     private let favoriteItems: [TaskUI]
     private let currentItems: [TaskUI]
     private let completedItems: [TaskUI]
@@ -23,6 +24,7 @@ struct TasksView: View {
     
     init(
         isLoading: Bool,
+        showAd: Bool,
         favoriteItems: [TaskUI],
         currentItems: [TaskUI],
         completedItems: [TaskUI],
@@ -31,6 +33,7 @@ struct TasksView: View {
         onTaskListUpdateClick: @escaping () -> Void
     ) {
         self.isLoading = isLoading
+        self.showAd = showAd
         self.favoriteItems = favoriteItems
         self.currentItems = currentItems
         self.completedItems = completedItems
@@ -54,7 +57,7 @@ struct TasksView: View {
                         )
                         
                         if !favoriteItems.isEmpty {
-                            AdView()
+                            AdView(showAd: showAd)
                                 .padding(.vertical, 2)
                         }
                         
@@ -66,7 +69,7 @@ struct TasksView: View {
                             onUpdateClick: onTaskListUpdateClick
                         )
                         
-                        AdView()
+                        AdView(showAd: showAd)
                             .padding(.vertical, 2)
                         
                         TasksSection(

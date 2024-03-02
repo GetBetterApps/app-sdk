@@ -14,18 +14,20 @@ struct NotesView: View {
     
     @Binding var state: NotesViewState
     
+    private let showAd: Bool
     private let adPosition: Int
     
-    var isLoading: Bool
-    let createGoalClick: () -> Void
-    let createNoteClick: () -> Void
+    private var isLoading: Bool
+    private let createGoalClick: () -> Void
+    private let createNoteClick: () -> Void
     
-    let items: [Note]
-    let itemClick: (Note) -> Void
-    let itemLikeClick: (Note) -> Void
-    let onBottomReach: () -> Void
+    private let items: [Note]
+    private let itemClick: (Note) -> Void
+    private let itemLikeClick: (Note) -> Void
+    private let onBottomReach: () -> Void
     
     init(
+        showAd: Bool,
         adPosition: Int, state: Binding<NotesViewState>,
         isLoading: Bool, items: [Note],
         createGoalClick: @escaping () -> Void, createNoteClick: @escaping () -> Void,
@@ -33,6 +35,7 @@ struct NotesView: View {
         itemLikeClick: @escaping (Note) -> Void,
         onBottomReach: @escaping () -> Void
     ) {
+        self.showAd = showAd
         self.adPosition = adPosition
         self._state = state
         self.isLoading = isLoading
@@ -68,13 +71,13 @@ struct NotesView: View {
                                 }
                                 
                                 if index != 0 && index % adPosition == 0 {
-                                    AdView()
+                                    AdView(showAd: showAd)
                                         .padding(.vertical, 2)
                                 }
                             }
                             
                             if items.count < adPosition {
-                                AdView()
+                                AdView(showAd: showAd)
                                     .padding(.vertical, 2)
                             }
                         }

@@ -138,13 +138,13 @@ struct CalendarsScreen: View {
                                         )
                                         
                                         if index != 0 && index % Int(state.adPosition) == 0 {
-                                            AdView()
+                                            AdView(showAd: state.showAds)
                                                 .padding(.vertical, 2)
                                         }
                                     }
                                     
                                     if state.datesState.selectedDate!.items.count < state.adPosition {
-                                        AdView()
+                                        AdView(showAd: state.showAds)
                                             .padding(.vertical, 2)
                                     }
                                     

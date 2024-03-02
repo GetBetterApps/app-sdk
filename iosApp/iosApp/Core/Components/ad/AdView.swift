@@ -13,24 +13,31 @@ import YandexMobileAds
 
 struct AdView: View {
     
+    private let showAd: Bool
+    init(showAd: Bool) {
+        self.showAd = showAd
+    }
+    
     var body: some View {
-        PrimaryBox(
-            padding: .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
-        ) {
-            VStack {
-                Loader()
-                Text(SharedR.strings().ad_title.desc().localized().capitalized)
-                    .style(.headlineSmall)
-                    .foregroundColor(.onboardingBackgroundGradientStart)
-                    .padding(.top, 6)
+        if showAd {
+            PrimaryBox(
+                padding: .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
+            ) {
+                VStack {
+                    Loader()
+                    Text(SharedR.strings().ad_title.desc().localized().capitalized)
+                        .style(.headlineSmall)
+                        .foregroundColor(.onboardingBackgroundGradientStart)
+                        .padding(.top, 6)
+                }
+                .frame(height: 300)
+                
+                AdBannerView()
+                    .clipShape(.rect(cornerRadii: .init(topLeading: 12, bottomLeading: 12, bottomTrailing: 12, topTrailing: 12)))
+                
             }
             .frame(height: 300)
-            
-            AdBannerView()
-                .clipShape(.rect(cornerRadii: .init(topLeading: 12, bottomLeading: 12, bottomTrailing: 12, topTrailing: 12)))
-            
         }
-        .frame(height: 300)
     }
 }
 

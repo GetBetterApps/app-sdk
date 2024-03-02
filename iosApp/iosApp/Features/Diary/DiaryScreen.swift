@@ -48,6 +48,7 @@ struct DiaryScreen: View {
             
             switch(selectedPage) {
             case 0: NotesView(
+                showAd: state.showAds,
                 adPosition: Int(state.adPosition),
                 state: $notesViewState,
                 isLoading: notesViewState.isLoading,
@@ -82,6 +83,7 @@ struct DiaryScreen: View {
             case 1: AreasView(
                 items: state.areasViewState.items, 
                 isLoading: state.areasViewState.isLoading,
+                showAd: state.showAds,
                 adPosition: Int(state.adPosition),
                 areaClick: { areaId in
                     selectedAreaId = areaId
@@ -102,6 +104,7 @@ struct DiaryScreen: View {
             default:
                 TasksView(
                     isLoading: state.tasksViewState.isLoading,
+                    showAd: state.showAds,
                     favoriteItems: state.tasksViewState.favoriteItems,
                     currentItems: state.tasksViewState.currentItems,
                     completedItems: state.tasksViewState.completedItems,

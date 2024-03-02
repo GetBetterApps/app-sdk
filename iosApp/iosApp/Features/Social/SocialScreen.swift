@@ -41,6 +41,7 @@ struct SocialScreen: View {
                 emptyText: SharedR.strings().placeholder_social_all.desc().localized(),
                 loadMorePrefetch: Int(generalFeedState.loadMorePrefetch),
                 items: generalFeedState.items,
+                showAd: state.showAds,
                 adPosition: Int(state.adPosition),
                 itemClick: { value in
                     viewModel.dispatch(action: SocialActionNoteClick(value: value))
@@ -60,6 +61,7 @@ struct SocialScreen: View {
                 emptyText: SharedR.strings().placeholder_social_areas.desc().localized(),
                 loadMorePrefetch: Int(areasFeedState.loadMorePrefetch),
                 items: areasFeedState.items,
+                showAd: state.showAds,
                 adPosition: Int(state.adPosition),
                 itemClick: { value in
                     viewModel.dispatch(action: SocialActionNoteClick(value: value))

@@ -48,7 +48,7 @@ struct AddAreaScreen: View {
                                 }
                                 
                                 if index != 0 && index % Int(state.adPosition) == 0 {
-                                    AdView()
+                                    AdView(showAd: state.showAds)
                                         .padding(.vertical, 2)
                                 }
                             }
