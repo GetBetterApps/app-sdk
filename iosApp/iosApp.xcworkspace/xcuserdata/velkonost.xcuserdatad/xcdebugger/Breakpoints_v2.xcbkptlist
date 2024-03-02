@@ -1428,6 +1428,36 @@
                   endingLineNumber = "143"
                   offsetFromSymbolStart = "1112">
                </Location>
+               <Location
+                  uuid = "98E3DE07-5E5B-4928-88B1-F8AD4FA728B6 - 7776c426ccaf2d01"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iosApp.ContentView.handle(resource: __C.SSDKMessage) -&gt; ()"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/velkonost/AndroidStudioProjects/GetBetter/iosApp/iosApp/App/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "1416">
+               </Location>
+               <Location
+                  uuid = "98E3DE07-5E5B-4928-88B1-F8AD4FA728B6 - c158f1f418e25743"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 @Swift.MainActor () -&gt; () in iosApp.ContentView.handle(resource: __C.SSDKMessage) -&gt; ()"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/velkonost/AndroidStudioProjects/GetBetter/iosApp/iosApp/App/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "84">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -1475,6 +1505,21 @@
                   startingLineNumber = "138"
                   endingLineNumber = "138"
                   offsetFromSymbolStart = "860">
+               </Location>
+               <Location
+                  uuid = "7F2885E9-9084-43BD-BF0A-EF9EA74D1AEB - 7776c426ccaf2da4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iosApp.ContentView.handle(resource: __C.SSDKMessage) -&gt; ()"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/velkonost/AndroidStudioProjects/GetBetter/iosApp/iosApp/App/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "149"
+                  endingLineNumber = "149"
+                  offsetFromSymbolStart = "1156">
                </Location>
             </Locations>
          </BreakpointContent>

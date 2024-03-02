@@ -149,7 +149,7 @@ internal constructor(
                         emit(
                             viewState.value.copy(
                                 tasksViewState = tasksViewState,
-                                showAds = !it.isActive
+                                showAds = !it.isActive || it.fake
                             )
                         )
                     }

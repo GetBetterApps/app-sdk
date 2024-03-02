@@ -68,8 +68,12 @@ internal constructor(
     }
 
     override fun dispatch(action: SplashAction) = when (action) {
-        else -> {
+        is SplashAction.AllowSubscription -> obtainAllowSubscription(action.value)
+    }
 
+    private fun obtainAllowSubscription(value: Boolean) {
+        launchJob {
+            splashRepository.saveSubscriptionAllowanceState(value)
         }
     }
 

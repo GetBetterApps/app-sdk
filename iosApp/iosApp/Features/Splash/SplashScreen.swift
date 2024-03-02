@@ -11,6 +11,7 @@ import SharedSDK
 import SwiftUI
 import KMMViewModelSwiftUI
 import KMPNativeCoroutinesAsync
+import CoreTelephony
 
 struct SplashScreen: View {
     @StateViewModel var viewModel: SplashViewModel
@@ -36,6 +37,11 @@ struct SplashScreen: View {
         }
         .onAppear {
             observeEvents()
+            #if targetEnvironment(simulator)
+                let x = 1
+            #else
+                let x = 1
+            #endif
         }
         .onDisappear {
             eventsObserver?.cancel()

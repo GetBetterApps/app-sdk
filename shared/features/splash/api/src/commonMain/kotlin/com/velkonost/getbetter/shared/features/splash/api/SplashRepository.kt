@@ -13,4 +13,6 @@ interface SplashRepository {
     suspend fun saveUserRegistrationDate(value: Long)
 
     suspend fun getTheme(): UIThemeMode
+
+    suspend fun saveSubscriptionAllowanceState(value: Boolean)
 }

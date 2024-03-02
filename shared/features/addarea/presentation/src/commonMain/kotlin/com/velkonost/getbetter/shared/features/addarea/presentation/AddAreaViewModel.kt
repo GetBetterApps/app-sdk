@@ -48,7 +48,7 @@ internal constructor(
             checkSubscriptionUseCase() collectAndProcess {
                 onSuccess { result ->
                     result?.let {
-                        emit(viewState.value.copy(showAds = !it.isActive))
+                        emit(viewState.value.copy(showAds = !it.isActive || it.fake))
                     }
                 }
             }

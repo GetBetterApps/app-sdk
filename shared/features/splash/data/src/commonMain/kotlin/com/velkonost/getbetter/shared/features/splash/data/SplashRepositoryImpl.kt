@@ -3,6 +3,7 @@ package com.velkonost.getbetter.shared.features.splash.data
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import com.velkonost.getbetter.shared.core.datastore.ALLOW_SUBSCRIPTION
 import com.velkonost.getbetter.shared.core.datastore.ONBOARDING_SHOWN
 import com.velkonost.getbetter.shared.core.datastore.SELECTED_UI_MODE
 import com.velkonost.getbetter.shared.core.datastore.USER_REGISTRATION_MILLIS
@@ -37,5 +38,11 @@ class SplashRepositoryImpl(
         }
 
         return UIThemeMode.SystemTheme
+    }
+
+    override suspend fun saveSubscriptionAllowanceState(value: Boolean) {
+        localDataSource.edit { preferences ->
+            preferences[ALLOW_SUBSCRIPTION] = value
+        }
     }
 }

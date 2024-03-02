@@ -1,5 +1,7 @@
 package com.velkonost.getbetter.android.features.splash
 
+import android.content.Context
+import android.telephony.TelephonyManager
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,19 +16,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.shared.core.model.profile.UIThemeMode
 import com.velkonost.getbetter.shared.features.splash.presentation.SplashViewModel
+import com.velkonost.getbetter.shared.features.splash.presentation.contract.SplashAction
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
+
 
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
     @Suppress("unused") viewModel: SplashViewModel
 ) {
+
+    val context = LocalContext.current
     val state by viewModel.viewState.collectAsStateWithLifecycle()
 
     state.selectedTheme?.let {
@@ -63,5 +70,11 @@ fun SplashScreen(
                 contentDescription = null
             )
         }
+    }
+
+    LaunchedEffect(Unit) {
+        val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        val countryCodeValue = tm.networkCountryIso
+        viewModel.dispatch(SplashAction.AllowSubscription(countryCodeValue.isNotEmpty()))
     }
 }

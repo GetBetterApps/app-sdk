@@ -28,6 +28,7 @@ val ONBOARDING_SHOWN = booleanPreferencesKey("onboarding_shown")
 val SELECTED_UI_MODE = stringPreferencesKey("selected_ui_mode")
 
 val TOKEN_KEY = stringPreferencesKey("auth_token")
+val ALLOW_SUBSCRIPTION = booleanPreferencesKey("allow_subscription")
 
 val USER_REGISTRATION_MILLIS = longPreferencesKey("user_registration_millis")
 

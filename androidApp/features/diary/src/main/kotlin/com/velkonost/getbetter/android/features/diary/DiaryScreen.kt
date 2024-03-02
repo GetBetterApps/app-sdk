@@ -290,7 +290,6 @@ fun DiaryScreen(
                 viewModel.dispatch(DiaryAction.NavigateToPaywallClick)
             }
         )
-
     }
 
     LaunchedEffect(Unit) {
