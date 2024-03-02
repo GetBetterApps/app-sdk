@@ -25,6 +25,10 @@ struct DiaryScreen: View {
     
     @State private var selectedAreaId: Int32? = nil
     
+    @State var hintSubscriptionSheetHeight: CGFloat = .zero
+    @State private var hintSubscriptionVisible: Bool = false
+    @State private var hintSubscriptionText: String = ""
+    
     var body: some View {
         @State var state = viewModel.viewStateValue as! DiaryViewState
         @State var createNewAreaState = state.createNewAreaViewState
@@ -93,8 +97,13 @@ struct DiaryScreen: View {
                     viewModel.dispatch(action: AreaLikeClick(value: value))
                 },
                 createNewAreaClick: {
-                    viewModel.dispatch(action: CreateNewAreaActionOpen())
-                    showingCreateNewAreaSheet = true
+                    if state.areasViewState.canCreateNewArea {
+                        viewModel.dispatch(action: CreateNewAreaActionOpen())
+                        showingCreateNewAreaSheet = true
+                    } else {
+                        hintSubscriptionText = SharedR.strings().hint_subscription_areas.desc().localized()
+                        hintSubscriptionVisible = true
+                    }
                 },
                 addExistingAreaClick: {
                     viewModel.dispatch(action: AddAreaClick())
@@ -115,7 +124,12 @@ struct DiaryScreen: View {
                         viewModel.dispatch(action: DiaryActionTaskFavoriteClick(value: value))
                     },
                     onTaskListUpdateClick: {
-                        viewModel.dispatch(action: DiaryActionTasksListUpdateClick())
+                        if state.tasksViewState.canUpdateList {
+                            viewModel.dispatch(action: DiaryActionTasksListUpdateClick())
+                        } else {
+                            hintSubscriptionText = SharedR.strings().hint_subscription_tasks.desc().localized()
+                            hintSubscriptionVisible = true
+                        }
                     }
                 )
             }
@@ -196,6 +210,15 @@ struct DiaryScreen: View {
                 }
             )
         }
+        .hintSubscriptionSheet(
+            isShowing: $hintSubscriptionVisible,
+            sheetHeight: $hintSubscriptionSheetHeight,
+            text: hintSubscriptionText,
+            onClick: {
+                hintSubscriptionVisible = false
+                viewModel.dispatch(action: DiaryActionNavigateToPaywallClick())
+            }
+        )
         .onAppear {
             viewModel.refreshData()
             observeEvents()

@@ -44,6 +44,7 @@
 		461F7C682AA88B80003791CF /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C672AA88B80003791CF /* StringExt.swift */; };
 		461F7C6A2AA8D6FF003791CF /* UINavigationControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C692AA8D6FF003791CF /* UINavigationControllerExt.swift */; };
 		461F7C6C2AA8D71F003791CF /* BaseViewModelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461F7C6B2AA8D71F003791CF /* BaseViewModelExt.swift */; };
+		462174972B9374790074CE44 /* HintSubscriptionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462174962B9374790074CE44 /* HintSubscriptionSheet.swift */; };
 		462922D82B13351F00DF080D /* FeedbackDetailBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462922D72B13351F00DF080D /* FeedbackDetailBottomSheet.swift */; };
 		463049E32AFD0590006F60D2 /* LevelBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463049E22AFD0590006F60D2 /* LevelBlock.swift */; };
 		4639A06B2B5AAD8E00072606 /* BlockUserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4639A06A2B5AAD8E00072606 /* BlockUserButton.swift */; };
@@ -229,6 +230,7 @@
 		461F7C672AA88B80003791CF /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		461F7C692AA8D6FF003791CF /* UINavigationControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExt.swift; sourceTree = "<group>"; };
 		461F7C6B2AA8D71F003791CF /* BaseViewModelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelExt.swift; sourceTree = "<group>"; };
+		462174962B9374790074CE44 /* HintSubscriptionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintSubscriptionSheet.swift; sourceTree = "<group>"; };
 		462922D72B13351F00DF080D /* FeedbackDetailBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackDetailBottomSheet.swift; sourceTree = "<group>"; };
 		463049E22AFD0590006F60D2 /* LevelBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelBlock.swift; sourceTree = "<group>"; };
 		4639A06A2B5AAD8E00072606 /* BlockUserButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserButton.swift; sourceTree = "<group>"; };
@@ -897,6 +899,7 @@
 				468913622B31AAD9002C7105 /* PlaceholderView.swift */,
 				4662502D2B32DCA70063F71A /* HintSheet.swift */,
 				466250322B330D740063F71A /* HintButton.swift */,
+				462174962B9374790074CE44 /* HintSubscriptionSheet.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1151,7 +1154,7 @@
 			);
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
-				469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */,
+				469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 				464A426E2AEA642C0019CB98 /* XCRemoteSwiftPackageReference "SwiftUIFlow" */,
 				464478CA2B0A393000926899 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 			);
@@ -1441,6 +1444,7 @@
 				4616B0872AF629B100A4CDDE /* DateExt.swift in Sources */,
 				468356FB2B0E321200DC356A /* NoteActionItem.swift in Sources */,
 				461F7C682AA88B80003791CF /* StringExt.swift in Sources */,
+				462174972B9374790074CE44 /* HintSubscriptionSheet.swift in Sources */,
 				46E3804B2B24D86E00056C0D /* AbilitiesScreen.swift in Sources */,
 				46D857742ACFF1C500BE74DA /* AddAreaViewModel.swift in Sources */,
 				461D21EE2AA8EF1A007E84CE /* LifecycleAwareObservableObject.swift in Sources */,
@@ -1687,7 +1691,7 @@
 				kind = branch;
 			};
 		};
-		469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */ = {
+		469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
 			requirement = {
@@ -1710,7 +1714,7 @@
 		};
 		469629C12AD9306200D41AF1 /* SwiftUIPager */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */;
+			package = 469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
 			productName = SwiftUIPager;
 		};
 /* End XCSwiftPackageProductDependency section */
