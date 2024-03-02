@@ -38,9 +38,9 @@ struct SplashScreen: View {
         .onAppear {
             observeEvents()
             #if targetEnvironment(simulator)
-                let x = 1
+                viewModel.dispatch(action: SplashActionAllowSubscription(value: false))
             #else
-                let x = 1
+                viewModel.dispatch(action: SplashActionAllowSubscription(value: true))
             #endif
         }
         .onDisappear {
