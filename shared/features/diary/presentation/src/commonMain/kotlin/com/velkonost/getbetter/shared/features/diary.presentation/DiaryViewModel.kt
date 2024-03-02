@@ -35,6 +35,8 @@ import com.velkonost.getbetter.shared.features.diary.presentation.contracts.Task
 import com.velkonost.getbetter.shared.features.diary.presentation.model.DiaryTab
 import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
+import com.velkonost.getbetter.shared.features.subscription.api.SubscriptionRepository
+import com.velkonost.getbetter.shared.features.subscription.domain.CheckSubscriptionUseCase
 import com.velkonost.getbetter.shared.features.tasks.api.TasksRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -47,7 +49,9 @@ internal constructor(
     private val tasksRepository: TasksRepository,
     private val diaryRepository: DiaryRepository,
     private val likesRepository: LikesRepository,
-    private val createNoteRepository: CreateNoteRepository
+    private val createNoteRepository: CreateNoteRepository,
+    private val subscriptionRepository: SubscriptionRepository,
+    private val checkSubscriptionUseCase: CheckSubscriptionUseCase
 ) : BaseViewModel<DiaryViewState, DiaryAction, DiaryNavigation, DiaryEvent>(
     initialState = DiaryViewState()
 ) {
@@ -62,6 +66,7 @@ internal constructor(
     fun refreshData() {
         fetchAreas()
         fetchTasks()
+        checkSubscription()
 
         launchJob {
             if (diaryRepository.checkNeedsResetState()) {
@@ -131,6 +136,35 @@ internal constructor(
     }
 
     fun dispatch(action: CreateNewNoteAction) = dispatchCreateNewNoteAction(action)
+
+    private fun checkSubscription() {
+        launchJob {
+            subscriptionRepository.canCreateArea() collectAndProcess {
+                onSuccess { result ->
+                    result?.let {
+                        val areasViewState =
+                            viewState.value.areasViewState.copy(canCreateNewArea = it)
+                        emit(viewState.value.copy(areasViewState = areasViewState))
+                    }
+                }
+            }
+
+            checkSubscriptionUseCase() collectAndProcess {
+                onSuccess { result ->
+                    result?.let {
+                        val tasksViewState =
+                            viewState.value.tasksViewState.copy(canUpdateList = it.isActive)
+                        emit(
+                            viewState.value.copy(
+                                tasksViewState = tasksViewState,
+                                showAds = !it.isActive
+                            )
+                        )
+                    }
+                }
+            }
+        }
+    }
 
     private fun showHint(firstTime: Boolean = false, index: Int) {
         val selectedTab = DiaryTab.entries[index]

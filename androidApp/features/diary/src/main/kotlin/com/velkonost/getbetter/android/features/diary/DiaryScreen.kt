@@ -53,6 +53,8 @@ import com.velkonost.getbetter.shared.features.diary.presentation.contracts.Note
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.NotesViewState
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.TaskClick
 import com.velkonost.getbetter.shared.features.diary.presentation.contracts.TasksViewState
+import com.velkonost.getbetter.shared.resources.SharedR
+import dev.icerock.moko.resources.compose.stringResource
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
@@ -89,6 +91,11 @@ fun DiaryScreen(
     )
 
     val selectedAreaId = remember { mutableStateOf<Int?>(null) }
+
+    val hintSubscriptionText = remember { mutableStateOf("") }
+
+    val areasLimitText = stringResource(resource = SharedR.strings.hint_subscription_areas)
+    val tasksUpdateLimitText = stringResource(resource = SharedR.strings.hint_subscription_tasks)
 
     BackHandler {
         scope.launch {
@@ -143,8 +150,13 @@ fun DiaryScreen(
                 },
                 createNewAreaClick = {
                     scope.launch {
-                        viewModel.dispatch(CreateNewAreaAction.Open)
-                        createNewAreaSheetState.show()
+                        if (state.areasViewState.canCreateNewArea) {
+                            viewModel.dispatch(CreateNewAreaAction.Open)
+                            createNewAreaSheetState.show()
+                        } else {
+                            hintSubscriptionText.value = areasLimitText
+                            hintSubscriptionSheetState.show()
+                        }
                     }
                 },
                 addExistingAreaClick = {
@@ -177,7 +189,14 @@ fun DiaryScreen(
                     viewModel.dispatch(TaskClick(it))
                 },
                 tasksListUpdateClick = {
-                    viewModel.dispatch(DiaryAction.TasksListUpdateClick)
+                    if (state.tasksViewState.canUpdateList) {
+                        viewModel.dispatch(DiaryAction.TasksListUpdateClick)
+                    } else {
+                        scope.launch {
+                            hintSubscriptionText.value = tasksUpdateLimitText
+                            hintSubscriptionSheetState.show()
+                        }
+                    }
                 },
                 taskFavoriteClick = {
                     viewModel.dispatch(DiaryAction.TaskFavoriteClick(it))
@@ -265,7 +284,7 @@ fun DiaryScreen(
 
         HintSubscriptionSheet(
             modalSheetState = hintSubscriptionSheetState,
-            text = "trowughqeow",
+            text = hintSubscriptionText.value,
             onClick = {
                 viewModel.dispatch(DiaryAction.NavigateToPaywallClick)
             }

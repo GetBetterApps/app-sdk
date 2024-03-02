@@ -508,6 +508,13 @@
     <string name="subscription_cancel_autorenew_text">Отменить автопродление и отвязать карту?
         Текущая подписка будет активна до %s
     </string>
+
+    <string name="hint_subscription_tasks">Неограниченное обновление заданий доступно для премиум
+        подписки
+    </string>
+    <string name="hint_subscription_areas">Лимит создания областей достигнут.\nНеограниченное
+        создание областей доступно для премиум подписки
+    </string>
     <!--  PAYWALL  -->
 
     <!--  SERVER EXCEPTIONS  -->

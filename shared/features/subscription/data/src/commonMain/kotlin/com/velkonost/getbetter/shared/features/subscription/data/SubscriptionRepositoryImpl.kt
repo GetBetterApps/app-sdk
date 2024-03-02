@@ -62,6 +62,7 @@ class SubscriptionRepositoryImpl(
     )
 
     override fun canCreateArea(): Flow<ResultState<Boolean>> = flowRequest(
+        mapper = { !this },
         request = {
             val token = localDataSource.getUserToken()
             remoteDataSource.isAreasLimitReached(token)

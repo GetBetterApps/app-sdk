@@ -501,6 +501,13 @@
     <string name="subscription_cancel_autorenew_text">Cancel auto-renewal and unlink the card? The
         current subscription will be active until %s
     </string>
+
+    <string name="hint_subscription_tasks">Unlimited task’s list updates are available for premium
+        subscription
+    </string>
+    <string name="hint_subscription_areas">The limit for creating areas has been reached.\nUnlimited
+        area creation is available for premium subscriptions
+    </string>
     <!--  PAYWALL  -->
 
     <!--  SERVER EXCEPTIONS  -->
