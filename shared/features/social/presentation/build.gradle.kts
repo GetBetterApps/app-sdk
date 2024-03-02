@@ -32,6 +32,8 @@ kotlin {
                 implementation(projects.shared.features.social.api)
                 implementation(projects.shared.features.notes.api)
                 implementation(projects.shared.features.likes.api)
+                implementation(projects.shared.features.subscription.domain)
+
                 implementation(projects.shared.resources)
             }
         }

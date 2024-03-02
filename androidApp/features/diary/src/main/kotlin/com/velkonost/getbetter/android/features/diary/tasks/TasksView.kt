@@ -33,6 +33,7 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun TasksView(
     modifier: Modifier = Modifier,
+    showAd: Boolean,
     isLoading: Boolean,
     favoriteItems: List<TaskUI>,
     currentItems: List<TaskUI>,
@@ -61,7 +62,7 @@ fun TasksView(
 
                 if (favoriteItems.isNotEmpty()) {
                     item {
-                        AdView(slotId = adSlotId)
+                        AdView(slotId = adSlotId, show = showAd)
                     }
                 }
 

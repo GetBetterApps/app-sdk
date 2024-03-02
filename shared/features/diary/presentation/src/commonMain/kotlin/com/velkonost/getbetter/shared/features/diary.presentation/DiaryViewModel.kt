@@ -138,17 +138,9 @@ internal constructor(
     fun dispatch(action: CreateNewNoteAction) = dispatchCreateNewNoteAction(action)
 
     private fun checkSubscription() {
-        launchJob {
-            subscriptionRepository.canCreateArea() collectAndProcess {
-                onSuccess { result ->
-                    result?.let {
-                        val areasViewState =
-                            viewState.value.areasViewState.copy(canCreateNewArea = it)
-                        emit(viewState.value.copy(areasViewState = areasViewState))
-                    }
-                }
-            }
+        checkAreasLimit()
 
+        launchJob {
             checkSubscriptionUseCase() collectAndProcess {
                 onSuccess { result ->
                     result?.let {
@@ -160,6 +152,20 @@ internal constructor(
                                 showAds = !it.isActive
                             )
                         )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun checkAreasLimit() {
+        launchJob {
+            subscriptionRepository.canCreateArea() collectAndProcess {
+                onSuccess { result ->
+                    result?.let {
+                        val areasViewState =
+                            viewState.value.areasViewState.copy(canCreateNewArea = it)
+                        emit(viewState.value.copy(areasViewState = areasViewState))
                     }
                 }
             }

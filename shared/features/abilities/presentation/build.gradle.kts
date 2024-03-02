@@ -30,6 +30,7 @@ kotlin {
                 api(projects.shared.core.model)
                 implementation(projects.shared.resources)
                 implementation(projects.shared.features.abilities.api)
+                implementation(projects.shared.features.subscription.domain)
             }
         }
 

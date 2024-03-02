@@ -86,7 +86,7 @@ fun DiaryScreen(
     )
 
     val hintSubscriptionSheetState = rememberModalBottomSheetState(
-        initialValue = ModalBottomSheetValue.Expanded,
+        initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true
     )
 
@@ -131,6 +131,7 @@ fun DiaryScreen(
                 notesState = state.notesViewState,
                 areasState = state.areasViewState,
                 tasksState = state.tasksViewState,
+                showAd = state.showAds,
                 adPosition = state.adPosition,
                 adSlotId = state.adId,
                 noteClick = {
@@ -352,6 +353,7 @@ fun DiaryScreenContent(
     notesState: NotesViewState,
     areasState: AreasViewState,
     tasksState: TasksViewState,
+    showAd: Boolean,
     adPosition: Int,
     adSlotId: String,
     noteClick: (Note) -> Unit,
@@ -374,6 +376,7 @@ fun DiaryScreenContent(
     ) { index ->
         when (index) {
             0 -> NotesView(
+                showAd = showAd,
                 items = notesState.items,
                 isLoading = notesState.isLoading,
                 loadMorePrefetch = notesState.loadMorePrefetch,
@@ -387,6 +390,7 @@ fun DiaryScreenContent(
             )
 
             1 -> AreasView(
+                showAd = showAd,
                 items = areasState.items,
                 isLoading = areasState.isLoading,
                 adPosition = adPosition,
@@ -398,6 +402,7 @@ fun DiaryScreenContent(
             )
 
             else -> TasksView(
+                showAd = showAd,
                 isLoading = tasksState.isLoading,
                 favoriteItems = tasksState.favoriteItems,
                 currentItems = tasksState.currentItems,

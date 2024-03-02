@@ -24,6 +24,7 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun NotesView(
     modifier: Modifier = Modifier,
+    showAd: Boolean,
     loadMorePrefetch: Int,
     isLoading: Boolean,
     items: List<Note>,
@@ -59,13 +60,13 @@ fun NotesView(
                         )
 
                         if (index % adPosition == 0 && index != 0) {
-                            AdView(slotId = adSlotId)
+                            AdView(slotId = adSlotId, show = showAd)
                         }
                     }
 
                     if (items.size < adPosition) {
                         item {
-                            AdView(slotId = adSlotId)
+                            AdView(slotId = adSlotId, show = showAd)
                         }
                     }
 

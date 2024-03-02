@@ -22,6 +22,7 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun AreasView(
     modifier: Modifier = Modifier,
+    showAd: Boolean,
     isLoading: Boolean,
     items: List<Area>,
     adPosition: Int,
@@ -53,13 +54,13 @@ fun AreasView(
                         )
 
                         if (index % adPosition == 0 && index != 0) {
-                            AdView(slotId = adSlotId)
+                            AdView(slotId = adSlotId, show = showAd)
                         }
                     }
 
                     if (items.size < adPosition) {
                         item {
-                            AdView(slotId = adSlotId)
+                            AdView(slotId = adSlotId, show = showAd)
                         }
                     }
                 }

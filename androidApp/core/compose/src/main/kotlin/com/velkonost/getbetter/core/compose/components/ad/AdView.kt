@@ -43,8 +43,11 @@ import java.util.Locale
 fun AdView(
     modifier: Modifier = Modifier,
     slotId: String,
-    padding: Dp = DP_20
+    padding: Dp = DP_20,
+    show: Boolean
 ) {
+
+    if (!show) return
 
     val viewHeight = remember { DP_300 }
     val boxPadding = remember { 0 }

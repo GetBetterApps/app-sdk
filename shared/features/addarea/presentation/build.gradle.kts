@@ -31,6 +31,7 @@ kotlin {
                 implementation(projects.shared.resources)
                 implementation(projects.shared.features.areas.api)
                 implementation(projects.shared.features.addarea.api)
+                implementation(projects.shared.features.subscription.domain)
             }
         }
 

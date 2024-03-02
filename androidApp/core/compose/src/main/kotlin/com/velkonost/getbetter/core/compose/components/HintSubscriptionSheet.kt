@@ -14,11 +14,14 @@ import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -28,6 +31,8 @@ fun HintSubscriptionSheet(
     text: String,
     onClick: () -> Unit
 ) {
+
+    val scope = rememberCoroutineScope()
 
     ModalBottomSheetLayout(
         sheetState = modalSheetState,
@@ -42,18 +47,29 @@ fun HintSubscriptionSheet(
                     .padding(bottom = 56.dp, top = 16.dp)
             ) {
                 Column(verticalArrangement = Arrangement.SpaceEvenly) {
-                    Text(
-                        text = text,
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = colorResource(resource = SharedR.colors.text_title)
-                    )
+                    Row {
+                        WeightedSpacer()
+                        Text(
+                            text = text,
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = colorResource(resource = SharedR.colors.text_title),
+                            textAlign = TextAlign.Center
+                        )
+                        WeightedSpacer()
+                    }
+
 
                     Row(modifier = modifier.padding(top = 24.dp)) {
                         WeightedSpacer()
                         AppButton(
-                            labelText = stringResource(resource = SharedR.strings.paywall_title),
+                            labelText = stringResource(resource = SharedR.strings.profile_sub_upgrade),
                             isLoading = false,
-                            onClick = onClick
+                            onClick = {
+                                onClick()
+                                scope.launch {
+                                    modalSheetState.hide()
+                                }
+                            }
                         )
                         WeightedSpacer()
                     }

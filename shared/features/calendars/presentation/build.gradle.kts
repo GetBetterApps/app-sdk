@@ -36,6 +36,7 @@ kotlin {
                 implementation(projects.shared.features.userinfo.api)
                 implementation(projects.shared.features.comments.api)
                 implementation(projects.shared.features.calendars.api)
+                implementation(projects.shared.features.subscription.domain)
             }
         }
 
