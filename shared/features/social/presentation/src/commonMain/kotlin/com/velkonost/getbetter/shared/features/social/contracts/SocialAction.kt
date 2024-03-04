@@ -17,4 +17,6 @@ sealed interface SocialAction : UIContract.Action {
     data object RefreshAreasFeed : SocialAction
 
     data object HintClick : SocialAction
+
+    data object NavigateToPaywallClick : SocialAction
 }

@@ -17,13 +17,19 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -34,6 +40,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.velkonost.getbetter.android.features.social.components.FeedNoteItem
 import com.velkonost.getbetter.core.compose.components.HintButton
+import com.velkonost.getbetter.core.compose.components.HintSubscriptionSheet
 import com.velkonost.getbetter.core.compose.components.Loader
 import com.velkonost.getbetter.core.compose.components.PlaceholderView
 import com.velkonost.getbetter.core.compose.components.PrimaryTabs
@@ -44,18 +51,27 @@ import com.velkonost.getbetter.shared.core.model.note.Note
 import com.velkonost.getbetter.shared.features.social.SocialViewModel
 import com.velkonost.getbetter.shared.features.social.contracts.FeedViewState
 import com.velkonost.getbetter.shared.features.social.contracts.SocialAction
+import com.velkonost.getbetter.shared.features.social.contracts.SocialEvent
 import com.velkonost.getbetter.shared.resources.SharedR
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun SocialScreen(
-    viewModel: SocialViewModel
+    viewModel: SocialViewModel,
+    forceHideBottomBar: MutableState<Boolean> = mutableStateOf(false)
 ) {
 
     val state by viewModel.viewState.collectAsStateWithLifecycle()
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { state.tabs.size })
+
+    val resumeSubscriptionSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = true
+    )
 
     Box {
         Column {
@@ -117,6 +133,37 @@ fun SocialScreen(
                 )
             }
 
+        }
+
+        HintSubscriptionSheet(
+            modalSheetState = resumeSubscriptionSheetState,
+            text = stringResource(resource = SharedR.strings.resume_subscription_text),
+            onClick = {
+                viewModel.dispatch(SocialAction.NavigateToPaywallClick)
+            }
+        )
+    }
+
+    LaunchedEffect(Unit) {
+        combine(
+            snapshotFlow { resumeSubscriptionSheetState.currentValue },
+            snapshotFlow { resumeSubscriptionSheetState.currentValue }
+        ) { resumeSubscriptionState, _ ->
+            val hideBottomBar =
+                resumeSubscriptionState != ModalBottomSheetValue.Hidden
+            hideBottomBar
+        }.collect {
+            forceHideBottomBar.value = it
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.events.collectLatest {
+            when (it) {
+                is SocialEvent.SuggestResumeSubscription -> {
+                    resumeSubscriptionSheetState.show()
+                }
+            }
         }
     }
 

@@ -13,9 +13,12 @@ import com.velkonost.getbetter.shared.features.likes.api.LikesRepository
 import com.velkonost.getbetter.shared.features.notes.api.NotesRepository
 import com.velkonost.getbetter.shared.features.social.api.SocialRepository
 import com.velkonost.getbetter.shared.features.social.contracts.NavigateToNoteDetail
+import com.velkonost.getbetter.shared.features.social.contracts.NavigateToPaywall
 import com.velkonost.getbetter.shared.features.social.contracts.SocialAction
+import com.velkonost.getbetter.shared.features.social.contracts.SocialEvent
 import com.velkonost.getbetter.shared.features.social.contracts.SocialNavigation
 import com.velkonost.getbetter.shared.features.social.contracts.SocialViewState
+import com.velkonost.getbetter.shared.features.subscription.api.SubscriptionRepository
 import com.velkonost.getbetter.shared.features.subscription.domain.CheckSubscriptionUseCase
 import kotlinx.coroutines.Job
 
@@ -24,8 +27,9 @@ internal constructor(
     private val socialRepository: SocialRepository,
     private val notesRepository: NotesRepository,
     private val likesRepository: LikesRepository,
+    private val subscriptionRepository: SubscriptionRepository,
     private val checkSubscriptionUseCase: CheckSubscriptionUseCase
-) : BaseViewModel<SocialViewState, SocialAction, SocialNavigation, Nothing>(
+) : BaseViewModel<SocialViewState, SocialAction, SocialNavigation, SocialEvent>(
     initialState = SocialViewState()
 ) {
 
@@ -59,17 +63,43 @@ internal constructor(
         is SocialAction.RefreshGeneralFeed -> obtainRefreshGeneralFeed()
         is SocialAction.RefreshAreasFeed -> obtainRefreshAreasFeed()
         is SocialAction.HintClick -> showHint()
+        is SocialAction.NavigateToPaywallClick -> emit(NavigateToPaywall)
     }
 
     private fun checkSubscription() {
         launchJob {
+
+            val shouldSuggestResumeSubscription =
+                subscriptionRepository.shouldSuggestResumeSubscription()
+
             checkSubscriptionUseCase() collectAndProcess {
                 onSuccess { result ->
                     result?.let {
                         emit(viewState.value.copy(showAds = !it.isActive || it.fake))
+
+                        if (
+//                            !it.isActive
+//                            && !it.fake
+//                            && it.trialUsed
+//                            && !it.autoRenewal
+//                            && it.expiredAt != -1L
+//                            && !it.isUnlimited
+//                            &&
+//                            shouldSuggestResumeSubscription
+                            true
+                        ) {
+                            obtainResumeSubscriptionSuggested()
+                            emit(SocialEvent.SuggestResumeSubscription)
+                        }
                     }
                 }
             }
+        }
+    }
+
+    private fun obtainResumeSubscriptionSuggested() {
+        launchJob {
+            subscriptionRepository.markResumeSubscriptionAsSuggested()
         }
     }
 

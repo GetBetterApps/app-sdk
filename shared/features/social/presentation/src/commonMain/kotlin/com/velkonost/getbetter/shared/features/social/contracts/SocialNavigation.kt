@@ -18,3 +18,9 @@ data class NavigateToNoteDetail(val note: Note) : SocialNavigation {
         )
     )
 }
+
+data object NavigateToPaywall : SocialNavigation {
+    override val event: NavigationEvent = NavigationEvent.NavigateToRoute(
+        route = NavigationScreen.SubscriptionNavScreen.route,
+    )
+}

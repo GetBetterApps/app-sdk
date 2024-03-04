@@ -4,6 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import com.velkonost.getbetter.shared.core.datastore.ALLOW_SUBSCRIPTION
+import com.velkonost.getbetter.shared.core.datastore.RESUME_SUBSCRIPTION_SUGGESTED
 import com.velkonost.getbetter.shared.core.datastore.SESSION_NUMBER
 import com.velkonost.getbetter.shared.core.datastore.TRIAL_SUGGESTED
 import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
@@ -31,6 +32,8 @@ class SubscriptionRepositoryImpl(
         flowRequest(
             mapper = KtorCreateSubscription::asExternalModel,
             request = {
+                markResumeSubscriptionAsNotSuggested()
+
                 val token = localDataSource.getUserToken()
                 val body = CreateSubscriptionRequest(subscriptionType)
                 remoteDataSource.createSubscription(token, body)
@@ -91,9 +94,25 @@ class SubscriptionRepositoryImpl(
         return !trialSuggested && sessionNumber % 3 == 0
     }
 
+    override suspend fun shouldSuggestResumeSubscription(): Boolean {
+        return localDataSource.data.first()[RESUME_SUBSCRIPTION_SUGGESTED] ?: false
+    }
+
+    override suspend fun markResumeSubscriptionAsSuggested() {
+        localDataSource.edit { preferences ->
+            preferences[RESUME_SUBSCRIPTION_SUGGESTED] = true
+        }
+    }
+
     private suspend fun markTrialAsSuggested() {
         localDataSource.edit { preferences ->
             preferences[TRIAL_SUGGESTED] = true
+        }
+    }
+
+    private suspend fun markResumeSubscriptionAsNotSuggested() {
+        localDataSource.edit { preferences ->
+            preferences[RESUME_SUBSCRIPTION_SUGGESTED] = false
         }
     }
 

@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.android.features.social
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import com.velkonost.getbetter.core.compose.NavRoute
 import com.velkonost.getbetter.shared.core.vm.navigation.NavigationScreen
 import com.velkonost.getbetter.shared.features.social.SocialViewModel
@@ -17,6 +18,18 @@ object SocialNavRoute : NavRoute<SocialViewModel> {
 
     @Composable
     override fun Content(viewModel: SocialViewModel) = SocialScreen(viewModel = viewModel)
+
+    @Composable
+    override fun Content(
+        viewModel: SocialViewModel,
+        forceHideBottomBar: MutableState<Boolean>
+    ) {
+        viewModel.init()
+        SocialScreen(
+            viewModel = viewModel,
+            forceHideBottomBar = forceHideBottomBar
+        )
+    }
 
     override val viewModel: SocialViewModel
         @Composable get() = koinViewModel()

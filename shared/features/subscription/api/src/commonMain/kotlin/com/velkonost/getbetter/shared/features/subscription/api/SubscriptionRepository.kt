@@ -23,4 +23,8 @@ interface SubscriptionRepository {
 
     suspend fun shouldSuggestTrial(): Boolean
 
+    suspend fun shouldSuggestResumeSubscription(): Boolean
+
+    suspend fun markResumeSubscriptionAsSuggested()
+
 }

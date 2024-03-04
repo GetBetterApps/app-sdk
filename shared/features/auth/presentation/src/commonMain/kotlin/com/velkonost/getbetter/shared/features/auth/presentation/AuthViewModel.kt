@@ -100,14 +100,14 @@ internal constructor(
     private fun loginAnonymous() {
         launchJob {
             if (viewState.value.forceSignUp) {
-                navigateNext()
+                navigateNext(allowPaywall = false)
             } else {
                 loginAnonymousUseCase() collectAndProcess {
                     isLoading {
                         emit(viewState.value.copy(isLoading = it))
                     }
                     onSuccess {
-                        navigateNext()
+                        navigateNext(allowPaywall = false)
                     }
                 }
             }
@@ -146,11 +146,11 @@ internal constructor(
         }
     }
 
-    private fun navigateNext() {
+    private fun navigateNext(allowPaywall: Boolean = true) {
         launchJob {
             showPaywallAfterLogin.collectLatest {
                 emit(
-                    if (it) NavigateToPaywall
+                    if (it && allowPaywall) NavigateToPaywall
                     else NavigateToMainFlow
                 )
             }

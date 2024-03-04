@@ -30,6 +30,7 @@ val SELECTED_UI_MODE = stringPreferencesKey("selected_ui_mode")
 val TOKEN_KEY = stringPreferencesKey("auth_token")
 val ALLOW_SUBSCRIPTION = booleanPreferencesKey("allow_subscription")
 val TRIAL_SUGGESTED = booleanPreferencesKey("trial_suggested")
+val RESUME_SUBSCRIPTION_SUGGESTED = booleanPreferencesKey("resume_subscription_suggested")
 
 val SESSION_NUMBER = intPreferencesKey("session_number")
 

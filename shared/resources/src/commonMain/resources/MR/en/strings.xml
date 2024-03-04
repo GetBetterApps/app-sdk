@@ -513,6 +513,10 @@
         days
     </string>
     <string name="start_trial_button">Start trial period</string>
+
+    <string name="resume_subscription_text">Premium access has expired :(\n But we have some nice
+        offers to renew your subscription
+    </string>
     <!--  PAYWALL  -->
 
     <!--  SERVER EXCEPTIONS  -->

@@ -521,6 +521,10 @@
     </string>
     <string name="start_trial_button">Начать пробный период</string>
 
+    <string name="resume_subscription_text">Премиум доступ закончился :(\nНо у нас есть приятные
+        предложения для возобновления подписки
+    </string>
+
     <!--  PAYWALL  -->
 
     <!--  SERVER EXCEPTIONS  -->
