@@ -68,7 +68,6 @@ internal constructor(
 
     private fun checkSubscription() {
         launchJob {
-
             val shouldSuggestResumeSubscription =
                 subscriptionRepository.shouldSuggestResumeSubscription()
 
@@ -78,15 +77,13 @@ internal constructor(
                         emit(viewState.value.copy(showAds = !it.isActive || it.fake))
 
                         if (
-//                            !it.isActive
-//                            && !it.fake
-//                            && it.trialUsed
-//                            && !it.autoRenewal
-//                            && it.expiredAt != -1L
-//                            && !it.isUnlimited
-//                            &&
-//                            shouldSuggestResumeSubscription
-                            true
+                            !it.isActive
+                            && !it.fake
+                            && it.trialUsed
+                            && !it.autoRenewal
+                            && it.expiredAt != -1L
+                            && !it.isUnlimited
+                            && shouldSuggestResumeSubscription
                         ) {
                             obtainResumeSubscriptionSuggested()
                             emit(SocialEvent.SuggestResumeSubscription)
