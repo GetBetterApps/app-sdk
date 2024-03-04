@@ -16,6 +16,10 @@ struct SocialScreen: View {
     
     @StateViewModel var viewModel: SocialViewModel
     @State private var selectedPage: Int = 0
+    
+    @State private var eventsObserver: Task<(), Error>? = nil
+    @State var resumeSubscriptionSheetHeight: CGFloat = .zero
+    @State private var resumeSubscriptionVisible: Bool = false
 
     var body: some View {
         @State var state = viewModel.viewStateValue as! SocialViewState
@@ -79,8 +83,18 @@ struct SocialScreen: View {
             
             }
         }
-        .onAppear {            
+        .hintSubscriptionSheet(
+            isShowing: $resumeSubscriptionVisible,
+            sheetHeight: $resumeSubscriptionSheetHeight,
+            text: SharedR.strings().resume_subscription_text.desc().localized(),
+            onClick: {
+                resumeSubscriptionVisible = false
+                viewModel.dispatch(action: SocialActionNavigateToPaywallClick())
+            }
+        )
+        .onAppear {
             viewModel.onAppear()
+            observeEvents()
             
             if state.generalFeed.items.isEmpty {
                 viewModel.dispatch(action: SocialActionGeneralFeedLoadNextPage())
@@ -88,6 +102,25 @@ struct SocialScreen: View {
             
             if state.areasFeed.items.isEmpty {
                 viewModel.dispatch(action: SocialActionAreasFeedLoadNextPage())
+            }
+        }
+    }
+}
+
+extension SocialScreen {
+    func observeEvents() {
+        if eventsObserver == nil {
+            eventsObserver = Task {
+                for try await event in asyncSequence(for: viewModel.events) {
+                    switch(event) {
+                    case _ as SocialEventSuggestResumeSubscription: do {
+                        resumeSubscriptionVisible = true
+                    }
+                        
+                    default:
+                        break
+                    }
+                }
             }
         }
     }
