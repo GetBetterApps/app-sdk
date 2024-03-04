@@ -516,7 +516,11 @@
         создание областей доступно для премиум подписки
     </string>
 
-    <string name="start_trial_button">Start trial period</string>
+    <string name="suggest_trial_text">Специальное предложение!\nПопробуйте премиум доступ совершенно
+        бесплатно на 3 дня
+    </string>
+    <string name="start_trial_button">Начать пробный период</string>
+
     <!--  PAYWALL  -->
 
     <!--  SERVER EXCEPTIONS  -->

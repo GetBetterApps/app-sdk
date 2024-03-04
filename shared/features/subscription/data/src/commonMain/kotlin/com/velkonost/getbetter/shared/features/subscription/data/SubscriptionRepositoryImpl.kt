@@ -88,7 +88,7 @@ class SubscriptionRepositoryImpl(
         val sessionNumber = data[SESSION_NUMBER] ?: 0
         val trialSuggested = data[TRIAL_SUGGESTED] ?: false
 
-        return !trialSuggested && sessionNumber % 3 == 0
+        return !trialSuggested //&& sessionNumber % 3 == 0
     }
 
     private suspend fun markTrialAsSuggested() {

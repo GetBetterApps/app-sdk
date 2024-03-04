@@ -4,6 +4,8 @@ import com.velkonost.getbetter.shared.core.vm.contracts.UIContract
 
 sealed interface DiaryEvent : UIContract.Event {
     data object NewNoteCreatedSuccess : DiaryEvent
+
+    data object SuggestTrial : DiaryEvent
 }
 
 sealed interface CreateNewAreaEvent : DiaryEvent {

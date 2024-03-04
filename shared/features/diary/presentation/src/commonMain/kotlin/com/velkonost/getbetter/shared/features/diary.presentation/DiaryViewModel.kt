@@ -153,9 +153,12 @@ internal constructor(
                             viewState.value.copy(
                                 tasksViewState = tasksViewState,
                                 showAds = !it.isActive || it.fake,
-                                suggestTrial = shouldSuggestTrial && !it.isActive && !it.trialUsed
                             )
                         )
+
+                        if (shouldSuggestTrial && !it.isActive && !it.trialUsed) {
+                            emit(DiaryEvent.SuggestTrial)
+                        }
                     }
                 }
             }
@@ -214,7 +217,6 @@ internal constructor(
                             viewState.value.copy(
                                 tasksViewState = tasksViewState,
                                 showAds = !it.isActive || it.fake,
-                                suggestTrial = false
                             )
                         )
                     }

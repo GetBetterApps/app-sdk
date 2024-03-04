@@ -28,6 +28,7 @@ import kotlinx.coroutines.launch
 fun HintSubscriptionSheet(
     modifier: Modifier = Modifier,
     modalSheetState: ModalBottomSheetState,
+    isLoading: Boolean = false,
     text: String,
     onClick: () -> Unit
 ) {
@@ -63,7 +64,7 @@ fun HintSubscriptionSheet(
                         WeightedSpacer()
                         AppButton(
                             labelText = stringResource(resource = SharedR.strings.profile_sub_upgrade),
-                            isLoading = false,
+                            isLoading = isLoading,
                             onClick = {
                                 onClick()
                                 scope.launch {

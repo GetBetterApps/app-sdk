@@ -90,6 +90,11 @@ fun DiaryScreen(
         skipHalfExpanded = true
     )
 
+    val trialSuggestSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = true
+    )
+
     val selectedAreaId = remember { mutableStateOf<Int?>(null) }
 
     val hintSubscriptionText = remember { mutableStateOf("") }
@@ -290,6 +295,15 @@ fun DiaryScreen(
                 viewModel.dispatch(DiaryAction.NavigateToPaywallClick)
             }
         )
+
+        HintSubscriptionSheet(
+            modalSheetState = trialSuggestSheetState,
+            isLoading = state.isTrialLoading,
+            text = stringResource(resource = SharedR.strings.suggest_trial_text),
+            onClick = {
+                viewModel.dispatch(DiaryAction.StartTrialClick)
+            }
+        )
     }
 
     LaunchedEffect(Unit) {
@@ -298,12 +312,14 @@ fun DiaryScreen(
             snapshotFlow { areaDetailSheetState.currentValue },
             snapshotFlow { createNewNoteSheetState.currentValue },
             snapshotFlow { hintSubscriptionSheetState.currentValue },
-        ) { createNewAreaState, areaDetailState, createNewNoteState, hintSubscriptionState ->
+            snapshotFlow { trialSuggestSheetState.currentValue },
+        ) { createNewAreaState, areaDetailState, createNewNoteState, hintSubscriptionState, trialSuggestState ->
             val hideBottomBar =
                 createNewAreaState != ModalBottomSheetValue.Hidden
                         || areaDetailState != ModalBottomSheetValue.Hidden
                         || createNewNoteState != ModalBottomSheetValue.Hidden
                         || hintSubscriptionState != ModalBottomSheetValue.Hidden
+                        || trialSuggestState != ModalBottomSheetValue.Hidden
             hideBottomBar
         }.collect {
             forceHideBottomBar.value = it
@@ -321,6 +337,10 @@ fun DiaryScreen(
                 is DiaryEvent.NewNoteCreatedSuccess -> {
                     createNewNoteSheetState.hide()
                     viewModel.refreshData()
+                }
+
+                is DiaryEvent.SuggestTrial -> {
+                    trialSuggestSheetState.show()
                 }
             }
         }
