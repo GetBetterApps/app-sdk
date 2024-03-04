@@ -23,7 +23,10 @@ data class DiaryViewState(
 
     val adId: String = ACTUAL_AD_ID,
     val adPosition: Int = (6..10).random(),
-    val showAds: Boolean = false
+    val showAds: Boolean = false,
+
+    val suggestTrial: Boolean = false,
+    val isTrialLoading: Boolean = false
 ) : UIContract.State
 
 data class NotesViewState(

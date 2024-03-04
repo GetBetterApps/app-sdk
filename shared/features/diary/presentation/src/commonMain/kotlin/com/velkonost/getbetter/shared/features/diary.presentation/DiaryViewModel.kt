@@ -133,6 +133,7 @@ internal constructor(
         is DiaryAction.TasksListUpdateClick -> fetchTasks(forceUpdate = true)
         is DiaryAction.HintClick -> showHint(firstTime = action.firstTime, index = action.index)
         is DiaryAction.NavigateToPaywallClick -> emit(NavigateToPaywall)
+        is DiaryAction.StartTrialClick -> obtainStartTrial()
     }
 
     fun dispatch(action: CreateNewNoteAction) = dispatchCreateNewNoteAction(action)
@@ -141,6 +142,8 @@ internal constructor(
         checkAreasLimit()
 
         launchJob {
+            val shouldSuggestTrial = subscriptionRepository.shouldSuggestTrial()
+
             checkSubscriptionUseCase() collectAndProcess {
                 onSuccess { result ->
                     result?.let {
@@ -149,7 +152,8 @@ internal constructor(
                         emit(
                             viewState.value.copy(
                                 tasksViewState = tasksViewState,
-                                showAds = !it.isActive || it.fake
+                                showAds = !it.isActive || it.fake,
+                                suggestTrial = shouldSuggestTrial && !it.isActive && !it.trialUsed
                             )
                         )
                     }
@@ -193,6 +197,30 @@ internal constructor(
                 }
             }
         } else uiHint.send()
+    }
+
+    private fun obtainStartTrial() {
+        launchJob {
+            subscriptionRepository.startTrial() collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isTrialLoading = it))
+                }
+
+                onSuccess { result ->
+                    result?.let {
+                        val tasksViewState =
+                            viewState.value.tasksViewState.copy(canUpdateList = it.isActive)
+                        emit(
+                            viewState.value.copy(
+                                tasksViewState = tasksViewState,
+                                showAds = !it.isActive || it.fake,
+                                suggestTrial = false
+                            )
+                        )
+                    }
+                }
+            }
+        }
     }
 
     private fun obtainNoteLikeClick(value: Note) {

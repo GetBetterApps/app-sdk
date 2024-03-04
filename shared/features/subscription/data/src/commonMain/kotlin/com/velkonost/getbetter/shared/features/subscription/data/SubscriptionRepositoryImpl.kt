@@ -2,7 +2,10 @@ package com.velkonost.getbetter.shared.features.subscription.data
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
 import com.velkonost.getbetter.shared.core.datastore.ALLOW_SUBSCRIPTION
+import com.velkonost.getbetter.shared.core.datastore.SESSION_NUMBER
+import com.velkonost.getbetter.shared.core.datastore.TRIAL_SUGGESTED
 import com.velkonost.getbetter.shared.core.datastore.extension.getUserToken
 import com.velkonost.getbetter.shared.core.model.subscription.Subscription
 import com.velkonost.getbetter.shared.core.network.model.RemoteResponse
@@ -37,6 +40,8 @@ class SubscriptionRepositoryImpl(
     override fun startTrial(): Flow<ResultState<Subscription>> = flowRequest(
         mapper = KtorSubscription::asExternalModel,
         request = {
+            markTrialAsSuggested()
+
             val token = localDataSource.getUserToken()
             remoteDataSource.startTrial(token)
         }
@@ -77,5 +82,19 @@ class SubscriptionRepositoryImpl(
             remoteDataSource.isAreasLimitReached(token)
         }
     )
+
+    override suspend fun shouldSuggestTrial(): Boolean {
+        val data = localDataSource.data.first()
+        val sessionNumber = data[SESSION_NUMBER] ?: 0
+        val trialSuggested = data[TRIAL_SUGGESTED] ?: false
+
+        return !trialSuggested && sessionNumber % 3 == 0
+    }
+
+    private suspend fun markTrialAsSuggested() {
+        localDataSource.edit { preferences ->
+            preferences[TRIAL_SUGGESTED] = true
+        }
+    }
 
 }

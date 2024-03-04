@@ -21,4 +21,6 @@ interface SubscriptionRepository {
 
     fun canCreateArea(): Flow<ResultState<Boolean>>
 
+    suspend fun shouldSuggestTrial(): Boolean
+
 }
