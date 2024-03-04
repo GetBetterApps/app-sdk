@@ -342,6 +342,10 @@ fun DiaryScreen(
                 is DiaryEvent.SuggestTrial -> {
                     trialSuggestSheetState.show()
                 }
+
+                is DiaryEvent.TrialStartedSuccess -> {
+                    trialSuggestSheetState.hide()
+                }
             }
         }
     }

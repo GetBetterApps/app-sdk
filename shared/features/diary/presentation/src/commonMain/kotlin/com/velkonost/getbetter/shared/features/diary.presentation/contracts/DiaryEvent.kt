@@ -6,6 +6,8 @@ sealed interface DiaryEvent : UIContract.Event {
     data object NewNoteCreatedSuccess : DiaryEvent
 
     data object SuggestTrial : DiaryEvent
+
+    data object TrialStartedSuccess : DiaryEvent
 }
 
 sealed interface CreateNewAreaEvent : DiaryEvent {

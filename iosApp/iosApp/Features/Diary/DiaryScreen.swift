@@ -26,7 +26,9 @@ struct DiaryScreen: View {
     @State private var selectedAreaId: Int32? = nil
     
     @State var hintSubscriptionSheetHeight: CGFloat = .zero
+    @State var trialSuggestSheetHeight: CGFloat = .zero
     @State private var hintSubscriptionVisible: Bool = false
+    @State private var trialSuggestVisible: Bool = false
     @State private var hintSubscriptionText: String = ""
     
     var body: some View {
@@ -219,6 +221,14 @@ struct DiaryScreen: View {
                 viewModel.dispatch(action: DiaryActionNavigateToPaywallClick())
             }
         )
+        .hintSubscriptionSheet(
+            isShowing: $trialSuggestVisible,
+            sheetHeight: $trialSuggestSheetHeight,
+            text: SharedR.strings().suggest_trial_text.desc().localized(),
+            onClick: {
+                viewModel.dispatch(action: DiaryActionStartTrialClick())
+            }
+        )
         .onAppear {
             viewModel.refreshData()
             observeEvents()
@@ -249,6 +259,15 @@ extension DiaryScreen {
                         showingCreateNewNoteSheet = false
                         viewModel.refreshData()
                     }
+                        
+                    case _ as DiaryEventSuggestTrial: do {
+                        trialSuggestVisible = true
+                    }
+                        
+                    case _ as DiaryEventTrialStartedSuccess: do {
+                        trialSuggestVisible = false
+                    }
+                        
                     default:
                         break
                     }
