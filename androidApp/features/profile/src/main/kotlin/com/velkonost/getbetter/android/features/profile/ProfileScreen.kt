@@ -173,9 +173,9 @@ fun ProfileScreen(
         }
 
         AnimatedVisibility(
-            visible = state.subscriptionData.available
+            visible = !state.isUserAnonymous
+                    && state.subscriptionData.available
                     && state.subscriptionData.subscription?.trialUsed == false
-                    && !state.isUserAnonymous
         ) {
             TrialButton(isLoading = state.isLoading) {
                 viewModel.dispatch(StartTrialClick)
