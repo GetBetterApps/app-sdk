@@ -33,6 +33,7 @@ kotlin {
                 implementation(projects.shared.features.auth.api)
                 implementation(projects.shared.features.profile.api)
                 implementation(projects.shared.features.userinfo.api)
+                implementation(projects.shared.features.subscription.api)
                 implementation(projects.shared.features.subscription.domain)
             }
         }

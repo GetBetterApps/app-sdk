@@ -39,6 +39,7 @@ import com.velkonost.getbetter.android.features.profile.components.HelpAndSuppor
 import com.velkonost.getbetter.android.features.profile.components.OtherBlock
 import com.velkonost.getbetter.android.features.profile.components.ProfileHeader
 import com.velkonost.getbetter.android.features.profile.components.SubscriptionBox
+import com.velkonost.getbetter.android.features.profile.components.TrialButton
 import com.velkonost.getbetter.core.compose.components.AppButton
 import com.velkonost.getbetter.core.compose.components.VersionName
 import com.velkonost.getbetter.core.compose.components.experience.LevelBlock
@@ -51,6 +52,7 @@ import com.velkonost.getbetter.shared.features.profile.contracts.ContactUsClick
 import com.velkonost.getbetter.shared.features.profile.contracts.LogoutClick
 import com.velkonost.getbetter.shared.features.profile.contracts.SettingsClick
 import com.velkonost.getbetter.shared.features.profile.contracts.SignUpClick
+import com.velkonost.getbetter.shared.features.profile.contracts.StartTrialClick
 import com.velkonost.getbetter.shared.features.profile.contracts.SubscriptionClick
 import com.velkonost.getbetter.shared.features.profile.contracts.ThemeChange
 import com.velkonost.getbetter.shared.resources.SharedR
@@ -168,6 +170,16 @@ fun ProfileScreen(
                     viewModel.dispatch(SubscriptionClick)
                 }
             )
+        }
+
+        AnimatedVisibility(
+            visible = state.subscriptionData.available
+                    && state.subscriptionData.subscription?.trialUsed == false
+                    && !state.isUserAnonymous
+        ) {
+            TrialButton(isLoading = state.isLoading) {
+                viewModel.dispatch(StartTrialClick)
+            }
         }
 
         AppSettings(

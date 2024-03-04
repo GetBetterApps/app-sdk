@@ -21,6 +21,8 @@ data class AvatarSelected(val avatarContent: ByteArray) : ProfileAction
 
 data class AvatarSelectedBase64(val avatarContent: String) : ProfileAction
 
+data object StartTrialClick : ProfileAction
+
 data object SubscriptionClick : ProfileAction, ProfileNavigation {
     override val event: NavigationEvent = NavigationEvent.NavigateToRoute(
         route = NavigationScreen.SubscriptionNavScreen.route,

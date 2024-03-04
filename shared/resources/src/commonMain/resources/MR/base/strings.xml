@@ -515,6 +515,8 @@
     <string name="hint_subscription_areas">Лимит создания областей достигнут.\nНеограниченное
         создание областей доступно для премиум подписки
     </string>
+
+    <string name="start_trial_button">Start trial period</string>
     <!--  PAYWALL  -->
 
     <!--  SERVER EXCEPTIONS  -->

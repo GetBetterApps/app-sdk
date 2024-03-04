@@ -21,9 +21,11 @@ import com.velkonost.getbetter.shared.features.profile.contracts.ProfileNavigati
 import com.velkonost.getbetter.shared.features.profile.contracts.ProfileViewState
 import com.velkonost.getbetter.shared.features.profile.contracts.SettingsClick
 import com.velkonost.getbetter.shared.features.profile.contracts.SignUpClick
+import com.velkonost.getbetter.shared.features.profile.contracts.StartTrialClick
 import com.velkonost.getbetter.shared.features.profile.contracts.SubscriptionClick
 import com.velkonost.getbetter.shared.features.profile.contracts.SubscriptionData
 import com.velkonost.getbetter.shared.features.profile.contracts.ThemeChange
+import com.velkonost.getbetter.shared.features.subscription.api.SubscriptionRepository
 import com.velkonost.getbetter.shared.features.subscription.domain.CheckSubscriptionUseCase
 import com.velkonost.getbetter.shared.features.userinfo.api.UserInfoRepository
 import io.ktor.util.decodeBase64Bytes
@@ -33,6 +35,7 @@ internal constructor(
     private val authRepository: AuthRepository<String>,
     private val userInfoRepository: UserInfoRepository,
     private val profileRepository: ProfileRepository,
+    private val subscriptionRepository: SubscriptionRepository,
     private val checkSubscriptionUseCase: CheckSubscriptionUseCase
 ) : BaseViewModel<ProfileViewState, ProfileAction, ProfileNavigation, ProfileEvent>(
     initialState = ProfileViewState()
@@ -56,6 +59,7 @@ internal constructor(
         is AvatarSelectedBase64 -> obtainAvatarSelected(action.avatarContent.decodeBase64Bytes())
         is ContactUsClick -> emit(NavigateToFeedback)
         is SubscriptionClick -> emit(action)
+        is StartTrialClick -> obtainStartTrial()
     }
 
     // ios fix
@@ -89,6 +93,25 @@ internal constructor(
     private fun fetchSubscriptionInfo() {
         launchJob {
             checkSubscriptionUseCase() collectAndProcess {
+                onSuccess {
+                    val subscriptionData = SubscriptionData(
+                        subscription = it,
+                        available = it?.fake == false
+                    )
+
+                    emit(viewState.value.copy(subscriptionData = subscriptionData))
+                }
+            }
+        }
+    }
+
+    private fun obtainStartTrial() {
+        launchJob {
+            subscriptionRepository.startTrial() collectAndProcess {
+                isLoading {
+                    emit(viewState.value.copy(isLoading = it))
+                }
+
                 onSuccess {
                     val subscriptionData = SubscriptionData(
                         subscription = it,
