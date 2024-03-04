@@ -15,4 +15,5 @@ interface SplashRepository {
     suspend fun getTheme(): UIThemeMode
 
     suspend fun saveSubscriptionAllowanceState(value: Boolean)
+
 }
