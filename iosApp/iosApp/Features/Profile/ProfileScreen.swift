@@ -68,6 +68,12 @@ struct ProfileScreen: View {
                     )
                 }
                 
+                if !state.isUserAnonymous && state.subscriptionData.available && state.subscriptionData.subscription?.trialUsed == false {
+                    TrialButton(isLoading: state.isLoading) {
+                        viewModel.dispatch(action: StartTrialClick())
+                    }
+                }
+                
                 AppSettings(
                     selectedTheme: state.selectedTheme,
                     onThemeChanged: { value in
@@ -111,11 +117,10 @@ struct ProfileScreen: View {
                         .foregroundColor(.textUnimportantColor)
                     Spacer()
                 }.padding(.top, 40)
-                
             }
             .padding(.init(top: 16, leading: 16, bottom: 200, trailing: 16))
             .animation(.easeInOut, value: state.experienceData)
-            .animation(.easeInOut, value: state.subscriptionData.available)
+            .animation(.easeInOut, value: state.subscriptionData)
         }
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(sourceType: .photoLibrary) { image in

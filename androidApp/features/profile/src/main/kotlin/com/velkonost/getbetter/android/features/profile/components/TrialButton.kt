@@ -38,8 +38,6 @@ fun TrialButton(
         Row(
             modifier = modifier
                 .fillMaxSize()
-//                .clipToBounds()
-
                 .clip(MaterialTheme.shapes.medium)
                 .clickable(
                     onClick = {

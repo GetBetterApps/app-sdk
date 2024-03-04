@@ -27,6 +27,7 @@
 		46059D2B2AC409A900DC5015 /* AddAreaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D2A2AC409A900DC5015 /* AddAreaButton.swift */; };
 		46059D2D2AC41DB500DC5015 /* ExpandableButtonPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46059D2C2AC41DB500DC5015 /* ExpandableButtonPanel.swift */; };
 		4608C3992B247EF200A37E84 /* TaskActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4608C3982B247EF200A37E84 /* TaskActionItem.swift */; };
+		46101FCD2B95C668001B5760 /* TrialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46101FCC2B95C668001B5760 /* TrialButton.swift */; };
 		4616B0852AF626F900A4CDDE /* MultilineTextFieldBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B0842AF626F900A4CDDE /* MultilineTextFieldBinding.swift */; };
 		4616B0872AF629B100A4CDDE /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B0862AF629B100A4CDDE /* DateExt.swift */; };
 		4616B08B2AF62B9500A4CDDE /* CompletionDateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4616B08A2AF62B9500A4CDDE /* CompletionDateButton.swift */; };
@@ -213,6 +214,7 @@
 		46059D2A2AC409A900DC5015 /* AddAreaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAreaButton.swift; sourceTree = "<group>"; };
 		46059D2C2AC41DB500DC5015 /* ExpandableButtonPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableButtonPanel.swift; sourceTree = "<group>"; };
 		4608C3982B247EF200A37E84 /* TaskActionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskActionItem.swift; sourceTree = "<group>"; };
+		46101FCC2B95C668001B5760 /* TrialButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialButton.swift; sourceTree = "<group>"; };
 		4616B0842AF626F900A4CDDE /* MultilineTextFieldBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextFieldBinding.swift; sourceTree = "<group>"; };
 		4616B0862AF629B100A4CDDE /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
 		4616B08A2AF62B9500A4CDDE /* CompletionDateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionDateButton.swift; sourceTree = "<group>"; };
@@ -645,6 +647,7 @@
 				463049E22AFD0590006F60D2 /* LevelBlock.swift */,
 				46FAC9772B4FBC70007F2008 /* OtherBlock.swift */,
 				4639A06A2B5AAD8E00072606 /* BlockUserButton.swift */,
+				46101FCC2B95C668001B5760 /* TrialButton.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -1325,6 +1328,7 @@
 				460054AB2ABB18FC00586767 /* MenuItem.swift in Sources */,
 				46F0B3C12B1CDE7400D6BCC1 /* TaskItem.swift in Sources */,
 				464478C92B0A101C00926899 /* ProfileDetailViewModel.swift in Sources */,
+				46101FCD2B95C668001B5760 /* TrialButton.swift in Sources */,
 				46F0B3C52B1CE3D700D6BCC1 /* TasksSection.swift in Sources */,
 				468B87722ABC45E1001BBEB1 /* SocialScreen.swift in Sources */,
 				46B91B522B150901003ACC58 /* ChangePasswordBottomSheet.swift in Sources */,
