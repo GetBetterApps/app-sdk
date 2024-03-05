@@ -1,8 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks.sh
-${BUILT_PRODUCTS_DIR}/DivKit/DivKit.framework
-${BUILT_PRODUCTS_DIR}/DivKit_LayoutKit/LayoutKit.framework
-${BUILT_PRODUCTS_DIR}/DivKit_LayoutKitInterface/LayoutKitInterface.framework
-${BUILT_PRODUCTS_DIR}/DivKit_Serialization/Serialization.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseCoreExtension/FirebaseCoreExtension.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseCoreInternal/FirebaseCoreInternal.framework
@@ -19,12 +15,5 @@ ${BUILT_PRODUCTS_DIR}/KMPNativeCoroutinesAsync/KMPNativeCoroutinesAsync.framewor
 ${BUILT_PRODUCTS_DIR}/KMPNativeCoroutinesCore/KMPNativeCoroutinesCore.framework
 ${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework
 ${BUILT_PRODUCTS_DIR}/PromisesSwift/Promises.framework
-${BUILT_PRODUCTS_DIR}/VGSLBase/BasePublic.framework
-${BUILT_PRODUCTS_DIR}/VGSLBaseTiny/BaseTinyPublic.framework
-${BUILT_PRODUCTS_DIR}/VGSLBaseUI/BaseUIPublic.framework
-${BUILT_PRODUCTS_DIR}/VGSLCommonCore/CommonCorePublic.framework
-${BUILT_PRODUCTS_DIR}/VGSLNetworking/NetworkingPublic.framework
-${BUILT_PRODUCTS_DIR}/VGSL_Fundamentals/VGSL_Fundamentals.framework
-${BUILT_PRODUCTS_DIR}/VGSL_Fundamentals_Tiny/VGSL_Fundamentals_Tiny.framework
 ${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework
 ${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework

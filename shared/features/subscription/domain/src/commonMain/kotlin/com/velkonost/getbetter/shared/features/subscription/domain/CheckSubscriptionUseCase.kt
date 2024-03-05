@@ -17,7 +17,7 @@ class CheckSubscriptionUseCase(
             when (availabilityResult) {
 
                 is ResultState.Loading -> {
-                    flow { emit(ResultState.Success(Subscription.NoSubscription)) }
+                    flow { emit(ResultState.Loading) }
                 }
 
                 is ResultState.Success -> {
@@ -29,7 +29,7 @@ class CheckSubscriptionUseCase(
                 }
 
                 is ResultState.Failure -> {
-                    flow { emit(ResultState.Success(Subscription.NoSubscription)) }
+                    flow { emit(ResultState.Success(Subscription.FakeSubscription)) }
                 }
             }
         }

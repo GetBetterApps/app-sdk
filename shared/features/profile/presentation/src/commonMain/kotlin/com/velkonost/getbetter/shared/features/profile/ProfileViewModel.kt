@@ -1,6 +1,7 @@
 package com.velkonost.getbetter.shared.features.profile
 
 import com.velkonost.getbetter.shared.core.model.profile.UIThemeMode
+import com.velkonost.getbetter.shared.core.model.subscription.Subscription
 import com.velkonost.getbetter.shared.core.model.user.UserInfo
 import com.velkonost.getbetter.shared.core.util.isLoading
 import com.velkonost.getbetter.shared.core.util.onFailure
@@ -97,6 +98,15 @@ internal constructor(
                     val subscriptionData = SubscriptionData(
                         subscription = it,
                         available = it?.fake == false
+                    )
+
+                    emit(viewState.value.copy(subscriptionData = subscriptionData))
+                }
+
+                onFailure {
+                    val subscriptionData = SubscriptionData(
+                        subscription = Subscription.NoSubscription,
+                        available = false
                     )
 
                     emit(viewState.value.copy(subscriptionData = subscriptionData))

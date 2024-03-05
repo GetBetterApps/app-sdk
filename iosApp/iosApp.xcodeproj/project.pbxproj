@@ -49,6 +49,8 @@
 		462922D82B13351F00DF080D /* FeedbackDetailBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462922D72B13351F00DF080D /* FeedbackDetailBottomSheet.swift */; };
 		463049E32AFD0590006F60D2 /* LevelBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463049E22AFD0590006F60D2 /* LevelBlock.swift */; };
 		4639A06B2B5AAD8E00072606 /* BlockUserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4639A06A2B5AAD8E00072606 /* BlockUserButton.swift */; };
+		463A57A22B97238C00653F69 /* YandexMobileAdsPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 463A57A12B97238C00653F69 /* YandexMobileAdsPackage */; };
+		463A57A42B97253700653F69 /* MobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 463A57A32B97253700653F69 /* MobileAdsBundle.bundle */; };
 		46407B962B28734E004A3AA2 /* AbilityDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46407B952B28734E004A3AA2 /* AbilityDetailsScreen.swift */; };
 		46407B982B28735F004A3AA2 /* AbilityDetailsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46407B972B28735F004A3AA2 /* AbilityDetailsRoute.swift */; };
 		46445AFA2ACD5484008934B2 /* PrivateSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46445AF92ACD5484008934B2 /* PrivateSwitch.swift */; };
@@ -236,7 +238,7 @@
 		462922D72B13351F00DF080D /* FeedbackDetailBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackDetailBottomSheet.swift; sourceTree = "<group>"; };
 		463049E22AFD0590006F60D2 /* LevelBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelBlock.swift; sourceTree = "<group>"; };
 		4639A06A2B5AAD8E00072606 /* BlockUserButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserButton.swift; sourceTree = "<group>"; };
-		4639A06C2B5ABA1F00072606 /* iosApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iosApp.entitlements; sourceTree = "<group>"; };
+		463A57A32B97253700653F69 /* MobileAdsBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MobileAdsBundle.bundle; sourceTree = "<group>"; };
 		46407B952B28734E004A3AA2 /* AbilityDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityDetailsScreen.swift; sourceTree = "<group>"; };
 		46407B972B28735F004A3AA2 /* AbilityDetailsRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityDetailsRoute.swift; sourceTree = "<group>"; };
 		46445AF92ACD5484008934B2 /* PrivateSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateSwitch.swift; sourceTree = "<group>"; };
@@ -387,10 +389,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD1CD8AC3CDFF9460475C5F4 /* Pods_iosApp.framework in Frameworks */,
 				469629C22AD9306200D41AF1 /* SwiftUIPager in Frameworks */,
+				463A57A22B97238C00653F69 /* YandexMobileAdsPackage in Frameworks */,
 				464478CC2B0A393000926899 /* CachedAsyncImage in Frameworks */,
 				464A42702AEA642C0019CB98 /* SwiftUIFlow in Frameworks */,
-				DD1CD8AC3CDFF9460475C5F4 /* Pods_iosApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1064,6 +1067,7 @@
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
+				463A57A32B97253700653F69 /* MobileAdsBundle.bundle */,
 				7555FF7D242A565900829871 /* iosApp */,
 				7555FF7C242A565900829871 /* Products */,
 				1727E38462DEEDAE317A8B07 /* Pods */,
@@ -1082,7 +1086,6 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				4639A06C2B5ABA1F00072606 /* iosApp.entitlements */,
 				4678E44B2AAC6CF8000B88E8 /* GoogleService-Info.plist */,
 				461F7C5F2AA878D0003791CF /* App */,
 				461F7C622AA88A13003791CF /* Core */,
@@ -1115,7 +1118,6 @@
 				81BC7FD84C6F72E25629192D /* [CP] Embed Pods Frameworks */,
 				4678E4502AACDD48000B88E8 /* ShellScript */,
 				46A9A1EC2ABF06020098798A /* crashlytics */,
-				08063635F38581886DE99274 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1126,6 +1128,7 @@
 				469629C12AD9306200D41AF1 /* SwiftUIPager */,
 				464A426F2AEA642C0019CB98 /* SwiftUIFlow */,
 				464478CB2B0A393000926899 /* CachedAsyncImage */,
+				463A57A12B97238C00653F69 /* YandexMobileAdsPackage */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* iosApp.app */;
@@ -1157,9 +1160,10 @@
 			);
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
-				469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
+				469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */,
 				464A426E2AEA642C0019CB98 /* XCRemoteSwiftPackageReference "SwiftUIFlow" */,
 				464478CA2B0A393000926899 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
+				463A57A02B97238C00653F69 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-ios" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -1175,6 +1179,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				463A57A42B97253700653F69 /* MobileAdsBundle.bundle in Resources */,
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
 				4678E44C2AAC6CF8000B88E8 /* GoogleService-Info.plist in Resources */,
 			);
@@ -1183,23 +1188,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		08063635F38581886DE99274 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		452E5D293612E49AD807C398 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1526,7 +1514,6 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1582,7 +1569,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1594,15 +1580,17 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A94E91A91D61B9AD7FF8F12F /* Pods-iosApp.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphoneos*]" = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = iosApp/Assets.xcassets;
 				DEVELOPMENT_TEAM = 2Y83RX392R;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GetBetter;
@@ -1626,16 +1614,20 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E6048413415DDDC574965275 /* Pods-iosApp.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphoneos*]" = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = iosApp/Assets.xcassets;
 				DEVELOPMENT_TEAM = 2Y83RX392R;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				ENABLE_NS_ASSERTIONS = YES;
 				ENABLE_PREVIEWS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GetBetter;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
@@ -1644,6 +1636,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.3;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.velkonost.getbetter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1679,6 +1672,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		463A57A02B97238C00653F69 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yandexmobile/yandex-ads-sdk-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.4.1;
+			};
+		};
 		464478CA2B0A393000926899 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
@@ -1695,7 +1696,7 @@
 				kind = branch;
 			};
 		};
-		469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
+		469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
 			requirement = {
@@ -1706,6 +1707,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		463A57A12B97238C00653F69 /* YandexMobileAdsPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 463A57A02B97238C00653F69 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-ios" */;
+			productName = YandexMobileAdsPackage;
+		};
 		464478CB2B0A393000926899 /* CachedAsyncImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 464478CA2B0A393000926899 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
@@ -1718,7 +1724,7 @@
 		};
 		469629C12AD9306200D41AF1 /* SwiftUIPager */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
+			package = 469629C02AD9306200D41AF1 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */;
 			productName = SwiftUIPager;
 		};
 /* End XCSwiftPackageProductDependency section */

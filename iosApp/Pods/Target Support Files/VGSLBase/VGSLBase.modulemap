@@ -1,6 +1,0 @@
-framework module BasePublic {
-  umbrella header "VGSLBase-umbrella.h"
-
-  export *
-  module * { export * }
-}
